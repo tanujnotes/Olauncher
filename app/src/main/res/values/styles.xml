@@ -6,7 +6,7 @@
         <item name="colorPrimaryDark">@android:color/black</item>
         <item name="colorAccent">@android:color/darker_gray</item>
 
-        <item name="android:windowShowWallpaper">true</item>
+<!--        <item name="android:windowShowWallpaper">true</item>-->
         <item name="android:windowBackground">@android:color/black</item>
     </style>
 
