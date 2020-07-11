@@ -10,4 +10,10 @@
         android:name="app.olauncher.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" />
+
+    <fragment
+        android:id="@+id/appListFragment"
+        android:name="app.olauncher.AppListFragment"
+        android:label="app_list_fragment"
+        tools:layout="@layout/fragment_app" />
 </navigation>
