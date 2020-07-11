@@ -15,6 +15,7 @@
         app:closeIcon="@null"
         app:iconifiedByDefault="false"
         app:queryBackground="@null"
+        app:queryHint="__"
         app:searchIcon="@null"
         app:theme="@style/AppSearchText" />
 

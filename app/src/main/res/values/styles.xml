@@ -15,6 +15,7 @@
         <item name="android:textSize">32sp</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:cursorVisible">false</item>
     </style>
 
 </resources>
