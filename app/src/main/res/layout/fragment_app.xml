@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
@@ -42,6 +41,14 @@
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:layout_marginTop="200dp"
+        android:src="@drawable/gradient_black_to_transparent"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_gravity="bottom"
+        android:rotation="180"
         android:src="@drawable/gradient_black_to_transparent"
         tools:ignore="ContentDescription" />
 
