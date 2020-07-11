@@ -3,24 +3,46 @@ package app.olauncher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.adapter_app_list.view.*
 
-class AppListAdapter(private val items: List<AppModel>, private val listener: (AppModel) -> Unit) :
-    RecyclerView.Adapter<AppListAdapter.ViewHolder>() {
+class AppListAdapter(
+    private var appsList: List<AppModel>,
+    private val listener: (AppModel) -> Unit
+) : RecyclerView.Adapter<AppListAdapter.ViewHolder>(), Filterable {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_app_list, parent, false)
-        )
-    }
+    var appFilteredList = appsList
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position], listener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.adapter_app_list, parent, false)
+    )
 
-    override fun getItemCount(): Int {
-        return items.size
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bind(appFilteredList[position], listener)
+
+    override fun getItemCount(): Int = appFilteredList.size
+
+    // Filter app search results
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                appFilteredList = (if (charSearch.isEmpty()) appsList
+                else appsList.filter { app -> app.appLabel.contains(charSearch, true) })
+
+                val filterResults = FilterResults()
+                filterResults.values = appFilteredList
+                return filterResults
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                appFilteredList = results?.values as List<AppModel>
+                notifyDataSetChanged()
+            }
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

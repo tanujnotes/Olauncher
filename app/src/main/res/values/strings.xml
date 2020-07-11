@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Olauncher</string>
     <string name="select">Select</string>
+    <string name="no_match_found">No match found</string>
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,9 +31,20 @@ class AppListFragment : Fragment() {
             Toast.makeText(requireContext(), appModel.appLabel, Toast.LENGTH_SHORT).show()
         }
 
+        val appAdapter = AppListAdapter(getAppsList(requireContext()), onAppClicked)
+
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = AppListAdapter(getAppsList(requireContext()), onAppClicked)
+            adapter = appAdapter
         }
+
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                appAdapter.filter.filter(newText)
+                return false
+            }
+        })
     }
 }
