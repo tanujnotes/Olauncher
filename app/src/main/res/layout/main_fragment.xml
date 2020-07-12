@@ -14,7 +14,7 @@
         android:fontFamily="sans-serif-light"
         android:format12Hour="hh:mm"
         android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:textSize="28sp" />
 
     <TextClock
         android:id="@+id/day"
