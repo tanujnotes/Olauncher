@@ -4,14 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
-    val selectedApp = MutableLiveData<AppModelPosition>()
+    val selectedApp = MutableLiveData<AppModelWithFlag>()
 
-    fun selectedApp(app: AppModel, position: Int) {
-        selectedApp.value = AppModelPosition(app, position)
+    fun selectedApp(app: AppModel, flag: Int) {
+        selectedApp.value = AppModelWithFlag(app, flag)
     }
 }
 
-data class AppModelPosition(
+data class AppModelWithFlag(
     val appModel: AppModel,
-    val position: Int
+    val flag: Int
 )
