@@ -1,5 +1,6 @@
 package app.olauncher
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -21,8 +22,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onUserLeaveHint() {
+        backToHomeScreen()
+        super.onUserLeaveHint()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        backToHomeScreen()
+        super.onNewIntent(intent)
+    }
+
+    private fun backToHomeScreen() {
+        // Whenever home button is pressed or user leaves the launcher,
+        // pop all the fragments except main
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)
-        super.onUserLeaveHint()
     }
 }
