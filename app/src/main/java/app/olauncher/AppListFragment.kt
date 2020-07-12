@@ -84,8 +84,8 @@ class AppListFragment : Fragment() {
     }
 
     override fun onStop() {
-        super.onStop()
         search.hideKeyboard()
+        super.onStop()
     }
 
     fun View.hideKeyboard() {
