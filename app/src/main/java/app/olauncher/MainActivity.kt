@@ -1,13 +1,17 @@
 package app.olauncher
 
-import android.content.Intent
-import android.content.pm.ResolveInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
+
+    override fun onBackPressed() {
+        if (findNavController(R.id.nav_host_fragment).currentDestination?.id != R.id.mainFragment)
+            super.onBackPressed()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,16 +27,5 @@ class MainActivity : AppCompatActivity() {
                 // Hide the nav bar and status bar
 //                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_FULLSCREEN)
-    }
-
-    private fun getAppsList() {
-        val pm = packageManager
-        val intent = Intent(Intent.ACTION_MAIN, null)
-        intent.addCategory(Intent.CATEGORY_LAUNCHER)
-        val apps = pm.queryIntentActivities(intent, 0)
-        for (a: ResolveInfo in apps) {
-            Log.d("TAG", a.loadLabel(pm).toString())
-            Log.d("PACKAGE", a.activityInfo.packageName)
-        }
     }
 }
