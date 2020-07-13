@@ -43,8 +43,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         mainLayout.setOnTouchListener(getSwipeGestureListener(requireContext()))
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
         if (isOlauncherDefault(requireContext())) setDefaultLauncher.visibility = View.GONE
         else setDefaultLauncher.visibility = View.VISIBLE
     }
@@ -162,10 +162,9 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun openDefaultAppsSetting() {
+        resetDefaultLauncher(requireContext())
         val intent = Intent(Intent.ACTION_MAIN, null)
         intent.addCategory(Intent.CATEGORY_HOME)
-        intent.addCategory(Intent.CATEGORY_DEFAULT)
-        intent.addCategory(Intent.CATEGORY_LAUNCHER)
         startActivity(intent)
     }
 
