@@ -1,7 +1,10 @@
 package app.olauncher
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +12,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_app.*
@@ -33,7 +35,7 @@ class AppListFragment : Fragment() {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
         val appAdapter = AppListAdapter(
-            getAppsList(requireContext()), appClickListener(viewModel, flag)
+            getAppsList(requireContext()), appClickListener(viewModel, flag), appLongPressListener()
         )
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -76,8 +78,19 @@ class AppListFragment : Fragment() {
                 (appModel: AppModel) -> Unit =
         { appModel ->
             viewModel.selectedApp(appModel, flag)
-            findNavController().popBackStack()
         }
+
+    private fun appLongPressListener(): (appModel: AppModel) -> Unit =
+        { appModel ->
+            openAppInfo(appModel.appPackage)
+        }
+
+    private fun openAppInfo(packageName: String) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        intent.addCategory(Intent.CATEGORY_DEFAULT)
+        intent.data = Uri.parse("package:$packageName")
+        startActivity(intent)
+    }
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
         return object : RecyclerView.OnScrollListener() {

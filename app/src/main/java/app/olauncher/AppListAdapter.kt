@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.adapter_app_list.view.*
 
 class AppListAdapter(
     private var appsList: List<AppModel>,
-    private val listener: (AppModel) -> Unit
+    private val clickListener: (AppModel) -> Unit,
+    private val longPressListener: (AppModel) -> Unit
 ) : RecyclerView.Adapter<AppListAdapter.ViewHolder>(), Filterable {
 
     var appFilteredList = appsList
@@ -20,8 +21,8 @@ class AppListAdapter(
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(appFilteredList[position], listener)
-        if (itemCount == 1) listener(appFilteredList[position])
+        holder.bind(appFilteredList[position], clickListener, longPressListener)
+        if (itemCount == 1) clickListener(appFilteredList[position])
     }
 
     override fun getItemCount(): Int = appFilteredList.size
@@ -48,9 +49,17 @@ class AppListAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(appModel: AppModel, listener: (AppModel) -> Unit) = with(itemView) {
+        fun bind(
+            appModel: AppModel,
+            listener: (AppModel) -> Unit,
+            longPressListener: (AppModel) -> Unit
+        ) = with(itemView) {
             app_label.text = appModel.appLabel
             app_label.setOnClickListener { listener(appModel) }
+            app_label.setOnLongClickListener {
+                longPressListener(appModel)
+                true
+            }
         }
     }
 }
