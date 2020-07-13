@@ -1,10 +1,12 @@
 package app.olauncher
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,8 +34,20 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         } ?: throw Exception("Invalid Activity")
 
         initUi()
+        initClickListeners()
         initObservers()
 
+        mainLayout.setOnTouchListener(getSwipeGestureListener(requireContext()))
+    }
+
+    private fun initUi() {
+        homeApp1.text = prefs.appName1
+        homeApp2.text = prefs.appName2
+        homeApp3.text = prefs.appName3
+        homeApp4.text = prefs.appName4
+    }
+
+    private fun initClickListeners() {
         homeApp1.setOnClickListener(this)
         homeApp2.setOnClickListener(this)
         homeApp3.setOnClickListener(this)
@@ -42,13 +56,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp2.setOnLongClickListener(this)
         homeApp3.setOnLongClickListener(this)
         homeApp4.setOnLongClickListener(this)
-    }
-
-    private fun initUi() {
-        homeApp1.text = prefs.appName1
-        homeApp2.text = prefs.appName2
-        homeApp3.text = prefs.appName3
-        homeApp4.text = prefs.appName4
     }
 
     private fun initObservers() {
@@ -106,5 +113,29 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         val intent: Intent? = pm?.getLaunchIntentForPackage(packageName)
         intent?.addCategory(Intent.CATEGORY_LAUNCHER)
         startActivity(intent)
+    }
+
+    private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
+        return object : OnSwipeTouchListener(context) {
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                Toast.makeText(context, "Swipe Left gesture", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                Toast.makeText(context, "Swipe Right gesture", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onSwipeUp() {
+                super.onSwipeUp()
+                Toast.makeText(context, "Swipe up gesture", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onSwipeDown() {
+                super.onSwipeDown()
+                Toast.makeText(context, "Swipe down gesture", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
