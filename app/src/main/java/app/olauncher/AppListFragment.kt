@@ -27,46 +27,18 @@ class AppListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val flag = arguments?.getInt("flag") ?: 0
 
+        val flag = arguments?.getInt("flag") ?: 0
         val viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+        val appAdapter = AppListAdapter(
+            getAppsList(requireContext()), appClickListener(viewModel, flag)
+        )
 
-        val onAppClicked: (appModel: AppModel) -> Unit = { appModel ->
-            viewModel.selectedApp(appModel, flag)
-            findNavController().popBackStack()
-        }
-
-        val appAdapter = AppListAdapter(getAppsList(requireContext()), onAppClicked)
-
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = appAdapter
-        }
-
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            var isKeyboardDismissedByScroll = false
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                when (newState) {
-                    RecyclerView.SCROLL_STATE_DRAGGING -> {
-                        if (!isKeyboardDismissedByScroll) {
-                            search.hideKeyboard()
-                            isKeyboardDismissedByScroll = !isKeyboardDismissedByScroll
-                        }
-                    }
-                    RecyclerView.SCROLL_STATE_IDLE -> {
-                        isKeyboardDismissedByScroll = false
-                        if (!recyclerView.canScrollVertically(-1)) {
-                            search.showKeyboard()
-                        }
-                    }
-                }
-            }
-        })
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = appAdapter
+        recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
 
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
@@ -88,15 +60,49 @@ class AppListFragment : Fragment() {
         super.onStop()
     }
 
-    fun View.hideKeyboard() {
+    private fun View.hideKeyboard() {
         view?.clearFocus()
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    fun View.showKeyboard() {
+    private fun View.showKeyboard() {
         view?.requestFocus()
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+    }
+
+    private fun appClickListener(viewModel: MainViewModel, flag: Int):
+                (appModel: AppModel) -> Unit =
+        { appModel ->
+            viewModel.selectedApp(appModel, flag)
+            findNavController().popBackStack()
+        }
+
+    private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
+        return object : RecyclerView.OnScrollListener() {
+
+            var isKeyboardDismissedByScroll = false
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when (newState) {
+
+                    RecyclerView.SCROLL_STATE_DRAGGING -> {
+                        if (!isKeyboardDismissedByScroll) {
+                            search.hideKeyboard()
+                            isKeyboardDismissedByScroll = !isKeyboardDismissedByScroll
+                        }
+                    }
+
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        isKeyboardDismissedByScroll = false
+                        if (!recyclerView.canScrollVertically(-1)) {
+                            search.showKeyboard()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
