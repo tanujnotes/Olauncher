@@ -19,8 +19,10 @@ class AppListAdapter(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter_app_list, parent, false)
     )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(appFilteredList[position], listener)
+        if (itemCount == 1) listener(appFilteredList[position])
+    }
 
     override fun getItemCount(): Int = appFilteredList.size
 
