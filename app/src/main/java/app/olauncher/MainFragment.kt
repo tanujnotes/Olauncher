@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -144,11 +144,20 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
+    private fun openCameraApp() {
+        try {
+            val sendIntent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
+            startActivity(sendIntent)
+        } catch (e: java.lang.Exception) {
+
+        }
+    }
+
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
         return object : OnSwipeTouchListener(context) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
-                Toast.makeText(context, "Swipe Left gesture", Toast.LENGTH_SHORT).show()
+                openCameraApp()
             }
 
             override fun onSwipeRight() {
