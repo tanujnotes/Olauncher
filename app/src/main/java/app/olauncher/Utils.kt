@@ -17,12 +17,13 @@ fun getAppsList(context: Context): MutableList<AppModel> {
     for (app in installedApps)
         appList.add(AppModel(app.loadLabel(pm).toString(), app.activityInfo.packageName))
     appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+    appList.remove(AppModel(context.getString(R.string.app_name), BuildConfig.APPLICATION_ID))
     return appList
 }
 
 fun isOlauncherDefault(context: Context?): Boolean {
     val launcherPackageName = getLauncherPackageName(context!!)
-    return "app.olauncher" == launcherPackageName
+    return BuildConfig.APPLICATION_ID == launcherPackageName
 }
 
 fun getLauncherPackageName(context: Context): String? {
