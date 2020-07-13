@@ -61,6 +61,9 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun initObservers() {
         viewModel.selectedApp.observe(viewLifecycleOwner, Observer<AppModelWithFlag> {
             when (it.flag) {
+                Constants.FLAG_LAUNCH_APP -> {
+                    launchApp(it.appModel.appPackage)
+                }
                 Constants.FLAG_SET_HOME_APP_1 -> {
                     prefs.appName1 = it.appModel.appLabel
                     prefs.appPackage1 = it.appModel.appPackage
@@ -129,7 +132,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeUp() {
                 super.onSwipeUp()
-                Toast.makeText(context, "Swipe up gesture", Toast.LENGTH_SHORT).show()
+                showAppList(Constants.FLAG_LAUNCH_APP)
             }
 
             override fun onSwipeDown() {
