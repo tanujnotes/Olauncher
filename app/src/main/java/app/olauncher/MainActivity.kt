@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (navController.currentDestination?.id != R.id.mainFragment)
             super.onBackPressed()
+        else checkForDefaultLauncher()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,5 +37,10 @@ class MainActivity : AppCompatActivity() {
         // pop all the fragments except main
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)
+    }
+
+    private fun checkForDefaultLauncher() {
+        if (!isOlauncherDefault(this))
+            resetDefaultLauncher(this)
     }
 }

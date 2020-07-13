@@ -2,4 +2,5 @@
     <string name="app_name">Olauncher</string>
     <string name="select">Select</string>
     <string name="no_match_found">No match found</string>
+    <string name="set_as_default_launcher">Set as default launcher</string>
 </resources>
