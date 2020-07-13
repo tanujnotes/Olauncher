@@ -75,4 +75,14 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
+    <TextView
+        android:id="@+id/setDefaultLauncher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/set_as_default_launcher"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:visibility="gone" />
 </LinearLayout>

@@ -43,6 +43,12 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         mainLayout.setOnTouchListener(getSwipeGestureListener(requireContext()))
     }
 
+    override fun onStart() {
+        super.onStart()
+        if (isOlauncherDefault(requireContext())) setDefaultLauncher.visibility = View.GONE
+        else setDefaultLauncher.visibility = View.VISIBLE
+    }
+
     private fun initUi() {
         homeApp1.text = prefs.appName1
         homeApp2.text = prefs.appName2
@@ -59,6 +65,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp2.setOnLongClickListener(this)
         homeApp3.setOnLongClickListener(this)
         homeApp4.setOnLongClickListener(this)
+        setDefaultLauncher.setOnClickListener(this)
     }
 
     private fun initObservers() {
@@ -94,6 +101,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view) else launchApp(prefs.appPackage2)
             R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view) else launchApp(prefs.appPackage3)
             R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view) else launchApp(prefs.appPackage4)
+            R.id.setDefaultLauncher -> openDefaultAppsSetting()
         }
     }
 
@@ -151,6 +159,14 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         } catch (e: java.lang.Exception) {
 
         }
+    }
+
+    private fun openDefaultAppsSetting() {
+        val intent = Intent(Intent.ACTION_MAIN, null)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.addCategory(Intent.CATEGORY_DEFAULT)
+        intent.addCategory(Intent.CATEGORY_LAUNCHER)
+        startActivity(intent)
     }
 
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
