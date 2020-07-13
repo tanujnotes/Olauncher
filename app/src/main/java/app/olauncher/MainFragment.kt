@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -136,6 +135,15 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
+    private fun openDialerApp() {
+        try {
+            val sendIntent = Intent(Intent.ACTION_DIAL)
+            startActivity(sendIntent)
+        } catch (e: java.lang.Exception) {
+
+        }
+    }
+
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
         return object : OnSwipeTouchListener(context) {
             override fun onSwipeLeft() {
@@ -145,7 +153,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeRight() {
                 super.onSwipeRight()
-                Toast.makeText(context, "Swipe Right gesture", Toast.LENGTH_SHORT).show()
+                openDialerApp()
             }
 
             override fun onSwipeUp() {
