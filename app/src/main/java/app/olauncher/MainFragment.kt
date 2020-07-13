@@ -1,11 +1,13 @@
 package app.olauncher
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -13,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.main_fragment.*
+import java.lang.reflect.Method
+
 
 class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
@@ -118,6 +122,20 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         startActivity(intent)
     }
 
+    // Source: https://stackoverflow.com/a/51132142
+    @SuppressLint("WrongConstant", "PrivateApi")
+    private fun expandNotificationDrawer(context: Context) {
+        try {
+            val statusBarService = context.getSystemService("statusbar")
+            val methodName = "expandNotificationsPanel"
+            val statusBarManager: Class<*> = Class.forName("android.app.StatusBarManager")
+            val method: Method = statusBarManager.getMethod(methodName)
+            method.invoke(statusBarService)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
         return object : OnSwipeTouchListener(context) {
             override fun onSwipeLeft() {
@@ -137,7 +155,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                Toast.makeText(context, "Swipe down gesture", Toast.LENGTH_SHORT).show()
+                expandNotificationDrawer(context)
             }
         }
     }
