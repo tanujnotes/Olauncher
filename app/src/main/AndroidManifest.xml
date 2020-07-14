@@ -16,8 +16,10 @@
 
         <activity
             android:name=".MainActivity"
+            android:excludeFromRecents="true"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
+            android:taskAffinity=""
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
