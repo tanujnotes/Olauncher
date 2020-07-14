@@ -1,10 +1,7 @@
 package app.olauncher
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,16 +81,9 @@ class AppListFragment : Fragment() {
 
     private fun appLongPressListener(): (appModel: AppModel) -> Unit =
         { appModel ->
-            openAppInfo(appModel.appPackage)
+            openAppInfo(requireContext(), appModel.appPackage)
             findNavController().popBackStack()
         }
-
-    private fun openAppInfo(packageName: String) {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        intent.addCategory(Intent.CATEGORY_DEFAULT)
-        intent.data = Uri.parse("package:$packageName")
-        startActivity(intent)
-    }
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
         return object : RecyclerView.OnScrollListener() {

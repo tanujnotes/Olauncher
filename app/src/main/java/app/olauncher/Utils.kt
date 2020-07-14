@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.Settings
 import java.util.*
 
 
@@ -76,4 +78,11 @@ fun setBlackWallpaper(context: Context) {
         bitmap.recycle()
     } catch (e: Exception) {
     }
+}
+
+fun openAppInfo(context: Context, packageName: String) {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+    intent.addCategory(Intent.CATEGORY_DEFAULT)
+    intent.data = Uri.parse("package:$packageName")
+    context.startActivity(intent)
 }

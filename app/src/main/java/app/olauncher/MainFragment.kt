@@ -202,6 +202,11 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 super.onSwipeDown()
                 expandNotificationDrawer(context)
             }
+
+            override fun onLongClick() {
+                super.onLongClick()
+                openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
+            }
         }
     }
 }

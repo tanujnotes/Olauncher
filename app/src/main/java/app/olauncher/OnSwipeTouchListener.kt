@@ -72,9 +72,9 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
     open fun onSwipeLeft() {}
     open fun onSwipeUp() {}
     open fun onSwipeDown() {}
+    open fun onLongClick() {}
     private fun onClick() {}
     private fun onDoubleClick() {}
-    private fun onLongClick() {}
 
     init {
         gestureDetector = GestureDetector(c, GestureListener())
