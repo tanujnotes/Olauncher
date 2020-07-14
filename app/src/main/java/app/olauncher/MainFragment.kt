@@ -69,39 +69,26 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initObservers() {
-        viewModel.selectedApp.observe(viewLifecycleOwner, Observer<AppModelWithFlag> {
-            when (it.flag) {
-                Constants.FLAG_LAUNCH_APP -> {
-                    launchApp(it.appModel.appPackage)
-                }
-                Constants.FLAG_SET_HOME_APP_1 -> {
-                    prefs.appName1 = it.appModel.appLabel
-                    prefs.appPackage1 = it.appModel.appPackage
-                }
-                Constants.FLAG_SET_HOME_APP_2 -> {
-                    prefs.appName2 = it.appModel.appLabel
-                    prefs.appPackage2 = it.appModel.appPackage
-                }
-                Constants.FLAG_SET_HOME_APP_3 -> {
-                    prefs.appName3 = it.appModel.appLabel
-                    prefs.appPackage3 = it.appModel.appPackage
-                }
-                Constants.FLAG_SET_HOME_APP_4 -> {
-                    prefs.appName4 = it.appModel.appLabel
-                    prefs.appPackage4 = it.appModel.appPackage
-                }
-            }
+        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Any> {
             initUi()
         })
     }
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view) else launchApp(prefs.appPackage1)
-            R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view) else launchApp(prefs.appPackage2)
-            R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view) else launchApp(prefs.appPackage3)
-            R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view) else launchApp(prefs.appPackage4)
-            R.id.setDefaultLauncher -> openDefaultAppsSetting()
+            R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view)
+            else launchAppEvent(prefs.appName1, prefs.appPackage1)
+
+            R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view)
+            else launchAppEvent(prefs.appName2, prefs.appPackage2)
+
+            R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view)
+            else launchAppEvent(prefs.appName3, prefs.appPackage3)
+
+            R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
+            else launchAppEvent(prefs.appName4, prefs.appPackage4)
+
+            R.id.setDefaultLauncher -> showLauncherAppChooser()
         }
     }
 
@@ -122,11 +109,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         )
     }
 
-    private fun launchApp(packageName: String) {
-        val pm = context?.packageManager
-        val intent: Intent? = pm?.getLaunchIntentForPackage(packageName)
-        intent?.addCategory(Intent.CATEGORY_LAUNCHER)
-        startActivity(intent)
+    private fun launchAppEvent(appName: String, packageName: String) {
+        viewModel.selectedApp(AppModel(appName, packageName), Constants.FLAG_LAUNCH_APP)
     }
 
     // Source: https://stackoverflow.com/a/51132142
@@ -161,7 +145,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun openDefaultAppsSetting() {
+    private fun showLauncherAppChooser() {
         resetDefaultLauncher(requireContext())
         val intent = Intent(Intent.ACTION_MAIN, null)
         intent.addCategory(Intent.CATEGORY_HOME)

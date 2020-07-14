@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_app.*
@@ -78,11 +79,13 @@ class AppListFragment : Fragment() {
                 (appModel: AppModel) -> Unit =
         { appModel ->
             viewModel.selectedApp(appModel, flag)
+            findNavController().popBackStack()
         }
 
     private fun appLongPressListener(): (appModel: AppModel) -> Unit =
         { appModel ->
             openAppInfo(appModel.appPackage)
+            findNavController().popBackStack()
         }
 
     private fun openAppInfo(packageName: String) {
