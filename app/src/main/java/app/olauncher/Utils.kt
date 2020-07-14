@@ -8,21 +8,25 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.Settings
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 
 
-fun getAppsList(context: Context): MutableList<AppModel> {
-    val appList: MutableList<AppModel> = mutableListOf()
-    val pm = context.packageManager
-    val intent = Intent(Intent.ACTION_MAIN, null)
-    intent.addCategory(Intent.CATEGORY_LAUNCHER)
+suspend fun getAppsList(context: Context): MutableList<AppModel> {
+    return withContext(Dispatchers.IO) {
+        val appList: MutableList<AppModel> = mutableListOf()
+        val pm = context.packageManager
+        val intent = Intent(Intent.ACTION_MAIN, null)
+        intent.addCategory(Intent.CATEGORY_LAUNCHER)
 
-    val installedApps = pm.queryIntentActivities(intent, 0)
-    for (app in installedApps)
-        appList.add(AppModel(app.loadLabel(pm).toString(), app.activityInfo.packageName))
-    appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
-    appList.remove(AppModel(context.getString(R.string.app_name), BuildConfig.APPLICATION_ID))
-    return appList
+        val installedApps = pm.queryIntentActivities(intent, 0)
+        for (app in installedApps)
+            appList.add(AppModel(app.loadLabel(pm).toString(), app.activityInfo.packageName))
+        appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+        appList.remove(AppModel(context.getString(R.string.app_name), BuildConfig.APPLICATION_ID))
+        appList
+    }
 }
 
 fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {

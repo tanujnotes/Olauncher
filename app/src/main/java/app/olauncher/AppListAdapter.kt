@@ -10,12 +10,12 @@ import kotlinx.android.synthetic.main.adapter_app_list.view.*
 
 class AppListAdapter(
     private var flag: Int,
-    private var appsList: List<AppModel>,
     private val clickListener: (AppModel) -> Unit,
     private val longPressListener: (AppModel) -> Unit
 ) : RecyclerView.Adapter<AppListAdapter.ViewHolder>(), Filterable {
 
-    var appFilteredList = appsList
+    var appsList: List<AppModel> = listOf()
+    var appFilteredList: List<AppModel> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.adapter_app_list, parent, false)
@@ -47,6 +47,12 @@ class AppListAdapter(
                 notifyDataSetChanged()
             }
         }
+    }
+
+    fun setAppList(appsList: List<AppModel>) {
+        this.appsList = appsList
+        this.appFilteredList = appsList
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

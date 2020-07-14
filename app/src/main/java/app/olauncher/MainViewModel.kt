@@ -2,10 +2,11 @@ package app.olauncher
 
 import android.app.Application
 import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val appContext = application.applicationContext
@@ -13,6 +14,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val selectedApp = MutableLiveData<AppModelWithFlag>()
     val refreshHome = MutableLiveData<Any>()
+    val appList = MutableLiveData<List<AppModel>>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -54,6 +56,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             appContext.startActivity(intent)
         } catch (e: Exception) {
             refreshHome(true)
+        }
+    }
+
+    fun getAppList() {
+        viewModelScope.launch {
+            appList.value = getAppsList(appContext)
         }
     }
 }

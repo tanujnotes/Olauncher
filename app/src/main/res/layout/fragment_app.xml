@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
@@ -21,6 +22,7 @@
         app:theme="@style/AppSearchText" />
 
     <TextView
+        android:id="@+id/noMatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
@@ -30,7 +32,8 @@
         android:text="@string/no_match_found"
         android:textColor="@android:color/white"
         android:textSize="24sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

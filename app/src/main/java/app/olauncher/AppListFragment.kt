@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,18 +28,17 @@ class AppListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val flag = arguments?.getInt("flag") ?: 0
         val viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
-
         val appAdapter = AppListAdapter(
             flag,
-            getAppsList(requireContext()),
             appClickListener(viewModel, flag),
             appLongPressListener()
         )
+
+        initViewModel(viewModel, appAdapter)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = appAdapter
@@ -51,6 +51,15 @@ class AppListFragment : Fragment() {
                 appAdapter.filter.filter(newText)
                 return false
             }
+        })
+    }
+
+    private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
+        viewModel.getAppList()
+        viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+            appAdapter.setAppList(it)
+            search.visibility = View.VISIBLE
+            noMatch.visibility = View.VISIBLE
         })
     }
 
