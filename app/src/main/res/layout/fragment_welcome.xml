@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:paddingVertical="24dp"
+    android:paddingStart="24dp"
+    android:paddingEnd="8dp">
 
     <Space
         android:layout_width="wrap_content"
@@ -16,7 +18,7 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/welcome_to_olauncher"
         android:textColor="@android:color/white"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
     <Space
         android:layout_width="wrap_content"
@@ -29,7 +31,7 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/how_to_use"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <Space
         android:layout_width="wrap_content"
@@ -42,7 +44,7 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/swipe_in_any_direction_for_options"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <Space
         android:layout_width="wrap_content"
@@ -53,9 +55,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="@string/long_press_on_apps_for_more_options"
+        android:text="@string/long_press_anywhere_for_even_more_options"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <Space
         android:layout_width="wrap_content"
@@ -68,7 +70,7 @@
         android:fontFamily="sans-serif-light"
         android:text="@string/live_happily_ever_after"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <Space
         android:layout_width="wrap_content"
@@ -84,7 +86,7 @@
         android:text="@string/let_s_go"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
     <Space
         android:layout_width="wrap_content"
