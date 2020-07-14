@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        if (Prefs(this).firstOpen) {
+            Prefs(this).firstOpen = false
+            navController.navigate(R.id.action_mainFragment_to_welcomeFragment)
+        }
     }
 
     override fun onUserLeaveHint() {

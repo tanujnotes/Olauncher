@@ -15,6 +15,11 @@
             app:destination="@id/appListFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_mainFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -22,4 +27,8 @@
         android:name="app.olauncher.AppListFragment"
         android:label="app_list_fragment"
         tools:layout="@layout/fragment_app" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="app.olauncher.WelcomeFragment"
+        android:label="WelcomeFragment" />
 </navigation>
