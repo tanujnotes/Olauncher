@@ -13,9 +13,10 @@
     </style>
 
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
-        <item name="android:maxLength">30</item>
-        <item name="android:textSize">32sp</item>
+        <item name="android:maxLength">20</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:cursorVisible">false</item>
     </style>
