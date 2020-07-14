@@ -139,6 +139,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun showAppList(flag: Int) {
+        viewModel.getAppList()
         findNavController().navigate(
             R.id.action_mainFragment_to_appListFragment,
             bundleOf("flag" to flag)

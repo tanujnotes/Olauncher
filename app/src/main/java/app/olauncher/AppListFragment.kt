@@ -55,7 +55,7 @@ class AppListFragment : Fragment() {
     }
 
     private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
-        viewModel.getAppList()
+//        viewModel.getAppList()
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
             appAdapter.setAppList(it)
             search.visibility = View.VISIBLE
