@@ -1,9 +1,11 @@
 package app.olauncher
 
+import android.app.WallpaperManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import java.util.*
 
 
@@ -63,4 +65,15 @@ fun resetDefaultLauncher(context: Context) {
         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
         PackageManager.DONT_KILL_APP
     )
+}
+
+fun setBlackWallpaper(context: Context) {
+    try {
+        val bitmap = Bitmap.createBitmap(1000, 2000, Bitmap.Config.ARGB_8888)
+        bitmap.eraseColor(context.getColor(android.R.color.black))
+        val manager = WallpaperManager.getInstance(context)
+        manager.setBitmap(bitmap)
+        bitmap.recycle()
+    } catch (e: Exception) {
+    }
 }

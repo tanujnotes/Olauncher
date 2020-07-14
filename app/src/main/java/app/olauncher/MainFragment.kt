@@ -46,8 +46,10 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     override fun onResume() {
         super.onResume()
         populateHomeApps()
-        if (isOlauncherDefault(requireContext())) setDefaultLauncher.visibility = View.GONE
-        else setDefaultLauncher.visibility = View.VISIBLE
+        if (isOlauncherDefault(requireContext())) {
+            setDefaultLauncher.visibility = View.GONE
+            setBlackWallpaper(requireContext())
+        } else setDefaultLauncher.visibility = View.VISIBLE
     }
 
     private fun populateHomeApps() {
