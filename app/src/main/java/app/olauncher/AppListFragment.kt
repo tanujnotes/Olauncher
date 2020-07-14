@@ -32,8 +32,12 @@ class AppListFragment : Fragment() {
         val viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+
         val appAdapter = AppListAdapter(
-            getAppsList(requireContext()), appClickListener(viewModel, flag), appLongPressListener()
+            flag,
+            getAppsList(requireContext()),
+            appClickListener(viewModel, flag),
+            appLongPressListener()
         )
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

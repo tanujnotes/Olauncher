@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.adapter_app_list.view.*
 
 class AppListAdapter(
+    private var flag: Int,
     private var appsList: List<AppModel>,
     private val clickListener: (AppModel) -> Unit,
     private val longPressListener: (AppModel) -> Unit
@@ -22,7 +23,7 @@ class AppListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(appFilteredList[position], clickListener, longPressListener)
-        if (itemCount == 1) clickListener(appFilteredList[position])
+        if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP)) clickListener(appFilteredList[position])
     }
 
     override fun getItemCount(): Int = appFilteredList.size
