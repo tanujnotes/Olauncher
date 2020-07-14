@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,6 +96,9 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp2.setOnLongClickListener(this)
         homeApp3.setOnLongClickListener(this)
         homeApp4.setOnLongClickListener(this)
+
+        date.setOnClickListener(this)
+        clock.setOnClickListener(this)
         setDefaultLauncher.setOnClickListener(this)
     }
 
@@ -117,6 +122,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
             else launchAppEvent(prefs.appName4, prefs.appPackage4)
 
+            R.id.clock -> openAlarmApp()
+            R.id.date -> openCalendar()
             R.id.setDefaultLauncher -> showLauncherAppChooser()
         }
     }
@@ -136,6 +143,25 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.action_mainFragment_to_appListFragment,
             bundleOf("flag" to flag)
         )
+    }
+
+    private fun openAlarmApp() {
+        try {
+            val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+            startActivity(intent)
+        } catch (e: java.lang.Exception) {
+            Log.d("TAG", e.toString())
+        }
+    }
+
+    private fun openCalendar() {
+        try {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+            startActivity(intent)
+        } catch (e: java.lang.Exception) {
+
+        }
     }
 
     private fun launchAppEvent(appName: String, packageName: String) {
