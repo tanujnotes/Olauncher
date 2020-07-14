@@ -36,7 +36,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        initUi()
+        populateHomeApps()
         initClickListeners()
         initObservers()
 
@@ -45,15 +45,42 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onResume() {
         super.onResume()
+        populateHomeApps()
         if (isOlauncherDefault(requireContext())) setDefaultLauncher.visibility = View.GONE
         else setDefaultLauncher.visibility = View.VISIBLE
     }
 
-    private fun initUi() {
-        homeApp1.text = prefs.appName1
-        homeApp2.text = prefs.appName2
-        homeApp3.text = prefs.appName3
-        homeApp4.text = prefs.appName4
+    private fun populateHomeApps() {
+        val pm = requireContext().packageManager
+        if (isPackageInstalled(prefs.appPackage1, pm))
+            homeApp1.text = prefs.appName1
+        else {
+            homeApp1.text = ""
+            prefs.appName1 = ""
+            prefs.appPackage1 = ""
+        }
+        if (isPackageInstalled(prefs.appPackage2, pm))
+            homeApp2.text = prefs.appName2
+        else {
+            homeApp2.text = ""
+            prefs.appName2 = ""
+            prefs.appPackage2 = ""
+        }
+        if (isPackageInstalled(prefs.appPackage3, pm))
+            homeApp3.text = prefs.appName3
+        else {
+            homeApp3.text = ""
+            prefs.appName3 = ""
+            prefs.appPackage3 = ""
+        }
+        if (isPackageInstalled(prefs.appPackage4, pm))
+            homeApp4.text = prefs.appName4
+        else {
+            homeApp4.text = ""
+            prefs.appName4 = ""
+            prefs.appPackage4 = ""
+        }
+
     }
 
     private fun initClickListeners() {
@@ -70,7 +97,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun initObservers() {
         viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Any> {
-            initUi()
+            populateHomeApps()
         })
     }
 

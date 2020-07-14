@@ -46,9 +46,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun launchApp(packageName: String) {
-        val intent: Intent? = appContext.packageManager.getLaunchIntentForPackage(packageName)
-        intent?.addCategory(Intent.CATEGORY_LAUNCHER)
-        appContext.startActivity(intent)
+        try {
+            val intent: Intent? = appContext.packageManager.getLaunchIntentForPackage(packageName)
+            intent?.addCategory(Intent.CATEGORY_LAUNCHER)
+            appContext.startActivity(intent)
+        } catch (e: Exception) {
+            refreshHome(true)
+        }
     }
 }
 

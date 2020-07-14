@@ -21,6 +21,15 @@ fun getAppsList(context: Context): MutableList<AppModel> {
     return appList
 }
 
+fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
+    return try {
+        packageManager.getPackageInfo(packageName, 0)
+        true
+    } catch (e: PackageManager.NameNotFoundException) {
+        false
+    }
+}
+
 fun isOlauncherDefault(context: Context?): Boolean {
     val launcherPackageName = getLauncherPackageName(context!!)
     return BuildConfig.APPLICATION_ID == launcherPackageName
