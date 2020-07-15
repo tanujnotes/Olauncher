@@ -51,10 +51,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     override fun onResume() {
         super.onResume()
         populateHomeApps()
-        if (isOlauncherDefault(requireContext())) {
-            setDefaultLauncher.visibility = View.GONE
-            setBlackWallpaper(requireContext())
-        } else setDefaultLauncher.visibility = View.VISIBLE
+        viewModel.isOlauncherDefault()
     }
 
     private fun populateHomeApps() {
@@ -108,6 +105,11 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun initObservers() {
         viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Any> {
             populateHomeApps()
+        })
+
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (it) setDefaultLauncher.visibility = View.GONE
+            else setDefaultLauncher.visibility = View.VISIBLE
         })
     }
 

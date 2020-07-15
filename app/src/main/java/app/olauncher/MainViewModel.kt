@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -15,6 +14,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val selectedApp = MutableLiveData<AppModelWithFlag>()
     val refreshHome = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>>()
+    val isOlauncherDefault = MutableLiveData<Boolean>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -63,6 +63,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             appList.value = getAppsList(appContext)
         }
+    }
+
+    fun isOlauncherDefault() {
+        val isDefault = isOlauncherDefault(appContext)
+        isOlauncherDefault.value = isDefault
+        if (isDefault) setBlackWallpaper(appContext)
     }
 }
 
