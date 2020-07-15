@@ -25,4 +25,26 @@
         <item name="android:cursorVisible">false</item>
     </style>
 
+    <style name="TextDefault" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:shadowColor">@color/blackTransparent50</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
+
+    <style name="TextLarge" parent="TextDefault">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="TextMedium" parent="TextDefault">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextSmall" parent="TextDefault">
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>

@@ -12,12 +12,11 @@
         android:layout_weight="1" />
 
     <TextView
+        style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="@string/welcome_to_olauncher"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        android:text="@string/welcome_to_olauncher" />
 
     <Space
         android:layout_width="wrap_content"
@@ -25,12 +24,10 @@
         android:layout_weight="2" />
 
     <TextView
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/how_to_use"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:text="@string/how_to_use" />
 
     <Space
         android:layout_width="wrap_content"
@@ -38,12 +35,10 @@
         android:layout_weight="1" />
 
     <TextView
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/swipe_in_any_direction"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:text="@string/swipe_in_any_direction" />
 
     <Space
         android:layout_width="wrap_content"
@@ -51,12 +46,10 @@
         android:layout_weight="1" />
 
     <TextView
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/long_press_anywhere"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:text="@string/long_press_anywhere" />
 
     <Space
         android:layout_width="wrap_content"
@@ -64,12 +57,10 @@
         android:layout_weight="1" />
 
     <TextView
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/live_happily_ever_after"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:text="@string/live_happily_ever_after" />
 
     <Space
         android:layout_width="wrap_content"
@@ -78,14 +69,12 @@
 
     <TextView
         android:id="@+id/lets_go"
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
         android:paddingVertical="12dp"
         android:text="@string/let_s_go"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:textAllCaps="true" />
 
     <Space
         android:layout_width="wrap_content"

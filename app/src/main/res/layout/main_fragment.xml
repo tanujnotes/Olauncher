@@ -10,21 +10,18 @@
 
     <TextClock
         android:id="@+id/clock"
+        style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
         android:format12Hour="hh:mm"
-        android:textColor="@android:color/white"
-        android:textSize="30sp" />
+        android:textSize="40sp" />
 
     <TextClock
         android:id="@+id/date"
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:format12Hour="EEE, dd MMM"
-        android:textColor="@android:color/white"
-        android:textSize="14sp" />
+        android:format12Hour="EEE, dd MMM" />
 
     <Space
         android:layout_width="wrap_content"
@@ -33,42 +30,34 @@
 
     <TextView
         android:id="@+id/homeApp1"
+        style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/select"
-        android:textColor="@android:color/white"
-        android:textSize="32sp" />
+        android:hint="@string/select" />
 
     <TextView
         android:id="@+id/homeApp2"
+        style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/select"
-        android:textColor="@android:color/white"
-        android:textSize="32sp" />
+        android:hint="@string/select" />
 
     <TextView
         android:id="@+id/homeApp3"
+        style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/select"
-        android:textColor="@android:color/white"
-        android:textSize="32sp" />
+        android:hint="@string/select" />
 
     <TextView
         android:id="@+id/homeApp4"
+        style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-light"
-        android:hint="@string/select"
-        android:textColor="@android:color/white"
-        android:textSize="32sp" />
+        android:hint="@string/select" />
 
     <Space
         android:layout_width="wrap_content"
@@ -77,12 +66,10 @@
 
     <TextView
         android:id="@+id/setDefaultLauncher"
+        style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:fontFamily="sans-serif-light"
         android:text="@string/set_as_default_launcher"
-        android:textColor="@android:color/white"
-        android:textSize="14sp"
         android:visibility="gone" />
 </LinearLayout>
