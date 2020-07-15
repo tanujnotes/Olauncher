@@ -3,13 +3,16 @@ package app.olauncher
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -202,9 +205,24 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun showLauncherAppChooser() {
-        resetDefaultLauncher(requireContext())
-        val intent = Intent(Intent.ACTION_MAIN, null)
-        intent.addCategory(Intent.CATEGORY_HOME)
+        if (prefs.launcherReset) {
+            resetDefaultLauncher(requireContext())
+            val intent = Intent(Intent.ACTION_MAIN, null)
+            intent.addCategory(Intent.CATEGORY_HOME)
+            startActivity(intent)
+            return
+        }
+        // Open settings because default launcher cannot be reset programmatically
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Search for launcher or home app",
+                Toast.LENGTH_LONG
+            ).show()
+            Intent(Settings.ACTION_SETTINGS)
+        }
         startActivity(intent)
     }
 

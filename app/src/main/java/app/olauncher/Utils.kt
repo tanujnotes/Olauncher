@@ -39,11 +39,11 @@ fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boo
 }
 
 fun isOlauncherDefault(context: Context?): Boolean {
-    val launcherPackageName = getLauncherPackageName(context!!)
+    val launcherPackageName = getDefaultLauncherPackage(context!!)
     return BuildConfig.APPLICATION_ID == launcherPackageName
 }
 
-fun getLauncherPackageName(context: Context): String? {
+fun getDefaultLauncherPackage(context: Context): String {
     val intent = Intent()
     intent.action = Intent.ACTION_MAIN
     intent.addCategory(Intent.CATEGORY_HOME)
@@ -51,7 +51,7 @@ fun getLauncherPackageName(context: Context): String? {
     val result = packageManager.resolveActivity(intent, 0)
     return if (result?.activityInfo != null) {
         result.activityInfo.packageName
-    } else null
+    } else "android"
 }
 
 // Source: https://stackoverflow.com/a/13239706
