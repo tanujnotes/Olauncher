@@ -8,10 +8,14 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.Settings
+import android.widget.Toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
 
+fun showToastLong(context: Context, message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+}
 
 suspend fun getAppsList(context: Context): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {

@@ -25,13 +25,7 @@ class MainActivity : AppCompatActivity() {
         if (prefs.firstOpen) {
             prefs.firstOpen = false
             navController.navigate(R.id.action_mainFragment_to_welcomeFragment)
-            checkIfLauncherReset(prefs)
         }
-    }
-
-    private fun checkIfLauncherReset(prefs: Prefs) {
-        val defaultLauncher = getDefaultLauncherPackage(this)
-        prefs.launcherReset = !defaultLauncher.contains(".")
     }
 
     override fun onUserLeaveHint() {

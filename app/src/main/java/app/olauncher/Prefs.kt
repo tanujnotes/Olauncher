@@ -7,7 +7,6 @@ class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
 
     private val FIRST_OPEN = "FIRST_OPEN"
-    private val LAUNCHER_RESET = "LAUNCHER_RESET"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -23,10 +22,6 @@ class Prefs(context: Context) {
     var firstOpen: Boolean
         get() = prefs.getBoolean(FIRST_OPEN, true)
         set(value) = prefs.edit().putBoolean(FIRST_OPEN, value).apply()
-
-    var launcherReset: Boolean
-        get() = prefs.getBoolean(LAUNCHER_RESET, false)
-        set(value) = prefs.edit().putBoolean(LAUNCHER_RESET, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

@@ -1,6 +1,7 @@
 package app.olauncher
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +16,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val refreshHome = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
+    val launcherResetSuccessful = MutableLiveData<Boolean>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -67,6 +69,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun isOlauncherDefault() {
         isOlauncherDefault.value = isOlauncherDefault(appContext)
+    }
+
+    fun resetDefaultLauncherApp(context: Context) {
+        resetDefaultLauncher(context)
+        launcherResetSuccessful.value = !getDefaultLauncherPackage(appContext).contains(".")
     }
 }
 

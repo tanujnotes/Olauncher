@@ -12,7 +12,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -111,6 +110,9 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             if (it) setDefaultLauncher.visibility = View.GONE
             else setDefaultLauncher.visibility = View.VISIBLE
         })
+        viewModel.launcherResetSuccessful.observe(viewLifecycleOwner, Observer<Boolean> {
+            showLauncherAppChooser(it)
+        })
     }
 
     override fun onClick(view: View) {
@@ -129,9 +131,25 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
-            R.id.setDefaultLauncher -> showLauncherAppChooser()
+            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
         }
     }
+
+    private fun showLauncherAppChooser(resetSuccessful: Boolean) {
+        val intent: Intent
+        if (resetSuccessful) {
+            intent = Intent(Intent.ACTION_MAIN, null)
+            intent.addCategory(Intent.CATEGORY_HOME)
+        } else {
+            intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS) else {
+                showToastLong(requireContext(), "Search for launcher or home app")
+                Intent(Settings.ACTION_SETTINGS)
+            }
+        }
+        startActivity(intent)
+    }
+
 
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
@@ -204,28 +222,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         } catch (e: java.lang.Exception) {
 
         }
-    }
-
-    private fun showLauncherAppChooser() {
-        if (prefs.launcherReset) {
-            resetDefaultLauncher(requireContext())
-            val intent = Intent(Intent.ACTION_MAIN, null)
-            intent.addCategory(Intent.CATEGORY_HOME)
-            startActivity(intent)
-            return
-        }
-        // Open settings because default launcher cannot be reset programmatically
-        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-        } else {
-            Toast.makeText(
-                requireContext(),
-                "Search for launcher or home app",
-                Toast.LENGTH_LONG
-            ).show()
-            Intent(Settings.ACTION_SETTINGS)
-        }
-        startActivity(intent)
     }
 
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
