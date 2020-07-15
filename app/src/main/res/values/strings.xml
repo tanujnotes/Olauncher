@@ -4,8 +4,8 @@
     <string name="no_match_found">No match found</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="let_s_go">Let\'s go</string>
-    <string name="swipe_in_any_direction_for_options">Swipe in any direction for options</string>
-    <string name="long_press_anywhere_for_even_more_options">Long press anywhere for even more options</string>
+    <string name="swipe_in_any_direction">Swipe in any direction</string>
+    <string name="long_press_anywhere">Long press anywhere</string>
     <string name="live_happily_ever_after">Live happily ever after</string>
     <string name="how_to_use">How to use -</string>
     <string name="welcome_to_olauncher">Welcome to Olauncher!</string>
