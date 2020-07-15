@@ -66,9 +66,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun isOlauncherDefault() {
-        val isDefault = isOlauncherDefault(appContext)
-        isOlauncherDefault.value = isDefault
-        if (isDefault) setBlackWallpaper(appContext)
+        isOlauncherDefault.value = isOlauncherDefault(appContext)
     }
 }
 

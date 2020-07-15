@@ -1,15 +1,18 @@
 <resources>
-    <!-- Base application theme. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@android:color/black</item>
         <item name="colorPrimaryDark">@android:color/black</item>
         <item name="colorAccent">@android:color/darker_gray</item>
 
-        <!--        <item name="android:windowShowWallpaper">true</item>-->
-        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowShowWallpaper">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
 
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
@@ -18,6 +21,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:inputType">textNoSuggestions</item>
         <item name="android:cursorVisible">false</item>
     </style>
 
