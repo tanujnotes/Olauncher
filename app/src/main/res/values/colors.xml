@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">@android:color/darker_gray</color>
     <color name="colorAccent">#FFEB3B</color>
 
-    <color name="blackTransparent">#08000000</color>
-    <color name="blackTransparent50">#80000000</color>
+    <color name="blackTransparent10">#1A000000</color>
+    <color name="blackTransparent75">#BF000000</color>
 </resources>
