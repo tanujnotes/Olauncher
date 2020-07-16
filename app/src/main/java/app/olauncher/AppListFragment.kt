@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -56,6 +57,9 @@ class AppListFragment : Fragment() {
 
     private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+            val animation =
+                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+            recyclerView.layoutAnimation = animation
             appAdapter.setAppList(it)
             search.visibility = View.VISIBLE
         })
