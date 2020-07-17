@@ -16,7 +16,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val refreshHome = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
-    val launcherResetSuccessful = MutableLiveData<Boolean>()
+    val launcherResetFailed = MutableLiveData<Boolean>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -73,7 +73,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun resetDefaultLauncherApp(context: Context) {
         resetDefaultLauncher(context)
-        launcherResetSuccessful.value = !getDefaultLauncherPackage(appContext).contains(".")
+        launcherResetFailed.value = getDefaultLauncherPackage(appContext).contains(".")
     }
 }
 

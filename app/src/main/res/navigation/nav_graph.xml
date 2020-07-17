@@ -20,6 +20,11 @@
             app:destination="@id/welcomeFragment"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit" />
     </fragment>
 
     <fragment
@@ -30,5 +35,12 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="app.olauncher.WelcomeFragment"
-        android:label="WelcomeFragment" />
+        android:label="WelcomeFragment"
+        android:layout="@layout/fragment_welcome" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="app.olauncher.SettingsFragment"
+        android:label="SettingsFragment"
+        android:layout="@layout/fragment_settings" />
+
 </navigation>
