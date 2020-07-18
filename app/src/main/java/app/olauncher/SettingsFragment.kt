@@ -54,9 +54,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setLockModeText() {
-        val active: Boolean = deviceManager.isAdminActive(componentName)
-        Prefs(requireContext()).lockModeOn = active
-        if (active) toggleOnOff.text = getString(R.string.on)
+        if (Prefs(requireContext()).lockModeOn) toggleOnOff.text = getString(R.string.on)
         else toggleOnOff.text = getString(R.string.off)
     }
 
