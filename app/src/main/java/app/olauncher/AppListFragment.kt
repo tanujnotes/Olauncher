@@ -103,23 +103,21 @@ class AppListFragment : Fragment() {
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
         return object : RecyclerView.OnScrollListener() {
 
-            var isKeyboardDismissedByScroll = false
+            var onTop = false
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 when (newState) {
 
                     RecyclerView.SCROLL_STATE_DRAGGING -> {
-                        if (!isKeyboardDismissedByScroll) {
-                            search.hideKeyboard()
-                            isKeyboardDismissedByScroll = !isKeyboardDismissedByScroll
-                        }
+                        onTop = !recyclerView.canScrollVertically(-1)
+                        if (onTop) search.hideKeyboard()
                     }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
-                        isKeyboardDismissedByScroll = false
                         if (!recyclerView.canScrollVertically(-1)) {
-                            search.showKeyboard()
+                            if (onTop) findNavController().popBackStack()
+                            else search.showKeyboard()
                         }
                     }
                 }
