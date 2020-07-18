@@ -46,6 +46,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
+            R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.textColor -> viewModel.switchTheme()
             R.id.toggleOnOff -> toggleLockMode()
@@ -60,6 +61,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initClickListeners() {
+        appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
         textColor.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
