@@ -29,7 +29,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:shadowColor">@color/blackTransparent75</item>
+        <item name="android:shadowColor">@color/colorPrimaryInverseTrans75</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">1</item>

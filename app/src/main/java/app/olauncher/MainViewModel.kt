@@ -3,6 +3,7 @@ package app.olauncher
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -17,6 +18,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val appList = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
+    val isDarkModeOn = MutableLiveData<Boolean>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -74,6 +76,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun resetDefaultLauncherApp(context: Context) {
         resetDefaultLauncher(context)
         launcherResetFailed.value = getDefaultLauncherPackage(appContext).contains(".")
+    }
+
+    fun switchTheme() {
+        prefs.darkModeOn = !prefs.darkModeOn
+        setTheme(prefs.darkModeOn)
+    }
+
+    fun setTheme(darkMode: Boolean) {
+        if (darkMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        isDarkModeOn.value = prefs.darkModeOn
     }
 }
 

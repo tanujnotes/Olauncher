@@ -36,16 +36,22 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.textColor -> viewModel.switchTheme()
         }
     }
 
     private fun initClickListeners() {
         setLauncher.setOnClickListener(this)
+        textColor.setOnClickListener(this)
     }
 
     private fun initObservers() {
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it) setLauncher.text = getString(R.string.change_default_launcher)
+        })
+        viewModel.isDarkModeOn.observe(viewLifecycleOwner, Observer {
+            if (it) textColor.text = getString(R.string.white)
+            else textColor.text = getString(R.string.black)
         })
     }
 }
