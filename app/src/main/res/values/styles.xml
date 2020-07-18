@@ -50,4 +50,8 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="TextSmallBold" parent="TextSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

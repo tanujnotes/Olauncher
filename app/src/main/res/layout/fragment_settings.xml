@@ -15,7 +15,7 @@
         style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/settings" />
+        android:text="@string/app_name" />
 
     <Space
         android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/setLauncher"
-        style="@style/TextSmall"
+        style="@style/TextSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/set_as_default_launcher" />
@@ -32,21 +32,21 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="0.5" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            style="@style/TextSmall"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/double_tap_to_lock_screen" />
 
         <TextView
             android:id="@+id/toggleOnOff"
-            style="@style/TextSmall"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -57,20 +57,20 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="0.5" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            style="@style/TextSmall"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/daily_new_wallpaper" />
 
         <TextView
-            style="@style/TextSmall"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -81,21 +81,21 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="0.5" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            style="@style/TextSmall"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_text_color" />
 
         <TextView
             android:id="@+id/textColor"
-            style="@style/TextSmall"
+            style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -106,10 +106,10 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="0.5" />
 
     <TextView
-        style="@style/TextSmall"
+        style="@style/TextSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/olauncher_pro" />
