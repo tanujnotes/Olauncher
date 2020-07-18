@@ -45,6 +45,7 @@
             android:text="@string/double_tap_to_lock_screen" />
 
         <TextView
+            android:id="@+id/toggleOnOff"
             style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

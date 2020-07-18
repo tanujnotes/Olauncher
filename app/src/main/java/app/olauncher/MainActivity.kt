@@ -1,5 +1,6 @@
 package app.olauncher
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -67,6 +68,19 @@ class MainActivity : AppCompatActivity() {
                 Intent(Settings.ACTION_SETTINGS)
             }
             startActivity(intent)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            Constants.REQUEST_CODE_ENABLE_ADMIN -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    Prefs(this).lockModeOn = true
+                    showToastShort(this, "Double tap to lock")
+                }
+                return
+            }
         }
     }
 }

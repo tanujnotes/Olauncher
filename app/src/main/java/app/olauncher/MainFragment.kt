@@ -1,6 +1,7 @@
 package app.olauncher
 
 import android.annotation.SuppressLint
+import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -21,8 +22,9 @@ import java.lang.reflect.Method
 
 class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
-    private lateinit var viewModel: MainViewModel
     private lateinit var prefs: Prefs
+    private lateinit var viewModel: MainViewModel
+    private lateinit var deviceManager: DevicePolicyManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +39,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+        deviceManager =
+            context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
         populateHomeApps()
         initClickListeners()
@@ -203,6 +207,16 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
+    private fun lockPhone() {
+        try {
+            deviceManager.lockNow()
+        } catch (e: java.lang.Exception) {
+            prefs.lockModeOn = false
+            showToastShort(requireContext(), "Olauncher failed to lock phone")
+            findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+        }
+    }
+
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
         return object : OnSwipeTouchListener(context) {
             override fun onSwipeLeft() {
@@ -228,6 +242,11 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onLongClick() {
                 super.onLongClick()
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+            }
+
+            override fun onDoubleClick() {
+                super.onDoubleClick()
+                if (prefs.lockModeOn) lockPhone()
             }
         }
     }

@@ -8,6 +8,7 @@ class Prefs(context: Context) {
 
     private val FIRST_OPEN = "FIRST_OPEN"
     private val DARK_MODE = "DARK_MODE"
+    private val LOCK_MODE = "LOCK_MODE"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -27,6 +28,10 @@ class Prefs(context: Context) {
     var darkModeOn: Boolean
         get() = prefs.getBoolean(DARK_MODE, true)
         set(value) = prefs.edit().putBoolean(DARK_MODE, value).apply()
+
+    var lockModeOn: Boolean
+        get() = prefs.getBoolean(LOCK_MODE, false)
+        set(value) = prefs.edit().putBoolean(LOCK_MODE, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()
