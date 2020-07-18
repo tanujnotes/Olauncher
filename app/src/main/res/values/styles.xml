@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@android:color/black</item>
@@ -10,6 +10,9 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">
+            @bool/light_navigation_bar
+        </item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@null</item>
@@ -18,8 +21,8 @@
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
         <item name="android:maxLength">20</item>
         <item name="android:textSize">30sp</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:inputType">textNoSuggestions</item>
         <item name="android:cursorVisible">false</item>
@@ -29,7 +32,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:shadowColor">@color/colorPrimaryInverseTrans75</item>
+        <item name="android:shadowColor">@color/colorPrimaryInverseTrans25</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">1</item>
