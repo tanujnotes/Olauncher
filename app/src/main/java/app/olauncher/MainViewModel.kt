@@ -84,6 +84,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setTheme(darkMode: Boolean) {
+        prefs.darkModeOn = darkMode
         if (darkMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         isDarkModeOn.value = prefs.darkModeOn
