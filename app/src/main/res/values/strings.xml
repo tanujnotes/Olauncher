@@ -19,5 +19,5 @@
     <string name="black">Black</string>
     <string name="white">White</string>
     <string name="change_default_launcher">Change default launcher</string>
-    <string name="admin_permission_message">Olauncher promises to lock screen permission responsibly.</string>
+    <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly.</string>
 </resources>
