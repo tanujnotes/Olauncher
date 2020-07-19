@@ -81,30 +81,6 @@
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/daily_new_wallpaper" />
-
-        <TextView
-            style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/off"
-            android:textAllCaps="true" />
-    </FrameLayout>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.5" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/app_text_color" />
 
         <TextView
@@ -116,17 +92,6 @@
             android:text="@string/white"
             android:textAllCaps="true" />
     </FrameLayout>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.5" />
-
-    <TextView
-        style="@style/TextSmallBold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/olauncher_pro" />
 
     <Space
         android:layout_width="wrap_content"
