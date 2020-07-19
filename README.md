@@ -9,7 +9,9 @@ You can also clone the master branch and build the app yourself in Android Studi
 
 ## What's next
 
-Since this is a minimalistic launcher, I want to highlight its greatest feature which is called - no feature! Although the next version will have the option of daily wallpaper update.
+Since this is a minimalistic launcher, I want to highlight its greatest feature which is called - no feature! 
+The next version will have the option to change text color (black or white) and double tap to lock (requires permission). 
+I'm also thinking about adding daily wallpaper update but only if there's enough demand for it.
 
 ## Contact
 Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
