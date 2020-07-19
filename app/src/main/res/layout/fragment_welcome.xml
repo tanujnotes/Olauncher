@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:background="@drawable/gradient_transparent_background"
     android:orientation="vertical"
     android:padding="24dp">
 
@@ -24,7 +25,7 @@
         android:layout_weight="2" />
 
     <TextView
-        style="@style/TextMedium"
+        style="@style/TextSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/how_to_use" />
@@ -35,7 +36,7 @@
         android:layout_weight="1" />
 
     <TextView
-        style="@style/TextMedium"
+        style="@style/TextSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/swipe_in_any_direction" />
@@ -46,7 +47,7 @@
         android:layout_weight="1" />
 
     <TextView
-        style="@style/TextMedium"
+        style="@style/TextSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/long_press_anywhere" />
@@ -57,7 +58,7 @@
         android:layout_weight="1" />
 
     <TextView
-        style="@style/TextMedium"
+        style="@style/TextSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/live_happily_ever_after" />
@@ -69,7 +70,7 @@
 
     <TextView
         android:id="@+id/lets_go"
-        style="@style/TextMedium"
+        style="@style/TextSmallBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingVertical="12dp"
