@@ -1,3 +1,4 @@
+![Olauncher](https://repository-images.githubusercontent.com/278638069/e14e7b80-c874-11ea-9a8f-afd6a88db933)
 # Olauncher
 Olauncher is a minimalistic open source launcher app for Android.
 
