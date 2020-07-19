@@ -22,6 +22,7 @@
         <item name="android:maxLength">20</item>
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:editTextColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:inputType">textNoSuggestions</item>
