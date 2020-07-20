@@ -1,6 +1,7 @@
 package app.olauncher
 
 import android.app.Activity
+import android.app.WallpaperManager
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initObservers(viewModel)
         viewModel.setTheme(prefs.darkModeOn)
+        setMarshmallowWallpaper()
     }
 
     override fun onUserLeaveHint() {
@@ -51,6 +54,17 @@ class MainActivity : AppCompatActivity() {
         viewModel.launcherResetFailed.observe(this, Observer {
             openLauncherChooser(it)
         })
+    }
+
+    private fun setMarshmallowWallpaper() {
+        try {
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
+                val wallpaperManager = WallpaperManager.getInstance(this)
+                mainActivityLayout.background = wallpaperManager.drawable
+            }
+        } catch (e: Exception) {
+
+        }
     }
 
     private fun backToHomeScreen() {

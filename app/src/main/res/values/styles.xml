@@ -16,6 +16,7 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
 
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
