@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.helper
 
 import android.app.Application
 import android.content.Context
@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import app.olauncher.data.AppModel
+import app.olauncher.data.Constants
+import app.olauncher.data.Prefs
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -70,12 +73,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun isOlauncherDefault() {
-        isOlauncherDefault.value = isOlauncherDefault(appContext)
+        isOlauncherDefault.value =
+            isOlauncherDefault(appContext)
     }
 
     fun resetDefaultLauncherApp(context: Context) {
         resetDefaultLauncher(context)
-        launcherResetFailed.value = getDefaultLauncherPackage(appContext).contains(".")
+        launcherResetFailed.value = getDefaultLauncherPackage(
+            appContext
+        ).contains(".")
     }
 
     fun switchTheme() {

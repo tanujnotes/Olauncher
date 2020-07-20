@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.helper
 
 import android.app.WallpaperManager
 import android.content.ComponentName
@@ -9,6 +9,9 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.Settings
 import android.widget.Toast
+import app.olauncher.BuildConfig
+import app.olauncher.R
+import app.olauncher.data.AppModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -30,9 +33,19 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
 
         val installedApps = pm.queryIntentActivities(intent, 0)
         for (app in installedApps)
-            appList.add(AppModel(app.loadLabel(pm).toString(), app.activityInfo.packageName))
+            appList.add(
+                AppModel(
+                    app.loadLabel(pm).toString(),
+                    app.activityInfo.packageName
+                )
+            )
         appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
-        appList.remove(AppModel(context.getString(R.string.app_name), BuildConfig.APPLICATION_ID))
+        appList.remove(
+            AppModel(
+                context.getString(R.string.app_name),
+                BuildConfig.APPLICATION_ID
+            )
+        )
         appList
     }
 }
@@ -47,7 +60,8 @@ fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boo
 }
 
 fun isOlauncherDefault(context: Context?): Boolean {
-    val launcherPackageName = getDefaultLauncherPackage(context!!)
+    val launcherPackageName =
+        getDefaultLauncherPackage(context!!)
     return BuildConfig.APPLICATION_ID == launcherPackageName
 }
 

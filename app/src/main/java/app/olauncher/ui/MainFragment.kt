@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.ui
 
 import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
@@ -16,6 +16,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import app.olauncher.*
+import app.olauncher.helper.OnSwipeTouchListener
+import app.olauncher.data.AppModel
+import app.olauncher.data.Constants
+import app.olauncher.data.Prefs
+import app.olauncher.helper.MainViewModel
+import app.olauncher.helper.isPackageInstalled
+import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.main_fragment.*
 import java.lang.reflect.Method
 
@@ -172,7 +180,10 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun launchAppEvent(appName: String, packageName: String) {
-        viewModel.selectedApp(AppModel(appName, packageName), Constants.FLAG_LAUNCH_APP)
+        viewModel.selectedApp(
+            AppModel(appName, packageName),
+            Constants.FLAG_LAUNCH_APP
+        )
     }
 
     // Source: https://stackoverflow.com/a/51132142
@@ -212,7 +223,10 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             deviceManager.lockNow()
         } catch (e: java.lang.Exception) {
             prefs.lockModeOn = false
-            showToastShort(requireContext(), "Olauncher failed to lock phone")
+            showToastShort(
+                requireContext(),
+                "Olauncher failed to lock phone"
+            )
             findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
         }
     }

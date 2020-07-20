@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.helper
 
 import android.app.admin.DeviceAdminReceiver
 import android.content.Context

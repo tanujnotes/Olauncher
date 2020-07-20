@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.data
 
 object Constants {
     const val FLAG_LAUNCH_APP = 100

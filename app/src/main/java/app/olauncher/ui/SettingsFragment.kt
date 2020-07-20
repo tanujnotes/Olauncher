@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.ui
 
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
@@ -11,6 +11,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import app.olauncher.*
+import app.olauncher.data.Constants
+import app.olauncher.data.Prefs
+import app.olauncher.helper.DeviceAdmin
+import app.olauncher.helper.MainViewModel
+import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -46,7 +53,10 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
+            R.id.appInfo -> openAppInfo(
+                requireContext(),
+                BuildConfig.APPLICATION_ID
+            )
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.textColor -> viewModel.switchTheme()
             R.id.toggleOnOff -> toggleLockMode()
@@ -54,7 +64,9 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setLockModeText() {
-        if (Prefs(requireContext()).lockModeOn) toggleOnOff.text = getString(R.string.on)
+        if (Prefs(requireContext()).lockModeOn) toggleOnOff.text = getString(
+            R.string.on
+        )
         else toggleOnOff.text = getString(R.string.off)
     }
 
@@ -81,7 +93,10 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             deviceManager.removeActiveAdmin(componentName)
             Prefs(requireContext()).lockModeOn = false
             setLockModeText()
-            showToastShort(requireContext(), "Admin permission removed")
+            showToastShort(
+                requireContext(),
+                "Admin permission removed"
+            )
         } else {
             val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
@@ -89,7 +104,9 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 DevicePolicyManager.EXTRA_ADD_EXPLANATION,
                 getString(R.string.admin_permission_message)
             )
-            activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
+            activity?.startActivityForResult(intent,
+                Constants.REQUEST_CODE_ENABLE_ADMIN
+            )
         }
     }
 }

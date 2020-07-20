@@ -12,6 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import app.olauncher.data.Constants
+import app.olauncher.data.Prefs
+import app.olauncher.helper.MainViewModel
+import app.olauncher.helper.showToastLong
+import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -85,7 +90,10 @@ class MainActivity : AppCompatActivity() {
         if (resetFailed) {
             val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS) else {
-                showToastLong(this, "Search for launcher or home app")
+                showToastLong(
+                    this,
+                    "Search for launcher or home app"
+                )
                 Intent(Settings.ACTION_SETTINGS)
             }
             startActivity(intent)
@@ -98,7 +106,10 @@ class MainActivity : AppCompatActivity() {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
                 if (resultCode == Activity.RESULT_OK) {
                     Prefs(this).lockModeOn = true
-                    showToastShort(this, "Double tap to lock")
+                    showToastShort(
+                        this,
+                        "Double tap to lock"
+                    )
                 }
                 return
             }

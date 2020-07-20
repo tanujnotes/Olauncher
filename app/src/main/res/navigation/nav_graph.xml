@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="app.olauncher.MainFragment"
+        android:name="app.olauncher.ui.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment">
         <action
@@ -35,17 +35,17 @@
 
     <fragment
         android:id="@+id/appListFragment"
-        android:name="app.olauncher.AppListFragment"
+        android:name="app.olauncher.ui.AppListFragment"
         android:label="app_list_fragment"
         tools:layout="@layout/fragment_app" />
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="app.olauncher.WelcomeFragment"
+        android:name="app.olauncher.ui.WelcomeFragment"
         android:label="WelcomeFragment"
         android:layout="@layout/fragment_welcome" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="app.olauncher.SettingsFragment"
+        android:name="app.olauncher.ui.SettingsFragment"
         android:label="SettingsFragment"
         android:layout="@layout/fragment_settings" />
 

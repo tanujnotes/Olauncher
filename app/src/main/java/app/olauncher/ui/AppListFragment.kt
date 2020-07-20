@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -14,6 +14,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import app.olauncher.data.AppModel
+import app.olauncher.helper.MainViewModel
+import app.olauncher.R
+import app.olauncher.helper.openAppInfo
 import kotlinx.android.synthetic.main.fragment_app.*
 
 
@@ -58,7 +62,9 @@ class AppListFragment : Fragment() {
     private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
             val animation =
-                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+                AnimationUtils.loadLayoutAnimation(requireContext(),
+                    R.anim.layout_anim_from_bottom
+                )
             recyclerView.layoutAnimation = animation
             appAdapter.setAppList(it)
             search.visibility = View.VISIBLE
@@ -96,7 +102,10 @@ class AppListFragment : Fragment() {
 
     private fun appLongPressListener(): (appModel: AppModel) -> Unit =
         { appModel ->
-            openAppInfo(requireContext(), appModel.appPackage)
+            openAppInfo(
+                requireContext(),
+                appModel.appPackage
+            )
             findNavController().popBackStack()
         }
 

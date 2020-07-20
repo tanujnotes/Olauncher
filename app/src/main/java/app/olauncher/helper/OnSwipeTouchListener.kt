@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olauncher.helper
 
 import android.content.Context
 import android.view.GestureDetector
