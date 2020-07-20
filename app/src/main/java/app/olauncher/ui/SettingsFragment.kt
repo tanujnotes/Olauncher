@@ -4,6 +4,7 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import app.olauncher.*
+import app.olauncher.BuildConfig
+import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.DeviceAdmin
@@ -51,30 +53,18 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         initObservers()
     }
 
-    override fun onClick(view: View) {
-        when (view.id) {
-            R.id.appInfo -> openAppInfo(
-                requireContext(),
-                BuildConfig.APPLICATION_ID
-            )
-            R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.textColor -> viewModel.switchTheme()
-            R.id.toggleOnOff -> toggleLockMode()
-        }
-    }
-
-    private fun setLockModeText() {
-        if (Prefs(requireContext()).lockModeOn) toggleOnOff.text = getString(
-            R.string.on
-        )
-        else toggleOnOff.text = getString(R.string.off)
-    }
-
     private fun initClickListeners() {
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
         textColor.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
+        about.setOnClickListener(this)
+        privacy.setOnClickListener(this)
+        share.setOnClickListener(this)
+        rate.setOnClickListener(this)
+        twitter.setOnClickListener(this)
+        github.setOnClickListener(this)
+        sponsor.setOnClickListener(this)
     }
 
     private fun initObservers() {
@@ -93,10 +83,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             deviceManager.removeActiveAdmin(componentName)
             Prefs(requireContext()).lockModeOn = false
             setLockModeText()
-            showToastShort(
-                requireContext(),
-                "Admin permission removed"
-            )
+            showToastShort(requireContext(), "Admin permission removed")
         } else {
             val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
@@ -104,9 +91,58 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                 DevicePolicyManager.EXTRA_ADD_EXPLANATION,
                 getString(R.string.admin_permission_message)
             )
-            activity?.startActivityForResult(intent,
-                Constants.REQUEST_CODE_ENABLE_ADMIN
-            )
+            activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
         }
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
+            R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.textColor -> viewModel.switchTheme()
+            R.id.toggleOnOff -> toggleLockMode()
+
+            R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
+            R.id.share -> shareApp()
+            R.id.rate -> rateApp()
+            R.id.twitter -> openUrl(Constants.URL_TWITTER_TANUJNOTES)
+            R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
+            R.id.sponsor -> openUrl(Constants.URL_COFFEE_TANUJNOTES)
+        }
+    }
+
+    private fun setLockModeText() {
+        if (Prefs(requireContext()).lockModeOn) toggleOnOff.text = getString(R.string.on)
+        else toggleOnOff.text = getString(R.string.off)
+    }
+
+    private fun openUrl(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(url)
+        startActivity(intent)
+    }
+
+    private fun shareApp() {
+        val message = "Olauncher - Minimalistic launcher for Android\n" +
+                Constants.URL_OLAUNCHER_PLAY_STORE
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, message)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
+
+    private fun rateApp() {
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(Constants.URL_OLAUNCHER_PLAY_STORE)
+        )
+        var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+        flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+        intent.addFlags(flags)
+        startActivity(intent)
     }
 }

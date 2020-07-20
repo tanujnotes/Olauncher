@@ -56,4 +56,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextSmallLight" parent="TextSmall">
+        <item name="android:textColor">@color/colorPrimaryTrans75</item>
+    </style>
+
 </resources>

@@ -20,4 +20,10 @@
     <string name="white">White</string>
     <string name="change_default_launcher">Change default launcher</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly.</string>
+    <string name="privacy">Privacy</string>
+    <string name="share">Share</string>
+    <string name="rate">Rate</string>
+    <string name="twitter">Twitter</string>
+    <string name="github">Github</string>
+    <string name="sponsor">Sponsor</string>
 </resources>
