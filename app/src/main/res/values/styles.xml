@@ -41,7 +41,7 @@
     </style>
 
     <style name="TextLarge" parent="TextDefault">
-        <item name="android:textSize">32sp</item>
+        <item name="android:textSize">30sp</item>
     </style>
 
     <style name="TextMedium" parent="TextDefault">
