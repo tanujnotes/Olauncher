@@ -3,6 +3,7 @@ package app.olauncher
 import android.app.Activity
 import android.app.WallpaperManager
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initObservers(viewModel)
         viewModel.setTheme(prefs.darkModeOn)
-        setMarshmallowWallpaper()
+        setWallpaper()
+        setupOrientation()
     }
 
     override fun onUserLeaveHint() {
@@ -56,14 +58,19 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setMarshmallowWallpaper() {
+    private fun setWallpaper() {
         try {
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
-                val wallpaperManager = WallpaperManager.getInstance(this)
-                mainActivityLayout.background = wallpaperManager.drawable
-            }
+            val wallpaperManager = WallpaperManager.getInstance(this)
+            mainActivityLayout.background = wallpaperManager.drawable
         } catch (e: Exception) {
 
+        }
+    }
+
+    private fun setupOrientation() {
+        // In Android 8.0, windowIsTranslucent cannot be used with screenOrientation=portrait
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
     }
 
