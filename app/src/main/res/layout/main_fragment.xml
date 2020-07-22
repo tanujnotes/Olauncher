@@ -4,6 +4,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:orientation="vertical"
     android:padding="24dp"
     tools:context=".ui.MainFragment">
@@ -64,12 +65,25 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/setDefaultLauncher"
-        style="@style/TextSmall"
+    <FrameLayout
+        android:id="@+id/tips"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="@string/set_as_default_launcher"
-        android:visibility="gone" />
+        android:layout_height="56dp"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/TextSmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/swipe_up_for_apps" />
+
+        <TextView
+            style="@style/TextSmallLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/long_press_for_settings" />
+
+    </FrameLayout>
+
 </LinearLayout>

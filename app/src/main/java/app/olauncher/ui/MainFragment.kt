@@ -16,12 +16,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import app.olauncher.*
-import app.olauncher.helper.OnSwipeTouchListener
+import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.MainViewModel
+import app.olauncher.helper.OnSwipeTouchListener
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -108,17 +108,15 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         date.setOnClickListener(this)
         clock.setOnClickListener(this)
-        setDefaultLauncher.setOnClickListener(this)
     }
 
     private fun initObservers() {
         viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Any> {
             populateHomeApps()
         })
-
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (it) setDefaultLauncher.visibility = View.GONE
-            else setDefaultLauncher.visibility = View.VISIBLE
+        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (it) tips.visibility = View.VISIBLE
+            else tips.visibility = View.GONE
         })
     }
 
@@ -138,7 +136,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
-            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
         }
     }
 
@@ -256,6 +253,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onLongClick() {
                 super.onLongClick()
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                viewModel.firstOpen(false) // To make tips disappear
             }
 
             override fun onDoubleClick() {

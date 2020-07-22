@@ -17,6 +17,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val prefs = Prefs(appContext)
 
     private val selectedApp = MutableLiveData<AppModelWithFlag>()
+    val firstOpen = MutableLiveData<Boolean>()
     val refreshHome = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
@@ -50,6 +51,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         selectedApp.value = AppModelWithFlag(appModel, flag)
+    }
+
+    fun firstOpen(value: Boolean) {
+        firstOpen.value = value
     }
 
     private fun refreshHome(value: Any) {

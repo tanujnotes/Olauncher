@@ -34,13 +34,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
+        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         val prefs = Prefs(this)
         if (prefs.firstOpen) {
+            viewModel.firstOpen(true)
             prefs.firstOpen = false
-            navController.navigate(R.id.action_mainFragment_to_welcomeFragment)
         }
 
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         initObservers(viewModel)
         viewModel.setTheme(prefs.darkModeOn)
         setWallpaper()

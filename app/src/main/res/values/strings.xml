@@ -26,4 +26,6 @@
     <string name="twitter">Twitter</string>
     <string name="github">Github</string>
     <string name="sponsor">Sponsor</string>
+    <string name="long_press_for_settings">Long press for settings</string>
+    <string name="swipe_up_for_apps">Swipe up for apps</string>
 </resources>
