@@ -93,7 +93,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appName4 = ""
             prefs.appPackage4 = ""
         }
-
     }
 
     private fun initClickListeners() {
@@ -106,8 +105,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp3.setOnLongClickListener(this)
         homeApp4.setOnLongClickListener(this)
 
-        date.setOnClickListener(this)
         clock.setOnClickListener(this)
+        date.setOnClickListener(this)
     }
 
     private fun initObservers() {
