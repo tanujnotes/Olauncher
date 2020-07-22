@@ -6,12 +6,13 @@ Olauncher is a minimalistic open source launcher app for Android.
 
 [Available at Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
 
-You can also clone the master branch and build the app yourself in Android Studio. No extra steps required.
+Coming soon on F-Droid. You can also clone the master branch and build the app yourself in Android Studio. No extra steps required.
 
 ## What's next
 
 Since this is a minimalistic launcher, I want to highlight its greatest feature which is called - no feature! 
-The next version will have the option to change text color (black or white) and double tap to lock (requires permission). 
+
+Although, the next verion (v0.3) will give user option to choose the number of apps on the home screen.
 I'm also thinking about adding daily wallpaper update but only if there's enough demand for it.
 
 ## Contact
