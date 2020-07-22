@@ -3,7 +3,7 @@
     <string name="select">Select</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Change text color</string>
-    <string name="double_tap_to_lock_screen">Double tap to lock screen</string>
+    <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="about">About</string>
     <string name="off">Off</string>
     <string name="on">On</string>
@@ -19,4 +19,5 @@
     <string name="sponsor">Sponsor</string>
     <string name="long_press_for_settings">Long press for settings</string>
     <string name="swipe_up_for_apps">Swipe up for apps</string>
+    <string name="apps_on_home_screen">Apps on home screen</string>
 </resources>

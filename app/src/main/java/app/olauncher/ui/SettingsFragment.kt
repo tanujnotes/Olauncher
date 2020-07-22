@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener {
 
+    private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
     private lateinit var componentName: ComponentName
@@ -39,6 +40,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        prefs = Prefs(requireContext())
         viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
@@ -48,6 +50,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
 
+        homeAppsNum.text = prefs.homeAppsNum.toString()
         setLockModeText()
         initClickListeners()
         initObservers()
@@ -56,6 +59,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     private fun initClickListeners() {
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
+        homeAppsNum.setOnClickListener(this)
         textColor.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
         about.setOnClickListener(this)
@@ -99,6 +103,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.homeAppsNum -> updateHomeAppsNum()
             R.id.textColor -> viewModel.switchTheme()
             R.id.toggleOnOff -> toggleLockMode()
 
@@ -109,6 +114,14 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
             R.id.sponsor -> openUrl(Constants.URL_COFFEE_TANUJNOTES)
         }
+    }
+
+    private fun updateHomeAppsNum() {
+        var num = prefs.homeAppsNum
+        if (num == 0) num = Constants.HOME_APPS_NUM_MAX else num--
+        homeAppsNum.text = num.toString()
+        prefs.homeAppsNum = num
+        viewModel.refreshHome(true)
     }
 
     private fun setLockModeText() {

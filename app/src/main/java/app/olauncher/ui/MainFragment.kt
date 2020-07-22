@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -64,35 +66,59 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun populateHomeApps() {
+        hideHomeApps()
+        val homeAppsNum = prefs.homeAppsNum
+        if (homeAppsNum == 0) return
+
         val pm = requireContext().packageManager
-        if (isPackageInstalled(prefs.appPackage1, pm))
-            homeApp1.text = prefs.appName1
-        else {
-            homeApp1.text = ""
+
+        homeApp1.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp1, prefs.appName1, prefs.appPackage1, pm)) {
             prefs.appName1 = ""
             prefs.appPackage1 = ""
         }
-        if (isPackageInstalled(prefs.appPackage2, pm))
-            homeApp2.text = prefs.appName2
-        else {
-            homeApp2.text = ""
+        if (homeAppsNum == 1) return
+
+        homeApp2.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp2, prefs.appName2, prefs.appPackage2, pm)) {
             prefs.appName2 = ""
             prefs.appPackage2 = ""
         }
-        if (isPackageInstalled(prefs.appPackage3, pm))
-            homeApp3.text = prefs.appName3
-        else {
-            homeApp3.text = ""
+        if (homeAppsNum == 2) return
+
+        homeApp3.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp3, prefs.appName3, prefs.appPackage3, pm)) {
             prefs.appName3 = ""
             prefs.appPackage3 = ""
         }
-        if (isPackageInstalled(prefs.appPackage4, pm))
-            homeApp4.text = prefs.appName4
-        else {
-            homeApp4.text = ""
+        if (homeAppsNum == 3) return
+
+        homeApp4.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp4, prefs.appName4, prefs.appPackage4, pm)) {
             prefs.appName4 = ""
             prefs.appPackage4 = ""
         }
+    }
+
+    private fun setHomeAppText(
+        textView: TextView,
+        appName: String,
+        packageName: String,
+        pm: PackageManager
+    ): Boolean {
+        if (isPackageInstalled(packageName, pm)) {
+            textView.text = appName
+            return true
+        }
+        textView.text = ""
+        return false
+    }
+
+    private fun hideHomeApps() {
+        homeApp1.visibility = View.GONE
+        homeApp2.visibility = View.GONE
+        homeApp3.visibility = View.GONE
+        homeApp4.visibility = View.GONE
     }
 
     private fun initClickListeners() {

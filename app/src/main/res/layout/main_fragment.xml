@@ -35,7 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/select"
-        android:paddingVertical="8dp" />
+        android:paddingVertical="8dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/homeApp2"
@@ -43,7 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/select"
-        android:paddingVertical="8dp" />
+        android:paddingVertical="8dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/homeApp3"
@@ -51,7 +53,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/select"
-        android:paddingVertical="8dp" />
+        android:paddingVertical="8dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/homeApp4"
@@ -59,7 +62,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/select"
-        android:paddingVertical="8dp" />
+        android:paddingVertical="8dp"
+        android:visibility="gone" />
 
     <Space
         android:layout_width="wrap_content"

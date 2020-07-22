@@ -8,6 +8,8 @@ object Constants {
     const val FLAG_SET_HOME_APP_3 = 3
     const val FLAG_SET_HOME_APP_4 = 4
 
+    const val HOME_APPS_NUM_MAX = 4
+
     const val REQUEST_CODE_ENABLE_ADMIN = 1001
 
     const val URL_OLAUNCHER_PRIVACY = "https://olauncher.flycricket.io/privacy.html"

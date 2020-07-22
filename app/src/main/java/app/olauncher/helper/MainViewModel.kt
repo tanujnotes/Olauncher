@@ -57,7 +57,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         firstOpen.value = value
     }
 
-    private fun refreshHome(value: Any) {
+    fun refreshHome(value: Any) {
         refreshHome.value = value
     }
 
