@@ -16,12 +16,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import app.olauncher.*
-import app.olauncher.helper.OnSwipeTouchListener
+import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.MainViewModel
+import app.olauncher.helper.OnSwipeTouchListener
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -93,7 +93,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appName4 = ""
             prefs.appPackage4 = ""
         }
-
     }
 
     private fun initClickListeners() {
@@ -106,19 +105,14 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp3.setOnLongClickListener(this)
         homeApp4.setOnLongClickListener(this)
 
-        date.setOnClickListener(this)
         clock.setOnClickListener(this)
-        setDefaultLauncher.setOnClickListener(this)
+        date.setOnClickListener(this)
+        more.setOnClickListener(this)
     }
 
     private fun initObservers() {
         viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Any> {
             populateHomeApps()
-        })
-
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (it) setDefaultLauncher.visibility = View.GONE
-            else setDefaultLauncher.visibility = View.VISIBLE
         })
     }
 
@@ -138,7 +132,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
-            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.more -> findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+
         }
     }
 
@@ -251,11 +246,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onSwipeDown() {
                 super.onSwipeDown()
                 expandNotificationDrawer(context)
-            }
-
-            override fun onLongClick() {
-                super.onLongClick()
-                findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             }
 
             override fun onDoubleClick() {

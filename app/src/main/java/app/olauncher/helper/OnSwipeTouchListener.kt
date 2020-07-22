@@ -72,8 +72,8 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
     open fun onSwipeLeft() {}
     open fun onSwipeUp() {}
     open fun onSwipeDown() {}
-    open fun onLongClick() {}
     open fun onDoubleClick() {}
+    private fun onLongClick() {}
     private fun onClick() {}
 
     init {
