@@ -17,8 +17,9 @@
         android:layout_height="wrap_content">
 
         <TextView
-            style="@style/TextLarge"
+            style="@style/TextDefault"
             android:layout_width="wrap_content"
+            android:textSize="32sp"
             android:layout_height="wrap_content"
             android:text="@string/app_name" />
 

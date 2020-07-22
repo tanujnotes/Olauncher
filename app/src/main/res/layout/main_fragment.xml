@@ -11,7 +11,7 @@
 
     <TextClock
         android:id="@+id/clock"
-        style="@style/TextLarge"
+        style="@style/TextDefault"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:format12Hour="hh:mm"
@@ -34,31 +34,32 @@
         style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/select" />
+        android:hint="@string/select"
+        android:paddingVertical="8dp" />
 
     <TextView
         android:id="@+id/homeApp2"
         style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/select" />
+        android:hint="@string/select"
+        android:paddingVertical="8dp" />
 
     <TextView
         android:id="@+id/homeApp3"
         style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/select" />
+        android:hint="@string/select"
+        android:paddingVertical="8dp" />
 
     <TextView
         android:id="@+id/homeApp4"
         style="@style/TextLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/select" />
+        android:hint="@string/select"
+        android:paddingVertical="8dp" />
 
     <Space
         android:layout_width="wrap_content"
