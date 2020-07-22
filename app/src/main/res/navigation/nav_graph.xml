@@ -18,13 +18,6 @@
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
         <action
-            android:id="@+id/action_mainFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
-            app:popEnterAnim="@anim/fragment_fade_enter"
-            app:popExitAnim="@anim/fragment_fade_exit" />
-        <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
             app:enterAnim="@anim/fragment_fade_enter"
@@ -38,11 +31,6 @@
         android:name="app.olauncher.ui.AppListFragment"
         android:label="app_list_fragment"
         tools:layout="@layout/fragment_app" />
-    <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="app.olauncher.ui.WelcomeFragment"
-        android:label="WelcomeFragment"
-        android:layout="@layout/fragment_welcome" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="app.olauncher.ui.SettingsFragment"
