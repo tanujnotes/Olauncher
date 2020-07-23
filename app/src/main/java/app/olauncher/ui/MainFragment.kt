@@ -52,7 +52,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         deviceManager =
             context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
-        populateHomeApps()
         initClickListeners()
         initObservers()
 
@@ -61,12 +60,12 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onResume() {
         super.onResume()
-        populateHomeApps()
+        populateHomeApps(false)
         viewModel.isOlauncherDefault()
     }
 
-    private fun populateHomeApps() {
-        hideHomeApps()
+    private fun populateHomeApps(appCountUpdated: Boolean) {
+        if (appCountUpdated) hideHomeApps()
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
 
@@ -136,8 +135,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initObservers() {
-        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Any> {
-            populateHomeApps()
+        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Boolean> {
+            populateHomeApps(it)
         })
         viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it) tips.visibility = View.VISIBLE

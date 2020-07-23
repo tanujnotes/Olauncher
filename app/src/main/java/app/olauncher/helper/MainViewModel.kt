@@ -18,7 +18,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val selectedApp = MutableLiveData<AppModelWithFlag>()
     val firstOpen = MutableLiveData<Boolean>()
-    val refreshHome = MutableLiveData<Any>()
+    val refreshHome = MutableLiveData<Boolean>()
     val appList = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
@@ -32,22 +32,22 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             Constants.FLAG_SET_HOME_APP_1 -> {
                 prefs.appName1 = appModel.appLabel
                 prefs.appPackage1 = appModel.appPackage
-                refreshHome(true)
+                refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_2 -> {
                 prefs.appName2 = appModel.appLabel
                 prefs.appPackage2 = appModel.appPackage
-                refreshHome(true)
+                refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_3 -> {
                 prefs.appName3 = appModel.appLabel
                 prefs.appPackage3 = appModel.appPackage
-                refreshHome(true)
+                refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_4 -> {
                 prefs.appName4 = appModel.appLabel
                 prefs.appPackage4 = appModel.appPackage
-                refreshHome(true)
+                refreshHome(false)
             }
         }
         selectedApp.value = AppModelWithFlag(appModel, flag)
@@ -57,8 +57,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         firstOpen.value = value
     }
 
-    fun refreshHome(value: Any) {
-        refreshHome.value = value
+    fun refreshHome(appCountUpdated: Boolean) {
+        refreshHome.value = appCountUpdated
     }
 
     private fun launchApp(packageName: String) {
@@ -67,7 +67,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             intent?.addCategory(Intent.CATEGORY_LAUNCHER)
             appContext.startActivity(intent)
         } catch (e: Exception) {
-            refreshHome(true)
+            refreshHome(false)
         }
     }
 
