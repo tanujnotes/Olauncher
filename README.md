@@ -12,8 +12,7 @@ Coming soon on F-Droid. You can also clone the master branch and build the app y
 
 Since this is a minimalistic launcher, I want to highlight its greatest feature which is called - no feature! 
 
-Although, the next verion (v0.3) will give user option to choose the number of apps on the home screen.
-I'm also thinking about adding daily wallpaper update but only if there's enough demand for it.
+Although, I'm thinking about adding daily wallpaper update but only if there's enough demand for it.
 
 ## Contact
 Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
