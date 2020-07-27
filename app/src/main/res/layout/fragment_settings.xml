@@ -187,13 +187,6 @@
                 android:layout_marginEnd="24dp"
                 android:text="@string/github" />
 
-            <TextView
-                android:id="@+id/sponsor"
-                style="@style/TextSmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sponsor" />
-
         </LinearLayout>
     </HorizontalScrollView>
 </LinearLayout>

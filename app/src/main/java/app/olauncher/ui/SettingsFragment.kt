@@ -68,7 +68,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         rate.setOnClickListener(this)
         twitter.setOnClickListener(this)
         github.setOnClickListener(this)
-        sponsor.setOnClickListener(this)
     }
 
     private fun initObservers() {
@@ -112,7 +111,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             R.id.rate -> rateApp()
             R.id.twitter -> openUrl(Constants.URL_TWITTER_TANUJNOTES)
             R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
-            R.id.sponsor -> openUrl(Constants.URL_COFFEE_TANUJNOTES)
         }
     }
 
