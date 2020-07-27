@@ -22,7 +22,8 @@
         style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:format12Hour="EEE, dd MMM" />
+        android:format12Hour="EEE, dd MMM"
+        android:format24Hour="EEE, dd MMM" />
 
     <Space
         android:layout_width="wrap_content"
