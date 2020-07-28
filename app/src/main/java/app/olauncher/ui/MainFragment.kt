@@ -97,6 +97,20 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appName4 = ""
             prefs.appPackage4 = ""
         }
+        if (homeAppsNum == 4) return
+
+        homeApp5.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp5, prefs.appName5, prefs.appPackage5, pm)) {
+            prefs.appName5 = ""
+            prefs.appPackage5 = ""
+        }
+        if (homeAppsNum == 5) return
+
+        homeApp6.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp6, prefs.appName6, prefs.appPackage6, pm)) {
+            prefs.appName6 = ""
+            prefs.appPackage6 = ""
+        }
     }
 
     private fun setHomeAppText(
@@ -118,6 +132,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp2.visibility = View.GONE
         homeApp3.visibility = View.GONE
         homeApp4.visibility = View.GONE
+        homeApp5.visibility = View.GONE
+        homeApp6.visibility = View.GONE
     }
 
     private fun initClickListeners() {
@@ -125,10 +141,14 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp2.setOnClickListener(this)
         homeApp3.setOnClickListener(this)
         homeApp4.setOnClickListener(this)
+        homeApp5.setOnClickListener(this)
+        homeApp6.setOnClickListener(this)
         homeApp1.setOnLongClickListener(this)
         homeApp2.setOnLongClickListener(this)
         homeApp3.setOnLongClickListener(this)
         homeApp4.setOnLongClickListener(this)
+        homeApp5.setOnLongClickListener(this)
+        homeApp6.setOnLongClickListener(this)
 
         clock.setOnClickListener(this)
         date.setOnClickListener(this)
@@ -158,6 +178,12 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
             else launchAppEvent(prefs.appName4, prefs.appPackage4)
 
+            R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) onLongClick(view)
+            else launchAppEvent(prefs.appName5, prefs.appPackage5)
+
+            R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) onLongClick(view)
+            else launchAppEvent(prefs.appName6, prefs.appPackage6)
+
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
         }
@@ -169,6 +195,8 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2)
             R.id.homeApp3 -> showAppList(Constants.FLAG_SET_HOME_APP_3)
             R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4)
+            R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5)
+            R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6)
         }
         return true
     }

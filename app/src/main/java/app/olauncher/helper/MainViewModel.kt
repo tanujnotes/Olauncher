@@ -49,6 +49,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appPackage4 = appModel.appPackage
                 refreshHome(false)
             }
+            Constants.FLAG_SET_HOME_APP_5 -> {
+                prefs.appName5 = appModel.appLabel
+                prefs.appPackage5 = appModel.appPackage
+                refreshHome(false)
+            }
+            Constants.FLAG_SET_HOME_APP_6 -> {
+                prefs.appName6 = appModel.appLabel
+                prefs.appPackage6 = appModel.appPackage
+                refreshHome(false)
+            }
         }
         selectedApp.value = AppModelWithFlag(appModel, flag)
     }

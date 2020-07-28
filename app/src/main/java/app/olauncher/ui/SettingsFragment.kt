@@ -116,7 +116,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
     private fun updateHomeAppsNum() {
         var num = prefs.homeAppsNum
-        if (num == 0) num = Constants.HOME_APPS_NUM_MAX else num--
+        if (num == Constants.HOME_APPS_NUM_MAX) num = 0 else num++
         homeAppsNum.text = num.toString()
         prefs.homeAppsNum = num
         viewModel.refreshHome(true)
