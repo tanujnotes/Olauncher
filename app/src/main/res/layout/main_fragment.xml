@@ -93,7 +93,7 @@
         android:id="@+id/tips"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             style="@style/TextSmallLight"
@@ -109,5 +109,14 @@
             android:text="@string/long_press_for_settings" />
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/setDefaultLauncher"
+        style="@style/TextSmallLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/set_as_default_launcher"
+        android:visibility="gone" />
 
 </LinearLayout>

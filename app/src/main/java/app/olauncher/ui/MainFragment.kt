@@ -152,6 +152,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         clock.setOnClickListener(this)
         date.setOnClickListener(this)
+        setDefaultLauncher.setOnClickListener(this)
     }
 
     private fun initObservers() {
@@ -161,6 +162,11 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it) tips.visibility = View.VISIBLE
             else tips.visibility = View.GONE
+        })
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (tips.visibility == View.VISIBLE) return@Observer
+            if (it) setDefaultLauncher.visibility = View.GONE
+            else setDefaultLauncher.visibility = View.VISIBLE
         })
     }
 
@@ -186,6 +192,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
+            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
         }
     }
 
