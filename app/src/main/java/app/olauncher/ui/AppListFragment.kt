@@ -53,7 +53,7 @@ class AppListFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean = false
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                appAdapter.filter.filter(newText)
+                appAdapter.filter.filter(newText?.trim())
                 return false
             }
         })
@@ -62,9 +62,7 @@ class AppListFragment : Fragment() {
     private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
             val animation =
-                AnimationUtils.loadLayoutAnimation(requireContext(),
-                    R.anim.layout_anim_from_bottom
-                )
+                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
             recyclerView.layoutAnimation = animation
             appAdapter.setAppList(it)
             search.visibility = View.VISIBLE
