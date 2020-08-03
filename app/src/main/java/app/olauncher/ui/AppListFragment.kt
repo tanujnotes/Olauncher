@@ -2,6 +2,7 @@ package app.olauncher.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +66,6 @@ class AppListFragment : Fragment() {
                 AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
             recyclerView.layoutAnimation = animation
             appAdapter.setAppList(it)
-            search.visibility = View.VISIBLE
         })
     }
 
