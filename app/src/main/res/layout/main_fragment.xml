@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
@@ -9,90 +9,95 @@
     android:padding="24dp"
     tools:context=".ui.MainFragment">
 
-    <TextClock
-        android:id="@+id/clock"
-        style="@style/TextDefault"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:format12Hour="hh:mm"
-        android:textSize="38sp" />
+        android:orientation="vertical">
 
-    <TextClock
-        android:id="@+id/date"
-        style="@style/TextSmall"
+        <TextClock
+            android:id="@+id/clock"
+            style="@style/TextDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="hh:mm"
+            android:textSize="38sp" />
+
+        <TextClock
+            android:id="@+id/date"
+            style="@style/TextSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:format12Hour="EEE, dd MMM"
+            android:format24Hour="EEE, dd MMM" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:format12Hour="EEE, dd MMM"
-        android:format24Hour="EEE, dd MMM" />
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        <TextView
+            android:id="@+id/homeApp1"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="8dp"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/homeApp1"
-        style="@style/TextLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/select"
-        android:paddingVertical="8dp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/homeApp2"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="8dp"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/homeApp2"
-        style="@style/TextLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/select"
-        android:paddingVertical="8dp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/homeApp3"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="8dp"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/homeApp3"
-        style="@style/TextLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/select"
-        android:paddingVertical="8dp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/homeApp4"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="8dp"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/homeApp4"
-        style="@style/TextLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/select"
-        android:paddingVertical="8dp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/homeApp5"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="8dp"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/homeApp5"
-        style="@style/TextLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/select"
-        android:paddingVertical="8dp"
-        android:visibility="gone" />
+        <TextView
+            android:id="@+id/homeApp6"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="8dp"
+            android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/homeApp6"
-        style="@style/TextLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/select"
-        android:paddingVertical="8dp"
-        android:visibility="gone" />
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/tips"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
+        android:layout_gravity="bottom"
         android:visibility="gone">
 
         <TextView
@@ -115,16 +120,9 @@
         style="@style/TextSmallLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_marginBottom="24dp"
         android:text="@string/set_as_default_launcher"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/wallpaper"
-        style="@style/TextSmallLight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="Wallpaper" />
-
-</LinearLayout>
+</FrameLayout>
