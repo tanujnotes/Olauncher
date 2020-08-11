@@ -1,6 +1,7 @@
 package app.olauncher.helper
 
 import android.app.Application
+import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
@@ -23,6 +24,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val isDarkModeOn = MutableLiveData<Boolean>()
+    val refreshWallpaper = MutableLiveData<Any>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -109,6 +111,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         if (darkMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         isDarkModeOn.value = prefs.darkModeOn
+    }
+
+    fun setWallpaper(width: Int, height: Int, url: String) {
+        viewModelScope.launch {
+            val originalImageBitmap = getBitmapFromURL(url)
+            val wallpaperManager = WallpaperManager.getInstance(appContext)
+            val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
+
+            try {
+                wallpaperManager.setBitmap(scaledBitmap)
+                originalImageBitmap.recycle()
+                scaledBitmap.recycle()
+                refreshWallpaper.value = Unit
+            } catch (e: Exception) {
+
+            }
+        }
     }
 }
 

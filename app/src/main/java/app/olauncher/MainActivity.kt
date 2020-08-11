@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.launcherResetFailed.observe(this, Observer {
             openLauncherChooser(it)
         })
+        viewModel.refreshWallpaper.observe(this, Observer {
+            setWallpaper()
+        })
     }
 
     private fun setWallpaper() {

@@ -119,4 +119,12 @@
         android:text="@string/set_as_default_launcher"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/wallpaper"
+        style="@style/TextSmallLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Wallpaper" />
+
 </LinearLayout>

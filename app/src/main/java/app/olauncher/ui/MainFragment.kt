@@ -5,6 +5,7 @@ import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
@@ -137,6 +138,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initClickListeners() {
+        wallpaper.setOnClickListener(this)
         homeApp1.setOnClickListener(this)
         homeApp2.setOnClickListener(this)
         homeApp3.setOnClickListener(this)
@@ -172,6 +174,12 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onClick(view: View) {
         when (view.id) {
+            R.id.wallpaper -> {
+                val width = Resources.getSystem().displayMetrics.widthPixels
+                val height = Resources.getSystem().displayMetrics.heightPixels
+                viewModel.setWallpaper(width, height, "https://images.unsplash.com/photo-1516410529446-2c777cb7366d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80")
+            }
+
             R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view)
             else launchAppEvent(prefs.appName1, prefs.appPackage1)
 

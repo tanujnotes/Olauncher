@@ -5,7 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
+import android.graphics.*
 import android.net.Uri
 import android.provider.Settings
 import android.widget.Toast
@@ -14,6 +14,9 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.*
 
 fun showToastLong(context: Context, message: String) {
@@ -111,4 +114,41 @@ fun openAppInfo(context: Context, packageName: String) {
     intent.addCategory(Intent.CATEGORY_DEFAULT)
     intent.data = Uri.parse("package:$packageName")
     context.startActivity(intent)
+}
+
+suspend fun getBitmapFromURL(src: String?): Bitmap {
+    return withContext(Dispatchers.IO) {
+        val url = URL(src)
+        val connection: HttpURLConnection = url
+            .openConnection() as HttpURLConnection
+        connection.doInput = true
+        connection.connect()
+        val input: InputStream = connection.inputStream
+        BitmapFactory.decodeStream(input)
+    }
+}
+
+suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): Bitmap {
+    return withContext(Dispatchers.IO) {
+        val background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+
+        val originalWidth: Float = originalImage.width.toFloat()
+        val originalHeight: Float = originalImage.height.toFloat()
+
+        val canvas = Canvas(background)
+        val scale: Float = height / originalHeight
+
+        val xTranslation: Float = (width - originalWidth * scale) / 2.0f
+        val yTranslation = 0.0f
+
+        val transformation = Matrix()
+        transformation.postTranslate(xTranslation, yTranslation)
+        transformation.preScale(scale, scale)
+
+        val paint = Paint()
+        paint.isFilterBitmap = true
+        canvas.drawBitmap(originalImage, transformation, paint)
+
+        background
+    }
 }
