@@ -2,7 +2,6 @@ package app.olauncher.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.helper.MainViewModel
-import app.olauncher.R
 import app.olauncher.helper.openAppInfo
 import kotlinx.android.synthetic.main.fragment_app.*
 
@@ -62,8 +61,11 @@ class AppListFragment : Fragment() {
 
     private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
-            val animation =
-                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+            if (it.isNullOrEmpty()) {
+                findNavController().popBackStack()
+                return@Observer
+            }
+            val animation = AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
             recyclerView.layoutAnimation = animation
             appAdapter.setAppList(it)
         })
