@@ -39,7 +39,6 @@
         <activity
             android:name=".helper.FakeHomeActivity"
             android:enabled="false"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
