@@ -124,7 +124,9 @@ class AppListFragment : Fragment() {
                     }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
-                        if (!recyclerView.canScrollVertically(-1)) {
+                        if (!recyclerView.canScrollVertically(1)) {
+                            search.hideKeyboard()
+                        } else if (!recyclerView.canScrollVertically(-1)) {
                             if (onTop) findNavController().popBackStack()
                             else search.showKeyboard()
                         }
