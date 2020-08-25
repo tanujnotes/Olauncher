@@ -119,6 +119,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
         val uploadWorkRequest = PeriodicWorkRequestBuilder<WallpaperWorker>(20, TimeUnit.MINUTES)
+            .setBackoffCriteria(BackoffPolicy.LINEAR, 1, TimeUnit.HOURS)
             .setConstraints(constraints)
             .build()
         WorkManager
