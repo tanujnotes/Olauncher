@@ -6,6 +6,15 @@ android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     defaultConfig {
         applicationId "app.olauncher"
         minSdkVersion 23
@@ -45,4 +54,7 @@ dependencies {
 
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
+
+    // Work Manager
+    implementation "androidx.work:work-runtime-ktx:2.4.0"
 }

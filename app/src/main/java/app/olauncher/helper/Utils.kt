@@ -155,3 +155,17 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
         background
     }
 }
+
+suspend fun setWallpaper(appContext: Context, url: String, width: Int, height: Int) {
+    val originalImageBitmap = getBitmapFromURL(url)
+    val wallpaperManager = WallpaperManager.getInstance(appContext)
+    val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
+
+    try {
+        wallpaperManager.setBitmap(scaledBitmap)
+        originalImageBitmap.recycle()
+        scaledBitmap.recycle()
+    } catch (e: Exception) {
+
+    }
+}

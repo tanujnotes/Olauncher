@@ -20,4 +20,5 @@
     <string name="long_press_for_settings">Long press for settings</string>
     <string name="swipe_up_for_apps">Swipe up for apps</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
+    <string name="daily_wallpaper_update">Daily wallpaper update</string>
 </resources>

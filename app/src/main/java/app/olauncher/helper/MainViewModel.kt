@@ -1,13 +1,15 @@
 package app.olauncher.helper
 
 import android.app.Application
-import android.app.WallpaperManager
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
@@ -113,21 +115,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         isDarkModeOn.value = prefs.darkModeOn
     }
 
-    fun setWallpaper(width: Int, height: Int, url: String) {
-        viewModelScope.launch {
-            val originalImageBitmap = getBitmapFromURL(url)
-            val wallpaperManager = WallpaperManager.getInstance(appContext)
-            val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
-
-            try {
-                wallpaperManager.setBitmap(scaledBitmap)
-                originalImageBitmap.recycle()
-                scaledBitmap.recycle()
-                refreshWallpaper.value = Unit
-            } catch (e: Exception) {
-
-            }
-        }
+    fun setWallpaperWorker() {
+        val uploadWorkRequest: WorkRequest =
+            OneTimeWorkRequestBuilder<WallpaperWorker>()
+                .build()
+        WorkManager
+            .getInstance(appContext)
+            .enqueue(uploadWorkRequest)
     }
 }
 

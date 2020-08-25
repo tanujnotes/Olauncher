@@ -51,7 +51,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
-        setLockModeText()
+        populateSettings()
         initClickListeners()
         initObservers()
     }
@@ -62,6 +62,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         homeAppsNum.setOnClickListener(this)
         textColor.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
+        dailyWallpaper.setOnClickListener(this)
         about.setOnClickListener(this)
         privacy.setOnClickListener(this)
         share.setOnClickListener(this)
@@ -85,7 +86,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         if (active) {
             deviceManager.removeActiveAdmin(componentName)
             Prefs(requireContext()).lockModeOn = false
-            setLockModeText()
+            populateSettings()
             showToastShort(requireContext(), "Admin permission removed")
         } else {
             val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
@@ -98,6 +99,12 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun toggleDailyWallpaperUpdate() {
+        prefs.dailyWallpaper = !prefs.dailyWallpaper
+        populateSettings()
+        if (prefs.dailyWallpaper) viewModel.setWallpaperWorker()
+    }
+
     override fun onClick(view: View) {
         when (view.id) {
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
@@ -105,6 +112,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             R.id.homeAppsNum -> updateHomeAppsNum()
             R.id.textColor -> viewModel.switchTheme()
             R.id.toggleOnOff -> toggleLockMode()
+            R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
 
             R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.share -> shareApp()
@@ -122,9 +130,12 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         viewModel.refreshHome(true)
     }
 
-    private fun setLockModeText() {
-        if (Prefs(requireContext()).lockModeOn) toggleOnOff.text = getString(R.string.on)
+    private fun populateSettings() {
+        if (prefs.lockModeOn) toggleOnOff.text = getString(R.string.on)
         else toggleOnOff.text = getString(R.string.off)
+
+        if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
+        else dailyWallpaper.text = getString(R.string.off)
     }
 
     private fun openUrl(url: String) {
