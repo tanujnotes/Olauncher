@@ -34,14 +34,14 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
         )
 
 
-        setWallpaper(
+        val success = setWallpaper(
             applicationContext,
             wallpapers[Random.nextInt(0, wallpapers.size)],
             width,
             height
         )
 
-        // Indicate whether the work finished successfully with the Result
-        Result.success()
+        if (success) Result.success()
+        else Result.failure()
     }
 }

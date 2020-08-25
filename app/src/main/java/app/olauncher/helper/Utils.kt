@@ -119,15 +119,20 @@ fun openAppInfo(context: Context, packageName: String) {
     context.startActivity(intent)
 }
 
-suspend fun getBitmapFromURL(src: String?): Bitmap {
+suspend fun getBitmapFromURL(src: String?): Bitmap? {
     return withContext(Dispatchers.IO) {
-        val url = URL(src)
-        val connection: HttpURLConnection = url
-            .openConnection() as HttpURLConnection
-        connection.doInput = true
-        connection.connect()
-        val input: InputStream = connection.inputStream
-        BitmapFactory.decodeStream(input)
+        var bitmap: Bitmap? = null
+        try {
+            val url = URL(src)
+            val connection: HttpURLConnection = url
+                .openConnection() as HttpURLConnection
+            connection.doInput = true
+            connection.connect()
+            val input: InputStream = connection.inputStream
+            bitmap = BitmapFactory.decodeStream(input)
+        } catch (e: java.lang.Exception) {
+        }
+        bitmap
     }
 }
 
@@ -156,16 +161,21 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
     }
 }
 
-suspend fun setWallpaper(appContext: Context, url: String, width: Int, height: Int) {
-    val originalImageBitmap = getBitmapFromURL(url)
+suspend fun setWallpaper(appContext: Context, url: String, width: Int, height: Int): Boolean {
+    val originalImageBitmap = getBitmapFromURL(url) ?: return false
     val wallpaperManager = WallpaperManager.getInstance(appContext)
     val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
 
     try {
         wallpaperManager.setBitmap(scaledBitmap)
+    } catch (e: Exception) {
+        return false
+    }
+
+    try {
         originalImageBitmap.recycle()
         scaledBitmap.recycle()
     } catch (e: Exception) {
-
     }
+    return true
 }
