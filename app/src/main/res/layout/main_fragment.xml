@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="48dp"
     tools:context=".ui.MainFragment">
 
     <LinearLayout

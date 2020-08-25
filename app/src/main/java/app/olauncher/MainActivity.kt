@@ -1,7 +1,6 @@
 package app.olauncher
 
 import android.app.Activity
-import android.app.WallpaperManager
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
@@ -17,7 +16,6 @@ import app.olauncher.data.Prefs
 import app.olauncher.helper.MainViewModel
 import app.olauncher.helper.showToastLong
 import app.olauncher.helper.showToastShort
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         initObservers(viewModel)
         viewModel.setTheme(prefs.darkModeOn)
         viewModel.getAppList()
-        setWallpaper()
         setupOrientation()
     }
 
@@ -62,18 +59,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.launcherResetFailed.observe(this, Observer {
             openLauncherChooser(it)
         })
-        viewModel.refreshWallpaper.observe(this, Observer {
-            setWallpaper()
-        })
-    }
-
-    private fun setWallpaper() {
-        try {
-            val wallpaperManager = WallpaperManager.getInstance(this)
-            mainActivityLayout.background = wallpaperManager.drawable
-        } catch (e: Exception) {
-
-        }
     }
 
     private fun setupOrientation() {

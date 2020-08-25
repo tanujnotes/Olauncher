@@ -25,7 +25,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val isDarkModeOn = MutableLiveData<Boolean>()
-    val refreshWallpaper = MutableLiveData<Any>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
