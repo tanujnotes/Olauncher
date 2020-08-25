@@ -19,4 +19,6 @@ object Constants {
         "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJNOTES = "https://twitter.com/tanujnotes/"
     const val URL_GITHUB_TANUJNOTES = "https://github.com/tanujnotes/"
+
+    const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
 }

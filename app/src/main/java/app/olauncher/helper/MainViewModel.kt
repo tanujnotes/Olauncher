@@ -7,13 +7,12 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
+import androidx.work.*
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val appContext = application.applicationContext
@@ -116,12 +115,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setWallpaperWorker() {
-        val uploadWorkRequest: WorkRequest =
-            OneTimeWorkRequestBuilder<WallpaperWorker>()
-                .build()
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        val uploadWorkRequest = PeriodicWorkRequestBuilder<WallpaperWorker>(20, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
         WorkManager
             .getInstance(appContext)
-            .enqueue(uploadWorkRequest)
+            .enqueueUniquePeriodicWork(Constants.WALLPAPER_WORKER_NAME, ExistingPeriodicWorkPolicy.KEEP, uploadWorkRequest)
+    }
+
+    fun cancelWallpaperWorker() {
+        WorkManager.getInstance(appContext).cancelUniqueWork(Constants.WALLPAPER_WORKER_NAME)
     }
 }
 

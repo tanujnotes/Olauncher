@@ -103,6 +103,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         prefs.dailyWallpaper = !prefs.dailyWallpaper
         populateSettings()
         if (prefs.dailyWallpaper) viewModel.setWallpaperWorker()
+        else viewModel.cancelWallpaperWorker()
     }
 
     override fun onClick(view: View) {
