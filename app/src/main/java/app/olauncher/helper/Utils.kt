@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.*
 import android.net.Uri
 import android.provider.Settings
@@ -139,8 +140,11 @@ suspend fun getBitmapFromURL(src: String?): Bitmap? {
     }
 }
 
-suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): Bitmap {
+suspend fun getWallpaperBitmap(originalImage: Bitmap): Bitmap {
     return withContext(Dispatchers.IO) {
+        val width = Resources.getSystem().displayMetrics.widthPixels
+        val height = Resources.getSystem().displayMetrics.heightPixels
+
         val background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
 
         val originalWidth: Float = originalImage.width.toFloat()
@@ -164,10 +168,10 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
     }
 }
 
-suspend fun setWallpaper(appContext: Context, url: String, width: Int, height: Int): Boolean {
+suspend fun setWallpaper(appContext: Context, url: String): Boolean {
     val originalImageBitmap = getBitmapFromURL(url) ?: return false
     val wallpaperManager = WallpaperManager.getInstance(appContext)
-    val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
+    val scaledBitmap = getWallpaperBitmap(originalImageBitmap)
 
     try {
         wallpaperManager.setBitmap(scaledBitmap)
