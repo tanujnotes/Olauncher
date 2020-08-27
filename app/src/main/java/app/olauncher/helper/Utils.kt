@@ -5,10 +5,11 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.*
 import android.net.Uri
 import android.provider.Settings
+import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
 import app.olauncher.BuildConfig
 import app.olauncher.R
@@ -140,10 +141,8 @@ suspend fun getBitmapFromURL(src: String?): Bitmap? {
     }
 }
 
-suspend fun getWallpaperBitmap(originalImage: Bitmap): Bitmap {
+suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): Bitmap {
     return withContext(Dispatchers.IO) {
-        val width = Resources.getSystem().displayMetrics.widthPixels
-        val height = Resources.getSystem().displayMetrics.heightPixels
 
         val background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
 
@@ -171,7 +170,9 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap): Bitmap {
 suspend fun setWallpaper(appContext: Context, url: String): Boolean {
     val originalImageBitmap = getBitmapFromURL(url) ?: return false
     val wallpaperManager = WallpaperManager.getInstance(appContext)
-    val scaledBitmap = getWallpaperBitmap(originalImageBitmap)
+
+    val (width, height) = getScreenDimensions(appContext)
+    val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
 
     try {
         wallpaperManager.setBitmap(scaledBitmap)
@@ -185,6 +186,13 @@ suspend fun setWallpaper(appContext: Context, url: String): Boolean {
     } catch (e: Exception) {
     }
     return true
+}
+
+fun getScreenDimensions(context: Context): Pair<Int, Int> {
+    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val point = Point()
+    windowManager.defaultDisplay.getRealSize(point)
+    return Pair(point.x, point.y)
 }
 
 suspend fun getTodaysWallpaper(): String {
