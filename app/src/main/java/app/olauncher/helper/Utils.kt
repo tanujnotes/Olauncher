@@ -12,12 +12,15 @@ import android.widget.Toast
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.AppModel
+import app.olauncher.data.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
+
 
 fun showToastLong(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
@@ -178,4 +181,71 @@ suspend fun setWallpaper(appContext: Context, url: String, width: Int, height: I
     } catch (e: Exception) {
     }
     return true
+}
+
+suspend fun getTodaysWallpaper(): String {
+    return withContext(Dispatchers.IO) {
+        var wallpaperUrl: String
+        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+
+        try {
+            val url = URL(Constants.URL_DARK_WALLPAPERS)
+            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+            connection.doInput = true
+            connection.connect()
+
+            val inputStream = connection.inputStream
+            val scanner = Scanner(inputStream)
+            val stringBuffer = StringBuffer()
+            while (scanner.hasNext()) {
+                stringBuffer.append(scanner.nextLine())
+            }
+
+            val json = JSONObject(stringBuffer.toString())
+            wallpaperUrl = json.getString(hour.toString())
+            wallpaperUrl
+
+        } catch (e: Exception) {
+            wallpaperUrl = getBackupWallpaper(hour)
+            if (wallpaperUrl.isEmpty()) wallpaperUrl = Constants.URL_DEFAULT_WALLPAPER
+            wallpaperUrl
+        }
+    }
+}
+
+fun getBackupWallpaper(hour: Int): String {
+    val wallpapers = mapOf(
+        1 to "https://images.unsplash.com/photo-1506147854445-5a3f534191f8",
+        2 to "https://images.unsplash.com/photo-1502899576159-f224dc2349fa",
+        3 to "https://images.unsplash.com/photo-1506475097213-5555f7fc9b66",
+        4 to "https://images.unsplash.com/photo-1506296933720-1a0ce9bed41d",
+        5 to "https://images.unsplash.com/photo-1505191419261-8ccbb5ac8f93",
+        6 to "https://images.unsplash.com/photo-1498081959737-f3ba1af08103",
+        7 to "https://images.unsplash.com/photo-1515825838458-f2a94b20105a",
+        8 to "https://images.unsplash.com/photo-1504883303951-581cbf120aa4",
+        9 to "https://images.unsplash.com/photo-1504972516657-526efa0347c9",
+        10 to "https://images.unsplash.com/photo-1504198580308-d186fefc3fbb",
+        11 to "https://images.unsplash.com/photo-1504466334719-af4ae9f12ad0",
+        12 to "https://images.unsplash.com/photo-1495344517868-8ebaf0a2044a",
+        13 to "https://images.unsplash.com/photo-1576405515541-cb47b7da4fa7",
+        14 to "https://images.unsplash.com/photo-1565176083871-abc1508bd064",
+        15 to "https://images.unsplash.com/photo-1518095695691-352141ca6c0f",
+        16 to "https://images.unsplash.com/photo-1575387779103-48eb0dc78647",
+        17 to "https://images.unsplash.com/photo-1500877015165-e1fb7f2db007",
+        18 to "https://images.unsplash.com/photo-1570420118092-5b96e28ff4cb",
+        19 to "https://images.unsplash.com/photo-1550041771-aef92f14a6d5",
+        20 to "https://images.unsplash.com/photo-1518141532615-4305c9f914c9",
+        21 to "https://images.unsplash.com/photo-1530600130-16d76247813a",
+        22 to "https://images.unsplash.com/photo-1591333012556-473040f4e105",
+        23 to "https://images.unsplash.com/photo-1541185933-c43f4922c6f7",
+        24 to "https://images.unsplash.com/photo-1588765529230-0b9518c5af1d",
+        25 to "https://images.unsplash.com/photo-1580523494734-852098607611",
+        26 to "https://images.unsplash.com/photo-1504893524553-b855bce32c67",
+        27 to "https://images.unsplash.com/photo-1536405416754-3bcd4fb38128",
+        28 to "https://images.unsplash.com/photo-1577657655074-8bd55df63190",
+        29 to "https://images.unsplash.com/photo-1584920718830-8d5d92a21fa8",
+        30 to "https://images.unsplash.com/photo-1536444640702-7d82b071cab8",
+        31 to "https://images.unsplash.com/photo-1590522665925-dd1abea17a1d"
+    )
+    return wallpapers[hour].toString()
 }

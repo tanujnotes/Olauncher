@@ -15,10 +15,11 @@ object Constants {
     const val REQUEST_CODE_ENABLE_ADMIN = 1001
 
     const val URL_OLAUNCHER_PRIVACY = "https://olauncher.flycricket.io/privacy.html"
-    const val URL_OLAUNCHER_PLAY_STORE =
-        "https://play.google.com/store/apps/details?id=app.olauncher"
+    const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJNOTES = "https://twitter.com/tanujnotes/"
     const val URL_GITHUB_TANUJNOTES = "https://github.com/tanujnotes/"
 
     const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
+    const val URL_DARK_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/481074b27ad4dc2607326c97439bb3ac/raw"
+    const val URL_DEFAULT_WALLPAPER = "https://images.unsplash.com/photo-1559091156-b9610fb12eda"
 }
