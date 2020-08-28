@@ -15,7 +15,6 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.MainViewModel
 import app.olauncher.helper.showToastLong
-import app.olauncher.helper.showToastShort
 
 
 class MainActivity : AppCompatActivity() {
@@ -95,9 +94,9 @@ class MainActivity : AppCompatActivity() {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
                 if (resultCode == Activity.RESULT_OK) {
                     Prefs(this).lockModeOn = true
-                    showToastShort(
+                    showToastLong(
                         this,
-                        "Double tap to lock"
+                        "Double tap to lock enabled. Please disable this before uninstalling the app."
                     )
                 }
                 return
