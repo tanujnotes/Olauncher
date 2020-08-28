@@ -11,6 +11,7 @@
     android:paddingBottom="48dp"
     tools:context=".ui.MainFragment">
 
+    <!-- Clock and calendar-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,11 +34,13 @@
             android:format24Hour="EEE, dd MMM" />
     </LinearLayout>
 
+    <!-- Home apps-->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="24dp"
+        android:animateLayoutChanges="true"
         android:orientation="vertical">
 
         <TextView
@@ -96,11 +99,14 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/tips"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
+    <!-- First run tips -->
+    <LinearLayout
+        android:id="@+id/firstRunTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <TextView
@@ -113,18 +119,18 @@
             style="@style/TextSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
             android:text="@string/long_press_for_settings" />
 
-    </FrameLayout>
+    </LinearLayout>
 
+    <!-- Set default launcher -->
     <TextView
         android:id="@+id/setDefaultLauncher"
         style="@style/TextSmallLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/set_as_default_launcher"
         android:visibility="gone" />
 
