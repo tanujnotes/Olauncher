@@ -21,5 +21,5 @@ object Constants {
 
     const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
     const val URL_DARK_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/481074b27ad4dc2607326c97439bb3ac/raw"
-    const val URL_DEFAULT_WALLPAPER = "https://images.unsplash.com/photo-1559091156-b9610fb12eda"
+    const val URL_DEFAULT_WALLPAPER = "https://images.unsplash.com/photo-1512551980832-13df02babc9e"
 }

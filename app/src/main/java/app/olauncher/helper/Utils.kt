@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.graphics.*
 import android.net.Uri
 import android.provider.Settings
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import app.olauncher.BuildConfig
@@ -218,14 +217,13 @@ suspend fun getTodaysWallpaper(): String {
             wallpaperUrl
 
         } catch (e: Exception) {
-            wallpaperUrl = getBackupWallpaper(hour)
-            if (wallpaperUrl.isEmpty()) wallpaperUrl = Constants.URL_DEFAULT_WALLPAPER
+            wallpaperUrl = getBackupWallpaper(hour) ?: Constants.URL_DEFAULT_WALLPAPER
             wallpaperUrl
         }
     }
 }
 
-fun getBackupWallpaper(hour: Int): String {
+fun getBackupWallpaper(hour: Int): String? {
     val wallpapers = mapOf(
         1 to "https://images.unsplash.com/photo-1506147854445-5a3f534191f8",
         2 to "https://images.unsplash.com/photo-1502899576159-f224dc2349fa",
@@ -259,5 +257,5 @@ fun getBackupWallpaper(hour: Int): String {
         30 to "https://images.unsplash.com/photo-1536444640702-7d82b071cab8",
         31 to "https://images.unsplash.com/photo-1590522665925-dd1abea17a1d"
     )
-    return wallpapers[hour].toString()
+    return wallpapers[hour]
 }
