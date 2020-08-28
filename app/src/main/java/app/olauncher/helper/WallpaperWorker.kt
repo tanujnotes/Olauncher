@@ -17,6 +17,6 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
         )
 
         if (success) Result.success()
-        else Result.failure()
+        else Result.retry()
     }
 }
