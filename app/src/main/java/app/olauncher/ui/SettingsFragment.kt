@@ -16,10 +16,7 @@ import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.DeviceAdmin
-import app.olauncher.helper.MainViewModel
-import app.olauncher.helper.openAppInfo
-import app.olauncher.helper.showToastShort
+import app.olauncher.helper.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -54,6 +51,23 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         populateSettings()
         initClickListeners()
         initObservers()
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
+            R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.homeAppsNum -> updateHomeAppsNum()
+            R.id.textColor -> viewModel.switchTheme()
+            R.id.toggleOnOff -> toggleLockMode()
+            R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
+
+            R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
+            R.id.share -> shareApp()
+            R.id.rate -> rateApp()
+            R.id.twitter -> openUrl(Constants.URL_TWITTER_TANUJNOTES)
+            R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
+        }
     }
 
     private fun initClickListeners() {
@@ -101,25 +115,11 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     private fun toggleDailyWallpaperUpdate() {
         prefs.dailyWallpaper = !prefs.dailyWallpaper
         populateSettings()
-        if (prefs.dailyWallpaper) viewModel.setWallpaperWorker()
-        else viewModel.cancelWallpaperWorker()
-    }
-
-    override fun onClick(view: View) {
-        when (view.id) {
-            R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
-            R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.homeAppsNum -> updateHomeAppsNum()
-            R.id.textColor -> viewModel.switchTheme()
-            R.id.toggleOnOff -> toggleLockMode()
-            R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
-
-            R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.share -> shareApp()
-            R.id.rate -> rateApp()
-            R.id.twitter -> openUrl(Constants.URL_TWITTER_TANUJNOTES)
-            R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
-        }
+        if (prefs.dailyWallpaper) {
+            viewModel.setWallpaperWorker()
+            if (!prefs.darkModeOn)
+                showToastLong(requireContext(), "Please change text color to white for better visibility with Olauncher wallpapers")
+        } else viewModel.cancelWallpaperWorker()
     }
 
     private fun updateHomeAppsNum() {
