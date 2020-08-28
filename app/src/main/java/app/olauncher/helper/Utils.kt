@@ -167,24 +167,26 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
 }
 
 suspend fun setWallpaper(appContext: Context, url: String): Boolean {
-    val originalImageBitmap = getBitmapFromURL(url) ?: return false
-    val wallpaperManager = WallpaperManager.getInstance(appContext)
+    return withContext(Dispatchers.IO) {
+        val originalImageBitmap = getBitmapFromURL(url) ?: return@withContext false
+        val wallpaperManager = WallpaperManager.getInstance(appContext)
 
-    val (width, height) = getScreenDimensions(appContext)
-    val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
+        val (width, height) = getScreenDimensions(appContext)
+        val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
 
-    try {
-        wallpaperManager.setBitmap(scaledBitmap)
-    } catch (e: Exception) {
-        return false
+        try {
+            wallpaperManager.setBitmap(scaledBitmap)
+        } catch (e: Exception) {
+            return@withContext false
+        }
+
+        try {
+            originalImageBitmap.recycle()
+            scaledBitmap.recycle()
+        } catch (e: Exception) {
+        }
+        true
     }
-
-    try {
-        originalImageBitmap.recycle()
-        scaledBitmap.recycle()
-    } catch (e: Exception) {
-    }
-    return true
 }
 
 fun getScreenDimensions(context: Context): Pair<Int, Int> {
