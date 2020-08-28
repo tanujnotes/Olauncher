@@ -66,7 +66,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun firstOpen(value: Boolean) {
-        firstOpen.value = value
+        firstOpen.postValue(value)
     }
 
     fun refreshHome(appCountUpdated: Boolean) {
