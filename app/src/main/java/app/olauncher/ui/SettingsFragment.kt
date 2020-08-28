@@ -117,9 +117,17 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         populateSettings()
         if (prefs.dailyWallpaper) {
             viewModel.setWallpaperWorker()
-            if (!prefs.darkModeOn)
-                showToastLong(requireContext(), "Please change text color to white for better visibility with Olauncher wallpapers")
+            showWallpaperToasts()
         } else viewModel.cancelWallpaperWorker()
+    }
+
+    private fun showWallpaperToasts() {
+        if (!prefs.darkModeOn)
+            showToastLong(requireContext(), "Change text color to white for better visibility with Olauncher wallpapers.")
+        else if (!isOlauncherDefault(requireContext()))
+            showToastLong(requireContext(), "Olauncher is not default launcher.\nWallpaper update may fail on some devices.")
+        else
+            showToastShort(requireContext(), "Your wallpaper will update shortly.")
     }
 
     private fun updateHomeAppsNum() {
