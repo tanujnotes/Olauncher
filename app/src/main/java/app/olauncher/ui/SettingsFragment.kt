@@ -63,7 +63,6 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         textColor.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
-        about.setOnClickListener(this)
         privacy.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
