@@ -22,10 +22,8 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.MainViewModel
+import app.olauncher.helper.*
 import app.olauncher.helper.OnSwipeTouchListener
-import app.olauncher.helper.isPackageInstalled
-import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.main_fragment.*
 import java.lang.reflect.Method
 
@@ -300,13 +298,12 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun lockPhone() {
         try {
             deviceManager.lockNow()
-        } catch (e: java.lang.Exception) {
-            prefs.lockModeOn = false
-            showToastShort(
-                requireContext(),
-                "Olauncher failed to lock phone"
-            )
+        } catch (e: SecurityException) {
+            showToastLong(requireContext(), "Please turn on double tap to lock")
             findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+        } catch (e: Exception) {
+            showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
+            prefs.lockModeOn = false
         }
     }
 

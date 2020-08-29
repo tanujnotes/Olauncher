@@ -50,6 +50,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
+        checkAdminPermission()
         populateSettings()
         populateAlignment()
         populateSwipeApps()
@@ -113,11 +114,16 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         })
     }
 
+    private fun checkAdminPermission() {
+        val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
+        prefs.lockModeOn = isAdmin
+    }
+
     private fun toggleLockMode() {
-        val active: Boolean = deviceManager.isAdminActive(componentName)
-        if (active) {
+        val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
+        if (isAdmin) {
             deviceManager.removeActiveAdmin(componentName)
-            Prefs(requireContext()).lockModeOn = false
+            prefs.lockModeOn = false
             populateSettings()
             showToastShort(requireContext(), "Admin permission removed")
         } else {
