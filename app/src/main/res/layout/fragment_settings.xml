@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:paddingVertical="4dp"
+            android:paddingVertical="8dp"
             android:src="@drawable/ic_outline_info_24"
             android:tint="@color/colorPrimaryTrans75" />
     </FrameLayout>
@@ -43,6 +43,7 @@
     <TextView
         android:id="@+id/setLauncher"
         style="@style/TextSmallBold"
+        android:paddingVertical="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/set_as_default_launcher" />
@@ -50,7 +51,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.8" />
+        android:layout_weight="1" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -58,6 +59,7 @@
 
         <TextView
             style="@style/TextSmallBold"
+            android:paddingVertical="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/apps_on_home_screen" />
@@ -65,6 +67,7 @@
         <TextView
             android:id="@+id/homeAppsNum"
             style="@style/TextSmallBold"
+            android:paddingVertical="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -76,7 +79,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.2" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -85,6 +88,7 @@
         <TextView
             android:id="@+id/dailyWallpaperUrl"
             style="@style/TextSmallBold"
+            android:paddingVertical="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/daily_wallpaper_update" />
@@ -93,6 +97,7 @@
             android:id="@+id/dailyWallpaper"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/off"
@@ -102,7 +107,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.2" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -111,6 +116,7 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:text="@string/double_tap_to_lock_screen" />
 
@@ -120,6 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:paddingVertical="8dp"
             android:text="@string/off"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -127,7 +134,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.2" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -136,6 +143,7 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:text="@string/home_layout_alignment" />
 
@@ -143,6 +151,7 @@
             android:id="@+id/alignment"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/left"
@@ -152,7 +161,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.2" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -161,6 +170,7 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:text="@string/app_text_color" />
 
@@ -168,6 +178,7 @@
             android:id="@+id/textColor"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/white"
@@ -177,7 +188,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.8" />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -189,12 +200,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
+            android:paddingVertical="8dp"
             android:lines="1"
             android:text="@string/swipe_left_app" />
 
         <TextView
             android:id="@+id/swipeLeftApp"
             style="@style/TextSmallBold"
+            android:paddingVertical="8dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -206,7 +219,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.2" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -216,6 +229,7 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
             android:lines="1"
@@ -225,6 +239,7 @@
             android:id="@+id/swipeRightApp"
             style="@style/TextSmallBold"
             android:layout_width="0dp"
+            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
