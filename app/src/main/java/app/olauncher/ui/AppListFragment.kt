@@ -60,7 +60,9 @@ class AppListFragment : Fragment() {
     }
 
     private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
+        var appsPopulated = false
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+            if (appsPopulated) return@Observer
             if (it.isNullOrEmpty()) {
                 findNavController().popBackStack()
                 return@Observer
@@ -68,6 +70,7 @@ class AppListFragment : Fragment() {
             val animation = AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
             recyclerView.layoutAnimation = animation
             appAdapter.setAppList(it)
+            appsPopulated = true
         })
     }
 
