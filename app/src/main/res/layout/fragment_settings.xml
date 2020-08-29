@@ -84,6 +84,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/dailyWallpaperUrl"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

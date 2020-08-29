@@ -62,6 +62,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             R.id.homeAppsNum -> updateHomeAppsNum()
             R.id.textColor -> viewModel.switchTheme()
             R.id.toggleOnOff -> toggleLockMode()
+            R.id.dailyWallpaperUrl -> openWallpaperUrl()
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
 
@@ -79,6 +80,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         homeAppsNum.setOnClickListener(this)
         textColor.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
+        dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
         privacy.setOnClickListener(this)
@@ -159,6 +161,11 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             Gravity.CENTER -> alignment.text = getString(R.string.center)
             Gravity.END -> alignment.text = getString(R.string.right)
         }
+    }
+
+    private fun openWallpaperUrl() {
+        if (prefs.dailyWallpaper and prefs.dailyWallpaperUrl.isNotEmpty())
+            openUrl(prefs.dailyWallpaperUrl)
     }
 
     private fun openUrl(url: String) {

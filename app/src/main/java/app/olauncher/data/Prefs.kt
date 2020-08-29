@@ -12,6 +12,7 @@ class Prefs(context: Context) {
     private val LOCK_MODE = "LOCK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
+    private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
 
     private val APP_NAME_1 = "APP_NAME_1"
@@ -40,6 +41,10 @@ class Prefs(context: Context) {
     var dailyWallpaper: Boolean
         get() = prefs.getBoolean(DAILY_WALLPAPER, false)
         set(value) = prefs.edit().putBoolean(DAILY_WALLPAPER, value).apply()
+
+    var dailyWallpaperUrl: String
+        get() = prefs.getString(DAILY_WALLPAPER_URL, "").toString()
+        set(value) = prefs.edit().putString(DAILY_WALLPAPER_URL, value).apply()
 
     var lockModeOn: Boolean
         get() = prefs.getBoolean(LOCK_MODE, false)

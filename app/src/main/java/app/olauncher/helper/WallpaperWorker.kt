@@ -3,6 +3,7 @@ package app.olauncher.helper
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import app.olauncher.data.Prefs
 import kotlinx.coroutines.coroutineScope
 
 class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams) {
@@ -16,7 +17,9 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
             wallpaperUrl
         )
 
-        if (success) Result.success()
-        else Result.retry()
+        if (success) {
+            Prefs(applicationContext).dailyWallpaperUrl = wallpaperUrl
+            Result.success()
+        } else Result.retry()
     }
 }
