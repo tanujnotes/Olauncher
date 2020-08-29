@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">@android:color/darker_gray</color>
     <color name="colorAccent">#FFEB3B</color>
 
+    <color name="colorPrimaryTrans50">#80FFFFFF</color>
     <color name="colorPrimaryTrans75">#BFFFFFFF</color>
     <color name="colorPrimaryInverseTrans10">#1A000000</color>
     <color name="colorPrimaryInverseTrans25">#40000000</color>
