@@ -23,7 +23,7 @@ import app.olauncher.helper.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
-class SettingsFragment : Fragment(), View.OnClickListener {
+class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
@@ -80,6 +80,14 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    override fun onLongClick(view: View): Boolean {
+        when (view.id) {
+            R.id.swipeLeftApp -> showAppList(Constants.FLAG_SET_SWIPE_LEFT_APP)
+            R.id.swipeRightApp -> showAppList(Constants.FLAG_SET_SWIPE_RIGHT_APP)
+        }
+        return true
+    }
+
     private fun initClickListeners() {
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
@@ -96,6 +104,9 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         rate.setOnClickListener(this)
         twitter.setOnClickListener(this)
         github.setOnClickListener(this)
+
+        swipeLeftApp.setOnLongClickListener(this)
+        swipeRightApp.setOnLongClickListener(this)
     }
 
     private fun initObservers() {
