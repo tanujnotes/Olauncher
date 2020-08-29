@@ -3,6 +3,7 @@ package app.olauncher.helper
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.view.Gravity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -25,6 +26,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val isDarkModeOn = MutableLiveData<Boolean>()
+    val homeAppAlignment = MutableLiveData<Int>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -128,6 +130,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun cancelWallpaperWorker() {
         WorkManager.getInstance(appContext).cancelUniqueWork(Constants.WALLPAPER_WORKER_NAME)
+    }
+
+    fun updateHomeAlignment() {
+        when (prefs.homeAlignment) {
+            Gravity.START -> prefs.homeAlignment = Gravity.END
+            Gravity.END -> prefs.homeAlignment = Gravity.CENTER
+            Gravity.CENTER -> prefs.homeAlignment = Gravity.START
+        }
+        homeAppAlignment.value = prefs.homeAlignment
     }
 }
 

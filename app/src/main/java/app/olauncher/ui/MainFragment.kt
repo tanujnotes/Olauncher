@@ -52,6 +52,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         deviceManager =
             context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
+        setHomeAlignment(prefs.homeAlignment)
         initClickListeners()
         initObservers()
 
@@ -168,6 +169,15 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             if (it) setDefaultLauncher.visibility = View.GONE
             else setDefaultLauncher.visibility = View.VISIBLE
         })
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
+            setHomeAlignment(it)
+        })
+    }
+
+    private fun setHomeAlignment(gravity: Int) {
+        dateTimeLayout.gravity = gravity
+        homeAppsLayout.gravity = gravity
+        setDefaultLauncher.gravity = gravity
     }
 
     override fun onClick(view: View) {

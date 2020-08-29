@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateSettings()
+        populateAlignment()
         initClickListeners()
         initObservers()
     }
@@ -61,6 +63,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             R.id.textColor -> viewModel.switchTheme()
             R.id.toggleOnOff -> toggleLockMode()
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
+            R.id.alignment -> viewModel.updateHomeAlignment()
 
             R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.share -> shareApp()
@@ -77,6 +80,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         textColor.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
+        alignment.setOnClickListener(this)
         privacy.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
@@ -91,6 +95,9 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         viewModel.isDarkModeOn.observe(viewLifecycleOwner, Observer {
             if (it) textColor.text = getString(R.string.white)
             else textColor.text = getString(R.string.black)
+        })
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
+            populateAlignment()
         })
     }
 
@@ -144,6 +151,14 @@ class SettingsFragment : Fragment(), View.OnClickListener {
 
         if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
         else dailyWallpaper.text = getString(R.string.off)
+    }
+
+    private fun populateAlignment() {
+        when (prefs.homeAlignment) {
+            Gravity.START -> alignment.text = getString(R.string.left)
+            Gravity.CENTER -> alignment.text = getString(R.string.center)
+            Gravity.END -> alignment.text = getString(R.string.right)
+        }
     }
 
     private fun openUrl(url: String) {

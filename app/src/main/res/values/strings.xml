@@ -2,7 +2,7 @@
     <string name="app_name">Olauncher</string>
     <string name="select">Select</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
-    <string name="app_text_color">Change text color</string>
+    <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="about">About</string>
     <string name="off">Off</string>
@@ -21,4 +21,8 @@
     <string name="swipe_up_for_apps">Swipe up for all apps</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
     <string name="daily_wallpaper_update">Daily wallpaper update</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="center">Center</string>
+    <string name="home_layout_alignment">Home alignment</string>
 </resources>

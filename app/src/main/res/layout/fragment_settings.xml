@@ -50,7 +50,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.8" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -121,6 +121,31 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/off"
+            android:textAllCaps="true" />
+    </FrameLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.4" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_layout_alignment" />
+
+        <TextView
+            android:id="@+id/alignment"
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/left"
             android:textAllCaps="true" />
     </FrameLayout>
 

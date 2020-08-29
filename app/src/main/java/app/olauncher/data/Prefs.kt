@@ -2,6 +2,7 @@ package app.olauncher.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.Gravity
 
 class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
@@ -11,6 +12,7 @@ class Prefs(context: Context) {
     private val LOCK_MODE = "LOCK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
+    private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -46,6 +48,10 @@ class Prefs(context: Context) {
     var homeAppsNum: Int
         get() = prefs.getInt(HOME_APPS_NUM, 4)
         set(value) = prefs.edit().putInt(HOME_APPS_NUM, value).apply()
+
+    var homeAlignment: Int
+        get() = prefs.getInt(HOME_ALIGNMENT, Gravity.START)
+        set(value) = prefs.edit().putInt(HOME_ALIGNMENT, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()
