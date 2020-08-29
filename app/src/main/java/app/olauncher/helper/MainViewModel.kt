@@ -19,9 +19,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val appContext = application.applicationContext
     private val prefs = Prefs(appContext)
 
-    private val selectedApp = MutableLiveData<AppModelWithFlag>()
+//    private val selectedApp = MutableLiveData<AppModelWithFlag>()
     val firstOpen = MutableLiveData<Boolean>()
     val refreshHome = MutableLiveData<Boolean>()
+    val updateSwipeApps = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
@@ -63,8 +64,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appPackage6 = appModel.appPackage
                 refreshHome(false)
             }
+            Constants.FLAG_SET_SWIPE_LEFT_APP -> {
+                prefs.appNameSwipeLeft = appModel.appLabel
+                prefs.appPackageSwipeLeft = appModel.appPackage
+                updateSwipeApps()
+            }
+            Constants.FLAG_SET_SWIPE_RIGHT_APP -> {
+                prefs.appNameSwipeRight = appModel.appLabel
+                prefs.appPackageSwipeRight = appModel.appPackage
+                updateSwipeApps()
+            }
         }
-        selectedApp.value = AppModelWithFlag(appModel, flag)
+//        selectedApp.value = AppModelWithFlag(appModel, flag)
     }
 
     fun firstOpen(value: Boolean) {
@@ -73,6 +84,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun refreshHome(appCountUpdated: Boolean) {
         refreshHome.value = appCountUpdated
+    }
+
+    fun updateSwipeApps() {
+        updateSwipeApps.postValue(Unit)
     }
 
     private fun launchApp(packageName: String) {

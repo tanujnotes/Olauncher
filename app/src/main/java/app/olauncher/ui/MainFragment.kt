@@ -182,29 +182,24 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onClick(view: View) {
         when (view.id) {
-//            R.id.wallpaper -> {
-//                val width = Resources.getSystem().displayMetrics.widthPixels
-//                val height = Resources.getSystem().displayMetrics.heightPixels
-//                viewModel.setWallpaper(width, height, "https://images.unsplash.com/photo-1516410529446-2c777cb7366d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80")
-//            }
 
             R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view)
-            else launchAppEvent(prefs.appName1, prefs.appPackage1)
+            else launchApp(prefs.appName1, prefs.appPackage1)
 
             R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view)
-            else launchAppEvent(prefs.appName2, prefs.appPackage2)
+            else launchApp(prefs.appName2, prefs.appPackage2)
 
             R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view)
-            else launchAppEvent(prefs.appName3, prefs.appPackage3)
+            else launchApp(prefs.appName3, prefs.appPackage3)
 
             R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
-            else launchAppEvent(prefs.appName4, prefs.appPackage4)
+            else launchApp(prefs.appName4, prefs.appPackage4)
 
             R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) onLongClick(view)
-            else launchAppEvent(prefs.appName5, prefs.appPackage5)
+            else launchApp(prefs.appName5, prefs.appPackage5)
 
             R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) onLongClick(view)
-            else launchAppEvent(prefs.appName6, prefs.appPackage6)
+            else launchApp(prefs.appName6, prefs.appPackage6)
 
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
@@ -251,7 +246,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun launchAppEvent(appName: String, packageName: String) {
+    private fun launchApp(appName: String, packageName: String) {
         viewModel.selectedApp(
             AppModel(appName, packageName),
             Constants.FLAG_LAUNCH_APP
@@ -270,6 +265,18 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun openSwipeRightApp() {
+        if (prefs.appPackageSwipeRight.isNotEmpty())
+            launchApp(prefs.appNameSwipeRight, prefs.appPackageSwipeRight)
+        else openDialerApp()
+    }
+
+    private fun openSwipeLeftApp() {
+        if (prefs.appPackageSwipeLeft.isNotEmpty())
+            launchApp(prefs.appNameSwipeLeft, prefs.appPackageSwipeLeft)
+        else openCameraApp()
     }
 
     private fun openDialerApp() {
@@ -307,12 +314,12 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         return object : OnSwipeTouchListener(context) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
-                openCameraApp()
+                openSwipeLeftApp()
             }
 
             override fun onSwipeRight() {
                 super.onSwipeRight()
-                openDialerApp()
+                openSwipeRightApp()
             }
 
             override fun onSwipeUp() {

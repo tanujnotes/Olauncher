@@ -10,9 +10,11 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.Constants
@@ -44,13 +46,13 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         } ?: throw Exception("Invalid Activity")
         viewModel.isOlauncherDefault()
 
-        deviceManager =
-            context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        deviceManager = context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateSettings()
         populateAlignment()
+        populateSwipeApps()
         initClickListeners()
         initObservers()
     }
@@ -65,6 +67,9 @@ class SettingsFragment : Fragment(), View.OnClickListener {
             R.id.dailyWallpaperUrl -> openWallpaperUrl()
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
+
+            R.id.swipeLeftApp -> showAppList(Constants.FLAG_SET_SWIPE_LEFT_APP)
+            R.id.swipeRightApp -> showAppList(Constants.FLAG_SET_SWIPE_RIGHT_APP)
 
             R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.share -> shareApp()
@@ -83,6 +88,8 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
+        swipeLeftApp.setOnClickListener(this)
+        swipeRightApp.setOnClickListener(this)
         privacy.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
@@ -100,6 +107,9 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
             populateAlignment()
+        })
+        viewModel.updateSwipeApps.observe(viewLifecycleOwner, Observer<Any> {
+            populateSwipeApps()
         })
     }
 
@@ -199,5 +209,18 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         intent.addFlags(flags)
         startActivity(intent)
         showToastShort(requireContext(), "Thank you for the stars. We love them. :)")
+    }
+
+    private fun populateSwipeApps() {
+        swipeLeftApp.text = prefs.appNameSwipeLeft
+        swipeRightApp.text = prefs.appNameSwipeRight
+    }
+
+    private fun showAppList(flag: Int) {
+        viewModel.getAppList()
+        findNavController().navigate(
+            R.id.action_settingsFragment_to_appListFragment,
+            bundleOf("flag" to flag)
+        )
     }
 }

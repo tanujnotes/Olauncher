@@ -10,9 +10,12 @@ object Constants {
     const val FLAG_SET_HOME_APP_5 = 5
     const val FLAG_SET_HOME_APP_6 = 6
 
+    const val FLAG_SET_SWIPE_LEFT_APP = 11
+    const val FLAG_SET_SWIPE_RIGHT_APP = 12
+
     const val HOME_APPS_NUM_MAX = 6 // Max number of apps on home screen
 
-    const val REQUEST_CODE_ENABLE_ADMIN = 1001
+    const val REQUEST_CODE_ENABLE_ADMIN = 666
 
     const val URL_OLAUNCHER_PRIVACY = "https://olauncher.flycricket.io/privacy.html"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"

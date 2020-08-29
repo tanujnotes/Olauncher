@@ -70,7 +70,6 @@
             android:layout_gravity="end"
             android:paddingStart="24dp"
             android:paddingEnd="0dp"
-            android:text=""
             android:textAllCaps="true" />
     </FrameLayout>
 
@@ -174,6 +173,65 @@
             android:text="@string/white"
             android:textAllCaps="true" />
     </FrameLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.8" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:lines="1"
+            android:text="@string/swipe_left_app" />
+
+        <TextView
+            android:id="@+id/swipeLeftApp"
+            style="@style/TextSmallBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:lines="1"
+            android:textAllCaps="true" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:lines="1"
+            android:text="@string/swipe_right_app" />
+
+        <TextView
+            android:id="@+id/swipeRightApp"
+            style="@style/TextSmallBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:lines="1"
+            android:textAllCaps="true" />
+    </LinearLayout>
+
 
     <Space
         android:layout_width="wrap_content"

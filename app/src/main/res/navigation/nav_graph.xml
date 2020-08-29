@@ -35,6 +35,14 @@
         android:id="@+id/settingsFragment"
         android:name="app.olauncher.ui.SettingsFragment"
         android:label="SettingsFragment"
-        android:layout="@layout/fragment_settings" />
+        android:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_appListFragment"
+            app:destination="@id/appListFragment"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:popEnterAnim="@anim/fragment_fade_enter"
+            app:popExitAnim="@anim/fragment_fade_exit" />
+    </fragment>
 
 </navigation>

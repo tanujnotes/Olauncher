@@ -28,6 +28,11 @@ class Prefs(context: Context) {
     private val APP_PACKAGE_5 = "APP_PACKAGE_5"
     private val APP_PACKAGE_6 = "APP_PACKAGE_6"
 
+    private val APP_NAME_SWIPE_LEFT = "APP_NAME_SWIPE_LEFT"
+    private val APP_NAME_SWIPE_RIGHT = "APP_NAME_SWIPE_RIGHT"
+    private val APP_PACKAGE_SWIPE_LEFT = "APP_PACKAGE_SWIPE_LEFT"
+    private val APP_PACKAGE_SWIPE_RIGHT = "APP_PACKAGE_SWIPE_RIGHT"
+
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
     var firstOpen: Boolean
@@ -105,4 +110,20 @@ class Prefs(context: Context) {
     var appPackage6: String
         get() = prefs.getString(APP_PACKAGE_6, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_6, value).apply()
+
+    var appNameSwipeLeft: String
+        get() = prefs.getString(APP_NAME_SWIPE_LEFT, "CAMERA").toString()
+        set(value) = prefs.edit().putString(APP_NAME_SWIPE_LEFT, value).apply()
+
+    var appNameSwipeRight: String
+        get() = prefs.getString(APP_NAME_SWIPE_RIGHT, "PHONE").toString()
+        set(value) = prefs.edit().putString(APP_NAME_SWIPE_RIGHT, value).apply()
+
+    var appPackageSwipeLeft: String
+        get() = prefs.getString(APP_PACKAGE_SWIPE_LEFT, "").toString()
+        set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_LEFT, value).apply()
+
+    var appPackageSwipeRight: String
+        get() = prefs.getString(APP_PACKAGE_SWIPE_RIGHT, "").toString()
+        set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_RIGHT, value).apply()
 }
