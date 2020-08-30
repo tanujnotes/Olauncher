@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.setTheme(prefs.darkModeOn)
         viewModel.getAppList()
         setupOrientation()
-        Gravity.LEFT
     }
 
     override fun onUserLeaveHint() {
