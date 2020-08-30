@@ -33,10 +33,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.main_fragment, container, false)
     }
 
@@ -55,6 +52,51 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         initObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        populateHomeApps(false)
+        viewModel.isOlauncherDefault()
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+
+            R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName1, prefs.appPackage1)
+
+            R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName2, prefs.appPackage2)
+
+            R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName3, prefs.appPackage3)
+
+            R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName4, prefs.appPackage4)
+
+            R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName5, prefs.appPackage5)
+
+            R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName6, prefs.appPackage6)
+
+            R.id.clock -> openAlarmApp()
+            R.id.date -> openCalendar()
+            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+        }
+    }
+
+    override fun onLongClick(view: View): Boolean {
+        when (view.id) {
+            R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1)
+            R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2)
+            R.id.homeApp3 -> showAppList(Constants.FLAG_SET_HOME_APP_3)
+            R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4)
+            R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5)
+            R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6)
+        }
+        return true
+    }
+
     private fun initSwipeTouchListener() {
         mainLayout.setOnTouchListener(getSwipeGestureListener(requireContext()))
         homeApp1.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp1))
@@ -65,10 +107,34 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp6))
     }
 
-    override fun onResume() {
-        super.onResume()
-        populateHomeApps(false)
-        viewModel.isOlauncherDefault()
+    private fun initClickListeners() {
+        clock.setOnClickListener(this)
+        date.setOnClickListener(this)
+        setDefaultLauncher.setOnClickListener(this)
+    }
+
+    private fun initObservers() {
+        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Boolean> {
+            populateHomeApps(it)
+        })
+        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (it) firstRunTips.visibility = View.VISIBLE
+            else firstRunTips.visibility = View.GONE
+        })
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (firstRunTips.visibility == View.VISIBLE) return@Observer
+            if (it) setDefaultLauncher.visibility = View.GONE
+            else setDefaultLauncher.visibility = View.VISIBLE
+        })
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
+            setHomeAlignment(it)
+        })
+    }
+
+    private fun setHomeAlignment(gravity: Int) {
+        dateTimeLayout.gravity = gravity
+        homeAppsLayout.gravity = gravity
+        setDefaultLauncher.gravity = gravity
     }
 
     private fun populateHomeApps(appCountUpdated: Boolean) {
@@ -120,12 +186,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun setHomeAppText(
-        textView: TextView,
-        appName: String,
-        packageName: String,
-        pm: PackageManager
-    ): Boolean {
+    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, pm: PackageManager): Boolean {
         if (isPackageInstalled(packageName, pm)) {
             textView.text = appName
             return true
@@ -143,77 +204,11 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.visibility = View.GONE
     }
 
-    private fun initClickListeners() {
-        clock.setOnClickListener(this)
-        date.setOnClickListener(this)
-        setDefaultLauncher.setOnClickListener(this)
-    }
-
-    private fun initObservers() {
-        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Boolean> {
-            populateHomeApps(it)
-        })
-        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (it) firstRunTips.visibility = View.VISIBLE
-            else firstRunTips.visibility = View.GONE
-        })
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (firstRunTips.visibility == View.VISIBLE) return@Observer
-            if (it) setDefaultLauncher.visibility = View.GONE
-            else setDefaultLauncher.visibility = View.VISIBLE
-        })
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
-            setHomeAlignment(it)
-        })
-    }
-
-    private fun setHomeAlignment(gravity: Int) {
-        dateTimeLayout.gravity = gravity
-        homeAppsLayout.gravity = gravity
-        setDefaultLauncher.gravity = gravity
-    }
-
-    override fun onClick(view: View) {
-        when (view.id) {
-
-            R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName1, prefs.appPackage1)
-
-            R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName2, prefs.appPackage2)
-
-            R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName3, prefs.appPackage3)
-
-            R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName4, prefs.appPackage4)
-
-            R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName5, prefs.appPackage5)
-
-            R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName6, prefs.appPackage6)
-
-            R.id.clock -> openAlarmApp()
-            R.id.date -> openCalendar()
-            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-        }
-    }
-
-    private fun textOnClick(view: View) = onClick(view)
-
-    private fun textOnLongClick(view: View) = onLongClick(view)
-
-    override fun onLongClick(view: View): Boolean {
-        when (view.id) {
-            R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1)
-            R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2)
-            R.id.homeApp3 -> showAppList(Constants.FLAG_SET_HOME_APP_3)
-            R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4)
-            R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5)
-            R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6)
-        }
-        return true
+    private fun launchApp(appName: String, packageName: String) {
+        viewModel.selectedApp(
+            AppModel(appName, packageName),
+            Constants.FLAG_LAUNCH_APP
+        )
     }
 
     private fun showAppList(flag: Int) {
@@ -224,35 +219,9 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         )
     }
 
-    private fun openAlarmApp() {
-        try {
-            val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
-            startActivity(intent)
-        } catch (e: java.lang.Exception) {
-            Log.d("TAG", e.toString())
-        }
-    }
-
-    private fun openCalendar() {
-        try {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
-            startActivity(intent)
-        } catch (e: java.lang.Exception) {
-
-        }
-    }
-
-    private fun launchApp(appName: String, packageName: String) {
-        viewModel.selectedApp(
-            AppModel(appName, packageName),
-            Constants.FLAG_LAUNCH_APP
-        )
-    }
-
-    // Source: https://stackoverflow.com/a/51132142
     @SuppressLint("WrongConstant", "PrivateApi")
     private fun expandNotificationDrawer(context: Context) {
+        // Source: https://stackoverflow.com/a/51132142
         try {
             val statusBarService = context.getSystemService("statusbar")
             val methodName = "expandNotificationsPanel"
@@ -294,6 +263,25 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
+    private fun openAlarmApp() {
+        try {
+            val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+            startActivity(intent)
+        } catch (e: java.lang.Exception) {
+            Log.d("TAG", e.toString())
+        }
+    }
+
+    private fun openCalendar() {
+        try {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+            startActivity(intent)
+        } catch (e: java.lang.Exception) {
+
+        }
+    }
+
     private fun lockPhone() {
         try {
             deviceManager.lockNow()
@@ -305,6 +293,10 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.lockModeOn = false
         }
     }
+
+    private fun textOnClick(view: View) = onClick(view)
+
+    private fun textOnLongClick(view: View) = onLongClick(view)
 
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
         return object : OnSwipeTouchListener(context) {
