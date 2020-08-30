@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -43,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.setTheme(prefs.darkModeOn)
         viewModel.getAppList()
         setupOrientation()
+    }
+
+    override fun onStop() {
+        backToHomeScreen()
+        super.onStop()
     }
 
     override fun onUserLeaveHint() {
