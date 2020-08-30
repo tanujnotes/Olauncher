@@ -46,10 +46,10 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         deviceManager =
             context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
+        initObservers()
         setHomeAlignment(prefs.homeAlignment)
         initSwipeTouchListener()
         initClickListeners()
-        initObservers()
     }
 
     override fun onResume() {
@@ -97,6 +97,26 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         return true
     }
 
+    private fun initObservers() {
+        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Boolean> {
+            populateHomeApps(it)
+        })
+        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (it) firstRunTips.visibility = View.VISIBLE
+            else firstRunTips.visibility = View.GONE
+            // To fix a race condition b/w firstOpen and isOlauncherDefault observers. This only runs once.
+            viewModel.isOlauncherDefault()
+        })
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (firstRunTips.visibility == View.VISIBLE) return@Observer
+            if (it) setDefaultLauncher.visibility = View.GONE
+            else setDefaultLauncher.visibility = View.VISIBLE
+        })
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
+            setHomeAlignment(it)
+        })
+    }
+
     private fun initSwipeTouchListener() {
         mainLayout.setOnTouchListener(getSwipeGestureListener(requireContext()))
         homeApp1.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp1))
@@ -111,24 +131,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         clock.setOnClickListener(this)
         date.setOnClickListener(this)
         setDefaultLauncher.setOnClickListener(this)
-    }
-
-    private fun initObservers() {
-        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Boolean> {
-            populateHomeApps(it)
-        })
-        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (it) firstRunTips.visibility = View.VISIBLE
-            else firstRunTips.visibility = View.GONE
-        })
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (firstRunTips.visibility == View.VISIBLE) return@Observer
-            if (it) setDefaultLauncher.visibility = View.GONE
-            else setDefaultLauncher.visibility = View.VISIBLE
-        })
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
-            setHomeAlignment(it)
-        })
     }
 
     private fun setHomeAlignment(gravity: Int) {
@@ -323,7 +325,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onLongClick() {
                 super.onLongClick()
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
-                viewModel.firstOpen(false) // To make tips disappear
+                firstRunTips.visibility = View.GONE
             }
 
             override fun onDoubleClick() {
