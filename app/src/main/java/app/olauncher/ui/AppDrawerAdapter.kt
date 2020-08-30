@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
-import kotlinx.android.synthetic.main.adapter_app_list.view.*
+import kotlinx.android.synthetic.main.adapter_app_drawer.view.*
 
-class AppListAdapter(
+class AppDrawerAdapter(
     private var flag: Int,
     private val clickListener: (AppModel) -> Unit,
     private val longPressListener: (AppModel) -> Unit
-) : RecyclerView.Adapter<AppListAdapter.ViewHolder>(), Filterable {
+) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
     var appsList: List<AppModel> = listOf()
     var appFilteredList: List<AppModel> = listOf()
@@ -23,7 +23,7 @@ class AppListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_app_list, parent, false)
+                .inflate(R.layout.adapter_app_drawer, parent, false)
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

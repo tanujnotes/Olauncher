@@ -9,7 +9,7 @@
     android:paddingHorizontal="24dp"
     android:paddingTop="24dp"
     android:paddingBottom="48dp"
-    tools:context=".ui.MainFragment">
+    tools:context=".ui.HomeFragment">
 
     <!-- Clock and calendar-->
     <LinearLayout
@@ -106,6 +106,7 @@
         android:id="@+id/firstRunTips"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_gravity="bottom"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -115,6 +116,7 @@
             style="@style/TextSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:text="@string/swipe_up_for_apps" />
 
         <TextView

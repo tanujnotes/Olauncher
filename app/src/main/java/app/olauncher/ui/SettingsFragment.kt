@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import app.olauncher.BuildConfig
+import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs

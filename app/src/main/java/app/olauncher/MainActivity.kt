@@ -13,7 +13,6 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.MainViewModel
 import app.olauncher.helper.showToastLong
 
 

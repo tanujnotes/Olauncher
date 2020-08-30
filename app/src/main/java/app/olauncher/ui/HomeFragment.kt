@@ -18,23 +18,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
-import kotlinx.android.synthetic.main.main_fragment.*
+import app.olauncher.listener.OnSwipeTouchListener
+import app.olauncher.listener.ViewSwipeTouchListener
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.lang.reflect.Method
 
 
-class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
+class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -101,11 +104,11 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Boolean> {
             populateHomeApps(it)
         })
-        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (it) firstRunTips.visibility = View.VISIBLE
-            else firstRunTips.visibility = View.GONE
-            // To fix a race condition b/w firstOpen and isOlauncherDefault observers. This only runs once.
-            viewModel.isOlauncherDefault()
+        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> { isFirstOpen ->
+            if (isFirstOpen) {
+                firstRunTips.visibility = View.VISIBLE
+                viewModel.isOlauncherDefault()
+            } else firstRunTips.visibility = View.GONE
         })
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
             if (firstRunTips.visibility == View.VISIBLE) return@Observer
@@ -325,7 +328,7 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onLongClick() {
                 super.onLongClick()
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
-                firstRunTips.visibility = View.GONE
+                viewModel.firstOpen(false)
             }
 
             override fun onDoubleClick() {

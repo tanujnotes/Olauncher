@@ -1,4 +1,4 @@
-package app.olauncher.helper
+package app.olauncher
 
 import android.app.Application
 import android.content.Context
@@ -12,6 +12,10 @@ import androidx.work.*
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.helper.WallpaperWorker
+import app.olauncher.helper.getAppsList
+import app.olauncher.helper.getDefaultLauncherPackage
+import app.olauncher.helper.resetDefaultLauncher
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
@@ -108,7 +112,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun isOlauncherDefault() {
         isOlauncherDefault.value =
-            isOlauncherDefault(appContext)
+            app.olauncher.helper.isOlauncherDefault(appContext)
     }
 
     fun resetDefaultLauncherApp(context: Context) {

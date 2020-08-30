@@ -16,19 +16,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.R
 import app.olauncher.data.AppModel
-import app.olauncher.helper.MainViewModel
+import app.olauncher.MainViewModel
 import app.olauncher.helper.openAppInfo
-import kotlinx.android.synthetic.main.fragment_app.*
+import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 
-class AppListFragment : Fragment() {
+class AppDrawerFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_app, container, false)
+        return inflater.inflate(R.layout.fragment_app_drawer, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class AppListFragment : Fragment() {
         val viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
-        val appAdapter = AppListAdapter(
+        val appAdapter = AppDrawerAdapter(
             flag,
             appClickListener(viewModel, flag),
             appLongPressListener()
@@ -59,7 +59,7 @@ class AppListFragment : Fragment() {
         })
     }
 
-    private fun initViewModel(viewModel: MainViewModel, appAdapter: AppListAdapter) {
+    private fun initViewModel(viewModel: MainViewModel, appAdapter: AppDrawerAdapter) {
         var appsPopulated = false
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
             if (appsPopulated) return@Observer
