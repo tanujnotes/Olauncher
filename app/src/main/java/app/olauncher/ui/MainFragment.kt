@@ -23,7 +23,6 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
-import app.olauncher.helper.OnSwipeTouchListener
 import kotlinx.android.synthetic.main.main_fragment.*
 import java.lang.reflect.Method
 
@@ -51,10 +50,19 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
         setHomeAlignment(prefs.homeAlignment)
+        initSwipeTouchListener()
         initClickListeners()
         initObservers()
+    }
 
+    private fun initSwipeTouchListener() {
         mainLayout.setOnTouchListener(getSwipeGestureListener(requireContext()))
+        homeApp1.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp1))
+        homeApp2.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp2))
+        homeApp3.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp3))
+        homeApp4.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp4))
+        homeApp5.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp5))
+        homeApp6.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp6))
     }
 
     override fun onResume() {
@@ -136,19 +144,6 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initClickListeners() {
-        homeApp1.setOnClickListener(this)
-        homeApp2.setOnClickListener(this)
-        homeApp3.setOnClickListener(this)
-        homeApp4.setOnClickListener(this)
-        homeApp5.setOnClickListener(this)
-        homeApp6.setOnClickListener(this)
-        homeApp1.setOnLongClickListener(this)
-        homeApp2.setOnLongClickListener(this)
-        homeApp3.setOnLongClickListener(this)
-        homeApp4.setOnLongClickListener(this)
-        homeApp5.setOnLongClickListener(this)
-        homeApp6.setOnLongClickListener(this)
-
         clock.setOnClickListener(this)
         date.setOnClickListener(this)
         setDefaultLauncher.setOnClickListener(this)
@@ -204,6 +199,10 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
         }
     }
+
+    private fun textOnClick(view: View) = onClick(view)
+
+    private fun textOnLongClick(view: View) = onLongClick(view)
 
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
@@ -338,6 +337,40 @@ class MainFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onDoubleClick() {
                 super.onDoubleClick()
                 if (prefs.lockModeOn) lockPhone()
+            }
+        }
+    }
+
+    private fun getViewSwipeTouchListener(context: Context, view: View): View.OnTouchListener {
+        return object : ViewSwipeTouchListener(context, view) {
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                openSwipeLeftApp()
+            }
+
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                openSwipeRightApp()
+            }
+
+            override fun onSwipeUp() {
+                super.onSwipeUp()
+                showAppList(Constants.FLAG_LAUNCH_APP)
+            }
+
+            override fun onSwipeDown() {
+                super.onSwipeDown()
+                expandNotificationDrawer(context)
+            }
+
+            override fun onLongClick(view: View) {
+                super.onLongClick(view)
+                textOnLongClick(view)
+            }
+
+            override fun onClick(view: View) {
+                super.onClick(view)
+                textOnClick(view)
             }
         }
     }
