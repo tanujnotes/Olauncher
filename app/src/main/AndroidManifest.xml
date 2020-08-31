@@ -50,13 +50,19 @@
         </activity>
 
         <receiver
-            android:name=".helper.DeviceAdmin"
+            android:name=".listener.DeviceAdmin"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/policies" />
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".listener.WallpaperReceiver">
+            <intent-filter>
+                <action android:name="app.olauncher.WALLPAPER_CHANGED" />
             </intent-filter>
         </receiver>
 

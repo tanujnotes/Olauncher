@@ -20,7 +20,11 @@ import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.*
+import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.showToastLong
+import app.olauncher.helper.showToastShort
+import app.olauncher.listener.DeviceAdmin
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -53,6 +57,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         homeAppsNum.text = prefs.homeAppsNum.toString()
         checkAdminPermission()
         populateSettings()
+        populateTextColor()
         populateAlignment()
         populateSwipeApps()
         initClickListeners()
@@ -115,8 +120,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             if (it) setLauncher.text = getString(R.string.change_default_launcher)
         })
         viewModel.isDarkModeOn.observe(viewLifecycleOwner, Observer {
-            if (it) textColor.text = getString(R.string.white)
-            else textColor.text = getString(R.string.black)
+            populateTextColor()
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
             populateAlignment()
@@ -159,10 +163,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun showWallpaperToasts() {
-        if (!prefs.darkModeOn)
-            showToastLong(requireContext(), "Change text color to white for better visibility with Olauncher wallpapers.")
-        else if (!isOlauncherDefault(requireContext()))
-            showToastLong(requireContext(), "Olauncher is not default launcher.\nWallpaper update may fail on some devices.")
+        if (!isOlauncherDefault(requireContext()))
+            showToastLong(requireContext(), "Olauncher is not default launcher.\nWallpaper update may fail.")
         else
             showToastShort(requireContext(), "Your wallpaper will update shortly.")
     }
@@ -181,6 +183,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
         else dailyWallpaper.text = getString(R.string.off)
+    }
+
+    private fun populateTextColor() {
+        if (prefs.darkModeOn) textColor.text = getString(R.string.white)
+        else textColor.text = getString(R.string.black)
     }
 
     private fun populateAlignment() {

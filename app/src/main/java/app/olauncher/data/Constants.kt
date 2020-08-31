@@ -17,6 +17,8 @@ object Constants {
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
 
+    const val ACTION_WALLPAPER_CHANGED = "app.olauncher.WALLPAPER_CHANGED"
+
     const val URL_OLAUNCHER_PRIVACY = "https://olauncher.flycricket.io/privacy.html"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJNOTES = "https://twitter.com/tanujnotes/"
