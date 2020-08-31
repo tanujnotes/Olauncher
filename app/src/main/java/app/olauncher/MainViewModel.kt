@@ -23,7 +23,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val appContext = application.applicationContext
     private val prefs = Prefs(appContext)
 
-//    private val selectedApp = MutableLiveData<AppModelWithFlag>()
+    //  private val selectedApp = MutableLiveData<AppModelWithFlag>()
     val firstOpen = MutableLiveData<Boolean>()
     val refreshHome = MutableLiveData<Boolean>()
     val updateSwipeApps = MutableLiveData<Any>()
@@ -127,7 +127,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         setTheme(prefs.darkModeOn)
     }
 
-    fun setTheme(darkMode: Boolean) {
+    private fun setTheme(darkMode: Boolean) {
         prefs.darkModeOn = darkMode
         if (darkMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

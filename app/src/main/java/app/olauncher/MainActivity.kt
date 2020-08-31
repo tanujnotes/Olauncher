@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         initObservers(viewModel)
-        viewModel.setTheme(prefs.darkModeOn)
         viewModel.getAppList()
         setupOrientation()
     }
