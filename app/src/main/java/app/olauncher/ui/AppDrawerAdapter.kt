@@ -43,9 +43,9 @@ class AppDrawerAdapter(
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                appFilteredList = (if (charSearch.isEmpty()) appsList
-                else appsList.filter { app -> app.appLabel.contains(charSearch, true) })
+                val searchChars = constraint.toString()
+                appFilteredList = (if (searchChars.isEmpty()) appsList
+                else appsList.filter { app -> appLabelMatches(app.appLabel, searchChars) })
 
                 val filterResults = FilterResults()
                 filterResults.values = appFilteredList
@@ -58,6 +58,12 @@ class AppDrawerAdapter(
                 notifyDataSetChanged()
             }
         }
+    }
+
+    private fun appLabelMatches(appLabel: String, searchChars: String): Boolean {
+        return (appLabel.contains(searchChars, true) or
+                appLabel.replace(Regex("[-_+,. ]"), "")
+                    .contains(searchChars, true))
     }
 
     fun setAppList(appsList: List<AppModel>) {
