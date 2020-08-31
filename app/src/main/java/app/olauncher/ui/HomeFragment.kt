@@ -107,7 +107,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> { isFirstOpen ->
             if (isFirstOpen) {
                 firstRunTips.visibility = View.VISIBLE
-                viewModel.isOlauncherDefault()
+                setDefaultLauncher.visibility = View.GONE
             } else firstRunTips.visibility = View.GONE
         })
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
