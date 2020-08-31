@@ -23,11 +23,11 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.*
+import app.olauncher.helper.isPackageInstalled
+import app.olauncher.helper.showToastLong
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
-import java.lang.reflect.Method
 
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -229,9 +229,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         // Source: https://stackoverflow.com/a/51132142
         try {
             val statusBarService = context.getSystemService("statusbar")
-            val methodName = "expandNotificationsPanel"
-            val statusBarManager: Class<*> = Class.forName("android.app.StatusBarManager")
-            val method: Method = statusBarManager.getMethod(methodName)
+            val statusBarManager = Class.forName("android.app.StatusBarManager")
+            val method = statusBarManager.getMethod("expandNotificationsPanel")
             method.invoke(statusBarService)
         } catch (e: Exception) {
             e.printStackTrace()
