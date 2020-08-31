@@ -214,7 +214,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
-        showToastShort(requireContext(), "Sharing is caring. Thank you for caring. :)")
     }
 
     private fun rateApp() {
@@ -226,7 +225,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
         intent.addFlags(flags)
         startActivity(intent)
-        showToastShort(requireContext(), "Thank you for the stars. We love them. :)")
     }
 
     private fun populateSwipeApps() {
