@@ -17,8 +17,12 @@ You can also clone the master branch and build the app yourself in Android Studi
 
 ## What's next
 
-* Ability to rename apps on the home screen
-* Increase max no. of apps on homescreen to 8
+- [ ] Ability to rename apps on the home screen
+- [ ] Increase max no. of apps on homescreen to 8
+- [ ] App search bar at the bottom
+- [ ] Remove some low priority features from settings (suggestions are welcome)
+
+It's getting too crowded in there. This is a "minimal" launcher afterall.
 
 ## Contact
 Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
