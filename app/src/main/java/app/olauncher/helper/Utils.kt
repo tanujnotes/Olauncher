@@ -199,7 +199,7 @@ fun getScreenDimensions(context: Context): Pair<Int, Int> {
 suspend fun getTodaysWallpaper(): String {
     return withContext(Dispatchers.IO) {
         var wallpaperUrl: String
-        val hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val hour = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 
         try {
             val url = URL(Constants.URL_DARK_WALLPAPERS)
