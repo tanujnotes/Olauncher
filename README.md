@@ -6,7 +6,7 @@ Olauncher is a minimal, free and open source launcher app for Android with daily
 
 [Available at Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
 
-You can also clone the master branch and build the app yourself in Android Studio. No extra steps required.
+You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. Or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
 ## What's new (v1.0+)
 
