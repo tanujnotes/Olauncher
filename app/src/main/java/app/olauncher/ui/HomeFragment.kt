@@ -326,8 +326,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onLongClick() {
                 super.onLongClick()
-                findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
                 viewModel.firstOpen(false)
+                if (findNavController().currentDestination?.id == R.id.mainFragment)
+                    findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             }
 
             override fun onDoubleClick() {
