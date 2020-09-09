@@ -12,6 +12,10 @@ internal open class ViewSwipeTouchListener(c: Context?, v: View) : OnTouchListen
     private val gestureDetector: GestureDetector
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> view.isPressed = true
+            MotionEvent.ACTION_UP -> view.isPressed = false
+        }
         return gestureDetector.onTouchEvent(motionEvent)
     }
 
