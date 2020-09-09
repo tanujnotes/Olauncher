@@ -164,9 +164,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showWallpaperToasts() {
         if (!isOlauncherDefault(requireContext()))
-            showToastLong(requireContext(), "Olauncher is not default launcher.\nWallpaper update may fail.")
+            showToastLong(requireContext(), "Olauncher is not default launcher.\nDaily wallpaper update may fail.")
         else
-            showToastShort(requireContext(), "Your wallpaper will update shortly.")
+            showToastShort(requireContext(), "Your wallpaper will update shortly")
     }
 
     private fun updateHomeAppsNum() {
