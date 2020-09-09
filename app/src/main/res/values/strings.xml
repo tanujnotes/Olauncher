@@ -15,6 +15,7 @@
     <string name="share">Share</string>
     <string name="rate">Rate</string>
     <string name="twitter">Twitter</string>
+    <string name="email">Email</string>
     <string name="github">Github</string>
     <string name="sponsor">Sponsor</string>
     <string name="long_press_for_settings">Long press anywhere for more</string>

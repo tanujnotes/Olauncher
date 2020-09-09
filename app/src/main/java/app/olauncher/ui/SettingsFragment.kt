@@ -81,7 +81,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.share -> shareApp()
             R.id.rate -> rateApp()
-            R.id.twitter -> openUrl(Constants.URL_TWITTER_TANUJNOTES)
+            R.id.email -> sendEmailIntent()
             R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
         }
     }
@@ -108,7 +108,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         privacy.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
-        twitter.setOnClickListener(this)
+        email.setOnClickListener(this)
         github.setOnClickListener(this)
 
         swipeLeftApp.setOnLongClickListener(this)
@@ -232,6 +232,21 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
         intent.addFlags(flags)
         startActivity(intent)
+    }
+
+    private fun sendEmailIntent() {
+        val emailIntent = Intent(Intent.ACTION_SENDTO)
+        emailIntent.data = Uri.parse(
+            "mailto:thetanuj1@gmail.com?" +
+                    "subject=Hello%20Team%20Olauncher!"
+        )
+
+        try {
+            startActivity(emailIntent)
+        } catch (e: Exception) {
+            showToastLong(requireContext(), "Sending email failed. Direct message instead.")
+            openUrl(Constants.URL_TWITTER_TANUJNOTES)
+        }
     }
 
     private fun populateSwipeApps() {

@@ -299,12 +299,12 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/twitter"
+            android:id="@+id/email"
             style="@style/TextSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:text="@string/twitter" />
+            android:text="@string/email" />
 
         <Space
             android:layout_width="0dp"
