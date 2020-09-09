@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/gradient_transparent_background">
+    android:background="@color/colorPrimaryInverseTrans10">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"

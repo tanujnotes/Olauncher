@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@drawable/gradient_transparent_background"
+    android:background="@color/colorPrimaryInverseTrans10"
     android:orientation="vertical"
     android:paddingHorizontal="24dp"
     android:paddingTop="24dp"
@@ -44,9 +44,9 @@
     <TextView
         android:id="@+id/setLauncher"
         style="@style/TextSmallBold"
-        android:paddingVertical="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
         android:text="@string/set_as_default_launcher" />
 
     <Space
@@ -60,18 +60,18 @@
 
         <TextView
             style="@style/TextSmallBold"
-            android:paddingVertical="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
             android:text="@string/apps_on_home_screen" />
 
         <TextView
             android:id="@+id/homeAppsNum"
             style="@style/TextSmallBold"
-            android:paddingVertical="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:paddingVertical="8dp"
             android:paddingStart="24dp"
             android:paddingEnd="0dp"
             android:textAllCaps="true" />
@@ -89,18 +89,18 @@
         <TextView
             android:id="@+id/dailyWallpaperUrl"
             style="@style/TextSmallBold"
-            android:paddingVertical="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
             android:text="@string/daily_wallpaper_update" />
 
         <TextView
             android:id="@+id/dailyWallpaper"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:paddingVertical="8dp"
             android:text="@string/off"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -117,8 +117,8 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
             android:text="@string/double_tap_to_lock_screen" />
 
         <TextView
@@ -144,17 +144,17 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
             android:text="@string/home_layout_alignment" />
 
         <TextView
             android:id="@+id/alignment"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:paddingVertical="8dp"
             android:text="@string/left"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -171,17 +171,17 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
             android:text="@string/app_text_color" />
 
         <TextView
             android:id="@+id/textColor"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:paddingVertical="8dp"
             android:text="@string/white"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -201,19 +201,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
-            android:paddingVertical="8dp"
             android:lines="1"
+            android:paddingVertical="8dp"
             android:text="@string/swipe_left_app" />
 
         <TextView
             android:id="@+id/swipeLeftApp"
             style="@style/TextSmallBold"
-            android:paddingVertical="8dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
             android:lines="1"
+            android:paddingVertical="8dp"
             android:textAllCaps="true" />
     </LinearLayout>
 
@@ -230,21 +230,21 @@
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
             android:lines="1"
+            android:paddingVertical="8dp"
             android:text="@string/swipe_right_app" />
 
         <TextView
             android:id="@+id/swipeRightApp"
             style="@style/TextSmallBold"
             android:layout_width="0dp"
-            android:paddingVertical="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
             android:lines="1"
+            android:paddingVertical="8dp"
             android:textAllCaps="true" />
     </LinearLayout>
 

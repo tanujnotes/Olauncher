@@ -5,7 +5,7 @@
     android:id="@+id/mainActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_transparent_background">
+    android:background="@color/colorPrimaryInverseTrans10">
 
     <fragment
         android:id="@+id/nav_host_fragment"
