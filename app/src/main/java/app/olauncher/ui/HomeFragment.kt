@@ -218,10 +218,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun showAppList(flag: Int) {
         viewModel.getAppList()
-        findNavController().navigate(
-            R.id.action_mainFragment_to_appListFragment,
-            bundleOf("flag" to flag)
-        )
+        try {
+            findNavController().navigate(
+                R.id.action_mainFragment_to_appListFragment,
+                bundleOf("flag" to flag)
+            )
+        } catch (e: Exception) {
+        }
     }
 
     @SuppressLint("WrongConstant", "PrivateApi")
@@ -326,9 +329,11 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onLongClick() {
                 super.onLongClick()
-                viewModel.firstOpen(false)
-                if (findNavController().currentDestination?.id == R.id.mainFragment)
+                try {
                     findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                    viewModel.firstOpen(false)
+                } catch (e: java.lang.Exception) {
+                }
             }
 
             override fun onDoubleClick() {
