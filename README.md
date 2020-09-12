@@ -1,10 +1,14 @@
 ![Olauncher](https://repository-images.githubusercontent.com/278638069/8ea13280-edd4-11ea-81be-15dd81255a4b)
 # Olauncher
-Olauncher is a minimal, free and open source launcher app for Android with daily new wallpaper and no ads.
+Olauncher is a minimal, ad-free and open source launcher app for Android with daily new wallpaper.
 
 ## Installation
-
-[Available at Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+    alt="Get it on F-Droid"
+    height="80">](https://f-droid.org/packages/app.olauncher)
+[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+    alt="Get it on F-Droid"
+    height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
 You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. Or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
@@ -19,7 +23,6 @@ You can also clone the master branch and build the app yourself in Android Studi
 
 - [ ] Hide apps
 - [ ] Rename apps on the home screen
-- [ ] App search bar at the bottom
 - [ ] Remove some low priority features from settings (suggestions are welcome)
 
 It's getting too crowded in there. This is a "minimal" launcher afterall.
