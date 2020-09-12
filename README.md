@@ -1,4 +1,4 @@
-![Olauncher](https://repository-images.githubusercontent.com/278638069/8ea13280-edd4-11ea-81be-15dd81255a4b)
+![Olauncher](https://repository-images.githubusercontent.com/278638069/82fbed00-f4f3-11ea-8028-1493d78c4ebd)
 # Olauncher
 Olauncher is a minimal, ad-free and open source launcher app for Android with daily new wallpaper.
 
