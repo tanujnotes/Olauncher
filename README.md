@@ -1,6 +1,6 @@
 ![Olauncher](https://repository-images.githubusercontent.com/278638069/82fbed00-f4f3-11ea-8028-1493d78c4ebd)
 # Olauncher
-Olauncher is a minimal, ad-free and open source launcher app for Android with daily new wallpaper.
+Olauncher is a minimal and ad-free launcher app for Android with daily new wallpaper.
 
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
