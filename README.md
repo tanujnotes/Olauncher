@@ -1,6 +1,6 @@
 ![Olauncher](https://repository-images.githubusercontent.com/278638069/82fbed00-f4f3-11ea-8028-1493d78c4ebd)
 # Olauncher
-Olauncher is a minimal and ad-free launcher app for Android with daily new wallpaper.
+Olauncher is a minimal and ad-free launcher app for Android. It can also update your wallpaper daily, if you want.
 
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
@@ -27,8 +27,14 @@ You can also clone the master branch and build the app yourself in Android Studi
 
 It's getting too crowded in there. This is a "minimal" launcher afterall.
 
+Olauncher recently got an [article in AndroidPolice](https://www.androidpolice.com/2020/09/21/olauncher-gives-your-home-screen-an-open-source-minimalist-makeover/) and after that I recieved tons of messages to either fix something or add features. I'm working on them but it will take some time. Your understanding and patience is appreciated.
+
 ## Contact
 Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
 
 ## License
 [GNU GPLv3 ](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+In case you want to donate, use this link: www.buymeacoff.ee/tanujnotes
+
+Thank you.
