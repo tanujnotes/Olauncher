@@ -21,14 +21,24 @@
         app:searchIcon="@null"
         app:theme="@style/AppSearchText" />
 
+    <TextView
+        android:id="@+id/appDrawerTip"
+        style="@style/TextSmallLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="136dp"
+        android:text="@string/scroll_to_hide_keyboard"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
-        android:paddingBottom="48dp"
-        android:clipToPadding="false"
         android:clipChildren="false"
-        android:overScrollMode="never" />
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingBottom="48dp" />
 
 </FrameLayout>

@@ -14,9 +14,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
-import app.olauncher.MainViewModel
 import app.olauncher.helper.openAppInfo
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
@@ -71,6 +71,13 @@ class AppDrawerFragment : Fragment() {
             recyclerView.layoutAnimation = animation
             appAdapter.setAppList(it)
             appsPopulated = true
+        })
+
+        viewModel.firstOpen.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                appDrawerTip.visibility = View.VISIBLE
+                search.queryHint = getString(R.string.type_to_search)
+            }
         })
     }
 
