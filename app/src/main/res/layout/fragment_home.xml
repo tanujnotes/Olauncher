@@ -15,8 +15,8 @@
     <LinearLayout
         android:id="@+id/dateTimeLayout"
         android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:orientation="vertical">
 
         <TextClock
@@ -125,21 +125,21 @@
         android:id="@+id/firstRunTips"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="gone">
 
         <TextView
-            style="@style/TextSmallLight"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="@string/swipe_up_for_apps" />
 
         <TextView
-            style="@style/TextSmallLight"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/long_press_for_settings" />
@@ -149,7 +149,7 @@
     <!-- Set default launcher -->
     <TextView
         android:id="@+id/setDefaultLauncher"
-        style="@style/TextSmallLight"
+        style="@style/TextSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
