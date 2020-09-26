@@ -51,7 +51,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
@@ -60,7 +60,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
@@ -69,7 +69,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
@@ -78,7 +78,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
@@ -87,7 +87,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
@@ -96,7 +96,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
@@ -105,7 +105,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
@@ -114,7 +114,7 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/select"
+            android:hint="@string/app"
             android:paddingVertical="12dp"
             android:visibility="gone" />
 
