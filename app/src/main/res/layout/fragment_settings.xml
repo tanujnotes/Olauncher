@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settingsRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -24,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
+            android:textColor="@color/colorPrimary"
             android:textSize="28sp" />
 
         <ImageView
@@ -56,14 +58,16 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
 
         <TextView
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:text="@string/apps_on_home_screen" />
+            android:text="@string/apps_on_home_screen"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/homeAppsNum"
@@ -75,6 +79,98 @@
             android:paddingStart="24dp"
             android:paddingEnd="0dp"
             android:textAllCaps="true" />
+
+        <LinearLayout
+            android:id="@+id/appsNumSelectLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:background="@color/colorPrimaryInverseTrans90"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/maxApps1"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_1" />
+
+            <TextView
+                android:id="@+id/maxApps2"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_2" />
+
+            <TextView
+                android:id="@+id/maxApps3"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_3" />
+
+            <TextView
+                android:id="@+id/maxApps4"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_4" />
+
+            <TextView
+                android:id="@+id/maxApps5"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_5" />
+
+            <TextView
+                android:id="@+id/maxApps6"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_6" />
+
+            <TextView
+                android:id="@+id/maxApps7"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_7" />
+
+            <TextView
+                android:id="@+id/maxApps8"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_8" />
+
+        </LinearLayout>
+
     </FrameLayout>
 
     <Space
@@ -119,7 +215,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:text="@string/double_tap_to_lock_screen" />
+            android:text="@string/double_tap_to_lock_screen"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/toggleOnOff"
@@ -146,7 +243,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:text="@string/home_layout_alignment" />
+            android:text="@string/home_layout_alignment"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/alignment"
@@ -173,7 +271,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:text="@string/app_text_color" />
+            android:text="@string/app_text_color"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/textColor"
@@ -198,19 +297,20 @@
 
         <TextView
             style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
+            android:layout_weight="1"
             android:lines="1"
             android:paddingVertical="8dp"
-            android:text="@string/swipe_left_app" />
+            android:text="@string/swipe_left_app"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/swipeLeftApp"
             style="@style/TextSmallBold"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="end"
             android:lines="1"
             android:paddingVertical="8dp"
@@ -229,19 +329,20 @@
 
         <TextView
             style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
+            android:layout_weight="1"
             android:lines="1"
             android:paddingVertical="8dp"
-            android:text="@string/swipe_right_app" />
+            android:text="@string/swipe_right_app"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/swipeRightApp"
             style="@style/TextSmallBold"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="end"
             android:lines="1"
             android:paddingVertical="8dp"

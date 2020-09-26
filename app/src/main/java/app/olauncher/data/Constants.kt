@@ -9,11 +9,13 @@ object Constants {
     const val FLAG_SET_HOME_APP_4 = 4
     const val FLAG_SET_HOME_APP_5 = 5
     const val FLAG_SET_HOME_APP_6 = 6
+    const val FLAG_SET_HOME_APP_7 = 7
+    const val FLAG_SET_HOME_APP_8 = 8
 
     const val FLAG_SET_SWIPE_LEFT_APP = 11
     const val FLAG_SET_SWIPE_RIGHT_APP = 12
 
-    const val HOME_APPS_NUM_MAX = 6 // Max number of apps on home screen
+    const val HOME_APPS_NUM_MAX = 8 // Max number of apps on home screen. Hopefully we'll never increase it ever again.
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
 

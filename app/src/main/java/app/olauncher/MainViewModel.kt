@@ -68,6 +68,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appPackage6 = appModel.appPackage
                 refreshHome(false)
             }
+            Constants.FLAG_SET_HOME_APP_7 -> {
+                prefs.appName7 = appModel.appLabel
+                prefs.appPackage7 = appModel.appPackage
+                refreshHome(false)
+            }
+            Constants.FLAG_SET_HOME_APP_8 -> {
+                prefs.appName8 = appModel.appLabel
+                prefs.appPackage8 = appModel.appPackage
+                refreshHome(false)
+            }
             Constants.FLAG_SET_SWIPE_LEFT_APP -> {
                 prefs.appNameSwipeLeft = appModel.appLabel
                 prefs.appPackageSwipeLeft = appModel.appPackage

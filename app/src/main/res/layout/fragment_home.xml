@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="36dp"
         android:animateLayoutChanges="true"
         android:orientation="vertical">
 
@@ -93,6 +93,24 @@
 
         <TextView
             android:id="@+id/homeApp6"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="10dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/homeApp7"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/select"
+            android:paddingVertical="10dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/homeApp8"
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

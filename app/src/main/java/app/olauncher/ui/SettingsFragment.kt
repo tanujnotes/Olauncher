@@ -66,14 +66,24 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onClick(view: View) {
         when (view.id) {
+            R.id.settingsRootLayout -> appsNumSelectLayout.visibility = View.GONE
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.homeAppsNum -> updateHomeAppsNum()
+            R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
             R.id.textColor -> viewModel.switchTheme()
             R.id.toggleOnOff -> toggleLockMode()
             R.id.dailyWallpaperUrl -> openWallpaperUrl()
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
+
+            R.id.maxApps1 -> updateHomeAppsNum(1)
+            R.id.maxApps2 -> updateHomeAppsNum(2)
+            R.id.maxApps3 -> updateHomeAppsNum(3)
+            R.id.maxApps4 -> updateHomeAppsNum(4)
+            R.id.maxApps5 -> updateHomeAppsNum(5)
+            R.id.maxApps6 -> updateHomeAppsNum(6)
+            R.id.maxApps7 -> updateHomeAppsNum(7)
+            R.id.maxApps8 -> updateHomeAppsNum(8)
 
             R.id.swipeLeftApp -> showAppList(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppList(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -95,6 +105,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initClickListeners() {
+        settingsRootLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
@@ -110,6 +121,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         rate.setOnClickListener(this)
         email.setOnClickListener(this)
         github.setOnClickListener(this)
+
+        maxApps1.setOnClickListener(this)
+        maxApps2.setOnClickListener(this)
+        maxApps3.setOnClickListener(this)
+        maxApps4.setOnClickListener(this)
+        maxApps5.setOnClickListener(this)
+        maxApps6.setOnClickListener(this)
+        maxApps7.setOnClickListener(this)
+        maxApps8.setOnClickListener(this)
 
         swipeLeftApp.setOnLongClickListener(this)
         swipeRightApp.setOnLongClickListener(this)
@@ -169,10 +189,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             showToastShort(requireContext(), "Your wallpaper will update shortly")
     }
 
-    private fun updateHomeAppsNum() {
-        var num = prefs.homeAppsNum
-        if (num == Constants.HOME_APPS_NUM_MAX) num = 0 else num++
+    private fun updateHomeAppsNum(num: Int) {
         homeAppsNum.text = num.toString()
+        appsNumSelectLayout.visibility = View.GONE
         prefs.homeAppsNum = num
         viewModel.refreshHome(true)
     }

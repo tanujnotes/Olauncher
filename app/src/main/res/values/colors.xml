@@ -8,4 +8,5 @@
     <color name="colorPrimaryTrans75">#BF000000</color>
     <color name="colorPrimaryInverseTrans10">#1AFFFFFF</color>
     <color name="colorPrimaryInverseTrans25">#40FFFFFF</color>
+    <color name="colorPrimaryInverseTrans90">#E6FFFFFF</color>
 </resources>

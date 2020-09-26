@@ -21,12 +21,16 @@ class Prefs(context: Context) {
     private val APP_NAME_4 = "APP_NAME_4"
     private val APP_NAME_5 = "APP_NAME_5"
     private val APP_NAME_6 = "APP_NAME_6"
+    private val APP_NAME_7 = "APP_NAME_7"
+    private val APP_NAME_8 = "APP_NAME_8"
     private val APP_PACKAGE_1 = "APP_PACKAGE_1"
     private val APP_PACKAGE_2 = "APP_PACKAGE_2"
     private val APP_PACKAGE_3 = "APP_PACKAGE_3"
     private val APP_PACKAGE_4 = "APP_PACKAGE_4"
     private val APP_PACKAGE_5 = "APP_PACKAGE_5"
     private val APP_PACKAGE_6 = "APP_PACKAGE_6"
+    private val APP_PACKAGE_7 = "APP_PACKAGE_7"
+    private val APP_PACKAGE_8 = "APP_PACKAGE_8"
 
     private val APP_NAME_SWIPE_LEFT = "APP_NAME_SWIPE_LEFT"
     private val APP_NAME_SWIPE_RIGHT = "APP_NAME_SWIPE_RIGHT"
@@ -87,6 +91,14 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_NAME_6, "").toString()
         set(value) = prefs.edit().putString(APP_NAME_6, value).apply()
 
+    var appName7: String
+        get() = prefs.getString(APP_NAME_7, "").toString()
+        set(value) = prefs.edit().putString(APP_NAME_7, value).apply()
+
+    var appName8: String
+        get() = prefs.getString(APP_NAME_8, "").toString()
+        set(value) = prefs.edit().putString(APP_NAME_8, value).apply()
+
     var appPackage1: String
         get() = prefs.getString(APP_PACKAGE_1, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_1, value).apply()
@@ -110,6 +122,14 @@ class Prefs(context: Context) {
     var appPackage6: String
         get() = prefs.getString(APP_PACKAGE_6, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_6, value).apply()
+
+    var appPackage7: String
+        get() = prefs.getString(APP_PACKAGE_7, "").toString()
+        set(value) = prefs.edit().putString(APP_PACKAGE_7, value).apply()
+
+    var appPackage8: String
+        get() = prefs.getString(APP_PACKAGE_8, "").toString()
+        set(value) = prefs.edit().putString(APP_PACKAGE_8, value).apply()
 
     var appNameSwipeLeft: String
         get() = prefs.getString(APP_NAME_SWIPE_LEFT, "CAMERA").toString()

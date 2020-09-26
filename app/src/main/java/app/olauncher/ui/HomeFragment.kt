@@ -82,6 +82,12 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) onLongClick(view)
             else launchApp(prefs.appName6, prefs.appPackage6)
 
+            R.id.homeApp7 -> if (prefs.appPackage7.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName7, prefs.appPackage7)
+
+            R.id.homeApp8 -> if (prefs.appPackage8.isEmpty()) onLongClick(view)
+            else launchApp(prefs.appName8, prefs.appPackage8)
+
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
@@ -96,6 +102,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4)
             R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5)
             R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6)
+            R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7)
+            R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8)
         }
         return true
     }
@@ -128,6 +136,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp4.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp4))
         homeApp5.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp5))
         homeApp6.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp6))
+        homeApp7.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp7))
+        homeApp8.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp8))
     }
 
     private fun initClickListeners() {
@@ -189,6 +199,20 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appName6 = ""
             prefs.appPackage6 = ""
         }
+        if (homeAppsNum == 6) return
+
+        homeApp7.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp7, prefs.appName7, prefs.appPackage7, pm)) {
+            prefs.appName7 = ""
+            prefs.appPackage7 = ""
+        }
+        if (homeAppsNum == 7) return
+
+        homeApp8.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp8, prefs.appName8, prefs.appPackage8, pm)) {
+            prefs.appName8 = ""
+            prefs.appPackage8 = ""
+        }
     }
 
     private fun setHomeAppText(textView: TextView, appName: String, packageName: String, pm: PackageManager): Boolean {
@@ -207,6 +231,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp4.visibility = View.GONE
         homeApp5.visibility = View.GONE
         homeApp6.visibility = View.GONE
+        homeApp7.visibility = View.GONE
+        homeApp8.visibility = View.GONE
     }
 
     private fun launchApp(appName: String, packageName: String) {
