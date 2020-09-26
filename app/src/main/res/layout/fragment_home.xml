@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/select"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/select"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/select"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/select"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/select"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/select"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
     </LinearLayout>
