@@ -1,7 +1,6 @@
 package app.olauncher.ui
 
 import android.annotation.SuppressLint
-import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -24,7 +23,6 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.isPackageInstalled
-import app.olauncher.helper.showToastLong
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -34,7 +32,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
-    private lateinit var deviceManager: DevicePolicyManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -46,8 +43,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
-        deviceManager =
-            context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
@@ -315,18 +310,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun lockPhone() {
-        try {
-            deviceManager.lockNow()
-        } catch (e: SecurityException) {
-            showToastLong(requireContext(), "Please turn on double tap to lock")
-            findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
-        } catch (e: Exception) {
-            showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
-            prefs.lockModeOn = false
-        }
-    }
-
     private fun textOnClick(view: View) = onClick(view)
 
     private fun textOnLongClick(view: View) = onLongClick(view)
@@ -360,11 +343,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     viewModel.firstOpen(false)
                 } catch (e: java.lang.Exception) {
                 }
-            }
-
-            override fun onDoubleClick() {
-                super.onDoubleClick()
-                if (prefs.lockModeOn) lockPhone()
             }
         }
     }

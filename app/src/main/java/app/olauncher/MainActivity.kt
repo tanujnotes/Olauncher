@@ -90,20 +90,4 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            Constants.REQUEST_CODE_ENABLE_ADMIN -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    Prefs(this).lockModeOn = true
-                    showToastLong(
-                        this,
-                        "Double tap to lock enabled. Please disable this before uninstalling the app."
-                    )
-                }
-                return
-            }
-        }
-    }
 }

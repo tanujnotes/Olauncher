@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.app.admin.DeviceAdminReceiver
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
@@ -24,7 +25,6 @@ import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.showToastLong
 import app.olauncher.helper.showToastShort
-import app.olauncher.listener.DeviceAdmin
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -51,11 +51,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         } ?: throw Exception("Invalid Activity")
         viewModel.isOlauncherDefault()
 
+        // Admin permission no longer required
         deviceManager = context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-        componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
+        componentName = ComponentName(requireContext(), DeviceAdminReceiver::class.java)
+        val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
+        if (isAdmin) deviceManager.removeActiveAdmin(componentName)
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
-        checkAdminPermission()
         populateSettings()
         populateTextColor()
         populateAlignment()
@@ -71,7 +73,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
             R.id.textColor -> viewModel.switchTheme()
-            R.id.toggleOnOff -> toggleLockMode()
             R.id.dailyWallpaperUrl -> openWallpaperUrl()
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
@@ -110,7 +111,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         setLauncher.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
         textColor.setOnClickListener(this)
-        toggleOnOff.setOnClickListener(this)
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
@@ -150,29 +150,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         })
     }
 
-    private fun checkAdminPermission() {
-        val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
-        prefs.lockModeOn = isAdmin
-    }
-
-    private fun toggleLockMode() {
-        val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
-        if (isAdmin) {
-            deviceManager.removeActiveAdmin(componentName)
-            prefs.lockModeOn = false
-            populateSettings()
-            showToastShort(requireContext(), "Admin permission removed")
-        } else {
-            val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
-            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
-            intent.putExtra(
-                DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-                getString(R.string.admin_permission_message)
-            )
-            activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
-        }
-    }
-
     private fun toggleDailyWallpaperUpdate() {
         prefs.dailyWallpaper = !prefs.dailyWallpaper
         populateSettings()
@@ -197,9 +174,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateSettings() {
-        if (prefs.lockModeOn) toggleOnOff.text = getString(R.string.on)
-        else toggleOnOff.text = getString(R.string.off)
-
         if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
         else dailyWallpaper.text = getString(R.string.off)
     }

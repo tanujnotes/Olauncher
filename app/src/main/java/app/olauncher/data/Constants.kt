@@ -17,8 +17,6 @@ object Constants {
 
     const val HOME_APPS_NUM_MAX = 8 // Max number of apps on home screen. Hopefully we'll never increase it ever again.
 
-    const val REQUEST_CODE_ENABLE_ADMIN = 666
-
     const val ACTION_WALLPAPER_CHANGED = "app.olauncher.WALLPAPER_CHANGED"
 
     const val URL_OLAUNCHER_PRIVACY = "https://olauncher.flycricket.io/privacy.html"
