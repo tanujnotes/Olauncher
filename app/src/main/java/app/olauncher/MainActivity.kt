@@ -1,19 +1,20 @@
 package app.olauncher
 
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.showToastLong
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         initObservers(viewModel)
         viewModel.getAppList()
         setupOrientation()
+
+        ViewCompat.setOnApplyWindowInsetsListener(mainActivityLayout) { v, insets ->
+            v.updatePadding(bottom = insets.systemWindowInsets.bottom)
+            // Return the insets so that they keep going down the view hierarchy
+            insets
+        }
+
     }
 
     override fun onStop() {
