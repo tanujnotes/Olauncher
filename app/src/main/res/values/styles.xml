@@ -36,7 +36,7 @@
     <style name="TextDefault" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">@drawable/text_colors_default</item>
         <item name="android:textColorHint">@color/colorPrimaryTrans75</item>
-<!--        <item name="android:fontFamily">sans-serif-light</item>-->
+        <!--        <item name="android:fontFamily">sans-serif-light</item>-->
         <item name="android:shadowColor">@color/colorPrimaryInverseTrans25</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>

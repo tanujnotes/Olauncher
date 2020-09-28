@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <bool name="night_mode">true</bool>
-    <bool name="light_navigation_bar">false</bool>
+    <bool name="light_navigation_bar">true</bool>
 </resources>

@@ -7,7 +7,9 @@
     android:animateLayoutChanges="true"
     android:background="@color/colorPrimaryInverseTrans25"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="48dp">
 
     <Space
         android:layout_width="wrap_content"

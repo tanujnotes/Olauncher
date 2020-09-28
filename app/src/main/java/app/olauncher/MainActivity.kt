@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
@@ -42,12 +43,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.getAppList()
         setupOrientation()
 
-        ViewCompat.setOnApplyWindowInsetsListener(mainActivityLayout) { v, insets ->
-            v.updatePadding(bottom = insets.systemWindowInsets.bottom)
-            // Return the insets so that they keep going down the view hierarchy
-            insets
-        }
-
+        window.addFlags(FLAG_LAYOUT_NO_LIMITS)
     }
 
     override fun onStop() {
