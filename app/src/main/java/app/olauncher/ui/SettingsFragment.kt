@@ -75,6 +75,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
 
+            R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
             R.id.maxApps2 -> updateHomeAppsNum(2)
             R.id.maxApps3 -> updateHomeAppsNum(3)
@@ -124,6 +125,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         email.setOnClickListener(this)
         github.setOnClickListener(this)
 
+        maxApps0.setOnClickListener(this)
         maxApps1.setOnClickListener(this)
         maxApps2.setOnClickListener(this)
         maxApps3.setOnClickListener(this)

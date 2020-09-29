@@ -88,6 +88,16 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/maxApps0"
+                style="@style/TextMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_0" />
+
+            <TextView
                 android:id="@+id/maxApps1"
                 style="@style/TextMedium"
                 android:layout_width="0dp"
