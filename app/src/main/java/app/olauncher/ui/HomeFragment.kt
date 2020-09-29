@@ -262,12 +262,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun openSwipeRightApp() {
+        if (!prefs.swipeLeftRight) return
         if (prefs.appPackageSwipeRight.isNotEmpty())
             launchApp(prefs.appNameSwipeRight, prefs.appPackageSwipeRight)
         else openDialerApp()
     }
 
     private fun openSwipeLeftApp() {
+        if (!prefs.swipeLeftRight) return
         if (prefs.appPackageSwipeLeft.isNotEmpty())
             launchApp(prefs.appNameSwipeLeft, prefs.appPackageSwipeLeft)
         else openCameraApp()

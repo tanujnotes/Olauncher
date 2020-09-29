@@ -232,7 +232,7 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="0.2" />
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -247,17 +247,18 @@
             android:layout_weight="1"
             android:lines="1"
             android:paddingVertical="8dp"
-            android:text="@string/swipe_left_app"
+            android:text="@string/swipe_left_right_apps"
             android:textColor="@color/colorPrimary" />
 
         <TextView
-            android:id="@+id/swipeLeftApp"
+            android:id="@+id/swipeLeftRight"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
             android:lines="1"
             android:paddingVertical="8dp"
+            android:text="@string/on"
             android:textAllCaps="true" />
     </LinearLayout>
 
@@ -293,6 +294,37 @@
             android:textAllCaps="true" />
     </LinearLayout>
 
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextSmallBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:layout_weight="1"
+            android:lines="1"
+            android:paddingVertical="8dp"
+            android:text="@string/swipe_left_app"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/swipeLeftApp"
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:lines="1"
+            android:paddingVertical="8dp"
+            android:textAllCaps="true" />
+    </LinearLayout>
 
     <Space
         android:layout_width="wrap_content"

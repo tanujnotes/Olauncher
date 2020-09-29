@@ -27,7 +27,6 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
 
     private fun sendWallpaperBroadcast(url: String) {
         Prefs(applicationContext).dailyWallpaperUrl = url
-        Prefs(applicationContext).darkModeOn = true
 
         val intent = Intent()
         intent.action = Constants.ACTION_WALLPAPER_CHANGED

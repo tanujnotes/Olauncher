@@ -8,11 +8,11 @@ class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
 
     private val FIRST_OPEN = "FIRST_OPEN"
-    private val DARK_MODE = "DARK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
     private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
+    private val SWIPE_LEFT_RIGHT = "SWIPE_LEFT_RIGHT"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -42,10 +42,6 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(FIRST_OPEN, true)
         set(value) = prefs.edit().putBoolean(FIRST_OPEN, value).apply()
 
-    var darkModeOn: Boolean
-        get() = prefs.getBoolean(DARK_MODE, true)
-        set(value) = prefs.edit().putBoolean(DARK_MODE, value).apply()
-
     var dailyWallpaper: Boolean
         get() = prefs.getBoolean(DAILY_WALLPAPER, false)
         set(value) = prefs.edit().putBoolean(DAILY_WALLPAPER, value).apply()
@@ -61,6 +57,10 @@ class Prefs(context: Context) {
     var homeAlignment: Int
         get() = prefs.getInt(HOME_ALIGNMENT, Gravity.START)
         set(value) = prefs.edit().putInt(HOME_ALIGNMENT, value).apply()
+
+    var swipeLeftRight: Boolean
+        get() = prefs.getBoolean(SWIPE_LEFT_RIGHT, true)
+        set(value) = prefs.edit().putBoolean(SWIPE_LEFT_RIGHT, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

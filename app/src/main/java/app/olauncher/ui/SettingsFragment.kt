@@ -58,7 +58,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         if (isAdmin) deviceManager.removeActiveAdmin(componentName)
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
-        populateSettings()
+        populateWallpaperText()
         populateAlignment()
         populateSwipeApps()
         initClickListeners()
@@ -84,6 +84,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.maxApps7 -> updateHomeAppsNum(7)
             R.id.maxApps8 -> updateHomeAppsNum(8)
 
+            R.id.swipeLeftRight -> {
+                prefs.swipeLeftRight = !prefs.swipeLeftRight
+                populateSwipeLeftRight()
+            }
             R.id.swipeLeftApp -> showAppList(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppList(Constants.FLAG_SET_SWIPE_RIGHT_APP)
 
@@ -111,6 +115,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
+        swipeLeftRight.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
         privacy.setOnClickListener(this)
@@ -146,7 +151,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun toggleDailyWallpaperUpdate() {
         prefs.dailyWallpaper = !prefs.dailyWallpaper
-        populateSettings()
+        populateWallpaperText()
         if (prefs.dailyWallpaper) {
             viewModel.setWallpaperWorker()
             showWallpaperToasts()
@@ -167,9 +172,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.refreshHome(true)
     }
 
-    private fun populateSettings() {
+    private fun populateWallpaperText() {
         if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
         else dailyWallpaper.text = getString(R.string.off)
+    }
+
+    private fun populateSwipeLeftRight() {
+        if (prefs.swipeLeftRight) swipeLeftRight.text = getString(R.string.on)
+        else swipeLeftRight.text = getString(R.string.off)
     }
 
     private fun populateAlignment() {

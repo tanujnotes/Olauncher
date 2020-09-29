@@ -19,8 +19,8 @@
     <string name="sponsor">Sponsor</string>
     <string name="long_press_for_settings">Long press anywhere for more</string>
     <string name="swipe_up_for_apps">Swipe up for all apps</string>
-    <string name="apps_on_home_screen">No. of apps on home screen</string>
-    <string name="daily_wallpaper_update">Daily wallpaper update</string>
+    <string name="apps_on_home_screen">Apps on home screen</string>
+    <string name="daily_wallpaper_update">Daily new wallpaper</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="center">Center</string>
@@ -37,4 +37,5 @@
     <string name="_8">8</string>
     <string name="scroll_to_hide_keyboard">Scroll to hide keyboard</string>
     <string name="type_to_search">Type to search</string>
+    <string name="swipe_left_right_apps">Swipe left right apps</string>
 </resources>
