@@ -59,6 +59,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateWallpaperText()
+        populateSwipeLeftRight()
         populateAlignment()
         populateSwipeApps()
         initClickListeners()
