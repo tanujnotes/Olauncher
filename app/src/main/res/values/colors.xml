@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@android:color/black</color>
+    <color name="colorPrimary">@android:color/white</color>
     <color name="colorPrimaryDark">@android:color/darker_gray</color>
     <color name="colorAccent">#FFEB3B</color>
 
-    <color name="colorPrimaryTrans50">#80000000</color>
-    <color name="colorPrimaryTrans75">#BF000000</color>
-    <color name="colorPrimaryInverseTrans10">#1AFFFFFF</color>
-    <color name="colorPrimaryInverseTrans25">#40FFFFFF</color>
-    <color name="colorPrimaryInverseTrans90">#E6FFFFFF</color>
+    <color name="colorPrimaryTrans50">#80FFFFFF</color>
+    <color name="colorPrimaryTrans75">#BFFFFFFF</color>
+    <color name="colorPrimaryInverseTrans10">#1A000000</color>
+    <color name="colorPrimaryInverseTrans25">#40000000</color>
+    <color name="colorPrimaryInverseTrans90">#E6000000</color>
 </resources>

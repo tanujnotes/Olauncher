@@ -30,7 +30,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val appList = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
-    val isDarkModeOn = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
@@ -130,18 +129,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         launcherResetFailed.value = getDefaultLauncherPackage(
             appContext
         ).contains(".")
-    }
-
-    fun switchTheme() {
-        prefs.darkModeOn = !prefs.darkModeOn
-        setTheme(prefs.darkModeOn)
-    }
-
-    private fun setTheme(darkMode: Boolean) {
-        prefs.darkModeOn = darkMode
-        if (darkMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        else AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        isDarkModeOn.value = prefs.darkModeOn
     }
 
     fun setWallpaperWorker() {

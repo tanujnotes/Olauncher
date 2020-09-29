@@ -59,7 +59,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateSettings()
-        populateTextColor()
         populateAlignment()
         populateSwipeApps()
         initClickListeners()
@@ -72,7 +71,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
-            R.id.textColor -> viewModel.switchTheme()
             R.id.dailyWallpaperUrl -> openWallpaperUrl()
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
@@ -110,7 +108,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
-        textColor.setOnClickListener(this)
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
@@ -138,9 +135,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun initObservers() {
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it) setLauncher.text = getString(R.string.change_default_launcher)
-        })
-        viewModel.isDarkModeOn.observe(viewLifecycleOwner, Observer {
-            populateTextColor()
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
             populateAlignment()
@@ -176,11 +170,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateSettings() {
         if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
         else dailyWallpaper.text = getString(R.string.off)
-    }
-
-    private fun populateTextColor() {
-        if (prefs.darkModeOn) textColor.text = getString(R.string.white)
-        else textColor.text = getString(R.string.black)
     }
 
     private fun populateAlignment() {

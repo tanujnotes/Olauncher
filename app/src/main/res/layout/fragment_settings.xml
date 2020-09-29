@@ -234,34 +234,6 @@
         android:layout_height="0dp"
         android:layout_weight="0.2" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:text="@string/app_text_color"
-            android:textColor="@color/colorPrimary" />
-
-        <TextView
-            android:id="@+id/textColor"
-            style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingVertical="8dp"
-            android:text="@string/white"
-            android:textAllCaps="true" />
-    </FrameLayout>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
