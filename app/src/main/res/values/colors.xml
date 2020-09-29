@@ -6,6 +6,7 @@
 
     <color name="colorPrimaryTrans50">#80FFFFFF</color>
     <color name="colorPrimaryTrans75">#BFFFFFFF</color>
+    <color name="colorPrimaryTrans90">#E6FFFFFF</color>
     <color name="colorPrimaryInverseTrans10">#1A000000</color>
     <color name="colorPrimaryInverseTrans25">#40000000</color>
     <color name="colorPrimaryInverseTrans90">#E6000000</color>
