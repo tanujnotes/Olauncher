@@ -11,6 +11,7 @@ class Prefs(context: Context) {
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
     private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
+    private val WALLPAPER_UPDATED_DAY = "WALLPAPER_UPDATED_DAY"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
     private val SWIPE_LEFT_RIGHT = "SWIPE_LEFT_RIGHT"
 
@@ -49,6 +50,10 @@ class Prefs(context: Context) {
     var dailyWallpaperUrl: String
         get() = prefs.getString(DAILY_WALLPAPER_URL, "").toString()
         set(value) = prefs.edit().putString(DAILY_WALLPAPER_URL, value).apply()
+
+    var wallpaperUpdatedDay: String
+        get() = prefs.getString(WALLPAPER_UPDATED_DAY, "").toString()
+        set(value) = prefs.edit().putString(WALLPAPER_UPDATED_DAY, value).apply()
 
     var homeAppsNum: Int
         get() = prefs.getInt(HOME_APPS_NUM, 4)

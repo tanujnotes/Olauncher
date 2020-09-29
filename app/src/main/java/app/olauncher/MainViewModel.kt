@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.view.Gravity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -135,7 +134,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
-        val uploadWorkRequest = PeriodicWorkRequestBuilder<WallpaperWorker>(1, TimeUnit.DAYS)
+        val uploadWorkRequest = PeriodicWorkRequestBuilder<WallpaperWorker>(8, TimeUnit.HOURS)
             .setBackoffCriteria(BackoffPolicy.LINEAR, 1, TimeUnit.HOURS)
             .setConstraints(constraints)
             .build()
@@ -146,6 +145,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun cancelWallpaperWorker() {
         WorkManager.getInstance(appContext).cancelUniqueWork(Constants.WALLPAPER_WORKER_NAME)
+        prefs.dailyWallpaperUrl = ""
+        prefs.wallpaperUpdatedDay = ""
     }
 
     fun updateHomeAlignment() {

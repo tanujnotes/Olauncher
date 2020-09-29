@@ -1,16 +1,19 @@
 package app.olauncher.helper
 
 import android.content.Context
-import android.content.Intent
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import kotlinx.coroutines.coroutineScope
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams) {
 
     override suspend fun doWork(): Result = coroutineScope {
+
+        val date: String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+        if (date == Prefs(applicationContext).wallpaperUpdatedDay) Result.success()
 
         val wallpaperUrl = getTodaysWallpaper()
 
@@ -20,16 +23,13 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
         )
 
         if (success) {
-            sendWallpaperBroadcast(wallpaperUrl)
+            updateWallpaperPrefs(wallpaperUrl, date)
             Result.success()
         } else Result.retry()
     }
 
-    private fun sendWallpaperBroadcast(url: String) {
+    private fun updateWallpaperPrefs(url: String, date: String) {
         Prefs(applicationContext).dailyWallpaperUrl = url
-
-        val intent = Intent()
-        intent.action = Constants.ACTION_WALLPAPER_CHANGED
-        applicationContext.sendBroadcast(intent)
+        Prefs(applicationContext).wallpaperUpdatedDay = date
     }
 }

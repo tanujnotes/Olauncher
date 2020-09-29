@@ -45,12 +45,6 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".listener.WallpaperReceiver">
-            <intent-filter>
-                <action android:name="app.olauncher.WALLPAPER_CHANGED" />
-            </intent-filter>
-        </receiver>
-
     </application>
 
 </manifest>

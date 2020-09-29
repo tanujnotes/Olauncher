@@ -72,7 +72,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
-            R.id.dailyWallpaperUrl -> openWallpaperUrl()
+            R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
 
@@ -193,12 +193,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
     }
 
-    private fun openWallpaperUrl() {
-        if (prefs.dailyWallpaper and prefs.dailyWallpaperUrl.isNotEmpty())
-            openUrl(prefs.dailyWallpaperUrl)
-    }
-
     private fun openUrl(url: String) {
+        if (url.isEmpty()) return
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
