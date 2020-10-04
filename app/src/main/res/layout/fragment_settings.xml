@@ -7,13 +7,7 @@
     android:background="@color/colorPrimaryInverseTrans10"
     android:orientation="vertical"
     android:paddingHorizontal="24dp"
-    android:paddingTop="24dp"
-    android:paddingBottom="48dp">
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.5" />
+    android:paddingVertical="48dp">
 
     <FrameLayout
         android:layout_width="match_parent"
