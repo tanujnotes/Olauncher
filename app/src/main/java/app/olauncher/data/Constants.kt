@@ -15,6 +15,8 @@ object Constants {
     const val FLAG_SET_SWIPE_LEFT_APP = 11
     const val FLAG_SET_SWIPE_RIGHT_APP = 12
 
+    const val REQUEST_CODE_ENABLE_ADMIN = 666
+
     const val URL_OLAUNCHER_PRIVACY = "https://olauncher.flycricket.io/privacy.html"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJNOTES = "https://twitter.com/tanujnotes/"

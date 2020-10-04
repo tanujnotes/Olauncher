@@ -8,6 +8,7 @@ class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
 
     private val FIRST_OPEN = "FIRST_OPEN"
+    private val LOCK_MODE = "LOCK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
     private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
@@ -42,6 +43,10 @@ class Prefs(context: Context) {
     var firstOpen: Boolean
         get() = prefs.getBoolean(FIRST_OPEN, true)
         set(value) = prefs.edit().putBoolean(FIRST_OPEN, value).apply()
+
+    var lockModeOn: Boolean
+        get() = prefs.getBoolean(LOCK_MODE, false)
+        set(value) = prefs.edit().putBoolean(LOCK_MODE, value).apply()
 
     var dailyWallpaper: Boolean
         get() = prefs.getBoolean(DAILY_WALLPAPER, false)

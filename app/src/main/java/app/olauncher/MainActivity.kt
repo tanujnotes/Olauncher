@@ -1,5 +1,6 @@
 package app.olauncher
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Build
@@ -7,15 +8,13 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.updatePadding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.showToastLong
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -92,6 +91,22 @@ class MainActivity : AppCompatActivity() {
                 Intent(Settings.ACTION_SETTINGS)
             }
             startActivity(intent)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            Constants.REQUEST_CODE_ENABLE_ADMIN -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    Prefs(this).lockModeOn = true
+                    showToastLong(
+                        this,
+                        "Double tap to lock enabled. Please disable this before uninstalling the app."
+                    )
+                }
+                return
+            }
         }
     }
 }
