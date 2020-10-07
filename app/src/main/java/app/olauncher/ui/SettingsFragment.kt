@@ -56,6 +56,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         checkAdminPermission()
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
+        populateLockSettings()
         populateWallpaperText()
         populateSwipeLeftRight()
         populateAlignment()

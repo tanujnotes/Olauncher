@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.showToastLong
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +45,13 @@ class MainActivity : AppCompatActivity() {
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
+        okGotIt.setOnClickListener {
+            lockEnabledLayout.visibility = View.GONE
+            showToastLong(
+                this,
+                "Double tap to lock. Please disable this before uninstalling Olauncher."
+            )
+        }
     }
 
     override fun onStop() {
@@ -100,13 +109,21 @@ class MainActivity : AppCompatActivity() {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
                 if (resultCode == Activity.RESULT_OK) {
                     Prefs(this).lockModeOn = true
-                    showToastLong(
-                        this,
-                        "Double tap to lock enabled. Please disable this before uninstalling the app."
-                    )
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
+                        lockEnabledLayout.visibility = View.VISIBLE
+                    else
+                        showToastLong(
+                            this,
+                            "Double tap to lock. Please disable this before uninstalling Olauncher."
+                        )
                 }
                 return
             }
         }
+//        if (!Settings.System.canWrite(this)) {
+//            val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+//            intent.data = Uri.parse("package:$packageName")
+//            startActivityForResult(intent, 123123)
+//        }
     }
 }

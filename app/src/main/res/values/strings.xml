@@ -40,4 +40,7 @@
     <string name="type_to_search">Type to search</string>
     <string name="swipe_left_right_apps">Swipe left right apps</string>
     <string name="_0">0</string>
+    <string name="okay_got_it">Okay, got it</string>
+    <string name="important_">Important!</string>
+    <string name="double_to_lock_is_enabled_message">If fingerprint or face unlock is disabled on lock, please click on \'experimental\' in Olauncher settings and follow the instructions. Thank you.</string>
 </resources>

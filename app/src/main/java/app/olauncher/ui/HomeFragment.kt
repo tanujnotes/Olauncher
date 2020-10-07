@@ -336,6 +336,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
             prefs.lockModeOn = false
         }
+//        Settings.System.getInt(requireContext().applicationContext.contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 0)
+//        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000);
     }
 
     private fun textOnClick(view: View) = onClick(view)

@@ -57,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
+            android:textColor="@color/colorPrimary"
             android:text="@string/double_tap_to_lock_screen" />
 
         <TextView

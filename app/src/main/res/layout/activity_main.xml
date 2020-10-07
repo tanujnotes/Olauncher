@@ -16,4 +16,57 @@
         app:navGraph="@navigation/nav_graph"
         tools:ignore="FragmentTagUsage" /><!--Changing <fragment> to FragmentContainerView crashes
     the app on initialising navController-->
+
+    <FrameLayout
+        android:id="@+id/lockEnabledLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryInverseTrans25"
+        android:clickable="true"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_rectangle_dark"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:padding="24dp"
+            tools:targetApi="p">
+
+            <TextView
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="@string/important_" />
+
+            <TextView
+                style="@style/TextSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lineSpacingExtra="1dp"
+                android:text="@string/double_to_lock_is_enabled_message"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/okGotIt"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="24dp"
+                android:text="@string/okay_got_it"
+                android:textAllCaps="true" />
+
+        </LinearLayout>
+
+    </FrameLayout>
 </FrameLayout>
