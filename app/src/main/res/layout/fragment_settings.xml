@@ -57,8 +57,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="8dp"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/double_tap_to_lock_screen" />
+            android:text="@string/double_tap_to_lock_screen"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/toggleOnOff"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:paddingVertical="8dp"
+            android:paddingVertical="10dp"
             android:text="@string/off"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -94,12 +94,13 @@
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="end|bottom"
             android:paddingVertical="8dp"
             android:paddingStart="24dp"
             android:paddingEnd="0dp"
             android:textAllCaps="true" />
 
+        <!-- Home apps numbers layout -->
         <LinearLayout
             android:id="@+id/appsNumSelectLayout"
             android:layout_width="match_parent"
@@ -225,7 +226,7 @@
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="end|bottom"
             android:paddingVertical="8dp"
             android:text="@string/off"
             android:textAllCaps="true" />
@@ -253,7 +254,7 @@
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_gravity="end|bottom"
             android:paddingVertical="8dp"
             android:text="@string/left"
             android:textAllCaps="true" />
@@ -285,7 +286,7 @@
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_gravity="end|bottom"
             android:lines="1"
             android:paddingVertical="8dp"
             android:text="@string/on"
@@ -318,7 +319,7 @@
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_gravity="end|bottom"
             android:lines="1"
             android:paddingVertical="8dp"
             android:textAllCaps="true" />
@@ -350,7 +351,7 @@
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_gravity="end|bottom"
             android:lines="1"
             android:paddingVertical="8dp"
             android:textAllCaps="true" />
