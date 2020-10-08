@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
         okGotIt.setOnClickListener {
-            lockEnabledLayout.visibility = View.GONE
+            messageLayout.visibility = View.GONE
             showToastLong(
                 this,
                 "Double tap to lock. Please disable this before uninstalling Olauncher."
@@ -103,6 +103,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showMessage(message: String) {
+        messageTextView.text = message
+        messageLayout.visibility = View.VISIBLE
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -110,20 +115,18 @@ class MainActivity : AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK) {
                     Prefs(this).lockModeOn = true
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
-                        lockEnabledLayout.visibility = View.VISIBLE
+                        showMessage(getString(R.string.double_tap_lock_is_enabled_message))
                     else
                         showToastLong(
                             this,
                             "Double tap to lock. Please disable this before uninstalling Olauncher."
                         )
                 }
-                return
+            }
+
+            Constants.REQUEST_CODE_EDIT_SETTINGS -> {
+                showMessage(getString(R.string.triple_tap_lock_message))
             }
         }
-//        if (!Settings.System.canWrite(this)) {
-//            val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-//            intent.data = Uri.parse("package:$packageName")
-//            startActivityForResult(intent, 123123)
-//        }
     }
 }

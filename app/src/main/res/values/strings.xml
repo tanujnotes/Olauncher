@@ -42,5 +42,8 @@
     <string name="_0">0</string>
     <string name="okay_got_it">Okay, got it</string>
     <string name="important_">Important!</string>
-    <string name="double_to_lock_is_enabled_message">If fingerprint or face unlock is disabled on lock, please click on \'experimental\' in Olauncher settings and follow the instructions. Thank you.</string>
+    <string name="double_tap_lock_is_enabled_message">If fingerprint or face unlock is disabled on lock, please click on \'experimental\' in Olauncher settings and follow the instructions. Thank you.</string>
+    <string name="triple_tap_lock_message">Due to updated security rules in some Android devices, apps cannot lock phones normally.
+        \nThat\'s why, once you double tap to lock, the screen will go black and the phone will lock itself in about 5 seconds.
+        \nDuring this time, you can double tap to go back to home screen. You can also triple tap anytime to lock the phone immediately and disable the fingerprint or face unlock. Thank you.</string>
 </resources>

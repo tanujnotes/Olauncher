@@ -5,13 +5,13 @@ import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -54,12 +54,27 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         setHomeAlignment(prefs.homeAlignment)
         initSwipeTouchListener()
         initClickListeners()
+        blackOverlay.setOnClickListener {
+
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        blackOverlay.visibility = View.GONE
         populateHomeApps(false)
         viewModel.isOlauncherDefault()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
+        } else {
+            @Suppress("DEPRECATION")
+            requireActivity().window.addFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+
+        if (Settings.System.canWrite(requireContext()))
+            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 30000);
     }
 
     override fun onClick(view: View) {
@@ -377,7 +392,22 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onDoubleClick() {
                 super.onDoubleClick()
-                if (prefs.lockModeOn) lockPhone()
+                if (prefs.lockModeOn) {
+                    if (Settings.System.canWrite(requireContext())) {
+                        blackOverlay.visibility = View.VISIBLE
+                        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                            requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
+                        } else {
+                            @Suppress("DEPRECATION")
+                            requireActivity().window.decorView.apply {
+                                systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            }
+                        }
+                    } else {
+                        lockPhone()
+                    }
+                }
             }
         }
     }

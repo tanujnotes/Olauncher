@@ -18,7 +18,7 @@
     the app on initialising navController-->
 
     <FrameLayout
-        android:id="@+id/lockEnabledLayout"
+        android:id="@+id/messageLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryInverseTrans25"
@@ -48,12 +48,13 @@
                 android:text="@string/important_" />
 
             <TextView
+                android:id="@+id/messageTextView"
                 style="@style/TextSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:lineSpacingExtra="1dp"
-                android:text="@string/double_to_lock_is_enabled_message"
+                android:text="@string/double_tap_lock_is_enabled_message"
                 android:textColor="@color/colorPrimary" />
 
             <TextView

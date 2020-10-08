@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -71,6 +72,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.toggleOnOff -> toggleLockMode()
+            R.id.experimental -> openEditSettingsPermission()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
@@ -114,6 +116,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
+        experimental.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
@@ -280,5 +283,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf("flag" to flag)
         )
+    }
+
+    private fun openEditSettingsPermission() {
+        //        if (!Settings.System.canWrite(this)) {
+        val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+        intent.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
+        startActivityForResult(intent, Constants.REQUEST_CODE_EDIT_SETTINGS)
+//        }
     }
 }
