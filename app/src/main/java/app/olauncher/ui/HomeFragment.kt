@@ -25,6 +25,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.showToastLong
+import app.olauncher.listener.LockTouchListener
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -142,15 +143,17 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initSwipeTouchListener() {
-        mainLayout.setOnTouchListener(getSwipeGestureListener(requireContext()))
-        homeApp1.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp1))
-        homeApp2.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp2))
-        homeApp3.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp3))
-        homeApp4.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp4))
-        homeApp5.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp5))
-        homeApp6.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp6))
-        homeApp7.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp7))
-        homeApp8.setOnTouchListener(getViewSwipeTouchListener(requireContext(), homeApp8))
+        val context = requireContext()
+        mainLayout.setOnTouchListener(getSwipeGestureListener(context))
+        blackOverlay.setOnTouchListener(getLockScreenGestureListener(context))
+        homeApp1.setOnTouchListener(getViewSwipeTouchListener(context, homeApp1))
+        homeApp2.setOnTouchListener(getViewSwipeTouchListener(context, homeApp2))
+        homeApp3.setOnTouchListener(getViewSwipeTouchListener(context, homeApp3))
+        homeApp4.setOnTouchListener(getViewSwipeTouchListener(context, homeApp4))
+        homeApp5.setOnTouchListener(getViewSwipeTouchListener(context, homeApp5))
+        homeApp6.setOnTouchListener(getViewSwipeTouchListener(context, homeApp6))
+        homeApp7.setOnTouchListener(getViewSwipeTouchListener(context, homeApp7))
+        homeApp8.setOnTouchListener(getViewSwipeTouchListener(context, homeApp8))
     }
 
     private fun initClickListeners() {
@@ -348,8 +351,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
             prefs.lockModeOn = false
         }
-//        Settings.System.getInt(requireContext().applicationContext.contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 0)
-//        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000);
     }
 
     private fun textOnClick(view: View) = onClick(view)
@@ -439,6 +440,22 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onClick(view: View) {
                 super.onClick(view)
                 textOnClick(view)
+            }
+        }
+    }
+
+    private fun getLockScreenGestureListener(context: Context): View.OnTouchListener {
+        return object : LockTouchListener(context) {
+            override fun onDoubleClick() {
+                super.onDoubleClick()
+                requireActivity().runOnUiThread {
+                    blackOverlay.visibility = View.GONE
+                }
+            }
+
+            override fun onTripleClick() {
+                super.onTripleClick()
+                if (prefs.lockModeOn) lockPhone()
             }
         }
     }
