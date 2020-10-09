@@ -11,7 +11,10 @@ import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -62,17 +65,20 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         blackOverlay.visibility = View.GONE
         populateHomeApps(false)
         viewModel.isOlauncherDefault()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
-        } else {
-            @Suppress("DEPRECATION")
-            requireActivity().window.addFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
-        }
-
+        showNavigationBar()
         if (Settings.System.canWrite(requireContext()))
             Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 30000);
+    }
+
+    private fun showNavigationBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
+        else
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+            }
     }
 
     override fun onClick(view: View) {
@@ -456,6 +462,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onDoubleClick() {
                 requireActivity().runOnUiThread {
                     blackOverlay.visibility = View.GONE
+                    showNavigationBar()
                 }
                 super.onDoubleClick()
             }
