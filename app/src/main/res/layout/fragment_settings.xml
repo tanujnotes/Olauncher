@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/settingsRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/colorPrimaryInverseTrans10"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
     android:paddingHorizontal="24dp"
     android:paddingVertical="48dp">
@@ -92,7 +95,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <TextView
             style="@style/TextMedium"
@@ -119,9 +124,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:background="@color/colorPrimaryInverseTrans90"
+            android:background="@drawable/rounded_rectangle_dark"
+            android:elevation="8dp"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:visibility="gone"
+            tools:targetApi="p">
 
             <TextView
                 android:id="@+id/maxApps0"
