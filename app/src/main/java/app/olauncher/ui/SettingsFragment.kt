@@ -67,8 +67,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     override fun onClick(view: View) {
+        appsNumSelectLayout.visibility = View.GONE
         when (view.id) {
-            R.id.settingsRootLayout -> appsNumSelectLayout.visibility = View.GONE
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.toggleOnOff -> toggleLockMode()
