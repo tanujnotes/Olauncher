@@ -54,9 +54,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         setHomeAlignment(prefs.homeAlignment)
         initSwipeTouchListener()
         initClickListeners()
-        blackOverlay.setOnClickListener {
-
-        }
     }
 
     override fun onResume() {

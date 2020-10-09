@@ -168,5 +168,6 @@
         android:layout_height="match_parent"
         android:background="@android:color/black"
         android:clickable="false"
-        android:focusable="false" />
+        android:focusable="false"
+        android:visibility="gone" />
 </FrameLayout>
