@@ -16,6 +16,7 @@ import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.showToastLong
+import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -125,7 +126,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             Constants.REQUEST_CODE_EDIT_SETTINGS -> {
-                showMessage(getString(R.string.triple_tap_lock_message))
+                if (Settings.System.canWrite(this))
+                    showMessage(getString(R.string.triple_tap_lock_message))
+                else
+                    showToastShort(this, "Settings permission denied")
             }
         }
     }

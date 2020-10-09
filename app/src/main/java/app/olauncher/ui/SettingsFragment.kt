@@ -290,7 +290,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         //        if (!Settings.System.canWrite(this)) {
         val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
         intent.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
-        startActivityForResult(intent, Constants.REQUEST_CODE_EDIT_SETTINGS)
+        activity?.startActivityForResult(intent, Constants.REQUEST_CODE_EDIT_SETTINGS)
 //        }
     }
 }
