@@ -389,23 +389,30 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             }
 
             override fun onDoubleClick() {
-                super.onDoubleClick()
                 if (prefs.lockModeOn) {
                     if (Settings.System.canWrite(requireContext())) {
-                        blackOverlay.visibility = View.VISIBLE
-                        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                            requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
-                        } else {
-                            @Suppress("DEPRECATION")
-                            requireActivity().window.decorView.apply {
-                                systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        requireActivity().runOnUiThread {
+                            blackOverlay.visibility = View.VISIBLE
+                            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
+                            } else {
+                                @Suppress("DEPRECATION")
+                                requireActivity().window.decorView.apply {
+                                    systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                }
                             }
                         }
                     } else {
                         lockPhone()
                     }
                 }
+                super.onDoubleClick()
+            }
+
+            override fun onTripleClick() {
+                if (prefs.lockModeOn) lockPhone()
+                super.onTripleClick()
             }
         }
     }
@@ -447,15 +454,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun getLockScreenGestureListener(context: Context): View.OnTouchListener {
         return object : LockTouchListener(context) {
             override fun onDoubleClick() {
-                super.onDoubleClick()
                 requireActivity().runOnUiThread {
                     blackOverlay.visibility = View.GONE
                 }
+                super.onDoubleClick()
             }
 
             override fun onTripleClick() {
-                super.onTripleClick()
                 if (prefs.lockModeOn) lockPhone()
+                super.onTripleClick()
             }
         }
     }

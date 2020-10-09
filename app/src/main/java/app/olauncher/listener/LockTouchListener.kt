@@ -6,6 +6,7 @@ import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
+import app.olauncher.data.Constants
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -42,7 +43,7 @@ internal open class LockTouchListener(c: Context?) : OnTouchListener {
 
         override fun onDoubleTap(e: MotionEvent): Boolean {
             doubleTapOn = true
-            Timer().schedule(400) {
+            Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS.toLong()) {
                 if (doubleTapOn) {
                     onDoubleClick()
                     doubleTapOn = false
