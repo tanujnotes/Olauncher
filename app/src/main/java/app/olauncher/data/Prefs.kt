@@ -15,6 +15,7 @@ class Prefs(context: Context) {
     private val WALLPAPER_UPDATED_DAY = "WALLPAPER_UPDATED_DAY"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
     private val SWIPE_LEFT_RIGHT = "SWIPE_LEFT_RIGHT"
+    private val SCREEN_TIMEOUT = "SCREEN_TIMEOUT"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -71,6 +72,10 @@ class Prefs(context: Context) {
     var swipeLeftRight: Boolean
         get() = prefs.getBoolean(SWIPE_LEFT_RIGHT, true)
         set(value) = prefs.edit().putBoolean(SWIPE_LEFT_RIGHT, value).apply()
+
+    var screenTimeout: Int
+        get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds
+        set(value) = prefs.edit().putInt(SCREEN_TIMEOUT, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

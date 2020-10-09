@@ -65,20 +65,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         blackOverlay.visibility = View.GONE
         populateHomeApps(false)
         viewModel.isOlauncherDefault()
-        showNavigationBar()
-        if (Settings.System.canWrite(requireContext()))
-            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 30000);
-    }
-
-    private fun showNavigationBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
-            requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
-        else
-            requireActivity().window.decorView.apply {
-                systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-            }
+        showNavBarAndResetScreenTimeout()
     }
 
     override fun onClick(view: View) {
@@ -359,6 +346,19 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
+    private fun showNavBarAndResetScreenTimeout() {
+        if (Settings.System.canWrite(requireContext()))
+            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
+        else
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+            }
+    }
+
     private fun textOnClick(view: View) = onClick(view)
 
     private fun textOnLongClick(view: View) = onLongClick(view)
@@ -399,7 +399,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     if (Settings.System.canWrite(requireContext())) {
                         requireActivity().runOnUiThread {
                             blackOverlay.visibility = View.VISIBLE
-                            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000);
+
+                            // Save the existing screen off timeout
+                            val screenTimeoutInSettings =
+                                Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
+                            if (screenTimeoutInSettings >= 5000) prefs.screenTimeout = screenTimeoutInSettings
+
+                            // Set timeout to 5 seconds
+                            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000)
+
+                            // Hide the navigation bar
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                                 requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
                             } else {
@@ -462,7 +471,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onDoubleClick() {
                 requireActivity().runOnUiThread {
                     blackOverlay.visibility = View.GONE
-                    showNavigationBar()
+                    showNavBarAndResetScreenTimeout()
                 }
                 super.onDoubleClick()
             }

@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/rounded_rectangle_dark"
-            android:elevation="4dp"
+            android:elevation="8dp"
             android:orientation="vertical"
             android:outlineAmbientShadowColor="@color/colorPrimaryDark"
             android:outlineSpotShadowColor="@color/colorPrimaryDark"
