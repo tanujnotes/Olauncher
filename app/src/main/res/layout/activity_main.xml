@@ -45,7 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:text="@string/important_" />
+                android:text="@string/important_"
+                android:textColor="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/messageTextView"
