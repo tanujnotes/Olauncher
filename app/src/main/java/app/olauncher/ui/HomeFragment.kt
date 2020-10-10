@@ -344,14 +344,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun lockPhone() {
-        try {
-            deviceManager.lockNow()
-        } catch (e: SecurityException) {
-            showToastLong(requireContext(), "Please turn on double tap to lock")
-            findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
-        } catch (e: Exception) {
-            showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
-            prefs.lockModeOn = false
+        requireActivity().runOnUiThread {
+            try {
+                deviceManager.lockNow()
+            } catch (e: SecurityException) {
+                showToastLong(requireContext(), "Please turn on double tap to lock")
+                findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+            } catch (e: Exception) {
+                showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
+                prefs.lockModeOn = false
+            }
         }
     }
 
