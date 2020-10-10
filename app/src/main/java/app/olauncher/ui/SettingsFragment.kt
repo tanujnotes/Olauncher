@@ -167,8 +167,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             deviceManager.removeActiveAdmin(componentName)
             prefs.lockModeOn = false
             populateLockSettings()
-            showToastLong(requireContext(), "Admin permission removed. You can remove settings permission too.")
-            openEditSettingsPermission()
+            showToastShort(requireContext(), "Admin permission removed.")
+            if (Settings.System.canWrite(requireContext())) {
+                openEditSettingsPermission()
+                showToastLong(requireContext(), "You can remove settings permission too.")
+            }
         } else {
             val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
