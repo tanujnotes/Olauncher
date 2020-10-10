@@ -47,8 +47,8 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
             doubleTapOn = true
             Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS.toLong()) {
                 if (doubleTapOn) {
-                    onDoubleClick()
                     doubleTapOn = false
+                    onDoubleClick()
                 }
             }
             return super.onDoubleTap(e)
