@@ -62,6 +62,7 @@
             android:paddingVertical="8dp">
 
             <TextView
+                android:id="@+id/doubleTapText"
                 style="@style/TextMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

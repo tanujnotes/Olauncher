@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.Gravity
@@ -56,6 +57,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P)
+            experimental.visibility = View.GONE
+
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateLockSettings()
         populateWallpaperText()
@@ -72,6 +76,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.toggleOnOff -> toggleLockMode()
+            R.id.doubleTapText -> openEditSettingsPermission()
             R.id.experimental -> openEditSettingsPermission()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
@@ -116,6 +121,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
         toggleOnOff.setOnClickListener(this)
+        doubleTapText.setOnClickListener(this)
         experimental.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
         dailyWallpaperUrl.setOnClickListener(this)
