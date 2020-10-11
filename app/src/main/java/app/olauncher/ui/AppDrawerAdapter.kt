@@ -27,7 +27,7 @@ class AppDrawerAdapter(
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(appFilteredList[position], clickListener, longPressListener)
+        holder.bind(appFilteredList[holder.adapterPosition], clickListener, longPressListener)
 
         try { // Automatically open the app when there's only one search result
             if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP))
