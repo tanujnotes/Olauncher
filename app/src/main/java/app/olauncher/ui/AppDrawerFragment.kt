@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
+import app.olauncher.data.Prefs
 import app.olauncher.helper.openAppInfo
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
@@ -97,6 +98,7 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun View.showKeyboard() {
+        if (!Prefs(requireContext()).autoShowKeyboard) return
         view?.requestFocus()
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)

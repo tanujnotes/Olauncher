@@ -61,6 +61,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             experimental.visibility = View.GONE
 
         homeAppsNum.text = prefs.homeAppsNum.toString()
+        populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
         populateSwipeLeftRight()
@@ -75,7 +76,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         when (view.id) {
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.toggleOnOff -> toggleLockMode()
+            R.id.toggleLock -> toggleLockMode()
+            R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.doubleTapText -> openEditSettingsPermission()
             R.id.experimental -> openEditSettingsPermission()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
@@ -120,7 +122,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         settingsRootLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
-        toggleOnOff.setOnClickListener(this)
+        autoShowKeyboard.setOnClickListener(this)
+        toggleLock.setOnClickListener(this)
         doubleTapText.setOnClickListener(this)
         experimental.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
@@ -212,6 +215,16 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.refreshHome(true)
     }
 
+    private fun toggleKeyboardText() {
+        prefs.autoShowKeyboard = !prefs.autoShowKeyboard
+        populateKeyboardText()
+    }
+
+    private fun populateKeyboardText() {
+        if (prefs.autoShowKeyboard) autoShowKeyboard.text = getString(R.string.on)
+        else autoShowKeyboard.text = getString(R.string.off)
+    }
+
     private fun populateWallpaperText() {
         if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
         else dailyWallpaper.text = getString(R.string.off)
@@ -231,8 +244,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateLockSettings() {
-        if (prefs.lockModeOn) toggleOnOff.text = getString(R.string.on)
-        else toggleOnOff.text = getString(R.string.off)
+        if (prefs.lockModeOn) toggleLock.text = getString(R.string.on)
+        else toggleLock.text = getString(R.string.off)
     }
 
     private fun openUrl(url: String) {

@@ -78,7 +78,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/toggleOnOff"
+            android:id="@+id/toggleLock"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -245,6 +245,7 @@
             android:textColor="@color/colorPrimary" />
 
         <TextView
+            android:id="@+id/autoShowKeyboard"
             style="@style/TextSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
