@@ -1,6 +1,6 @@
 ![Olauncher](https://repository-images.githubusercontent.com/278638069/82fbed00-f4f3-11ea-8028-1493d78c4ebd)
-# Olauncher
-Olauncher is a minimal and ad-free launcher app for Android. It can also update your wallpaper daily, if you want.
+# Olauncher | Minimal AF
+Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can also update your wallpaper daily, if you want.
 
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
@@ -10,24 +10,23 @@ Olauncher is a minimal and ad-free launcher app for Android. It can also update 
     alt="Get it on F-Droid"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
-You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. Or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
+Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher). You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. Or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
 ## What's new (v1.0+)
 
-* Daily wallpaper update
-* Improved app search, using regex
-* Customize swipe left and right apps
-* Tons of big and small changes based on community feedback to make Olauncher more user friendly
+Biometric unlock getting disabled on double tap lock has been fixed, more or less. Max no. of home apps increased to 8. I hope that's enough for everyone. Wallpaper update frequency has been improved. You should see a new wallpaper every morning. No guarantees though. Improved text visibility. And a lot more.
 
 ## What's next
 
 - [ ] Hide apps
 - [ ] Rename apps on the home screen
-- [ ] Remove some low priority features from settings (suggestions are welcome)
 
-It's getting too crowded in there. This is a "minimal" launcher afterall.
+## Known issues
 
-Olauncher recently got an [article in AndroidPolice](https://www.androidpolice.com/2020/09/21/olauncher-gives-your-home-screen-an-open-source-minimalist-makeover/) and after that I recieved tons of messages to either fix something or add features. I'm working on them but it will take some time. Your understanding and patience is appreciated.
+* Android 10 gestures not supported
+* Work apps not showing in app list
+
+Your understanding and patience is appreciated.
 
 ## Contact
 Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
@@ -35,6 +34,6 @@ Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
 ## License
 [GNU GPLv3 ](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-In case you want to donate, use this link: www.buymeacoff.ee/tanujnotes
+In case you want to buy me a coffee - www.buymeacoff.ee/tanujnotes
 
 Thank you.
