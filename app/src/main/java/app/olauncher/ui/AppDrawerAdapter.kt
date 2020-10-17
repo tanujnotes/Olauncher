@@ -16,7 +16,7 @@ class AppDrawerAdapter(
     private var flag: Int,
     private val clickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
-    private val appHideListener: (AppModel) -> Unit
+    private val appHideListener: (Int, AppModel) -> Unit
 ) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
     var appsList: MutableList<AppModel> = mutableListOf()
@@ -30,13 +30,13 @@ class AppDrawerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val appModel = appFilteredList[holder.adapterPosition]
-        holder.bind(appModel, clickListener, appInfoListener)
+        holder.bind(flag, appModel, clickListener, appInfoListener)
 
         holder.appHideButton.setOnClickListener {
             appFilteredList.removeAt(holder.adapterPosition)
             appsList.remove(appModel)
             notifyItemRemoved(holder.adapterPosition)
-            appHideListener(appModel)
+            appHideListener(flag, appModel)
         }
         try { // Automatically open the app when there's only one search result
             if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP))
@@ -84,15 +84,18 @@ class AppDrawerAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val appHideButton: TextView = itemView.appHide
 
-        fun bind(appModel: AppModel, listener: (AppModel) -> Unit, appInfoListener: (AppModel) -> Unit) =
+        fun bind(flag: Int, appModel: AppModel, listener: (AppModel) -> Unit, appInfoListener: (AppModel) -> Unit) =
             with(itemView) {
                 appHideLayout.visibility = View.GONE
+                appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
+
                 appTitle.text = appModel.appLabel
                 appTitle.setOnClickListener { listener(appModel) }
                 appTitle.setOnLongClickListener {
                     appHideLayout.visibility = View.VISIBLE
                     true
                 }
+
                 appInfo.setOnClickListener { appInfoListener(appModel) }
                 appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
             }

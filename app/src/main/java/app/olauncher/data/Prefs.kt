@@ -8,6 +8,7 @@ class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
 
     private val FIRST_OPEN = "FIRST_OPEN"
+    private val FIRST_HIDE = "FIRST_HIDE"
     private val LOCK_MODE = "LOCK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val AUTO_SHOW_KEYBOARD = "AUTO_SHOW_KEYBOARD"
@@ -46,6 +47,10 @@ class Prefs(context: Context) {
     var firstOpen: Boolean
         get() = prefs.getBoolean(FIRST_OPEN, true)
         set(value) = prefs.edit().putBoolean(FIRST_OPEN, value).apply()
+
+    var firstHide: Boolean
+        get() = prefs.getBoolean(FIRST_HIDE, true)
+        set(value) = prefs.edit().putBoolean(FIRST_HIDE, value).apply()
 
     var lockModeOn: Boolean
         get() = prefs.getBoolean(LOCK_MODE, false)

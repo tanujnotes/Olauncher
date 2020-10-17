@@ -17,8 +17,10 @@ import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
+import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.showToastLong
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 
@@ -38,19 +40,21 @@ class AppDrawerFragment : Fragment() {
         val viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
+
         val appAdapter = AppDrawerAdapter(
             flag,
             appClickListener(viewModel, flag),
             appInfoListener(),
-            appHideListener()
+            appShowHideListener()
         )
 
-        initViewModel(viewModel, appAdapter)
+        initViewModel(flag, viewModel, appAdapter)
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = appAdapter
         recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
 
+        if (flag == Constants.FLAG_HIDDEN_APPS) search.queryHint = "Hidden apps"
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean = false
 
@@ -61,17 +65,24 @@ class AppDrawerFragment : Fragment() {
         })
     }
 
-    private fun initViewModel(viewModel: MainViewModel, appAdapter: AppDrawerAdapter) {
+    private fun initViewModel(flag: Int, viewModel: MainViewModel, appAdapter: AppDrawerAdapter) {
+        viewModel.hiddenApps.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+            if (flag != Constants.FLAG_HIDDEN_APPS) return@Observer
+            if (it.isNullOrEmpty()) {
+                findNavController().popBackStack()
+                return@Observer
+            }
+            populateAppList(it, appAdapter)
+        })
+
         viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+            if (flag == Constants.FLAG_HIDDEN_APPS) return@Observer
             if (it.isNullOrEmpty()) {
                 findNavController().popBackStack()
                 return@Observer
             }
             if (it == appAdapter.appsList) return@Observer
-
-            val animation = AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
-            recyclerView.layoutAnimation = animation
-            appAdapter.setAppList(it.toMutableList())
+            populateAppList(it, appAdapter)
         })
 
         viewModel.firstOpen.observe(viewLifecycleOwner, Observer {
@@ -105,6 +116,12 @@ class AppDrawerFragment : Fragment() {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
+    private fun populateAppList(apps: List<AppModel>, appAdapter: AppDrawerAdapter) {
+        val animation = AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+        recyclerView.layoutAnimation = animation
+        appAdapter.setAppList(apps.toMutableList())
+    }
+
     private fun appClickListener(viewModel: MainViewModel, flag: Int):
                 (appModel: AppModel) -> Unit =
         { appModel ->
@@ -121,13 +138,20 @@ class AppDrawerFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-    private fun appHideListener(): (appModel: AppModel) -> Unit =
-        { appModel ->
-            val hiddenAppsSet = Prefs(requireContext()).hiddenApps
+    private fun appShowHideListener(): (flag: Int, appModel: AppModel) -> Unit =
+        { flag, appModel ->
+            val prefs = Prefs(requireContext())
             val newSet = mutableSetOf<String>()
-            newSet.add(appModel.appPackage)
-            newSet.addAll(hiddenAppsSet)
-            Prefs(requireContext()).hiddenApps = newSet
+            newSet.addAll(prefs.hiddenApps)
+            if (flag == Constants.FLAG_HIDDEN_APPS) newSet.remove(appModel.appPackage)
+            else newSet.add(appModel.appPackage)
+            prefs.hiddenApps = newSet
+
+            if (newSet.isEmpty()) findNavController().popBackStack()
+            if (prefs.firstHide) {
+                showToastLong(requireContext(), "Tap Olauncher in settings to see hidden apps")
+                prefs.firstHide = false
+            }
         }
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {

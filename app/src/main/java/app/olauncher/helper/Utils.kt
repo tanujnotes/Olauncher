@@ -57,6 +57,23 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
     }
 }
 
+suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
+    return withContext(Dispatchers.IO) {
+        val pm = context.packageManager
+        val hiddenAppsSet = Prefs(context).hiddenApps
+        val appList: MutableList<AppModel> = mutableListOf()
+        if (hiddenAppsSet.isEmpty()) return@withContext appList
+
+        for (appPackage in hiddenAppsSet) {
+            val appInfo = pm.getApplicationInfo(appPackage, 0)
+            val appName = pm.getApplicationLabel(appInfo).toString()
+            appList.add(AppModel(appName, appPackage))
+        }
+        appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+        appList
+    }
+}
+
 fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
     return try {
         packageManager.getPackageInfo(packageName, 0)

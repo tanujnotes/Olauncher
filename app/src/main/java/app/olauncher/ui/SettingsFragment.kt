@@ -74,6 +74,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     override fun onClick(view: View) {
         appsNumSelectLayout.visibility = View.GONE
         when (view.id) {
+            R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.toggleLock -> toggleLockMode()
@@ -119,6 +120,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initClickListeners() {
+        olauncherHiddenApps.setOnClickListener(this)
         settingsRootLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
@@ -163,6 +165,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.updateSwipeApps.observe(viewLifecycleOwner, Observer<Any> {
             populateSwipeApps()
         })
+    }
+
+    private fun showHiddenApps() {
+        if (prefs.hiddenApps.isEmpty()) {
+            showToastShort(requireContext(), "No hidden apps")
+            return
+        }
+        viewModel.getHiddenApps()
+        findNavController().navigate(
+            R.id.action_settingsFragment_to_appListFragment,
+            bundleOf("flag" to Constants.FLAG_HIDDEN_APPS)
+        )
     }
 
     private fun checkAdminPermission() {

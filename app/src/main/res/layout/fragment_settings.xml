@@ -17,11 +17,11 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/olauncherHiddenApps"
             style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textColor="@color/colorPrimary"
             android:textSize="30sp" />
 
         <ImageView
