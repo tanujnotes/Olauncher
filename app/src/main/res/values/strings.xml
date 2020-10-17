@@ -47,4 +47,5 @@
         \nSo once you double tap to lock, screen will go black and the phone will lock itself in 5 seconds.
         \nDuring this time, you can double tap to unlock. You can also triple tap anytime to fully lock the phone immediately.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
+    <string name="hide">Hide</string>
 </resources>

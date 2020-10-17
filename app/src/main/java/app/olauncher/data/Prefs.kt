@@ -17,6 +17,7 @@ class Prefs(context: Context) {
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
     private val SWIPE_LEFT_RIGHT = "SWIPE_LEFT_RIGHT"
     private val SCREEN_TIMEOUT = "SCREEN_TIMEOUT"
+    private val HIDDEN_APPS = "HIDDEN_APPS"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -81,6 +82,10 @@ class Prefs(context: Context) {
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds
         set(value) = prefs.edit().putInt(SCREEN_TIMEOUT, value).apply()
+
+    var hiddenApps: MutableSet<String>
+        get() = prefs.getStringSet(HIDDEN_APPS, mutableSetOf()) as MutableSet<String>
+        set(value) = prefs.edit().putStringSet(HIDDEN_APPS, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

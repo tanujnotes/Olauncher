@@ -5,11 +5,45 @@
     android:animateLayoutChanges="true">
 
     <TextView
-        android:id="@+id/app_label"
+        android:id="@+id/appTitle"
         style="@style/TextLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:paddingHorizontal="24dp"
         android:paddingVertical="12dp" />
+
+    <FrameLayout
+        android:id="@+id/appHideLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@color/colorPrimaryInverseTrans50"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="12dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/appHide"
+            style="@style/TextSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="48dp"
+            android:padding="12dp"
+            android:text="@string/hide"
+            android:textAllCaps="true" />
+
+        <ImageView
+            android:id="@+id/appInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:contentDescription="@string/app"
+            android:padding="12dp"
+            android:src="@drawable/ic_outline_info_24" />
+
+    </FrameLayout>
+
 </FrameLayout>

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.R
 import app.olauncher.data.AppModel
@@ -14,11 +15,12 @@ import kotlinx.android.synthetic.main.adapter_app_drawer.view.*
 class AppDrawerAdapter(
     private var flag: Int,
     private val clickListener: (AppModel) -> Unit,
-    private val longPressListener: (AppModel) -> Unit
+    private val appInfoListener: (AppModel) -> Unit,
+    private val appHideListener: (AppModel) -> Unit
 ) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
-    var appsList: List<AppModel> = listOf()
-    var appFilteredList: List<AppModel> = listOf()
+    var appsList: MutableList<AppModel> = mutableListOf()
+    var appFilteredList: MutableList<AppModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -27,8 +29,15 @@ class AppDrawerAdapter(
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(appFilteredList[holder.adapterPosition], clickListener, longPressListener)
+        val appModel = appFilteredList[holder.adapterPosition]
+        holder.bind(appModel, clickListener, appInfoListener)
 
+        holder.appHideButton.setOnClickListener {
+            appFilteredList.removeAt(holder.adapterPosition)
+            appsList.remove(appModel)
+            notifyItemRemoved(holder.adapterPosition)
+            appHideListener(appModel)
+        }
         try { // Automatically open the app when there's only one search result
             if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP))
                 clickListener(appFilteredList[position])
@@ -45,7 +54,7 @@ class AppDrawerAdapter(
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val searchChars = constraint.toString()
                 appFilteredList = (if (searchChars.isEmpty()) appsList
-                else appsList.filter { app -> appLabelMatches(app.appLabel, searchChars) })
+                else appsList.filter { app -> appLabelMatches(app.appLabel, searchChars) } as MutableList<AppModel>)
 
                 val filterResults = FilterResults()
                 filterResults.values = appFilteredList
@@ -54,7 +63,7 @@ class AppDrawerAdapter(
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                appFilteredList = results?.values as List<AppModel>
+                appFilteredList = results?.values as MutableList<AppModel>
                 notifyDataSetChanged()
             }
         }
@@ -66,24 +75,26 @@ class AppDrawerAdapter(
                     .contains(searchChars, true))
     }
 
-    fun setAppList(appsList: List<AppModel>) {
+    fun setAppList(appsList: MutableList<AppModel>) {
         this.appsList = appsList
         this.appFilteredList = appsList
         notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(
-            appModel: AppModel,
-            listener: (AppModel) -> Unit,
-            longPressListener: (AppModel) -> Unit
-        ) = with(itemView) {
-            app_label.text = appModel.appLabel
-            app_label.setOnClickListener { listener(appModel) }
-            app_label.setOnLongClickListener {
-                longPressListener(appModel)
-                true
+        val appHideButton: TextView = itemView.appHide
+
+        fun bind(appModel: AppModel, listener: (AppModel) -> Unit, appInfoListener: (AppModel) -> Unit) =
+            with(itemView) {
+                appHideLayout.visibility = View.GONE
+                appTitle.text = appModel.appLabel
+                appTitle.setOnClickListener { listener(appModel) }
+                appTitle.setOnLongClickListener {
+                    appHideLayout.visibility = View.VISIBLE
+                    true
+                }
+                appInfo.setOnClickListener { appInfoListener(appModel) }
+                appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
             }
-        }
     }
 }

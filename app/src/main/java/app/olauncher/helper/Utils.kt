@@ -14,6 +14,7 @@ import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
+import app.olauncher.data.Prefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -35,24 +36,20 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
         try {
+            val hiddenApps = Prefs(context).hiddenApps
             val pm = context.packageManager
             val intent = Intent(Intent.ACTION_MAIN, null)
             intent.addCategory(Intent.CATEGORY_LAUNCHER)
 
             val installedApps = pm.queryIntentActivities(intent, 0)
             for (app in installedApps)
-                appList.add(
-                    AppModel(
-                        app.loadLabel(pm).toString(),
-                        app.activityInfo.packageName
+                if (!hiddenApps.contains(app.activityInfo.packageName))
+                    appList.add(
+                        AppModel(app.loadLabel(pm).toString(), app.activityInfo.packageName)
                     )
-                )
             appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
             appList.remove(
-                AppModel(
-                    context.getString(R.string.app_name),
-                    BuildConfig.APPLICATION_ID
-                )
+                AppModel(context.getString(R.string.app_name), BuildConfig.APPLICATION_ID)
             )
         } catch (e: java.lang.Exception) {
         }

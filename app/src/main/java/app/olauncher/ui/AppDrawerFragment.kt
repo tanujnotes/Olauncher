@@ -41,7 +41,8 @@ class AppDrawerFragment : Fragment() {
         val appAdapter = AppDrawerAdapter(
             flag,
             appClickListener(viewModel, flag),
-            appLongPressListener()
+            appInfoListener(),
+            appHideListener()
         )
 
         initViewModel(viewModel, appAdapter)
@@ -70,7 +71,7 @@ class AppDrawerFragment : Fragment() {
 
             val animation = AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
             recyclerView.layoutAnimation = animation
-            appAdapter.setAppList(it)
+            appAdapter.setAppList(it.toMutableList())
         })
 
         viewModel.firstOpen.observe(viewLifecycleOwner, Observer {
@@ -111,13 +112,20 @@ class AppDrawerFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-    private fun appLongPressListener(): (appModel: AppModel) -> Unit =
+    private fun appInfoListener(): (appModel: AppModel) -> Unit =
         { appModel ->
             openAppInfo(
                 requireContext(),
                 appModel.appPackage
             )
             findNavController().popBackStack()
+        }
+
+    private fun appHideListener(): (appModel: AppModel) -> Unit =
+        { appModel ->
+            val set = Prefs(requireContext()).hiddenApps
+            set.add(appModel.appPackage)
+            Prefs(requireContext()).hiddenApps = set
         }
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
