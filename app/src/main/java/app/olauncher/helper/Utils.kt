@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.graphics.*
 import android.net.Uri
 import android.provider.Settings
+import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
 import app.olauncher.BuildConfig
@@ -25,11 +26,15 @@ import java.util.*
 
 
 fun showToastLong(context: Context, message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+    toast.setGravity(Gravity.CENTER, 0, 0)
+    toast.show()
 }
 
 fun showToastShort(context: Context, message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
+    toast.setGravity(Gravity.CENTER, 0, 0)
+    toast.show()
 }
 
 suspend fun getAppsList(context: Context): MutableList<AppModel> {
