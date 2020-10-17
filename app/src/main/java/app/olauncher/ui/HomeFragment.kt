@@ -255,9 +255,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun refreshDateTimeLayout() {
         // To fix a bug that causes clock freeze in some devices
-        dateTimeLayout.post {
-            dateTimeLayout.invalidate()
-            dateTimeLayout.requestLayout()
+        try {
+            dateTimeLayout.post {
+                dateTimeLayout.invalidate()
+                dateTimeLayout.requestLayout()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
