@@ -123,9 +123,11 @@ class AppDrawerFragment : Fragment() {
 
     private fun appHideListener(): (appModel: AppModel) -> Unit =
         { appModel ->
-            val set = Prefs(requireContext()).hiddenApps
-            set.add(appModel.appPackage)
-            Prefs(requireContext()).hiddenApps = set
+            val hiddenAppsSet = Prefs(requireContext()).hiddenApps
+            val newSet = mutableSetOf<String>()
+            newSet.add(appModel.appPackage)
+            newSet.addAll(hiddenAppsSet)
+            Prefs(requireContext()).hiddenApps = newSet
         }
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
