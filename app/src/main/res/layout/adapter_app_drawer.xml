@@ -22,7 +22,7 @@
         android:clickable="true"
         android:focusable="true"
         android:paddingHorizontal="12dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/appHide"
