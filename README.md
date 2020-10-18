@@ -18,7 +18,7 @@ Biometric unlock getting disabled on double tap lock has been fixed, more or les
 
 ## What's next
 
-- [ ] Hide apps
+- [x] Hide apps
 - [ ] Rename apps on the home screen
 
 ## Known issues
