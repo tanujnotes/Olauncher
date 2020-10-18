@@ -14,6 +14,8 @@ Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Sto
 
 ## What's new (v1.0+)
 
+Ability to hide apps. Long press on apps to see the hide option. Tap on Olauncher in settings to see your hidden apps.
+
 Biometric unlock getting disabled on double tap lock has been fixed, more or less. Max no. of home apps increased to 8. I hope that's enough for everyone. Wallpaper update frequency has been improved. You should see a new wallpaper every morning. No guarantees though. Improved text visibility. And a lot more.
 
 ## What's next
