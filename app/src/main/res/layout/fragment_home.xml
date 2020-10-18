@@ -20,12 +20,11 @@
 
         <TextClock
             android:id="@+id/clock"
-            style="@style/TextDefault"
+            style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
-            android:textSize="40sp" />
+            android:textSize="42sp" />
 
         <TextClock
             android:id="@+id/date"
@@ -54,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -63,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -72,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -81,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -90,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -99,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -108,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
         <TextView
@@ -117,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:visibility="gone" />
 
     </LinearLayout>
