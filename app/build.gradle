@@ -19,8 +19,8 @@ android {
         applicationId "app.olauncher"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 13
-        versionName "v1.3"
+        versionCode 14
+        versionName "v1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
