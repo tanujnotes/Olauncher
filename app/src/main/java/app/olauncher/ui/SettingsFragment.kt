@@ -105,8 +105,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.rate -> rateApp()
             R.id.email -> sendEmailIntent()
             R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.twitter -> openUrl(Constants.URL_TWITTER_TANUJNOTES)
-            R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
         }
     }
 
@@ -139,8 +137,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         rate.setOnClickListener(this)
         email.setOnClickListener(this)
         privacy.setOnClickListener(this)
-        twitter.setOnClickListener(this)
-        github.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)
         maxApps1.setOnClickListener(this)
@@ -300,12 +296,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             "mailto:thetanuj1@gmail.com?" +
                     "subject=Hello%20Team%20Olauncher!"
         )
-
         try {
             startActivity(emailIntent)
         } catch (e: Exception) {
-            showToastLong(requireContext(), "Sending email failed. Direct message instead.")
-            openUrl(Constants.URL_TWITTER_TANUJNOTES)
+            showToastLong(requireContext(), "Failed! Send email to thetanuj1@gmail.com")
         }
     }
 
@@ -324,26 +318,28 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateActionHints() {
         when {
-            prefs.toShowHintCounter in Constants.CODE_EMAIL_HINT..Constants.CODE_EMAIL_HINT + 1 -> {
+            prefs.toShowHintCounter == Constants.HINT_ABOUT_US -> {
+                Toast.makeText(context, getString(R.string.about_hint), Toast.LENGTH_LONG).show()
+                about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+            }
+            prefs.toShowHintCounter == Constants.HINT_EMAIL_US -> {
                 Toast.makeText(context, getString(R.string.email_us_hint), Toast.LENGTH_LONG).show()
-                email.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0);
+                email.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
-            prefs.toShowHintCounter in Constants.CODE_RATE_HINT..Constants.CODE_RATE_HINT + 1 -> {
+            prefs.toShowHintCounter in Constants.HINT_RATE_US..Constants.HINT_RATE_US + 1 -> {
                 Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_LONG).show()
-                rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0);
+                rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
-            prefs.toShowHintCounter % Constants.CODE_DONATE_HINT == 0 -> {
+            prefs.toShowHintCounter % Constants.HINT_DONATE == 0 -> {
                 Toast.makeText(context, getString(R.string.donate_hint), Toast.LENGTH_LONG).show()
-                about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0);
+                about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
         }
     }
 
     private fun openEditSettingsPermission() {
-        //        if (!Settings.System.canWrite(this)) {
         val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
         intent.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
         activity?.startActivityForResult(intent, Constants.REQUEST_CODE_EDIT_SETTINGS)
-//        }
     }
 }
