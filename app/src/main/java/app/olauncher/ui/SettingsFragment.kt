@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -66,6 +67,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateWallpaperText()
         populateAlignment()
         populateSwipeApps()
+        populateActionHints()
         initClickListeners()
         initObservers()
     }
@@ -155,8 +157,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initObservers() {
+        prefs.toShowHintCounter = prefs.toShowHintCounter + 1
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
-            if (it) setLauncher.text = getString(R.string.change_default_launcher)
+            if (it) {
+                setLauncher.text = getString(R.string.change_default_launcher)
+//                prefs.settingsOpenCount = prefs.settingsOpenCount + 1
+            }
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
             populateAlignment()
@@ -314,6 +320,23 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf("flag" to flag)
         )
+    }
+
+    private fun populateActionHints() {
+        when {
+            prefs.toShowHintCounter in Constants.CODE_EMAIL_HINT..Constants.CODE_EMAIL_HINT + 1 -> {
+                Toast.makeText(context, getString(R.string.email_us_hint), Toast.LENGTH_LONG).show()
+                email.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0);
+            }
+            prefs.toShowHintCounter in Constants.CODE_RATE_HINT..Constants.CODE_RATE_HINT + 1 -> {
+                Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_LONG).show()
+                rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0);
+            }
+            prefs.toShowHintCounter % Constants.CODE_DONATE_HINT == 0 -> {
+                Toast.makeText(context, getString(R.string.donate_hint), Toast.LENGTH_LONG).show()
+                about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0);
+            }
+        }
     }
 
     private fun openEditSettingsPermission() {

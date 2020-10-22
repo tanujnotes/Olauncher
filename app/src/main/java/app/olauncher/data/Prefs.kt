@@ -19,6 +19,7 @@ class Prefs(context: Context) {
     private val SWIPE_LEFT_RIGHT = "SWIPE_LEFT_RIGHT"
     private val SCREEN_TIMEOUT = "SCREEN_TIMEOUT"
     private val HIDDEN_APPS = "HIDDEN_APPS"
+    private val SHOW_HINT_COUNTER = "SHOW_HINT_COUNTER"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -91,6 +92,10 @@ class Prefs(context: Context) {
     var hiddenApps: MutableSet<String>
         get() = prefs.getStringSet(HIDDEN_APPS, mutableSetOf()) as MutableSet<String>
         set(value) = prefs.edit().putStringSet(HIDDEN_APPS, value).apply()
+
+    var toShowHintCounter: Int
+        get() = prefs.getInt(SHOW_HINT_COUNTER, 1)
+        set(value) = prefs.edit().putInt(SHOW_HINT_COUNTER, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

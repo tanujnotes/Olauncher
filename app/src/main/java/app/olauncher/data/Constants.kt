@@ -19,6 +19,10 @@ object Constants {
     const val REQUEST_CODE_ENABLE_ADMIN = 666
     const val REQUEST_CODE_EDIT_SETTINGS = 777
 
+    const val CODE_EMAIL_HINT = 10
+    const val CODE_RATE_HINT = 20
+    const val CODE_DONATE_HINT = 25
+
     const val TRIPLE_TAP_DELAY_MS = 400
     const val LONG_PRESS_DELAY_MS = 600
 

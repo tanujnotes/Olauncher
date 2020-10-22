@@ -48,4 +48,7 @@
         \nDuring this time, you can double tap to unlock. You can also triple tap anytime to fully lock the phone immediately.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
+    <string name="rate_us_hint">Love using Olauncher?\nPlease consider rating us.</string>
+    <string name="email_us_hint">Have feedback?\nFeel free to email us.</string>
+    <string name="donate_hint">Want to support?\nBuy us a coffee :)</string>
 </resources>
