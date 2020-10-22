@@ -26,13 +26,13 @@ import java.util.*
 
 
 fun showToastLong(context: Context, message: String) {
-    val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+    val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
     toast.setGravity(Gravity.CENTER, 0, 0)
     toast.show()
 }
 
 fun showToastShort(context: Context, message: String) {
-    val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
+    val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
     toast.setGravity(Gravity.CENTER, 0, 0)
     toast.show()
 }
