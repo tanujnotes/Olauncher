@@ -22,7 +22,8 @@ object Constants {
     const val TRIPLE_TAP_DELAY_MS = 400
     const val LONG_PRESS_DELAY_MS = 600
 
-    const val URL_OLAUNCHER_PRIVACY = "https://olauncher.flycricket.io/privacy.html"
+    const val URL_ABOUT_OLAUNCHER = "https://www.notion.so/About-Olauncher-4843e398b05a455bb521b0665b26fbcd"
+    const val URL_OLAUNCHER_PRIVACY = "https://www.notion.so/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJNOTES = "https://twitter.com/tanujnotes/"
     const val URL_GITHUB_TANUJNOTES = "https://github.com/tanujnotes/"

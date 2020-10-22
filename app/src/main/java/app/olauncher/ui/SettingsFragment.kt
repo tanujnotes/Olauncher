@@ -64,7 +64,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
-        populateSwipeLeftRight()
         populateAlignment()
         populateSwipeApps()
         initClickListeners()
@@ -96,17 +95,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.maxApps7 -> updateHomeAppsNum(7)
             R.id.maxApps8 -> updateHomeAppsNum(8)
 
-            R.id.swipeLeftRight -> {
-                prefs.swipeLeftRight = !prefs.swipeLeftRight
-                populateSwipeLeftRight()
-            }
             R.id.swipeLeftApp -> showAppList(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppList(Constants.FLAG_SET_SWIPE_RIGHT_APP)
 
-            R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
+            R.id.about -> openUrl(Constants.URL_ABOUT_OLAUNCHER)
             R.id.share -> shareApp()
             R.id.rate -> rateApp()
             R.id.email -> sendEmailIntent()
+            R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
+            R.id.twitter -> openUrl(Constants.URL_TWITTER_TANUJNOTES)
             R.id.github -> openUrl(Constants.URL_GITHUB_TANUJNOTES)
         }
     }
@@ -132,13 +129,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
-        swipeLeftRight.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
-        privacy.setOnClickListener(this)
+
+        about.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
         email.setOnClickListener(this)
+        privacy.setOnClickListener(this)
+        twitter.setOnClickListener(this)
         github.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)
@@ -242,11 +241,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateWallpaperText() {
         if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
         else dailyWallpaper.text = getString(R.string.off)
-    }
-
-    private fun populateSwipeLeftRight() {
-        if (prefs.swipeLeftRight) swipeLeftRight.text = getString(R.string.on)
-        else swipeLeftRight.text = getString(R.string.off)
     }
 
     private fun populateAlignment() {

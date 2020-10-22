@@ -9,7 +9,6 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:orientation="vertical"
-    android:paddingHorizontal="24dp"
     android:paddingVertical="48dp">
 
     <FrameLayout
@@ -21,6 +20,7 @@
             style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:text="@string/app_name"
             android:textSize="30sp" />
 
@@ -29,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:paddingVertical="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
             android:src="@drawable/ic_outline_info_24" />
     </FrameLayout>
 
@@ -43,6 +44,7 @@
         style="@style/TextMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
         android:paddingVertical="8dp"
         android:text="@string/set_as_default_launcher" />
 
@@ -53,7 +55,9 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="14dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -83,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:paddingVertical="10dp"
+            android:padding="10dp"
             android:text="@string/off"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -104,6 +108,7 @@
             style="@style/TextMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:paddingVertical="8dp"
             android:text="@string/apps_on_home_screen"
             android:textColor="@color/colorPrimary" />
@@ -114,9 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:paddingVertical="8dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="0dp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
             android:textAllCaps="true" />
 
         <!-- Home apps numbers layout -->
@@ -125,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:background="@drawable/rounded_rectangle_dark"
+            android:background="@color/colorPrimaryInverseTrans90"
             android:elevation="8dp"
             android:orientation="horizontal"
             android:outlineAmbientShadowColor="@color/colorPrimaryDark"
@@ -240,6 +244,7 @@
             style="@style/TextMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:paddingVertical="8dp"
             android:text="@string/auto_show_keyboard"
             android:textColor="@color/colorPrimary" />
@@ -250,7 +255,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:paddingVertical="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
             android:text="@string/on"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -269,6 +275,7 @@
             style="@style/TextMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:paddingVertical="8dp"
             android:text="@string/daily_wallpaper_update" />
 
@@ -278,7 +285,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:paddingVertical="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
             android:text="@string/off"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -296,6 +304,7 @@
             style="@style/TextMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:paddingVertical="8dp"
             android:text="@string/home_layout_alignment"
             android:textColor="@color/colorPrimary" />
@@ -306,7 +315,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:paddingVertical="8dp"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
             android:text="@string/left"
             android:textAllCaps="true" />
     </FrameLayout>
@@ -315,41 +325,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.3"
-        android:visibility="gone" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            style="@style/TextMedium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:layout_weight="1"
-            android:lines="1"
-            android:paddingVertical="8dp"
-            android:text="@string/swipe_left_right_apps"
-            android:textColor="@color/colorPrimary" />
-
-        <TextView
-            android:id="@+id/swipeLeftRight"
-            style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:lines="1"
-            android:paddingVertical="8dp"
-            android:text="@string/on"
-            android:textAllCaps="true" />
-    </LinearLayout>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.3" />
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -360,7 +336,8 @@
             style="@style/TextMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_weight="1"
             android:lines="1"
             android:paddingVertical="8dp"
@@ -373,8 +350,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
+            android:layout_marginEnd="16dp"
             android:lines="1"
-            android:paddingVertical="8dp"
+            android:padding="8dp"
             android:textAllCaps="true" />
     </LinearLayout>
 
@@ -392,7 +370,8 @@
             style="@style/TextMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_weight="1"
             android:lines="1"
             android:paddingVertical="8dp"
@@ -405,8 +384,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
+            android:layout_marginEnd="16dp"
             android:lines="1"
-            android:paddingVertical="8dp"
+            android:padding="8dp"
             android:textAllCaps="true" />
     </LinearLayout>
 
@@ -415,71 +395,81 @@
         android:layout_height="0dp"
         android:layout_weight="2" />
 
-    <LinearLayout
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp"
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/privacy"
-            style="@style/TextSmallLight"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:text="@string/privacy" />
+            android:orientation="horizontal">
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/about"
+                style="@style/TextSmallLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="@string/about" />
 
-        <TextView
-            android:id="@+id/share"
-            style="@style/TextSmallLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:text="@string/share" />
+            <TextView
+                android:id="@+id/share"
+                style="@style/TextSmallLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="@string/share" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/rate"
+                style="@style/TextSmallLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="@string/rate" />
 
-        <TextView
-            android:id="@+id/rate"
-            style="@style/TextSmallLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:text="@string/rate" />
+            <TextView
+                android:id="@+id/email"
+                style="@style/TextSmallLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="@string/email" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/privacy"
+                style="@style/TextSmallLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="@string/privacy" />
 
-        <TextView
-            android:id="@+id/email"
-            style="@style/TextSmallLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:text="@string/email" />
+            <TextView
+                android:id="@+id/twitter"
+                style="@style/TextSmallLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="8dp"
+                android:text="@string/twitter" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            <TextView
+                android:id="@+id/github"
+                style="@style/TextSmallLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="@string/github" />
 
-        <TextView
-            android:id="@+id/github"
-            style="@style/TextSmallLight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="8dp"
-            android:text="@string/github" />
-
-    </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </LinearLayout>
