@@ -266,8 +266,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun shareApp() {
-        val message = "Give your phone a new ultra clean look - every day.\n" +
-                "Download Olauncher! Free and open source, forever.\n" +
+        val message = "You should use your phone, not the other way round. -Olauncher\n" +
                 Constants.URL_OLAUNCHER_PLAY_STORE
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
