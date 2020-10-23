@@ -153,11 +153,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initObservers() {
-        prefs.toShowHintCounter = prefs.toShowHintCounter + 1
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
-//                prefs.settingsOpenCount = prefs.settingsOpenCount + 1
+                prefs.toShowHintCounter = prefs.toShowHintCounter + 1
             }
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
