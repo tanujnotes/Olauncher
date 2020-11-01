@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.UserManager
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
@@ -73,28 +74,28 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         when (view.id) {
 
             R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName1, prefs.appPackage1)
+            else launchApp(prefs.appName1, prefs.appPackage1, prefs.appUser1)
 
             R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName2, prefs.appPackage2)
+            else launchApp(prefs.appName2, prefs.appPackage2, prefs.appUser2)
 
             R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName3, prefs.appPackage3)
+            else launchApp(prefs.appName3, prefs.appPackage3, prefs.appUser3)
 
             R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName4, prefs.appPackage4)
+            else launchApp(prefs.appName4, prefs.appPackage4, prefs.appUser4)
 
             R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName5, prefs.appPackage5)
+            else launchApp(prefs.appName5, prefs.appPackage5, prefs.appUser5)
 
             R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName6, prefs.appPackage6)
+            else launchApp(prefs.appName6, prefs.appPackage6, prefs.appUser6)
 
             R.id.homeApp7 -> if (prefs.appPackage7.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName7, prefs.appPackage7)
+            else launchApp(prefs.appName7, prefs.appPackage7, prefs.appUser7)
 
             R.id.homeApp8 -> if (prefs.appPackage8.isEmpty()) onLongClick(view)
-            else launchApp(prefs.appName8, prefs.appPackage8)
+            else launchApp(prefs.appName8, prefs.appPackage8, prefs.appUser8)
 
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
@@ -265,11 +266,17 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun launchApp(appName: String, packageName: String) {
-        viewModel.selectedApp(
-            AppModel(appName, packageName),
-            Constants.FLAG_LAUNCH_APP
-        )
+    private fun launchApp(appName: String, packageName: String, userString: String) {
+        val userManager = requireContext().getSystemService(Context.USER_SERVICE) as UserManager
+        for (userHandle in userManager.userProfiles) {
+            if (userHandle.toString() == userString) {
+                viewModel.selectedApp(
+                    AppModel(appName, packageName, userHandle),
+                    Constants.FLAG_LAUNCH_APP
+                )
+            }
+        }
+
     }
 
     private fun showAppList(flag: Int) {
@@ -299,14 +306,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun openSwipeRightApp() {
         if (!prefs.swipeLeftRight) return
         if (prefs.appPackageSwipeRight.isNotEmpty())
-            launchApp(prefs.appNameSwipeRight, prefs.appPackageSwipeRight)
+            launchApp(prefs.appNameSwipeRight, prefs.appPackageSwipeRight, android.os.Process.myUserHandle().toString())
         else openDialerApp()
     }
 
     private fun openSwipeLeftApp() {
         if (!prefs.swipeLeftRight) return
         if (prefs.appPackageSwipeLeft.isNotEmpty())
-            launchApp(prefs.appNameSwipeLeft, prefs.appPackageSwipeLeft)
+            launchApp(prefs.appNameSwipeLeft, prefs.appPackageSwipeLeft, android.os.Process.myUserHandle().toString())
         else openCameraApp()
     }
 

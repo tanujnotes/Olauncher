@@ -124,8 +124,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun isOlauncherDefault() {
-        isOlauncherDefault.value =
-            app.olauncher.helper.isOlauncherDefault(appContext)
+        isOlauncherDefault.value = isOlauncherDefault(appContext)
     }
 
     fun resetDefaultLauncherApp(context: Context) {

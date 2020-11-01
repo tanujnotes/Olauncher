@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Olauncher</string>
     <string name="app">App</string>
+    <string name="superscript">ᵂ</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock screen</string>

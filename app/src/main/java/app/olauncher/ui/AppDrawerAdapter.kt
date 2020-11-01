@@ -89,7 +89,11 @@ class AppDrawerAdapter(
                 appHideLayout.visibility = View.GONE
                 appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
 
-                appTitle.text = appModel.appLabel
+                if (appModel.user == android.os.Process.myUserHandle())
+                    appTitle.text = appModel.appLabel
+                else
+                    appTitle.text = appModel.appLabel + "w"
+
                 appTitle.setOnClickListener { listener(appModel) }
                 appTitle.setOnLongClickListener {
                     appHideLayout.visibility = View.VISIBLE

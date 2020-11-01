@@ -143,8 +143,12 @@ class AppDrawerFragment : Fragment() {
             val prefs = Prefs(requireContext())
             val newSet = mutableSetOf<String>()
             newSet.addAll(prefs.hiddenApps)
-            if (flag == Constants.FLAG_HIDDEN_APPS) newSet.remove(appModel.appPackage)
-            else newSet.add(appModel.appPackage)
+
+            if (flag == Constants.FLAG_HIDDEN_APPS) {
+                newSet.remove(appModel.appPackage)
+                newSet.remove(appModel.appPackage + "|" + appModel.user)
+            } else newSet.add(appModel.appPackage + "|" + appModel.user)
+
             prefs.hiddenApps = newSet
 
             if (newSet.isEmpty()) findNavController().popBackStack()

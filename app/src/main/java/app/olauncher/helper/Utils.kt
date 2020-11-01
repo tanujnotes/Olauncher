@@ -4,15 +4,16 @@ import android.app.WallpaperManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.net.Uri
+import android.os.UserManager
 import android.provider.Settings
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
 import app.olauncher.BuildConfig
-import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
@@ -40,22 +41,23 @@ fun showToastShort(context: Context, message: String) {
 suspend fun getAppsList(context: Context): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
+
         try {
             val hiddenApps = Prefs(context).hiddenApps
-            val pm = context.packageManager
-            val intent = Intent(Intent.ACTION_MAIN, null)
-            intent.addCategory(Intent.CATEGORY_LAUNCHER)
 
-            val installedApps = pm.queryIntentActivities(intent, 0)
-            for (app in installedApps)
-                if (!hiddenApps.contains(app.activityInfo.packageName))
-                    appList.add(
-                        AppModel(app.loadLabel(pm).toString(), app.activityInfo.packageName)
+            val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+            val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+
+            for (profile in userManager.userProfiles) {
+                for (app in launcherApps.getActivityList(null, profile)) {
+                    if (!hiddenApps.contains(app.applicationInfo.packageName)
+                        and (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
                     )
+                        appList.add(AppModel(app.label.toString(), app.applicationInfo.packageName, profile))
+                }
+            }
             appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
-            appList.remove(
-                AppModel(context.getString(R.string.app_name), BuildConfig.APPLICATION_ID)
-            )
+
         } catch (e: java.lang.Exception) {
         }
         appList
@@ -69,10 +71,21 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
         val appList: MutableList<AppModel> = mutableListOf()
         if (hiddenAppsSet.isEmpty()) return@withContext appList
 
-        for (appPackage in hiddenAppsSet) {
+        val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+
+        for (hiddenPackage in hiddenAppsSet) {
+            if (!hiddenPackage.contains("|")) continue
+
+            val appPackage = hiddenPackage.split("|")[0]
+            val userString = hiddenPackage.split("|")[1]
+            var userHandle = android.os.Process.myUserHandle()
+            for (user in userManager.userProfiles) {
+                if (user.toString() == userString) userHandle = user
+            }
+
             val appInfo = pm.getApplicationInfo(appPackage, 0)
             val appName = pm.getApplicationLabel(appInfo).toString()
-            appList.add(AppModel(appName, appPackage))
+            appList.add(AppModel(appName, appPackage, userHandle))
         }
         appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
         appList

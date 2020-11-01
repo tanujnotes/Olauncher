@@ -37,6 +37,14 @@ class Prefs(context: Context) {
     private val APP_PACKAGE_6 = "APP_PACKAGE_6"
     private val APP_PACKAGE_7 = "APP_PACKAGE_7"
     private val APP_PACKAGE_8 = "APP_PACKAGE_8"
+    private val APP_USER_1 = "APP_USER_1"
+    private val APP_USER_2 = "APP_USER_2"
+    private val APP_USER_3 = "APP_USER_3"
+    private val APP_USER_4 = "APP_USER_4"
+    private val APP_USER_5 = "APP_USER_5"
+    private val APP_USER_6 = "APP_USER_6"
+    private val APP_USER_7 = "APP_USER_7"
+    private val APP_USER_8 = "APP_USER_8"
 
     private val APP_NAME_SWIPE_LEFT = "APP_NAME_SWIPE_LEFT"
     private val APP_NAME_SWIPE_RIGHT = "APP_NAME_SWIPE_RIGHT"
@@ -160,6 +168,38 @@ class Prefs(context: Context) {
     var appPackage8: String
         get() = prefs.getString(APP_PACKAGE_8, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_8, value).apply()
+
+    var appUser1: String
+        get() = prefs.getString(APP_USER_1, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_1, value).apply()
+
+    var appUser2: String
+        get() = prefs.getString(APP_USER_2, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_2, value).apply()
+
+    var appUser3: String
+        get() = prefs.getString(APP_USER_3, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_3, value).apply()
+
+    var appUser4: String
+        get() = prefs.getString(APP_USER_4, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_4, value).apply()
+
+    var appUser5: String
+        get() = prefs.getString(APP_USER_5, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_5, value).apply()
+
+    var appUser6: String
+        get() = prefs.getString(APP_USER_6, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_6, value).apply()
+
+    var appUser7: String
+        get() = prefs.getString(APP_USER_7, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_7, value).apply()
+
+    var appUser8: String
+        get() = prefs.getString(APP_USER_8, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_8, value).apply()
 
     var appNameSwipeLeft: String
         get() = prefs.getString(APP_NAME_SWIPE_LEFT, "CAMERA").toString()
