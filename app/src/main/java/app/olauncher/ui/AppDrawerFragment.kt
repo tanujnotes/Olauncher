@@ -146,8 +146,8 @@ class AppDrawerFragment : Fragment() {
 
             if (flag == Constants.FLAG_HIDDEN_APPS) {
                 newSet.remove(appModel.appPackage)
-                newSet.remove(appModel.appPackage + "|" + appModel.user)
-            } else newSet.add(appModel.appPackage + "|" + appModel.user)
+                newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
+            } else newSet.add(appModel.appPackage + "|" + appModel.user.toString())
 
             prefs.hiddenApps = newSet
 
