@@ -145,7 +145,7 @@ class AppDrawerFragment : Fragment() {
             newSet.addAll(prefs.hiddenApps)
 
             if (flag == Constants.FLAG_HIDDEN_APPS) {
-                newSet.remove(appModel.appPackage)
+                newSet.remove(appModel.appPackage) // for backward compatibility
                 newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
             } else newSet.add(appModel.appPackage + "|" + appModel.user.toString())
 
@@ -153,8 +153,9 @@ class AppDrawerFragment : Fragment() {
 
             if (newSet.isEmpty()) findNavController().popBackStack()
             if (prefs.firstHide) {
-                showToastLong(requireContext(), "Tap Olauncher in settings to see hidden apps")
                 prefs.firstHide = false
+                showToastLong(requireContext(), "Tap Olauncher on the top to see your hidden apps")
+                findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
             }
         }
 

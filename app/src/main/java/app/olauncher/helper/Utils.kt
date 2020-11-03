@@ -27,13 +27,13 @@ import java.util.*
 
 
 fun showToastLong(context: Context, message: String) {
-    val toast = Toast.makeText(context, message, Toast.LENGTH_LONG)
+    val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG)
     toast.setGravity(Gravity.CENTER, 0, 0)
     toast.show()
 }
 
 fun showToastShort(context: Context, message: String) {
-    val toast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+    val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_SHORT)
     toast.setGravity(Gravity.CENTER, 0, 0)
     toast.show()
 }
@@ -43,6 +43,7 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
         val appList: MutableList<AppModel> = mutableListOf()
 
         try {
+            if (!Prefs(context).hiddenAppsUpdated) upgradeHiddenApps(Prefs(context))
             val hiddenApps = Prefs(context).hiddenApps
 
             val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
@@ -50,7 +51,7 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
-                    if (!hiddenApps.contains(app.applicationInfo.packageName)
+                    if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
                         and (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
                     )
                         appList.add(AppModel(app.label.toString(), app.applicationInfo.packageName, profile))
@@ -67,15 +68,14 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
 suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val pm = context.packageManager
+        if (!Prefs(context).hiddenAppsUpdated) upgradeHiddenApps(Prefs(context))
+
         val hiddenAppsSet = Prefs(context).hiddenApps
         val appList: MutableList<AppModel> = mutableListOf()
         if (hiddenAppsSet.isEmpty()) return@withContext appList
 
         val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-
         for (hiddenPackage in hiddenAppsSet) {
-            if (!hiddenPackage.contains("|")) continue
-
             val appPackage = hiddenPackage.split("|")[0]
             val userString = hiddenPackage.split("|")[1]
             var userHandle = android.os.Process.myUserHandle()
@@ -90,6 +90,19 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
         appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
         appList
     }
+}
+
+// This is to ensure backward compatibility with older app versions
+// which did not support multiple user profiles
+private fun upgradeHiddenApps(prefs: Prefs) {
+    val hiddenAppsSet = prefs.hiddenApps
+    val newHiddenAppsSet = mutableSetOf<String>()
+    for (hiddenPackage in hiddenAppsSet) {
+        if (hiddenPackage.contains("|")) newHiddenAppsSet.add(hiddenPackage)
+        else newHiddenAppsSet.add(hiddenPackage + android.os.Process.myUserHandle().toString())
+    }
+    prefs.hiddenApps = newHiddenAppsSet
+    prefs.hiddenAppsUpdated = true
 }
 
 fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
