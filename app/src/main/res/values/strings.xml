@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Olauncher</string>
     <string name="app">App</string>
-    <string name="superscript">ᵂ</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock screen</string>
@@ -30,6 +29,7 @@
     <string name="home_layout_alignment">Home alignment</string>
     <string name="swipe_left_app">Swipe left app</string>
     <string name="swipe_right_app">Swipe right app</string>
+    <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -40,8 +40,6 @@
     <string name="_8">8</string>
     <string name="scroll_to_hide_keyboard">Scroll to hide keyboard</string>
     <string name="type_to_search">Type to search</string>
-    <string name="swipe_left_right_apps">Swipe left right apps</string>
-    <string name="_0">0</string>
     <string name="okay_got_it">Okay, got it</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
     <string name="triple_tap_lock_message">Due to updated Android security rules, apps cannot lock some phones normally.
@@ -50,7 +48,6 @@
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
     <string name="about_hint">Tip: About has all the latest info about Olauncher.</string>
-    <string name="rate_us_hint">Love using Olauncher? Please rate us. Thank you.</string>
     <string name="email_us_hint">Have feedback? Feel free to email us.</string>
-    <string name="donate_hint">Want to support? Buy us a coffee :)</string>
+    <string name="rate_us_hint">Loving Olauncher? Please rate us 7 stars. *giggles*</string>
 </resources>

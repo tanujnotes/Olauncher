@@ -315,22 +315,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateActionHints() {
-        when {
-            prefs.toShowHintCounter == Constants.HINT_ABOUT_US -> {
+        when (prefs.toShowHintCounter) {
+            Constants.HINT_ABOUT_US -> {
                 Toast.makeText(context, getString(R.string.about_hint), Toast.LENGTH_LONG).show()
                 about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
-            prefs.toShowHintCounter == Constants.HINT_EMAIL_US -> {
+            Constants.HINT_EMAIL_US -> {
                 Toast.makeText(context, getString(R.string.email_us_hint), Toast.LENGTH_LONG).show()
                 email.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
-            prefs.toShowHintCounter in Constants.HINT_RATE_US..Constants.HINT_RATE_US + 1 -> {
+            Constants.HINT_RATE_US -> {
                 Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_LONG).show()
                 rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-            }
-            prefs.toShowHintCounter % Constants.HINT_DONATE == 0 -> {
-                Toast.makeText(context, getString(R.string.donate_hint), Toast.LENGTH_LONG).show()
-                about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
         }
     }

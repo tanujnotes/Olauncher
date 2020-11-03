@@ -22,7 +22,6 @@ object Constants {
     const val HINT_ABOUT_US = 5
     const val HINT_EMAIL_US = 10
     const val HINT_RATE_US = 20
-    const val HINT_DONATE = 25
 
     const val TRIPLE_TAP_DELAY_MS = 400
     const val LONG_PRESS_DELAY_MS = 600
