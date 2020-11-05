@@ -81,6 +81,11 @@ class AppDrawerAdapter(
         notifyDataSetChanged()
     }
 
+    fun getTopApp(): AppModel? {
+        return if (appFilteredList.size > 0) appFilteredList[0]
+        else null
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val appHideButton: TextView = itemView.appHide
 

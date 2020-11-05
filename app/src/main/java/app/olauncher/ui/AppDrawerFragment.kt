@@ -56,7 +56,14 @@ class AppDrawerFragment : Fragment() {
 
         if (flag == Constants.FLAG_HIDDEN_APPS) search.queryHint = "Hidden apps"
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean = false
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val app = appAdapter.getTopApp()
+                if (app != null) {
+                    viewModel.selectedApp(app, Constants.FLAG_LAUNCH_APP)
+                    findNavController().popBackStack()
+                }
+                return true
+            }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 appAdapter.filter.filter(newText?.trim())
