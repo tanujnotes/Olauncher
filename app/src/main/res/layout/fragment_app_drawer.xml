@@ -10,7 +10,7 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="88dp"
         android:paddingHorizontal="8dp"
         android:paddingVertical="0dp"
         android:textCursorDrawable="@null"
@@ -23,12 +23,14 @@
 
     <TextView
         android:id="@+id/appDrawerTip"
-        style="@style/TextSmallLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="136dp"
-        android:text="@string/scroll_to_hide_keyboard"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/app_drawer_tips"
+        android:textColor="@color/colorPrimaryTrans90"
+        android:textSize="16sp"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

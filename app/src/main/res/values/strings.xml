@@ -38,8 +38,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="scroll_to_hide_keyboard">Scroll to hide keyboard</string>
-    <string name="type_to_search">Type to search</string>
+    <string name="app_drawer_tips">Tips: Scroll to hide keyboard. Swipe down to dismiss. Long press on apps for more.</string>
     <string name="okay_got_it">Okay, got it</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
     <string name="triple_tap_lock_message">Due to updated Android security rules, apps cannot lock some phones normally.
@@ -49,5 +48,5 @@
     <string name="hide">Hide</string>
     <string name="about_hint">Tip: About has all the latest info about Olauncher.</string>
     <string name="email_us_hint">Have feedback? Feel free to email us.</string>
-    <string name="rate_us_hint">Loving Olauncher? Please rate us 7 stars. *giggles*</string>
+    <string name="rate_us_hint">Loving Olauncher? Please rate us 10 stars. *giggles*</string>
 </resources>

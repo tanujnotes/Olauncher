@@ -86,10 +86,7 @@ class AppDrawerFragment : Fragment() {
         })
 
         viewModel.firstOpen.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                appDrawerTip.visibility = View.VISIBLE
-                search.queryHint = getString(R.string.type_to_search)
-            }
+            if (it) appDrawerTip.visibility = View.VISIBLE
         })
     }
 
