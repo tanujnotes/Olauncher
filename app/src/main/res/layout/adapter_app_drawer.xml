@@ -13,6 +13,16 @@
         android:paddingHorizontal="24dp"
         android:paddingVertical="12dp" />
 
+    <ImageView
+        android:id="@+id/otherProfileIndicator"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:src="@drawable/olauncher_logo_rounded" />
+
     <FrameLayout
         android:id="@+id/appHideLayout"
         android:layout_width="match_parent"
