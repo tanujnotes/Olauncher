@@ -67,7 +67,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         populateHomeApps(false)
         viewModel.isOlauncherDefault()
         showNavBarAndResetScreenTimeout()
-        refreshDateTimeLayout()
     }
 
     override fun onClick(view: View) {
@@ -173,6 +172,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun populateHomeApps(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
+        dateTimeLayout.visibility = View.VISIBLE
+
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
 
@@ -252,18 +253,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.visibility = View.GONE
         homeApp7.visibility = View.GONE
         homeApp8.visibility = View.GONE
-    }
 
-    private fun refreshDateTimeLayout() {
-        // To fix a bug that causes clock freeze in some devices
-        try {
-            dateTimeLayout.post {
-                dateTimeLayout.invalidate()
-                dateTimeLayout.requestLayout()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        // Added as a potential fix to clock freeze issue
+        dateTimeLayout.visibility = View.GONE
     }
 
     private fun launchApp(appName: String, packageName: String, userString: String) {
