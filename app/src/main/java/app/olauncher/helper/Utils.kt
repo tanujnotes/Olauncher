@@ -75,16 +75,20 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
 
         val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
         for (hiddenPackage in hiddenAppsSet) {
-            val appPackage = hiddenPackage.split("|")[0]
-            val userString = hiddenPackage.split("|")[1]
-            var userHandle = android.os.Process.myUserHandle()
-            for (user in userManager.userProfiles) {
-                if (user.toString() == userString) userHandle = user
-            }
+            try {
+                val appPackage = hiddenPackage.split("|")[0]
+                val userString = hiddenPackage.split("|")[1]
+                var userHandle = android.os.Process.myUserHandle()
+                for (user in userManager.userProfiles) {
+                    if (user.toString() == userString) userHandle = user
+                }
 
-            val appInfo = pm.getApplicationInfo(appPackage, 0)
-            val appName = pm.getApplicationLabel(appInfo).toString()
-            appList.add(AppModel(appName, appPackage, userHandle))
+                val appInfo = pm.getApplicationInfo(appPackage, 0)
+                val appName = pm.getApplicationLabel(appInfo).toString()
+                appList.add(AppModel(appName, appPackage, userHandle))
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
         appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
         appList
