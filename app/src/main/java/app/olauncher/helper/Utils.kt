@@ -7,9 +7,8 @@ import android.content.Intent
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.graphics.*
-import android.net.Uri
+import android.os.UserHandle
 import android.os.UserManager
-import android.provider.Settings
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
@@ -165,11 +164,14 @@ fun setBlackWallpaper(context: Context) {
     }
 }
 
-fun openAppInfo(context: Context, packageName: String) {
-    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-    intent.addCategory(Intent.CATEGORY_DEFAULT)
-    intent.data = Uri.parse("package:$packageName")
-    context.startActivity(intent)
+fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
+    val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+    val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
+    launcher.startAppDetailsActivity(intent?.component, userHandle, null, null)
+//    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+//    intent.addCategory(Intent.CATEGORY_DEFAULT)
+//    intent.data = Uri.parse("package:$packageName")
+//    context.startActivity(intent)
 }
 
 suspend fun getBitmapFromURL(src: String?): Bitmap? {

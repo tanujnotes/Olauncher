@@ -137,6 +137,7 @@ class AppDrawerFragment : Fragment() {
         { appModel ->
             openAppInfo(
                 requireContext(),
+                appModel.user,
                 appModel.appPackage
             )
             findNavController().popBackStack()

@@ -76,7 +76,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appsNumSelectLayout.visibility = View.GONE
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
-            R.id.appInfo -> openAppInfo(requireContext(), BuildConfig.APPLICATION_ID)
+            R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
