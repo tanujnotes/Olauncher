@@ -15,8 +15,8 @@ Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Sto
 ## What's next
 
 :heavy_check_mark: Hide apps  
-:heavy_check_mark: Work apps support
-- [ ] Rename apps on the home screen
+:heavy_check_mark: Work apps support  
+:white_check_mark: Rename apps on the home screen
 
 ## Contact
 Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
