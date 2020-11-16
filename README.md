@@ -14,8 +14,8 @@ Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Sto
 
 ## What's next
 
-- [x] Hide apps
-- [x] Work apps support
+:heavy_check_mark: Hide apps  
+:heavy_check_mark: Work apps support
 - [ ] Rename apps on the home screen
 
 ## Contact
