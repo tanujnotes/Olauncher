@@ -12,23 +12,11 @@ Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can a
 
 Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher). You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. Or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
-## What's new (v1.0+)
-
-Ability to hide apps. Long press on apps to see the hide option. Tap on Olauncher in settings to see your hidden apps.
-
-Biometric unlock getting disabled on double tap lock has been fixed, more or less. Max no. of home apps increased to 8. I hope that's enough for everyone. Wallpaper update frequency has been improved. You should see a new wallpaper every morning. No guarantees though. Improved text visibility. And a lot more.
-
 ## What's next
 
 - [x] Hide apps
+- [x] Work apps support
 - [ ] Rename apps on the home screen
-
-## Known issues
-
-* Android 10 gestures not supported
-* Work apps not showing in app list
-
-Your understanding and patience is appreciated.
 
 ## Contact
 Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
@@ -36,6 +24,7 @@ Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
 ## License
 [GNU GPLv3 ](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-In case you want to buy me a coffee - www.buymeacoff.ee/tanujnotes
+#
+In case you want to support the development - www.buymeacoff.ee/tanujnotes
 
 Thank you.
