@@ -16,7 +16,8 @@ class Prefs(context: Context) {
     private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
     private val WALLPAPER_UPDATED_DAY = "WALLPAPER_UPDATED_DAY"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
-    private val SWIPE_LEFT_RIGHT = "SWIPE_LEFT_RIGHT"
+    private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
+    private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
     private val SCREEN_TIMEOUT = "SCREEN_TIMEOUT"
     private val HIDDEN_APPS = "HIDDEN_APPS"
     private val HIDDEN_APPS_UPDATED = "HIDDEN_APPS_UPDATED"
@@ -92,9 +93,13 @@ class Prefs(context: Context) {
         get() = prefs.getInt(HOME_ALIGNMENT, Gravity.START)
         set(value) = prefs.edit().putInt(HOME_ALIGNMENT, value).apply()
 
-    var swipeLeftRight: Boolean
-        get() = prefs.getBoolean(SWIPE_LEFT_RIGHT, true)
-        set(value) = prefs.edit().putBoolean(SWIPE_LEFT_RIGHT, value).apply()
+    var swipeLeftEnabled: Boolean
+        get() = prefs.getBoolean(SWIPE_LEFT_ENABLED, true)
+        set(value) = prefs.edit().putBoolean(SWIPE_LEFT_ENABLED, value).apply()
+
+    var swipeRightEnabled: Boolean
+        get() = prefs.getBoolean(SWIPE_RIGHT_ENABLED, true)
+        set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
 
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds

@@ -97,8 +97,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.maxApps7 -> updateHomeAppsNum(7)
             R.id.maxApps8 -> updateHomeAppsNum(8)
 
-            R.id.swipeLeftApp -> showAppList(Constants.FLAG_SET_SWIPE_LEFT_APP)
-            R.id.swipeRightApp -> showAppList(Constants.FLAG_SET_SWIPE_RIGHT_APP)
+            R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
+            R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
 
             R.id.about -> openUrl(Constants.URL_ABOUT_OLAUNCHER)
             R.id.share -> shareApp()
@@ -110,10 +110,32 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
-            R.id.swipeLeftApp -> showAppList(Constants.FLAG_SET_SWIPE_LEFT_APP)
-            R.id.swipeRightApp -> showAppList(Constants.FLAG_SET_SWIPE_RIGHT_APP)
+            R.id.swipeLeftApp -> toggleSwipeLeft()
+            R.id.swipeRightApp -> toggleSwipeRight()
         }
         return true
+    }
+
+    private fun toggleSwipeLeft() {
+        prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
+        if (prefs.swipeLeftEnabled) {
+            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            showToastShort(requireContext(), "Swipe left app enabled")
+        } else {
+            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            showToastShort(requireContext(), "Swipe left app disabled")
+        }
+    }
+
+    private fun toggleSwipeRight() {
+        prefs.swipeRightEnabled = !prefs.swipeRightEnabled
+        if (prefs.swipeRightEnabled) {
+            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            showToastShort(requireContext(), "Swipe right app enabled")
+        } else {
+            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            showToastShort(requireContext(), "Swipe right app disabled")
+        }
     }
 
     private fun initClickListeners() {
@@ -304,9 +326,22 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateSwipeApps() {
         swipeLeftApp.text = prefs.appNameSwipeLeft
         swipeRightApp.text = prefs.appNameSwipeRight
+        if (!prefs.swipeLeftEnabled)
+            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+        if (!prefs.swipeRightEnabled)
+            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
     }
 
-    private fun showAppList(flag: Int) {
+    private fun showAppListIfEnabled(flag: Int) {
+        if ((flag == Constants.FLAG_SET_SWIPE_LEFT_APP) and !prefs.swipeLeftEnabled) {
+            showToastShort(requireContext(), "Long press to enable")
+            return
+        }
+        if ((flag == Constants.FLAG_SET_SWIPE_RIGHT_APP) and !prefs.swipeRightEnabled) {
+            showToastShort(requireContext(), "Long press to enable")
+            return
+        }
+
         viewModel.getAppList()
         findNavController().navigate(
             R.id.action_settingsFragment_to_appListFragment,
