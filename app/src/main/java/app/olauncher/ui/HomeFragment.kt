@@ -259,6 +259,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun launchApp(appName: String, packageName: String, userString: String) {
+        if (userString.isEmpty()) {
+            viewModel.selectedApp(
+                AppModel(appName, packageName, android.os.Process.myUserHandle()),
+                Constants.FLAG_LAUNCH_APP
+            )
+            return
+        }
         val userManager = requireContext().getSystemService(Context.USER_SERVICE) as UserManager
         for (userHandle in userManager.userProfiles) {
             if (userHandle.toString() == userString) {
