@@ -117,22 +117,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun launchApp(packageName: String, userHandle: UserHandle) {
         val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
         val intent: Intent? = appContext.packageManager.getLaunchIntentForPackage(packageName)
-        launcher.startMainActivity(intent?.component, userHandle, null, null)
-
-//        try {
-//            val intent: Intent? = appContext.packageManager.getLaunchIntentForPackage(packageName)
-//            intent?.addCategory(Intent.CATEGORY_LAUNCHER)
-//            appContext.startActivity(intent)
-//        } catch (e: Exception) {
-//            refreshHome(false)
-//        }
-    }
-
-    private fun getComponentName(launcher: LauncherApps, userHandle: UserHandle, packageName: String): ComponentName? {
-        val activityList = launcher.getActivityList(packageName, userHandle)
-        return if (activityList.size > 0)
-            ComponentName(packageName, activityList[0].applicationInfo.name)
-        else null
+        try {
+            launcher.startMainActivity(intent?.component, userHandle, null, null)
+        } catch (e: SecurityException) {
+            launcher.startMainActivity(intent?.component, android.os.Process.myUserHandle(), null, null)
+        } catch (e: Exception) {
+            showToastShort(appContext, "App not found")
+        }
     }
 
     fun getAppList() {
