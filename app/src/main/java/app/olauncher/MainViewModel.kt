@@ -3,7 +3,6 @@ package app.olauncher
 import android.app.Application
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.content.pm.LauncherApps
 import android.os.UserHandle
 import android.view.Gravity
@@ -116,11 +115,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun launchApp(packageName: String, userHandle: UserHandle) {
         val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-        val intent: Intent? = appContext.packageManager.getLaunchIntentForPackage(packageName)
+        val activityInfo = launcher.getActivityList(packageName, userHandle)
+        if (activityInfo.size != 1) {
+            showToastShort(appContext, "App not found")
+            return
+        }
+
+        val component = ComponentName(packageName, activityInfo[0].name)
+
         try {
-            launcher.startMainActivity(intent?.component, userHandle, null, null)
+            launcher.startMainActivity(component, userHandle, null, null)
         } catch (e: SecurityException) {
-            launcher.startMainActivity(intent?.component, android.os.Process.myUserHandle(), null, null)
+            launcher.startMainActivity(component, android.os.Process.myUserHandle(), null, null)
         } catch (e: Exception) {
             showToastShort(appContext, "App not found")
         }
