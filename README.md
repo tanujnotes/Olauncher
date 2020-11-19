@@ -5,6 +5,8 @@ Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can a
 
 ***NOTE:** If home apps are not opening after latest update, long press on them and select the app again from the app list. That'll fix it. Sorry for the inconvenience.*
 
+***NOTE 2.0:** If dual apps are not working, click on the primary app which will give option to launch both apps. This will be fixed in the next update. Sorry again. :|*
+
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
