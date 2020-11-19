@@ -3,9 +3,7 @@
 # Olauncher | Minimal AF
 Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can also update your wallpaper daily, if you want.
 
-***NOTE:** If home apps are not opening after latest update, long press on them and select the app again from the app list. That'll fix it. Sorry for the inconvenience.*
-
-***NOTE 2.0:** If dual apps are not working, click on the primary app which will give option to launch both apps. This will be fixed in the next update. Sorry again. :|*
+***NOTE:** If you're having any issue with home screen apps or dual/cloned apps, please update to the latest (v1.7) version. Thank you.*
 
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
