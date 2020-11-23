@@ -116,11 +116,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun launchApp(packageName: String, userHandle: UserHandle) {
         val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
         val activityInfo = launcher.getActivityList(packageName, userHandle)
-        if (activityInfo.size != 1) {
+        if (activityInfo.size == 0) {
             showToastShort(appContext, "App not found")
             return
         }
-
+        // TODO: Handle multiple launch activities in an app
         val component = ComponentName(packageName, activityInfo[0].name)
 
         try {
@@ -128,7 +128,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         } catch (e: SecurityException) {
             launcher.startMainActivity(component, android.os.Process.myUserHandle(), null, null)
         } catch (e: Exception) {
-            showToastShort(appContext, "App not found")
+            showToastShort(appContext, "Unable to launch app")
         }
     }
 
