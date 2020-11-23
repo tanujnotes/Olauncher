@@ -120,7 +120,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             showToastShort(appContext, "App not found")
             return
         }
-        // TODO: Handle multiple launch activities in an app
+        // TODO: Handle multiple launch activities in an app. This is NOT the way.
         val component = ComponentName(packageName, activityInfo[0].name)
 
         try {
