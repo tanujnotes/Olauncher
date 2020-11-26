@@ -24,11 +24,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:format12Hour="hh:mm"
-            android:textSize="42sp" />
+            android:textSize="40sp" />
 
         <TextClock
             android:id="@+id/date"
-            style="@style/TextMedium"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:format12Hour="EEE, dd MMM"
