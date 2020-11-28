@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:paddingHorizontal="24dp"
-        android:paddingVertical="12dp" />
+        android:paddingVertical="@dimen/app_padding_vertical" />
 
     <ImageView
         android:id="@+id/otherProfileIndicator"
@@ -31,7 +31,7 @@
         android:background="@color/colorPrimaryInverseTrans50"
         android:clickable="true"
         android:focusable="true"
-        android:paddingHorizontal="12dp"
+        android:paddingHorizontal="@dimen/app_padding_vertical"
         android:visibility="gone">
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="48dp"
-            android:padding="12dp"
+            android:padding="@dimen/app_padding_vertical"
             android:text="@string/hide"
             android:textAllCaps="true" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:contentDescription="@string/app"
-            android:padding="12dp"
+            android:padding="@dimen/app_padding_vertical"
             android:src="@drawable/ic_outline_info_24" />
 
     </FrameLayout>
