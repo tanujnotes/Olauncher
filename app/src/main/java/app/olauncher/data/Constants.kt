@@ -23,7 +23,7 @@ object Constants {
     const val HINT_EMAIL_US = 20
     const val HINT_RATE_US = 30
 
-    const val TRIPLE_TAP_DELAY_MS = 400
+    const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 600
 
     const val URL_ABOUT_OLAUNCHER = "https://www.notion.so/About-Olauncher-4843e398b05a455bb521b0665b26fbcd"

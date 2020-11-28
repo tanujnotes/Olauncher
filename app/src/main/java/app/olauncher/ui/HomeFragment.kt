@@ -172,7 +172,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun populateHomeApps(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
-        dateTimeLayout.visibility = View.VISIBLE
+//        dateTimeLayout.visibility = View.VISIBLE
 
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
@@ -370,14 +370,38 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun showNavBarAndResetScreenTimeout() {
         if (Settings.System.canWrite(requireContext()))
             Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
             requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
-        else
+        } else
             requireActivity().window.decorView.apply {
                 systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
             }
+    }
+
+    private fun hideNavBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+            requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
+        } else {
+            @Suppress("DEPRECATION")
+            requireActivity().window.decorView.apply {
+                systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            }
+        }
+    }
+
+    private fun setScreenTimeout() {
+        // Save the existing screen off timeout
+        val screenTimeoutInSettings =
+            Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
+        if (screenTimeoutInSettings >= 5000) prefs.screenTimeout = screenTimeoutInSettings
+
+        // Set timeout to 5 seconds
+        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000)
     }
 
     private fun textOnClick(view: View) = onClick(view)
@@ -420,24 +444,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     if (Settings.System.canWrite(requireContext())) {
                         requireActivity().runOnUiThread {
                             blackOverlay.visibility = View.VISIBLE
-
-                            // Save the existing screen off timeout
-                            val screenTimeoutInSettings =
-                                Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-                            if (screenTimeoutInSettings >= 5000) prefs.screenTimeout = screenTimeoutInSettings
-
-                            // Set timeout to 5 seconds
-                            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000)
-
-                            // Hide the navigation bar
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                                requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
-                            } else {
-                                @Suppress("DEPRECATION")
-                                requireActivity().window.decorView.apply {
-                                    systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                                }
-                            }
+                            setScreenTimeout()
+                            hideNavBar()
                         }
                     } else {
                         lockPhone()
