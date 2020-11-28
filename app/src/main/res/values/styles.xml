@@ -24,7 +24,7 @@
 
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
         <item name="android:maxLength">20</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:editTextColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
