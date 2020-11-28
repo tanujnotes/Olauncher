@@ -51,9 +51,9 @@
             style="@style/TextLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Digital Wellbeing"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:hint="@string/app"
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/homeApp2"
@@ -61,8 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/homeApp3"
@@ -70,8 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/homeApp4"
@@ -79,8 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/homeApp5"
@@ -88,8 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/homeApp6"
@@ -97,8 +97,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/homeApp7"
@@ -106,8 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/homeApp8"
@@ -115,8 +115,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/app"
-            android:paddingVertical="10dp"
-            android:visibility="visible" />
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -131,7 +131,7 @@
         android:layout_marginBottom="56dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             style="@style/TextSmall"
