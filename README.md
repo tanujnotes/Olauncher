@@ -3,7 +3,7 @@
 # Olauncher | Minimal AF
 Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can also update your wallpaper daily, if you want.
 
-***NOTE:** If you're having any issue with Contacts app, home screen apps or dual/cloned apps, please update to the latest (v1.9) version. Thank you.*
+***NOTE:** If you're having any issue with Contacts app, home screen apps or dual/cloned apps, please update to the latest (v2.0) version. Thank you.*
 
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
