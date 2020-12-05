@@ -21,6 +21,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.showToastLong
+import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 
@@ -159,7 +160,9 @@ class AppDrawerFragment : Fragment() {
             if (newSet.isEmpty()) findNavController().popBackStack()
             if (prefs.firstHide) {
                 prefs.firstHide = false
-                showToastLong(requireContext(), "Tap Olauncher on the top to see your hidden apps")
+                // Deploying a weird strategy to make sure that people read this message
+                showToastShort(requireContext(), "To see hidden apps, tap Olauncher text on the top.")
+                showToastLong(requireContext(), "To see hidden apps, tap Olauncher text on the top.")
                 findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
             }
         }

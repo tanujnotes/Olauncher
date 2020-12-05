@@ -20,7 +20,6 @@ object Constants {
     const val REQUEST_CODE_EDIT_SETTINGS = 777
 
     const val HINT_ABOUT_US = 10
-    const val HINT_EMAIL_US = 20
     const val HINT_RATE_US = 30
 
     const val TRIPLE_TAP_DELAY_MS = 300
