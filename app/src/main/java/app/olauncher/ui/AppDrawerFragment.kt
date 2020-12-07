@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -44,10 +45,14 @@ class AppDrawerFragment : Fragment() {
 
         val appAdapter = AppDrawerAdapter(
             flag,
+            Prefs(requireContext()).appLabelAlignment,
             appClickListener(viewModel, flag),
             appInfoListener(),
             appShowHideListener()
         )
+
+        val searchTextView = search.findViewById<TextView>(R.id.search_src_text)
+        if (searchTextView != null) searchTextView.gravity = Prefs(requireContext()).appLabelAlignment
 
         initViewModel(flag, viewModel, appAdapter)
 

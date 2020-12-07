@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.adapter_app_drawer.view.*
 
 class AppDrawerAdapter(
     private var flag: Int,
+    private val appLabelGravity: Int,
     private val clickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
     private val appHideListener: (Int, AppModel) -> Unit
@@ -30,7 +31,7 @@ class AppDrawerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val appModel = appFilteredList[holder.adapterPosition]
-        holder.bind(flag, appModel, clickListener, appInfoListener)
+        holder.bind(flag, appLabelGravity, appModel, clickListener, appInfoListener)
 
         holder.appHideButton.setOnClickListener {
             appFilteredList.removeAt(holder.adapterPosition)
@@ -89,11 +90,12 @@ class AppDrawerAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val appHideButton: TextView = itemView.appHide
 
-        fun bind(flag: Int, appModel: AppModel, listener: (AppModel) -> Unit, appInfoListener: (AppModel) -> Unit) =
+        fun bind(flag: Int, appLabelGravity: Int, appModel: AppModel, listener: (AppModel) -> Unit, appInfoListener: (AppModel) -> Unit) =
             with(itemView) {
                 appHideLayout.visibility = View.GONE
                 appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
                 appTitle.text = appModel.appLabel
+                appTitle.gravity = appLabelGravity
 
                 if (appModel.user == android.os.Process.myUserHandle())
                     otherProfileIndicator.visibility = View.GONE

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
+        android:gravity="end"
         android:imeOptions="actionNone"
         android:paddingHorizontal="8dp"
         android:paddingVertical="0dp"

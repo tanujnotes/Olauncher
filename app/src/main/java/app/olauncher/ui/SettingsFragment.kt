@@ -110,6 +110,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
+            R.id.alignment -> {
+                prefs.appLabelAlignment = prefs.homeAlignment
+                findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
+            }
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
         }
@@ -170,6 +174,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         maxApps7.setOnClickListener(this)
         maxApps8.setOnClickListener(this)
 
+        alignment.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
         swipeRightApp.setOnLongClickListener(this)
     }
