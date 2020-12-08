@@ -172,7 +172,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun populateHomeApps(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
-//        dateTimeLayout.visibility = View.VISIBLE
+        dateTimeLayout.visibility = View.VISIBLE
 
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
