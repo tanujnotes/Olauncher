@@ -20,10 +20,7 @@ import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.isOlauncherDefault
-import app.olauncher.helper.openAppInfo
-import app.olauncher.helper.showToastLong
-import app.olauncher.helper.showToastShort
+import app.olauncher.helper.*
 import app.olauncher.listener.DeviceAdmin
 import kotlinx.android.synthetic.main.fragment_settings.*
 
@@ -113,32 +110,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 prefs.appLabelAlignment = prefs.homeAlignment
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
             }
+            R.id.dailyWallpaper -> removeWallpaper()
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
         }
         return true
-    }
-
-    private fun toggleSwipeLeft() {
-        prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
-        if (prefs.swipeLeftEnabled) {
-            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
-            showToastShort(requireContext(), "Swipe left app enabled")
-        } else {
-            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
-            showToastShort(requireContext(), "Swipe left app disabled")
-        }
-    }
-
-    private fun toggleSwipeRight() {
-        prefs.swipeRightEnabled = !prefs.swipeRightEnabled
-        if (prefs.swipeRightEnabled) {
-            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
-            showToastShort(requireContext(), "Swipe right app enabled")
-        } else {
-            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
-            showToastShort(requireContext(), "Swipe right app disabled")
-        }
     }
 
     private fun initClickListeners() {
@@ -174,6 +150,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         maxApps7.setOnClickListener(this)
         maxApps8.setOnClickListener(this)
 
+        // Long click listeners
+        dailyWallpaper.setOnLongClickListener(this)
         alignment.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
         swipeRightApp.setOnLongClickListener(this)
@@ -192,6 +170,28 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.updateSwipeApps.observe(viewLifecycleOwner, Observer<Any> {
             populateSwipeApps()
         })
+    }
+
+    private fun toggleSwipeLeft() {
+        prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
+        if (prefs.swipeLeftEnabled) {
+            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            showToastShort(requireContext(), "Swipe left app enabled")
+        } else {
+            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            showToastShort(requireContext(), "Swipe left app disabled")
+        }
+    }
+
+    private fun toggleSwipeRight() {
+        prefs.swipeRightEnabled = !prefs.swipeRightEnabled
+        if (prefs.swipeRightEnabled) {
+            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            showToastShort(requireContext(), "Swipe right app enabled")
+        } else {
+            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            showToastShort(requireContext(), "Swipe right app disabled")
+        }
     }
 
     private fun toggleStatusBar() {
@@ -267,6 +267,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             )
             activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
         }
+    }
+
+    private fun removeWallpaper() {
+        prefs.dailyWallpaper = false
+        populateWallpaperText()
+        setBlackWallpaper(requireContext())
     }
 
     private fun toggleDailyWallpaperUpdate() {
