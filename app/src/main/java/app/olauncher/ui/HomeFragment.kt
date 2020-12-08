@@ -371,14 +371,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (Settings.System.canWrite(requireContext()))
             Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
             requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
         } else
             requireActivity().window.decorView.apply {
-                systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             }
+        // populate status bar
+        if (prefs.showStatusBar) showStatusBar()
+        else hideStatusBar()
     }
 
     private fun hideNavBar() {
@@ -390,6 +390,27 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             requireActivity().window.decorView.apply {
                 systemUiVisibility =
                     View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            }
+        }
+    }
+
+    private fun showStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
+        else
+            @Suppress("DEPRECATION")
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            }
+    }
+
+    private fun hideStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+        else {
+            @Suppress("DEPRECATION")
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN
             }
         }
     }

@@ -17,6 +17,7 @@ class Prefs(context: Context) {
     private val WALLPAPER_UPDATED_DAY = "WALLPAPER_UPDATED_DAY"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
     private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
+    private val STATUS_BAR = "STATUS_BAR"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
     private val SCREEN_TIMEOUT = "SCREEN_TIMEOUT"
@@ -97,6 +98,10 @@ class Prefs(context: Context) {
     var appLabelAlignment: Int
         get() = prefs.getInt(APP_LABEL_ALIGNMENT, Gravity.START)
         set(value) = prefs.edit().putInt(APP_LABEL_ALIGNMENT, value).apply()
+
+    var showStatusBar: Boolean
+        get() = prefs.getBoolean(STATUS_BAR, false)
+        set(value) = prefs.edit().putBoolean(STATUS_BAR, value).apply()
 
     var swipeLeftEnabled: Boolean
         get() = prefs.getBoolean(SWIPE_LEFT_ENABLED, true)

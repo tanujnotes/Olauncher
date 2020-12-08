@@ -26,7 +26,7 @@
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="center">Center</string>
-    <string name="home_layout_alignment">Home alignment</string>
+    <string name="home_layout_alignment">App alignment</string>
     <string name="swipe_left_app">Swipe left app</string>
     <string name="swipe_right_app">Swipe right app</string>
     <string name="_0">0</string>
@@ -48,4 +48,6 @@
     <string name="hide">Hide</string>
     <string name="about_hint">Tip: About has answers to your questions.</string>
     <string name="rate_us_hint">Loving Olauncher? Please rate us 10 stars. *giggles*</string>
+    <string name="show">Show</string>
+    <string name="status_bar">Show status bar</string>
 </resources>

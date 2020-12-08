@@ -8,10 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -66,6 +63,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateLockSettings()
         populateWallpaperText()
         populateAlignment()
+        populateStatusBar()
         populateSwipeApps()
         populateActionHints()
         initClickListeners()
@@ -86,6 +84,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
+            R.id.statusBar -> toggleStatusBar()
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -155,6 +154,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
+        statusBar.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
 
@@ -192,6 +192,42 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.updateSwipeApps.observe(viewLifecycleOwner, Observer<Any> {
             populateSwipeApps()
         })
+    }
+
+    private fun toggleStatusBar() {
+        prefs.showStatusBar = !prefs.showStatusBar
+        populateStatusBar()
+    }
+
+    private fun populateStatusBar() {
+        if (prefs.showStatusBar) {
+            showStatusBar()
+            statusBar.text = getString(R.string.hide)
+        } else {
+            hideStatusBar()
+            statusBar.text = getString(R.string.show)
+        }
+    }
+
+    private fun showStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
+        else
+            @Suppress("DEPRECATION")
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            }
+    }
+
+    private fun hideStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+        else {
+            @Suppress("DEPRECATION")
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN
+            }
+        }
     }
 
     private fun showHiddenApps() {
