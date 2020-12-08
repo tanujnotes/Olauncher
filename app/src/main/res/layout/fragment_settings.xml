@@ -318,7 +318,7 @@
             android:layout_gravity="end|bottom"
             android:layout_marginEnd="16dp"
             android:padding="8dp"
-            android:text="@string/show"
+            android:text="@string/off"
             android:textAllCaps="true" />
     </FrameLayout>
 

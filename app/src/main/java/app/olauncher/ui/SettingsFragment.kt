@@ -202,10 +202,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateStatusBar() {
         if (prefs.showStatusBar) {
             showStatusBar()
-            statusBar.text = getString(R.string.hide)
+            statusBar.text = getString(R.string.on)
         } else {
             hideStatusBar()
-            statusBar.text = getString(R.string.show)
+            statusBar.text = getString(R.string.off)
         }
     }
 

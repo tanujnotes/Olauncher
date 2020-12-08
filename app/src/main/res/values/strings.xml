@@ -48,6 +48,5 @@
     <string name="hide">Hide</string>
     <string name="about_hint">Tip: About has answers to your questions.</string>
     <string name="rate_us_hint">Loving Olauncher? Please rate us 10 stars. *giggles*</string>
-    <string name="show">Show</string>
     <string name="status_bar">Show status bar</string>
 </resources>
