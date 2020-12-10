@@ -8,11 +8,11 @@
         android:id="@+id/appTitle"
         style="@style/TextLarge"
         android:layout_width="match_parent"
-        android:text="App label"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:paddingHorizontal="24dp"
-        android:paddingVertical="@dimen/app_padding_vertical" />
+        android:paddingVertical="@dimen/app_padding_vertical"
+        android:text="@string/app" />
 
     <ImageView
         android:id="@+id/otherProfileIndicator"
