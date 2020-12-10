@@ -29,6 +29,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.showToastLong
+import app.olauncher.helper.showToastShort
 import app.olauncher.listener.LockTouchListener
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
@@ -72,28 +73,28 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     override fun onClick(view: View) {
         when (view.id) {
 
-            R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) onLongClick(view)
+            R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName1, prefs.appPackage1, prefs.appUser1)
 
-            R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) onLongClick(view)
+            R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName2, prefs.appPackage2, prefs.appUser2)
 
-            R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) onLongClick(view)
+            R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName3, prefs.appPackage3, prefs.appUser3)
 
-            R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) onLongClick(view)
+            R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName4, prefs.appPackage4, prefs.appUser4)
 
-            R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) onLongClick(view)
+            R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName5, prefs.appPackage5, prefs.appUser5)
 
-            R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) onLongClick(view)
+            R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName6, prefs.appPackage6, prefs.appUser6)
 
-            R.id.homeApp7 -> if (prefs.appPackage7.isEmpty()) onLongClick(view)
+            R.id.homeApp7 -> if (prefs.appPackage7.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName7, prefs.appPackage7, prefs.appUser7)
 
-            R.id.homeApp8 -> if (prefs.appPackage8.isEmpty()) onLongClick(view)
+            R.id.homeApp8 -> if (prefs.appPackage8.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName8, prefs.appPackage8, prefs.appUser8)
 
             R.id.clock -> openAlarmApp()
@@ -275,7 +276,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 )
             }
         }
-
     }
 
     private fun showAppList(flag: Int) {
@@ -424,6 +424,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         // Set timeout to 5 seconds
         Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000)
     }
+
+    private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")
 
     private fun textOnClick(view: View) = onClick(view)
 
