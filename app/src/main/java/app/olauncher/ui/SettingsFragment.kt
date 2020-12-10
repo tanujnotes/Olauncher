@@ -270,9 +270,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun removeWallpaper() {
+        setBlackWallpaper(requireContext())
+        if (!prefs.dailyWallpaper) return
         prefs.dailyWallpaper = false
         populateWallpaperText()
-        setBlackWallpaper(requireContext())
+        viewModel.cancelWallpaperWorker()
     }
 
     private fun toggleDailyWallpaperUpdate() {
