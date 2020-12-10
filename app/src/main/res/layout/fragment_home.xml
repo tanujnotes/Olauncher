@@ -21,19 +21,21 @@
 
         <TextClock
             android:id="@+id/clock"
-            style="@style/TextLarge"
+            style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
             android:format12Hour="hh:mm"
-            android:textSize="40sp" />
+            android:textSize="@dimen/time_size" />
 
         <TextClock
             android:id="@+id/date"
-            style="@style/TextSmall"
+            style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:format12Hour="EEE, dd MMM"
-            android:format24Hour="EEE, dd MMM" />
+            android:format24Hour="EEE, dd MMM"
+            android:textSize="@dimen/date_size" />
     </LinearLayout>
 
     <!-- Home apps-->
@@ -43,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:orientation="vertical">
 

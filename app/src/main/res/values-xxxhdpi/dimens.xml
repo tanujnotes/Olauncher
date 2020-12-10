@@ -3,4 +3,7 @@
     <dimen name="text_large">30sp</dimen>
     <dimen name="app_padding_vertical">14dp</dimen>
     <dimen name="home_app_padding_vertical">12dp</dimen>
+
+    <dimen name="time_size">40sp</dimen>
+    <dimen name="date_size">18sp</dimen>
 </resources>
