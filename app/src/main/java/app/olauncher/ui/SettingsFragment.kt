@@ -99,7 +99,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.about -> openUrl(Constants.URL_ABOUT_OLAUNCHER)
             R.id.share -> shareApp()
             R.id.rate -> rateApp()
-            R.id.email -> sendEmailIntent()
+            R.id.tweet -> openUrl(Constants.URL_TWITTER_TANUJ)
             R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
         }
     }
@@ -137,7 +137,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         about.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
-        email.setOnClickListener(this)
+        tweet.setOnClickListener(this)
         privacy.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)

@@ -472,12 +472,12 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/tweet"
             style="@style/TextSmallLight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="@string/email" />
+            android:text="@string/tweet" />
 
         <Space
             android:layout_width="0dp"
