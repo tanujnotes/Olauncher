@@ -30,6 +30,7 @@ class AppDrawerAdapter(
         )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (appFilteredList.size == 0) return
         val appModel = appFilteredList[holder.adapterPosition]
         holder.bind(flag, appLabelGravity, appModel, clickListener, appInfoListener)
 

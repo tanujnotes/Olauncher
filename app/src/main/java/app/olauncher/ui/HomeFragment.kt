@@ -105,14 +105,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
-            R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1)
-            R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2)
-            R.id.homeApp3 -> showAppList(Constants.FLAG_SET_HOME_APP_3)
-            R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4)
-            R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5)
-            R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6)
-            R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7)
-            R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8)
+            R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1, prefs.appName1.isNotEmpty())
+            R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2, prefs.appName2.isNotEmpty())
+            R.id.homeApp3 -> showAppList(Constants.FLAG_SET_HOME_APP_3, prefs.appName3.isNotEmpty())
+            R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4, prefs.appName4.isNotEmpty())
+            R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5, prefs.appName5.isNotEmpty())
+            R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6, prefs.appName6.isNotEmpty())
+            R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7, prefs.appName7.isNotEmpty())
+            R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8, prefs.appName8.isNotEmpty())
         }
         return true
     }
@@ -278,12 +278,12 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun showAppList(flag: Int) {
+    private fun showAppList(flag: Int, rename: Boolean = false) {
         viewModel.getAppList()
         try {
             findNavController().navigate(
                 R.id.action_mainFragment_to_appListFragment,
-                bundleOf("flag" to flag)
+                bundleOf("flag" to flag, "rename" to rename)
             )
         } catch (e: Exception) {
         }

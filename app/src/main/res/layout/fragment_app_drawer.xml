@@ -6,22 +6,42 @@
     android:animateLayoutChanges="true"
     android:background="@color/colorPrimaryInverseTrans10">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
-        android:gravity="end"
-        android:imeOptions="actionNone"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="0dp"
-        android:textCursorDrawable="@null"
-        app:closeIcon="@null"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@null"
-        app:queryHint="__"
-        app:searchIcon="@null"
-        app:theme="@style/AppSearchText" />
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:imeOptions="actionNone"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="0dp"
+            android:textCursorDrawable="@null"
+            app:closeIcon="@null"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="__"
+            app:searchIcon="@null"
+            app:theme="@style/AppSearchText" />
+
+        <TextView
+            android:id="@+id/appRename"
+            style="@style/TextSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="24dp"
+            android:paddingVertical="@dimen/app_padding_vertical"
+            android:text="@string/rename"
+            android:textAllCaps="true"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/appDrawerTip"

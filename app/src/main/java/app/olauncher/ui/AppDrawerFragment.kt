@@ -38,7 +38,11 @@ class AppDrawerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val flag = arguments?.getInt("flag") ?: 0
+
+        val flag = arguments?.getInt("flag", 0) ?: 0
+        val rename = arguments?.getBoolean("rename", false) ?: false
+        if (rename) appRename.setOnClickListener { renameListener(flag) }
+
         val viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
@@ -73,6 +77,8 @@ class AppDrawerFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 appAdapter.filter.filter(newText?.trim())
+                if (rename && newText?.trim()?.isNotEmpty()!!) appRename.visibility = View.VISIBLE
+                else appRename.visibility = View.GONE
                 return false
             }
         })
@@ -171,6 +177,23 @@ class AppDrawerFragment : Fragment() {
                 findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
             }
         }
+
+    private fun renameListener(flag: Int) {
+        val name = search.query.toString().trim()
+        if (name.isEmpty()) return
+
+        when (flag) {
+            Constants.FLAG_SET_HOME_APP_1 -> Prefs(requireContext()).appName1 = name
+            Constants.FLAG_SET_HOME_APP_2 -> Prefs(requireContext()).appName2 = name
+            Constants.FLAG_SET_HOME_APP_3 -> Prefs(requireContext()).appName3 = name
+            Constants.FLAG_SET_HOME_APP_4 -> Prefs(requireContext()).appName4 = name
+            Constants.FLAG_SET_HOME_APP_5 -> Prefs(requireContext()).appName5 = name
+            Constants.FLAG_SET_HOME_APP_6 -> Prefs(requireContext()).appName6 = name
+            Constants.FLAG_SET_HOME_APP_7 -> Prefs(requireContext()).appName7 = name
+            Constants.FLAG_SET_HOME_APP_8 -> Prefs(requireContext()).appName8 = name
+        }
+        findNavController().popBackStack()
+    }
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
         return object : RecyclerView.OnScrollListener() {
