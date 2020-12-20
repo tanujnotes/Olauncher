@@ -27,7 +27,5 @@ Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
 ## License
 [GNU GPLv3 ](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-#
-In case you want to buy me a coffee - www.buymeacoff.ee/tanujnotes
 
 Thank you.
