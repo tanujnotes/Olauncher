@@ -108,13 +108,21 @@ private fun upgradeHiddenApps(prefs: Prefs) {
     prefs.hiddenAppsUpdated = true
 }
 
-fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
-    return try {
-        packageManager.getPackageInfo(packageName, 0)
-        true
-    } catch (e: PackageManager.NameNotFoundException) {
-        false
+fun isPackageInstalled(context: Context, packageName: String, userString: String): Boolean {
+    val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+    val activityInfo = launcher.getActivityList(packageName, getUserHandleFromString(context, userString))
+    if (activityInfo.size > 0) return true
+    return false
+}
+
+fun getUserHandleFromString(context: Context, userHandleString: String): UserHandle {
+    val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+    for (userHandle in userManager.userProfiles) {
+        if (userHandle.toString() == userHandleString) {
+            return userHandle
+        }
     }
+    return android.os.Process.myUserHandle()
 }
 
 fun isOlauncherDefault(context: Context?): Boolean {

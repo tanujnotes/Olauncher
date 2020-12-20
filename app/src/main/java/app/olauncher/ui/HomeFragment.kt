@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.os.UserManager
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
@@ -27,6 +25,7 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.helper.getUserHandleFromString
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.showToastLong
 import app.olauncher.helper.showToastShort
@@ -181,63 +180,63 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         val pm = requireContext().packageManager
 
         homeApp1.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp1, prefs.appName1, prefs.appPackage1, pm)) {
+        if (!setHomeAppText(homeApp1, prefs.appName1, prefs.appPackage1, prefs.appUser1)) {
             prefs.appName1 = ""
             prefs.appPackage1 = ""
         }
         if (homeAppsNum == 1) return
 
         homeApp2.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp2, prefs.appName2, prefs.appPackage2, pm)) {
+        if (!setHomeAppText(homeApp2, prefs.appName2, prefs.appPackage2, prefs.appUser2)) {
             prefs.appName2 = ""
             prefs.appPackage2 = ""
         }
         if (homeAppsNum == 2) return
 
         homeApp3.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp3, prefs.appName3, prefs.appPackage3, pm)) {
+        if (!setHomeAppText(homeApp3, prefs.appName3, prefs.appPackage3, prefs.appUser3)) {
             prefs.appName3 = ""
             prefs.appPackage3 = ""
         }
         if (homeAppsNum == 3) return
 
         homeApp4.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp4, prefs.appName4, prefs.appPackage4, pm)) {
+        if (!setHomeAppText(homeApp4, prefs.appName4, prefs.appPackage4, prefs.appUser4)) {
             prefs.appName4 = ""
             prefs.appPackage4 = ""
         }
         if (homeAppsNum == 4) return
 
         homeApp5.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp5, prefs.appName5, prefs.appPackage5, pm)) {
+        if (!setHomeAppText(homeApp5, prefs.appName5, prefs.appPackage5, prefs.appUser5)) {
             prefs.appName5 = ""
             prefs.appPackage5 = ""
         }
         if (homeAppsNum == 5) return
 
         homeApp6.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp6, prefs.appName6, prefs.appPackage6, pm)) {
+        if (!setHomeAppText(homeApp6, prefs.appName6, prefs.appPackage6, prefs.appUser6)) {
             prefs.appName6 = ""
             prefs.appPackage6 = ""
         }
         if (homeAppsNum == 6) return
 
         homeApp7.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp7, prefs.appName7, prefs.appPackage7, pm)) {
+        if (!setHomeAppText(homeApp7, prefs.appName7, prefs.appPackage7, prefs.appUser7)) {
             prefs.appName7 = ""
             prefs.appPackage7 = ""
         }
         if (homeAppsNum == 7) return
 
         homeApp8.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp8, prefs.appName8, prefs.appPackage8, pm)) {
+        if (!setHomeAppText(homeApp8, prefs.appName8, prefs.appPackage8, prefs.appUser8)) {
             prefs.appName8 = ""
             prefs.appPackage8 = ""
         }
     }
 
-    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, pm: PackageManager): Boolean {
-        if (isPackageInstalled(packageName, pm)) {
+    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String): Boolean {
+        if (isPackageInstalled(requireContext(), packageName, userString)) {
             textView.text = appName
             return true
         }
@@ -260,22 +259,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun launchApp(appName: String, packageName: String, userString: String) {
-        if (userString.isEmpty()) {
-            viewModel.selectedApp(
-                AppModel(appName, packageName, android.os.Process.myUserHandle()),
-                Constants.FLAG_LAUNCH_APP
-            )
-            return
-        }
-        val userManager = requireContext().getSystemService(Context.USER_SERVICE) as UserManager
-        for (userHandle in userManager.userProfiles) {
-            if (userHandle.toString() == userString) {
-                viewModel.selectedApp(
-                    AppModel(appName, packageName, userHandle),
-                    Constants.FLAG_LAUNCH_APP
-                )
-            }
-        }
+        viewModel.selectedApp(
+            AppModel(appName, packageName, getUserHandleFromString(requireContext(), userString)),
+            Constants.FLAG_LAUNCH_APP
+        )
     }
 
     private fun showAppList(flag: Int, rename: Boolean = false) {
