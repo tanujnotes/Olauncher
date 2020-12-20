@@ -12,6 +12,9 @@ object Constants {
     const val FLAG_SET_HOME_APP_6 = 6
     const val FLAG_SET_HOME_APP_7 = 7
     const val FLAG_SET_HOME_APP_8 = 8
+    const val FLAG_SET_HOME_APP_9 = 9
+    const val FLAG_SET_HOME_APP_10 = 10
+
 
     const val FLAG_SET_SWIPE_LEFT_APP = 11
     const val FLAG_SET_SWIPE_RIGHT_APP = 12
@@ -19,7 +22,7 @@ object Constants {
     const val REQUEST_CODE_ENABLE_ADMIN = 666
     const val REQUEST_CODE_EDIT_SETTINGS = 777
 
-    const val HINT_ABOUT_US = 10
+    const val HINT_ABOUT_US = 1000
     const val HINT_RATE_US = 30
 
     const val TRIPLE_TAP_DELAY_MS = 300

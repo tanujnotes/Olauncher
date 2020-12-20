@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.UserManager
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.provider.Settings
@@ -25,7 +27,6 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.getUserHandleFromString
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.showToastLong
 import app.olauncher.helper.showToastShort
@@ -96,6 +97,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp8 -> if (prefs.appPackage8.isEmpty()) showLongPressToast()
             else launchApp(prefs.appName8, prefs.appPackage8, prefs.appUser8)
 
+            R.id.homeApp9 -> if (prefs.appPackage9.isEmpty()) showLongPressToast()
+            else launchApp(prefs.appName9, prefs.appPackage9, prefs.appUser9)
+
+            R.id.homeApp10 -> if (prefs.appPackage10.isEmpty()) showLongPressToast()
+            else launchApp(prefs.appName10, prefs.appPackage10, prefs.appUser10)
+
+
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
@@ -112,6 +120,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6, prefs.appName6.isNotEmpty())
             R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7, prefs.appName7.isNotEmpty())
             R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8, prefs.appName8.isNotEmpty())
+            R.id.homeApp9 -> showAppList(Constants.FLAG_SET_HOME_APP_9, prefs.appName9.isNotEmpty())
+            R.id.homeApp10 -> showAppList(Constants.FLAG_SET_HOME_APP_10, prefs.appName10.isNotEmpty())
         }
         return true
     }
@@ -148,6 +158,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.setOnTouchListener(getViewSwipeTouchListener(context, homeApp6))
         homeApp7.setOnTouchListener(getViewSwipeTouchListener(context, homeApp7))
         homeApp8.setOnTouchListener(getViewSwipeTouchListener(context, homeApp8))
+        homeApp9.setOnTouchListener(getViewSwipeTouchListener(context, homeApp9))
+        homeApp10.setOnTouchListener(getViewSwipeTouchListener(context, homeApp10))
     }
 
     private fun initClickListeners() {
@@ -168,6 +180,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.gravity = gravity
         homeApp7.gravity = gravity
         homeApp8.gravity = gravity
+        homeApp9.gravity = gravity
+        homeApp10.gravity = gravity
     }
 
     private fun populateHomeApps(appCountUpdated: Boolean) {
@@ -180,63 +194,78 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         val pm = requireContext().packageManager
 
         homeApp1.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp1, prefs.appName1, prefs.appPackage1, prefs.appUser1)) {
+        if (!setHomeAppText(homeApp1, prefs.appName1, prefs.appPackage1, pm)) {
             prefs.appName1 = ""
             prefs.appPackage1 = ""
         }
         if (homeAppsNum == 1) return
 
         homeApp2.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp2, prefs.appName2, prefs.appPackage2, prefs.appUser2)) {
+        if (!setHomeAppText(homeApp2, prefs.appName2, prefs.appPackage2, pm)) {
             prefs.appName2 = ""
             prefs.appPackage2 = ""
         }
         if (homeAppsNum == 2) return
 
         homeApp3.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp3, prefs.appName3, prefs.appPackage3, prefs.appUser3)) {
+        if (!setHomeAppText(homeApp3, prefs.appName3, prefs.appPackage3, pm)) {
             prefs.appName3 = ""
             prefs.appPackage3 = ""
         }
         if (homeAppsNum == 3) return
 
         homeApp4.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp4, prefs.appName4, prefs.appPackage4, prefs.appUser4)) {
+        if (!setHomeAppText(homeApp4, prefs.appName4, prefs.appPackage4, pm)) {
             prefs.appName4 = ""
             prefs.appPackage4 = ""
         }
         if (homeAppsNum == 4) return
 
         homeApp5.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp5, prefs.appName5, prefs.appPackage5, prefs.appUser5)) {
+        if (!setHomeAppText(homeApp5, prefs.appName5, prefs.appPackage5, pm)) {
             prefs.appName5 = ""
             prefs.appPackage5 = ""
         }
         if (homeAppsNum == 5) return
 
         homeApp6.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp6, prefs.appName6, prefs.appPackage6, prefs.appUser6)) {
+        if (!setHomeAppText(homeApp6, prefs.appName6, prefs.appPackage6, pm)) {
             prefs.appName6 = ""
             prefs.appPackage6 = ""
         }
         if (homeAppsNum == 6) return
 
         homeApp7.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp7, prefs.appName7, prefs.appPackage7, prefs.appUser7)) {
+        if (!setHomeAppText(homeApp7, prefs.appName7, prefs.appPackage7, pm)) {
             prefs.appName7 = ""
             prefs.appPackage7 = ""
         }
         if (homeAppsNum == 7) return
 
         homeApp8.visibility = View.VISIBLE
-        if (!setHomeAppText(homeApp8, prefs.appName8, prefs.appPackage8, prefs.appUser8)) {
+        if (!setHomeAppText(homeApp8, prefs.appName8, prefs.appPackage8, pm)) {
             prefs.appName8 = ""
             prefs.appPackage8 = ""
         }
+        if (homeAppsNum == 8) return
+
+        homeApp9.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp9, prefs.appName9, prefs.appPackage9, pm)) {
+            prefs.appName9 = ""
+            prefs.appPackage9 = ""
+        }
+        if (homeAppsNum == 9) return
+
+        homeApp10.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp10, prefs.appName10, prefs.appPackage10, pm)) {
+            prefs.appName10 = ""
+            prefs.appPackage10 = ""
+        }
+
     }
 
-    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String): Boolean {
-        if (isPackageInstalled(requireContext(), packageName, userString)) {
+    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, pm: PackageManager): Boolean {
+        if (isPackageInstalled(packageName, pm)) {
             textView.text = appName
             return true
         }
@@ -253,16 +282,30 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.visibility = View.GONE
         homeApp7.visibility = View.GONE
         homeApp8.visibility = View.GONE
+        homeApp9.visibility = View.GONE
+        homeApp10.visibility = View.GONE
 
         // Added as a potential fix to clock freeze issue
         dateTimeLayout.visibility = View.GONE
     }
 
     private fun launchApp(appName: String, packageName: String, userString: String) {
-        viewModel.selectedApp(
-            AppModel(appName, packageName, getUserHandleFromString(requireContext(), userString)),
-            Constants.FLAG_LAUNCH_APP
-        )
+        if (userString.isEmpty()) {
+            viewModel.selectedApp(
+                AppModel(appName, packageName, android.os.Process.myUserHandle()),
+                Constants.FLAG_LAUNCH_APP
+            )
+            return
+        }
+        val userManager = requireContext().getSystemService(Context.USER_SERVICE) as UserManager
+        for (userHandle in userManager.userProfiles) {
+            if (userHandle.toString() == userString) {
+                viewModel.selectedApp(
+                    AppModel(appName, packageName, userHandle),
+                    Constants.FLAG_LAUNCH_APP
+                )
+            }
+        }
     }
 
     private fun showAppList(flag: Int, rename: Boolean = false) {

@@ -228,6 +228,26 @@
                 android:paddingVertical="8dp"
                 android:text="@string/_8" />
 
+            <TextView
+                android:id="@+id/maxApps9"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_9" />
+
+            <TextView
+                android:id="@+id/maxApps10"
+                style="@style/TextSmallBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/_10" />
+
         </LinearLayout>
 
     </FrameLayout>
