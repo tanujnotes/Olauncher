@@ -360,7 +360,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (Settings.System.canWrite(requireContext())) {
             val screenTimeoutInSettings =
                 Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-            if (screenTimeoutInSettings <= 5000)
+            if (screenTimeoutInSettings <= LOCK_SCREEN_TIMEOUT)
                 Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout)
             else
                 Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, screenTimeoutInSettings)
