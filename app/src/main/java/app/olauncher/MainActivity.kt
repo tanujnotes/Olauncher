@@ -130,9 +130,9 @@ class MainActivity : AppCompatActivity() {
                 if (Settings.System.canWrite(this)) {
                     showMessage(getString(R.string.triple_tap_lock_message))
                     // Save the existing screen off timeout
-                    val screenTimeoutInSettings =
-                        Settings.System.getInt(contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-                    if (screenTimeoutInSettings >= 5000) Prefs(this).screenTimeout = screenTimeoutInSettings
+//                    val screenTimeoutInSettings =
+//                        Settings.System.getInt(contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
+//                    if (screenTimeoutInSettings >= 5000) Prefs(this).screenTimeout = screenTimeoutInSettings
                 } else
                     showToastShort(this, "Settings permission denied")
             }

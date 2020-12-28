@@ -37,6 +37,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
+    private val LOCK_SCREEN_TIMEOUT = 5000 // 5 seconds
+
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
@@ -355,8 +357,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun showNavBarAndResetScreenTimeout() {
-        if (Settings.System.canWrite(requireContext()))
-            Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout);
+        if (Settings.System.canWrite(requireContext())) {
+            val screenTimeoutInSettings =
+                Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
+            if (screenTimeoutInSettings <= 5000)
+                Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout)
+            else
+                Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, screenTimeoutInSettings)
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
         } else
@@ -406,10 +414,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         // Save the existing screen off timeout
         val screenTimeoutInSettings =
             Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-        if (screenTimeoutInSettings >= 5000) prefs.screenTimeout = screenTimeoutInSettings
+        if (screenTimeoutInSettings >= LOCK_SCREEN_TIMEOUT) prefs.screenTimeout = screenTimeoutInSettings
 
         // Set timeout to 5 seconds
-        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, 5000)
+        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, LOCK_SCREEN_TIMEOUT)
     }
 
     private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")
