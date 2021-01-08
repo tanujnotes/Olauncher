@@ -184,8 +184,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
 
-        val pm = requireContext().packageManager
-
         homeApp1.visibility = View.VISIBLE
         if (!setHomeAppText(homeApp1, prefs.appName1, prefs.appPackage1, prefs.appUser1)) {
             prefs.appName1 = ""
