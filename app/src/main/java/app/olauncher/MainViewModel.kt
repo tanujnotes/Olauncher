@@ -110,8 +110,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         refreshHome.value = appCountUpdated
     }
 
-    fun toggleDateTime(visiblity: Boolean) {
-        toggleDateTime.value = visiblity
+    fun toggleDateTime(visibility: Boolean) {
+        toggleDateTime.value = visibility
     }
 
     private fun updateSwipeApps() {
