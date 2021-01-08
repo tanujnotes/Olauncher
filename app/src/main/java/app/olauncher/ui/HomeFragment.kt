@@ -136,6 +136,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
             setHomeAlignment(it)
         })
+        viewModel.toggleDateTime.observe(viewLifecycleOwner, Observer {
+            if (it) dateTimeLayout.visibility = View.VISIBLE
+            else dateTimeLayout.visibility = View.GONE
+        })
     }
 
     private fun initSwipeTouchListener() {
@@ -174,7 +178,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun populateHomeApps(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
-        dateTimeLayout.visibility = View.VISIBLE
+        if (prefs.showDateTime) dateTimeLayout.visibility = View.VISIBLE
+        else dateTimeLayout.visibility = View.GONE
 
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return

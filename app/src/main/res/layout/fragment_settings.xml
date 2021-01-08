@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scrollView"
     android:animateLayoutChanges="true"
     android:background="@color/colorPrimaryInverseTrans10"
-    android:clipChildren="false"
-    android:clipToPadding="false">
+    android:paddingTop="48dp"
+    android:paddingBottom="48dp">
 
     <LinearLayout
         android:id="@+id/settingsRootLayout"
@@ -15,8 +16,8 @@
         android:clickable="true"
         android:focusable="true"
         android:orientation="vertical"
-        android:paddingTop="56dp"
-        android:paddingBottom="56dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -94,7 +95,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:animateLayoutChanges="true"
             android:clipChildren="false"
             android:clipToPadding="false">
@@ -315,6 +316,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:paddingVertical="8dp"
+                android:text="@string/show_date_time"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/dateTime"
+                style="@style/TextSmallBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginEnd="16dp"
+                android:padding="8dp"
+                android:text="@string/on"
+                android:textAllCaps="true" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                style="@style/TextMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:paddingVertical="8dp"
                 android:text="@string/home_layout_alignment"
                 android:textColor="@color/colorPrimary" />
 
@@ -333,7 +360,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal">
 
             <TextView

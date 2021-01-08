@@ -61,6 +61,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateWallpaperText()
         populateAlignment()
         populateStatusBar()
+        populateDateTime()
         populateSwipeApps()
         populateActionHints()
         initClickListeners()
@@ -82,6 +83,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> viewModel.updateHomeAlignment()
             R.id.statusBar -> toggleStatusBar()
+            R.id.dateTime -> toggleDateTime()
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -131,6 +133,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
         statusBar.setOnClickListener(this)
+        dateTime.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
 
@@ -207,6 +210,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             hideStatusBar()
             statusBar.text = getString(R.string.off)
         }
+    }
+
+    private fun toggleDateTime() {
+        prefs.showDateTime = !prefs.showDateTime
+        populateDateTime()
+        viewModel.toggleDateTime(prefs.showDateTime)
+    }
+
+    private fun populateDateTime() {
+        if (prefs.showDateTime) dateTime.text = getString(R.string.on)
+        else dateTime.text = getString(R.string.off)
     }
 
     private fun showStatusBar() {
@@ -401,13 +415,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateActionHints() {
         when (prefs.toShowHintCounter) {
             Constants.HINT_ABOUT_US -> {
-                Toast.makeText(context, getString(R.string.about_hint), Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, getString(R.string.about_hint), Toast.LENGTH_LONG).show()
+                scrollView.fullScroll(View.FOCUS_DOWN)
                 about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
             Constants.HINT_RATE_US -> {
                 Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_LONG).show()
+                scrollView.fullScroll(View.FOCUS_DOWN)
                 rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
         }

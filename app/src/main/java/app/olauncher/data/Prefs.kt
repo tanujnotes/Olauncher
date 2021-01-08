@@ -18,6 +18,7 @@ class Prefs(context: Context) {
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
     private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
     private val STATUS_BAR = "STATUS_BAR"
+    private val DATE_TIME = "DATE_TIME"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
     private val SCREEN_TIMEOUT = "SCREEN_TIMEOUT"
@@ -102,6 +103,10 @@ class Prefs(context: Context) {
     var showStatusBar: Boolean
         get() = prefs.getBoolean(STATUS_BAR, false)
         set(value) = prefs.edit().putBoolean(STATUS_BAR, value).apply()
+
+    var showDateTime: Boolean
+        get() = prefs.getBoolean(DATE_TIME, true)
+        set(value) = prefs.edit().putBoolean(DATE_TIME, value).apply()
 
     var swipeLeftEnabled: Boolean
         get() = prefs.getBoolean(SWIPE_LEFT_ENABLED, true)

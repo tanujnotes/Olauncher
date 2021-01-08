@@ -50,4 +50,5 @@
     <string name="rate_us_hint">Loving Olauncher? Please rate us 10 stars. *giggles*</string>
     <string name="status_bar">Show status bar</string>
     <string name="rename">Rename</string>
+    <string name="show_date_time">Show date time</string>
 </resources>
