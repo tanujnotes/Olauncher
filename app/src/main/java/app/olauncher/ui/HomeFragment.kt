@@ -280,6 +280,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 bundleOf("flag" to flag, "rename" to rename)
             )
         } catch (e: Exception) {
+            findNavController().navigate(R.id.appListFragment)
+            e.printStackTrace()
         }
     }
 
