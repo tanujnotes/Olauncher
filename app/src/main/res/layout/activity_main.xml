@@ -22,7 +22,7 @@
         android:id="@+id/messageLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryInverseTrans50"
+        android:background="@color/colorPrimaryInverseTrans25"
         android:clickable="true"
         android:clipToPadding="false"
         android:focusable="true"

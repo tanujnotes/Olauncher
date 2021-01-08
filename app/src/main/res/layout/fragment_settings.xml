@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/colorPrimaryInverseTrans50"
+    android:background="@color/colorPrimaryInverseTrans25"
     android:overScrollMode="never"
     android:paddingTop="48dp"
     android:paddingBottom="48dp">
