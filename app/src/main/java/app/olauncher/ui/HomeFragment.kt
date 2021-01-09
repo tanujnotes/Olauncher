@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -33,7 +34,6 @@ import app.olauncher.listener.LockTouchListener
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
-
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
@@ -278,7 +278,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 bundleOf("flag" to flag, "rename" to rename)
             )
         } catch (e: Exception) {
-            findNavController().navigate(R.id.appListFragment)
+            findNavController().navigate(
+                R.id.appListFragment,
+                bundleOf("flag" to flag, "rename" to rename)
+            )
             e.printStackTrace()
         }
     }
