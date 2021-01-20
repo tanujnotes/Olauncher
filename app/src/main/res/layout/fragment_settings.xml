@@ -1,70 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:background="@color/colorPrimaryInverseTrans25"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
 
-    <ScrollView
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp">
+
+        <TextView
+            android:id="@+id/olauncherHiddenApps"
+            style="@style/TextDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/app_name"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:id="@+id/appInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_outline_info_24" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/setLauncher"
+        style="@style/TextMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="8dp"
+        android:text="@string/set_as_default_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/appearanceTab"
+            style="@style/TextDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/appearance"
+            android:textColor="@color/colorPrimary"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/gesturesTab"
+            style="@style/TextDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:maxLines="1"
+            android:text="@string/gestures"
+            android:textColor="@color/colorPrimaryTrans80"
+            android:textSize="26sp" />
+
+    </LinearLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:paddingTop="64dp"
-        android:paddingBottom="8dp">
+        android:animateLayoutChanges="true">
 
         <LinearLayout
-            android:id="@+id/rootLayout"
+            android:id="@+id/appearanceLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/olauncherHiddenApps"
-                    style="@style/TextLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:text="@string/app_name" />
-
-                <ImageView
-                    android:id="@+id/appInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="16dp"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_outline_info_24" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/setLauncher"
-                style="@style/TextMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="8dp"
-                android:text="@string/set_as_default_launcher" />
-
-            <TextView
-                android:id="@+id/appearanceTab"
-                style="@style/TextLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/appearance"
-                android:textColor="@color/colorPrimary" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -331,15 +351,14 @@
                     android:textAllCaps="true" />
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/gesturesTab"
-                style="@style/TextLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/gestures"
-                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gesturesLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -444,7 +463,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
