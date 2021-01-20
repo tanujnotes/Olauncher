@@ -5,7 +5,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.pm.LauncherApps
 import android.os.UserHandle
-import android.view.Gravity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -183,12 +182,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         prefs.wallpaperUpdatedDay = ""
     }
 
-    fun updateHomeAlignment() {
-        when (prefs.homeAlignment) {
-            Gravity.START -> prefs.homeAlignment = Gravity.END
-            Gravity.END -> prefs.homeAlignment = Gravity.CENTER
-            Gravity.CENTER -> prefs.homeAlignment = Gravity.START
-        }
+    fun updateHomeAlignment(gravity: Int) {
+        prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
     }
 }

@@ -224,7 +224,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     style="@style/TextMedium"
@@ -250,7 +251,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     android:id="@+id/dailyWallpaperUrl"
@@ -276,7 +278,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     style="@style/TextMedium"
@@ -302,7 +305,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     style="@style/TextMedium"
@@ -328,7 +332,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:animateLayoutChanges="true">
 
                 <TextView
                     style="@style/TextMedium"
@@ -349,6 +354,66 @@
                     android:padding="8dp"
                     android:text="@string/left"
                     android:textAllCaps="true" />
+
+                <!-- alignment layout-->
+                <LinearLayout
+                    android:id="@+id/alignmentSelectLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:background="@color/colorPrimaryInverseTrans90"
+                    android:elevation="8dp"
+                    android:orientation="horizontal"
+                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="2dp"
+                    android:visibility="gone"
+                    tools:ignore="UnusedAttribute">
+
+                    <TextView
+                        android:id="@+id/alignmentLeft"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingVertical="8dp"
+                        android:text="@string/left"
+                        android:textAllCaps="true" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/alignmentCenter"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center"
+                        android:paddingVertical="8dp"
+                        android:text="@string/center"
+                        android:textAllCaps="true" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/alignmentRight"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingVertical="8dp"
+                        android:text="@string/right"
+                        android:textAllCaps="true" />
+
+                </LinearLayout>
+
             </FrameLayout>
 
         </LinearLayout>

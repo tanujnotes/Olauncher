@@ -72,6 +72,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onClick(view: View) {
         appsNumSelectLayout.visibility = View.GONE
+        alignmentSelectLayout.visibility = View.GONE
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
@@ -85,7 +86,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
-            R.id.alignment -> viewModel.updateHomeAlignment()
+            R.id.alignment -> alignmentSelectLayout.visibility = View.VISIBLE
+            R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
+            R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
+            R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> toggleDateTime()
 
@@ -138,6 +142,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
+        alignmentLeft.setOnClickListener(this)
+        alignmentCenter.setOnClickListener(this)
+        alignmentRight.setOnClickListener(this)
         statusBar.setOnClickListener(this)
         dateTime.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
