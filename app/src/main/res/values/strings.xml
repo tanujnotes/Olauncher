@@ -51,4 +51,6 @@
     <string name="status_bar">Show status bar</string>
     <string name="rename">Rename</string>
     <string name="show_date_time">Show date time</string>
+    <string name="appearance">Appearance</string>
+    <string name="gestures">Gestures</string>
 </resources>

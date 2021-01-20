@@ -24,7 +24,6 @@ import app.olauncher.helper.*
 import app.olauncher.listener.DeviceAdmin
 import kotlinx.android.synthetic.main.fragment_settings.*
 
-
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
     private lateinit var prefs: Prefs
@@ -121,7 +120,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun initClickListeners() {
         olauncherHiddenApps.setOnClickListener(this)
-        settingsRootLayout.setOnClickListener(this)
+        rootLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
         autoShowKeyboard.setOnClickListener(this)
@@ -416,13 +415,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         when (prefs.toShowHintCounter) {
             Constants.HINT_ABOUT_US -> {
                 Toast.makeText(context, getString(R.string.about_hint), Toast.LENGTH_LONG).show()
-                scrollView.fullScroll(View.FOCUS_DOWN)
                 about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
             Constants.HINT_RATE_US -> {
-                Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_SHORT).show()
                 Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_LONG).show()
-                scrollView.fullScroll(View.FOCUS_DOWN)
                 rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
         }
