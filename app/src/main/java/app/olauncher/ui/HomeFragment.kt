@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -73,34 +72,17 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onClick(view: View) {
         when (view.id) {
-
-            R.id.homeApp1 -> if (prefs.appPackage1.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName1, prefs.appPackage1, prefs.appUser1)
-
-            R.id.homeApp2 -> if (prefs.appPackage2.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName2, prefs.appPackage2, prefs.appUser2)
-
-            R.id.homeApp3 -> if (prefs.appPackage3.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName3, prefs.appPackage3, prefs.appUser3)
-
-            R.id.homeApp4 -> if (prefs.appPackage4.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName4, prefs.appPackage4, prefs.appUser4)
-
-            R.id.homeApp5 -> if (prefs.appPackage5.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName5, prefs.appPackage5, prefs.appUser5)
-
-            R.id.homeApp6 -> if (prefs.appPackage6.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName6, prefs.appPackage6, prefs.appUser6)
-
-            R.id.homeApp7 -> if (prefs.appPackage7.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName7, prefs.appPackage7, prefs.appUser7)
-
-            R.id.homeApp8 -> if (prefs.appPackage8.isEmpty()) showLongPressToast()
-            else launchApp(prefs.appName8, prefs.appPackage8, prefs.appUser8)
-
             R.id.clock -> openAlarmApp()
             R.id.date -> openCalendar()
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            else -> {
+                try { // Launch app
+                    val appLocation = view.tag.toString().toInt()
+                    homeAppClicked(appLocation)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }
     }
 
@@ -119,24 +101,24 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initObservers() {
-        viewModel.refreshHome.observe(viewLifecycleOwner, Observer<Boolean> {
+        viewModel.refreshHome.observe(viewLifecycleOwner, {
             populateHomeApps(it)
         })
-        viewModel.firstOpen.observe(viewLifecycleOwner, Observer<Boolean> { isFirstOpen ->
+        viewModel.firstOpen.observe(viewLifecycleOwner, { isFirstOpen ->
             if (isFirstOpen) {
                 firstRunTips.visibility = View.VISIBLE
                 setDefaultLauncher.visibility = View.GONE
             } else firstRunTips.visibility = View.GONE
         })
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
             if (firstRunTips.visibility == View.VISIBLE) return@Observer
             if (it) setDefaultLauncher.visibility = View.GONE
             else setDefaultLauncher.visibility = View.VISIBLE
         })
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
             setHomeAlignment(it)
         })
-        viewModel.toggleDateTime.observe(viewLifecycleOwner, Observer {
+        viewModel.toggleDateTime.observe(viewLifecycleOwner, {
             if (it) dateTimeLayout.visibility = View.VISIBLE
             else dateTimeLayout.visibility = View.GONE
         })
@@ -261,6 +243,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         // Added as a potential fix to clock freeze issue
         dateTimeLayout.visibility = View.GONE
+    }
+
+    private fun homeAppClicked(location: Int) {
+        if (prefs.getAppName(location).isEmpty()) showLongPressToast()
+        else launchApp(
+            prefs.getAppName(location),
+            prefs.getAppPackage(location),
+            prefs.getAppUser(location)
+        )
     }
 
     private fun launchApp(appName: String, packageName: String, userString: String) {

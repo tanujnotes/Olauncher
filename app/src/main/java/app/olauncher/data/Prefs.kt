@@ -251,4 +251,46 @@ class Prefs(context: Context) {
     var appUserSwipeRight: String
         get() = prefs.getString(APP_USER_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_USER_SWIPE_RIGHT, value).apply()
+
+    fun getAppName(location: Int): String {
+        return when (location) {
+            1 -> prefs.getString(APP_NAME_1, "").toString()
+            2 -> prefs.getString(APP_NAME_2, "").toString()
+            3 -> prefs.getString(APP_NAME_3, "").toString()
+            4 -> prefs.getString(APP_NAME_4, "").toString()
+            5 -> prefs.getString(APP_NAME_5, "").toString()
+            6 -> prefs.getString(APP_NAME_6, "").toString()
+            7 -> prefs.getString(APP_NAME_7, "").toString()
+            8 -> prefs.getString(APP_NAME_8, "").toString()
+            else -> ""
+        }
+    }
+
+    fun getAppPackage(location: Int): String {
+        return when (location) {
+            1 -> prefs.getString(APP_PACKAGE_1, "").toString()
+            2 -> prefs.getString(APP_PACKAGE_2, "").toString()
+            3 -> prefs.getString(APP_PACKAGE_3, "").toString()
+            4 -> prefs.getString(APP_PACKAGE_4, "").toString()
+            5 -> prefs.getString(APP_PACKAGE_5, "").toString()
+            6 -> prefs.getString(APP_PACKAGE_6, "").toString()
+            7 -> prefs.getString(APP_PACKAGE_7, "").toString()
+            8 -> prefs.getString(APP_PACKAGE_8, "").toString()
+            else -> ""
+        }
+    }
+
+    fun getAppUser(location: Int): String {
+        return when (location) {
+            1 -> prefs.getString(APP_USER_1, "").toString()
+            2 -> prefs.getString(APP_USER_2, "").toString()
+            3 -> prefs.getString(APP_USER_3, "").toString()
+            4 -> prefs.getString(APP_USER_4, "").toString()
+            5 -> prefs.getString(APP_USER_5, "").toString()
+            6 -> prefs.getString(APP_USER_6, "").toString()
+            7 -> prefs.getString(APP_USER_7, "").toString()
+            8 -> prefs.getString(APP_USER_8, "").toString()
+            else -> ""
+        }
+    }
 }
