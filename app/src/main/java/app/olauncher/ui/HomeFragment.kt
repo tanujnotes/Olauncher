@@ -3,13 +3,9 @@ package app.olauncher.ui
 import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.provider.AlarmClock
-import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,10 +21,7 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.getUserHandleFromString
-import app.olauncher.helper.isPackageInstalled
-import app.olauncher.helper.showToastLong
-import app.olauncher.helper.showToastShort
+import app.olauncher.helper.*
 import app.olauncher.listener.LockTouchListener
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
@@ -72,8 +65,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.clock -> openAlarmApp()
-            R.id.date -> openCalendar()
+            R.id.clock -> openAlarmApp(requireContext())
+            R.id.date -> openCalendar(requireContext())
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             else -> {
                 try { // Launch app
@@ -294,51 +287,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (!prefs.swipeRightEnabled) return
         if (prefs.appPackageSwipeRight.isNotEmpty())
             launchApp(prefs.appNameSwipeRight, prefs.appPackageSwipeRight, android.os.Process.myUserHandle().toString())
-        else openDialerApp()
+        else openDialerApp(requireContext())
     }
 
     private fun openSwipeLeftApp() {
         if (!prefs.swipeLeftEnabled) return
         if (prefs.appPackageSwipeLeft.isNotEmpty())
             launchApp(prefs.appNameSwipeLeft, prefs.appPackageSwipeLeft, android.os.Process.myUserHandle().toString())
-        else openCameraApp()
-    }
-
-    private fun openDialerApp() {
-        try {
-            val sendIntent = Intent(Intent.ACTION_DIAL)
-            startActivity(sendIntent)
-        } catch (e: java.lang.Exception) {
-
-        }
-    }
-
-    private fun openCameraApp() {
-        try {
-            val sendIntent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
-            startActivity(sendIntent)
-        } catch (e: java.lang.Exception) {
-
-        }
-    }
-
-    private fun openAlarmApp() {
-        try {
-            val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
-            startActivity(intent)
-        } catch (e: java.lang.Exception) {
-            Log.d("TAG", e.toString())
-        }
-    }
-
-    private fun openCalendar() {
-        try {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
-            startActivity(intent)
-        } catch (e: java.lang.Exception) {
-
-        }
+        else openCameraApp(requireContext())
     }
 
     private fun lockPhone() {

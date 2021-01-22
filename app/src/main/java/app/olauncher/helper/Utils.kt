@@ -9,6 +9,9 @@ import android.content.pm.PackageManager
 import android.graphics.*
 import android.os.UserHandle
 import android.os.UserManager
+import android.provider.AlarmClock
+import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
@@ -323,4 +326,42 @@ fun getBackupWallpaper(hour: Int): String? {
         31 to "https://images.unsplash.com/photo-1600648170020-3182aba0a7e4?w=2000&q=100"
     )
     return wallpapers[hour]
+}
+
+
+fun openDialerApp(context: Context) {
+    try {
+        val sendIntent = Intent(Intent.ACTION_DIAL)
+        context.startActivity(sendIntent)
+    } catch (e: java.lang.Exception) {
+
+    }
+}
+
+fun openCameraApp(context: Context) {
+    try {
+        val sendIntent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
+        context.startActivity(sendIntent)
+    } catch (e: java.lang.Exception) {
+
+    }
+}
+
+fun openAlarmApp(context: Context) {
+    try {
+        val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
+        context.startActivity(intent)
+    } catch (e: java.lang.Exception) {
+        Log.d("TAG", e.toString())
+    }
+}
+
+fun openCalendar(context: Context) {
+    try {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+        context.startActivity(intent)
+    } catch (e: java.lang.Exception) {
+
+    }
 }
