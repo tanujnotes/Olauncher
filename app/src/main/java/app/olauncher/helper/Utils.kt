@@ -12,9 +12,12 @@ import android.os.UserManager
 import android.provider.AlarmClock
 import android.provider.MediaStore
 import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import app.olauncher.BuildConfig
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
@@ -364,4 +367,14 @@ fun openCalendar(context: Context) {
     } catch (e: java.lang.Exception) {
 
     }
+}
+
+@ColorInt
+fun Context.getColorFromAttr(
+    @AttrRes attrColor: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
 }

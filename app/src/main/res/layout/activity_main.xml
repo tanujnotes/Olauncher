@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainActivityLayout"
-    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryInverseTrans10">
+    android:animateLayoutChanges="true"
+    android:background="?attr/primaryShadeColor">
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -22,7 +22,7 @@
         android:id="@+id/messageLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryInverseTrans25"
+        android:background="?attr/primaryShadeDarkColor"
         android:clickable="true"
         android:clipToPadding="false"
         android:focusable="true"

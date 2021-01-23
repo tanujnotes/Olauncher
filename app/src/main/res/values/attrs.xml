@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="primaryColor" format="color" />
+    <attr name="primaryInverseColor" format="color" />
+    <attr name="primaryTextShadowColor" format="color" />
+    <attr name="primaryColorTrans50" format="color" />
+    <attr name="primaryColorTrans80" format="color" />
+    <attr name="primaryColorInverseTrans90" format="color" />
+    <attr name="primaryShadeColor" format="color" />
+    <attr name="primaryShadeDarkColor" format="color" />
+</resources>

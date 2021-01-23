@@ -12,7 +12,6 @@ import android.view.*
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import app.olauncher.BuildConfig
@@ -61,6 +60,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
+        populateThemeColorText()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -73,6 +73,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     override fun onClick(view: View) {
         appsNumSelectLayout.visibility = View.GONE
         alignmentSelectLayout.visibility = View.GONE
+        themeColorSelectLayout.visibility = View.GONE
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
@@ -92,6 +93,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> toggleDateTime()
+            R.id.themeColor -> themeColorSelectLayout.visibility = View.VISIBLE
+            R.id.themeBlack -> updateTheme(Constants.THEME_COLOR_BLACK)
+            R.id.themeWhite -> updateTheme(Constants.THEME_COLOR_WHITE)
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -149,6 +153,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dateTime.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
+        themeColor.setOnClickListener(this)
+        themeBlack.setOnClickListener(this)
+        themeWhite.setOnClickListener(this)
 
         about.setOnClickListener(this)
         share.setOnClickListener(this)
@@ -174,16 +181,16 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initObservers() {
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer<Boolean> {
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, {
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
             }
         })
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner, Observer<Int> {
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
             populateAlignment()
         })
-        viewModel.updateSwipeApps.observe(viewLifecycleOwner, Observer<Any> {
+        viewModel.updateSwipeApps.observe(viewLifecycleOwner, {
             populateSwipeApps()
         })
     }
@@ -191,13 +198,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun changeTabLayout(position: Int) {
         if (position == APPEARANCE) {
             gesturesLayout.visibility = View.GONE
-            gesturesTab.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans80))
-            appearanceTab.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            gesturesTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans80))
+            appearanceTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             appearanceLayout.visibility = View.VISIBLE
         } else if (position == GESTURES) {
             appearanceLayout.visibility = View.GONE
-            appearanceTab.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans80))
-            gesturesTab.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            appearanceTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans80))
+            gesturesTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             gesturesLayout.visibility = View.VISIBLE
         }
     }
@@ -205,10 +212,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun toggleSwipeLeft() {
         prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
         if (prefs.swipeLeftEnabled) {
-            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             showToastShort(requireContext(), "Swipe left app enabled")
         } else {
-            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
             showToastShort(requireContext(), "Swipe left app disabled")
         }
     }
@@ -216,10 +223,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun toggleSwipeRight() {
         prefs.swipeRightEnabled = !prefs.swipeRightEnabled
         if (prefs.swipeRightEnabled) {
-            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimary))
+            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             showToastShort(requireContext(), "Swipe right app enabled")
         } else {
-            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
             showToastShort(requireContext(), "Swipe right app disabled")
         }
     }
@@ -344,6 +351,21 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun toggleKeyboardText() {
         prefs.autoShowKeyboard = !prefs.autoShowKeyboard
         populateKeyboardText()
+        requireActivity().recreate()
+    }
+
+    private fun updateTheme(themeColor: Int) {
+        if (prefs.themeColor == themeColor) return
+        prefs.themeColor = themeColor
+        populateThemeColorText()
+        requireActivity().recreate()
+    }
+
+    private fun populateThemeColorText() {
+        when (prefs.themeColor) {
+            Constants.THEME_COLOR_BLACK -> themeColor.text = getString(R.string.black)
+            else -> themeColor.text = getString(R.string.white)
+        }
     }
 
     private fun populateKeyboardText() {
@@ -417,9 +439,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         swipeLeftApp.text = prefs.appNameSwipeLeft
         swipeRightApp.text = prefs.appNameSwipeRight
         if (!prefs.swipeLeftEnabled)
-            swipeLeftApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
         if (!prefs.swipeRightEnabled)
-            swipeRightApp.setTextColor(requireContext().getColor(R.color.colorPrimaryTrans50))
+            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
     }
 
     private fun showAppListIfEnabled(flag: Int) {

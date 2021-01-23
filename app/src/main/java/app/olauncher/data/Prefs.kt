@@ -25,6 +25,7 @@ class Prefs(context: Context) {
     private val HIDDEN_APPS = "HIDDEN_APPS"
     private val HIDDEN_APPS_UPDATED = "HIDDEN_APPS_UPDATED"
     private val SHOW_HINT_COUNTER = "SHOW_HINT_COUNTER"
+    private val THEME_COLOR = "THEME_COLOR"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -115,6 +116,10 @@ class Prefs(context: Context) {
     var swipeRightEnabled: Boolean
         get() = prefs.getBoolean(SWIPE_RIGHT_ENABLED, true)
         set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
+
+    var themeColor: Int
+        get() = prefs.getInt(THEME_COLOR, Constants.THEME_COLOR_WHITE)
+        set(value) = prefs.edit().putInt(THEME_COLOR, value).apply()
 
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds

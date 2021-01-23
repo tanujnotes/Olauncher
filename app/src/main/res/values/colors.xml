@@ -4,11 +4,28 @@
     <color name="colorPrimaryDark">#9E9E9E</color>
     <color name="colorAccent">#FFEB3B</color>
 
-    <color name="colorPrimaryTrans50">#80FFFFFF</color>
-    <color name="colorPrimaryTrans80">#CCFFFFFF</color>
-    <color name="colorPrimaryTrans90">#E6FFFFFF</color>
-    <color name="colorPrimaryInverseTrans10">#1A000000</color>
-    <color name="colorPrimaryInverseTrans25">#40000000</color>
-    <color name="colorPrimaryInverseTrans50">#80000000</color>
-    <color name="colorPrimaryInverseTrans90">#E6000000</color>
+    <!--White-->
+    <color name="white">#FFFFFF</color>
+    <color name="whiteTrans90">#E6FFFFFF</color>
+    <color name="whiteTrans80">#CCFFFFFF</color>
+    <color name="whiteTrans50">#80FFFFFF</color>
+    <color name="whiteInverse">#000000</color>
+    <color name="whiteInverseTrans10">#1A000000</color>
+    <color name="whiteInverseTrans25">#40000000</color>
+    <color name="whiteInverseTrans50">#80000000</color>
+    <color name="whiteInverseTrans80">#CC000000</color>
+    <color name="whiteInverseTrans90">#E6000000</color>
+
+    <!--Black-->
+    <color name="black">#000000</color>
+    <color name="blackTrans90">#E6000000</color>
+    <color name="blackTrans80">#CC000000</color>
+    <color name="blackTrans50">#80000000</color>
+    <color name="blackInverse">#FFFFFF</color>
+    <color name="blackInverseTrans10">#1AFFFFFF</color>
+    <color name="blackInverseTrans25">#40FFFFFF</color>
+    <color name="blackInverseTrans50">#80FFFFFF</color>
+    <color name="blackInverseTrans80">#CCFFFFFF</color>
+    <color name="blackInverseTrans90">#E6FFFFFF</color>
+
 </resources>

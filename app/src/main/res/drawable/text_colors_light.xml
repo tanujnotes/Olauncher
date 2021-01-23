@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/colorPrimary" android:state_pressed="true" />
-    <item android:color="@color/colorPrimary" android:state_selected="true" />
-    <item android:color="@color/colorPrimary" android:state_focused="true" />
-    <item android:color="@color/colorPrimaryTrans80" />
+    <item android:color="?attr/primaryColor" android:state_pressed="true" />
+    <item android:color="?attr/primaryColor" android:state_selected="true" />
+    <item android:color="?attr/primaryColor" android:state_focused="true" />
+    <item android:color="?attr/primaryColorTrans80" />
 </selector>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/colorPrimaryInverseTrans25">
+    android:background="?attr/primaryShadeDarkColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/app_drawer_tips"
-        android:textColor="@color/colorPrimaryTrans90"
+        android:textColor="?attr/primaryColor"
         android:textSize="16sp"
         android:visibility="gone" />
 

@@ -15,19 +15,56 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <!--        <item name="android:enforceStatusBarContrast">false</item>-->
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <!--        <item name="android:windowTranslucentStatus">false</item>-->
+        <!--        <item name="android:windowTranslucentNavigation">true</item>-->
+
+    </style>
+
+    <style name="WhiteTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@android:color/darker_gray</item>
+        <item name="colorAccent">@color/white</item>
+
+        <item name="primaryColor">@color/white</item>
+        <item name="primaryInverseColor">@color/whiteInverse</item>
+        <item name="primaryTextShadowColor">@color/whiteInverseTrans50</item>
+        <item name="primaryColorTrans50">@color/whiteTrans50</item>
+        <item name="primaryColorTrans80">@color/whiteTrans80</item>
+        <item name="primaryColorInverseTrans90">@color/whiteInverseTrans90</item>
+        <item name="primaryShadeColor">@color/whiteInverseTrans10</item>
+        <item name="primaryShadeDarkColor">@color/whiteInverseTrans25</item>
+    </style>
+
+    <style name="BlackTheme" parent="AppTheme">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@android:color/darker_gray</item>
+        <item name="colorAccent">@color/black</item>
+
+        <item name="primaryColor">@color/black</item>
+        <item name="primaryInverseColor">@color/blackInverse</item>
+        <item name="primaryTextShadowColor">@color/blackInverseTrans50</item>
+        <item name="primaryColorTrans50">@color/blackTrans50</item>
+        <item name="primaryColorTrans80">@color/blackTrans80</item>
+        <item name="primaryColorInverseTrans90">@color/blackInverseTrans90</item>
+        <item name="primaryShadeColor">@color/blackInverseTrans10</item>
+        <item name="primaryShadeDarkColor">@color/blackInverseTrans25</item>
     </style>
 
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
         <item name="android:maxLength">20</item>
         <item name="android:textSize">@dimen/text_large</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:editTextColor">@color/colorPrimary</item>
-        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:textColor">?attr/primaryColor</item>
+        <item name="android:editTextColor">?attr/primaryColor</item>
+        <item name="android:textColorHint">?attr/primaryColor</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:inputType">textNoSuggestions</item>
         <item name="android:cursorVisible">false</item>
@@ -35,8 +72,8 @@
 
     <style name="TextDefault" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">@drawable/text_colors_default</item>
-        <item name="android:textColorHint">@color/colorPrimaryTrans80</item>
-        <item name="android:shadowColor">@color/colorPrimaryInverseTrans50</item>
+        <item name="android:textColorHint">?attr/primaryColorTrans80</item>
+        <item name="android:shadowColor">?attr/primaryTextShadowColor</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">1</item>
