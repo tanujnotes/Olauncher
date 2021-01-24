@@ -30,7 +30,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
 
-
 fun showToastLong(context: Context, message: String) {
     val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG)
     toast.setGravity(Gravity.CENTER, 0, 0)
@@ -265,13 +264,13 @@ fun getScreenDimensions(context: Context): Pair<Int, Int> {
     return Pair(point.x, point.y)
 }
 
-suspend fun getTodaysWallpaper(): String {
+suspend fun getTodaysWallpaper(wallType: String): String {
     return withContext(Dispatchers.IO) {
         var wallpaperUrl: String
-        val hour = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
 
         try {
-            val url = URL(Constants.URL_DARK_WALLPAPERS)
+            val url = URL(Constants.URL_WALLPAPERS)
             val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
             connection.doInput = true
             connection.connect()
@@ -284,53 +283,23 @@ suspend fun getTodaysWallpaper(): String {
             }
 
             val json = JSONObject(stringBuffer.toString())
-            wallpaperUrl = json.getString(hour.toString())
+            val wallpapers = json.getString(day.toString())
+            val wallpapersJson = JSONObject(wallpapers)
+            wallpaperUrl = wallpapersJson.getString(wallType)
             wallpaperUrl
 
         } catch (e: Exception) {
-            wallpaperUrl = getBackupWallpaper(hour) ?: Constants.URL_DEFAULT_WALLPAPER
+            wallpaperUrl = getBackupWallpaper(wallType)
             wallpaperUrl
         }
     }
 }
 
-fun getBackupWallpaper(hour: Int): String? {
-    val wallpapers = mapOf(
-        1 to "https://images.unsplash.com/photo-1560713796-952b738c598b?w=2000&q=100",
-        2 to "https://images.unsplash.com/photo-1502899576159-f224dc2349fa?w=2000&q=100",
-        3 to "https://images.unsplash.com/photo-1555217851-6141535bd771?w=2000&q=100",
-        4 to "https://images.unsplash.com/photo-1506296933720-1a0ce9bed41d?w=2000&q=100",
-        5 to "https://images.unsplash.com/photo-1543651425-3260f9c9ecfb?w=2000&q=100",
-        6 to "https://images.unsplash.com/photo-1542676032-e505f4fe02a9?w=2000&q=100",
-        7 to "https://images.unsplash.com/photo-1578885136359-16c8bd4d3a8e?w=2000&q=100",
-        8 to "https://images.unsplash.com/photo-1511362483461-8795ba551506?w=2000&q=100",
-        9 to "https://images.unsplash.com/photo-1601969907230-092a6c065025?w=2000&q=100",
-        10 to "https://images.unsplash.com/photo-1593714011419-91b10cd8a3a6?w=2000&q=100",
-        11 to "https://images.unsplash.com/photo-1569817480240-41de5e7283c9?w=2000&q=100",
-        12 to "https://images.unsplash.com/photo-1588363243917-97873eb4a8ce?w=2000&q=100",
-        13 to "https://images.unsplash.com/photo-1576405515541-cb47b7da4fa7?w=2000&q=100",
-        14 to "https://images.unsplash.com/photo-1597407068889-782ba11fb621?w=2000&q=100",
-        15 to "https://images.unsplash.com/photo-1512850183-6d7990f42385?w=2000&q=100",
-        16 to "https://images.unsplash.com/photo-1575387779103-48eb0dc78647?w=2000&q=100",
-        17 to "https://images.unsplash.com/photo-1549948558-1c6406684186?w=2000&q=100",
-        18 to "https://images.unsplash.com/photo-1570420118092-5b96e28ff4cb?w=2000&q=100",
-        19 to "https://images.unsplash.com/photo-1550041771-aef92f14a6d5?w=2000&q=100",
-        20 to "https://images.unsplash.com/photo-1600648170020-3182aba0a7e4?w=2000&q=100",
-        21 to "https://images.unsplash.com/photo-1551382801-104df360840a?w=2000&q=100",
-        22 to "https://images.unsplash.com/photo-1546507318-dc206ad061c9?w=2000&q=100",
-        23 to "https://images.unsplash.com/photo-1574895862047-5a662529395e?w=2000&q=100",
-        24 to "https://images.unsplash.com/photo-1548625149-720134d51a3a?w=2000&q=100",
-        25 to "https://images.unsplash.com/photo-1518242340236-fd1dd715ba89?w=2000&q=100",
-        26 to "https://images.unsplash.com/photo-1541617219835-3689726fa8e7?w=2000&q=100",
-        27 to "https://images.unsplash.com/photo-1597659840241-37e2b9c2f55f?w=2000&q=100",
-        28 to "https://images.unsplash.com/photo-1585135497273-1a86b09fe70e?w=2000&q=100",
-        29 to "https://images.unsplash.com/photo-1536444640702-7d82b071cab8?w=2000&q=100",
-        30 to "https://images.unsplash.com/photo-1544111795-fe8b9def73f6?w=2000&q=100",
-        31 to "https://images.unsplash.com/photo-1600648170020-3182aba0a7e4?w=2000&q=100"
-    )
-    return wallpapers[hour]
+fun getBackupWallpaper(wallType: String): String {
+    return if (wallType == Constants.WALL_TYPE_LIGHT)
+        Constants.URL_DEFAULT_LIGHT_WALLPAPER
+    else Constants.URL_DEFAULT_DARK_WALLPAPER
 }
-
 
 fun openDialerApp(context: Context) {
     try {

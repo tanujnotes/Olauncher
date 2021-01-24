@@ -3,6 +3,7 @@ package app.olauncher.helper
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import kotlinx.coroutines.coroutineScope
 import java.text.SimpleDateFormat
@@ -15,7 +16,11 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
         val date: String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
         if (date == Prefs(applicationContext).wallpaperUpdatedDay) Result.success()
 
-        val wallpaperUrl = getTodaysWallpaper()
+        var wallType = Constants.WALL_TYPE_DARK
+        if (Prefs(applicationContext).themeColor == Constants.THEME_COLOR_BLACK)
+            wallType = Constants.WALL_TYPE_LIGHT
+
+        val wallpaperUrl = getTodaysWallpaper(wallType)
 
         val success = setWallpaper(
             applicationContext,
