@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -318,7 +319,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun removeWallpaper() {
-        setBlackWallpaper(requireContext())
+        setPlainWallpaper(requireContext(), android.R.color.black)
         if (!prefs.dailyWallpaper) return
         prefs.dailyWallpaper = false
         populateWallpaperText()
@@ -351,14 +352,28 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun toggleKeyboardText() {
         prefs.autoShowKeyboard = !prefs.autoShowKeyboard
         populateKeyboardText()
-        requireActivity().recreate()
     }
 
     private fun updateTheme(themeColor: Int) {
         if (prefs.themeColor == themeColor) return
         prefs.themeColor = themeColor
         populateThemeColorText()
-        requireActivity().recreate()
+        when (prefs.themeColor) {
+            Constants.THEME_COLOR_BLACK -> {
+                if (prefs.dailyWallpaper) {
+                    setPlainWallpaper(requireContext(), android.R.color.white)
+                    viewModel.setWallpaperWorker()
+                }
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            else -> {
+                if (prefs.dailyWallpaper) {
+                    setPlainWallpaper(requireContext(), android.R.color.black)
+                    viewModel.setWallpaperWorker()
+                }
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+        }
     }
 
     private fun populateThemeColorText() {

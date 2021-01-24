@@ -170,10 +170,10 @@ fun resetDefaultLauncher(context: Context) {
     }
 }
 
-fun setBlackWallpaper(context: Context) {
+fun setPlainWallpaper(context: Context, color: Int) {
     try {
         val bitmap = Bitmap.createBitmap(1000, 2000, Bitmap.Config.ARGB_8888)
-        bitmap.eraseColor(context.getColor(android.R.color.black))
+        bitmap.eraseColor(context.getColor(color))
         val manager = WallpaperManager.getInstance(context)
         manager.setBitmap(bitmap)
         bitmap.recycle()
@@ -185,10 +185,6 @@ fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
     launcher.startAppDetailsActivity(intent?.component, userHandle, null, null)
-//    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-//    intent.addCategory(Intent.CATEGORY_DEFAULT)
-//    intent.data = Uri.parse("package:$packageName")
-//    context.startActivity(intent)
 }
 
 suspend fun getBitmapFromURL(src: String?): Bitmap? {

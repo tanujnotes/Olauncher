@@ -173,7 +173,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .build()
         WorkManager
             .getInstance(appContext)
-            .enqueueUniquePeriodicWork(Constants.WALLPAPER_WORKER_NAME, ExistingPeriodicWorkPolicy.KEEP, uploadWorkRequest)
+            .enqueueUniquePeriodicWork(Constants.WALLPAPER_WORKER_NAME, ExistingPeriodicWorkPolicy.REPLACE, uploadWorkRequest)
     }
 
     fun cancelWallpaperWorker() {
