@@ -30,13 +30,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         val prefs = Prefs(this)
         when (prefs.themeColor) {
             Constants.THEME_COLOR_BLACK -> setTheme(R.style.BlackTheme)
             else -> setTheme(R.style.WhiteTheme)
         }
 
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)

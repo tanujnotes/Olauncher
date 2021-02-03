@@ -262,10 +262,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
         else
-            @Suppress("DEPRECATION")
-            requireActivity().window.decorView.apply {
-                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            }
+            @Suppress("DEPRECATION", "InlinedApi")
+            if (prefs.themeColor == Constants.THEME_COLOR_BLACK)
+                requireActivity().window.decorView.apply {
+                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
+                            View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                }
+            else
+                requireActivity().window.decorView.apply {
+                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                }
     }
 
     private fun hideStatusBar() {
@@ -374,6 +382,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
         }
+        requireActivity().recreate()
     }
 
     private fun populateThemeColorText() {
