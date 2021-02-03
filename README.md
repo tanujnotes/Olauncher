@@ -1,3 +1,5 @@
+![Olauncher](https://repository-images.githubusercontent.com/278638069/db0acb80-661b-11eb-803e-926cae5dccb4)
+
 
 # Olauncher | Minimal AF
 Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can also update your wallpaper daily, if you want.
@@ -13,7 +15,7 @@ Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can a
 Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher). You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. Or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
 ## What's next
-Nothing. It's perfect! 😁
+Text size and color changes.
 
 **Done**
 
