@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/olauncher_logo_rounded"
         android:supportsRtl="true"
-        android:theme="@style/LightTheme">
+        android:theme="@style/DarkTheme">
 
         <activity
             android:name=".MainActivity"
