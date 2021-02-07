@@ -53,5 +53,7 @@
     <string name="show_date_time">Show date time</string>
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
-    <string name="theme_color">Theme color</string>
+    <string name="theme_mode">Theme mode</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
 </resources>

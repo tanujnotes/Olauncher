@@ -434,7 +434,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:paddingVertical="8dp"
-                        android:text="@string/theme_color"
+                        android:text="@string/theme_mode"
                         android:textColor="?attr/primaryColor" />
 
                     <TextView
@@ -445,7 +445,7 @@
                         android:layout_gravity="end|bottom"
                         android:layout_marginEnd="16dp"
                         android:padding="8dp"
-                        android:text="@string/white"
+                        android:text="@string/dark"
                         android:textAllCaps="true" />
 
                     <!-- theme color select layout-->
@@ -470,24 +470,24 @@
                             android:layout_weight="1" />
 
                         <TextView
-                            android:id="@+id/themeWhite"
+                            android:id="@+id/themeDark"
                             style="@style/TextSmallBold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="24dp"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="@string/white"
+                            android:text="@string/dark"
                             android:textAllCaps="true" />
 
                         <TextView
-                            android:id="@+id/themeBlack"
+                            android:id="@+id/themeLight"
                             style="@style/TextSmallBold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="@string/black"
+                            android:text="@string/light"
                             android:textAllCaps="true" />
 
                     </LinearLayout>

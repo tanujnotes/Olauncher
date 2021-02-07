@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val prefs = Prefs(this)
         when (prefs.themeColor) {
-            Constants.THEME_COLOR_BLACK -> setTheme(R.style.BlackTheme)
-            else -> setTheme(R.style.WhiteTheme)
+            Constants.THEME_MODE_LIGHT -> setTheme(R.style.LightTheme)
+            else -> setTheme(R.style.DarkTheme)
         }
 
         super.onCreate(savedInstanceState)

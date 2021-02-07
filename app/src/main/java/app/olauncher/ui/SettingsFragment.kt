@@ -95,8 +95,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> toggleDateTime()
             R.id.themeColor -> themeColorSelectLayout.visibility = View.VISIBLE
-            R.id.themeBlack -> updateTheme(Constants.THEME_COLOR_BLACK)
-            R.id.themeWhite -> updateTheme(Constants.THEME_COLOR_WHITE)
+            R.id.themeLight -> updateTheme(Constants.THEME_MODE_LIGHT)
+            R.id.themeDark -> updateTheme(Constants.THEME_MODE_DARK)
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -155,8 +155,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
         themeColor.setOnClickListener(this)
-        themeBlack.setOnClickListener(this)
-        themeWhite.setOnClickListener(this)
+        themeLight.setOnClickListener(this)
+        themeDark.setOnClickListener(this)
 
         about.setOnClickListener(this)
         share.setOnClickListener(this)
@@ -263,16 +263,16 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
         else
             @Suppress("DEPRECATION", "InlinedApi")
-            if (prefs.themeColor == Constants.THEME_COLOR_BLACK)
+            if (prefs.themeColor == Constants.THEME_MODE_DARK)
+                requireActivity().window.decorView.apply {
+                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                }
+            else
                 requireActivity().window.decorView.apply {
                     systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                             View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
                             View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                }
-            else
-                requireActivity().window.decorView.apply {
-                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 }
     }
 
@@ -367,19 +367,19 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         prefs.themeColor = themeColor
         populateThemeColorText()
         when (prefs.themeColor) {
-            Constants.THEME_COLOR_BLACK -> {
-                if (prefs.dailyWallpaper) {
-                    setPlainWallpaper(requireContext(), android.R.color.white)
-                    viewModel.setWallpaperWorker()
-                }
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            else -> {
+            Constants.THEME_MODE_DARK -> {
                 if (prefs.dailyWallpaper) {
                     setPlainWallpaper(requireContext(), android.R.color.black)
                     viewModel.setWallpaperWorker()
                 }
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            else -> {
+                if (prefs.dailyWallpaper) {
+                    setPlainWallpaper(requireContext(), android.R.color.white)
+                    viewModel.setWallpaperWorker()
+                }
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
         requireActivity().recreate()
@@ -387,8 +387,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateThemeColorText() {
         when (prefs.themeColor) {
-            Constants.THEME_COLOR_BLACK -> themeColor.text = getString(R.string.black)
-            else -> themeColor.text = getString(R.string.white)
+            Constants.THEME_MODE_DARK -> themeColor.text = getString(R.string.dark)
+            else -> themeColor.text = getString(R.string.light)
         }
     }
 

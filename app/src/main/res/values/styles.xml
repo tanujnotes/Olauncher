@@ -33,7 +33,7 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
-    <style name="WhiteTheme" parent="AppTheme">
+    <style name="DarkTheme" parent="AppTheme">
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@android:color/darker_gray</item>
         <item name="colorAccent">@color/white</item>
@@ -48,7 +48,7 @@
         <item name="primaryShadeDarkColor">@color/whiteInverseTrans25</item>
     </style>
 
-    <style name="BlackTheme" parent="AppTheme">
+    <style name="LightTheme" parent="AppTheme">
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryDark">@android:color/darker_gray</item>
         <item name="colorAccent">@color/black</item>

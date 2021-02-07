@@ -349,16 +349,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
         else
             @Suppress("DEPRECATION", "InlinedApi")
-            if (prefs.themeColor == Constants.THEME_COLOR_BLACK)
+            if (prefs.themeColor == Constants.THEME_MODE_DARK)
+                requireActivity().window.decorView.apply {
+                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                }
+            else
                 requireActivity().window.decorView.apply {
                     systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                             View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                             View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
                             View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                }
-            else
-                requireActivity().window.decorView.apply {
-                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 }
     }
 

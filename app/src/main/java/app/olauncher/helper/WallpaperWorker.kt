@@ -17,7 +17,7 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
         if (date == Prefs(applicationContext).wallpaperUpdatedDay) Result.success()
 
         var wallType = Constants.WALL_TYPE_DARK
-        if (Prefs(applicationContext).themeColor == Constants.THEME_COLOR_BLACK)
+        if (Prefs(applicationContext).themeColor == Constants.THEME_MODE_LIGHT)
             wallType = Constants.WALL_TYPE_LIGHT
 
         val wallpaperUrl = getTodaysWallpaper(wallType)

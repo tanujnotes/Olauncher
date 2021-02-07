@@ -118,7 +118,7 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
 
     var themeColor: Int
-        get() = prefs.getInt(THEME_COLOR, Constants.THEME_COLOR_WHITE)
+        get() = prefs.getInt(THEME_COLOR, Constants.THEME_MODE_DARK)
         set(value) = prefs.edit().putInt(THEME_COLOR, value).apply()
 
     var screenTimeout: Int
