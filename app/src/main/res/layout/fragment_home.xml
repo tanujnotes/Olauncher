@@ -129,6 +129,24 @@
             android:tag="@string/_8"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/homeApp9"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/app"
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/homeApp10"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/app"
+            android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:visibility="gone" />
+
     </LinearLayout>
 
     <!-- First run tips -->

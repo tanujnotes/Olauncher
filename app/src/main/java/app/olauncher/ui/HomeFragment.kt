@@ -89,6 +89,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6, prefs.appName6.isNotEmpty())
             R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7, prefs.appName7.isNotEmpty())
             R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8, prefs.appName8.isNotEmpty())
+            R.id.homeApp9 -> showAppList(Constants.FLAG_SET_HOME_APP_9, prefs.appName9.isNotEmpty())
+            R.id.homeApp10 -> showAppList(Constants.FLAG_SET_HOME_APP_10, prefs.appName10.isNotEmpty())
         }
         return true
     }
@@ -129,6 +131,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.setOnTouchListener(getViewSwipeTouchListener(context, homeApp6))
         homeApp7.setOnTouchListener(getViewSwipeTouchListener(context, homeApp7))
         homeApp8.setOnTouchListener(getViewSwipeTouchListener(context, homeApp8))
+        homeApp9.setOnTouchListener(getViewSwipeTouchListener(context, homeApp9))
+        homeApp10.setOnTouchListener(getViewSwipeTouchListener(context, homeApp10))
     }
 
     private fun initClickListeners() {
@@ -149,6 +153,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.gravity = gravity
         homeApp7.gravity = gravity
         homeApp8.gravity = gravity
+        homeApp9.gravity = gravity
+        homeApp10.gravity = gravity
     }
 
     private fun populateHomeApps(appCountUpdated: Boolean) {
@@ -213,6 +219,20 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appName8 = ""
             prefs.appPackage8 = ""
         }
+        if (homeAppsNum == 8) return
+
+        homeApp9.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp9, prefs.appName9, prefs.appPackage9, prefs.appUser9)) {
+            prefs.appName9 = ""
+            prefs.appPackage9 = ""
+        }
+        if (homeAppsNum == 9) return
+
+        homeApp10.visibility = View.VISIBLE
+        if (!setHomeAppText(homeApp10, prefs.appName10, prefs.appPackage10, prefs.appUser10)) {
+            prefs.appName10 = ""
+            prefs.appPackage10 = ""
+        }
     }
 
     private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String): Boolean {
@@ -233,6 +253,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp6.visibility = View.GONE
         homeApp7.visibility = View.GONE
         homeApp8.visibility = View.GONE
+        homeApp9.visibility = View.GONE
+        homeApp10.visibility = View.GONE
 
         // Added as a potential fix to clock freeze issue
         dateTimeLayout.visibility = View.GONE

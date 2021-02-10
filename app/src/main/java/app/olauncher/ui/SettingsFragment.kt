@@ -107,6 +107,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.maxApps6 -> updateHomeAppsNum(6)
             R.id.maxApps7 -> updateHomeAppsNum(7)
             R.id.maxApps8 -> updateHomeAppsNum(8)
+            R.id.maxApps9 -> updateHomeAppsNum(9)
+            R.id.maxApps10 -> updateHomeAppsNum(10)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -173,6 +175,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         maxApps6.setOnClickListener(this)
         maxApps7.setOnClickListener(this)
         maxApps8.setOnClickListener(this)
+        maxApps9.setOnClickListener(this)
+        maxApps10.setOnClickListener(this)
 
         // Long click listeners
         dailyWallpaper.setOnLongClickListener(this)
