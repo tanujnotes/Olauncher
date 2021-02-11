@@ -136,6 +136,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:tag="@string/_9"
             android:visibility="gone" />
 
         <TextView
@@ -145,6 +146,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
+            android:tag="@string/_10"
             android:visibility="gone" />
 
     </LinearLayout>

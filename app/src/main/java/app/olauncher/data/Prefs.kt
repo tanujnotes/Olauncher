@@ -299,6 +299,8 @@ class Prefs(context: Context) {
             6 -> prefs.getString(APP_NAME_6, "").toString()
             7 -> prefs.getString(APP_NAME_7, "").toString()
             8 -> prefs.getString(APP_NAME_8, "").toString()
+            9 -> prefs.getString(APP_NAME_9, "").toString()
+            10 -> prefs.getString(APP_NAME_10, "").toString()
             else -> ""
         }
     }
@@ -313,6 +315,8 @@ class Prefs(context: Context) {
             6 -> prefs.getString(APP_PACKAGE_6, "").toString()
             7 -> prefs.getString(APP_PACKAGE_7, "").toString()
             8 -> prefs.getString(APP_PACKAGE_8, "").toString()
+            9 -> prefs.getString(APP_PACKAGE_9, "").toString()
+            10 -> prefs.getString(APP_PACKAGE_10, "").toString()
             else -> ""
         }
     }
@@ -327,6 +331,8 @@ class Prefs(context: Context) {
             6 -> prefs.getString(APP_USER_6, "").toString()
             7 -> prefs.getString(APP_USER_7, "").toString()
             8 -> prefs.getString(APP_USER_8, "").toString()
+            9 -> prefs.getString(APP_USER_9, "").toString()
+            10 -> prefs.getString(APP_USER_10, "").toString()
             else -> ""
         }
     }
