@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
         okGotIt.setOnClickListener {
             messageLayout.visibility = View.GONE
+            viewModel.showMessageDialog("")
         }
     }
 
@@ -107,6 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMessage(message: String) {
+        if (message.isEmpty()) return
         messageTextView.text = message
         messageLayout.visibility = View.VISIBLE
     }
