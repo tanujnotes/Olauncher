@@ -41,10 +41,10 @@
     <string name="app_drawer_tips">Tip: Swipe down to dismiss. Scroll to hide keyboard.</string>
     <string name="okay_got_it">Okay, got it</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
-    <string name="triple_tap_lock_message">Due to updated Android security rules, apps cannot lock some phones normally.
-        \nSo once you double-tap, screen will go black and the phone will lock itself in 5 seconds.
-        \nDuring this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.
-        \nNote: Turn this OFF if you decide to delete Olauncher. Thank you.</string>
+    <string name="triple_tap_lock_message">How it works:
+        \nOnce you double-tap, screen will go dark and the phone will lock itself in 5 seconds.
+        \n\nDuring this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.
+        \n\nNote: Turn this OFF first if you decide to delete Olauncher. Thank you.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
     <string name="status_bar">Show status bar</string>
@@ -55,13 +55,14 @@
     <string name="theme_mode">Theme mode</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="double_tap_lock_uninstall_message">Double tap to lock. Please disable this before uninstalling Olauncher.</string>
-    <string name="welcome_to_olauncher_settings">Welcome to Olauncher settings!
-        \n\nFor tips and answers to your queries, please visit our About page on the bottom.
+    <string name="double_tap_lock_uninstall_message">Double tap to lock enabled.
+        \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
+    <string name="welcome_to_olauncher_settings">Welcome to settings!
+        \n\nFor answers to your queries and amazing tips, please visit our About page on the bottom.
         \n\nThank you.</string>
     <string name="rate_us_message">Hi, if you like Olauncher, can you please rate us 5-stars?
-        \nBecause people who don\'t like Olauncher, are very quick to rate us, not 5-stars :D
+        \nBecause people who don\'t like Olauncher, are very quick to rate us, not 5-stars. :D
         \n\nYou won\'t see this message again. Thank you for using Olauncher.</string>
     <string name="share_message">Hi, do you think your friends would like Olauncher as much as you do?
-        \n\nYou can always find the Share the button at the bottom of this page. Thank you for using Olauncher.</string>
+        \n\nYou can always find the Share button at the bottom of this page. Thank you for using Olauncher.</string>
 </resources>
