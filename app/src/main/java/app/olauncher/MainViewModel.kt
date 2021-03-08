@@ -87,6 +87,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appUser8 = appModel.user.toString()
                 refreshHome(false)
             }
+            Constants.FLAG_SET_HOME_APP_9 -> {
+                prefs.appName9 = appModel.appLabel
+                prefs.appPackage9 = appModel.appPackage
+                prefs.appUser9 = appModel.user.toString()
+                refreshHome(false)
+            }
+            Constants.FLAG_SET_HOME_APP_10 -> {
+                prefs.appName10 = appModel.appLabel
+                prefs.appPackage10 = appModel.appPackage
+                prefs.appUser10 = appModel.user.toString()
+                refreshHome(false)
+            }
             Constants.FLAG_SET_SWIPE_LEFT_APP -> {
                 prefs.appNameSwipeLeft = appModel.appLabel
                 prefs.appPackageSwipeLeft = appModel.appPackage

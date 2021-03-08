@@ -185,6 +185,8 @@ class AppDrawerFragment : Fragment() {
             Constants.FLAG_SET_HOME_APP_6 -> Prefs(requireContext()).appName6 = name
             Constants.FLAG_SET_HOME_APP_7 -> Prefs(requireContext()).appName7 = name
             Constants.FLAG_SET_HOME_APP_8 -> Prefs(requireContext()).appName8 = name
+            Constants.FLAG_SET_HOME_APP_9 -> Prefs(requireContext()).appName9 = name
+            Constants.FLAG_SET_HOME_APP_10 -> Prefs(requireContext()).appName10 = name
         }
         findNavController().popBackStack()
     }
