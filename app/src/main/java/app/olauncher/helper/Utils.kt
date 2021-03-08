@@ -7,9 +7,11 @@ import android.content.Intent
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.graphics.*
+import android.net.Uri
 import android.os.UserHandle
 import android.os.UserManager
 import android.provider.AlarmClock
+import android.provider.CalendarContract
 import android.provider.MediaStore
 import android.util.Log
 import android.util.TypedValue
@@ -29,6 +31,7 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
+
 
 fun showToastLong(context: Context, message: String) {
     val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG)
@@ -326,11 +329,20 @@ fun openAlarmApp(context: Context) {
 
 fun openCalendar(context: Context) {
     try {
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
-        context.startActivity(intent)
-    } catch (e: java.lang.Exception) {
-
+        val cal: Calendar = Calendar.getInstance()
+        cal.time = Date()
+        val time = cal.time.time
+        val builder: Uri.Builder = CalendarContract.CONTENT_URI.buildUpon()
+        builder.appendPath("time")
+        builder.appendPath(time.toString())
+        context.startActivity(Intent(Intent.ACTION_VIEW, builder.build()))
+    } catch (e: Exception) {
+        try {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+        }
     }
 }
 
