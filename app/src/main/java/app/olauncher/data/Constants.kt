@@ -25,8 +25,8 @@ object Constants {
     const val REQUEST_CODE_ENABLE_ADMIN = 666
     const val REQUEST_CODE_EDIT_SETTINGS = 777
 
-    const val HINT_ABOUT_US = 5
-    const val HINT_RATE_US = 30
+    const val HINT_RATE_US = 25
+    const val HINT_SHARE = 50
 
     const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 600
@@ -37,7 +37,6 @@ object Constants {
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
 
     const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
-    const val URL_DARK_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/481074b27ad4dc2607326c97439bb3ac/raw/"
     const val URL_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/a3112c23b70279d331d7af28a6faf586/raw/"
     const val URL_DEFAULT_DARK_WALLPAPER = "https://images.unsplash.com/photo-1512551980832-13df02babc9e"
     const val URL_DEFAULT_LIGHT_WALLPAPER = "https://images.unsplash.com/photo-1515549832467-8783363e19b6"
