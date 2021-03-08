@@ -25,7 +25,6 @@ import app.olauncher.helper.showToastLong
 import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
-
 class AppDrawerFragment : Fragment() {
 
     override fun onCreateView(
@@ -137,7 +136,7 @@ class AppDrawerFragment : Fragment() {
     private fun appClickListener(viewModel: MainViewModel, flag: Int): (appModel: AppModel) -> Unit =
         { appModel ->
             viewModel.selectedApp(appModel, flag)
-            findNavController().popBackStack()
+            findNavController().popBackStack(R.id.mainFragment, false)
         }
 
     private fun appInfoListener(): (appModel: AppModel) -> Unit =
@@ -147,7 +146,7 @@ class AppDrawerFragment : Fragment() {
                 appModel.user,
                 appModel.appPackage
             )
-            findNavController().popBackStack()
+            findNavController().popBackStack(R.id.mainFragment, false)
         }
 
     private fun appShowHideListener(): (flag: Int, appModel: AppModel) -> Unit =
