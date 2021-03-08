@@ -94,14 +94,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initObservers() {
+        if (prefs.firstSettingsOpen) {
+            firstRunTips.visibility = View.VISIBLE
+            setDefaultLauncher.visibility = View.GONE
+        } else firstRunTips.visibility = View.GONE
+
         viewModel.refreshHome.observe(viewLifecycleOwner, {
             populateHomeApps(it)
-        })
-        viewModel.firstOpen.observe(viewLifecycleOwner, { isFirstOpen ->
-            if (isFirstOpen) {
-                firstRunTips.visibility = View.VISIBLE
-                setDefaultLauncher.visibility = View.GONE
-            } else firstRunTips.visibility = View.GONE
         })
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
             if (firstRunTips.visibility == View.VISIBLE) return@Observer
