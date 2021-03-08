@@ -67,12 +67,8 @@ class AppDrawerFragment : Fragment() {
         if (flag == Constants.FLAG_HIDDEN_APPS) search.queryHint = "Hidden apps"
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val app = appAdapter.getTopApp()
-                if (app != null) {
-                    viewModel.selectedApp(app, Constants.FLAG_LAUNCH_APP)
-                    findNavController().popBackStack()
-                }
-                return true
+                appAdapter.launchFirstInList()
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -85,7 +81,7 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun initViewModel(flag: Int, viewModel: MainViewModel, appAdapter: AppDrawerAdapter) {
-        viewModel.hiddenApps.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+        viewModel.hiddenApps.observe(viewLifecycleOwner, Observer {
             if (flag != Constants.FLAG_HIDDEN_APPS) return@Observer
             if (it.isNullOrEmpty()) {
                 findNavController().popBackStack()
@@ -94,7 +90,7 @@ class AppDrawerFragment : Fragment() {
             populateAppList(it, appAdapter)
         })
 
-        viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+        viewModel.appList.observe(viewLifecycleOwner, Observer {
             if (flag == Constants.FLAG_HIDDEN_APPS) return@Observer
             if (it.isNullOrEmpty()) {
                 findNavController().popBackStack()
@@ -104,7 +100,7 @@ class AppDrawerFragment : Fragment() {
             populateAppList(it, appAdapter)
         })
 
-        viewModel.firstOpen.observe(viewLifecycleOwner, Observer {
+        viewModel.firstOpen.observe(viewLifecycleOwner, {
             if (it) appDrawerTip.visibility = View.VISIBLE
         })
     }
@@ -138,8 +134,7 @@ class AppDrawerFragment : Fragment() {
         appAdapter.setAppList(apps.toMutableList())
     }
 
-    private fun appClickListener(viewModel: MainViewModel, flag: Int):
-                (appModel: AppModel) -> Unit =
+    private fun appClickListener(viewModel: MainViewModel, flag: Int): (appModel: AppModel) -> Unit =
         { appModel ->
             viewModel.selectedApp(appModel, flag)
             findNavController().popBackStack()

@@ -83,9 +83,9 @@ class AppDrawerAdapter(
         notifyDataSetChanged()
     }
 
-    fun getTopApp(): AppModel? {
-        return if (appFilteredList.size > 0) appFilteredList[0]
-        else null
+    fun launchFirstInList() {
+        if (appFilteredList.size > 0)
+            clickListener(appFilteredList[0])
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
