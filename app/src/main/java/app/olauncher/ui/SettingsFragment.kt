@@ -184,6 +184,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun initObservers() {
         if (prefs.firstSettingsOpen) {
             prefs.firstSettingsOpen = false
+            viewModel.showMessageDialog(getString(R.string.welcome_to_olauncher_settings))
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, {
             if (it) {

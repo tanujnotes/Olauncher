@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:text="@string/app_name"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="?attr/primaryColor" />
 
             <TextView
                 android:id="@+id/messageTextView"
@@ -56,7 +56,7 @@
                 android:layout_marginTop="16dp"
                 android:lineSpacingExtra="1dp"
                 android:text="@string/double_tap_lock_is_enabled_message"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="?attr/primaryColor" />
 
             <TextView
                 android:id="@+id/okGotIt"

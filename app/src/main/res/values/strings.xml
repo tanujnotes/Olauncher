@@ -42,8 +42,9 @@
     <string name="okay_got_it">Okay, got it</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
     <string name="triple_tap_lock_message">Due to updated Android security rules, apps cannot lock some phones normally.
-        \nSo once you double tap to lock, screen will go black and the phone will lock itself in 5 seconds.
-        \nDuring this time, you can double tap to unlock. You can also triple tap anytime to fully lock the phone immediately.</string>
+        \nSo once you double-tap, screen will go black and the phone will lock itself in 5 seconds.
+        \nDuring this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.
+        \nNote: Turn this OFF if you decide to delete Olauncher. Thank you.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
     <string name="about_hint">Tip: About has answers to your questions.</string>
@@ -56,4 +57,8 @@
     <string name="theme_mode">Theme mode</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
+    <string name="double_tap_lock_uninstall_message">Double tap to lock. Please disable this before uninstalling Olauncher.</string>
+    <string name="welcome_to_olauncher_settings">Welcome to Olauncher settings!
+        \n\nFor tips and answers to your queries, please visit our About page on the bottom.
+        \nThank you.</string>
 </resources>

@@ -9,7 +9,6 @@ import android.provider.Settings
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -52,10 +51,6 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
         okGotIt.setOnClickListener {
             messageLayout.visibility = View.GONE
-            showToastLong(
-                this,
-                "Double tap to lock. Please disable this before uninstalling Olauncher."
-            )
         }
     }
 
@@ -75,8 +70,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers(viewModel: MainViewModel) {
-        viewModel.launcherResetFailed.observe(this, Observer {
+        viewModel.launcherResetFailed.observe(this, {
             openLauncherChooser(it)
+        })
+        viewModel.showMessageDialog.observe(this, {
+            showMessage(it)
         })
     }
 
@@ -122,22 +120,14 @@ class MainActivity : AppCompatActivity() {
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
                         showMessage(getString(R.string.double_tap_lock_is_enabled_message))
                     else
-                        showToastLong(
-                            this,
-                            "Double tap to lock. Please disable this before uninstalling Olauncher."
-                        )
+                        showMessage(getString(R.string.double_tap_lock_uninstall_message))
                 }
             }
 
             Constants.REQUEST_CODE_EDIT_SETTINGS -> {
                 if (!Prefs(this).lockModeOn) return
-                if (Settings.System.canWrite(this)) {
-                    showMessage(getString(R.string.triple_tap_lock_message))
-                    // Save the existing screen off timeout
-//                    val screenTimeoutInSettings =
-//                        Settings.System.getInt(contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-//                    if (screenTimeoutInSettings >= 5000) Prefs(this).screenTimeout = screenTimeoutInSettings
-                } else
+                if (Settings.System.canWrite(this))
+                    showMessage(getString(R.string.triple_tap_lock_message)) else
                     showToastShort(this, "Settings permission denied")
             }
         }

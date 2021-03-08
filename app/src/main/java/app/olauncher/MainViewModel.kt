@@ -29,6 +29,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
+    val showMessageDialog = MutableLiveData<String>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -185,5 +186,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateHomeAlignment(gravity: Int) {
         prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
+    }
+
+    fun showMessageDialog(message: String) {
+        showMessageDialog.postValue(message)
     }
 }
