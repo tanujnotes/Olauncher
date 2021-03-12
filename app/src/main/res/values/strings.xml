@@ -57,8 +57,7 @@
     <string name="light">Light</string>
     <string name="double_tap_lock_uninstall_message">Double tap to lock enabled.
         \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
-    <string name="welcome_to_olauncher_settings">Welcome to settings!
-        \n\nFor answers to your queries and amazing tips, please visit our About page on the bottom.
+    <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
     <string name="rate_us_message">Hi, if you like Olauncher, can you please rate us 5-stars?
         \nBecause people who don\'t like Olauncher, are very quick to rate us, not 5-stars. :D
