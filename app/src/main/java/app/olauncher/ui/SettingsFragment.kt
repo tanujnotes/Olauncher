@@ -25,9 +25,6 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
-    private val APPEARANCE = 0
-    private val GESTURES = 1
-
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
@@ -78,8 +75,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.appearanceTab -> changeTabLayout(APPEARANCE)
-            R.id.gesturesTab -> changeTabLayout(GESTURES)
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.doubleTapText -> openEditSettingsPermission()
@@ -133,11 +128,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun initClickListeners() {
         olauncherHiddenApps.setOnClickListener(this)
-        rootLayout.setOnClickListener(this)
+        scrollLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
-        appearanceTab.setOnClickListener(this)
-        gesturesTab.setOnClickListener(this)
         autoShowKeyboard.setOnClickListener(this)
         toggleLock.setOnClickListener(this)
         doubleTapText.setOnClickListener(this)
@@ -197,20 +190,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.updateSwipeApps.observe(viewLifecycleOwner, {
             populateSwipeApps()
         })
-    }
-
-    private fun changeTabLayout(position: Int) {
-        if (position == APPEARANCE) {
-            gesturesLayout.visibility = View.GONE
-            gesturesTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans80))
-            appearanceTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            appearanceLayout.visibility = View.VISIBLE
-        } else if (position == GESTURES) {
-            appearanceLayout.visibility = View.GONE
-            appearanceTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans80))
-            gesturesTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            gesturesLayout.visibility = View.VISIBLE
-        }
     }
 
     private fun toggleSwipeLeft() {

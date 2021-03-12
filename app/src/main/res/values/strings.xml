@@ -3,7 +3,7 @@
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
-    <string name="double_tap_to_lock_screen">Double tap to lock screen</string>
+    <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="experimental_">(experimental)</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly.</string>
     <string name="about">About</string>
