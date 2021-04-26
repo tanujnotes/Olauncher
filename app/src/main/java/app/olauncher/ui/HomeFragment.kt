@@ -248,7 +248,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun launchApp(appName: String, packageName: String, userString: String) {
         viewModel.selectedApp(
-            AppModel(appName, packageName, getUserHandleFromString(requireContext(), userString)),
+            AppModel(appName, null, packageName, getUserHandleFromString(requireContext(), userString)),
             Constants.FLAG_LAUNCH_APP
         )
     }

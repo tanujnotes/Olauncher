@@ -30,6 +30,7 @@ import org.json.JSONObject
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import java.text.Collator
 import java.util.*
 
 
@@ -55,16 +56,17 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
 
             val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
             val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+            val collator = Collator.getInstance()
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
                     if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
                         and (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
                     )
-                        appList.add(AppModel(app.label.toString(), app.applicationInfo.packageName, profile))
+                        appList.add(AppModel(app.label.toString(), collator.getCollationKey(app.label.toString()), app.applicationInfo.packageName, profile))
                 }
             }
-            appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+            appList.sort()
 
         } catch (e: java.lang.Exception) {
         }
@@ -82,6 +84,7 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
         if (hiddenAppsSet.isEmpty()) return@withContext appList
 
         val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+        val collator = Collator.getInstance()
         for (hiddenPackage in hiddenAppsSet) {
             try {
                 val appPackage = hiddenPackage.split("|")[0]
@@ -93,12 +96,13 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
 
                 val appInfo = pm.getApplicationInfo(appPackage, 0)
                 val appName = pm.getApplicationLabel(appInfo).toString()
-                appList.add(AppModel(appName, appPackage, userHandle))
+                val appKey = collator.getCollationKey(appName)
+                appList.add(AppModel(appName, appKey, appPackage, userHandle))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-        appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+        appList.sort()
         appList
     }
 }
