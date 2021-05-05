@@ -50,9 +50,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P)
-            experimental.visibility = View.GONE
-
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateKeyboardText()
         populateLockSettings()
@@ -77,8 +74,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
-            R.id.doubleTapText -> openEditSettingsPermission()
-            R.id.experimental -> openEditSettingsPermission()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
@@ -122,6 +117,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.dailyWallpaper -> removeWallpaper()
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
+            R.id.toggleLock -> {
+                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                deviceManager.removeActiveAdmin(componentName) // for backward compatibility
+            }
         }
         return true
     }
@@ -133,8 +132,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         setLauncher.setOnClickListener(this)
         autoShowKeyboard.setOnClickListener(this)
         toggleLock.setOnClickListener(this)
-        doubleTapText.setOnClickListener(this)
-        experimental.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
@@ -166,17 +163,16 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         maxApps7.setOnClickListener(this)
         maxApps8.setOnClickListener(this)
 
-        // Long click listeners
         dailyWallpaper.setOnLongClickListener(this)
         alignment.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
         swipeRightApp.setOnLongClickListener(this)
+        toggleLock.setOnLongClickListener(this)
     }
 
     private fun initObservers() {
         if (prefs.firstSettingsOpen) {
             prefs.firstSettingsOpen = false
-            viewModel.showMessageDialog(getString(R.string.welcome_to_olauncher_settings))
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, {
             if (it) {
@@ -283,29 +279,40 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun checkAdminPermission() {
         val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
-        prefs.lockModeOn = isAdmin
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P)
+            prefs.lockModeOn = isAdmin
     }
 
     private fun toggleLockMode() {
-        val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
-        if (isAdmin) {
-            deviceManager.removeActiveAdmin(componentName)
-            prefs.lockModeOn = false
-            populateLockSettings()
-            showToastShort(requireContext(), "Admin permission removed.")
-            if (Settings.System.canWrite(requireContext())) {
-                openEditSettingsPermission()
-                showToastLong(requireContext(), "You can remove settings permission too.")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            when {
+                prefs.lockModeOn -> {
+                    prefs.lockModeOn = false
+                    deviceManager.removeActiveAdmin(componentName) // for backward compatibility
+                }
+                isAccessServiceEnabled(requireContext()) -> prefs.lockModeOn = true
+                else -> {
+                    showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
+                    startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                }
             }
         } else {
-            val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
-            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
-            intent.putExtra(
-                DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-                getString(R.string.admin_permission_message)
-            )
-            activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
+            val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
+            if (isAdmin) {
+                deviceManager.removeActiveAdmin(componentName)
+                prefs.lockModeOn = false
+                showToastShort(requireContext(), "Admin permission removed.")
+            } else {
+                val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
+                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
+                intent.putExtra(
+                    DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                    getString(R.string.admin_permission_message)
+                )
+                activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
+            }
         }
+        populateLockSettings()
     }
 
     private fun removeWallpaper() {
@@ -478,11 +485,5 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 share.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
             }
         }
-    }
-
-    private fun openEditSettingsPermission() {
-        val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-        intent.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
-        activity?.startActivityForResult(intent, Constants.REQUEST_CODE_EDIT_SETTINGS)
     }
 }

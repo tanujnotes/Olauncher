@@ -570,28 +570,13 @@
                 android:layout_marginTop="16dp"
                 android:visibility="visible">
 
-                <LinearLayout
+                <TextView
+                    style="@style/TextMedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingVertical="8dp">
-
-                    <TextView
-                        android:id="@+id/doubleTapText"
-                        style="@style/TextMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/double_tap_to_lock_screen"
-                        android:textColor="?attr/primaryColor" />
-
-                    <TextView
-                        android:id="@+id/experimental"
-                        style="@style/TextMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="@string/experimental_" />
-                </LinearLayout>
+                    android:paddingVertical="8dp"
+                    android:text="@string/double_tap_to_lock_screen"
+                    android:textColor="?attr/primaryColor" />
 
                 <TextView
                     android:id="@+id/toggleLock"

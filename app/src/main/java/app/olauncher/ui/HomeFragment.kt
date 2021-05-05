@@ -3,6 +3,7 @@ package app.olauncher.ui
 import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -22,14 +23,11 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
-import app.olauncher.listener.LockTouchListener
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
-
-    private val LOCK_SCREEN_TIMEOUT = 5000 // 5 seconds
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
@@ -57,14 +55,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onResume() {
         super.onResume()
-        blackOverlay.visibility = View.GONE
         populateHomeApps(false)
         viewModel.isOlauncherDefault()
-        showNavBarAndResetScreenTimeout()
+        if (prefs.showStatusBar) showStatusBar()
+        else hideStatusBar()
     }
 
     override fun onClick(view: View) {
         when (view.id) {
+            R.id.lock -> {
+            }
             R.id.clock -> openAlarmApp(requireContext())
             R.id.date -> openCalendar(requireContext())
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
@@ -119,7 +119,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun initSwipeTouchListener() {
         val context = requireContext()
         mainLayout.setOnTouchListener(getSwipeGestureListener(context))
-        blackOverlay.setOnTouchListener(getLockScreenGestureListener(context))
         homeApp1.setOnTouchListener(getViewSwipeTouchListener(context, homeApp1))
         homeApp2.setOnTouchListener(getViewSwipeTouchListener(context, homeApp2))
         homeApp3.setOnTouchListener(getViewSwipeTouchListener(context, homeApp3))
@@ -131,6 +130,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initClickListeners() {
+        lock.setOnClickListener(this)
         clock.setOnClickListener(this)
         date.setOnClickListener(this)
         setDefaultLauncher.setOnClickListener(this)
@@ -310,39 +310,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun showNavBarAndResetScreenTimeout() {
-        if (Settings.System.canWrite(requireContext())) {
-            val screenTimeoutInSettings =
-                Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-            if (screenTimeoutInSettings <= LOCK_SCREEN_TIMEOUT)
-                Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout)
-            else
-                Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, screenTimeoutInSettings)
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
-        } else
-            requireActivity().window.decorView.apply {
-                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            }
-        // populate status bar
-        if (prefs.showStatusBar) showStatusBar()
-        else hideStatusBar()
-    }
-
-    private fun hideNavBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
-            requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
-        } else {
-            @Suppress("DEPRECATION")
-            requireActivity().window.decorView.apply {
-                systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            }
-        }
-    }
-
     private fun showStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
@@ -370,16 +337,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN
             }
         }
-    }
-
-    private fun setScreenTimeout() {
-        // Save the existing screen off timeout
-        val screenTimeoutInSettings =
-            Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-        if (screenTimeoutInSettings >= LOCK_SCREEN_TIMEOUT) prefs.screenTimeout = screenTimeoutInSettings
-
-        // Set timeout to 5 seconds
-        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, LOCK_SCREEN_TIMEOUT)
     }
 
     private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")
@@ -420,18 +377,20 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             }
 
             override fun onDoubleClick() {
-                if (prefs.lockModeOn) {
-                    if (Settings.System.canWrite(requireContext())) {
-                        requireActivity().runOnUiThread {
-                            blackOverlay.visibility = View.VISIBLE
-                            setScreenTimeout()
-                            hideNavBar()
-                        }
-                    } else {
-                        lockPhone()
-                    }
-                }
                 super.onDoubleClick()
+                if (prefs.lockModeOn)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        requireActivity().runOnUiThread {
+                            if (isAccessServiceEnabled(requireContext()))
+                                lock.performClick()
+                            else {
+                                prefs.lockModeOn = false
+                                showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
+                                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                            }
+                        }
+                    } else
+                        lockPhone()
             }
 
             override fun onTripleClick() {
@@ -471,23 +430,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onClick(view: View) {
                 super.onClick(view)
                 textOnClick(view)
-            }
-        }
-    }
-
-    private fun getLockScreenGestureListener(context: Context): View.OnTouchListener {
-        return object : LockTouchListener(context) {
-            override fun onDoubleClick() {
-                requireActivity().runOnUiThread {
-                    blackOverlay.visibility = View.GONE
-                    showNavBarAndResetScreenTimeout()
-                }
-                super.onDoubleClick()
-            }
-
-            override fun onTripleClick() {
-                if (prefs.lockModeOn) lockPhone()
-                super.onTripleClick()
             }
         }
     }

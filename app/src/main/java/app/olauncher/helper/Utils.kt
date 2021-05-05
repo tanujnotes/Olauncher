@@ -13,6 +13,7 @@ import android.os.UserManager
 import android.provider.AlarmClock
 import android.provider.CalendarContract
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -344,6 +345,11 @@ fun openCalendar(context: Context) {
         } catch (e: Exception) {
         }
     }
+}
+
+fun isAccessServiceEnabled(context: Context): Boolean {
+    val prefString: String = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+    return prefString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
 }
 
 @ColorInt

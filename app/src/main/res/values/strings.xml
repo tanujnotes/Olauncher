@@ -59,9 +59,10 @@
         \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
-    <string name="rate_us_message">Hi, if you like Olauncher, can you please rate us 5-stars?
-        \nBecause people who don\'t like Olauncher, are very quick to rate us, not 5-stars. :D
-        \n\nYou won\'t see this message again. Thank you for using Olauncher.</string>
+    <string name="rate_us_message">Hi, if you find Olauncher useful, can you please rate us 5-stars? :)
+        \nYou won\'t see this message again. Thank you for using Olauncher.</string>
     <string name="share_message">Hi, do you think your friends would like Olauncher as much as you do?
         \n\nYou can always find the Share button at the bottom of this page. Thank you for using Olauncher.</string>
+    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
+    <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
 </resources>
