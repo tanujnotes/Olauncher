@@ -14,9 +14,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.isAccessServiceEnabled
+import app.olauncher.helper.isTablet
 import app.olauncher.helper.showToastLong
-import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -81,10 +80,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupOrientation() {
+        if (isTablet(this)) return
         // In Android 8.0, windowIsTranslucent cannot be used with screenOrientation=portrait
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O)
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        }
     }
 
     private fun backToHomeScreen() {

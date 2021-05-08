@@ -14,6 +14,7 @@ import android.provider.AlarmClock
 import android.provider.CalendarContract
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -32,6 +33,8 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 
 fun showToastLong(context: Context, message: String) {
@@ -350,6 +353,17 @@ fun openCalendar(context: Context) {
 fun isAccessServiceEnabled(context: Context): Boolean {
     val prefString: String = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
     return prefString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
+}
+
+fun isTablet(context: Context): Boolean {
+    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val metrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(metrics)
+    val widthInches = metrics.widthPixels / metrics.xdpi
+    val heightInches = metrics.heightPixels / metrics.ydpi
+    val diagonalInches = sqrt(widthInches.toDouble().pow(2.0) + heightInches.toDouble().pow(2.0))
+    if (diagonalInches >= 7.0) return true
+    return false
 }
 
 @ColorInt
