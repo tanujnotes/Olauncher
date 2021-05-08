@@ -9,7 +9,7 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:overScrollMode="never"
-    android:paddingVertical="48dp">
+    android:paddingVertical="56dp">
 
     <LinearLayout
         android:id="@+id/scrollLayout"
@@ -22,11 +22,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/rounded_rect_shade_color"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -64,12 +65,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="12dp"
             android:background="@drawable/rounded_rect_shade_color"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 style="@style/TextLarge"
@@ -113,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:animateLayoutChanges="true"
-                    android:background="?attr/primaryColorInverseTrans90"
+                    android:background="@drawable/rounded_primary_gradient"
                     android:elevation="8dp"
                     android:orientation="horizontal"
                     android:outlineAmbientShadowColor="@color/colorPrimaryDark"
@@ -358,7 +360,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:animateLayoutChanges="true"
-                    android:background="@drawable/rounded_rect_shade_color"
+                    android:background="@drawable/rounded_primary_gradient"
                     android:elevation="8dp"
                     android:orientation="horizontal"
                     android:outlineAmbientShadowColor="@color/colorPrimaryDark"
@@ -444,7 +446,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:animateLayoutChanges="true"
-                    android:background="@drawable/rounded_rect_shade_color"
+                    android:background="@drawable/rounded_primary_gradient"
                     android:elevation="8dp"
                     android:orientation="horizontal"
                     android:outlineAmbientShadowColor="@color/colorPrimaryDark"
@@ -489,11 +491,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/rounded_rect_shade_color"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 style="@style/TextLarge"
@@ -593,7 +596,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="12dp"
             android:background="@drawable/rounded_rect_shade_color"
             android:orientation="horizontal"
             android:paddingHorizontal="4dp">
