@@ -40,8 +40,10 @@
             style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
             android:format12Hour="EEE, dd MMM"
             android:format24Hour="EEE, dd MMM"
+            android:letterSpacing="0.02"
             android:textSize="@dimen/date_size" />
     </LinearLayout>
 
