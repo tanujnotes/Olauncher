@@ -351,8 +351,12 @@ fun openCalendar(context: Context) {
 }
 
 fun isAccessServiceEnabled(context: Context): Boolean {
-    val prefString: String = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
-    return prefString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
+    val enabled = Settings.Secure.getInt(context.applicationContext.contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED)
+    if (enabled == 1) {
+        val prefString: String = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+        return prefString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
+    }
+    return false
 }
 
 fun isTablet(context: Context): Boolean {
