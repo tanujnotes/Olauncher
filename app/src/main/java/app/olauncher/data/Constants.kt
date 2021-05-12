@@ -24,7 +24,7 @@ object Constants {
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
 
-    const val HINT_RATE_US = 25
+    const val HINT_RATE_US = 30
     const val HINT_SHARE = 50
 
     const val TRIPLE_TAP_DELAY_MS = 300
