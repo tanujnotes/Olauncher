@@ -11,6 +11,7 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import kotlinx.android.synthetic.main.adapter_app_drawer.view.*
+import java.text.Normalizer
 
 class AppDrawerAdapter(
     private var flag: Int,
@@ -73,7 +74,9 @@ class AppDrawerAdapter(
 
     private fun appLabelMatches(appLabel: String, searchChars: String): Boolean {
         return (appLabel.contains(searchChars, true) or
-                appLabel.replace(Regex("[-_+,. ]"), "")
+                Normalizer.normalize(appLabel, Normalizer.Form.NFD)
+                        .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
+                        .replace(Regex("[-_+,. ]"), "")
                     .contains(searchChars, true))
     }
 
