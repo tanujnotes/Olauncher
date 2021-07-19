@@ -64,11 +64,29 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
                 for (app in launcherApps.getActivityList(null, profile)) {
                     if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
                         and (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
-                    )
-                        appList.add(AppModel(app.label.toString(), app.applicationInfo.packageName, profile))
+                    ) {
+                        val label = app.label.toString()
+                        appList.add(
+                            AppModel(
+                                label,
+                                app.applicationInfo.packageName,
+                                profile,
+                                Prefs(context).getAppAlias(label)
+                            )
+                        )
+                    }
                 }
             }
-            appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+
+
+            //appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+            appList.sortBy {
+                if (it.appAlias.isEmpty()) {
+                    it.appLabel.toLowerCase(Locale.ROOT)
+                } else {
+                    it.appAlias.toLowerCase(Locale.ROOT)
+                }
+            }
 
         } catch (e: java.lang.Exception) {
         }
@@ -97,7 +115,7 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
 
                 val appInfo = pm.getApplicationInfo(appPackage, 0)
                 val appName = pm.getApplicationLabel(appInfo).toString()
-                appList.add(AppModel(appName, appPackage, userHandle))
+                appList.add(AppModel(appName, appPackage, userHandle, Prefs(context).getAppAlias(appName)))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
