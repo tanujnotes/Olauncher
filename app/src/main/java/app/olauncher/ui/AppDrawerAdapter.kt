@@ -70,8 +70,17 @@ class AppDrawerAdapter(
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val searchChars = constraint.toString()
+/*                 val appFilteredList = (if (searchChars.isEmpty()) appsList
+ *                 else appsList.filter { app -> appLabelMatches(app.appLabel, searchChars) } as MutableList<AppModel>)
+ *  */
                 val appFilteredList = (if (searchChars.isEmpty()) appsList
-                else appsList.filter { app -> appLabelMatches(app.appLabel, searchChars) } as MutableList<AppModel>)
+                else appsList.filter { app ->
+                    if (app.appAlias.isEmpty()) {
+                        appLabelMatches(app.appLabel, searchChars)
+                    } else {
+                        appLabelMatches(app.appAlias, searchChars)
+                    }
+                } as MutableList<AppModel>)
 
                 val filterResults = FilterResults()
                 filterResults.values = appFilteredList
