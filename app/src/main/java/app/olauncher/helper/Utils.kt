@@ -65,6 +65,7 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
+<<<<<<< HEAD
                     if (showHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
                         appList.add(
                             AppModel(
@@ -72,7 +73,8 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
                                 collator.getCollationKey(app.label.toString()),
                                 app.applicationInfo.packageName,
                                 app.componentName.className,
-                                profile
+                                profile,
+                                Prefs(context).getAppAlias(label)
                             )
                         )
                     else if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
@@ -84,12 +86,20 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
                                 collator.getCollationKey(app.label.toString()),
                                 app.applicationInfo.packageName,
                                 app.componentName.className,
-                                profile
+                                profile,
+                                Prefs(context).getAppAlias(label)
                             )
                         )
                 }
             }
-            appList.sort()
+
+            appList.sortBy {
+                if (it.appAlias.isEmpty()) {
+                    it.appLabel.toLowerCase(Locale.ROOT)
+                } else {
+                    it.appAlias.toLowerCase(Locale.ROOT)
+                }
+            }
 
         } catch (e: java.lang.Exception) {
         }
@@ -121,7 +131,7 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
                 val appName = pm.getApplicationLabel(appInfo).toString()
                 val appKey = collator.getCollationKey(appName)
                 // TODO: hidden apps settings ignore activity name for backward compatibility. Fix it.
-                appList.add(AppModel(appName, appKey, appPackage, "", userHandle))
+                appList.add(AppModel(appName, appKey, appPackage, "", userHandle, Prefs(context).getAppAlias(appName))
             } catch (e: Exception) {
                 e.printStackTrace()
             }

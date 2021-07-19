@@ -253,7 +253,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 null,
                 packageName,
                 appActivity,
-                getUserHandleFromString(requireContext(), userString)
+                getUserHandleFromString(requireContext(), userString),
+                Prefs(requireContext()).getAppAlias(appName)
             ),
             Constants.FLAG_LAUNCH_APP
         )

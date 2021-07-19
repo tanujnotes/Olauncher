@@ -3,6 +3,7 @@ package app.olauncher.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
@@ -10,15 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
+import app.olauncher.data.Prefs
 import kotlinx.android.synthetic.main.adapter_app_drawer.view.*
 import java.text.Normalizer
+import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 class AppDrawerAdapter(
     private var flag: Int,
     private val appLabelGravity: Int,
     private val clickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
-    private val appHideListener: (Int, AppModel) -> Unit
+    private val appHideListener: (Int, AppModel) -> Unit,
+    private val appRenameListener: (String, String) -> Unit
 ) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
     private var appFilter = createAppFilter()
@@ -42,6 +46,14 @@ class AppDrawerAdapter(
             notifyItemRemoved(holder.adapterPosition)
             appHideListener(flag, appModel)
         }
+
+        holder.appRenameButton.setOnClickListener {
+            val name = holder.appRenameEdit.text.toString().trim()
+            appModel.appAlias = name
+            notifyItemChanged(holder.adapterPosition)
+            appRenameListener(appModel.appLabel, appModel.appAlias)
+        }
+
         try { // Automatically open the app when there's only one search result
             if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP))
                 clickListener(appFilteredList[position])
@@ -95,6 +107,8 @@ class AppDrawerAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val appHideButton: TextView = itemView.appHide
+        val appRenameButton: TextView = itemView.appRename
+        val appRenameEdit: EditText = itemView.appRenameEdit
 
         fun bind(
             flag: Int,
@@ -106,7 +120,13 @@ class AppDrawerAdapter(
             with(itemView) {
                 appHideLayout.visibility = View.GONE
                 appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
-                appTitle.text = appModel.appLabel
+
+                appTitle.text = if (appModel.appAlias.isEmpty()) {
+                    appModel.appLabel
+                } else {
+                    appModel.appAlias
+                }
+
                 appTitle.gravity = appLabelGravity
 
                 if (appModel.user == android.os.Process.myUserHandle())

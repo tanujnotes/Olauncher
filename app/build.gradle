@@ -56,4 +56,5 @@ dependencies {
 
     // Work Manager
     implementation "androidx.work:work-runtime-ktx:2.6.0"
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 }
