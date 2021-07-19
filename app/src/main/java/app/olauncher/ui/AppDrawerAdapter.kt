@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -129,6 +130,12 @@ class AppDrawerAdapter(
             with(itemView) {
                 appHideLayout.visibility = View.GONE
                 appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
+                // set current name as default text in EditText
+                appRenameEdit.text = if (appModel.appAlias.isEmpty()) {
+                    Editable.Factory.getInstance().newEditable(appModel.appLabel);
+                } else {
+                    Editable.Factory.getInstance().newEditable(appModel.appAlias);
+                }
 
                 appTitle.text = if (appModel.appAlias.isEmpty()) {
                     appModel.appLabel
