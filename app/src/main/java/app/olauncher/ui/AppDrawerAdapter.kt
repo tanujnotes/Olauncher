@@ -1,6 +1,7 @@
 package app.olauncher.ui
 
 import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.R
 import app.olauncher.data.AppModel
@@ -130,6 +132,27 @@ class AppDrawerAdapter(
             with(itemView) {
                 appHideLayout.visibility = View.GONE
                 appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
+
+                appRenameEdit.addTextChangedListener(object : TextWatcher {
+
+                    override fun afterTextChanged(s: Editable) {}
+
+                    override fun beforeTextChanged(s: CharSequence, start: Int,
+                                                   count: Int, after: Int) {
+                    }
+
+                    override fun onTextChanged(s: CharSequence, start: Int,
+                                               before: Int, count: Int) {
+                        if (appRenameEdit.text.isEmpty()) {
+                            appRenameButton.text = "Reset"
+                        } else if (appRenameEdit.text.toString() == appModel.appAlias || appRenameEdit.text.toString() == appModel.appLabel) {
+                            appRenameButton.text = "Cancel"
+                        } else {
+                            appRenameButton.text = "Rename"
+                        }
+                    }
+                })
+
                 // set current name as default text in EditText
                 appRenameEdit.text = if (appModel.appAlias.isEmpty()) {
                     Editable.Factory.getInstance().newEditable(appModel.appLabel);
