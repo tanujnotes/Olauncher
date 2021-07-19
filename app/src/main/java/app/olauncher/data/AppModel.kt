@@ -5,5 +5,6 @@ import android.os.UserHandle
 data class AppModel(
     val appLabel: String,
     val appPackage: String,
-    val user: UserHandle
+    val user: UserHandle,
+    var appAlias: String
 )

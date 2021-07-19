@@ -51,7 +51,8 @@ class AppDrawerFragment : Fragment() {
             Prefs(requireContext()).appLabelAlignment,
             appClickListener(viewModel, flag),
             appInfoListener(),
-            appShowHideListener()
+            appShowHideListener(),
+            appRenameListener()
         )
 
         val searchTextView = search.findViewById<TextView>(R.id.search_src_text)
@@ -170,6 +171,11 @@ class AppDrawerFragment : Fragment() {
                 showToastLong(requireContext(), "To see hidden apps, tap Olauncher text on the top.")
                 findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
             }
+        }
+    private fun appRenameListener(): (appName: String, appAlias: String) -> Unit =
+        { appName, appAlias ->
+            val prefs = Prefs(requireContext())
+            prefs.setAppAlias(appName, appAlias)
         }
 
     private fun renameListener(flag: Int) {

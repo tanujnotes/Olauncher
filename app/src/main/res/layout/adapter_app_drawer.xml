@@ -25,7 +25,7 @@
         android:gravity="center"
         android:src="@drawable/ic_outline_info_24" />
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appHideLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,13 +36,36 @@
         android:paddingHorizontal="@dimen/app_padding_vertical"
         android:visibility="gone">
 
+        <EditText
+            android:id="@+id/appRenameEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/appRename"
+            android:padding="@dimen/app_padding_vertical"/>
+
+        <TextView
+            android:id="@+id/appRename"
+            style="@style/TextSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/appHide"
+            android:padding="@dimen/app_padding_vertical"
+            android:text="@string/rename"
+            android:textAllCaps="true" />
+
         <TextView
             android:id="@+id/appHide"
             style="@style/TextSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/appInfo"
             android:padding="@dimen/app_padding_vertical"
             android:text="@string/hide"
             android:textAllCaps="true" />
@@ -51,12 +74,14 @@
             android:id="@+id/appInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:contentDescription="@string/app"
             android:padding="@dimen/app_padding_vertical"
             android:src="@drawable/ic_outline_info_24"
             app:tint="?attr/primaryColor" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
