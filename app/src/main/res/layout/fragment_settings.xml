@@ -9,7 +9,8 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:overScrollMode="never"
-    android:paddingVertical="56dp">
+    android:paddingVertical="64dp"
+    android:scrollbars="none">
 
     <LinearLayout
         android:id="@+id/scrollLayout"
@@ -53,7 +54,7 @@
 
             <TextView
                 android:id="@+id/setLauncher"
-                style="@style/TextMedium"
+                style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -91,7 +92,7 @@
                 android:clipToPadding="false">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -125,7 +126,7 @@
 
                     <TextView
                         android:id="@+id/maxApps0"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -135,7 +136,7 @@
 
                     <TextView
                         android:id="@+id/maxApps1"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -145,7 +146,7 @@
 
                     <TextView
                         android:id="@+id/maxApps2"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -155,7 +156,7 @@
 
                     <TextView
                         android:id="@+id/maxApps3"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -165,7 +166,7 @@
 
                     <TextView
                         android:id="@+id/maxApps4"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -175,7 +176,7 @@
 
                     <TextView
                         android:id="@+id/maxApps5"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -185,7 +186,7 @@
 
                     <TextView
                         android:id="@+id/maxApps6"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -195,7 +196,7 @@
 
                     <TextView
                         android:id="@+id/maxApps7"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -205,7 +206,7 @@
 
                     <TextView
                         android:id="@+id/maxApps8"
-                        style="@style/TextMedium"
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -224,7 +225,7 @@
                 android:animateLayoutChanges="true">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -252,7 +253,7 @@
 
                 <TextView
                     android:id="@+id/dailyWallpaperUrl"
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -278,7 +279,7 @@
                 android:animateLayoutChanges="true">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -305,7 +306,7 @@
                 android:animateLayoutChanges="true">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -334,7 +335,7 @@
                 android:clipToPadding="false">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -420,7 +421,7 @@
                 android:animateLayoutChanges="true">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -513,7 +514,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -543,7 +544,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -574,7 +575,7 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/TextMedium"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="8dp"
@@ -593,76 +594,69 @@
             </FrameLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="@drawable/rounded_rect_shade_color"
-            android:orientation="horizontal"
-            android:paddingHorizontal="4dp">
+            android:layout_marginTop="12dp"
+            android:overScrollMode="never"
+            android:scrollbars="none">
 
-            <TextView
-                android:id="@+id/about"
-                style="@style/TextSmallLight"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:padding="12dp"
-                android:text="@string/about" />
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/about"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/about" />
 
-            <TextView
-                android:id="@+id/share"
-                style="@style/TextSmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="@string/share" />
+                <TextView
+                    android:id="@+id/share"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/share" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/rate"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/rate" />
 
-            <TextView
-                android:id="@+id/rate"
-                style="@style/TextSmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="@string/rate" />
+                <TextView
+                    android:id="@+id/follow"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/follow" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                <TextView
+                    android:id="@+id/privacy"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/privacy" />
 
-            <TextView
-                android:id="@+id/tweet"
-                style="@style/TextSmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="@string/tweet" />
+                <TextView
+                    android:id="@+id/github"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/github" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/privacy"
-                style="@style/TextSmallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="@string/privacy" />
-
-        </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
 
     </LinearLayout>
 

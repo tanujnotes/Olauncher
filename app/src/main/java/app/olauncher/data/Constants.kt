@@ -32,6 +32,7 @@ object Constants {
 
     const val URL_ABOUT_OLAUNCHER = "https://www.notion.so/About-Olauncher-4843e398b05a455bb521b0665b26fbcd"
     const val URL_OLAUNCHER_PRIVACY = "https://www.notion.so/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
+    const val URL_OLAUNCHER_GITHUB = "https://www.github.com/tanujnotes/Olauncher"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
 

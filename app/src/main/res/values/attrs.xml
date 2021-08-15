@@ -7,6 +7,7 @@
     <attr name="primaryColorTrans80" format="color" />
     <attr name="primaryColorInverseTrans90" format="color" />
     <attr name="primaryColorInverseTrans80" format="color" />
+    <attr name="primaryColorInverseTrans50" format="color" />
     <attr name="primaryShadeColor" format="color" />
     <attr name="primaryShadeDarkColor" format="color" />
 </resources>
