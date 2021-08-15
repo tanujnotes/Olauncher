@@ -9,7 +9,8 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:overScrollMode="never"
-    android:paddingVertical="64dp"
+    android:paddingTop="64dp"
+    android:paddingBottom="56dp"
     android:scrollbars="none">
 
     <LinearLayout
