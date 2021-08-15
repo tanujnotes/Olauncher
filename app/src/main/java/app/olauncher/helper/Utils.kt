@@ -67,7 +67,14 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
                     if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
                         and (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
                     )
-                        appList.add(AppModel(app.label.toString(), collator.getCollationKey(app.label.toString()), app.applicationInfo.packageName, profile))
+                        appList.add(
+                            AppModel(
+                                app.label.toString(),
+                                collator.getCollationKey(app.label.toString()),
+                                app.applicationInfo.packageName,
+                                profile
+                            )
+                        )
                 }
             }
             appList.sort()
@@ -274,7 +281,10 @@ fun getScreenDimensions(context: Context): Pair<Int, Int> {
 suspend fun getTodaysWallpaper(wallType: String): String {
     return withContext(Dispatchers.IO) {
         var wallpaperUrl: String
-        val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        val calendar = Calendar.getInstance()
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val key = String.format("%d_%d", month % 3, day)
 
         try {
             val url = URL(Constants.URL_WALLPAPERS)
@@ -290,7 +300,7 @@ suspend fun getTodaysWallpaper(wallType: String): String {
             }
 
             val json = JSONObject(stringBuffer.toString())
-            val wallpapers = json.getString(day.toString())
+            val wallpapers = json.getString(key)
             val wallpapersJson = JSONObject(wallpapers)
             wallpaperUrl = wallpapersJson.getString(wallType)
             wallpaperUrl
@@ -355,9 +365,11 @@ fun openCalendar(context: Context) {
 }
 
 fun isAccessServiceEnabled(context: Context): Boolean {
-    val enabled = Settings.Secure.getInt(context.applicationContext.contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED)
+    val enabled =
+        Settings.Secure.getInt(context.applicationContext.contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED)
     if (enabled == 1) {
-        val prefString: String = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+        val prefString: String =
+            Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
         return prefString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
     }
     return false
