@@ -99,7 +99,7 @@
     </style>
 
     <style name="TextSmall" parent="TextDefault">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/text_small</item>
     </style>
 
     <style name="TextSmallBold" parent="TextSmall">
