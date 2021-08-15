@@ -86,7 +86,7 @@
         <item name="android:shadowColor">?attr/primaryTextShadowColor</item>
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowRadius">5</item>
     </style>
 
     <style name="TextLarge" parent="TextDefault">
