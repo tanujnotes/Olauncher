@@ -239,11 +239,11 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putString(APP_USER_8, value).apply()
 
     var appNameSwipeLeft: String
-        get() = prefs.getString(APP_NAME_SWIPE_LEFT, "CAMERA").toString()
+        get() = prefs.getString(APP_NAME_SWIPE_LEFT, "Camera").toString()
         set(value) = prefs.edit().putString(APP_NAME_SWIPE_LEFT, value).apply()
 
     var appNameSwipeRight: String
-        get() = prefs.getString(APP_NAME_SWIPE_RIGHT, "PHONE").toString()
+        get() = prefs.getString(APP_NAME_SWIPE_RIGHT, "Phone").toString()
         set(value) = prefs.edit().putString(APP_NAME_SWIPE_RIGHT, value).apply()
 
     var appPackageSwipeLeft: String

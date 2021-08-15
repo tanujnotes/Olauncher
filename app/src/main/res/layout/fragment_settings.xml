@@ -27,8 +27,7 @@
             android:layout_marginEnd="12dp"
             android:background="@drawable/rounded_rect_shade_color"
             android:orientation="vertical"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="12dp">
+            android:padding="12dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -71,8 +70,7 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="12dp">
+            android:padding="12dp">
 
             <TextView
                 style="@style/TextLarge"
@@ -107,8 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
-                    android:padding="8dp"
-                    android:textAllCaps="true" />
+                    android:padding="8dp" />
 
                 <!-- Home apps numbers layout-->
                 <LinearLayout
@@ -241,8 +238,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:padding="8dp"
-                    android:text="@string/on"
-                    android:textAllCaps="true" />
+                    android:text="@string/on" />
             </FrameLayout>
 
             <FrameLayout
@@ -268,8 +264,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:padding="8dp"
-                    android:text="@string/off"
-                    android:textAllCaps="true" />
+                    android:text="@string/off" />
             </FrameLayout>
 
             <FrameLayout
@@ -295,8 +290,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:padding="8dp"
-                    android:text="@string/off"
-                    android:textAllCaps="true" />
+                    android:text="@string/off" />
             </FrameLayout>
 
             <FrameLayout
@@ -322,8 +316,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:padding="8dp"
-                    android:text="@string/on"
-                    android:textAllCaps="true" />
+                    android:text="@string/on" />
             </FrameLayout>
 
             <FrameLayout
@@ -351,15 +344,13 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:padding="8dp"
-                    android:text="@string/left"
-                    android:textAllCaps="true" />
+                    android:text="@string/left" />
 
                 <!-- alignment layout-->
                 <LinearLayout
                     android:id="@+id/alignmentSelectLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
                     android:animateLayoutChanges="true"
                     android:background="@drawable/rounded_primary_gradient"
                     android:elevation="8dp"
@@ -384,8 +375,7 @@
                         android:layout_marginEnd="24dp"
                         android:gravity="center"
                         android:paddingVertical="6dp"
-                        android:text="@string/left"
-                        android:textAllCaps="true" />
+                        android:text="@string/left" />
 
                     <TextView
                         android:id="@+id/alignmentCenter"
@@ -396,8 +386,7 @@
                         android:layout_marginEnd="24dp"
                         android:gravity="center"
                         android:paddingVertical="6dp"
-                        android:text="@string/center"
-                        android:textAllCaps="true" />
+                        android:text="@string/center" />
 
                     <TextView
                         android:id="@+id/alignmentRight"
@@ -406,8 +395,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingVertical="6dp"
-                        android:text="@string/right"
-                        android:textAllCaps="true" />
+                        android:text="@string/right" />
 
                 </LinearLayout>
 
@@ -437,15 +425,13 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:padding="8dp"
-                    android:text="@string/dark"
-                    android:textAllCaps="true" />
+                    android:text="@string/dark" />
 
                 <!-- theme color select layout-->
                 <LinearLayout
                     android:id="@+id/themeColorSelectLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
                     android:animateLayoutChanges="true"
                     android:background="@drawable/rounded_primary_gradient"
                     android:elevation="8dp"
@@ -470,8 +456,7 @@
                         android:layout_marginEnd="24dp"
                         android:gravity="center"
                         android:paddingVertical="6dp"
-                        android:text="@string/dark"
-                        android:textAllCaps="true" />
+                        android:text="@string/dark" />
 
                     <TextView
                         android:id="@+id/themeLight"
@@ -480,8 +465,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:paddingVertical="6dp"
-                        android:text="@string/light"
-                        android:textAllCaps="true" />
+                        android:text="@string/light" />
 
                 </LinearLayout>
 
@@ -496,8 +480,7 @@
             android:layout_marginEnd="12dp"
             android:background="@drawable/rounded_rect_shade_color"
             android:orientation="vertical"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="12dp">
+            android:padding="12dp">
 
             <TextView
                 style="@style/TextLarge"
@@ -533,8 +516,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:lines="1"
-                    android:padding="8dp"
-                    android:textAllCaps="true" />
+                    android:padding="8dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -563,8 +545,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginEnd="4dp"
                     android:lines="1"
-                    android:padding="8dp"
-                    android:textAllCaps="true" />
+                    android:padding="8dp" />
             </LinearLayout>
 
             <FrameLayout
@@ -589,8 +570,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:padding="10dp"
-                    android:text="@string/off"
-                    android:textAllCaps="true" />
+                    android:text="@string/off" />
             </FrameLayout>
         </LinearLayout>
 
@@ -605,7 +585,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="8dp">
+                android:paddingHorizontal="16dp">
 
                 <TextView
                     android:id="@+id/about"

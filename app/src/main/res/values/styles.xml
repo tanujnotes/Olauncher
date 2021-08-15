@@ -5,6 +5,8 @@
         <item name="colorPrimaryDark">@android:color/white</item>
         <item name="colorAccent">@android:color/darker_gray</item>
 
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
         <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges
         </item>
         <item name="android:windowTranslucentStatus">true</item>
