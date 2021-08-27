@@ -37,6 +37,8 @@ object Constants {
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
 
     const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
+    const val URL_NOTIFY =
+        "https://gist.githubusercontent.com/tanujnotes/da9490348422979650ccb3ec9392a40f/raw/bd303aeb3f0a0e891df08f210044c2c8239d1844/Onotify"
     const val URL_WALLPAPERS =
         "https://gist.githubusercontent.com/tanujnotes/bf400a269746c5c124a599af040dd82e/raw/75ab507aebe537080f177ae1d2dedaebdb0fbb24/owalls2"
     const val URL_DEFAULT_DARK_WALLPAPER = "https://images.unsplash.com/photo-1512551980832-13df02babc9e"

@@ -44,6 +44,7 @@
             android:format12Hour="EEE, dd MMM"
             android:format24Hour="EEE, dd MMM"
             android:letterSpacing="0.02"
+            android:paddingHorizontal="2dp"
             android:textSize="@dimen/date_size" />
     </LinearLayout>
 

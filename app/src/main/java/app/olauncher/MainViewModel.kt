@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val appContext = application.applicationContext
+    private val appContext by lazy { application.applicationContext }
     private val prefs = Prefs(appContext)
 
     val firstOpen = MutableLiveData<Boolean>()
@@ -174,7 +174,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .build()
         WorkManager
             .getInstance(appContext)
-            .enqueueUniquePeriodicWork(Constants.WALLPAPER_WORKER_NAME, ExistingPeriodicWorkPolicy.REPLACE, uploadWorkRequest)
+            .enqueueUniquePeriodicWork(
+                Constants.WALLPAPER_WORKER_NAME,
+                ExistingPeriodicWorkPolicy.REPLACE,
+                uploadWorkRequest
+            )
     }
 
     fun cancelWallpaperWorker() {
