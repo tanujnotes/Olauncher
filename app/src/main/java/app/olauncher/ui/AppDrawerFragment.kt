@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -71,9 +72,10 @@ class AppDrawerFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                appAdapter.filter.filter(newText?.trim())
-                if (rename && newText?.trim()?.isNotEmpty()!!) appRename.visibility = View.VISIBLE
-                else appRename.visibility = View.GONE
+                newText?.let {
+                    appAdapter.filter.filter(it.trim())
+                    appRename.isVisible = rename && it.trim().isNotEmpty()
+                }
                 return false
             }
         })
