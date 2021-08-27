@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
+        android:animateLayoutChanges="true"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.SearchView
