@@ -135,7 +135,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         try {
             launcher.startMainActivity(component, userHandle, null, null)
         } catch (e: SecurityException) {
-            launcher.startMainActivity(component, android.os.Process.myUserHandle(), null, null)
+            try {
+                launcher.startMainActivity(component, android.os.Process.myUserHandle(), null, null)
+            } catch (e: Exception) {
+                showToastShort(appContext, "Unable to launch app")
+            }
         } catch (e: Exception) {
             showToastShort(appContext, "Unable to launch app")
         }

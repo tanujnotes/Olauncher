@@ -148,9 +148,8 @@ fun getUserHandleFromString(context: Context, userHandleString: String): UserHan
     return android.os.Process.myUserHandle()
 }
 
-fun isOlauncherDefault(context: Context?): Boolean {
-    val launcherPackageName =
-        getDefaultLauncherPackage(context!!)
+fun isOlauncherDefault(context: Context): Boolean {
+    val launcherPackageName = getDefaultLauncherPackage(context)
     return BuildConfig.APPLICATION_ID == launcherPackageName
 }
 
@@ -202,7 +201,9 @@ fun setPlainWallpaper(context: Context, color: Int) {
 fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
-    launcher.startAppDetailsActivity(intent?.component, userHandle, null, null)
+    intent?.let {
+        launcher.startAppDetailsActivity(intent.component, userHandle, null, null)
+    } ?: showToastShort(context, "Unable to to open app info")
 }
 
 suspend fun getBitmapFromURL(src: String?): Bitmap? {
