@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
-        okGotIt.setOnClickListener {
+        okay.setOnClickListener {
             messageLayout.visibility = View.GONE
             viewModel.showMessageDialog("")
         }
