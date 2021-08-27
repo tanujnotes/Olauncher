@@ -139,7 +139,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun setHomeAlignment(gravity: Int) {
         dateTimeLayout.gravity = gravity
         homeAppsLayout.gravity = gravity
-        setDefaultLauncher.gravity = gravity
         homeApp1.gravity = gravity
         homeApp2.gravity = gravity
         homeApp3.gravity = gravity
