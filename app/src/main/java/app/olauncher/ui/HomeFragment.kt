@@ -400,11 +400,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     } else
                         lockPhone()
             }
-
-            override fun onTripleClick() {
-                if (prefs.lockModeOn) lockPhone()
-                super.onTripleClick()
-            }
         }
     }
 
