@@ -30,10 +30,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val prefs = Prefs(this)
-        when (prefs.themeColor) {
-            Constants.THEME_MODE_LIGHT -> setTheme(R.style.LightTheme)
-            else -> setTheme(R.style.DarkTheme)
-        }
+
+//        when (prefs.themeColor) {
+//            Constants.THEME_MODE_LIGHT -> setTheme(R.style.LightTheme)
+//            else -> setTheme(R.style.DarkTheme)
+//        }
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_rounded"
         android:supportsRtl="true"
-        android:theme="@style/DarkTheme">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
