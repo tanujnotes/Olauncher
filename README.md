@@ -2,7 +2,7 @@
 
 
 # Olauncher | Minimal AF
-Olauncher is a minimal launcher app for Android. It can also update your wallpaper daily, if you want. AF stands for ad-free. :)
+Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF stands for ad-free. :)
 
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
@@ -12,9 +12,12 @@ Olauncher is a minimal launcher app for Android. It can also update your wallpap
     alt="Get it on F-Droid"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
-Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
+### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
-You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. 
+You can also clone the `master` branch and build the app yourself in Android Studio. No extra steps required.
+
+## Feature requests
+Olauncher's user interface is insanely simple. Features are chosen very carefully because complexity grows quadratically since every feature potentially interferes with other features. We focus very narrowly on one thing and one thing only - a distraction free minimal launcher. We are not trying to optimize for some edge-cases. We are optimizing the user flow of the average users. Please don't be sad if we decline your feature request for the sake of simplicity.
 
 ## Contribute
 * Please go through the issues marked as `send a PR :)`
