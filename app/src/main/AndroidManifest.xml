@@ -19,6 +19,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:configChanges="uiMode"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
             android:taskAffinity=""
@@ -60,8 +61,8 @@
         <service
             android:name=".helper.MyAccessibilityService"
             android:label="@string/app_name"
-            android:process=":serviceProcess"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:process=":serviceProcess">
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />

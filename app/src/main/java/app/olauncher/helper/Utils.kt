@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.*
 import android.net.Uri
 import android.os.UserHandle
@@ -385,6 +387,11 @@ fun isTablet(context: Context): Boolean {
     val diagonalInches = sqrt(widthInches.toDouble().pow(2.0) + heightInches.toDouble().pow(2.0))
     if (diagonalInches >= 7.0) return true
     return false
+}
+
+fun Context.isDarkThemeOn(): Boolean {
+    return resources.configuration.uiMode and
+            Configuration.UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES
 }
 
 @ColorInt

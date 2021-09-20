@@ -420,7 +420,7 @@
                     android:textColor="?attr/primaryColor" />
 
                 <TextView
-                    android:id="@+id/themeColor"
+                    android:id="@+id/appThemeText"
                     style="@style/TextSmallBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -431,7 +431,7 @@
 
                 <!-- theme color select layout-->
                 <LinearLayout
-                    android:id="@+id/themeColorSelectLayout"
+                    android:id="@+id/appThemeSelectLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:animateLayoutChanges="true"
@@ -449,6 +449,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/themeSystem"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/system_default" />
 
                     <TextView
                         android:id="@+id/themeDark"

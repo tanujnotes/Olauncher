@@ -53,6 +53,7 @@
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
     <string name="theme_mode">Theme mode</string>
+    <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="double_tap_lock_uninstall_message">Double tap to lock enabled.

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
@@ -47,40 +47,6 @@
     <style name="WindowAnimationTransition">
         <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
-    </style>
-
-    <style name="DarkTheme" parent="AppTheme">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@android:color/darker_gray</item>
-        <item name="colorAccent">@color/white</item>
-
-        <item name="primaryColor">@color/white</item>
-        <item name="primaryInverseColor">@color/whiteInverse</item>
-        <item name="primaryTextShadowColor">@color/whiteInverseTrans50</item>
-        <item name="primaryColorTrans50">@color/whiteTrans50</item>
-        <item name="primaryColorTrans80">@color/whiteTrans80</item>
-        <item name="primaryColorInverseTrans50">@color/whiteInverseTrans50</item>
-        <item name="primaryColorInverseTrans80">@color/whiteInverseTrans80</item>
-        <item name="primaryColorInverseTrans90">@color/whiteInverseTrans90</item>
-        <item name="primaryShadeColor">@color/whiteInverseTrans10</item>
-        <item name="primaryShadeDarkColor">@color/whiteInverseTrans25</item>
-    </style>
-
-    <style name="LightTheme" parent="AppTheme">
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@android:color/darker_gray</item>
-        <item name="colorAccent">@color/black</item>
-
-        <item name="primaryColor">@color/black</item>
-        <item name="primaryInverseColor">@color/blackInverse</item>
-        <item name="primaryTextShadowColor">@color/blackInverseTrans50</item>
-        <item name="primaryColorTrans50">@color/blackTrans50</item>
-        <item name="primaryColorTrans80">@color/blackTrans80</item>
-        <item name="primaryColorInverseTrans50">@color/blackInverseTrans50</item>
-        <item name="primaryColorInverseTrans80">@color/blackInverseTrans80</item>
-        <item name="primaryColorInverseTrans90">@color/blackInverseTrans90</item>
-        <item name="primaryShadeColor">@color/blackInverseTrans10</item>
-        <item name="primaryShadeDarkColor">@color/blackInverseTrans25</item>
     </style>
 
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">

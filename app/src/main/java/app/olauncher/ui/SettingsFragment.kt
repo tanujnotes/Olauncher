@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -54,7 +53,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
-        populateThemeColorText()
+        populateAppThemeText()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -67,7 +66,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     override fun onClick(view: View) {
         appsNumSelectLayout.visibility = View.GONE
         alignmentSelectLayout.visibility = View.GONE
-        themeColorSelectLayout.visibility = View.GONE
+        appThemeSelectLayout.visibility = View.GONE
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
@@ -83,7 +82,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> toggleDateTime()
-            R.id.themeColor -> themeColorSelectLayout.visibility = View.VISIBLE
+            R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
+            R.id.themeSystem -> updateTheme(Constants.THEME_MODE_SYSTEM)
             R.id.themeLight -> updateTheme(Constants.THEME_MODE_LIGHT)
             R.id.themeDark -> updateTheme(Constants.THEME_MODE_DARK)
 
@@ -144,9 +144,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dateTime.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
-        themeColor.setOnClickListener(this)
+        appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
+        themeSystem.setOnClickListener(this)
 
         about.setOnClickListener(this)
         share.setOnClickListener(this)
@@ -243,7 +244,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
         else
             @Suppress("DEPRECATION", "InlinedApi")
-            if (prefs.themeColor == Constants.THEME_MODE_DARK)
+            if (prefs.appTheme == Constants.THEME_MODE_DARK)
                 requireActivity().window.decorView.apply {
                     systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 }
@@ -353,33 +354,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
     }
 
-    private fun updateTheme(themeColor: Int) {
-        if (prefs.themeColor == themeColor) return
-        prefs.themeColor = themeColor
-        populateThemeColorText()
-        when (prefs.themeColor) {
-            Constants.THEME_MODE_DARK -> {
-                if (prefs.dailyWallpaper) {
-                    setPlainWallpaper(requireContext(), android.R.color.black)
-                    viewModel.setWallpaperWorker()
-                }
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            else -> {
-                if (prefs.dailyWallpaper) {
-                    setPlainWallpaper(requireContext(), android.R.color.white)
-                    viewModel.setWallpaperWorker()
-                }
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-        }
-        requireActivity().recreate()
+    private fun updateTheme(appTheme: Int) {
+        if (prefs.appTheme == appTheme) return
+        populateAppThemeText(appTheme)
+        viewModel.appSetTheme(appTheme)
     }
 
-    private fun populateThemeColorText() {
-        when (prefs.themeColor) {
-            Constants.THEME_MODE_DARK -> themeColor.text = getString(R.string.dark)
-            else -> themeColor.text = getString(R.string.light)
+    private fun populateAppThemeText(appTheme: Int = prefs.appTheme) {
+        when (appTheme) {
+            Constants.THEME_MODE_DARK -> appThemeText.text = getString(R.string.dark)
+            Constants.THEME_MODE_LIGHT -> appThemeText.text = getString(R.string.light)
+            else -> appThemeText.text = getString(R.string.system_default)
         }
     }
 

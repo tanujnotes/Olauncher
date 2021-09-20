@@ -30,6 +30,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
     val showMessageDialog = MutableLiveData<String>()
+    val appSetTheme = MutableLiveData<Int>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -198,5 +199,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun showMessageDialog(message: String) {
         showMessageDialog.postValue(message)
+    }
+
+    fun appSetTheme(theme: Int) {
+        prefs.appTheme = theme
+        appSetTheme.value = theme
+        if (prefs.dailyWallpaper)
+            setWallpaperWorker()
     }
 }

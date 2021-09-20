@@ -122,7 +122,7 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(SWIPE_RIGHT_ENABLED, true)
         set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
 
-    var themeColor: Int
+    var appTheme: Int
         get() = prefs.getInt(THEME_COLOR, Constants.THEME_MODE_DARK)
         set(value) = prefs.edit().putInt(THEME_COLOR, value).apply()
 

@@ -6,6 +6,7 @@ object Constants {
 
     const val THEME_MODE_DARK = 0
     const val THEME_MODE_LIGHT = 1
+    const val THEME_MODE_SYSTEM = 2
 
     const val FLAG_LAUNCH_APP = 100
     const val FLAG_HIDDEN_APPS = 101
