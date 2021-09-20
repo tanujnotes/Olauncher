@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var prefs: Prefs
     private lateinit var navController: NavController
+    private lateinit var viewModel: MainViewModel
 
     override fun onBackPressed() {
         if (navController.currentDestination?.id != R.id.mainFragment)
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         prefs = Prefs(this)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         setAppTheme(prefs.appTheme)
         if (prefs.firstOpen) {
@@ -116,6 +117,7 @@ class MainActivity : AppCompatActivity() {
         if (this.isDarkThemeOn())
             setPlainWallpaper(this, android.R.color.black)
         else setPlainWallpaper(this, android.R.color.white)
+        viewModel.setWallpaperWorker()
     }
 
     private fun openLauncherChooser(resetFailed: Boolean) {
