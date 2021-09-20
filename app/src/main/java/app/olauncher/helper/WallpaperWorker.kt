@@ -1,6 +1,7 @@
 package app.olauncher.helper
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import app.olauncher.data.Constants
@@ -34,8 +35,8 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
 
     private fun checkWallpaperType(): String {
         return when (Prefs(applicationContext).appTheme) {
-            Constants.THEME_MODE_DARK -> Constants.WALL_TYPE_DARK
-            Constants.THEME_MODE_LIGHT -> Constants.WALL_TYPE_LIGHT
+            AppCompatDelegate.MODE_NIGHT_YES -> Constants.WALL_TYPE_DARK
+            AppCompatDelegate.MODE_NIGHT_NO -> Constants.WALL_TYPE_LIGHT
             else -> if (applicationContext.isDarkThemeOn())
                 Constants.WALL_TYPE_DARK
             else

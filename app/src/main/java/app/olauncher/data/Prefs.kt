@@ -3,6 +3,7 @@ package app.olauncher.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.Gravity
+import androidx.appcompat.app.AppCompatDelegate
 
 class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
@@ -26,7 +27,7 @@ class Prefs(context: Context) {
     private val HIDDEN_APPS = "HIDDEN_APPS"
     private val HIDDEN_APPS_UPDATED = "HIDDEN_APPS_UPDATED"
     private val SHOW_HINT_COUNTER = "SHOW_HINT_COUNTER"
-    private val THEME_COLOR = "THEME_COLOR"
+    private val APP_THEME = "APP_THEME"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -123,8 +124,8 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
 
     var appTheme: Int
-        get() = prefs.getInt(THEME_COLOR, Constants.THEME_MODE_DARK)
-        set(value) = prefs.edit().putInt(THEME_COLOR, value).apply()
+        get() = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_YES)
+        set(value) = prefs.edit().putInt(APP_THEME, value).apply()
 
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds

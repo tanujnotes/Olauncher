@@ -1,5 +1,6 @@
 package app.olauncher
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -34,13 +35,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        prefs = Prefs(this)
+        AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        prefs = Prefs(this)
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        setAppTheme(prefs.appTheme)
         if (prefs.firstOpen) {
             viewModel.firstOpen(true)
             prefs.firstOpen = false
@@ -74,8 +75,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        if (prefs.dailyWallpaper)
-            changeBackground()
+        if (prefs.dailyWallpaper &&
+            AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        ) {
+            setPlainWallpaper()
+            viewModel.setWallpaperWorker()
+        }
         recreate()
     }
 
@@ -86,11 +91,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.showMessageDialog.observe(this, {
             showMessage(it)
         })
-        viewModel.appSetTheme.observe(this, {
-            setAppTheme(it)
-        })
     }
 
+    @SuppressLint("SourceLockedOrientationActivity")
     private fun setupOrientation() {
         if (isTablet(this)) return
         // In Android 8.0, windowIsTranslucent cannot be used with screenOrientation=portrait
@@ -105,19 +108,10 @@ class MainActivity : AppCompatActivity() {
             navController.popBackStack(R.id.mainFragment, false)
     }
 
-    private fun setAppTheme(theme: Int) {
-        when (theme) {
-            Constants.THEME_MODE_LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            Constants.THEME_MODE_DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        }
-    }
-
-    private fun changeBackground() {
+    private fun setPlainWallpaper() {
         if (this.isDarkThemeOn())
             setPlainWallpaper(this, android.R.color.black)
         else setPlainWallpaper(this, android.R.color.white)
-        viewModel.setWallpaperWorker()
     }
 
     private fun openLauncherChooser(resetFailed: Boolean) {
