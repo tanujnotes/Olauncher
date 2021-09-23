@@ -10,6 +10,7 @@ import android.os.Vibrator
 import android.provider.Settings
 import android.view.*
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -330,11 +331,21 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    fun vibrate() {
+    private fun vibrate() {
         mainLayout.performHapticFeedback(
             HapticFeedbackConstants.LONG_PRESS,
             HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
         )
+    }
+
+    private fun changeAppTheme() {
+        if (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES || requireContext().isDarkThemeOn()) {
+            prefs.appTheme = AppCompatDelegate.MODE_NIGHT_NO
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            prefs.appTheme = AppCompatDelegate.MODE_NIGHT_YES
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
     private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")
@@ -390,6 +401,11 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                         }
                     } else
                         lockPhone()
+            }
+
+            override fun onTripleClick() {
+                super.onTripleClick()
+                changeAppTheme()
             }
         }
     }
