@@ -339,12 +339,27 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun changeAppTheme() {
-        if (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES || requireContext().isDarkThemeOn()) {
-            prefs.appTheme = AppCompatDelegate.MODE_NIGHT_NO
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        } else {
-            prefs.appTheme = AppCompatDelegate.MODE_NIGHT_YES
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        val newTheme = if (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES || requireContext().isDarkThemeOn())
+            AppCompatDelegate.MODE_NIGHT_NO
+        else AppCompatDelegate.MODE_NIGHT_YES
+
+        prefs.appTheme = newTheme
+        AppCompatDelegate.setDefaultNightMode(newTheme)
+        if (prefs.dailyWallpaper) {
+            setPlainWallpaper(newTheme)
+            viewModel.setWallpaperWorker()
+        }
+    }
+
+    private fun setPlainWallpaper(appTheme: Int) {
+        when (appTheme) {
+            AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(requireContext(), android.R.color.black)
+            AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(requireContext(), android.R.color.white)
+            else -> {
+                if (requireContext().isDarkThemeOn())
+                    setPlainWallpaper(requireContext(), android.R.color.black)
+                else setPlainWallpaper(requireContext(), android.R.color.white)
+            }
         }
     }
 
