@@ -66,4 +66,7 @@
         \n\nShare and find out. And help us spread the word. Thank you!</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
+    <string name="bottom_left">Bottom-left</string>
+    <string name="bottom_center">Bottom-center</string>
+    <string name="bottom_right">Bottom-right</string>
 </resources>
