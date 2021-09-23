@@ -84,7 +84,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> toggleDateTime()
             R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
-            R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
 
@@ -117,6 +116,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
             }
             R.id.dailyWallpaper -> removeWallpaper()
+            R.id.appThemeText -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
             R.id.toggleLock -> {
@@ -148,7 +148,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
-        themeSystem.setOnClickListener(this)
 
         about.setOnClickListener(this)
         share.setOnClickListener(this)
@@ -169,6 +168,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         dailyWallpaper.setOnLongClickListener(this)
         alignment.setOnLongClickListener(this)
+        appThemeText.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
         swipeRightApp.setOnLongClickListener(this)
         toggleLock.setOnLongClickListener(this)
