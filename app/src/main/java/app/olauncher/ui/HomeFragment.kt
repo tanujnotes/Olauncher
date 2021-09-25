@@ -339,28 +339,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun changeAppTheme() {
-        val newTheme = if (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES || requireContext().isDarkThemeOn())
-            AppCompatDelegate.MODE_NIGHT_NO
-        else AppCompatDelegate.MODE_NIGHT_YES
-
-        prefs.appTheme = newTheme
-        AppCompatDelegate.setDefaultNightMode(newTheme)
+        if (prefs.dailyWallpaper.not()) return
+        val changedAppTheme = getChangedAppTheme(requireContext(), prefs.appTheme)
+        prefs.appTheme = changedAppTheme
         if (prefs.dailyWallpaper) {
-            setPlainWallpaper(newTheme)
+            setPlainWallpaperByTheme(requireContext(), changedAppTheme)
             viewModel.setWallpaperWorker()
         }
-    }
-
-    private fun setPlainWallpaper(appTheme: Int) {
-        when (appTheme) {
-            AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(requireContext(), android.R.color.black)
-            AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(requireContext(), android.R.color.white)
-            else -> {
-                if (requireContext().isDarkThemeOn())
-                    setPlainWallpaper(requireContext(), android.R.color.black)
-                else setPlainWallpaper(requireContext(), android.R.color.white)
-            }
-        }
+        requireActivity().recreate()
     }
 
     private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")

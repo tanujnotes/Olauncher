@@ -24,6 +24,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatDelegate
 import app.olauncher.BuildConfig
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
@@ -38,7 +39,6 @@ import java.text.Collator
 import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
-
 
 fun showToastLong(context: Context, message: String) {
     val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG)
@@ -189,6 +189,18 @@ fun resetDefaultLauncher(context: Context) {
     }
 }
 
+fun setPlainWallpaperByTheme(context: Context, appTheme: Int) {
+    when (appTheme) {
+        AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(context, android.R.color.black)
+        AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(context, android.R.color.white)
+        else -> {
+            if (context.isDarkThemeOn())
+                setPlainWallpaper(context, android.R.color.black)
+            else setPlainWallpaper(context, android.R.color.white)
+        }
+    }
+}
+
 fun setPlainWallpaper(context: Context, color: Int) {
     try {
         val bitmap = Bitmap.createBitmap(1000, 2000, Bitmap.Config.ARGB_8888)
@@ -197,6 +209,18 @@ fun setPlainWallpaper(context: Context, color: Int) {
         manager.setBitmap(bitmap)
         bitmap.recycle()
     } catch (e: Exception) {
+    }
+}
+
+fun getChangedAppTheme(context: Context, currentAppTheme: Int): Int {
+    return when (currentAppTheme) {
+        AppCompatDelegate.MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_NO
+        AppCompatDelegate.MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_YES
+        else -> {
+            if (context.isDarkThemeOn())
+                AppCompatDelegate.MODE_NIGHT_NO
+            else AppCompatDelegate.MODE_NIGHT_YES
+        }
     }
 }
 

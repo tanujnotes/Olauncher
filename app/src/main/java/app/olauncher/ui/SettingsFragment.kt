@@ -360,7 +360,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             setPlainWallpaper(theme)
             viewModel.setWallpaperWorker()
         }
-        AppCompatDelegate.setDefaultNightMode(theme)
+        requireActivity().recreate()
     }
 
     private fun setPlainWallpaper(appTheme: Int) {
