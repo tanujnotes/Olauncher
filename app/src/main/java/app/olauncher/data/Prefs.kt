@@ -28,6 +28,8 @@ class Prefs(context: Context) {
     private val HIDDEN_APPS_UPDATED = "HIDDEN_APPS_UPDATED"
     private val SHOW_HINT_COUNTER = "SHOW_HINT_COUNTER"
     private val APP_THEME = "APP_THEME"
+    private val ABOUT_CLICKED = "ABOUT_CLICKED"
+    private val RATE_CLICKED = "RATE_CLICKED"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -142,6 +144,14 @@ class Prefs(context: Context) {
     var toShowHintCounter: Int
         get() = prefs.getInt(SHOW_HINT_COUNTER, 1)
         set(value) = prefs.edit().putInt(SHOW_HINT_COUNTER, value).apply()
+
+    var aboutClicked: Boolean
+        get() = prefs.getBoolean(ABOUT_CLICKED, false)
+        set(value) = prefs.edit().putBoolean(ABOUT_CLICKED, value).apply()
+
+    var rateClicked: Boolean
+        get() = prefs.getBoolean(RATE_CLICKED, false)
+        set(value) = prefs.edit().putBoolean(RATE_CLICKED, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

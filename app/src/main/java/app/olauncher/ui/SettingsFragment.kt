@@ -100,9 +100,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
 
-            R.id.about -> openUrl(Constants.URL_ABOUT_OLAUNCHER)
+            R.id.about -> {
+                prefs.aboutClicked = true
+                openUrl(Constants.URL_ABOUT_OLAUNCHER)
+            }
             R.id.share -> shareApp()
-            R.id.rate -> rateApp()
+            R.id.rate -> {
+                prefs.rateClicked = true
+                rateApp()
+            }
             R.id.follow -> openUrl(Constants.URL_TWITTER_TANUJ)
             R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.github -> openUrl(Constants.URL_OLAUNCHER_GITHUB)
@@ -438,19 +444,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         startActivity(intent)
     }
 
-    private fun sendEmailIntent() {
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.data = Uri.parse(
-            "mailto:thetanuj1@gmail.com?" +
-                    "subject=Hello%20Team%20Olauncher!"
-        )
-        try {
-            startActivity(emailIntent)
-        } catch (e: Exception) {
-            showToastLong(requireContext(), "Failed! Send email to thetanuj1@gmail.com")
-        }
-    }
-
     private fun populateSwipeApps() {
         swipeLeftApp.text = prefs.appNameSwipeLeft
         swipeRightApp.text = prefs.appNameSwipeRight
@@ -494,5 +487,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 }
             }
         }
+        if (prefs.aboutClicked.not())
+            about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+        if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US)
+            rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
     }
 }

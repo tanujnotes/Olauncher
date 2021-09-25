@@ -61,12 +61,9 @@
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
     <string name="rate_us_message">You won\'t see this message again.
-        \n\nHi, if you find Olauncher useful, please consider rating us 5-stars. Thank you for choosing Olauncher. Have a great day!</string>
-    <string name="share_message">Hi, do you think your friends would like Olauncher as much as you do?
-        \n\nShare and find out. And help us spread the word. Thank you!</string>
+        \n\nHi, if you find Olauncher useful, a 5-star review will make us happy. Thank you and have a great day!</string>
+    <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
+        \n\nShare the app and help us spread the word. Thank you!</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
-    <string name="bottom_left">Bottom-left</string>
-    <string name="bottom_center">Bottom-center</string>
-    <string name="bottom_right">Bottom-right</string>
 </resources>
