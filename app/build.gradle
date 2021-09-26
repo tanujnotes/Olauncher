@@ -55,5 +55,5 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.3.2"
 
     // Work Manager
-    implementation "androidx.work:work-runtime-ktx:2.4.0"
+    implementation "androidx.work:work-runtime-ktx:2.6.0"
 }
