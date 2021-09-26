@@ -12,15 +12,13 @@ import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
-import app.olauncher.helper.isDarkThemeOn
-import app.olauncher.helper.isTablet
-import app.olauncher.helper.setPlainWallpaper
-import app.olauncher.helper.showToastLong
+import app.olauncher.helper.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -47,15 +45,12 @@ class MainActivity : AppCompatActivity() {
             prefs.firstOpen = false
         }
 
+        initClickListeners()
         initObservers(viewModel)
         viewModel.getAppList()
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
-        okay.setOnClickListener {
-            messageLayout.visibility = View.GONE
-            viewModel.showMessageDialog("")
-        }
     }
 
     override fun onStop() {
@@ -84,12 +79,33 @@ class MainActivity : AppCompatActivity() {
         recreate()
     }
 
+    private fun initClickListeners() {
+        okay.setOnClickListener {
+            messageLayout.visibility = View.GONE
+            viewModel.showMessageDialog("")
+        }
+        closeOneLink.setOnClickListener {
+            viewModel.showSupportDialog(false)
+        }
+        copyOneLink.setOnClickListener {
+            this.copyToClipboard(Constants.URL_AFFILIATE)
+            viewModel.showSupportDialog(false)
+        }
+        openOneLink.setOnClickListener {
+            this.openUrl(Constants.URL_AFFILIATE)
+            viewModel.showSupportDialog(false)
+        }
+    }
+
     private fun initObservers(viewModel: MainViewModel) {
         viewModel.launcherResetFailed.observe(this, {
             openLauncherChooser(it)
         })
         viewModel.showMessageDialog.observe(this, {
             showMessage(it)
+        })
+        viewModel.showSupportDialog.observe(this, {
+            supportOlauncherLayout.isVisible = it
         })
     }
 

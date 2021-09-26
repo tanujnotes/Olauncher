@@ -36,6 +36,7 @@ object Constants {
     const val URL_OLAUNCHER_GITHUB = "https://www.github.com/tanujnotes/Olauncher"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
+    const val URL_AFFILIATE = "https://amzn.to/3uftwFW"
 
     const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
     const val URL_NOTIFY = "https://gist.githubusercontent.com/tanujnotes/da9490348422979650ccb3ec9392a40f/raw"

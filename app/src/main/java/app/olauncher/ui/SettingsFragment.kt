@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -72,10 +73,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.supportOlauncher -> {
+                viewModel.showSupportDialog(true)
+                findNavController().popBackStack()
+            }
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
-            R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
+            R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> alignmentSelectLayout.visibility = View.VISIBLE
             R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
@@ -102,16 +107,16 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
             R.id.about -> {
                 prefs.aboutClicked = true
-                openUrl(Constants.URL_ABOUT_OLAUNCHER)
+                requireContext().openUrl(Constants.URL_ABOUT_OLAUNCHER)
             }
             R.id.share -> shareApp()
             R.id.rate -> {
                 prefs.rateClicked = true
                 rateApp()
             }
-            R.id.follow -> openUrl(Constants.URL_TWITTER_TANUJ)
-            R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.github -> openUrl(Constants.URL_OLAUNCHER_GITHUB)
+            R.id.follow -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
+            R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
+            R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
         }
     }
 
@@ -138,6 +143,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         scrollLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
+        supportOlauncher.setOnClickListener(this)
         autoShowKeyboard.setOnClickListener(this)
         toggleLock.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
@@ -188,6 +194,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
+                if (prefs.toShowHintCounter > Constants.HINT_RATE_US)
+                    supportOlauncher.isVisible = true
             }
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
@@ -411,13 +419,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateLockSettings() {
         if (prefs.lockModeOn) toggleLock.text = getString(R.string.on)
         else toggleLock.text = getString(R.string.off)
-    }
-
-    private fun openUrl(url: String) {
-        if (url.isEmpty()) return
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
     }
 
     private fun shareApp() {

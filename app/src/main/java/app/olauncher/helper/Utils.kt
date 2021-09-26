@@ -1,9 +1,7 @@
 package app.olauncher.helper
 
 import android.app.WallpaperManager
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -26,6 +24,7 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
 import app.olauncher.BuildConfig
+import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
@@ -416,6 +415,20 @@ fun isTablet(context: Context): Boolean {
 fun Context.isDarkThemeOn(): Boolean {
     return resources.configuration.uiMode and
             Configuration.UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES
+}
+
+fun Context.copyToClipboard(text: String) {
+    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipData = ClipData.newPlainText(getString(R.string.app_name), text)
+    clipboardManager.setPrimaryClip(clipData)
+    showToastShort(this, "Copied")
+}
+
+fun Context.openUrl(url: String) {
+    if (url.isEmpty()) return
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse(url)
+    startActivity(intent)
 }
 
 @ColorInt

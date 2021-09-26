@@ -66,4 +66,10 @@
         \n\nShare the app and help us spread the word. Thank you!</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_needs_your_help">Olauncher needs your help</string>
+    <string name="support_olauncher_message">You can help us in keeping Olauncher free of ads and trackers by using our affiliate link.\n\nEvery time you buy using our link, we get a small commission. You can also copy and save the link to use it later. Thank you!</string>
+    <string name="open">Open link</string>
+    <string name="copy">Copy</string>
+    <string name="close">Close</string>
+    <string name="keeping_it_ad_free">Keeping it Ad-Free</string>
 </resources>
