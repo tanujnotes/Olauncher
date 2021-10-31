@@ -28,11 +28,10 @@
 
         <TextClock
             android:id="@+id/clock"
-            style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:format12Hour="hh:mm"
+            android:format12Hour="hh:mm a"
             android:textSize="@dimen/time_size" />
 
         <TextClock
@@ -45,6 +44,27 @@
             android:paddingHorizontal="2dp"
             android:textSize="@dimen/date_size" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/firstRunTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="56dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/OneThing" />
+    </LinearLayout>
+
 
     <!-- Home apps-->
     <LinearLayout
@@ -140,32 +160,7 @@
     </LinearLayout>
 
     <!-- First run tips -->
-    <LinearLayout
-        android:id="@+id/firstRunTips"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="56dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone">
 
-        <TextView
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="@string/swipe_up_for_apps" />
-
-        <TextView
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/long_press_for_settings" />
-
-    </LinearLayout>
 
     <!-- Set default launcher -->
     <TextView

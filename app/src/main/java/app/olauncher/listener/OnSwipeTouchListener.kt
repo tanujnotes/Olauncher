@@ -54,13 +54,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
             return super.onDoubleTap(e)
         }
 
-        override fun onLongPress(e: MotionEvent) {
-            longPressOn = true
-            Timer().schedule(Constants.LONG_PRESS_DELAY_MS.toLong()) {
-                if (longPressOn) onLongClick()
-            }
-            super.onLongPress(e)
-        }
+
 
         override fun onFling(
             event1: MotionEvent,

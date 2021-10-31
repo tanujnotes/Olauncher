@@ -583,7 +583,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:padding="10dp"
-                    android:text="@string/off" />
+                    android:text="@string/on" />
             </FrameLayout>
         </LinearLayout>
 

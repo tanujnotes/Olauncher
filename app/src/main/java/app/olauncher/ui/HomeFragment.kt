@@ -155,7 +155,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (prefs.showDateTime) dateTimeLayout.visibility = View.VISIBLE
         else dateTimeLayout.visibility = View.GONE
 
-        val homeAppsNum = prefs.homeAppsNum
+        val homeAppsNum = 0
         if (homeAppsNum == 0) return
 
         homeApp1.visibility = View.VISIBLE
@@ -291,9 +291,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun openSwipeLeftApp() {
         if (!prefs.swipeLeftEnabled) return
-        if (prefs.appPackageSwipeLeft.isNotEmpty())
-            launchApp(prefs.appNameSwipeLeft, prefs.appPackageSwipeLeft, android.os.Process.myUserHandle().toString())
-        else openCameraApp(requireContext())
+        openDialerApp(requireContext())
     }
 
     private fun lockPhone() {
@@ -305,7 +303,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             } catch (e: Exception) {
                 showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
-                prefs.lockModeOn = false
+                prefs.lockModeOn = true
             }
         }
     }
@@ -359,17 +357,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         return object : OnSwipeTouchListener(context) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
-                openSwipeLeftApp()
+                vibrate()
+                onDoubleClick()
+
             }
 
             override fun onSwipeRight() {
                 super.onSwipeRight()
-                openSwipeRightApp()
-            }
 
-            override fun onSwipeUp() {
-                super.onSwipeUp()
-                showAppList(Constants.FLAG_LAUNCH_APP)
+                openSwipeLeftApp()
             }
 
             override fun onSwipeDown() {
@@ -395,7 +391,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                             if (isAccessServiceEnabled(requireContext()))
                                 lock.performClick()
                             else {
-                                prefs.lockModeOn = false
+                                prefs.lockModeOn = true
                                 showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
                                 startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
                             }

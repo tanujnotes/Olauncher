@@ -78,7 +78,7 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putBoolean(FIRST_HIDE, value).apply()
 
     var lockModeOn: Boolean
-        get() = prefs.getBoolean(LOCK_MODE, false)
+        get() = prefs.getBoolean(LOCK_MODE, true)
         set(value) = prefs.edit().putBoolean(LOCK_MODE, value).apply()
 
     var autoShowKeyboard: Boolean

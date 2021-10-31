@@ -96,7 +96,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.maxApps1 -> updateHomeAppsNum(1)
             R.id.maxApps2 -> updateHomeAppsNum(2)
             R.id.maxApps3 -> updateHomeAppsNum(3)
-            R.id.maxApps4 -> updateHomeAppsNum(4)
+            R.id.maxApps4 -> updateHomeAppsNum(0)
             R.id.maxApps5 -> updateHomeAppsNum(5)
             R.id.maxApps6 -> updateHomeAppsNum(6)
             R.id.maxApps7 -> updateHomeAppsNum(7)
@@ -297,20 +297,22 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             when {
                 prefs.lockModeOn -> {
-                    prefs.lockModeOn = false
+                    prefs.lockModeOn = true
                     deviceManager.removeActiveAdmin(componentName) // for backward compatibility
                 }
                 isAccessServiceEnabled(requireContext()) -> prefs.lockModeOn = true
                 else -> {
                     showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
+                    prefs.lockModeOn = true
                     startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+
                 }
             }
         } else {
             val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
             if (isAdmin) {
                 deviceManager.removeActiveAdmin(componentName)
-                prefs.lockModeOn = false
+                prefs.lockModeOn = true
                 showToastShort(requireContext(), "Admin permission removed.")
             } else {
                 val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)

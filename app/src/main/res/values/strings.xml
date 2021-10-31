@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Olauncher</string>
     <string name="app">App</string>
-    <string name="set_as_default_launcher">Set as default launcher</string>
+    <string name="set_as_default_launcher"></string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="experimental_">(experimental)</string>
@@ -11,7 +11,7 @@
     <string name="on">On</string>
     <string name="black">Black</string>
     <string name="white">White</string>
-    <string name="change_default_launcher">Change default launcher</string>
+    <string name="change_default_launcher"></string>
     <string name="privacy">Privacy</string>
     <string name="share">Share</string>
     <string name="rate">Rate</string>
@@ -20,7 +20,7 @@
     <string name="github">Github</string>
     <string name="donate">Donate</string>
     <string name="long_press_for_settings">Long press anywhere for settings</string>
-    <string name="swipe_up_for_apps">Swipe up for all apps</string>
+    <string name="OneThing">ATG World</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
     <string name="daily_wallpaper_update">Daily new wallpaper</string>
     <string name="left">Left</string>
