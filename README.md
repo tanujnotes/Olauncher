@@ -16,20 +16,16 @@ Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF 
 
 You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
 
-## Feature requests
-Olauncher's user interface is insanely simple. Features are chosen very carefully because complexity grows quadratically since every feature potentially interferes with other features. We focus very narrowly on one thing and one thing only - a distraction free minimal launcher. We are not trying to optimize for some edge-cases. Please don't be sad if we decline your feature request for the sake of simplicity.
-
 ## Contribute
 * Please go through the issues marked as [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
 * Please don't send features without discussing first
 * Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch
 
+## Join membership
+https://www.buymeacoffee.com/tanujnotes
 
-## Contact
-Tanuj M. [@tanujnotes](https://twitter.com/tanujnotes)
+License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-## License
-[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+Contact - Tanuj M. [@tanujnotes](https://twitter.com/tanujnotes)
 
-
-Thank you.
+Thank you!
