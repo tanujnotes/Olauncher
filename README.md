@@ -17,7 +17,7 @@ Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF 
 You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
 
 ## Contribute
-* Please go through the issues marked as [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
+* Please go through the issues marked as [`bug`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug) or [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
 * Please don't send features without discussing first
 * Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch
 
