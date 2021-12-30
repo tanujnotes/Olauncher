@@ -146,9 +146,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getAppList() {
+    fun getAppList(showHiddenApps: Boolean = false) {
         viewModelScope.launch {
-            appList.value = getAppsList(appContext)
+            appList.value = getAppsList(appContext, showHiddenApps)
         }
     }
 

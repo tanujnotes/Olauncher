@@ -51,7 +51,7 @@ fun showToastShort(context: Context, message: String) {
     toast.show()
 }
 
-suspend fun getAppsList(context: Context): MutableList<AppModel> {
+suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
 
@@ -65,8 +65,17 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
-                    if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
-                        and (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
+                    if (showHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
+                        appList.add(
+                            AppModel(
+                                app.label.toString(),
+                                collator.getCollationKey(app.label.toString()),
+                                app.applicationInfo.packageName,
+                                profile
+                            )
+                        )
+                    else if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
+                        && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID
                     )
                         appList.add(
                             AppModel(
