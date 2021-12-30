@@ -29,7 +29,7 @@ object Constants {
     const val HINT_SHARE = 50
 
     const val TRIPLE_TAP_DELAY_MS = 300
-    const val LONG_PRESS_DELAY_MS = 600
+    const val LONG_PRESS_DELAY_MS = 500
 
     const val URL_ABOUT_OLAUNCHER = "https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd"
     const val URL_OLAUNCHER_PRIVACY = "https://tanujnotes.notion.site/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
