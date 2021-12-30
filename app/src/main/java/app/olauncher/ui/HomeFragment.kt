@@ -10,7 +10,6 @@ import android.os.Vibrator
 import android.provider.Settings
 import android.view.*
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -397,7 +396,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onTripleClick() {
                 super.onTripleClick()
-                changeAppTheme()
+                // changeAppTheme()
             }
         }
     }
