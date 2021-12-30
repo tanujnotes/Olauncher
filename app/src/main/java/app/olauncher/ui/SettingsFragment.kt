@@ -11,7 +11,6 @@ import android.provider.Settings
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -73,10 +72,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.supportOlauncher -> {
-                viewModel.showSupportDialog(true)
-                findNavController().popBackStack()
-            }
+            R.id.publicRoadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
@@ -114,7 +110,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 prefs.rateClicked = true
                 rateApp()
             }
-            R.id.follow -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
+            R.id.roadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
+            R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
+            R.id.instagram -> requireContext().openUrl(Constants.URL_INSTA_OLAUNCHER)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
         }
@@ -143,7 +141,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         scrollLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
-        supportOlauncher.setOnClickListener(this)
+        publicRoadmap.setOnClickListener(this)
         autoShowKeyboard.setOnClickListener(this)
         toggleLock.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
@@ -164,7 +162,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         about.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
-        follow.setOnClickListener(this)
+        roadmap.setOnClickListener(this)
+        twitter.setOnClickListener(this)
+        instagram.setOnClickListener(this)
         privacy.setOnClickListener(this)
         github.setOnClickListener(this)
 
@@ -194,8 +194,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
-                if (prefs.toShowHintCounter > Constants.HINT_RATE_US)
-                    supportOlauncher.isVisible = true
+                publicRoadmap.visibility = View.VISIBLE
             }
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
@@ -422,7 +421,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun shareApp() {
-        val message = "You should use your phone, not the other way round. -Olauncher\n" +
+        val message = "Are you using your phone or your phone is using you?\n" +
                 Constants.URL_OLAUNCHER_PLAY_STORE
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND

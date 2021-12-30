@@ -31,11 +31,13 @@ object Constants {
     const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 600
 
-    const val URL_ABOUT_OLAUNCHER = "https://www.notion.so/About-Olauncher-4843e398b05a455bb521b0665b26fbcd"
-    const val URL_OLAUNCHER_PRIVACY = "https://www.notion.so/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
+    const val URL_ABOUT_OLAUNCHER = "https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd"
+    const val URL_OLAUNCHER_PRIVACY = "https://tanujnotes.notion.site/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
+    const val URL_PUBLIC_ROADMAP = "https://tanujnotes.notion.site/Olauncher-Roadmap-1522aa8182424415b5b89bed923b0ccd"
     const val URL_OLAUNCHER_GITHUB = "https://www.github.com/tanujnotes/Olauncher"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
+    const val URL_INSTA_OLAUNCHER = "https://instagram.com/olauncherapp"
     const val URL_AFFILIATE = "https://amzn.to/3uftwFW"
 
     const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"

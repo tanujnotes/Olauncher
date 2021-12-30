@@ -64,15 +64,16 @@
                 android:text="@string/set_as_default_launcher" />
 
             <TextView
-                android:id="@+id/supportOlauncher"
+                android:id="@+id/publicRoadmap"
                 style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/olauncher_needs_your_help"
-                android:visibility="visible" />
+                android:text="@string/public_roadmap"
+                android:visibility="gone"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
@@ -598,7 +599,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="12dp">
 
                 <TextView
                     android:id="@+id/about"
@@ -625,20 +626,28 @@
                     android:text="@string/rate" />
 
                 <TextView
-                    android:id="@+id/follow"
+                    android:id="@+id/roadmap"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
-                    android:text="@string/follow" />
+                    android:text="@string/roadmap" />
 
                 <TextView
-                    android:id="@+id/privacy"
+                    android:id="@+id/twitter"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
-                    android:text="@string/privacy" />
+                    android:text="@string/twitter" />
+
+                <TextView
+                    android:id="@+id/instagram"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/instagram" />
 
                 <TextView
                     android:id="@+id/github"
@@ -647,6 +656,14 @@
                     android:layout_height="wrap_content"
                     android:padding="12dp"
                     android:text="@string/github" />
+
+                <TextView
+                    android:id="@+id/privacy"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="@string/privacy" />
 
             </LinearLayout>
         </HorizontalScrollView>
