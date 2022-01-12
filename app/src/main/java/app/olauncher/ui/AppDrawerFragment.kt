@@ -203,6 +203,8 @@ class AppDrawerFragment : Fragment() {
                     RecyclerView.SCROLL_STATE_DRAGGING -> {
                         onTop = !recyclerView.canScrollVertically(-1)
                         if (onTop) search.hideKeyboard()
+                        if (onTop && !recyclerView.canScrollVertically(1))
+                            findNavController().popBackStack()
                     }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
