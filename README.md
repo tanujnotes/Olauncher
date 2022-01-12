@@ -22,8 +22,12 @@ You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/m
 * Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch
 
 ## Sponsor
-Support this project and get exclusive rewards by joining membership -
+Support this project by joining our membership -
 https://buymeacoff.ee/tanujnotes
+
+Bitcoin: 33VFtQSa6HZr2FZphmNA5jZ9fEKPNbeEmL
+
+Etheruem: 0xcBb95AF4D76fba34bf8D1808905BF5365239E2ba
 
 ---
 
