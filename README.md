@@ -4,7 +4,7 @@
 # Olauncher | Minimal AF
 Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF stands for ad-free. :)
 
-## Installation
+## Install
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olauncher)
@@ -12,24 +12,23 @@ Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF 
     alt="Get it on F-Droid"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
-### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
+#### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
 You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
 
-## Feature requests
-Olauncher's user interface is insanely simple. Features are chosen very carefully because complexity grows quadratically since every feature potentially interferes with other features. We focus very narrowly on one thing and one thing only - a distraction free minimal launcher. We are not trying to optimize for some edge-cases. Please don't be sad if we decline your feature request for the sake of simplicity.
-
 ## Contribute
-* Please go through the issues marked as [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
+* Please go through the issues marked as [`bug`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug) or [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
 * Please don't send features without discussing first
 * Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch
 
+## Sponsor
+Support this project and get exclusive rewards by joining membership -
+https://buymeacoff.ee/tanujnotes
 
-## Contact
-Tanuj M. [@tanujnotes](https://twitter.com/tanujnotes)
+---
 
-## License
-[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
+Contact - [@tanujnotes](https://twitter.com/tanujnotes)
 
-Thank you.
+Thank you!
