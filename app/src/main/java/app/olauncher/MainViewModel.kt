@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val appContext = application.applicationContext
+    private val appContext by lazy { application.applicationContext }
     private val prefs = Prefs(appContext)
 
     val firstOpen = MutableLiveData<Boolean>()
@@ -29,6 +29,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
+    val showMessageDialog = MutableLiveData<String>()
+    val showSupportDialog = MutableLiveData<Boolean>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -134,15 +136,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         try {
             launcher.startMainActivity(component, userHandle, null, null)
         } catch (e: SecurityException) {
-            launcher.startMainActivity(component, android.os.Process.myUserHandle(), null, null)
+            try {
+                launcher.startMainActivity(component, android.os.Process.myUserHandle(), null, null)
+            } catch (e: Exception) {
+                showToastShort(appContext, "Unable to launch app")
+            }
         } catch (e: Exception) {
             showToastShort(appContext, "Unable to launch app")
         }
     }
 
-    fun getAppList() {
+    fun getAppList(showHiddenApps: Boolean = false) {
         viewModelScope.launch {
-            appList.value = getAppsList(appContext)
+            appList.value = getAppsList(appContext, showHiddenApps)
         }
     }
 
@@ -173,7 +179,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .build()
         WorkManager
             .getInstance(appContext)
-            .enqueueUniquePeriodicWork(Constants.WALLPAPER_WORKER_NAME, ExistingPeriodicWorkPolicy.REPLACE, uploadWorkRequest)
+            .enqueueUniquePeriodicWork(
+                Constants.WALLPAPER_WORKER_NAME,
+                ExistingPeriodicWorkPolicy.REPLACE,
+                uploadWorkRequest
+            )
     }
 
     fun cancelWallpaperWorker() {
@@ -185,5 +195,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateHomeAlignment(gravity: Int) {
         prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
+    }
+
+    fun showMessageDialog(message: String) {
+        showMessageDialog.postValue(message)
+    }
+
+    fun showSupportDialog(value: Boolean) {
+        showSupportDialog.postValue(value)
     }
 }

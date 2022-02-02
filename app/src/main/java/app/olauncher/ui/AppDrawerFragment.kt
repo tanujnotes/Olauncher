@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +25,6 @@ import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.showToastLong
 import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
-
 
 class AppDrawerFragment : Fragment() {
 
@@ -67,25 +67,22 @@ class AppDrawerFragment : Fragment() {
         if (flag == Constants.FLAG_HIDDEN_APPS) search.queryHint = "Hidden apps"
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val app = appAdapter.getTopApp()
-                if (app != null) {
-                    viewModel.selectedApp(app, Constants.FLAG_LAUNCH_APP)
-                    findNavController().popBackStack()
-                }
-                return true
+                appAdapter.launchFirstInList()
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                appAdapter.filter.filter(newText?.trim())
-                if (rename && newText?.trim()?.isNotEmpty()!!) appRename.visibility = View.VISIBLE
-                else appRename.visibility = View.GONE
+                newText?.let {
+                    appAdapter.filter.filter(it.trim())
+                    appRename.isVisible = rename && it.trim().isNotEmpty()
+                }
                 return false
             }
         })
     }
 
     private fun initViewModel(flag: Int, viewModel: MainViewModel, appAdapter: AppDrawerAdapter) {
-        viewModel.hiddenApps.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+        viewModel.hiddenApps.observe(viewLifecycleOwner, Observer {
             if (flag != Constants.FLAG_HIDDEN_APPS) return@Observer
             if (it.isNullOrEmpty()) {
                 findNavController().popBackStack()
@@ -94,7 +91,7 @@ class AppDrawerFragment : Fragment() {
             populateAppList(it, appAdapter)
         })
 
-        viewModel.appList.observe(viewLifecycleOwner, Observer<List<AppModel>> {
+        viewModel.appList.observe(viewLifecycleOwner, Observer {
             if (flag == Constants.FLAG_HIDDEN_APPS) return@Observer
             if (it.isNullOrEmpty()) {
                 findNavController().popBackStack()
@@ -104,7 +101,7 @@ class AppDrawerFragment : Fragment() {
             populateAppList(it, appAdapter)
         })
 
-        viewModel.firstOpen.observe(viewLifecycleOwner, Observer {
+        viewModel.firstOpen.observe(viewLifecycleOwner, {
             if (it) appDrawerTip.visibility = View.VISIBLE
         })
     }
@@ -138,11 +135,10 @@ class AppDrawerFragment : Fragment() {
         appAdapter.setAppList(apps.toMutableList())
     }
 
-    private fun appClickListener(viewModel: MainViewModel, flag: Int):
-                (appModel: AppModel) -> Unit =
+    private fun appClickListener(viewModel: MainViewModel, flag: Int): (appModel: AppModel) -> Unit =
         { appModel ->
             viewModel.selectedApp(appModel, flag)
-            findNavController().popBackStack()
+            findNavController().popBackStack(R.id.mainFragment, false)
         }
 
     private fun appInfoListener(): (appModel: AppModel) -> Unit =
@@ -152,7 +148,7 @@ class AppDrawerFragment : Fragment() {
                 appModel.user,
                 appModel.appPackage
             )
-            findNavController().popBackStack()
+            findNavController().popBackStack(R.id.mainFragment, false)
         }
 
     private fun appShowHideListener(): (flag: Int, appModel: AppModel) -> Unit =

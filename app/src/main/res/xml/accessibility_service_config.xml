@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeViewClicked"
+    android:accessibilityFeedbackType="feedbackVisual"
+    android:accessibilityFlags="flagDefault"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/accessibility_service_description"
+    android:notificationTimeout="10"
+    android:packageNames="app.olauncher.debug, app.olauncher"
+    android:settingsActivity="com.example.android.accessibility.ServiceSettingsActivity" />

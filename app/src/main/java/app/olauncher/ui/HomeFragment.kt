@@ -3,13 +3,12 @@ package app.olauncher.ui
 import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Vibrator
 import android.provider.Settings
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowInsets
+import android.view.*
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -22,18 +21,16 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
-import app.olauncher.listener.LockTouchListener
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
-    private val LOCK_SCREEN_TIMEOUT = 5000 // 5 seconds
-
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
+    private lateinit var vibrator: Vibrator
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -46,8 +43,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        deviceManager =
-            context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        deviceManager = context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
@@ -57,14 +54,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onResume() {
         super.onResume()
-        blackOverlay.visibility = View.GONE
         populateHomeApps(false)
         viewModel.isOlauncherDefault()
-        showNavBarAndResetScreenTimeout()
+        if (prefs.showStatusBar) showStatusBar()
+        else hideStatusBar()
     }
 
     override fun onClick(view: View) {
         when (view.id) {
+            R.id.lock -> {
+            }
             R.id.clock -> openAlarmApp(requireContext())
             R.id.date -> openCalendar(requireContext())
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
@@ -81,27 +80,26 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
-            R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1, prefs.appName1.isNotEmpty())
-            R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2, prefs.appName2.isNotEmpty())
-            R.id.homeApp3 -> showAppList(Constants.FLAG_SET_HOME_APP_3, prefs.appName3.isNotEmpty())
-            R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4, prefs.appName4.isNotEmpty())
-            R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5, prefs.appName5.isNotEmpty())
-            R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6, prefs.appName6.isNotEmpty())
-            R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7, prefs.appName7.isNotEmpty())
-            R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8, prefs.appName8.isNotEmpty())
+            R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1, prefs.appName1.isNotEmpty(), true)
+            R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2, prefs.appName2.isNotEmpty(), true)
+            R.id.homeApp3 -> showAppList(Constants.FLAG_SET_HOME_APP_3, prefs.appName3.isNotEmpty(), true)
+            R.id.homeApp4 -> showAppList(Constants.FLAG_SET_HOME_APP_4, prefs.appName4.isNotEmpty(), true)
+            R.id.homeApp5 -> showAppList(Constants.FLAG_SET_HOME_APP_5, prefs.appName5.isNotEmpty(), true)
+            R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6, prefs.appName6.isNotEmpty(), true)
+            R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7, prefs.appName7.isNotEmpty(), true)
+            R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8, prefs.appName8.isNotEmpty(), true)
         }
         return true
     }
 
     private fun initObservers() {
+        if (prefs.firstSettingsOpen) {
+            firstRunTips.visibility = View.VISIBLE
+            setDefaultLauncher.visibility = View.GONE
+        } else firstRunTips.visibility = View.GONE
+
         viewModel.refreshHome.observe(viewLifecycleOwner, {
             populateHomeApps(it)
-        })
-        viewModel.firstOpen.observe(viewLifecycleOwner, { isFirstOpen ->
-            if (isFirstOpen) {
-                firstRunTips.visibility = View.VISIBLE
-                setDefaultLauncher.visibility = View.GONE
-            } else firstRunTips.visibility = View.GONE
         })
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
             if (firstRunTips.visibility == View.VISIBLE) return@Observer
@@ -120,7 +118,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun initSwipeTouchListener() {
         val context = requireContext()
         mainLayout.setOnTouchListener(getSwipeGestureListener(context))
-        blackOverlay.setOnTouchListener(getLockScreenGestureListener(context))
         homeApp1.setOnTouchListener(getViewSwipeTouchListener(context, homeApp1))
         homeApp2.setOnTouchListener(getViewSwipeTouchListener(context, homeApp2))
         homeApp3.setOnTouchListener(getViewSwipeTouchListener(context, homeApp3))
@@ -132,6 +129,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun initClickListeners() {
+        lock.setOnClickListener(this)
         clock.setOnClickListener(this)
         date.setOnClickListener(this)
         setDefaultLauncher.setOnClickListener(this)
@@ -140,7 +138,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun setHomeAlignment(gravity: Int) {
         dateTimeLayout.gravity = gravity
         homeAppsLayout.gravity = gravity
-        setDefaultLauncher.gravity = gravity
         homeApp1.gravity = gravity
         homeApp2.gravity = gravity
         homeApp3.gravity = gravity
@@ -249,13 +246,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun launchApp(appName: String, packageName: String, userString: String) {
         viewModel.selectedApp(
-            AppModel(appName, packageName, getUserHandleFromString(requireContext(), userString)),
+            AppModel(appName, null, packageName, getUserHandleFromString(requireContext(), userString)),
             Constants.FLAG_LAUNCH_APP
         )
     }
 
-    private fun showAppList(flag: Int, rename: Boolean = false) {
-        viewModel.getAppList()
+    private fun showAppList(flag: Int, rename: Boolean = false, showHiddenApps: Boolean = false) {
+        viewModel.getAppList(showHiddenApps)
         try {
             findNavController().navigate(
                 R.id.action_mainFragment_to_appListFragment,
@@ -311,55 +308,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun showNavBarAndResetScreenTimeout() {
-        if (Settings.System.canWrite(requireContext())) {
-            val screenTimeoutInSettings =
-                Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-            if (screenTimeoutInSettings <= LOCK_SCREEN_TIMEOUT)
-                Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, prefs.screenTimeout)
-            else
-                Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, screenTimeoutInSettings)
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.show(WindowInsets.Type.navigationBars())
-        } else
-            requireActivity().window.decorView.apply {
-                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            }
-        // populate status bar
-        if (prefs.showStatusBar) showStatusBar()
-        else hideStatusBar()
-    }
-
-    private fun hideNavBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
-            requireActivity().window.insetsController?.hide(WindowInsets.Type.navigationBars())
-        } else {
-            @Suppress("DEPRECATION")
-            requireActivity().window.decorView.apply {
-                systemUiVisibility =
-                    View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-            }
-        }
-    }
-
     private fun showStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
         else
             @Suppress("DEPRECATION", "InlinedApi")
-            if (prefs.themeColor == Constants.THEME_MODE_DARK)
-                requireActivity().window.decorView.apply {
-                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                }
-            else
-                requireActivity().window.decorView.apply {
-                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
-                            View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                }
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            }
     }
 
     private fun hideStatusBar() {
@@ -373,14 +329,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun setScreenTimeout() {
-        // Save the existing screen off timeout
-        val screenTimeoutInSettings =
-            Settings.System.getInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT)
-        if (screenTimeoutInSettings >= LOCK_SCREEN_TIMEOUT) prefs.screenTimeout = screenTimeoutInSettings
-
-        // Set timeout to 5 seconds
-        Settings.System.putInt(requireContext().contentResolver, Settings.System.SCREEN_OFF_TIMEOUT, LOCK_SCREEN_TIMEOUT)
+    private fun changeAppTheme() {
+        if (prefs.dailyWallpaper.not()) return
+        val changedAppTheme = getChangedAppTheme(requireContext(), prefs.appTheme)
+        prefs.appTheme = changedAppTheme
+        if (prefs.dailyWallpaper) {
+            setPlainWallpaperByTheme(requireContext(), changedAppTheme)
+            viewModel.setWallpaperWorker()
+        }
+        requireActivity().recreate()
     }
 
     private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")
@@ -421,23 +378,25 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             }
 
             override fun onDoubleClick() {
-                if (prefs.lockModeOn) {
-                    if (Settings.System.canWrite(requireContext())) {
-                        requireActivity().runOnUiThread {
-                            blackOverlay.visibility = View.VISIBLE
-                            setScreenTimeout()
-                            hideNavBar()
-                        }
-                    } else {
-                        lockPhone()
-                    }
-                }
                 super.onDoubleClick()
+                if (prefs.lockModeOn)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        requireActivity().runOnUiThread {
+                            if (isAccessServiceEnabled(requireContext()))
+                                lock.performClick()
+                            else {
+                                prefs.lockModeOn = false
+                                showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
+                                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                            }
+                        }
+                    } else
+                        lockPhone()
             }
 
             override fun onTripleClick() {
-                if (prefs.lockModeOn) lockPhone()
                 super.onTripleClick()
+                // changeAppTheme()
             }
         }
     }
@@ -472,23 +431,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onClick(view: View) {
                 super.onClick(view)
                 textOnClick(view)
-            }
-        }
-    }
-
-    private fun getLockScreenGestureListener(context: Context): View.OnTouchListener {
-        return object : LockTouchListener(context) {
-            override fun onDoubleClick() {
-                requireActivity().runOnUiThread {
-                    blackOverlay.visibility = View.GONE
-                    showNavBarAndResetScreenTimeout()
-                }
-                super.onDoubleClick()
-            }
-
-            override fun onTripleClick() {
-                if (prefs.lockModeOn) lockPhone()
-                super.onTripleClick()
             }
         }
     }

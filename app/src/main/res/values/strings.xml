@@ -3,7 +3,7 @@
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
-    <string name="double_tap_to_lock_screen">Double tap to lock screen</string>
+    <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="experimental_">(experimental)</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly.</string>
     <string name="about">About</string>
@@ -15,11 +15,11 @@
     <string name="privacy">Privacy</string>
     <string name="share">Share</string>
     <string name="rate">Rate</string>
-    <string name="tweet">Tweet</string>
+    <string name="follow">Follow</string>
     <string name="email">Email</string>
     <string name="github">Github</string>
     <string name="donate">Donate</string>
-    <string name="long_press_for_settings">Long press anywhere for more</string>
+    <string name="long_press_for_settings">Long press anywhere for settings</string>
     <string name="swipe_up_for_apps">Swipe up for all apps</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
     <string name="daily_wallpaper_update">Daily new wallpaper</string>
@@ -39,21 +39,40 @@
     <string name="_7">7</string>
     <string name="_8">8</string>
     <string name="app_drawer_tips">Tip: Swipe down to dismiss. Scroll to hide keyboard.</string>
-    <string name="okay_got_it">Okay, got it</string>
+    <string name="okay">Okay</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
-    <string name="triple_tap_lock_message">Due to updated Android security rules, apps cannot lock some phones normally.
-        \nSo once you double tap to lock, screen will go black and the phone will lock itself in 5 seconds.
-        \nDuring this time, you can double tap to unlock. You can also triple tap anytime to fully lock the phone immediately.</string>
+    <string name="triple_tap_lock_message">How it works:
+        \nOnce you double-tap, screen will go dark and the phone will lock itself in 5 seconds.
+        \n\nDuring this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.
+        \n\nNote: Turn this OFF first if you decide to delete Olauncher. Thank you.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
-    <string name="about_hint">Tip: About has answers to your questions.</string>
-    <string name="rate_us_hint">Loving Olauncher? Please rate us 10 stars. *giggles*</string>
     <string name="status_bar">Show status bar</string>
     <string name="rename">Rename</string>
     <string name="show_date_time">Show date time</string>
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
     <string name="theme_mode">Theme mode</string>
+    <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
+    <string name="double_tap_lock_uninstall_message">Double tap to lock enabled.
+        \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
+    <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
+        \n\nThank you.</string>
+    <string name="rate_us_message">You won\'t see this message again.
+        \n\nHi, if you find Olauncher useful, a 5-star review will make us happy. Thank you and have a great day!</string>
+    <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
+        \n\nShare the app and help us spread the word. Thank you!</string>
+    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
+    <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
+    <string name="support_olauncher_message">You can help us in keeping Olauncher free of ads and trackers by using our affiliate link.\n\nEvery time you buy using our link, we get a small commission. You can also copy and save the link to use it later. Thank you!</string>
+    <string name="open">Open link</string>
+    <string name="copy">Copy</string>
+    <string name="close">Close</string>
+    <string name="keeping_it_ad_free">Keeping it Ad-Free</string>
+    <string name="public_roadmap">Olauncher public roadmap</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="roadmap">Roadmap</string>
 </resources>

@@ -1,16 +1,20 @@
 package app.olauncher.helper
 
 import android.app.WallpaperManager
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
+import android.content.res.Configuration
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.*
+import android.net.Uri
 import android.os.UserHandle
 import android.os.UserManager
 import android.provider.AlarmClock
+import android.provider.CalendarContract
 import android.provider.MediaStore
+import android.provider.Settings
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -18,7 +22,9 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatDelegate
 import app.olauncher.BuildConfig
+import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
@@ -28,7 +34,10 @@ import org.json.JSONObject
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
+import java.text.Collator
 import java.util.*
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 fun showToastLong(context: Context, message: String) {
     val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG)
@@ -42,7 +51,7 @@ fun showToastShort(context: Context, message: String) {
     toast.show()
 }
 
-suspend fun getAppsList(context: Context): MutableList<AppModel> {
+suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
 
@@ -52,16 +61,33 @@ suspend fun getAppsList(context: Context): MutableList<AppModel> {
 
             val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
             val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+            val collator = Collator.getInstance()
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
-                    if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
-                        and (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
+                    if (showHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
+                        appList.add(
+                            AppModel(
+                                app.label.toString(),
+                                collator.getCollationKey(app.label.toString()),
+                                app.applicationInfo.packageName,
+                                profile
+                            )
+                        )
+                    else if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
+                        && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID
                     )
-                        appList.add(AppModel(app.label.toString(), app.applicationInfo.packageName, profile))
+                        appList.add(
+                            AppModel(
+                                app.label.toString(),
+                                collator.getCollationKey(app.label.toString()),
+                                app.applicationInfo.packageName,
+                                profile
+                            )
+                        )
                 }
             }
-            appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+            appList.sort()
 
         } catch (e: java.lang.Exception) {
         }
@@ -79,6 +105,7 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
         if (hiddenAppsSet.isEmpty()) return@withContext appList
 
         val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+        val collator = Collator.getInstance()
         for (hiddenPackage in hiddenAppsSet) {
             try {
                 val appPackage = hiddenPackage.split("|")[0]
@@ -90,12 +117,13 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
 
                 val appInfo = pm.getApplicationInfo(appPackage, 0)
                 val appName = pm.getApplicationLabel(appInfo).toString()
-                appList.add(AppModel(appName, appPackage, userHandle))
+                val appKey = collator.getCollationKey(appName)
+                appList.add(AppModel(appName, appKey, appPackage, userHandle))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-        appList.sortBy { it.appLabel.toLowerCase(Locale.ROOT) }
+        appList.sort()
         appList
     }
 }
@@ -130,9 +158,8 @@ fun getUserHandleFromString(context: Context, userHandleString: String): UserHan
     return android.os.Process.myUserHandle()
 }
 
-fun isOlauncherDefault(context: Context?): Boolean {
-    val launcherPackageName =
-        getDefaultLauncherPackage(context!!)
+fun isOlauncherDefault(context: Context): Boolean {
+    val launcherPackageName = getDefaultLauncherPackage(context)
     return BuildConfig.APPLICATION_ID == launcherPackageName
 }
 
@@ -170,6 +197,18 @@ fun resetDefaultLauncher(context: Context) {
     }
 }
 
+fun setPlainWallpaperByTheme(context: Context, appTheme: Int) {
+    when (appTheme) {
+        AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(context, android.R.color.black)
+        AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(context, android.R.color.white)
+        else -> {
+            if (context.isDarkThemeOn())
+                setPlainWallpaper(context, android.R.color.black)
+            else setPlainWallpaper(context, android.R.color.white)
+        }
+    }
+}
+
 fun setPlainWallpaper(context: Context, color: Int) {
     try {
         val bitmap = Bitmap.createBitmap(1000, 2000, Bitmap.Config.ARGB_8888)
@@ -181,10 +220,24 @@ fun setPlainWallpaper(context: Context, color: Int) {
     }
 }
 
+fun getChangedAppTheme(context: Context, currentAppTheme: Int): Int {
+    return when (currentAppTheme) {
+        AppCompatDelegate.MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_NO
+        AppCompatDelegate.MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_YES
+        else -> {
+            if (context.isDarkThemeOn())
+                AppCompatDelegate.MODE_NIGHT_NO
+            else AppCompatDelegate.MODE_NIGHT_YES
+        }
+    }
+}
+
 fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
-    launcher.startAppDetailsActivity(intent?.component, userHandle, null, null)
+    intent?.let {
+        launcher.startAppDetailsActivity(intent.component, userHandle, null, null)
+    } ?: showToastShort(context, "Unable to to open app info")
 }
 
 suspend fun getBitmapFromURL(src: String?): Bitmap? {
@@ -263,7 +316,10 @@ fun getScreenDimensions(context: Context): Pair<Int, Int> {
 suspend fun getTodaysWallpaper(wallType: String): String {
     return withContext(Dispatchers.IO) {
         var wallpaperUrl: String
-        val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        val calendar = Calendar.getInstance()
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val key = String.format("%d_%d", (month % 3) + 1, day)
 
         try {
             val url = URL(Constants.URL_WALLPAPERS)
@@ -279,7 +335,7 @@ suspend fun getTodaysWallpaper(wallType: String): String {
             }
 
             val json = JSONObject(stringBuffer.toString())
-            val wallpapers = json.getString(day.toString())
+            val wallpapers = json.getString(key)
             val wallpapersJson = JSONObject(wallpapers)
             wallpaperUrl = wallpapersJson.getString(wallType)
             wallpaperUrl
@@ -326,12 +382,62 @@ fun openAlarmApp(context: Context) {
 
 fun openCalendar(context: Context) {
     try {
-        val intent = Intent(Intent.ACTION_MAIN)
-        intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
-        context.startActivity(intent)
-    } catch (e: java.lang.Exception) {
-
+        val cal: Calendar = Calendar.getInstance()
+        cal.time = Date()
+        val time = cal.time.time
+        val builder: Uri.Builder = CalendarContract.CONTENT_URI.buildUpon()
+        builder.appendPath("time")
+        builder.appendPath(time.toString())
+        context.startActivity(Intent(Intent.ACTION_VIEW, builder.build()))
+    } catch (e: Exception) {
+        try {
+            val intent = Intent(Intent.ACTION_MAIN)
+            intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+        }
     }
+}
+
+fun isAccessServiceEnabled(context: Context): Boolean {
+    val enabled =
+        Settings.Secure.getInt(context.applicationContext.contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED)
+    if (enabled == 1) {
+        val prefString: String =
+            Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+        return prefString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
+    }
+    return false
+}
+
+fun isTablet(context: Context): Boolean {
+    val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    val metrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(metrics)
+    val widthInches = metrics.widthPixels / metrics.xdpi
+    val heightInches = metrics.heightPixels / metrics.ydpi
+    val diagonalInches = sqrt(widthInches.toDouble().pow(2.0) + heightInches.toDouble().pow(2.0))
+    if (diagonalInches >= 7.0) return true
+    return false
+}
+
+fun Context.isDarkThemeOn(): Boolean {
+    return resources.configuration.uiMode and
+            Configuration.UI_MODE_NIGHT_MASK == UI_MODE_NIGHT_YES
+}
+
+fun Context.copyToClipboard(text: String) {
+    val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    val clipData = ClipData.newPlainText(getString(R.string.app_name), text)
+    clipboardManager.setPrimaryClip(clipData)
+    showToastShort(this, "Copied")
+}
+
+fun Context.openUrl(url: String) {
+    if (url.isEmpty()) return
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse(url)
+    startActivity(intent)
 }
 
 @ColorInt

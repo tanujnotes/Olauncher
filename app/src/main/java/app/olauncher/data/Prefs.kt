@@ -3,11 +3,13 @@ package app.olauncher.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.Gravity
+import androidx.appcompat.app.AppCompatDelegate
 
 class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
 
     private val FIRST_OPEN = "FIRST_OPEN"
+    private val FIRST_SETTINGS_OPEN = "FIRST_SETTINGS_OPEN"
     private val FIRST_HIDE = "FIRST_HIDE"
     private val LOCK_MODE = "LOCK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
@@ -25,7 +27,9 @@ class Prefs(context: Context) {
     private val HIDDEN_APPS = "HIDDEN_APPS"
     private val HIDDEN_APPS_UPDATED = "HIDDEN_APPS_UPDATED"
     private val SHOW_HINT_COUNTER = "SHOW_HINT_COUNTER"
-    private val THEME_COLOR = "THEME_COLOR"
+    private val APP_THEME = "APP_THEME"
+    private val ABOUT_CLICKED = "ABOUT_CLICKED"
+    private val RATE_CLICKED = "RATE_CLICKED"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -64,6 +68,10 @@ class Prefs(context: Context) {
     var firstOpen: Boolean
         get() = prefs.getBoolean(FIRST_OPEN, true)
         set(value) = prefs.edit().putBoolean(FIRST_OPEN, value).apply()
+
+    var firstSettingsOpen: Boolean
+        get() = prefs.getBoolean(FIRST_SETTINGS_OPEN, true)
+        set(value) = prefs.edit().putBoolean(FIRST_SETTINGS_OPEN, value).apply()
 
     var firstHide: Boolean
         get() = prefs.getBoolean(FIRST_HIDE, true)
@@ -117,9 +125,9 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(SWIPE_RIGHT_ENABLED, true)
         set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
 
-    var themeColor: Int
-        get() = prefs.getInt(THEME_COLOR, Constants.THEME_MODE_DARK)
-        set(value) = prefs.edit().putInt(THEME_COLOR, value).apply()
+    var appTheme: Int
+        get() = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_YES)
+        set(value) = prefs.edit().putInt(APP_THEME, value).apply()
 
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds
@@ -136,6 +144,14 @@ class Prefs(context: Context) {
     var toShowHintCounter: Int
         get() = prefs.getInt(SHOW_HINT_COUNTER, 1)
         set(value) = prefs.edit().putInt(SHOW_HINT_COUNTER, value).apply()
+
+    var aboutClicked: Boolean
+        get() = prefs.getBoolean(ABOUT_CLICKED, false)
+        set(value) = prefs.edit().putBoolean(ABOUT_CLICKED, value).apply()
+
+    var rateClicked: Boolean
+        get() = prefs.getBoolean(RATE_CLICKED, false)
+        set(value) = prefs.edit().putBoolean(RATE_CLICKED, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()
@@ -234,11 +250,11 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putString(APP_USER_8, value).apply()
 
     var appNameSwipeLeft: String
-        get() = prefs.getString(APP_NAME_SWIPE_LEFT, "CAMERA").toString()
+        get() = prefs.getString(APP_NAME_SWIPE_LEFT, "Camera").toString()
         set(value) = prefs.edit().putString(APP_NAME_SWIPE_LEFT, value).apply()
 
     var appNameSwipeRight: String
-        get() = prefs.getString(APP_NAME_SWIPE_RIGHT, "PHONE").toString()
+        get() = prefs.getString(APP_NAME_SWIPE_RIGHT, "Phone").toString()
         set(value) = prefs.edit().putString(APP_NAME_SWIPE_RIGHT, value).apply()
 
     var appPackageSwipeLeft: String

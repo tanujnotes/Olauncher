@@ -2,9 +2,9 @@
 
 
 # Olauncher | Minimal AF
-Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can also update your wallpaper daily, if you want.
+Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF stands for ad-free. :)
 
-## Installation
+## Install
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olauncher)
@@ -12,22 +12,23 @@ Olauncher is a minimal launcher app for Android. AF stands for Ad-Free. It can a
     alt="Get it on F-Droid"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
-Download from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher). You can also clone the master branch and build the app yourself in Android Studio. No extra steps required. Or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
+#### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
-## What's next
-Text size and color changes.
+You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
 
-**Done**
+## Contribute
+* Please go through the issues marked as [`bug`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug) or [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
+* Please don't send features without discussing first
+* Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch
 
-:heavy_check_mark: Hide apps  
-:heavy_check_mark: Work apps support  
-:heavy_check_mark: Rename apps on the home screen
+## Sponsor
+Support this project and get exclusive rewards by joining membership -
+https://buymeacoff.ee/tanujnotes
 
-## Contact
-Tanuj M. ([@tanujnotes](https://twitter.com/tanujnotes))
+---
 
-## License
-[GNU GPLv3 ](https://www.gnu.org/licenses/gpl-3.0.en.html)
+License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
+Contact - [@tanujnotes](https://twitter.com/tanujnotes)
 
-Thank you.
+Thank you!

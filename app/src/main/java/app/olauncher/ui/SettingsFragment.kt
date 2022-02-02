@@ -9,7 +9,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -25,9 +24,6 @@ import app.olauncher.listener.DeviceAdmin
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
-
-    private val APPEARANCE = 0
-    private val GESTURES = 1
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
@@ -54,14 +50,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P)
-            experimental.visibility = View.GONE
-
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
-        populateThemeColorText()
+        populateAppThemeText()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -74,19 +67,16 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     override fun onClick(view: View) {
         appsNumSelectLayout.visibility = View.GONE
         alignmentSelectLayout.visibility = View.GONE
-        themeColorSelectLayout.visibility = View.GONE
+        appThemeSelectLayout.visibility = View.GONE
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.appearanceTab -> changeTabLayout(APPEARANCE)
-            R.id.gesturesTab -> changeTabLayout(GESTURES)
+            R.id.publicRoadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
-            R.id.doubleTapText -> openEditSettingsPermission()
-            R.id.experimental -> openEditSettingsPermission()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
-            R.id.dailyWallpaperUrl -> openUrl(prefs.dailyWallpaperUrl)
+            R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> alignmentSelectLayout.visibility = View.VISIBLE
             R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
@@ -94,9 +84,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> toggleDateTime()
-            R.id.themeColor -> themeColorSelectLayout.visibility = View.VISIBLE
-            R.id.themeLight -> updateTheme(Constants.THEME_MODE_LIGHT)
-            R.id.themeDark -> updateTheme(Constants.THEME_MODE_DARK)
+            R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
+            R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
+            R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -111,11 +101,20 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
 
-            R.id.about -> openUrl(Constants.URL_ABOUT_OLAUNCHER)
+            R.id.about -> {
+                prefs.aboutClicked = true
+                requireContext().openUrl(Constants.URL_ABOUT_OLAUNCHER)
+            }
             R.id.share -> shareApp()
-            R.id.rate -> rateApp()
-            R.id.tweet -> openUrl(Constants.URL_TWITTER_TANUJ)
-            R.id.privacy -> openUrl(Constants.URL_OLAUNCHER_PRIVACY)
+            R.id.rate -> {
+                prefs.rateClicked = true
+                rateApp()
+            }
+            R.id.roadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
+            R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
+            R.id.instagram -> requireContext().openUrl(Constants.URL_INSTA_OLAUNCHER)
+            R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
+            R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
         }
     }
 
@@ -126,23 +125,25 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
             }
             R.id.dailyWallpaper -> removeWallpaper()
+            R.id.appThemeText -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
+            R.id.toggleLock -> {
+                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                deviceManager.removeActiveAdmin(componentName) // for backward compatibility
+            }
         }
         return true
     }
 
     private fun initClickListeners() {
         olauncherHiddenApps.setOnClickListener(this)
-        rootLayout.setOnClickListener(this)
+        scrollLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
-        appearanceTab.setOnClickListener(this)
-        gesturesTab.setOnClickListener(this)
+        publicRoadmap.setOnClickListener(this)
         autoShowKeyboard.setOnClickListener(this)
         toggleLock.setOnClickListener(this)
-        doubleTapText.setOnClickListener(this)
-        experimental.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
         dailyWallpaperUrl.setOnClickListener(this)
         dailyWallpaper.setOnClickListener(this)
@@ -154,15 +155,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dateTime.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
-        themeColor.setOnClickListener(this)
+        appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
 
         about.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
-        tweet.setOnClickListener(this)
+        roadmap.setOnClickListener(this)
+        twitter.setOnClickListener(this)
+        instagram.setOnClickListener(this)
         privacy.setOnClickListener(this)
+        github.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)
         maxApps1.setOnClickListener(this)
@@ -174,18 +178,23 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         maxApps7.setOnClickListener(this)
         maxApps8.setOnClickListener(this)
 
-        // Long click listeners
         dailyWallpaper.setOnLongClickListener(this)
         alignment.setOnLongClickListener(this)
+        appThemeText.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
         swipeRightApp.setOnLongClickListener(this)
+        toggleLock.setOnLongClickListener(this)
     }
 
     private fun initObservers() {
+        if (prefs.firstSettingsOpen) {
+            prefs.firstSettingsOpen = false
+        }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, {
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
+                publicRoadmap.visibility = View.VISIBLE
             }
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
@@ -194,20 +203,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.updateSwipeApps.observe(viewLifecycleOwner, {
             populateSwipeApps()
         })
-    }
-
-    private fun changeTabLayout(position: Int) {
-        if (position == APPEARANCE) {
-            gesturesLayout.visibility = View.GONE
-            gesturesTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans80))
-            appearanceTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            appearanceLayout.visibility = View.VISIBLE
-        } else if (position == GESTURES) {
-            appearanceLayout.visibility = View.GONE
-            appearanceTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans80))
-            gesturesTab.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            gesturesLayout.visibility = View.VISIBLE
-        }
     }
 
     private fun toggleSwipeLeft() {
@@ -263,17 +258,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
         else
             @Suppress("DEPRECATION", "InlinedApi")
-            if (prefs.themeColor == Constants.THEME_MODE_DARK)
-                requireActivity().window.decorView.apply {
-                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                }
-            else
-                requireActivity().window.decorView.apply {
-                    systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or
-                            View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                }
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            }
     }
 
     private fun hideStatusBar() {
@@ -301,29 +288,40 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun checkAdminPermission() {
         val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
-        prefs.lockModeOn = isAdmin
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P)
+            prefs.lockModeOn = isAdmin
     }
 
     private fun toggleLockMode() {
-        val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
-        if (isAdmin) {
-            deviceManager.removeActiveAdmin(componentName)
-            prefs.lockModeOn = false
-            populateLockSettings()
-            showToastShort(requireContext(), "Admin permission removed.")
-            if (Settings.System.canWrite(requireContext())) {
-                openEditSettingsPermission()
-                showToastLong(requireContext(), "You can remove settings permission too.")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            when {
+                prefs.lockModeOn -> {
+                    prefs.lockModeOn = false
+                    deviceManager.removeActiveAdmin(componentName) // for backward compatibility
+                }
+                isAccessServiceEnabled(requireContext()) -> prefs.lockModeOn = true
+                else -> {
+                    showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
+                    startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                }
             }
         } else {
-            val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
-            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
-            intent.putExtra(
-                DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-                getString(R.string.admin_permission_message)
-            )
-            activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
+            val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
+            if (isAdmin) {
+                deviceManager.removeActiveAdmin(componentName)
+                prefs.lockModeOn = false
+                showToastShort(requireContext(), "Admin permission removed.")
+            } else {
+                val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
+                intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
+                intent.putExtra(
+                    DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                    getString(R.string.admin_permission_message)
+                )
+                activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
+            }
         }
+        populateLockSettings()
     }
 
     private fun removeWallpaper() {
@@ -344,10 +342,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun showWallpaperToasts() {
-        if (!isOlauncherDefault(requireContext()))
-            showToastLong(requireContext(), "Olauncher is not default launcher.\nDaily wallpaper update may fail.")
-        else
+        if (isOlauncherDefault(requireContext()))
             showToastShort(requireContext(), "Your wallpaper will update shortly")
+        else
+            showToastLong(requireContext(), "Olauncher is not default launcher.\nDaily wallpaper update may fail.")
     }
 
     private fun updateHomeAppsNum(num: Int) {
@@ -362,33 +360,40 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
     }
 
-    private fun updateTheme(themeColor: Int) {
-        if (prefs.themeColor == themeColor) return
-        prefs.themeColor = themeColor
-        populateThemeColorText()
-        when (prefs.themeColor) {
-            Constants.THEME_MODE_DARK -> {
-                if (prefs.dailyWallpaper) {
-                    setPlainWallpaper(requireContext(), android.R.color.black)
-                    viewModel.setWallpaperWorker()
-                }
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            else -> {
-                if (prefs.dailyWallpaper) {
-                    setPlainWallpaper(requireContext(), android.R.color.white)
-                    viewModel.setWallpaperWorker()
-                }
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
+    private fun updateTheme(appTheme: Int) {
+        if (AppCompatDelegate.getDefaultNightMode() == appTheme) return
+        prefs.appTheme = appTheme
+        populateAppThemeText(appTheme)
+        setAppTheme(appTheme)
+    }
+
+    private fun setAppTheme(theme: Int) {
+        if (AppCompatDelegate.getDefaultNightMode() == theme) return
+        if (prefs.dailyWallpaper) {
+            setPlainWallpaper(theme)
+            viewModel.setWallpaperWorker()
         }
         requireActivity().recreate()
     }
 
-    private fun populateThemeColorText() {
-        when (prefs.themeColor) {
-            Constants.THEME_MODE_DARK -> themeColor.text = getString(R.string.dark)
-            else -> themeColor.text = getString(R.string.light)
+    private fun setPlainWallpaper(appTheme: Int) {
+        when (appTheme) {
+            AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(requireContext(), android.R.color.black)
+            AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(requireContext(), android.R.color.white)
+            else -> {
+                if (requireContext().isDarkThemeOn())
+                    setPlainWallpaper(requireContext(), android.R.color.black)
+                else setPlainWallpaper(requireContext(), android.R.color.white)
+            }
+        }
+    }
+
+
+    private fun populateAppThemeText(appTheme: Int = prefs.appTheme) {
+        when (appTheme) {
+            AppCompatDelegate.MODE_NIGHT_YES -> appThemeText.text = getString(R.string.dark)
+            AppCompatDelegate.MODE_NIGHT_NO -> appThemeText.text = getString(R.string.light)
+            else -> appThemeText.text = getString(R.string.system_default)
         }
     }
 
@@ -415,15 +420,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         else toggleLock.text = getString(R.string.off)
     }
 
-    private fun openUrl(url: String) {
-        if (url.isEmpty()) return
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
-    }
-
     private fun shareApp() {
-        val message = "You should use your phone, not the other way round. -Olauncher\n" +
+        val message = "Are you using your phone or your phone is using you?\n" +
                 Constants.URL_OLAUNCHER_PLAY_STORE
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -444,19 +442,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
         intent.addFlags(flags)
         startActivity(intent)
-    }
-
-    private fun sendEmailIntent() {
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.data = Uri.parse(
-            "mailto:thetanuj1@gmail.com?" +
-                    "subject=Hello%20Team%20Olauncher!"
-        )
-        try {
-            startActivity(emailIntent)
-        } catch (e: Exception) {
-            showToastLong(requireContext(), "Failed! Send email to thetanuj1@gmail.com")
-        }
     }
 
     private fun populateSwipeApps() {
@@ -487,20 +472,24 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateActionHints() {
         when (prefs.toShowHintCounter) {
-            Constants.HINT_ABOUT_US -> {
-                Toast.makeText(context, getString(R.string.about_hint), Toast.LENGTH_LONG).show()
-                about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-            }
             Constants.HINT_RATE_US -> {
-                Toast.makeText(context, getString(R.string.rate_us_hint), Toast.LENGTH_LONG).show()
+                viewModel.showMessageDialog(getString(R.string.rate_us_message))
                 rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+                scrollView.post {
+                    scrollView.fullScroll(View.FOCUS_DOWN)
+                }
+            }
+            Constants.HINT_SHARE -> {
+                viewModel.showMessageDialog(getString(R.string.share_message))
+                share.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+                scrollView.post {
+                    scrollView.fullScroll(View.FOCUS_DOWN)
+                }
             }
         }
-    }
-
-    private fun openEditSettingsPermission() {
-        val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-        intent.data = Uri.parse("package:" + BuildConfig.APPLICATION_ID)
-        activity?.startActivityForResult(intent, Constants.REQUEST_CODE_EDIT_SETTINGS)
+        if (prefs.aboutClicked.not())
+            about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+        if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US)
+            rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
     }
 }

@@ -8,18 +8,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!--For opening alarm app-->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/olauncher_logo"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/olauncher_logo_rounded"
+        android:roundIcon="@drawable/ic_rounded"
         android:supportsRtl="true"
-        android:theme="@style/LightTheme">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
+            android:configChanges="uiMode"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
             android:taskAffinity=""
@@ -57,6 +57,19 @@
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".helper.MyAccessibilityService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:process=":serviceProcess">
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+        </service>
 
     </application>
 
