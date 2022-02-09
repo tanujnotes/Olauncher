@@ -55,6 +55,14 @@ class Prefs(context: Context) {
     private val APP_USER_6 = "APP_USER_6"
     private val APP_USER_7 = "APP_USER_7"
     private val APP_USER_8 = "APP_USER_8"
+    private val APP_ACTIVITY_1 = "APP_ACTIVITY_1"
+    private val APP_ACTIVITY_2 = "APP_ACTIVITY_2"
+    private val APP_ACTIVITY_3 = "APP_ACTIVITY_3"
+    private val APP_ACTIVITY_4 = "APP_ACTIVITY_4"
+    private val APP_ACTIVITY_5 = "APP_ACTIVITY_5"
+    private val APP_ACTIVITY_6 = "APP_ACTIVITY_6"
+    private val APP_ACTIVITY_7 = "APP_ACTIVITY_7"
+    private val APP_ACTIVITY_8 = "APP_ACTIVITY_8"
 
     private val APP_NAME_SWIPE_LEFT = "APP_NAME_SWIPE_LEFT"
     private val APP_NAME_SWIPE_RIGHT = "APP_NAME_SWIPE_RIGHT"
@@ -62,6 +70,8 @@ class Prefs(context: Context) {
     private val APP_PACKAGE_SWIPE_RIGHT = "APP_PACKAGE_SWIPE_RIGHT"
     private val APP_USER_SWIPE_LEFT = "APP_USER_SWIPE_LEFT"
     private val APP_USER_SWIPE_RIGHT = "APP_USER_SWIPE_RIGHT"
+    private val APP_ACTIVITY_SWIPE_LEFT = "APP_ACTIVITY_SWIPE_LEFT"
+    private val APP_ACTIVITY_SWIPE_RIGHT = "APP_ACTIVITY_SWIPE_RIGHT"
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
@@ -249,6 +259,38 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_USER_8, "").toString()
         set(value) = prefs.edit().putString(APP_USER_8, value).apply()
 
+    var appActivity1: String
+        get() = prefs.getString(APP_ACTIVITY_1, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_1, value).apply()
+
+    var appActivity2: String
+        get() = prefs.getString(APP_ACTIVITY_2, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_2, value).apply()
+
+    var appActivity3: String
+        get() = prefs.getString(APP_ACTIVITY_3, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_3, value).apply()
+
+    var appActivity4: String
+        get() = prefs.getString(APP_ACTIVITY_4, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_4, value).apply()
+
+    var appActivity5: String
+        get() = prefs.getString(APP_ACTIVITY_5, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_5, value).apply()
+
+    var appActivity6: String
+        get() = prefs.getString(APP_ACTIVITY_6, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_6, value).apply()
+
+    var appActivity7: String
+        get() = prefs.getString(APP_ACTIVITY_7, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_7, value).apply()
+
+    var appActivity8: String
+        get() = prefs.getString(APP_ACTIVITY_8, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_8, value).apply()
+
     var appNameSwipeLeft: String
         get() = prefs.getString(APP_NAME_SWIPE_LEFT, "Camera").toString()
         set(value) = prefs.edit().putString(APP_NAME_SWIPE_LEFT, value).apply()
@@ -272,6 +314,14 @@ class Prefs(context: Context) {
     var appUserSwipeRight: String
         get() = prefs.getString(APP_USER_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_USER_SWIPE_RIGHT, value).apply()
+
+    var appActivitySwipeLeft: String
+        get() = prefs.getString(APP_ACTIVITY_SWIPE_LEFT, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_SWIPE_LEFT, value).apply()
+
+    var appActivitySwipeRight: String
+        get() = prefs.getString(APP_ACTIVITY_SWIPE_RIGHT, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_SWIPE_RIGHT, value).apply()
 
     fun getAppName(location: Int): String {
         return when (location) {
@@ -311,6 +361,20 @@ class Prefs(context: Context) {
             6 -> prefs.getString(APP_USER_6, "").toString()
             7 -> prefs.getString(APP_USER_7, "").toString()
             8 -> prefs.getString(APP_USER_8, "").toString()
+            else -> ""
+        }
+    }
+
+    fun getAppActivity(location: Int): String {
+        return when (location) {
+            1 -> prefs.getString(APP_ACTIVITY_1, "").toString()
+            2 -> prefs.getString(APP_ACTIVITY_2, "").toString()
+            3 -> prefs.getString(APP_ACTIVITY_3, "").toString()
+            4 -> prefs.getString(APP_ACTIVITY_4, "").toString()
+            5 -> prefs.getString(APP_ACTIVITY_5, "").toString()
+            6 -> prefs.getString(APP_ACTIVITY_6, "").toString()
+            7 -> prefs.getString(APP_ACTIVITY_7, "").toString()
+            8 -> prefs.getString(APP_ACTIVITY_8, "").toString()
             else -> ""
         }
     }

@@ -71,6 +71,7 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
                                 app.label.toString(),
                                 collator.getCollationKey(app.label.toString()),
                                 app.applicationInfo.packageName,
+                                app.componentName.className,
                                 profile
                             )
                         )
@@ -82,6 +83,7 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
                                 app.label.toString(),
                                 collator.getCollationKey(app.label.toString()),
                                 app.applicationInfo.packageName,
+                                app.componentName.className,
                                 profile
                             )
                         )
@@ -118,7 +120,8 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
                 val appInfo = pm.getApplicationInfo(appPackage, 0)
                 val appName = pm.getApplicationLabel(appInfo).toString()
                 val appKey = collator.getCollationKey(appName)
-                appList.add(AppModel(appName, appKey, appPackage, userHandle))
+                // TODO: hidden apps settings ignore activity name for backward compatibility. Fix it.
+                appList.add(AppModel(appName, appKey, appPackage, "", userHandle))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
