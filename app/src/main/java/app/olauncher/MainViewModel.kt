@@ -35,69 +35,79 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
             Constants.FLAG_LAUNCH_APP -> {
-                launchApp(appModel.appPackage, appModel.user)
+                launchApp(appModel)
             }
             Constants.FLAG_HIDDEN_APPS -> {
-                launchApp(appModel.appPackage, appModel.user)
+                launchApp(appModel)
             }
             Constants.FLAG_SET_HOME_APP_1 -> {
                 prefs.appName1 = appModel.appLabel
                 prefs.appPackage1 = appModel.appPackage
                 prefs.appUser1 = appModel.user.toString()
+                prefs.appActivity1 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_2 -> {
                 prefs.appName2 = appModel.appLabel
                 prefs.appPackage2 = appModel.appPackage
                 prefs.appUser2 = appModel.user.toString()
+                prefs.appActivity2 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_3 -> {
                 prefs.appName3 = appModel.appLabel
                 prefs.appPackage3 = appModel.appPackage
                 prefs.appUser3 = appModel.user.toString()
+                prefs.appActivity3 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_4 -> {
                 prefs.appName4 = appModel.appLabel
                 prefs.appPackage4 = appModel.appPackage
                 prefs.appUser4 = appModel.user.toString()
+                prefs.appActivity4 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_5 -> {
                 prefs.appName5 = appModel.appLabel
                 prefs.appPackage5 = appModel.appPackage
                 prefs.appUser5 = appModel.user.toString()
+                prefs.appActivity5 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_6 -> {
                 prefs.appName6 = appModel.appLabel
                 prefs.appPackage6 = appModel.appPackage
                 prefs.appUser6 = appModel.user.toString()
+                prefs.appActivity6 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_7 -> {
                 prefs.appName7 = appModel.appLabel
                 prefs.appPackage7 = appModel.appPackage
                 prefs.appUser7 = appModel.user.toString()
+                prefs.appActivity7 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_HOME_APP_8 -> {
                 prefs.appName8 = appModel.appLabel
                 prefs.appPackage8 = appModel.appPackage
                 prefs.appUser8 = appModel.user.toString()
+                prefs.appActivity8 = appModel.appActivityName
                 refreshHome(false)
             }
             Constants.FLAG_SET_SWIPE_LEFT_APP -> {
                 prefs.appNameSwipeLeft = appModel.appLabel
                 prefs.appPackageSwipeLeft = appModel.appPackage
                 prefs.appUserSwipeLeft = appModel.user.toString()
+                prefs.appActivitySwipeLeft = appModel.appActivityName
                 updateSwipeApps()
             }
             Constants.FLAG_SET_SWIPE_RIGHT_APP -> {
                 prefs.appNameSwipeRight = appModel.appLabel
                 prefs.appPackageSwipeRight = appModel.appPackage
                 prefs.appUserSwipeRight = appModel.user.toString()
+                prefs.appActivitySwipeRight = appModel.appActivityName
                 updateSwipeApps()
             }
         }
@@ -119,7 +129,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         updateSwipeApps.postValue(Unit)
     }
 
-    private fun launchApp(packageName: String, userHandle: UserHandle) {
+    private fun launchApp(appModel: AppModel) {
+        val packageName = appModel.appPackage
+        val appActivityName = appModel.appActivityName
+        val userHandle = appModel.user
         val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
         val activityInfo = launcher.getActivityList(packageName, userHandle)
 
@@ -130,7 +143,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 return
             }
             1 -> ComponentName(packageName, activityInfo[0].name)
-            else -> ComponentName(packageName, activityInfo[activityInfo.size - 1].name)
+            else -> if (appActivityName.isNotEmpty()) {
+                ComponentName(packageName, appActivityName)
+            } else {
+                ComponentName(packageName, activityInfo[activityInfo.size - 1].name)
+            }
         }
 
         try {
