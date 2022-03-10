@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.os.Bundle
-import android.os.Vibrator
+import android.os.*
 import android.provider.Settings
 import android.view.*
 import android.widget.TextView
@@ -61,6 +59,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     override fun onClick(view: View) {
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
         when (view.id) {
             R.id.lock -> {
             }
@@ -79,6 +78,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     override fun onLongClick(view: View): Boolean {
+        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
         when (view.id) {
             R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1, prefs.appName1.isNotEmpty(), true)
             R.id.homeApp2 -> showAppList(Constants.FLAG_SET_HOME_APP_2, prefs.appName2.isNotEmpty(), true)
