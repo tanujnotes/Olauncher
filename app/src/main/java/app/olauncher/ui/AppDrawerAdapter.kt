@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -113,14 +114,30 @@ class AppDrawerAdapter(
                     otherProfileIndicator.visibility = View.GONE
                 else otherProfileIndicator.visibility = View.VISIBLE
 
-                appTitle.setOnClickListener { listener(appModel) }
+                appTitle.setOnClickListener {
+                    withClickHapticFeedback(
+                        itemView,
+                        listener(appModel)
+                    )
+                }
                 appTitle.setOnLongClickListener {
+                    itemView.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
                     appHideLayout.visibility = View.VISIBLE
                     true
                 }
 
-                appInfo.setOnClickListener { appInfoListener(appModel) }
+                appInfo.setOnClickListener {
+                    withClickHapticFeedback(
+                        itemView,
+                        appInfoListener(appModel)
+                    )
+                }
                 appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
             }
+
+        private fun withClickHapticFeedback(view: View, listener: Unit) {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            return listener
+        }
     }
 }
