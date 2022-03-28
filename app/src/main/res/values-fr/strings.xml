@@ -27,8 +27,10 @@
     <string name="right">Droite</string>
     <string name="center">Centre</string>
     <string name="home_layout_alignment">Alignement des applications</string>
-    <string name="swipe_left_app">Accès à l\'application par balayage vers la gauche</string>
-    <string name="swipe_right_app">Accès à l\'application par balayage vers la droite</string>
+    <string name="swipe_left_app">Application appeler par un balayage vers la gauche</string>
+    <string name="swipe_right_app">Application appeler par un balayage vers la droite</string>
+    <string name="clock_click_app">Application appeler par un clic sur l\'horloge</string>
+    <string name="date_click_app">Application appeler par un clique sur la date</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
