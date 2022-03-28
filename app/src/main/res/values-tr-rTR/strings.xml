@@ -29,6 +29,8 @@
     <string name="home_layout_alignment" translatable="false">Uygulama hizalaması</string>
     <string name="swipe_left_app" translatable="false">Uygulamayı sola kaydırın</string>
     <string name="swipe_right_app" translatable="false">Uygulamayı sağa kaydırın</string>
+    <string name="clock_click_app">Saat tıklama uygulaması</string>
+    <string name="date_click_app">Tarih tıklama uygulaması</string>
     <string name="_0" translatable="false">0</string>
     <string name="_1" translatable="false">1</string>
     <string name="_2" translatable="false">2</string>
