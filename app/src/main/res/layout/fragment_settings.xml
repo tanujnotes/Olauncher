@@ -63,17 +63,6 @@
                 android:layout_marginBottom="8dp"
                 android:text="@string/set_as_default_launcher" />
 
-            <TextView
-                android:id="@+id/publicRoadmap"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/public_roadmap"
-                android:visibility="gone"
-                tools:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
@@ -587,87 +576,6 @@
                     android:text="@string/off" />
             </FrameLayout>
         </LinearLayout>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:overScrollMode="never"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp">
-
-                <TextView
-                    android:id="@+id/about"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/about" />
-
-                <TextView
-                    android:id="@+id/share"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/share" />
-
-                <TextView
-                    android:id="@+id/rate"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/rate" />
-
-                <TextView
-                    android:id="@+id/roadmap"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/roadmap" />
-
-                <TextView
-                    android:id="@+id/twitter"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/twitter" />
-
-                <TextView
-                    android:id="@+id/instagram"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/instagram" />
-
-                <TextView
-                    android:id="@+id/github"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/github" />
-
-                <TextView
-                    android:id="@+id/privacy"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/privacy" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
     </LinearLayout>
 
 </ScrollView>

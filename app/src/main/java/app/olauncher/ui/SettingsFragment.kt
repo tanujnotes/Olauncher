@@ -59,7 +59,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateStatusBar()
         populateDateTime()
         populateSwipeApps()
-        populateActionHints()
+        // populateActionHints()
         initClickListeners()
         initObservers()
     }
@@ -141,7 +141,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         scrollLayout.setOnClickListener(this)
         appInfo.setOnClickListener(this)
         setLauncher.setOnClickListener(this)
-        publicRoadmap.setOnClickListener(this)
         autoShowKeyboard.setOnClickListener(this)
         toggleLock.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
@@ -158,15 +157,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
-
-        about.setOnClickListener(this)
-        share.setOnClickListener(this)
-        rate.setOnClickListener(this)
-        roadmap.setOnClickListener(this)
-        twitter.setOnClickListener(this)
-        instagram.setOnClickListener(this)
-        privacy.setOnClickListener(this)
-        github.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)
         maxApps1.setOnClickListener(this)
@@ -194,7 +184,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
-                publicRoadmap.visibility = View.VISIBLE
             }
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
@@ -468,28 +457,5 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf("flag" to flag)
         )
-    }
-
-    private fun populateActionHints() {
-        when (prefs.toShowHintCounter) {
-            Constants.HINT_RATE_US -> {
-                viewModel.showMessageDialog(getString(R.string.rate_us_message))
-                rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-                scrollView.post {
-                    scrollView.fullScroll(View.FOCUS_DOWN)
-                }
-            }
-            Constants.HINT_SHARE -> {
-                viewModel.showMessageDialog(getString(R.string.share_message))
-                share.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-                scrollView.post {
-                    scrollView.fullScroll(View.FOCUS_DOWN)
-                }
-            }
-        }
-        if (prefs.aboutClicked.not())
-            about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-        if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US)
-            rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
     }
 }

@@ -65,7 +65,6 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
-<<<<<<< HEAD
                     if (showHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
                         appList.add(
                             AppModel(
@@ -74,7 +73,7 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
                                 app.applicationInfo.packageName,
                                 app.componentName.className,
                                 profile,
-                                Prefs(context).getAppAlias(label)
+                                Prefs(context).getAppAlias(app.label.toString())
                             )
                         )
                     else if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
@@ -87,7 +86,7 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
                                 app.applicationInfo.packageName,
                                 app.componentName.className,
                                 profile,
-                                Prefs(context).getAppAlias(label)
+                                Prefs(context).getAppAlias(app.label.toString())
                             )
                         )
                 }
@@ -131,7 +130,7 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
                 val appName = pm.getApplicationLabel(appInfo).toString()
                 val appKey = collator.getCollationKey(appName)
                 // TODO: hidden apps settings ignore activity name for backward compatibility. Fix it.
-                appList.add(AppModel(appName, appKey, appPackage, "", userHandle, Prefs(context).getAppAlias(appName))
+                appList.add(AppModel(appName, appKey, appPackage, "", userHandle, Prefs(context).getAppAlias(appName)))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
