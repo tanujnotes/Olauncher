@@ -29,6 +29,8 @@
     <string name="home_layout_alignment">Apps ausrichten</string>
     <string name="swipe_left_app">App für nach links wischen</string>
     <string name="swipe_right_app">App für nach rechts wischen</string>
+    <string name="clock_click_app">App bei Tippen auf Uhr</string>
+    <string name="date_click_app">App bei Tippen auf Datum</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
