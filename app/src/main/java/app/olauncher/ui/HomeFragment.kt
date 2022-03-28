@@ -64,8 +64,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         when (view.id) {
             R.id.lock -> {
             }
-            R.id.clock -> openAlarmApp(requireContext())
-            R.id.date -> openCalendar(requireContext())
+            R.id.clock -> openClickClockApp()
+            R.id.date -> openClickDateApp()
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             else -> {
                 try { // Launch app
@@ -299,6 +299,28 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 android.os.Process.myUserHandle().toString()
             )
         else openDialerApp(requireContext())
+    }
+
+    private fun openClickClockApp() {
+        if (prefs.appPackageClickClock.isNotEmpty())
+            launchApp(
+                prefs.appNameClickClock,
+                prefs.appPackageClickClock,
+                prefs.appActivityClickClock,
+                android.os.Process.myUserHandle().toString()
+            )
+        else openAlarmApp(requireContext())
+    }
+
+    private fun openClickDateApp() {
+        if (prefs.appPackageClickClock.isNotEmpty())
+            launchApp(
+                prefs.appNameClickDate,
+                prefs.appPackageClickDate,
+                prefs.appActivityClickDate,
+                android.os.Process.myUserHandle().toString()
+            )
+        else openCalendar(requireContext())
     }
 
     private fun openSwipeLeftApp() {

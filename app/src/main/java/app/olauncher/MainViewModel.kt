@@ -24,6 +24,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val refreshHome = MutableLiveData<Boolean>()
     val toggleDateTime = MutableLiveData<Boolean>()
     val updateSwipeApps = MutableLiveData<Any>()
+    val updateClickApps = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>>()
     val hiddenApps = MutableLiveData<List<AppModel>>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
@@ -110,6 +111,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appActivitySwipeRight = appModel.appActivityName
                 updateSwipeApps()
             }
+            Constants.FLAG_SET_CLICK_CLOCK_APP -> {
+                prefs.appNameClickClock = appModel.appLabel
+                prefs.appPackageClickClock = appModel.appPackage
+                prefs.appUserClickClock = appModel.user.toString()
+                prefs.appActivityClickClock = appModel.appActivityName
+                updateClickApps()
+            }
+            Constants.FLAG_SET_CLICK_DATE_APP -> {
+                prefs.appNameClickDate = appModel.appLabel
+                prefs.appPackageClickDate = appModel.appPackage
+                prefs.appUserClickDate = appModel.user.toString()
+                prefs.appActivityClickDate = appModel.appActivityName
+                updateClickApps()
+            }
         }
     }
 
@@ -127,6 +142,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun updateSwipeApps() {
         updateSwipeApps.postValue(Unit)
+    }
+
+    private fun updateClickApps() {
+        updateClickApps.postValue(Unit)
     }
 
     private fun launchApp(appModel: AppModel) {

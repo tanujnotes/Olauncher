@@ -66,14 +66,25 @@ class Prefs(context: Context) {
 
     private val APP_NAME_SWIPE_LEFT = "APP_NAME_SWIPE_LEFT"
     private val APP_NAME_SWIPE_RIGHT = "APP_NAME_SWIPE_RIGHT"
+    private val APP_NAME_CLICK_CLOCK = "APP_NAME_CLICK_CLOCK"
+    private val APP_NAME_CLICK_DATE = "APP_NAME_CLICK_DATE"
+
     private val APP_PACKAGE_SWIPE_LEFT = "APP_PACKAGE_SWIPE_LEFT"
     private val APP_PACKAGE_SWIPE_RIGHT = "APP_PACKAGE_SWIPE_RIGHT"
+    private val APP_PACKAGE_CLICK_CLOCK = "APP_PACKAGE_CLICK_CLOCK"
+    private val APP_PACKAGE_CLICK_DATE = "APP_PACKAGE_CLICK_DATE"
+
     private val APP_USER_SWIPE_LEFT = "APP_USER_SWIPE_LEFT"
     private val APP_USER_SWIPE_RIGHT = "APP_USER_SWIPE_RIGHT"
+    private val APP_USER_CLICK_CLOCK = "APP_USER_CLICK_CLOCK"
+    private val APP_USER_CLICK_DATE = "APP_USER_CLICK_DATE"
+
     private val APP_ACTIVITY_SWIPE_LEFT = "APP_ACTIVITY_SWIPE_LEFT"
     private val APP_ACTIVITY_SWIPE_RIGHT = "APP_ACTIVITY_SWIPE_RIGHT"
+    private val APP_ACTIVITY_CLICK_CLOCK = "APP_ACTIVITY_CLICK_CLOCK"
+    private val APP_ACTIVITY_CLICK_DATE = "APP_ACTIVITY_CLICK_DATE"
 
-    private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
+    private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
     var firstOpen: Boolean
         get() = prefs.getBoolean(FIRST_OPEN, true)
@@ -299,6 +310,14 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_NAME_SWIPE_RIGHT, "Phone").toString()
         set(value) = prefs.edit().putString(APP_NAME_SWIPE_RIGHT, value).apply()
 
+    var appNameClickClock: String
+        get() = prefs.getString(APP_NAME_CLICK_CLOCK, "Clock").toString()
+        set(value) = prefs.edit().putString(APP_NAME_CLICK_CLOCK, value).apply()
+
+    var appNameClickDate: String
+        get() = prefs.getString(APP_NAME_CLICK_DATE, "Calendar").toString()
+        set(value) = prefs.edit().putString(APP_NAME_CLICK_DATE, value).apply()
+
     var appPackageSwipeLeft: String
         get() = prefs.getString(APP_PACKAGE_SWIPE_LEFT, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_LEFT, value).apply()
@@ -306,6 +325,14 @@ class Prefs(context: Context) {
     var appPackageSwipeRight: String
         get() = prefs.getString(APP_PACKAGE_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_RIGHT, value).apply()
+
+    var appPackageClickClock: String
+        get() = prefs.getString(APP_PACKAGE_CLICK_CLOCK, "").toString()
+        set(value) = prefs.edit().putString(APP_PACKAGE_CLICK_CLOCK, value).apply()
+
+    var appPackageClickDate: String
+        get() = prefs.getString(APP_PACKAGE_CLICK_DATE, "").toString()
+        set(value) = prefs.edit().putString(APP_PACKAGE_CLICK_DATE, value).apply()
 
     var appUserSwipeLeft: String
         get() = prefs.getString(APP_USER_SWIPE_LEFT, "").toString()
@@ -315,6 +342,14 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_USER_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_USER_SWIPE_RIGHT, value).apply()
 
+    var appUserClickClock: String
+        get() = prefs.getString(APP_USER_CLICK_CLOCK, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_CLICK_CLOCK, value).apply()
+
+    var appUserClickDate: String
+        get() = prefs.getString(APP_USER_CLICK_DATE, "").toString()
+        set(value) = prefs.edit().putString(APP_USER_CLICK_DATE, value).apply()
+
     var appActivitySwipeLeft: String
         get() = prefs.getString(APP_ACTIVITY_SWIPE_LEFT, "").toString()
         set(value) = prefs.edit().putString(APP_ACTIVITY_SWIPE_LEFT, value).apply()
@@ -322,6 +357,14 @@ class Prefs(context: Context) {
     var appActivitySwipeRight: String
         get() = prefs.getString(APP_ACTIVITY_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_ACTIVITY_SWIPE_RIGHT, value).apply()
+
+    var appActivityClickClock: String
+        get() = prefs.getString(APP_ACTIVITY_CLICK_CLOCK, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLICK_CLOCK, value).apply()
+
+    var appActivityClickDate: String
+        get() = prefs.getString(APP_ACTIVITY_CLICK_DATE, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLICK_DATE, value).apply()
 
     fun getAppName(location: Int): String {
         return when (location) {

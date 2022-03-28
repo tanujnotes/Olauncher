@@ -21,6 +21,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
 import app.olauncher.listener.DeviceAdmin
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -59,6 +60,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateStatusBar()
         populateDateTime()
         populateSwipeApps()
+        populateClickApps()
         // populateActionHints()
         initClickListeners()
         initObservers()
@@ -72,7 +74,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.publicRoadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
@@ -100,21 +101,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
-
-            R.id.about -> {
-                prefs.aboutClicked = true
-                requireContext().openUrl(Constants.URL_ABOUT_OLAUNCHER)
-            }
-            R.id.share -> shareApp()
-            R.id.rate -> {
-                prefs.rateClicked = true
-                rateApp()
-            }
-            R.id.roadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
-            R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
-            R.id.instagram -> requireContext().openUrl(Constants.URL_INSTA_OLAUNCHER)
-            R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
+            R.id.clockClickApp -> showAppListIfEnabled(Constants.FLAG_SET_CLICK_CLOCK_APP)
+            R.id.dateClickApp -> showAppListIfEnabled(Constants.FLAG_SET_CLICK_DATE_APP)
         }
     }
 
@@ -154,6 +142,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dateTime.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
+
+        clockClickApp.setOnClickListener(this)
+        dateClickApp.setOnClickListener(this)
+
         appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
@@ -180,18 +172,21 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         if (prefs.firstSettingsOpen) {
             prefs.firstSettingsOpen = false
         }
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, {
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner) {
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
             }
-        })
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
+        }
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             populateAlignment()
-        })
-        viewModel.updateSwipeApps.observe(viewLifecycleOwner, {
+        }
+        viewModel.updateSwipeApps.observe(viewLifecycleOwner) {
             populateSwipeApps()
-        })
+        }
+        viewModel.updateClickApps.observe(viewLifecycleOwner) {
+            populateClickApps()
+        }
     }
 
     private fun toggleSwipeLeft() {
@@ -440,6 +435,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
         if (!prefs.swipeRightEnabled)
             swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+    }
+    private fun populateClickApps() {
+        clockClickApp.text = prefs.appNameClickClock
+        dateClickApp.text = prefs.appNameClickDate
     }
 
     private fun showAppListIfEnabled(flag: Int) {

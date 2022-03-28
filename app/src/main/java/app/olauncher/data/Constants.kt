@@ -23,10 +23,10 @@ object Constants {
     const val FLAG_SET_SWIPE_LEFT_APP = 11
     const val FLAG_SET_SWIPE_RIGHT_APP = 12
 
-    const val REQUEST_CODE_ENABLE_ADMIN = 666
+    const val FLAG_SET_CLICK_CLOCK_APP = 13
+    const val FLAG_SET_CLICK_DATE_APP = 14
 
-    const val HINT_RATE_US = 30
-    const val HINT_SHARE = 50
+    const val REQUEST_CODE_ENABLE_ADMIN = 666
 
     const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 500

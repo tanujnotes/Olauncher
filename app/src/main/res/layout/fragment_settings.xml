@@ -551,6 +551,64 @@
                     android:padding="8dp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_weight="1"
+                    android:lines="1"
+                    android:paddingVertical="8dp"
+                    android:text="@string/clock_click_app"
+                    android:textColor="?attr/primaryColor" />
+
+                <TextView
+                    android:id="@+id/clockClickApp"
+                    style="@style/TextSmallBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginEnd="4dp"
+                    android:lines="1"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_weight="1"
+                    android:lines="1"
+                    android:paddingVertical="8dp"
+                    android:text="@string/date_click_app"
+                    android:textColor="?attr/primaryColor" />
+
+                <TextView
+                    android:id="@+id/dateClickApp"
+                    style="@style/TextSmallBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginEnd="4dp"
+                    android:lines="1"
+                    android:padding="8dp" />
+            </LinearLayout>
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
