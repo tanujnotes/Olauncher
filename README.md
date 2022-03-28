@@ -1,5 +1,11 @@
 ![Olauncher](https://repository-images.githubusercontent.com/278638069/db0acb80-661b-11eb-803e-926cae5dccb4)
 
+# Forked with extra features
+
+- Removed clutter
+- Rename apps in normal app list
+- Change clock app
+- Change Calendar app
 
 # Olauncher | Minimal AF
 Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF stands for ad-free. :)
@@ -18,35 +24,12 @@ You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/m
 
 ## Contribute
 * Please go through the issues marked as [`bug`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug) or [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
-* Please don't send features without discussing first
-* Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch
-
-## Sponsor
-#### Sponsor this project by joining our membership - [buymeacoff.ee/tanujnotes](https://buymeacoff.ee/tanujnotes)
-
-<details>
-    <summary>More options</summary>
-    
-  * Etheruem: `0xcBb95AF4D76fba34bf8D1808905BF5365239E2ba`
-  * Bitcoin: `33VFtQSa6HZr2FZphmNA5jZ9fEKPNbeEmL`
-  * Monero: `46bCqsiEtqj4p48HbQjw4c6RVtWeN59Uy4NBGGferBe7HEFKoskBbouFuuTxKvhTXhNuXQbLiEUFCaeMDTrfBGK7Qhp3dRn`
-  * Amazon affiliate: [amzn.to/3uftwFW](https://amzn.to/3uftwFW)
-  * Paypal: [paypal.me/tanujnotes](https://paypal.me/tanujnotes)
-  * UPI: tanujnotes@upi
-
-</details>
-
-
-
-
-
-
+* ~Please don't send features without discussing first~
+* ~Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch~
 
 
 ---
 
 License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
-
-Contact - [@tanujnotes](https://twitter.com/tanujnotes)
 
 Thank you!
