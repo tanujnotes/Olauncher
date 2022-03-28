@@ -30,8 +30,8 @@
     <string name="home_layout_alignment">Allineamento App</string>
     <string name="swipe_left_app">Scorri verso sinistra</string>
     <string name="swipe_right_app">Scorri verso destra</string>
-    <string name="clock_click_app">Clock click app</string>
-    <string name="date_click_app">Date click app</string>
+    <string name="clock_click_app">toccare app Orario</string>
+    <string name="date_click_app">toccare app data</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
