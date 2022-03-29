@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Olauncher</string>
+    <string name="app" translatable="false">App</string>
+    <string name="set_as_default_launcher">Varsayılan başlatıcı olarak ayarla</string>
+    <string name="app_text_color">Metin rengi</string>
+    <string name="double_tap_to_lock_screen">Kilitlemek için iki kez dokunun</string>
+    <string name="experimental_" translatable="false">(deneysel)</string>
+    <string name="admin_permission_message" translatable="false">Olauncher, kilit ekranı iznini sorumlu bir şekilde kullanmayı vaat ediyor.</string>
+    <string name="about" translatable="false">Hakkımızda</string>
+    <string name="off" translatable="false">Kapalı</string>
+    <string name="on" translatable="false">Açık</string>
+    <string name="black" translatable="false">Siyah</string>
+    <string name="white" translatable="false">Beyaz</string>
+    <string name="change_default_launcher" translatable="false">Varsayılan başlatıcıyı değiştir</string>
+    <string name="privacy" translatable="false">Gizlilik</string>
+    <string name="share" translatable="false">Paylaş</string>
+    <string name="rate" translatable="false">Oran</string>
+    <string name="follow" translatable="false">Takip et</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="donate" translatable="false">Donate</string>
+    <string name="long_press_for_settings" translatable="false">Ayarlar için herhangi bir yere uzun basın</string>
+    <string name="swipe_up_for_apps" translatable="false">Tüm uygulamalar için yukarı kaydırın</string>
+    <string name="apps_on_home_screen" translatable="false">Ana ekrandaki uygulamalar</string>
+    <string name="daily_wallpaper_update" translatable="false">Günlük yeni duvar kağıdı</string>
+    <string name="left" translatable="false">Sol</string>
+    <string name="right" translatable="false">Sağ</string>
+    <string name="center" translatable="false">Orta</string>
+    <string name="home_layout_alignment" translatable="false">Uygulama hizalaması</string>
+    <string name="swipe_left_app" translatable="false">Uygulamayı sola kaydırın</string>
+    <string name="swipe_right_app" translatable="false">Uygulamayı sağa kaydırın</string>
+    <string name="clock_click_app">Saat tıklama uygulaması</string>
+    <string name="date_click_app">Tarih tıklama uygulaması</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="app_drawer_tips" translatable="false">İpucu: Kapatmak için aşağı kaydırın. Klavyeyi gizlemek için kaydırın.</string>
+    <string name="okay" translatable="false">Tamam</string>
+    <string name="double_tap_lock_is_enabled_message" translatable="false">Çift dokunma kilidi parmak izini veya yüzle kilit açmayı devre dışı bırakırsa, Olauncher ayarlarını açın, \'deneysel\' üzerine dokunun ve talimatları izleyin. Teşekkürler.</string>
+    <string name="triple_tap_lock_message" translatable="false">Nasıl çalışır:
+       \nÇift dokunduğunuzda ekran kararır ve telefon 5 saniye içinde kendini kilitler.
+         \n\nBu süre boyunca, telefonu hemen tamamen kilitlemek için <b>kilidini açmak</b> için iki kez veya istediğiniz zaman üç kez dokunabilirsiniz.
+         \n\nNot: Olauncher ı silmeye karar verirseniz, önce bunu KAPATIN. Teşekkürler.</string>
+    <string name="auto_show_keyboard" translatable="false">Klavyeyi otomatik göster</string>
+    <string name="hide" translatable="false">Gizle</string>
+    <string name="status_bar" translatable="false">Durum çubuğunu göster</string>
+    <string name="rename" translatable="false">Yeniden adlandır</string>
+    <string name="show_date_time" translatable="false">Tarih ve Saati göster</string>
+    <string name="appearance" translatable="false">Görünüm</string>
+    <string name="gestures" translatable="false">Kaydırma</string>
+    <string name="theme_mode" translatable="false">Tema modu</string>
+    <string name="system_default" translatable="false">Sistem</string>
+    <string name="dark" translatable="false">Koyu</string>
+    <string name="light" translatable="false">Açık</string>
+    <string name="double_tap_lock_uninstall_message" translatable="false">Kilitlemek için iki kez etkindir.
+         \n\nNot: Olauncher ı silmeye karar verirseniz, önce bunu KAPATIN.</string>
+    <string name="welcome_to_olauncher_settings" translatable="false">Alttaki Hakkında sayfamızda tüm sorularınızın cevapları var. unutma :)
+         \n\nTeşekkürler.</string>
+    <string name="rate_us_message" translatable="false">Bu mesajı bir daha görmeyeceksiniz.
+         \n\nMerhaba, Olauncher ı faydalı bulduysanız 5 yıldızlı bir inceleme bizi mutlu edecektir. Teşekkürler ve iyi günler!</string>
+    <string name="share_message" translatable="false">Merhaba, arkadaşlarının Olauncher ı senin kadar seveceğini düşünüyor musun?
+         \n\nUygulamayı paylaşın ve bunu yaymamıza yardımcı olun. Teşekkürler!</string>
+    <string name="accessibility_service_description" translatable="false">Kilitlemek için çift dokunmayı etkinleştirmek için erişilebilirlik izni gereklidir. Servis tarafından alınan hiçbir veri cihazınızdan çıkmayacak.</string>
+    <string name="lock_layout_description" translatable="false">ekranı kilitlemek için benzersiz bir kimlik kullanılacak kilit düzeni açıklaması</string>
+    <string name="support_olauncher_message" translatable="false">Satış ortağı bağlantımızı kullanarak Olauncher ı reklamlardan ve izleyicilerden uzak tutmamıza yardımcı olabilirsiniz.\n\nBağlantımızı kullanarak her satın aldığınızda, küçük bir komisyon alırız. Ayrıca daha sonra kullanmak için bağlantıyı kopyalayıp kaydedebilirsiniz. Teşekkürler!</string>
+    <string name="open" translatable="false">Linki aç</string>
+    <string name="copy" translatable="false">Kopyala</string>
+    <string name="close" translatable="false">Kapat</string>
+    <string name="keeping_it_ad_free" translatable="false">Reklamsız Tutmak</string>
+    <string name="public_roadmap" translatable="false">Olauncher genel yol haritası</string>
+    <string name="instagram" translatable="false">Instagram</string>
+    <string name="twitter" translatable="false">Twitter</string>
+    <string name="roadmap" translatable="false">Yol Haritası</string>
+</resources>
