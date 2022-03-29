@@ -1,4 +1,4 @@
-package app.olauncher.helper
+package app.olaunchercf.helper
 
 import android.app.WallpaperManager
 import android.content.*
@@ -23,11 +23,11 @@ import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
-import app.olauncher.BuildConfig
-import app.olauncher.R
-import app.olauncher.data.AppModel
-import app.olauncher.data.Constants
-import app.olauncher.data.Prefs
+import app.olaunchercf.BuildConfig
+import app.olaunchercf.R
+import app.olaunchercf.data.AppModel
+import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Prefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject

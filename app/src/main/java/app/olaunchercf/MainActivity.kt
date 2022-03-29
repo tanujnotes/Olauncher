@@ -1,4 +1,4 @@
-package app.olauncher
+package app.olaunchercf
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -16,9 +16,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import app.olauncher.data.Constants
-import app.olauncher.data.Prefs
-import app.olauncher.helper.*
+import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Prefs
+import app.olaunchercf.helper.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

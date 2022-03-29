@@ -1,18 +1,17 @@
-package app.olauncher
+package app.olaunchercf
 
 import android.app.Application
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.LauncherApps
-import android.os.UserHandle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.work.*
-import app.olauncher.data.AppModel
-import app.olauncher.data.Constants
-import app.olauncher.data.Prefs
-import app.olauncher.helper.*
+import app.olaunchercf.data.AppModel
+import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Prefs
+import app.olaunchercf.helper.*
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 

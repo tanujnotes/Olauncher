@@ -1,4 +1,4 @@
-package app.olauncher.ui
+package app.olaunchercf.ui
 
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
@@ -14,14 +14,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import app.olauncher.BuildConfig
-import app.olauncher.MainViewModel
-import app.olauncher.R
-import app.olauncher.data.Constants
-import app.olauncher.data.Prefs
-import app.olauncher.helper.*
-import app.olauncher.listener.DeviceAdmin
-import kotlinx.android.synthetic.main.fragment_home.*
+import app.olaunchercf.BuildConfig
+import app.olaunchercf.MainViewModel
+import app.olaunchercf.R
+import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Prefs
+import app.olaunchercf.helper.*
+import app.olaunchercf.listener.DeviceAdmin
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {

@@ -1,4 +1,4 @@
-package app.olauncher.ui
+package app.olaunchercf.ui
 
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,15 +9,12 @@ import android.widget.EditText
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
-import app.olauncher.R
-import app.olauncher.data.AppModel
-import app.olauncher.data.Constants
-import app.olauncher.data.Prefs
+import app.olaunchercf.R
+import app.olaunchercf.data.AppModel
+import app.olaunchercf.data.Constants
 import kotlinx.android.synthetic.main.adapter_app_drawer.view.*
 import java.text.Normalizer
-import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 class AppDrawerAdapter(
     private var flag: Int,

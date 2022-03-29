@@ -1,4 +1,4 @@
-package app.olauncher.data
+package app.olaunchercf.data
 
 data class NotifyModel(
     val id: Int,

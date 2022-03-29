@@ -1,11 +1,11 @@
-package app.olauncher.helper
+package app.olaunchercf.helper
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import app.olauncher.data.Constants
-import app.olauncher.data.Prefs
+import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Prefs
 import kotlinx.coroutines.coroutineScope
 import java.text.SimpleDateFormat
 import java.util.*

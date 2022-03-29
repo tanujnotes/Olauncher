@@ -1,4 +1,4 @@
-package app.olauncher.ui
+package app.olaunchercf.ui
 
 import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
@@ -15,14 +15,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import app.olauncher.MainViewModel
-import app.olauncher.R
-import app.olauncher.data.AppModel
-import app.olauncher.data.Constants
-import app.olauncher.data.Prefs
-import app.olauncher.helper.*
-import app.olauncher.listener.OnSwipeTouchListener
-import app.olauncher.listener.ViewSwipeTouchListener
+import app.olaunchercf.MainViewModel
+import app.olaunchercf.R
+import app.olaunchercf.data.AppModel
+import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Prefs
+import app.olaunchercf.helper.*
+import app.olaunchercf.listener.OnSwipeTouchListener
+import app.olaunchercf.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {

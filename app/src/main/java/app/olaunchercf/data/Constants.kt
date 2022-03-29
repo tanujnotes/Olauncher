@@ -1,4 +1,4 @@
-package app.olauncher.data
+package app.olaunchercf.data
 
 object Constants {
     const val WALL_TYPE_LIGHT = "light"

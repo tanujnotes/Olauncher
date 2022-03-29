@@ -96,14 +96,6 @@
             tools:targetApi="p">
 
             <TextView
-                style="@style/TextLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:text="@string/keeping_it_ad_free"
-                android:textColor="?attr/primaryColor" />
-
-            <TextView
                 style="@style/TextSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
