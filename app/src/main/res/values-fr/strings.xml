@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">Olauncher</string>
+    <string name="app">App</string>
+    <string name="set_as_default_launcher">Définir comme lanceur par défaut</string>
+    <string name="app_text_color">Couleur du texte</string>
+    <string name="double_tap_to_lock_screen">Tapoter deux fois pour verrouiller</string>
+    <string name="experimental_">(expérimental)</string>
+    <string name="admin_permission_message">Olauncher promet d\'utiliser l\'autorisation d\'accès au verrouillage de l\'écran de manière responsable.</string>
+    <string name="about">À Propos</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="black">Noir</string>
+    <string name="white">Blanc</string>
+    <string name="change_default_launcher">Modifier le lanceur par défaut</string>
+    <string name="privacy">Confidentialité</string>
+    <string name="share">Partager</string>
+    <string name="rate">Évaluer</string>
+    <string name="follow">Suivre</string>
+    <string name="email">Courriel</string>
+    <string name="github">Github</string>
+    <string name="donate">Faire un Don</string>
+    <string name="long_press_for_settings">Appuyez longuement n\'importe où pour accéder aux paramètres</string>
+    <string name="swipe_up_for_apps">Balayez vers le haut pour accéder aux applications</string>
+    <string name="apps_on_home_screen">Applications sur l\'écran d\'accueil</string>
+    <string name="daily_wallpaper_update">Nouveau fond d\'écran quotidien</string>
+    <string name="left">Gauche</string>
+    <string name="right">Droite</string>
+    <string name="center">Centre</string>
+    <string name="home_layout_alignment">Alignement des applications</string>
+    <string name="swipe_left_app">Application appeler par un balayage vers la gauche</string>
+    <string name="swipe_right_app">Application appeler par un balayage vers la droite</string>
+    <string name="clock_click_app">Application appeler par un clic sur l\'horloge</string>
+    <string name="date_click_app">Application appeler par un clique sur la date</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Conseil: balayez vers le bas pour ignorer. Faites défiler pour masquer le clavier.</string>
+    <string name="okay">Okay</string>
+    <string name="double_tap_lock_is_enabled_message">Si le verrouillage par double tapotement désactive le déverrouillage biométrique (par empreinte ou par visage), ouvrez les paramètres d\'Olauncher, toucher \'expérimental\' et suivez les instructions. Merci.</string>
+    <string name="triple_tap_lock_message">Comment cela fonctionne t-il:
+        \nLorsque vous appuyez deux fois, l\'écran s\'éteint et le téléphone se verrouille dans les 5 secondes.
+        \n\nPendant ce temps, vous pouvez double-taper pour <b>déverrouiller</b> ou triple-taper à tout moment pour verrouiller immédiatement et complètement le téléphone.
+        \n\nNote: Désactivez d\'abord cette fonction si vous décidez la suppression d\'Olauncher. Merci.</string>
+    <string name="auto_show_keyboard">Affichage automatique du clavier</string>
+    <string name="hide">Masquer</string>
+    <string name="status_bar">Afficher la barre d\'état</string>
+    <string name="rename">Renommer</string>
+    <string name="show_date_time">Afficher la date et l\'heure</string>
+    <string name="appearance">Apparence</string>
+    <string name="gestures">Gestuels</string>
+    <string name="theme_mode">Mode du thème</string>
+    <string name="system_default">Système</string>
+    <string name="dark">Obscur</string>
+    <string name="light">Clair</string>
+    <string name="double_tap_lock_uninstall_message">Tapoter deux fois pour verrouiller est activé
+        \n\nRemarque: Désactivez-le d\'abord si vous décidez de supprimer Olauncher.</string>
+    <string name="welcome_to_olauncher_settings">Notre page À Propos en bas a les réponses à toutes vos questions. Ne l\'oubliez pas. :)
+        \n\nMerci.</string>
+    <string name="rate_us_message">Vous ne verrez plus ce message.
+        \n\nSalut, si vous trouvez Olauncher utile, un avis 5 étoiles nous rendra heureux. Merci et passez une bonne journée!</string>
+    <string name="share_message">Bonjour, pensez-vous que vos amis aimeraient Olauncher autant que vous?
+        \n\nPartagez l\'application et aidez-nous à faire passer le message. Merci!</string>
+    <string name="accessibility_service_description">L\'autorisation d\'accès au service d\'accessibilité est nécessaire pour activer le double tapotement pour verrouiller. Aucunes données acquises par le service ne quitteront pas votre appareil.</string>
+    <string name="lock_layout_description">verrouiller la description de la disposition en utilisant un identifiant unique pour verrouiller l\'écran</string>
+    <string name="support_olauncher_message">Vous pouvez nous aider à garder Olauncher exempt de publicités et de trackers en utilisant notre lien d\'affiliation.\n\nChaque fois que vous achetez en utilisant notre lien, nous recevrons une petite commission. Vous pouvez également copier et enregistrer le lien pour l\'utiliser ultérieurement. Merci!</string>
+    <string name="open">Ouvrir le lien</string>
+    <string name="copy">Copier</string>
+    <string name="close">Fermer</string>
+    <string name="keeping_it_ad_free">Maintenir libre de toute publicité</string>
+    <string name="public_roadmap">Feuille de route publique d\'Olauncher</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="roadmap">Feuille de route</string>
+</resources>

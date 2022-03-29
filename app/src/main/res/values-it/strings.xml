@@ -1,0 +1,82 @@
+<resources>
+
+    <string name="app_name">Olauncher</string>
+    <string name="app">App</string>
+    <string name="set_as_default_launcher">Usa come launcher predefinito</string>
+    <string name="app_text_color">Colore del testo</string>
+    <string name="double_tap_to_lock_screen">Doppio tocco per bloccare lo schermo</string>
+    <string name="experimental_">(experimental)</string>
+    <string name="admin_permission_message">Olauncher promette di usare responsabilmente il blocco schermo.</string>
+    <string name="about">Info</string>
+    <string name="off">Disattivato</string>
+    <string name="on">Attivato</string>
+    <string name="black">Nero</string>
+    <string name="white">Bianco</string>
+    <string name="change_default_launcher">Cambia il launcher predefinito</string>
+    <string name="privacy">Privacy</string>
+    <string name="share">Condividi</string>
+    <string name="rate">Vota</string>
+    <string name="follow">Segui</string>
+    <string name="email">Email</string>
+    <string name="github">Github</string>
+    <string name="donate">Dona</string>
+    <string name="long_press_for_settings">Premi a lungo per i settaggi</string>
+    <string name="swipe_up_for_apps">Scorri verso l\'alto per tutte le apps</string>
+    <string name="apps_on_home_screen">Apps nella schermata principale</string>
+    <string name="daily_wallpaper_update">Nuovo sfondo del giorno</string>
+    <string name="left">Sinistra</string>
+    <string name="right">Destra</string>
+    <string name="center">Centro</string>
+    <string name="home_layout_alignment">Allineamento App</string>
+    <string name="swipe_left_app">Scorri verso sinistra</string>
+    <string name="swipe_right_app">Scorri verso destra</string>
+    <string name="clock_click_app">toccare app Orario</string>
+    <string name="date_click_app">toccare app data</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Tip: Striscia verso il basso per chiudere. Scorri per nascondere la tastiera.</string>
+    <string name="okay">Va bene</string>
+    <string name="double_tap_lock_is_enabled_message">Se il doppio tocco disabilita l\'imronta digitale o lo sblocco facciale, apri i settaggi di  Olauncher, tocca \'experimental\' e segui le instructioni. Grazie.</string>
+    <string name="triple_tap_lock_message">Come funziona:
+        \nCon il doppio tocco, lo schermo si oscura e il telefono si blocca in 5 secondi.
+        \n\nIn questo momento, puoi usare il doppio tocco per  <b>sbloccare</b> oppure puoi bloccare subito il telefono con il triplo tocco.
+        \n\nNote: Disabilita se decidi di rimuovere Olauncher. Grazie.</string>
+    <string name="auto_show_keyboard">Mostra la tastiera</string>
+    <string name="hide">Nascondi</string>
+    <string name="status_bar">Mostra la barra di stato</string>
+    <string name="rename">Rinomina</string>
+    <string name="show_date_time">Mostra Data e ora</string>
+    <string name="appearance">Aspetto</string>
+    <string name="gestures">Gesti</string>
+    <string name="theme_mode">Tema</string>
+    <string name="system_default">Sistema</string>
+    <string name="dark">Scuro</string>
+    <string name="light">Chiaro</string>
+    <string name="double_tap_lock_uninstall_message">Doppio tocco per bloccare abilitato.
+        \n\nNote: Disabilita se vuoi rimuovere Olauncher.</string>
+    <string name="welcome_to_olauncher_settings">La nostra pagina Info in basso risponde a tutte le tue domande. Non dimenticartene. :)
+        \n\nGrazie.</string>
+    <string name="rate_us_message">Non vedrai più questo messaggio.
+        \n\nHi, se ti piace Olauncher, lasciaci 5 stelle. Grazie e buona giornata!</string>
+    <string name="share_message">Pensi che Olauncher possa piacere ai tuoi amici?
+        \n\nCondividi e diffondi. Grazie!</string>
+    <string name="accessibility_service_description">Il permesso è richiesto per abilitare il doppio tocco. I tuoi dati personali rimangono sul tuo telefono.</string>
+    <string name="lock_layout_description">descrizione del layout di blocco da utilizzare un ID univoco per bloccare lo schermo </string>
+    <string name="support_olauncher_message">Puoi aiutarci a mantenere Olauncher libero da pubblicità e tracker utilizzando il nostro link di affiliazione.\n\nOgni volta che acquisti utilizzando il nostro link, riceviamo una piccola commissione.  Puoi anche copiare e salvare il link per usarlo in seguito.  Grazie!</string>
+    <string name="open">Apri link</string>
+    <string name="copy">Copia</string>
+    <string name="close">Chiudi</string>
+    <string name="keeping_it_ad_free">Mantienilo Ad-Free</string>
+    <string name="public_roadmap">Olauncher roadmap pubblica</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="roadmap">Roadmap</string>
+
+</resources>
