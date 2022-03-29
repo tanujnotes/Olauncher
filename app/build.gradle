@@ -18,9 +18,9 @@ android {
     defaultConfig {
         applicationId "app.olaunchercf"
         minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 37
-        versionName "v3.4.3"
+        targetSdkVersion 32
+        versionCode 1
+        versionName "fork1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
