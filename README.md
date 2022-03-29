@@ -6,6 +6,8 @@
 - Rename apps in normal app list
 - Change clock app
 - Change Calendar app
+- Multilingual support: English, French, German, Italian and Turkish 
+
 
 # Olauncher | Minimal AF
 Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF stands for ad-free. :)
