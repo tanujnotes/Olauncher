@@ -1,1 +1,80 @@
-
+<resources>
+    <string name="app_name">Olauncher Clutter Free</string>
+    <string name="app">App</string>
+    <string name="set_as_default_launcher">Establecer como predeterminado</string>
+    <string name="app_text_color">Color de texto</string>
+    <string name="double_tap_to_lock_screen">Doble pulsación para bloquear</string>
+    <string name="experimental_">(experimental)</string>
+    <string name="admin_permission_message">Prometemos que Olauncher utilizará el permiso de la pantalla de bloqueo de forma responsable</string>
+    <string name="about">Acerca de</string>
+    <string name="off">Apagado</string>
+    <string name="on">Encendio</string>
+    <string name="black">Negro</string>
+    <string name="white">Blanco</string>
+    <string name="change_default_launcher">Cambiar lanzador por defecto</string>
+    <string name="privacy">Privacidad</string>
+    <string name="share">Compartir</string>
+    <string name="rate">Valorar</string>
+    <string name="follow">Seguir</string>
+    <string name="email">Email</string>
+    <string name="github">GitHub</string>
+    <string name="donate">Donar</string>
+    <string name="long_press_for_settings">Haz una pulsación larga en cualquier lugar para mostrar los ajustes</string>
+    <string name="swipe_up_for_apps">Desliza hacia arriba para todas las aplicaciones</string>
+    <string name="apps_on_home_screen">Aplicaciones en pantalla de inicio</string>
+    <string name="daily_wallpaper_update">Fondo de pantalla diario</string>
+    <string name="left">Izquierda</string>
+    <string name="right">Derecha</string>
+    <string name="center">Centro</string>
+    <string name="home_layout_alignment">Alineación de aplicaciones</string>
+    <string name="swipe_left_app">Al deslizar a la izquierda</string>
+    <string name="swipe_right_app">Al deslizar a la derecha</string>
+    <string name="clock_click_app">Al pulsar reloj</string>
+    <string name="date_click_app">Al pulsar fecha</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Consejo: desliza hacia abajo para descartar y desplaza para ocultar el teclado.</string>
+    <string name="okay">OK</string>
+    <string name="double_tap_lock_is_enabled_message">Si el bloqueo de doble toque deshabilita el desbloqueo por medio de huellas dactilares o rostro, abre los ajustes de Olauncher, toca en \"experimental\" y sigue las instrucciones.</string>
+    <string name="triple_tap_lock_message">Cómo funciona:
+        \nUna vez que se pulses dos veces, la pantalla se oscurecerá y el teléfono se bloqueará en 5 segundos.
+        \n\nDurante este tiempo, puedes tocar dos veces para <b>desbloquear</b> o pulsa tres veces en cualquier momento para bloquear completamente el teléfono de inmediato.
+        \n\nNote: Desactiva esto primero si decides desinstalar Olauncher.</string>
+    <string name="auto_show_keyboard">Mostrar teclado automáticamente</string>
+    <string name="hide">Ocultar</string>
+    <string name="status_bar">Mostrar barra de estado</string>
+    <string name="rename">Cambiar nombre</string>
+    <string name="show_date_time">Mostrar fecha y hora</string>
+    <string name="appearance">Apariencia</string>
+    <string name="gestures">Gestos</string>
+    <string name="theme_mode">Tema</string>
+    <string name="system_default">Por defecto</string>
+    <string name="dark">Oscuro</string>
+    <string name="light">Claro</string>
+    <string name="double_tap_lock_uninstall_message">Doble toque para bloquear habilitado
+        \n\nNota: Desactiva esto primero si decides desinstalar Olauncher.</string>
+    <string name="welcome_to_olauncher_settings">Nuestra página "Acerca de" en la parte inferior tiene respuestas a todas sus preguntas. No lo olvides :)
+        \n\nGracias</string>
+    <string name="rate_us_message">No volverás a ver este mensaje.
+        \n\nHola, si encuentras útil Olauncher, por favor da una reseña de 5. ¡Gracias, y que tengas un buen día!</string>
+    <string name="share_message">Hola, ¿crees que a tus amigos les gustaría Olauncher tanto como a ti?
+        \n\nComparte la aplicación y ayúdanos a difundirla</string>
+    <string name="accessibility_service_description">El permiso de accesibilidad es necesario para habilitar la doble pulsación para bloquear. Cualquier dato adquirido por el servicio no saldrá de tu dispositivo.</string>
+    <string name="lock_layout_description">Descripción del diseño de bloqueo que para ser usado como identificación única para bloquear la pantalla</string>
+    <string name="support_olauncher_message">Puedes ayudarnos a mantener Olauncher libre de anuncios y rastreadores utilizando nuestro enlace de afiliación.\n\nCada vez que compras usando nuestro enlace, recibimos una pequeña comisión. También puedes copiar y guardar el enlace para usarlo después. ¡Muchas gracias!</string>
+    <string name="open">Abrir enlace</string>
+    <string name="copy">Copiar</string>
+    <string name="close">Cerrar</string>
+    <string name="keeping_it_ad_free">Mantener libre de anuncios</string>
+    <string name="public_roadmap">Hoja de ruta pública de Olauncher</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="roadmap">Hoja de ruta</string>
+</resources>
