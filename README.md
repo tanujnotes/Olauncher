@@ -13,6 +13,7 @@
   - German
   - Italian
   - Spanish
+  - Swedish
   - Turkish 
 
 
