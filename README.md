@@ -24,9 +24,10 @@ Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olauncher)
-[<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-    alt="Get it on F-Droid"
-    height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
+
+#### please note:
+* Upload to google play is not an immediat goal
+* Current link to Fdroid is still to the original version. It will be updated as soon as the submission to fdroid was successful
 
 #### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
