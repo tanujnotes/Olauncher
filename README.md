@@ -6,7 +6,7 @@
 - Rename apps in normal app list
 - Change clock app
 - Change Calendar app
-- Multilingual support: English, French, German, Italian and Turkish 
+- Multilingual support: English, French, German, Italian, Spanish and Turkish 
 
 
 # Olauncher | Minimal AF
