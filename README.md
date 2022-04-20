@@ -17,8 +17,8 @@
 
 
 
-# Olauncher | Minimal AF
-Olauncher is a minimal AF launcher app for Android with daily new wallpaper. AF stands for ad-free. :)
+# Olauncher | Minimal CF
+Olauncher is a minimal CF launcher app for Android with daily new wallpaper. CF stands for clutter free. :)
 
 ## Install
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
