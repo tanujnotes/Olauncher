@@ -1,0 +1,16 @@
+    Forked from <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a>
+    because original version is cluttered
+
+    Also added some features
+    * Removed clutter
+    * Rename apps in normal app list
+    * Change clock app
+    * Change Calendar app
+    * Multilingual support:
+      * Chinese
+      * English
+      * French
+      * German
+      * Italian
+      * Spanish
+      * Turkish
