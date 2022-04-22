@@ -24,15 +24,14 @@ Olauncher is a minimal CF launcher app for Android with daily new wallpaper. CF 
 ## Install
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
-    height="80">](https://f-droid.org/packages/app.olauncher)
+    height="80">](https://f-droid.org/packages/app.olaunchercf/)
 
 #### please note:
-* Upload to google play is not an immediat goal
-* Current link to Fdroid is still to the original version. It will be updated as soon as the submission to Fdroid was successful
+* Upload to google play is not an immediate goal
 
-#### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from [latest release](https://github.com/tanujnotes/Olauncher/releases/).
+#### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or ~[Play Store](https://play.google.com/store/apps/details?id=app.olauncher)~ or download the APK from ~[latest release](https://github.com/tanujnotes/Olauncher/releases/)~.
 
-You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
+You can also clone the [`master`](https://github.com/jooooscha/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
 
 ## Contribute
 * Please go through the issues marked as [`bug`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug) or [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
