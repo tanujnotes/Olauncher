@@ -29,7 +29,7 @@ Olauncher is a minimal CF launcher app for Android with daily new wallpaper. CF 
 #### please note:
 * Upload to google play is not an immediate goal
 
-#### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or ~[Play Store](https://play.google.com/store/apps/details?id=app.olauncher)~ or download the APK from ~[latest release](https://github.com/tanujnotes/Olauncher/releases/)~.
+#### Install from [F-Droid](https://f-droid.org/packages/app.olaunchercf) or ~[Play Store](https://play.google.com/store/apps/details?id=app.olauncher)~ or download the APK from ~[latest release](https://github.com/tanujnotes/Olauncher/releases/)~.
 
 You can also clone the [`master`](https://github.com/jooooscha/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
 
