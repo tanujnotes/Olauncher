@@ -5,7 +5,7 @@
 - Removed clutter
 - Rename apps in normal app list
 - Change clock app
-- Change Calendar app
+- Change calendar app
 - Multilingual support:
   - Chinese
   - English
@@ -16,31 +16,19 @@
   - Swedish
   - Turkish 
 
-
-
 # Olauncher | Minimal CF
-Olauncher is a minimal CF launcher app for Android with daily new wallpaper. CF stands for clutter free. :)
+Olauncher is a minimal CF launcher app for Android. CF stands for clutter free. :)
 
-## Install
+## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olaunchercf/)
 
-#### please note:
-* Upload to google play is not an immediate goal
-
-#### Install from [F-Droid](https://f-droid.org/packages/app.olaunchercf) or ~[Play Store](https://play.google.com/store/apps/details?id=app.olauncher)~ or download the APK from ~[latest release](https://github.com/tanujnotes/Olauncher/releases/)~.
-
-You can also clone the [`master`](https://github.com/jooooscha/olauncher/tree/master) branch and build the app yourself in Android Studio. No extra steps required.
+- This fork is available on [F-Droid](https://f-droid.org/packages/app.olaunchercf)
+- The latest stable version is on the [`main`](https://github.com/jooooscha/olauncher/tree/main) branch. You can clone it and build the android yourself.
+- A github action should build an apk for every release.
+- The original version is also available on [Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
 
 ## Contribute
-* Please go through the issues marked as [`bug`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug) or [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
-* ~Please don't send features without discussing first~
-* ~Make pull requests to [`dev`](https://github.com/tanujnotes/olauncher/tree/dev) branch~
 
-
----
-
-License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
-
-Thank you!
+- If you are uphappy with any part of the app or feel like missing something you can open a PR or an issue as you like
