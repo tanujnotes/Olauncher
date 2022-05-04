@@ -371,17 +371,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun changeAppTheme() {
-        if (prefs.dailyWallpaper.not()) return
-        val changedAppTheme = getChangedAppTheme(requireContext(), prefs.appTheme)
-        prefs.appTheme = changedAppTheme
-        if (prefs.dailyWallpaper) {
-            setPlainWallpaperByTheme(requireContext(), changedAppTheme)
-            viewModel.setWallpaperWorker()
-        }
-        requireActivity().recreate()
-    }
-
     private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")
 
     private fun textOnClick(view: View) = onClick(view)

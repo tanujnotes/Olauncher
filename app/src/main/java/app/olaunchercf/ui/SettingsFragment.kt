@@ -56,7 +56,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         homeAppsNum.text = prefs.homeAppsNum.toString()
         populateKeyboardText()
         populateLockSettings()
-        populateWallpaperText()
         populateAppThemeText()
         populateAlignment()
         populateLanguageText()
@@ -64,7 +63,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateDateTime()
         populateSwipeApps()
         populateClickApps()
-        // populateActionHints()
         initClickListeners()
         initObservers()
     }
@@ -81,8 +79,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
-            R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
-            R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> alignmentSelectLayout.visibility = View.VISIBLE
             R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
             R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
@@ -125,7 +121,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 prefs.appLabelAlignment = prefs.homeAlignment
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
             }
-            R.id.dailyWallpaper -> removeWallpaper()
             R.id.appThemeText -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
@@ -145,8 +140,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         autoShowKeyboard.setOnClickListener(this)
         toggleLock.setOnClickListener(this)
         homeAppsNum.setOnClickListener(this)
-        dailyWallpaperUrl.setOnClickListener(this)
-        dailyWallpaper.setOnClickListener(this)
         alignment.setOnClickListener(this)
         alignmentLeft.setOnClickListener(this)
         alignmentCenter.setOnClickListener(this)
@@ -182,7 +175,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         maxApps7.setOnClickListener(this)
         maxApps8.setOnClickListener(this)
 
-        dailyWallpaper.setOnLongClickListener(this)
         alignment.setOnLongClickListener(this)
         appThemeText.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
@@ -330,23 +322,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateLockSettings()
     }
 
-    private fun removeWallpaper() {
-        setPlainWallpaper(requireContext(), android.R.color.black)
-        if (!prefs.dailyWallpaper) return
-        prefs.dailyWallpaper = false
-        populateWallpaperText()
-        viewModel.cancelWallpaperWorker()
-    }
-
-    private fun toggleDailyWallpaperUpdate() {
-        prefs.dailyWallpaper = !prefs.dailyWallpaper
-        populateWallpaperText()
-        if (prefs.dailyWallpaper) {
-            viewModel.setWallpaperWorker()
-            showWallpaperToasts()
-        } else viewModel.cancelWallpaperWorker()
-    }
-
     private fun showWallpaperToasts() {
         if (isOlauncherDefault(requireContext()))
             showToastShort(requireContext(), "Your wallpaper will update shortly")
@@ -389,10 +364,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun setAppTheme(theme: Int) {
         if (AppCompatDelegate.getDefaultNightMode() == theme) return
-        if (prefs.dailyWallpaper) {
-            setPlainWallpaper(theme)
-            viewModel.setWallpaperWorker()
-        }
+
         requireActivity().recreate()
     }
 
@@ -432,11 +404,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateKeyboardText() {
         if (prefs.autoShowKeyboard) autoShowKeyboard.text = getString(R.string.on)
         else autoShowKeyboard.text = getString(R.string.off)
-    }
-
-    private fun populateWallpaperText() {
-        if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
-        else dailyWallpaper.text = getString(R.string.off)
     }
 
     private fun populateAlignment() {
