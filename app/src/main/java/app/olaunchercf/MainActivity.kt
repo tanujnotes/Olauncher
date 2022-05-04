@@ -82,12 +82,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        if (prefs.dailyWallpaper &&
-            AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        ) {
-            setPlainWallpaper()
-            viewModel.setWallpaperWorker()
-        }
         recreate()
     }
 

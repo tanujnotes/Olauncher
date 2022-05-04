@@ -19,9 +19,6 @@ class Prefs(context: Context) {
     private val LOCK_MODE = "LOCK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val AUTO_SHOW_KEYBOARD = "AUTO_SHOW_KEYBOARD"
-    private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
-    private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
-    private val WALLPAPER_UPDATED_DAY = "WALLPAPER_UPDATED_DAY"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
     private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
     private val STATUS_BAR = "STATUS_BAR"
@@ -110,18 +107,6 @@ class Prefs(context: Context) {
     var autoShowKeyboard: Boolean
         get() = prefs.getBoolean(AUTO_SHOW_KEYBOARD, true)
         set(value) = prefs.edit().putBoolean(AUTO_SHOW_KEYBOARD, value).apply()
-
-    var dailyWallpaper: Boolean
-        get() = prefs.getBoolean(DAILY_WALLPAPER, false)
-        set(value) = prefs.edit().putBoolean(DAILY_WALLPAPER, value).apply()
-
-    var dailyWallpaperUrl: String
-        get() = prefs.getString(DAILY_WALLPAPER_URL, "").toString()
-        set(value) = prefs.edit().putString(DAILY_WALLPAPER_URL, value).apply()
-
-    var wallpaperUpdatedDay: String
-        get() = prefs.getString(WALLPAPER_UPDATED_DAY, "").toString()
-        set(value) = prefs.edit().putString(WALLPAPER_UPDATED_DAY, value).apply()
 
     var homeAppsNum: Int
         get() = prefs.getInt(HOME_APPS_NUM, 4)
