@@ -2,10 +2,15 @@ package app.olaunchercf.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.res.Resources
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatDelegate
+import java.util.*
 
 class Prefs(context: Context) {
+
+    private val APP_LANGUAGE = "app_language"
+
     private val PREFS_FILENAME = "app.olauncher"
 
     private val FIRST_OPEN = "FIRST_OPEN"
@@ -149,6 +154,10 @@ class Prefs(context: Context) {
     var appTheme: Int
         get() = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_YES)
         set(value) = prefs.edit().putInt(APP_THEME, value).apply()
+
+    var language: String
+        get() = prefs.getString(APP_LANGUAGE, Constants.LANG_EN).toString()
+        set(value) = prefs.edit().putString(APP_LANGUAGE, value).apply()
 
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds

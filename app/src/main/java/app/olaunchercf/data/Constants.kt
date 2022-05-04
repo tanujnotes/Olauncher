@@ -31,6 +31,14 @@ object Constants {
     const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 500
 
+    const val LANG_EN = "en"
+    const val LANG_DE = "de"
+    const val LANG_ES = "es"
+    const val LANG_FR = "fr"
+    const val LANG_IT = "it"
+    const val LANG_SE = "se"
+    const val LANG_TR = "tr"
+
     const val URL_ABOUT_OLAUNCHER = "https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd"
     const val URL_OLAUNCHER_PRIVACY = "https://tanujnotes.notion.site/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
     const val URL_PUBLIC_ROADMAP = "https://tanujnotes.notion.site/Olauncher-Roadmap-1522aa8182424415b5b89bed923b0ccd"

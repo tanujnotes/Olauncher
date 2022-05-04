@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import app.olaunchercf.BuildConfig
+import app.olaunchercf.MainActivity
 import app.olaunchercf.MainViewModel
 import app.olaunchercf.R
 import app.olaunchercf.data.Constants
@@ -22,6 +24,7 @@ import app.olaunchercf.data.Prefs
 import app.olaunchercf.helper.*
 import app.olaunchercf.listener.DeviceAdmin
 import kotlinx.android.synthetic.main.fragment_settings.*
+import java.util.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
@@ -56,6 +59,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateWallpaperText()
         populateAppThemeText()
         populateAlignment()
+        populateLanguageText()
         populateStatusBar()
         populateDateTime()
         populateSwipeApps()
@@ -69,6 +73,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appsNumSelectLayout.visibility = View.GONE
         alignmentSelectLayout.visibility = View.GONE
         appThemeSelectLayout.visibility = View.GONE
+        appLangSelectLayout.visibility = View.GONE
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
@@ -87,6 +92,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
+            R.id.appLangText -> appLangSelectLayout.visibility = View.VISIBLE
+            R.id.langEn -> setLang(Constants.LANG_EN)
+            R.id.langDe -> setLang(Constants.LANG_DE)
+            R.id.langEs -> setLang(Constants.LANG_ES)
+            R.id.langFr -> setLang(Constants.LANG_FR)
+            R.id.langIt -> setLang(Constants.LANG_IT)
+            R.id.langSe -> setLang(Constants.LANG_SE)
+            R.id.langTr -> setLang(Constants.LANG_TR)
+
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -148,6 +162,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
+
+        appLangText.setOnClickListener(this)
+        langEn.setOnClickListener(this)
+        langDe.setOnClickListener(this)
+        langEs.setOnClickListener(this)
+        langFr.setOnClickListener(this)
+        langIt.setOnClickListener(this)
+        langSe.setOnClickListener(this)
+        langTr.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)
         maxApps1.setOnClickListener(this)
@@ -350,6 +373,20 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         setAppTheme(appTheme)
     }
 
+    private fun setLang(lang: String) {
+        prefs.language = lang
+        populateLanguageText(lang)
+
+        // restart activity
+        activity?.let {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            it.startActivity(intent)
+            it.finish()
+
+        }
+    }
+
     private fun setAppTheme(theme: Int) {
         if (AppCompatDelegate.getDefaultNightMode() == theme) return
         if (prefs.dailyWallpaper) {
@@ -377,6 +414,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             AppCompatDelegate.MODE_NIGHT_YES -> appThemeText.text = getString(R.string.dark)
             AppCompatDelegate.MODE_NIGHT_NO -> appThemeText.text = getString(R.string.light)
             else -> appThemeText.text = getString(R.string.system_default)
+        }
+    }
+
+    private fun populateLanguageText(language: String = prefs.language) {
+        when (language) {
+            Constants.LANG_DE -> appLangText.text = getString(R.string.lang_de)
+            Constants.LANG_ES -> appLangText.text = getString(R.string.lang_es)
+            Constants.LANG_FR -> appLangText.text = getString(R.string.lang_fr)
+            Constants.LANG_IT -> appLangText.text = getString(R.string.lang_it)
+            Constants.LANG_SE -> appLangText.text = getString(R.string.lang_se)
+            Constants.LANG_TR -> appLangText.text = getString(R.string.lang_tr)
+            else -> appLangText.text = getString(R.string.lang_en)
         }
     }
 

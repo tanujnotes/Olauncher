@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -20,6 +21,7 @@ import app.olaunchercf.data.Constants
 import app.olaunchercf.data.Prefs
 import app.olaunchercf.helper.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         prefs = Prefs(this)
         AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
         super.onCreate(savedInstanceState)
+        useLanguage()
         setContentView(R.layout.activity_main)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
@@ -51,6 +54,15 @@ class MainActivity : AppCompatActivity() {
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
+    }
+
+    @Suppress("DEPRECATION")
+    private fun useLanguage() {
+        val locale = Locale(prefs.language)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.locale = locale
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     override fun onStop() {

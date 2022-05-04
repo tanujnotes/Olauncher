@@ -24,6 +24,7 @@ import app.olaunchercf.helper.*
 import app.olaunchercf.listener.OnSwipeTouchListener
 import app.olaunchercf.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
