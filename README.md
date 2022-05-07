@@ -3,7 +3,7 @@
 # Forked with extra features
 
 - Removed clutter
-- Rename apps in normal app list
+- Rename apps in normal app list (Renaming apps on the home screen is already supported by the original app. Just long-click on an app on the home screen and start typing)
 - Change clock app
 - Change calendar app
 - Multilingual support:
