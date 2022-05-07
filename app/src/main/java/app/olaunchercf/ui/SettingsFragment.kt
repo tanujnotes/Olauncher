@@ -322,13 +322,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateLockSettings()
     }
 
-    private fun showWallpaperToasts() {
-        if (isOlauncherDefault(requireContext()))
-            showToastShort(requireContext(), "Your wallpaper will update shortly")
-        else
-            showToastLong(requireContext(), "Olauncher is not default launcher.\nDaily wallpaper update may fail.")
-    }
-
     private fun updateHomeAppsNum(num: Int) {
         homeAppsNum.text = num.toString()
         appsNumSelectLayout.visibility = View.GONE
@@ -368,19 +361,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         requireActivity().recreate()
     }
 
-    private fun setPlainWallpaper(appTheme: Int) {
-        when (appTheme) {
-            AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(requireContext(), android.R.color.black)
-            AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(requireContext(), android.R.color.white)
-            else -> {
-                if (requireContext().isDarkThemeOn())
-                    setPlainWallpaper(requireContext(), android.R.color.black)
-                else setPlainWallpaper(requireContext(), android.R.color.white)
-            }
-        }
-    }
-
-
     private fun populateAppThemeText(appTheme: Int = prefs.appTheme) {
         when (appTheme) {
             AppCompatDelegate.MODE_NIGHT_YES -> appThemeText.text = getString(R.string.dark)
@@ -417,30 +397,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateLockSettings() {
         if (prefs.lockModeOn) toggleLock.text = getString(R.string.on)
         else toggleLock.text = getString(R.string.off)
-    }
-
-    private fun shareApp() {
-        val message = "Are you using your phone or your phone is using you?\n" +
-                Constants.URL_OLAUNCHER_PLAY_STORE
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, message)
-            type = "text/plain"
-        }
-
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
-    }
-
-    private fun rateApp() {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse(Constants.URL_OLAUNCHER_PLAY_STORE)
-        )
-        var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-        flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-        intent.addFlags(flags)
-        startActivity(intent)
     }
 
     private fun populateSwipeApps() {

@@ -12,13 +12,6 @@
     <string name="black">Svart</string>
     <string name="white">Vit</string>
     <string name="change_default_launcher">Ändra standardstartsida</string>
-    <string name="privacy">Dataskydd</string>
-    <string name="share">Dela</string>
-    <string name="rate">Betygsätt</string>
-    <string name="follow">Följ</string>
-    <string name="email">E-post</string>
-    <string name="github">Github</string>
-    <string name="donate">Donera</string>
     <string name="long_press_for_settings">Tryck och håll nere var som helst för inställningar</string>
     <string name="swipe_up_for_apps">Svep uppåt för alla appar</string>
     <string name="apps_on_home_screen">Appar på startsidan</string>
@@ -31,15 +24,6 @@
     <string name="swipe_right_app">App svepning åt höger</string>
     <string name="clock_click_app">App vid pekning på klockan</string>
     <string name="date_click_app">App vid pekning på datumet</string>
-    <string name="_0">0</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
-    <string name="_8">8</string>
     <string name="app_drawer_tips">Tip: Svep nedåt för att avvisa. Rulla för att dölja tangentbordet.</string>
     <string name="okay">OK</string>
     <string name="double_tap_lock_is_enabled_message">Om dubbeltryckning avaktiverar upplåsning med fingeravtryck eller ansikte: öppna Olauncher inställningar, tryck på \'experimental\' och följ anvisningarna. Tack!</string>
@@ -57,17 +41,9 @@
     <string name="light">Ljust</string>
     <string name="double_tap_lock_uninstall_message">Dubbeltryck för aktiverad låsning. \n\nNotera: Stäng AV detta först om du vill avinstallera Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Vår sida Om längst ner har svar på alla dina frågor. Glöm inte det. :) \n\nTack.</string>
-    <string name="rate_us_message">Du kommer inte att se detta meddelande igen. \n\nOm du tycker att Olauncher är bra, skulle en betygsättning med 5-stjärnor glädja oss. Tack så mycket och ha en fin dag!</string>
-    <string name="share_message">Tror du att dina vänner skulle tycka om Olauncher lika mycket som du? \n\nDela appen och hjälp oss att sprida information om appen. Tack!</string>
     <string name="accessibility_service_description">Åtkomsttillstånd krävs för att aktivera dubbeltryckning för låsning. Ingen av de uppgifter som tjänsten kommer åt kommer att lämna din enhet.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
-    <string name="support_olauncher_message">Du kan hjälpa oss att hålla Olauncher fri från reklam och trackers genom att använda vår affiliatelänk.\n\nVarje gång du köper något via vår länk får vi en liten provision. Du kan också kopiera och spara länken för senare användning. Tack!</string>
     <string name="open">Öppna länk</string>
     <string name="copy">Kopiera</string>
     <string name="close">Stäng</string>
-    <string name="keeping_it_ad_free">Håll det reklamfritt</string>
-    <string name="public_roadmap">Olaunchers officiella roadmap</string>
-    <string name="instagram">Instagram</string>
-    <string name="twitter">Twitter</string>
-    <string name="roadmap">Roadmap</string>
 </resources>
