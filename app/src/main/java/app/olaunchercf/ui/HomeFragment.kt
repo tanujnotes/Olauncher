@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -410,19 +411,24 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onDoubleClick() {
                 super.onDoubleClick()
-                if (prefs.lockModeOn)
+                if (prefs.lockModeOn) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         requireActivity().runOnUiThread {
-                            if (isAccessServiceEnabled(requireContext()))
+                            if (isAccessServiceEnabled(requireContext())) {
                                 lock.performClick()
-                            else {
-                                prefs.lockModeOn = false
-                                showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
+                            } else {
+                                // prefs.lockModeOn = false
+                                showToastLong(
+                                    requireContext(),
+                                    "Please turn on accessibility service for Olauncher"
+                                )
                                 startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
                             }
                         }
-                    } else
+                    } else {
                         lockPhone()
+                    }
+                }
             }
 
             override fun onTripleClick() {
