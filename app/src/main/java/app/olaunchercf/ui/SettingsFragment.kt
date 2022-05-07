@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.*
+import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -59,6 +61,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateAppThemeText()
         populateAlignment()
         populateLanguageText()
+        populateTextSizeText()
         populateStatusBar()
         populateDateTime()
         populateSwipeApps()
@@ -72,6 +75,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         alignmentSelectLayout.visibility = View.GONE
         appThemeSelectLayout.visibility = View.GONE
         appLangSelectLayout.visibility = View.GONE
+        textSizeLayout.visibility = View.GONE
+
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
@@ -97,6 +102,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.langSe -> setLang(Constants.LANG_SE)
             R.id.langTr -> setLang(Constants.LANG_TR)
 
+            R.id.textSizeText -> textSizeLayout.visibility = View.VISIBLE
+            R.id.textSizeHuge -> setTextSize(Constants.TEXT_SIZE_HUGE)
+            R.id.textSizeNormal -> setTextSize(Constants.TEXT_SIZE_NORMAL)
+            R.id.textSizeSmall -> setTextSize(Constants.TEXT_SIZE_SMALL)
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -164,6 +173,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         langIt.setOnClickListener(this)
         langSe.setOnClickListener(this)
         langTr.setOnClickListener(this)
+
+        textSizeText.setOnClickListener(this)
+        textSizeHuge.setOnClickListener(this)
+        textSizeNormal.setOnClickListener(this)
+        textSizeSmall.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)
         maxApps1.setOnClickListener(this)
@@ -358,7 +372,21 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             it.startActivity(intent)
             it.finish()
+        }
+    }
+    private fun setTextSize(size: Float) {
+        if (size == Constants.TEXT_SIZE_HUGE || size == Constants.TEXT_SIZE_NORMAL || size == Constants.TEXT_SIZE_SMALL) {
+            prefs.textSize = size
 
+            populateTextSizeText(size)
+
+            // restart activity
+            activity?.let {
+                val intent = Intent(context, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                it.startActivity(intent)
+                it.finish()
+            }
         }
     }
 
@@ -398,6 +426,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Constants.LANG_SE -> appLangText.text = getString(R.string.lang_se)
             Constants.LANG_TR -> appLangText.text = getString(R.string.lang_tr)
             else -> appLangText.text = getString(R.string.lang_en)
+        }
+    }
+
+    private fun populateTextSizeText(size: Float = prefs.textSize) {
+        when(size) {
+            Constants.TEXT_SIZE_HUGE -> textSizeText.text = getString(R.string.text_size_huge)
+            Constants.TEXT_SIZE_NORMAL -> textSizeText.text = getString(R.string.text_size_normal)
+            Constants.TEXT_SIZE_SMALL -> textSizeText.text = getString(R.string.text_size_small)
         }
     }
 

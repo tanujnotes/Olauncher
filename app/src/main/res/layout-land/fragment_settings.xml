@@ -607,6 +607,87 @@
 
             </FrameLayout>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
+                android:animateLayoutChanges="true">
+
+                <TextView
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:paddingVertical="8dp"
+                    android:text="@string/app_language"
+                    android:textColor="?attr/primaryColor" />
+
+                <TextView
+                    android:id="@+id/textSizeText"
+                    style="@style/TextSmallBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginEnd="4dp"
+                    android:padding="8dp"
+                    android:text="@string/lang_en" />
+
+                <!-- theme color select layout-->
+                <LinearLayout
+                    android:id="@+id/textSizeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:background="@drawable/rounded_primary_gradient"
+                    android:elevation="8dp"
+                    android:orientation="horizontal"
+                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="2dp"
+                    android:visibility="gone"
+                    tools:ignore="UnusedAttribute">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/textSizeHuge"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/text_size_huge" />
+
+                    <TextView
+                        android:id="@+id/textSizeNormal"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/text_size_normal" />
+
+                    <TextView
+                        android:id="@+id/textSizeSmall"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/text_size_small" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
         </LinearLayout>
 
         <LinearLayout
