@@ -19,6 +19,8 @@
 # Olauncher | Minimal CF
 Olauncher is a minimal CF launcher app for Android. CF stands for clutter free. :)
 
+[![Build](https://github.com/jooooscha/Olauncher/actions/workflows/build.yml/badge.svg)](https://github.com/jooooscha/Olauncher/actions/workflows/build.yml)
+
 ## Installation
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
