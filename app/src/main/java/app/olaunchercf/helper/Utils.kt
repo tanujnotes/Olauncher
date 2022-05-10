@@ -94,9 +94,9 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
 
             appList.sortBy {
                 if (it.appAlias.isEmpty()) {
-                    it.appLabel.toLowerCase(Locale.ROOT)
+                    it.appLabel.lowercase()
                 } else {
-                    it.appAlias.toLowerCase(Locale.ROOT)
+                    it.appAlias.lowercase()
                 }
             }
 
