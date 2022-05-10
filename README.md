@@ -24,10 +24,10 @@ Olauncher is a minimal CF launcher app for Android. CF stands for clutter free. 
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olaunchercf/)
 
-- This fork is available on [F-Droid](https://f-droid.org/packages/app.olaunchercf)
+- This fork is only available on [F-Droid](https://f-droid.org/packages/app.olaunchercf)
 - The latest stable version is on the [`main`](https://github.com/jooooscha/olauncher/tree/main) branch. You can clone it and build the android yourself.
 - A github action should build an apk for every release.
-- The original version is also available on [Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
+- The **original version** is also available on [Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
 
 ## Contribute
 
