@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/olauncherHiddenApps"
+                    android:id="@+id/settingsTitle"
                     style="@style/TextLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -52,6 +52,16 @@
                     android:src="@drawable/ic_outline_info_24"
                     app:tint="?attr/primaryColor" />
             </FrameLayout>
+
+            <TextView
+                android:id="@+id/olauncherHiddenApps"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/hidden_apps" />
 
             <TextView
                 android:id="@+id/setLauncher"

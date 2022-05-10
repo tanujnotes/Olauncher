@@ -3,7 +3,7 @@
 # Forked with extra features
 
 - Removed clutter
-- Rename apps in normal app list
+- Rename apps in normal app list (Renaming apps on the home screen is already supported by the original app. Just long-click on an app on the home screen and start typing)
 - Change clock app
 - Change calendar app
 - Multilingual support:
@@ -24,11 +24,11 @@ Olauncher is a minimal CF launcher app for Android. CF stands for clutter free. 
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olaunchercf/)
 
-- This fork is available on [F-Droid](https://f-droid.org/packages/app.olaunchercf)
+- This fork is only available on [F-Droid](https://f-droid.org/packages/app.olaunchercf)
 - The latest stable version is on the [`main`](https://github.com/jooooscha/olauncher/tree/main) branch. You can clone it and build the android yourself.
 - A github action should build an apk for every release.
-- The original version is also available on [Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
+- The **original version** is also available on [Play Store](https://play.google.com/store/apps/details?id=app.olauncher)
 
 ## Contribute
 
-- If you are uphappy with any part of the app or feel like missing something you can open a PR or an issue as you like
+- If you are unhappy with any part of the app or feel like missing something you can open a PR or an issue as you like
