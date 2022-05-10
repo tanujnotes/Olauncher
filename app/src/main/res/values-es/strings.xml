@@ -1,54 +1,77 @@
 <resources>
     <string name="app_name">Olauncher Clutter Free</string>
     <string name="app">App</string>
-    <string name="set_as_default_launcher">Establecer como predeterminado</string>
+    <string name="set_as_default_launcher">Establecer como lanzador predeterminado</string>
     <string name="app_text_color">Color de texto</string>
-    <string name="double_tap_to_lock_screen">Doble pulsación para bloquear</string>
+    <string name="double_tap_to_lock_screen">Doble toque para bloqueo</string>
     <string name="experimental_">(experimental)</string>
-    <string name="admin_permission_message">Prometemos que Olauncher utilizará el permiso de la pantalla de bloqueo de forma responsable</string>
+    <string name="admin_permission_message">Olauncher promete usar el permiso de bloqueo de manera responsable.</string>
     <string name="about">Acerca de</string>
-    <string name="off">Apagado</string>
-    <string name="on">Encendio</string>
+    <string name="off">Ocultar</string>
+    <string name="on">Mostrar</string>
     <string name="black">Negro</string>
     <string name="white">Blanco</string>
-    <string name="change_default_launcher">Cambiar lanzador por defecto</string>
-    <string name="long_press_for_settings">Haz una pulsación larga en cualquier lugar para mostrar los ajustes</string>
-    <string name="swipe_up_for_apps">Desliza hacia arriba para todas las aplicaciones</string>
+    <string name="change_default_launcher">Cambiar lanzador predeterminado</string>
+    <string name="long_press_for_settings">Mantenga pulsado en cualquier lugar para la configuración</string>
+    <string name="swipe_up_for_apps">Deslize hacia arriba para todas las aplicaciones</string>
     <string name="apps_on_home_screen">Aplicaciones en pantalla de inicio</string>
     <string name="daily_wallpaper_update">Fondo de pantalla diario</string>
     <string name="left">Izquierda</string>
     <string name="right">Derecha</string>
     <string name="center">Centro</string>
     <string name="home_layout_alignment">Alineación de aplicaciones</string>
-    <string name="swipe_left_app">Al deslizar a la izquierda</string>
-    <string name="swipe_right_app">Al deslizar a la derecha</string>
-    <string name="clock_click_app">Al pulsar reloj</string>
-    <string name="date_click_app">Al pulsar fecha</string>
-    <string name="app_drawer_tips">Consejo: desliza hacia abajo para descartar y desplaza para ocultar el teclado.</string>
+    <string name="swipe_left_app">Deslizar a la izquierda</string>
+    <string name="swipe_right_app">Deslizar a la derecha</string>
+    <string name="clock_click_app">Pulsar reloj</string>
+    <string name="date_click_app">Pulsar fecha</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="app_drawer_tips">Sugerencia: deslice hacia abajo para descartar. Desplace para ocultar el teclado.</string>
     <string name="okay">OK</string>
-    <string name="double_tap_lock_is_enabled_message">Si el bloqueo de doble toque deshabilita el desbloqueo por medio de huellas dactilares o rostro, abre los ajustes de Olauncher, toca en \"experimental\" y sigue las instrucciones.</string>
+    <string name="double_tap_lock_is_enabled_message">Si el bloqueo con doble toque desactiva la huella digital o el desbloqueo facial, abra la configuración de Olauncher, toque \'experimental\' y sigua las instrucciones. Gracias.</string>
     <string name="triple_tap_lock_message">Cómo funciona:
-        \nUna vez que se pulses dos veces, la pantalla se oscurecerá y el teléfono se bloqueará en 5 segundos.
-        \n\nDurante este tiempo, puedes tocar dos veces para <b>desbloquear</b> o pulsa tres veces en cualquier momento para bloquear completamente el teléfono de inmediato.
-        \n\nNote: Desactiva esto primero si decides desinstalar Olauncher.</string>
-    <string name="auto_show_keyboard">Mostrar teclado automáticamente</string>
+        \nUna vez toque dos veces, la pantalla se oscurecerá y el teléfono se bloqueará en 5 segundos.
+        \n\nDurante este tiempo, puede tocar dos veces para <b>unlock</b> o toque tres veces en cualquier momento para bloquear el teléfono inmediatamente.
+        \n\nNota: Desactive esta opción antes de desinstalar Olauncher. Gracias.</string>
+    <string name="auto_show_keyboard">Teclado automático</string>
     <string name="hide">Ocultar</string>
-    <string name="status_bar">Mostrar barra de estado</string>
-    <string name="rename">Cambiar nombre</string>
-    <string name="show_date_time">Mostrar fecha y hora</string>
+    <string name="status_bar">Barra de estado</string>
+    <string name="rename">Renombrar</string>
+    <string name="show_date_time">Fecha y hora</string>
     <string name="appearance">Apariencia</string>
     <string name="gestures">Gestos</string>
     <string name="theme_mode">Tema</string>
     <string name="system_default">Por defecto</string>
     <string name="dark">Oscuro</string>
     <string name="light">Claro</string>
-    <string name="double_tap_lock_uninstall_message">Doble toque para bloquear habilitado
-        \n\nNota: Desactiva esto primero si decides desinstalar Olauncher.</string>
-    <string name="welcome_to_olauncher_settings">Nuestra página "Acerca de" en la parte inferior tiene respuestas a todas sus preguntas. No lo olvides :)
-        \n\nGracias</string>
-    <string name="accessibility_service_description">El permiso de accesibilidad es necesario para habilitar la doble pulsación para bloquear. Cualquier dato adquirido por el servicio no saldrá de tu dispositivo.</string>
-    <string name="lock_layout_description">Descripción del diseño de bloqueo que para ser usado como identificación única para bloquear la pantalla</string>
+    <string name="double_tap_lock_uninstall_message">Doble toque para bloqueo.
+        \n\nNota: Desactive esta opción antes de desinstalar Olauncher. Gracias.</string>
+    <string name="accessibility_service_description">Se requiere el permiso de accesibilidad para habilitar el bloqueo por doble toque. Cualquier dato adquirido a través de este permiso no saldrá de su dispositivo.</string>
+    <string name="lock_layout_description">descripción del servicio de bloqueo que se usará una identificación única para bloquear la pantalla</string>
     <string name="open">Abrir enlace</string>
     <string name="copy">Copiar</string>
     <string name="close">Cerrar</string>
+    <string name="app_language">Idioma</string>
+    <string name="lang_en" translatable="false">English</string>
+    <string name="lang_de" translatable="false">Deutsch</string>
+    <string name="lang_es" translatable="false">Español</string>
+    <string name="lang_fr" translatable="false">Français</string>
+    <string name="lang_it" translatable="false">Italiano</string>
+    <string name="lang_se" translatable="false">Svenska</string>
+    <string name="lang_tr" translatable="false">Türkçe</string>
+        
+    <string name="text_size_huge">Grande</string>
+    <string name="text_size_normal">Normal</string>
+    <string name="text_size_small">Pequeña</string>
+
+    <string name="hidden_apps">Aplicaciones ocultas</string>
+
+</resources>
 </resources>
