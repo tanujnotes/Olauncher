@@ -31,4 +31,4 @@ Olauncher is a minimal CF launcher app for Android. CF stands for clutter free. 
 
 ## Contribute
 
-- If you are uphappy with any part of the app or feel like missing something you can open a PR or an issue as you like
+- If you are unhappy with any part of the app or feel like missing something you can open a PR or an issue as you like
