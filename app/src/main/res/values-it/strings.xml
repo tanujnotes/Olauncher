@@ -45,8 +45,6 @@
     <string name="light">Chiaro</string>
     <string name="double_tap_lock_uninstall_message">Doppio tocco per bloccare abilitato.
         \n\nNote: Disabilita se vuoi rimuovere Olauncher.</string>
-    <string name="welcome_to_olauncher_settings">La nostra pagina Info in basso risponde a tutte le tue domande. Non dimenticartene. :)
-        \n\nGrazie.</string>
     <string name="accessibility_service_description">Il permesso è richiesto per abilitare il doppio tocco. I tuoi dati personali rimangono sul tuo telefono.</string>
     <string name="lock_layout_description">descrizione del layout di blocco da utilizzare un ID univoco per bloccare lo schermo </string>
     <string name="open">Apri link</string>

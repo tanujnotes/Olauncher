@@ -43,7 +43,6 @@
     <string name="light">浅色</string>
 	<string name="double_tap_lock_uninstall_message">轻敲两次启用锁定
         \n\n注：如果您决定删除 Olauncher，请先关闭此功能。</string>
-    <string name="welcome_to_olauncher_settings">底部的“关于”页面有您所有问题的答案。 别忘了。:)</string>
     <string name="accessibility_service_description">需要无障碍权限启用双击锁定。该服务获取的任何数据都不会离开您的设备。</string>
     <string name="lock_layout_description">锁定将被用作锁屏唯一 id 的布局描述</string>
     <string name="open">打开链接</string>

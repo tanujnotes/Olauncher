@@ -43,7 +43,6 @@
     <string name="dark">Dunkel</string>
     <string name="light">Hell</string>
     <string name="double_tap_lock_uninstall_message">Sperren durch Doppeltippen aktiviert. \n\nHinweis: Wenn Olauncher deinstalliert werden soll, diese Funktion zuerst AUSSCHALTEN.</string>
-    <string name="welcome_to_olauncher_settings">Auf der Seite FAQ finden sich Antworten auf alle Fragen. Nicht vergessen! :) \n\nDanke.</string>
     <string name="accessibility_service_description">Die Zugriffserlaubnis ist erforderlich für das Sperren des Bildschirms durch Doppeltippen. Die hierzu benötigten Daten werden nirgends außerhalb Ihres Geräts gespeichert.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="open">Link öffnen</string>
