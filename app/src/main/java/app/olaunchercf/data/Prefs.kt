@@ -86,6 +86,8 @@ class Prefs(context: Context) {
     private val APP_ACTIVITY_CLICK_CLOCK = "APP_ACTIVITY_CLICK_CLOCK"
     private val APP_ACTIVITY_CLICK_DATE = "APP_ACTIVITY_CLICK_DATE"
 
+    private val TEXT_SIZE = "text_size"
+
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
     var firstOpen: Boolean
@@ -359,6 +361,10 @@ class Prefs(context: Context) {
     var appActivityClickDate: String
         get() = prefs.getString(APP_ACTIVITY_CLICK_DATE, "").toString()
         set(value) = prefs.edit().putString(APP_ACTIVITY_CLICK_DATE, value).apply()
+
+    var textSize: Float
+        get() = prefs.getFloat(TEXT_SIZE, Constants.TEXT_SIZE_NORMAL)
+        set(value) = prefs.edit().putFloat(TEXT_SIZE, value).apply()
 
     fun getAppName(location: Int): String {
         return when (location) {

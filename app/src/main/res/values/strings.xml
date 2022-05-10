@@ -66,5 +66,11 @@
     <string name="lang_it" translatable="false">Italiano</string>
     <string name="lang_se" translatable="false">Svenska</string>
     <string name="lang_tr" translatable="false">Türkçe</string>
+
+    <string name="text_size_huge">Huge</string>
+    <string name="text_size_normal">Normal</string>
+    <string name="text_size_small">Small</string>
+
     <string name="hidden_apps">Hidden apps</string>
+
 </resources>

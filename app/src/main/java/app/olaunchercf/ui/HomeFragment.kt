@@ -25,6 +25,7 @@ import app.olaunchercf.helper.*
 import app.olaunchercf.listener.OnSwipeTouchListener
 import app.olaunchercf.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -35,12 +36,24 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private lateinit var vibrator: Vibrator
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        prefs = Prefs(requireContext())
+
+        view.homeApp1.textSize = prefs.textSize
+        view.homeApp2.textSize = prefs.textSize
+        view.homeApp3.textSize = prefs.textSize
+        view.homeApp4.textSize = prefs.textSize
+        view.homeApp5.textSize = prefs.textSize
+        view.homeApp6.textSize = prefs.textSize
+        view.homeApp7.textSize = prefs.textSize
+        view.homeApp8.textSize = prefs.textSize
+
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        prefs = Prefs(requireContext())
+        // prefs = Prefs(requireContext())
         viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
