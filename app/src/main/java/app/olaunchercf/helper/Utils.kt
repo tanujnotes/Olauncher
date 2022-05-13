@@ -209,41 +209,6 @@ fun resetDefaultLauncher(context: Context) {
     }
 }
 
-fun setPlainWallpaperByTheme(context: Context, appTheme: Int) {
-    when (appTheme) {
-        AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(context, android.R.color.black)
-        AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(context, android.R.color.white)
-        else -> {
-            if (context.isDarkThemeOn())
-                setPlainWallpaper(context, android.R.color.black)
-            else setPlainWallpaper(context, android.R.color.white)
-        }
-    }
-}
-
-fun setPlainWallpaper(context: Context, color: Int) {
-    try {
-        val bitmap = Bitmap.createBitmap(1000, 2000, Bitmap.Config.ARGB_8888)
-        bitmap.eraseColor(context.getColor(color))
-        val manager = WallpaperManager.getInstance(context)
-        manager.setBitmap(bitmap)
-        bitmap.recycle()
-    } catch (e: Exception) {
-    }
-}
-
-fun getChangedAppTheme(context: Context, currentAppTheme: Int): Int {
-    return when (currentAppTheme) {
-        AppCompatDelegate.MODE_NIGHT_YES -> AppCompatDelegate.MODE_NIGHT_NO
-        AppCompatDelegate.MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_YES
-        else -> {
-            if (context.isDarkThemeOn())
-                AppCompatDelegate.MODE_NIGHT_NO
-            else AppCompatDelegate.MODE_NIGHT_YES
-        }
-    }
-}
-
 fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)

@@ -130,12 +130,6 @@ class MainActivity : AppCompatActivity() {
             navController.popBackStack(R.id.mainFragment, false)
     }
 
-    private fun setPlainWallpaper() {
-        if (this.isDarkThemeOn())
-            setPlainWallpaper(this, android.R.color.black)
-        else setPlainWallpaper(this, android.R.color.white)
-    }
-
     private fun openLauncherChooser(resetFailed: Boolean) {
         if (resetFailed) {
             val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
