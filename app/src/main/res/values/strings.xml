@@ -59,6 +59,7 @@
     <string name="copy">Copy</string>
     <string name="close">Close</string>
     <string name="app_language">Interface Language</string>
+    <string name="lang_system">System</string>
     <string name="lang_en" translatable="false">English</string>
     <string name="lang_de" translatable="false">Deutsch</string>
     <string name="lang_es" translatable="false">Español</string>

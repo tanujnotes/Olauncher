@@ -31,6 +31,7 @@ object Constants {
     const val TRIPLE_TAP_DELAY_MS = 300
     const val LONG_PRESS_DELAY_MS = 500
 
+    const val LANG_SYSTEM = "lang_system"
     const val LANG_EN = "en"
     const val LANG_DE = "de"
     const val LANG_ES = "es"
