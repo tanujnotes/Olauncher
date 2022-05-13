@@ -15,7 +15,6 @@
     <string name="long_press_for_settings">Tryck och håll nere var som helst för inställningar</string>
     <string name="swipe_up_for_apps">Svep uppåt för alla appar</string>
     <string name="apps_on_home_screen">Appar på startsidan</string>
-    <string name="daily_wallpaper_update">Daglig ny bakgrund</string>
     <string name="left">Vänster</string>
     <string name="right">Höger</string>
     <string name="center">Centrerat</string>
@@ -40,7 +39,6 @@
     <string name="dark">Mörkt</string>
     <string name="light">Ljust</string>
     <string name="double_tap_lock_uninstall_message">Dubbeltryck för aktiverad låsning. \n\nNotera: Stäng AV detta först om du vill avinstallera Olauncher.</string>
-    <string name="welcome_to_olauncher_settings">Vår sida Om längst ner har svar på alla dina frågor. Glöm inte det. :) \n\nTack.</string>
     <string name="accessibility_service_description">Åtkomsttillstånd krävs för att aktivera dubbeltryckning för låsning. Ingen av de uppgifter som tjänsten kommer åt kommer att lämna din enhet.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="open">Öppna länk</string>

@@ -15,7 +15,6 @@
     <string name="long_press_for_settings">在任何地方长按进入设置</string>
     <string name="swipe_up_for_apps">向上滑动查找所有应用程序</string>
     <string name="apps_on_home_screen">主屏幕上的应用</string>
-    <string name="daily_wallpaper_update">每日新壁纸</string>
     <string name="left">偏左</string>
     <string name="right">偏右</string>
     <string name="center">居中</string>
@@ -43,7 +42,6 @@
     <string name="light">浅色</string>
 	<string name="double_tap_lock_uninstall_message">轻敲两次启用锁定
         \n\n注：如果您决定删除 Olauncher，请先关闭此功能。</string>
-    <string name="welcome_to_olauncher_settings">底部的“关于”页面有您所有问题的答案。 别忘了。:)</string>
     <string name="accessibility_service_description">需要无障碍权限启用双击锁定。该服务获取的任何数据都不会离开您的设备。</string>
     <string name="lock_layout_description">锁定将被用作锁屏唯一 id 的布局描述</string>
     <string name="open">打开链接</string>

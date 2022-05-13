@@ -15,7 +15,6 @@
     <string name="long_press_for_settings">Appuyez longuement n\'importe où pour accéder aux paramètres</string>
     <string name="swipe_up_for_apps">Balayez vers le haut pour accéder aux applications</string>
     <string name="apps_on_home_screen">Applications sur l\'écran d\'accueil</string>
-    <string name="daily_wallpaper_update">Nouveau fond d\'écran quotidien</string>
     <string name="left">Gauche</string>
     <string name="right">Droite</string>
     <string name="center">Centre</string>
@@ -44,8 +43,6 @@
     <string name="light">Clair</string>
     <string name="double_tap_lock_uninstall_message">Tapoter deux fois pour verrouiller est activé
         \n\nRemarque: Désactivez-le d\'abord si vous décidez de supprimer Olauncher.</string>
-    <string name="welcome_to_olauncher_settings">Notre page À Propos en bas a les réponses à toutes vos questions. Ne l\'oubliez pas. :)
-        \n\nMerci.</string>
     <string name="accessibility_service_description">L\'autorisation d\'accès au service d\'accessibilité est nécessaire pour activer le double tapotement pour verrouiller. Aucunes données acquises par le service ne quitteront pas votre appareil.</string>
     <string name="lock_layout_description">verrouiller la description de la disposition en utilisant un identifiant unique pour verrouiller l\'écran</string>
     <string name="open">Ouvrir le lien</string>

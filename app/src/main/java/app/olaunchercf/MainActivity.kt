@@ -94,11 +94,11 @@ class MainActivity : AppCompatActivity() {
             viewModel.showSupportDialog(false)
         }
         copyOneLink.setOnClickListener {
-            this.copyToClipboard(Constants.URL_AFFILIATE)
+            // this.copyToClipboard(Constants.URL_AFFILIATE)
             viewModel.showSupportDialog(false)
         }
         openOneLink.setOnClickListener {
-            this.openUrl(Constants.URL_AFFILIATE)
+            // this.openUrl(Constants.URL_AFFILIATE)
             viewModel.showSupportDialog(false)
         }
     }
@@ -128,12 +128,6 @@ class MainActivity : AppCompatActivity() {
         // pop all the fragments except main
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)
-    }
-
-    private fun setPlainWallpaper() {
-        if (this.isDarkThemeOn())
-            setPlainWallpaper(this, android.R.color.black)
-        else setPlainWallpaper(this, android.R.color.white)
     }
 
     private fun openLauncherChooser(resetFailed: Boolean) {

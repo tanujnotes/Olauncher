@@ -16,7 +16,6 @@
     <string name="long_press_for_settings">Premi a lungo per i settaggi</string>
     <string name="swipe_up_for_apps">Scorri verso l\'alto per tutte le apps</string>
     <string name="apps_on_home_screen">Apps nella schermata principale</string>
-    <string name="daily_wallpaper_update">Nuovo sfondo del giorno</string>
     <string name="left">Sinistra</string>
     <string name="right">Destra</string>
     <string name="center">Centro</string>
@@ -45,8 +44,6 @@
     <string name="light">Chiaro</string>
     <string name="double_tap_lock_uninstall_message">Doppio tocco per bloccare abilitato.
         \n\nNote: Disabilita se vuoi rimuovere Olauncher.</string>
-    <string name="welcome_to_olauncher_settings">La nostra pagina Info in basso risponde a tutte le tue domande. Non dimenticartene. :)
-        \n\nGrazie.</string>
     <string name="accessibility_service_description">Il permesso è richiesto per abilitare il doppio tocco. I tuoi dati personali rimangono sul tuo telefono.</string>
     <string name="lock_layout_description">descrizione del layout di blocco da utilizzare un ID univoco per bloccare lo schermo </string>
     <string name="open">Apri link</string>

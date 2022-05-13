@@ -15,7 +15,6 @@
     <string name="long_press_for_settings">Long press anywhere for settings</string>
     <string name="swipe_up_for_apps">Swipe up for all apps</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
-    <string name="daily_wallpaper_update">Daily new wallpaper</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="center">Center</string>
@@ -67,6 +66,7 @@
     <string name="lang_se" translatable="false">Svenska</string>
     <string name="lang_tr" translatable="false">Türkçe</string>
 
+    <string name="app_text_size">Text Size</string>
     <string name="text_size_huge">Huge</string>
     <string name="text_size_normal">Normal</string>
     <string name="text_size_small">Small</string>
