@@ -94,11 +94,11 @@ class MainActivity : AppCompatActivity() {
             viewModel.showSupportDialog(false)
         }
         copyOneLink.setOnClickListener {
-            this.copyToClipboard(Constants.URL_AFFILIATE)
+            // this.copyToClipboard(Constants.URL_AFFILIATE)
             viewModel.showSupportDialog(false)
         }
         openOneLink.setOnClickListener {
-            this.openUrl(Constants.URL_AFFILIATE)
+            // this.openUrl(Constants.URL_AFFILIATE)
             viewModel.showSupportDialog(false)
         }
     }
