@@ -9,6 +9,7 @@ import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
@@ -58,7 +59,11 @@ class MainActivity : AppCompatActivity() {
 
     @Suppress("DEPRECATION")
     private fun useLanguage() {
-        val locale = Locale(prefs.language)
+        val locale = if (prefs.language == Constants.LANG_SYSTEM) {
+            Locale(Locale.getDefault().language)
+        } else {
+            Locale(prefs.language)
+        }
         Locale.setDefault(locale)
         val config = resources.configuration
         config.locale = locale

@@ -5,7 +5,7 @@
     <string name="set_as_default_launcher">Usa come launcher predefinito</string>
     <string name="app_text_color">Colore del testo</string>
     <string name="double_tap_to_lock_screen">Doppio tocco per bloccare lo schermo</string>
-    <string name="experimental_">(experimental)</string>
+    <string name="experimental_">(sperimentale)</string>
     <string name="admin_permission_message">Olauncher promette di usare responsabilmente il blocco schermo.</string>
     <string name="about">Info</string>
     <string name="off">Disattivato</string>
@@ -13,20 +13,20 @@
     <string name="black">Nero</string>
     <string name="white">Bianco</string>
     <string name="change_default_launcher">Cambia il launcher predefinito</string>
-    <string name="long_press_for_settings">Premi a lungo per i settaggi</string>
-    <string name="swipe_up_for_apps">Scorri verso l\'alto per tutte le apps</string>
-    <string name="apps_on_home_screen">Apps nella schermata principale</string>
+    <string name="long_press_for_settings">Premi a lungo per le impostazioni</string>
+    <string name="swipe_up_for_apps">Scorri verso l\'alto per tutte le app</string>
+    <string name="apps_on_home_screen">App nella schermata principale</string>
     <string name="left">Sinistra</string>
     <string name="right">Destra</string>
     <string name="center">Centro</string>
     <string name="home_layout_alignment">Allineamento App</string>
     <string name="swipe_left_app">Scorri verso sinistra</string>
     <string name="swipe_right_app">Scorri verso destra</string>
-    <string name="clock_click_app">toccare app Orario</string>
-    <string name="date_click_app">toccare app data</string>
+    <string name="clock_click_app">Tocco app Ora</string>
+    <string name="date_click_app">Tocco app Data</string>
     <string name="app_drawer_tips">Tip: Striscia verso il basso per chiudere. Scorri per nascondere la tastiera.</string>
     <string name="okay">Va bene</string>
-    <string name="double_tap_lock_is_enabled_message">Se il doppio tocco disabilita l\'imronta digitale o lo sblocco facciale, apri i settaggi di  Olauncher, tocca \'experimental\' e segui le instructioni. Grazie.</string>
+    <string name="double_tap_lock_is_enabled_message">Se il doppio tocco disabilita l\'impronta digitale o lo sblocco facciale, apri le impostazioni di  Olauncher, tocca \'sperimentale\' e segui le istruzioni. Grazie.</string>
     <string name="triple_tap_lock_message">Come funziona:
         \nCon il doppio tocco, lo schermo si oscura e il telefono si blocca in 5 secondi.
         \n\nIn questo momento, puoi usare il doppio tocco per  <b>sbloccare</b> oppure puoi bloccare subito il telefono con il triplo tocco.
@@ -49,5 +49,14 @@
     <string name="open">Apri link</string>
     <string name="copy">Copia</string>
     <string name="close">Chiudi</string>
+    <string name="app_language">Lingua interfaccia</string>
+    <string name="lang_system">Sistema</string>
+    
+    <string name="app_text_size">Dimensione Testo</string>
+    <string name="text_size_huge">Grande</string>
+    <string name="text_size_normal">Normale</string>
+    <string name="text_size_small">Piccolo</string>
+
+    <string name="hidden_apps">App nascoste</string>
 
 </resources>

@@ -94,6 +94,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.appLangText -> appLangSelectLayout.visibility = View.VISIBLE
+            R.id.langSystem -> setLang(Constants.LANG_SYSTEM)
             R.id.langEn -> setLang(Constants.LANG_EN)
             R.id.langDe -> setLang(Constants.LANG_DE)
             R.id.langEs -> setLang(Constants.LANG_ES)
@@ -166,6 +167,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         themeDark.setOnClickListener(this)
 
         appLangText.setOnClickListener(this)
+        langSystem.setOnClickListener(this)
         langEn.setOnClickListener(this)
         langDe.setOnClickListener(this)
         langEs.setOnClickListener(this)
@@ -399,6 +401,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateLanguageText(language: String = prefs.language) {
         when (language) {
+            Constants.LANG_SYSTEM -> appLangText.text = getString(R.string.lang_system)
             Constants.LANG_DE -> appLangText.text = getString(R.string.lang_de)
             Constants.LANG_ES -> appLangText.text = getString(R.string.lang_es)
             Constants.LANG_FR -> appLangText.text = getString(R.string.lang_fr)
