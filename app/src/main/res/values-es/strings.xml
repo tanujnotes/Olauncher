@@ -48,11 +48,12 @@
     <string name="open">Abrir enlace</string>
     <string name="copy">Copiar</string>
     <string name="close">Cerrar</string>
-    <string name="app_language">Texto en pantalla</string>
-        
+    <string name="app_language">Idioma</string>
+    
+    <string name="app_text_size">Texto en pantalla</string>
     <string name="text_size_huge">Grande</string>
     <string name="text_size_normal">Normal</string>
-    <string name="text_size_small">Pequeña</string>
+    <string name="text_size_small">Pequeño</string>
 
     <string name="hidden_apps">Aplicaciones ocultas</string>
 
