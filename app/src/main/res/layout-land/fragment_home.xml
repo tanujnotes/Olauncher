@@ -57,7 +57,7 @@
         android:layout_marginHorizontal="56dp"
         android:orientation="vertical">
 
-        <TextView
+        <!-- <TextView
             android:id="@+id/homeApp1"
             style="@style/TextLarge"
             android:layout_width="wrap_content"
@@ -143,7 +143,7 @@
             android:paddingVertical="@dimen/home_app_padding_vertical"
             android:tag="@string/_8"
             android:visibility="gone"
-            tools:visibility="visible" />
+            tools:visibility="visible" /> -->
 
     </LinearLayout>
 

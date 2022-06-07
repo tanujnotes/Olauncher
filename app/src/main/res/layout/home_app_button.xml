@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeApp1"
+    style="@style/TextLarge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="@string/app"
+    android:paddingVertical="@dimen/home_app_padding_vertical"
+    android:tag="@string/_1">
+
+</TextView>

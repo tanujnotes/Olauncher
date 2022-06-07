@@ -133,7 +133,21 @@
                     android:visibility="gone"
                     tools:ignore="UnusedAttribute">
 
-                    <TextView
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/appsNum_layout"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </HorizontalScrollView>
+
+                    <!-- <TextView
                         android:id="@+id/maxApps0"
                         style="@style/TextSmall"
                         android:layout_width="0dp"
@@ -221,7 +235,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:paddingVertical="8dp"
-                        android:text="@string/_8" />
+                        android:text="@string/_8" />-->
 
                 </LinearLayout>
 
@@ -509,11 +523,12 @@
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/lang_layout"
                             android:orientation="horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
-                            <TextView
+                            <!-- <TextView
                                 android:id="@+id/langSystem"
                                 style="@style/TextSmallBold"
                                 android:layout_width="wrap_content"
@@ -591,7 +606,7 @@
                                 android:layout_marginEnd="12dp"
                                 android:gravity="center"
                                 android:paddingVertical="6dp"
-                                android:text="@string/lang_tr" />
+                                android:text="@string/lang_tr" /> -->
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
 

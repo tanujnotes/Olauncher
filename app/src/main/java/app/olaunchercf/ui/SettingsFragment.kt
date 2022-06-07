@@ -11,9 +11,11 @@ import android.provider.Settings
 import android.util.DisplayMetrics
 import android.view.*
 import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -55,17 +57,24 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
-        homeAppsNum.text = prefs.homeAppsNum.toString()
+        populateAppsNum()
+        initAppsNum()
+
         populateKeyboardText()
         populateLockSettings()
         populateAppThemeText()
         populateAlignment()
+
         populateLanguageText()
+        initLanguageText()
+
         populateTextSizeText()
+
         populateStatusBar()
         populateDateTime()
         populateSwipeApps()
         populateClickApps()
+
         initClickListeners()
         initObservers()
     }
@@ -94,29 +103,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.appLangText -> appLangSelectLayout.visibility = View.VISIBLE
-            R.id.langSystem -> setLang(Constants.LANG_SYSTEM)
-            R.id.langEn -> setLang(Constants.LANG_EN)
-            R.id.langDe -> setLang(Constants.LANG_DE)
-            R.id.langEs -> setLang(Constants.LANG_ES)
-            R.id.langFr -> setLang(Constants.LANG_FR)
-            R.id.langIt -> setLang(Constants.LANG_IT)
-            R.id.langSe -> setLang(Constants.LANG_SE)
-            R.id.langTr -> setLang(Constants.LANG_TR)
 
             R.id.textSizeText -> textSizeLayout.visibility = View.VISIBLE
             R.id.textSizeHuge -> setTextSize(Constants.TEXT_SIZE_HUGE)
             R.id.textSizeNormal -> setTextSize(Constants.TEXT_SIZE_NORMAL)
             R.id.textSizeSmall -> setTextSize(Constants.TEXT_SIZE_SMALL)
-
-            R.id.maxApps0 -> updateHomeAppsNum(0)
-            R.id.maxApps1 -> updateHomeAppsNum(1)
-            R.id.maxApps2 -> updateHomeAppsNum(2)
-            R.id.maxApps3 -> updateHomeAppsNum(3)
-            R.id.maxApps4 -> updateHomeAppsNum(4)
-            R.id.maxApps5 -> updateHomeAppsNum(5)
-            R.id.maxApps6 -> updateHomeAppsNum(6)
-            R.id.maxApps7 -> updateHomeAppsNum(7)
-            R.id.maxApps8 -> updateHomeAppsNum(8)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -167,29 +158,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         themeDark.setOnClickListener(this)
 
         appLangText.setOnClickListener(this)
-        langSystem.setOnClickListener(this)
-        langEn.setOnClickListener(this)
-        langDe.setOnClickListener(this)
-        langEs.setOnClickListener(this)
-        langFr.setOnClickListener(this)
-        langIt.setOnClickListener(this)
-        langSe.setOnClickListener(this)
-        langTr.setOnClickListener(this)
 
         textSizeText.setOnClickListener(this)
         textSizeHuge.setOnClickListener(this)
         textSizeNormal.setOnClickListener(this)
         textSizeSmall.setOnClickListener(this)
-
-        maxApps0.setOnClickListener(this)
-        maxApps1.setOnClickListener(this)
-        maxApps2.setOnClickListener(this)
-        maxApps3.setOnClickListener(this)
-        maxApps4.setOnClickListener(this)
-        maxApps5.setOnClickListener(this)
-        maxApps6.setOnClickListener(this)
-        maxApps7.setOnClickListener(this)
-        maxApps8.setOnClickListener(this)
 
         alignment.setOnLongClickListener(this)
         appThemeText.setOnLongClickListener(this)
@@ -391,11 +364,56 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         requireActivity().recreate()
     }
 
+    private fun initAppsNum() {
+        for (i in 0..Constants.MAX_HOME_APPS) {
+            val view = layoutInflater.inflate(R.layout.settings_button, null) as TextView
+            view.apply {
+                text = i.toString()
+                setPadding(30, 20, 30, 20)
+                setOnClickListener{
+                    updateHomeAppsNum(i)
+                }
+            }
+
+            appsNum_layout.addView(view)
+        }
+    }
+
+    private fun populateAppsNum() {
+        homeAppsNum.text = prefs.homeAppsNum.toString()
+    }
+
     private fun populateAppThemeText(appTheme: Int = prefs.appTheme) {
         when (appTheme) {
             AppCompatDelegate.MODE_NIGHT_YES -> appThemeText.text = getString(R.string.dark)
             AppCompatDelegate.MODE_NIGHT_NO -> appThemeText.text = getString(R.string.light)
             else -> appThemeText.text = getString(R.string.system_default)
+        }
+    }
+
+    private fun initLanguageText() {
+        val languages = arrayOf(
+            Pair(R.string.lang_system, Constants.LANG_SYSTEM),
+            Pair(R.string.lang_en, Constants.LANG_EN),
+            Pair(R.string.lang_de, Constants.LANG_DE),
+            Pair(R.string.lang_es, Constants.LANG_ES),
+            Pair(R.string.lang_fr, Constants.LANG_FR),
+            Pair(R.string.lang_it, Constants.LANG_IT),
+            Pair(R.string.lang_se, Constants.LANG_SE),
+            Pair(R.string.lang_tr, Constants.LANG_TR),
+        )
+
+        for ((button_text, lang) in languages) {
+            val view = layoutInflater.inflate(R.layout.settings_button, null) as TextView
+            view.apply {
+                text = getString(button_text)
+                setPadding(12)
+                setOnClickListener{
+                    setLang(lang)
+                }
+            }
+
+            lang_layout.addView(view)
         }
     }
 
