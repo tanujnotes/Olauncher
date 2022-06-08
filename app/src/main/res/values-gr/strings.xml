@@ -7,8 +7,8 @@
     <string name="experimental_">(πειραματικό)</string>
     <string name="admin_permission_message">Ο Olauncher υπόσχεται να χρησιμοποιεί το δικαίωμα κλειδώματος οθόνης υπεύθυνα.</string>
     <string name="about">Σχετικά με</string>
-    <string name="off">Απενεργοποιημένο</string>
-    <string name="on">Ενεργοποιημένο</string>
+    <string name="off">Κλειστό</string>
+    <string name="on">Ανοιχτό</string>
     <string name="black">Μαύρο</string>
     <string name="white">Άσπρο</string>
     <string name="change_default_launcher">Αλλαγή προεπιλεγμένου εκκινητή</string>
@@ -33,7 +33,7 @@
         \nΜόλις πατήσετε δύο φορές, η οθόνη θα μαυρίσει και το τηλέφωνο θα κλειδώσει μόνο του μετά από 5 δευτερόλεπτα.
         \n\nΚατα τη διάρκεια αυτή, μπορείτε να πατήσετε ξανά δύο φορές για να <b>ξεκλειδώσετε</b> ή τρεις φορές οποιαδήποτε στιγμή για να κλειδώσετε το τηλέφωνό σας κατευθείαν.
         \n\nΣημείωση: ΑΠΕΝΕΡΓΟΠΟΙΗΣΤΕ αυτή την επιλογή εάν θέλετε να απεγκαταστήσετε τον τον Olauncher. Ευχαριστούμε.</string>
-    <string name="auto_show_keyboard">Αυτόματη εμφάνιση πληκτρολογίου</string>
+    <string name="auto_show_keyboard">Αυτόματη προβολή πληκτρολογίου</string>
     <string name="hide">Απόκρυψη</string>
     <string name="status_bar">Εμφάνιση μπάρας κατάστασης</string>
     <string name="rename">Μετονομασία</string>
