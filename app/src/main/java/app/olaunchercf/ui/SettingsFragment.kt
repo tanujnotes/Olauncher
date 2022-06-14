@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
 import android.widget.TextView
@@ -158,7 +159,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         themeDark.setOnClickListener(this)
 
         appLangText.setOnClickListener(this)
-        initLanguageText()
         alignment.setOnLongClickListener(this)
         appThemeText.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
