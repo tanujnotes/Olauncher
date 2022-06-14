@@ -32,6 +32,7 @@ object Constants {
     const val LANG_IT = "it"
     const val LANG_SE = "se"
     const val LANG_TR = "tr"
+    const val LANG_GR = "gr"
 
     const val TEXT_SIZE_HUGE = 30f
     const val TEXT_SIZE_NORMAL = 22f

@@ -158,12 +158,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         themeDark.setOnClickListener(this)
 
         appLangText.setOnClickListener(this)
-
-        textSizeText.setOnClickListener(this)
-        textSizeHuge.setOnClickListener(this)
-        textSizeNormal.setOnClickListener(this)
-        textSizeSmall.setOnClickListener(this)
-
+        initLanguageText()
         alignment.setOnLongClickListener(this)
         appThemeText.setOnLongClickListener(this)
         swipeLeftApp.setOnLongClickListener(this)
@@ -401,6 +396,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Pair(R.string.lang_it, Constants.LANG_IT),
             Pair(R.string.lang_se, Constants.LANG_SE),
             Pair(R.string.lang_tr, Constants.LANG_TR),
+            Pair(R.string.lang_gr, Constants.LANG_GR),
         )
 
         for ((button_text, lang) in languages) {
@@ -426,6 +422,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Constants.LANG_IT -> appLangText.text = getString(R.string.lang_it)
             Constants.LANG_SE -> appLangText.text = getString(R.string.lang_se)
             Constants.LANG_TR -> appLangText.text = getString(R.string.lang_tr)
+            Constants.LANG_GR -> appLangText.text = getString(R.string.lang_gr)
             else -> appLangText.text = getString(R.string.lang_en)
         }
     }

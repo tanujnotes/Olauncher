@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Olauncher Clutter Free</string>
+    <string name="app">Εφαρμογή</string>
+    <string name="set_as_default_launcher">Ορισμός ως προεπιλεγμένου εκκινητή</string>
+    <string name="app_text_color">Χρώμα γραμματοσειράς</string>
+    <string name="double_tap_to_lock_screen">Διπλό πάτημα για κλείδωμα</string>
+    <string name="experimental_">(πειραματικό)</string>
+    <string name="admin_permission_message">Ο Olauncher υπόσχεται να χρησιμοποιεί το δικαίωμα κλειδώματος οθόνης υπεύθυνα.</string>
+    <string name="about">Σχετικά με</string>
+    <string name="off">Κλειστό</string>
+    <string name="on">Ανοιχτό</string>
+    <string name="black">Μαύρο</string>
+    <string name="white">Άσπρο</string>
+    <string name="change_default_launcher">Αλλαγή προεπιλεγμένου εκκινητή</string>
+    <string name="long_press_for_settings">Πατήστε παρατεταμένα οπουδήποτε για τις ρυθμήσεις</string>
+    <string name="swipe_up_for_apps">Σύρετε προς τα πάνω για να δείτε όλες τις εφαρμογές</string>
+    <string name="apps_on_home_screen">Εφαρμογές στην αρχική οθόνη</string>
+    <string name="left">Αριστερά</string>
+    <string name="right">Δεξιά</string>
+    <string name="center">Κέντρο</string>
+    <string name="home_layout_alignment">Ευθυγράμμιση εφαρμογών</string>
+    <string name="swipe_left_app">Σύρσιμο αριστερά για άνοιγμα</string>
+    <string name="swipe_right_app">Σύρσιμο δεξιά για άνοιγμα</string>
+    <string name="clock_click_app">Εφαρμογή ρολογιού</string>
+    <string name="date_click_app">Εφαρμογή ημερολογίου</string>
+    <string name="app_drawer_tips">Συμβουλή: Σύρετε κάτω για απόρριψη. Απόκρυψη πληκτρολογίου: κύλιση προς τα κάτω.</string>
+    <string name="okay">Εντάξει</string>
+    <string name="double_tap_lock_is_enabled_message">Εάν το διπλό πάτημα απενεργοποιεί το δακτυλικό αποτύπωμα ή το ξεκλείδωμα με αναγνώριση προσώπου, ανοίξτε τις ρυθμίσεις του Olauncher, πατήστε στην επιλογή \'πειραματικό\' και ακολουθήστε τις οδηγίες. Ευχαριστούμε.</string>
+    <string name="triple_tap_lock_message">Πως λείτουργεί:
+        \nΜόλις πατήσετε δύο φορές, η οθόνη θα μαυρίσει και το τηλέφωνο θα κλειδώσει μόνο του μετά από 5 δευτερόλεπτα.
+        \n\nΚατα τη διάρκεια αυτή, μπορείτε να πατήσετε ξανά δύο φορές για να <b>ξεκλειδώσετε</b> ή τρεις φορές οποιαδήποτε στιγμή για να κλειδώσετε το τηλέφωνό σας κατευθείαν.
+        \n\nΣημείωση: ΑΠΕΝΕΡΓΟΠΟΙΗΣΤΕ αυτή την επιλογή εάν θέλετε να απεγκαταστήσετε τον τον Olauncher. Ευχαριστούμε.</string>
+    <string name="auto_show_keyboard">Προβολή πληκτρολογίου μενού</string>
+    <string name="hide">Απόκρυψη</string>
+    <string name="status_bar">Εμφάνιση μπάρας κατάστασης</string>
+    <string name="rename">Μετονομασία</string>
+    <string name="show_date_time">Εμφάνιση ημερομηνίας ώρας</string>
+    <string name="appearance">Εμφάνιση</string>
+    <string name="gestures">Χεριρονομίες</string>
+    <string name="theme_mode">Θέμα</string>
+    <string name="system_default">Σύστημα</string>
+    <string name="dark">Σκοτεινό</string>
+    <string name="light">Φωτεινό</string>
+    <string name="double_tap_lock_uninstall_message">Ενεργοποιημένο το διπλό πάτημα για κλείδωμα.
+        \n\nΣημείωση: ΑΠΕΝΕΡΓΟΠΟΙΗΣΤΕ τη συγκεκριμένη επιλογή πριν απεγκαταστήσετε τον Olauncher.</string>
+    <string name="accessibility_service_description">Το δικαίωμα προσβασιμότητας είναι απαραίτητο για την ενεργοποίηση του διπλού πατήματος για κλείδωμα. Ό,τι δεδομένα αποκτηθούνε από αυτή τη λειτουργία αυτή δεν θα φύγουν από την συσκευή σας.</string>
+    <string name="lock_layout_description">περιγραφή διάταξης κλειδώματος που θα χρησιμοποιηθεί μοναδικό id για το κλείδωμα οθόνης.</string>
+    <string name="open">Άνοιγμα συνδέσμου</string>
+    <string name="copy">Αντιγραφή</string>
+    <string name="close">Κλείσιμο</string>
+    <string name="app_language">Γλώσσα Εφαρμογής</string>
+    <string name="lang_system">Γλώσσα Συστήματος</string>
+    <string name="app_text_size">Μέγεθος Γραμματοσειράς</string>
+    <string name="text_size_huge">Μεγάλο</string>
+    <string name="text_size_normal">Μεσαίο</string>
+    <string name="text_size_small">Μικρό</string>
+    <string name="hidden_apps">Κρυφές εφαρμογές</string>
+</resources>

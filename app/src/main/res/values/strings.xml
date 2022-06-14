@@ -66,6 +66,7 @@
     <string name="lang_it" translatable="false">Italiano</string>
     <string name="lang_se" translatable="false">Svenska</string>
     <string name="lang_tr" translatable="false">Türkçe</string>
+    <string name="lang_gr" translatable="false">Ελληνικά</string>
 
     <string name="app_text_size">Text Size</string>
     <string name="text_size_huge">Huge</string>
