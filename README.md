@@ -11,6 +11,7 @@
   - English
   - French
   - German
+  - Greek
   - Italian
   - Spanish
   - Swedish
