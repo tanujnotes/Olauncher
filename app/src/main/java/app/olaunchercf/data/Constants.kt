@@ -1,10 +1,8 @@
 package app.olaunchercf.data
 
-object Constants {
+import java.util.*
 
-//    const val THEME_MODE_DARK = 0
-//    const val THEME_MODE_LIGHT = 1
-//    const val THEME_MODE_SYSTEM = 2
+object Constants {
 
     const val FLAG_LAUNCH_APP = 100
     const val FLAG_HIDDEN_APPS = 101
@@ -23,18 +21,46 @@ object Constants {
     const val LONG_PRESS_DELAY_MS = 500
 
     const val MAX_HOME_APPS = 15
+    const val TEXT_SIZE_MIN = 16
+    const val TEXT_SIZE_MAX = 30
 
-    const val LANG_SYSTEM = "lang_system"
-    const val LANG_EN = "en"
-    const val LANG_DE = "de"
-    const val LANG_ES = "es"
-    const val LANG_FR = "fr"
-    const val LANG_IT = "it"
-    const val LANG_SE = "se"
-    const val LANG_TR = "tr"
-    const val LANG_GR = "gr"
+    enum class Language {
+        System,
+        English,
+        Deutsch,
+        Spanish,
+        French,
+        Italian,
+        Swedish,
+        Turkish,
+        Greek,
+        Chinese
+    }
 
-    const val TEXT_SIZE_HUGE = 30f
-    const val TEXT_SIZE_NORMAL = 22f
-    const val TEXT_SIZE_SMALL = 16f
+    fun Language.value(): String {
+        return when(this) {
+            Language.System -> Locale(Locale.getDefault().language).toString()
+            Language.English -> "en"
+            Language.Deutsch -> "de"
+            Language.Spanish -> "es"
+            Language.French -> "fr"
+            Language.Italian -> "it"
+            Language.Swedish -> "se"
+            Language.Turkish -> "tr"
+            Language.Greek -> "gr"
+            Language.Chinese -> "cn"
+        }
+    }
+
+    enum class Gravity {
+        Left,
+        Center,
+        Right
+    }
+
+    enum class Theme {
+        System,
+        Dark,
+        Light
+    }
 }

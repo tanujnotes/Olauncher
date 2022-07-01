@@ -19,7 +19,7 @@
     <string name="left">Sinistra</string>
     <string name="right">Destra</string>
     <string name="center">Centro</string>
-    <string name="home_layout_alignment">Allineamento App</string>
+    <string name="home_alignment">Allineamento App</string>
     <string name="swipe_left_app">Scorri verso sinistra</string>
     <string name="swipe_right_app">Scorri verso destra</string>
     <string name="clock_click_app">Tocco app Ora</string>

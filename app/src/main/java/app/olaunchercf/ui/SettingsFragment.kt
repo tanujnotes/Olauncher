@@ -1,22 +1,33 @@
 package app.olaunchercf.ui
 
+import SettingsTheme
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.DisplayMetrics
-import android.util.Log
-import android.view.*
-import android.view.inputmethod.EditorInfo.IME_ACTION_DONE
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.core.os.bundleOf
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,25 +36,199 @@ import app.olaunchercf.MainActivity
 import app.olaunchercf.MainViewModel
 import app.olaunchercf.R
 import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Constants.Theme.*
 import app.olaunchercf.data.Prefs
-import app.olaunchercf.helper.*
+import app.olaunchercf.databinding.FragmentSettingsBinding
+import app.olaunchercf.helper.isAccessServiceEnabled
+import app.olaunchercf.helper.openAppInfo
+import app.olaunchercf.helper.showToastLong
+import app.olaunchercf.helper.showToastShort
 import app.olaunchercf.listener.DeviceAdmin
-import kotlinx.android.synthetic.main.fragment_settings.*
-import java.util.*
+import app.olaunchercf.ui.compose.SettingsComposable
+import app.olaunchercf.ui.compose.SettingsComposable.SettingsAppSelector
+import app.olaunchercf.ui.compose.SettingsComposable.SettingsArea
+import app.olaunchercf.ui.compose.SettingsComposable.SettingsItem
+import app.olaunchercf.ui.compose.SettingsComposable.SettingsNumberItem
+import app.olaunchercf.ui.compose.SettingsComposable.SettingsToggle
 
-class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
+class SettingsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
     private lateinit var componentName: ComponentName
 
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    ): View {
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.testView.setContent {
+
+            val isDark = when (prefs.appTheme) {
+                Light -> false
+                Dark -> true
+                System -> isSystemInDarkTheme()
+            }
+
+            SettingsTheme(isDark) {
+                Settings()
+            }
+        }
+    }
+
+    @Composable
+    private fun Settings() {
+        // observer
+        Column {
+            SettingsArea(
+                title = "Appearance",
+                arrayOf(
+                    { open, onChange ->
+                        SettingsNumberItem(
+                            title = stringResource(R.string.apps_on_home_screen),
+                            open = open,
+                            onChange = onChange,
+                            currentSelection = remember { mutableStateOf(prefs.homeAppsNum) },
+                            min = 0,
+                            max = Constants.MAX_HOME_APPS,
+                            onSelect = { j -> updateHomeAppsNum(j) }
+                        )
+                    },
+                    { _, onChange ->
+                        SettingsToggle(
+                            title = stringResource(R.string.auto_show_keyboard),
+                            onChange = onChange,
+                            state = remember { mutableStateOf(prefs.autoShowKeyboard) },
+                        ) { toggleKeyboardText() }
+                    },
+                    { _, onChange ->
+                        SettingsToggle(
+                            title = stringResource(R.string.status_bar),
+                            onChange = onChange,
+                            state = remember { mutableStateOf(prefs.showStatusBar) },
+                        ) { toggleStatusBar() }
+                    },
+                    { _, onChange ->
+                        SettingsToggle(
+                            title = stringResource(R.string.show_date_time),
+                            onChange = onChange,
+                            state = remember { mutableStateOf(prefs.showDateTime) }
+                        ) { toggleDateTime() }
+                    },
+                    { open, onChange ->
+                        SettingsItem(
+                            title = stringResource(R.string.home_alignment),
+                            open = open,
+                            onChange = onChange,
+                            currentSelection = remember { mutableStateOf(prefs.homeAlignment) },
+                            values = arrayOf(Constants.Gravity.Left, Constants.Gravity.Center, Constants.Gravity.Right),
+                            onSelect = { j -> viewModel.updateHomeAlignment(j) }
+                        )
+                    },
+                    { open, onChange ->
+                        SettingsItem(
+                            title = stringResource(R.string.clock_alignment),
+                            open = open,
+                            onChange = onChange,
+                            currentSelection = remember { mutableStateOf(prefs.timeAlignment) },
+                            values = arrayOf(Constants.Gravity.Left, Constants.Gravity.Center, Constants.Gravity.Right),
+                            onSelect = { j -> viewModel.updateTimeAlignment(j) }
+                        )
+                    },
+                    { open, onChange ->
+                        SettingsItem(
+                            title = stringResource(R.string.drawer_alignment),
+                            open = open,
+                            onChange = onChange,
+                            currentSelection = remember { mutableStateOf(prefs.drawerAlignment) },
+                            values = arrayOf(Constants.Gravity.Left, Constants.Gravity.Center, Constants.Gravity.Right),
+                            onSelect = { j -> viewModel.updateDrawerAlignment(j) }
+                        )
+                    },
+                    { open, onChange ->
+                        SettingsItem(
+                            title = stringResource(R.string.theme_mode),
+                            open = open,
+                            onChange = onChange,
+                            currentSelection = remember { mutableStateOf(prefs.appTheme) },
+                            values = arrayOf(System, Light, Dark),
+                            onSelect = { j -> setTheme(j) }
+                        )
+                    },
+                    { open, onChange ->
+                        SettingsItem(
+                            open = open,
+                            onChange = onChange,
+                            title = stringResource(R.string.app_language),
+                            currentSelection = remember { mutableStateOf(prefs.language) },
+                            values = Constants.Language.values(),
+                            onSelect = { j -> setLang(j) }
+                        )
+                    },
+                    { open, onChange ->
+                        SettingsNumberItem(
+                            title = stringResource(R.string.app_text_size),
+                            open = open,
+                            onChange = onChange,
+                            currentSelection = remember { mutableStateOf(prefs.textSize) },
+                            min = Constants.TEXT_SIZE_MIN,
+                            max = Constants.TEXT_SIZE_MAX,
+                            onSelect = { f -> setTextSize(f) }
+                        )
+                    }
+                )
+            )
+            SettingsArea(title = "Gestures",
+                arrayOf(
+                    { _, _ ->
+                        SettingsAppSelector(
+                            title = stringResource(R.string.swipe_left_app),
+                            currentSelection = remember { mutableStateOf(prefs.appNameSwipeLeft) },
+                            onClick = { showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP) }
+                        )
+                    },
+                    { _, _ ->
+                        SettingsAppSelector(
+                            title = stringResource(R.string.swipe_right_app),
+                            currentSelection = remember { mutableStateOf(prefs.appNameSwipeRight) },
+                            onClick = { showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP) }
+                        )
+                    },
+                    { _, _ ->
+                        SettingsAppSelector(
+                            title = stringResource(R.string.clock_click_app),
+                            currentSelection = remember { mutableStateOf(prefs.appNameClickClock) },
+                            onClick = { showAppListIfEnabled(Constants.FLAG_SET_CLICK_CLOCK_APP) }
+                        )
+                    },
+                    { _, _ ->
+                        SettingsAppSelector(
+                            title = stringResource(R.string.date_click_app),
+                            currentSelection = remember { mutableStateOf(prefs.appNameClickDate) },
+                            onClick = { showAppListIfEnabled(Constants.FLAG_SET_CLICK_DATE_APP) }
+                        )
+                    },
+                    { _, onChange ->
+                        SettingsToggle(
+                            title = stringResource(R.string.double_tap_to_lock_screen),
+                            onChange = onChange,
+                            state = remember { mutableStateOf(prefs.lockModeOn) }
+                        ) { toggleLockMode() }
+                    }
+                )
+            )
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,112 +243,29 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
-        populateAppsNum()
-        initAppsNum()
-
-        populateKeyboardText()
-        populateLockSettings()
-        populateAppThemeText()
-        populateAlignment()
-
-        populateLanguageText()
-        initLanguageText()
-
-        populateTextSizeText()
-
         populateStatusBar()
-        populateDateTime()
-        populateSwipeApps()
-        populateClickApps()
-
         initClickListeners()
         initObservers()
     }
 
-    override fun onClick(view: View) {
-        appsNumSelectLayout.visibility = View.GONE
-        alignmentSelectLayout.visibility = View.GONE
-        appThemeSelectLayout.visibility = View.GONE
-        appLangSelectLayout.visibility = View.GONE
-        textSizeLayout.visibility = View.GONE
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
+    override fun onClick(view: View) {
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
-            R.id.toggleLock -> toggleLockMode()
-            R.id.autoShowKeyboard -> toggleKeyboardText()
-            R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
-            R.id.alignment -> alignmentSelectLayout.visibility = View.VISIBLE
-            R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
-            R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
-            R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
-            R.id.statusBar -> toggleStatusBar()
-            R.id.dateTime -> toggleDateTime()
-            R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
-            R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
-            R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
-            R.id.appLangText -> appLangSelectLayout.visibility = View.VISIBLE
-
-            R.id.textSizeText -> textSizeLayout.visibility = View.VISIBLE
-            R.id.textSizeHuge -> setTextSize(Constants.TEXT_SIZE_HUGE)
-            R.id.textSizeNormal -> setTextSize(Constants.TEXT_SIZE_NORMAL)
-            R.id.textSizeSmall -> setTextSize(Constants.TEXT_SIZE_SMALL)
-
-            R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
-            R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
-            R.id.clockClickApp -> showAppListIfEnabled(Constants.FLAG_SET_CLICK_CLOCK_APP)
-            R.id.dateClickApp -> showAppListIfEnabled(Constants.FLAG_SET_CLICK_DATE_APP)
         }
-    }
-
-    override fun onLongClick(view: View): Boolean {
-        when (view.id) {
-            R.id.alignment -> {
-                prefs.appLabelAlignment = prefs.homeAlignment
-                findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
-            }
-            R.id.appThemeText -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            R.id.swipeLeftApp -> toggleSwipeLeft()
-            R.id.swipeRightApp -> toggleSwipeRight()
-            R.id.toggleLock -> {
-                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
-                deviceManager.removeActiveAdmin(componentName) // for backward compatibility
-            }
-        }
-        return true
     }
 
     private fun initClickListeners() {
-        olauncherHiddenApps.setOnClickListener(this)
-        scrollLayout.setOnClickListener(this)
-        appInfo.setOnClickListener(this)
-        setLauncher.setOnClickListener(this)
-        autoShowKeyboard.setOnClickListener(this)
-        toggleLock.setOnClickListener(this)
-        homeAppsNum.setOnClickListener(this)
-        alignment.setOnClickListener(this)
-        alignmentLeft.setOnClickListener(this)
-        alignmentCenter.setOnClickListener(this)
-        alignmentRight.setOnClickListener(this)
-        statusBar.setOnClickListener(this)
-        dateTime.setOnClickListener(this)
-        swipeLeftApp.setOnClickListener(this)
-        swipeRightApp.setOnClickListener(this)
-
-        clockClickApp.setOnClickListener(this)
-        dateClickApp.setOnClickListener(this)
-
-        appThemeText.setOnClickListener(this)
-        themeLight.setOnClickListener(this)
-        themeDark.setOnClickListener(this)
-
-        appLangText.setOnClickListener(this)
-        alignment.setOnLongClickListener(this)
-        appThemeText.setOnLongClickListener(this)
-        swipeLeftApp.setOnLongClickListener(this)
-        swipeRightApp.setOnLongClickListener(this)
-        toggleLock.setOnLongClickListener(this)
+        binding.olauncherHiddenApps.setOnClickListener(this)
+        binding.scrollLayout.setOnClickListener(this)
+        binding.appInfo.setOnClickListener(this)
+        binding.setLauncher.setOnClickListener(this)
     }
 
     private fun initObservers() {
@@ -172,28 +274,19 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner) {
             if (it) {
-                setLauncher.text = getString(R.string.change_default_launcher)
+                binding.setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
             }
-        }
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
-            populateAlignment()
-        }
-        viewModel.updateSwipeApps.observe(viewLifecycleOwner) {
-            populateSwipeApps()
-        }
-        viewModel.updateClickApps.observe(viewLifecycleOwner) {
-            populateClickApps()
         }
     }
 
     private fun toggleSwipeLeft() {
         prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
         if (prefs.swipeLeftEnabled) {
-            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
+            //binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             showToastShort(requireContext(), "Swipe left app enabled")
         } else {
-            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+            //binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
             showToastShort(requireContext(), "Swipe left app disabled")
         }
     }
@@ -201,10 +294,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun toggleSwipeRight() {
         prefs.swipeRightEnabled = !prefs.swipeRightEnabled
         if (prefs.swipeRightEnabled) {
-            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
+            //binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             showToastShort(requireContext(), "Swipe right app enabled")
         } else {
-            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+            //binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
             showToastShort(requireContext(), "Swipe right app disabled")
         }
     }
@@ -217,22 +310,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateStatusBar() {
         if (prefs.showStatusBar) {
             showStatusBar()
-            statusBar.text = getString(R.string.on)
         } else {
             hideStatusBar()
-            statusBar.text = getString(R.string.off)
         }
     }
 
     private fun toggleDateTime() {
         prefs.showDateTime = !prefs.showDateTime
-        populateDateTime()
         viewModel.toggleDateTime(prefs.showDateTime)
-    }
-
-    private fun populateDateTime() {
-        if (prefs.showDateTime) dateTime.text = getString(R.string.on)
-        else dateTime.text = getString(R.string.off)
     }
 
     private fun showStatusBar() {
@@ -303,31 +388,27 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
             }
         }
-        populateLockSettings()
+        //populateLockSettings()
     }
 
     private fun updateHomeAppsNum(num: Int) {
-        homeAppsNum.text = num.toString()
-        appsNumSelectLayout.visibility = View.GONE
         prefs.homeAppsNum = num
         viewModel.refreshHome(true)
     }
 
     private fun toggleKeyboardText() {
         prefs.autoShowKeyboard = !prefs.autoShowKeyboard
-        populateKeyboardText()
     }
 
-    private fun updateTheme(appTheme: Int) {
-        if (AppCompatDelegate.getDefaultNightMode() == appTheme) return
+    private fun setTheme(appTheme: Constants.Theme) {
+        // if (AppCompatDelegate.getDefaultNightMode() == appTheme) return // TODO find out what this did
         prefs.appTheme = appTheme
-        populateAppThemeText(appTheme)
-        setAppTheme(appTheme)
+        requireActivity().recreate()
     }
 
-    private fun setLang(lang: String) {
-        prefs.language = lang
-        populateLanguageText(lang)
+    private fun setLang(lang_int: Constants.Language) {
+
+        prefs.language = lang_int
 
         // restart activity
         activity?.let {
@@ -337,134 +418,23 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             it.finish()
         }
     }
-    private fun setTextSize(size: Float) {
-        if (size == Constants.TEXT_SIZE_HUGE || size == Constants.TEXT_SIZE_NORMAL || size == Constants.TEXT_SIZE_SMALL) {
-            prefs.textSize = size
+    private fun setTextSize(size: Int) {
+        prefs.textSize = size
 
-            populateTextSizeText(size)
-
-            // restart activity
-            activity?.let {
-                val intent = Intent(context, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                it.startActivity(intent)
-                it.finish()
-            }
+        // restart activity
+        activity?.let {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            it.startActivity(intent)
+            it.finish()
         }
     }
 
-    private fun setAppTheme(theme: Int) {
-        if (AppCompatDelegate.getDefaultNightMode() == theme) return
+    /*private fun setAppTheme(theme: Constants.Theme) {
+        // if (AppCompatDelegate.getDefaultNightMode() == theme) return // TODO: find out what this did
 
         requireActivity().recreate()
-    }
-
-    private fun initAppsNum() {
-        for (i in 0..Constants.MAX_HOME_APPS) {
-            val view = layoutInflater.inflate(R.layout.settings_button, null) as TextView
-            view.apply {
-                text = i.toString()
-                setPadding(30, 20, 30, 20)
-                setOnClickListener{
-                    updateHomeAppsNum(i)
-                }
-            }
-
-            appsNum_layout.addView(view)
-        }
-    }
-
-    private fun populateAppsNum() {
-        homeAppsNum.text = prefs.homeAppsNum.toString()
-    }
-
-    private fun populateAppThemeText(appTheme: Int = prefs.appTheme) {
-        when (appTheme) {
-            AppCompatDelegate.MODE_NIGHT_YES -> appThemeText.text = getString(R.string.dark)
-            AppCompatDelegate.MODE_NIGHT_NO -> appThemeText.text = getString(R.string.light)
-            else -> appThemeText.text = getString(R.string.system_default)
-        }
-    }
-
-    private fun initLanguageText() {
-        val languages = arrayOf(
-            Pair(R.string.lang_system, Constants.LANG_SYSTEM),
-            Pair(R.string.lang_en, Constants.LANG_EN),
-            Pair(R.string.lang_de, Constants.LANG_DE),
-            Pair(R.string.lang_es, Constants.LANG_ES),
-            Pair(R.string.lang_fr, Constants.LANG_FR),
-            Pair(R.string.lang_it, Constants.LANG_IT),
-            Pair(R.string.lang_se, Constants.LANG_SE),
-            Pair(R.string.lang_tr, Constants.LANG_TR),
-            Pair(R.string.lang_gr, Constants.LANG_GR),
-        )
-
-        for ((button_text, lang) in languages) {
-            val view = layoutInflater.inflate(R.layout.settings_button, null) as TextView
-            view.apply {
-                text = getString(button_text)
-                setPadding(12)
-                setOnClickListener{
-                    setLang(lang)
-                }
-            }
-
-            lang_layout.addView(view)
-        }
-    }
-
-    private fun populateLanguageText(language: String = prefs.language) {
-        when (language) {
-            Constants.LANG_SYSTEM -> appLangText.text = getString(R.string.lang_system)
-            Constants.LANG_DE -> appLangText.text = getString(R.string.lang_de)
-            Constants.LANG_ES -> appLangText.text = getString(R.string.lang_es)
-            Constants.LANG_FR -> appLangText.text = getString(R.string.lang_fr)
-            Constants.LANG_IT -> appLangText.text = getString(R.string.lang_it)
-            Constants.LANG_SE -> appLangText.text = getString(R.string.lang_se)
-            Constants.LANG_TR -> appLangText.text = getString(R.string.lang_tr)
-            Constants.LANG_GR -> appLangText.text = getString(R.string.lang_gr)
-            else -> appLangText.text = getString(R.string.lang_en)
-        }
-    }
-
-    private fun populateTextSizeText(size: Float = prefs.textSize) {
-        when(size) {
-            Constants.TEXT_SIZE_HUGE -> textSizeText.text = getString(R.string.text_size_huge)
-            Constants.TEXT_SIZE_NORMAL -> textSizeText.text = getString(R.string.text_size_normal)
-            Constants.TEXT_SIZE_SMALL -> textSizeText.text = getString(R.string.text_size_small)
-        }
-    }
-
-    private fun populateKeyboardText() {
-        if (prefs.autoShowKeyboard) autoShowKeyboard.text = getString(R.string.on)
-        else autoShowKeyboard.text = getString(R.string.off)
-    }
-
-    private fun populateAlignment() {
-        when (prefs.homeAlignment) {
-            Gravity.START -> alignment.text = getString(R.string.left)
-            Gravity.CENTER -> alignment.text = getString(R.string.center)
-            Gravity.END -> alignment.text = getString(R.string.right)
-        }
-    }
-
-    private fun populateLockSettings() {
-        if (prefs.lockModeOn) toggleLock.text = getString(R.string.on)
-        else toggleLock.text = getString(R.string.off)
-    }
-
-    private fun populateSwipeApps() {
-        swipeLeftApp.text = prefs.appNameSwipeLeft
-        swipeRightApp.text = prefs.appNameSwipeRight
-        if (!prefs.swipeLeftEnabled)
-            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
-        if (!prefs.swipeRightEnabled)
-            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
-    }
-    private fun populateClickApps() {
-        clockClickApp.text = prefs.appNameClickClock
-        dateClickApp.text = prefs.appNameClickDate
-    }
+    }*/
 
     private fun showAppListIfEnabled(flag: Int) {
         if ((flag == Constants.FLAG_SET_SWIPE_LEFT_APP) and !prefs.swipeLeftEnabled) {

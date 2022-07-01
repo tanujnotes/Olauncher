@@ -1,7 +1,7 @@
 package app.olaunchercf.helper
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import app.olaunchercf.R
 
 class FakeHomeActivity : AppCompatActivity() {

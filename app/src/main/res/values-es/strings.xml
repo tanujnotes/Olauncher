@@ -18,7 +18,7 @@
     <string name="left">Izquierda</string>
     <string name="right">Derecha</string>
     <string name="center">Centro</string>
-    <string name="home_layout_alignment">Alineación</string>
+    <string name="home_alignment">Alineación</string>
     <string name="swipe_left_app">Deslizar a izquierda</string>
     <string name="swipe_right_app">Deslizar a derecha</string>
     <string name="clock_click_app">Pulsar reloj</string>

@@ -18,7 +18,9 @@
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="center">Center</string>
-    <string name="home_layout_alignment">App alignment</string>
+    <string name="home_alignment">App alignment</string>
+    <string name="clock_alignment">Clock alignment</string>
+    <string name="drawer_alignment">App drawer alignment</string>
     <string name="swipe_left_app">Swipe left app</string>
     <string name="swipe_right_app">Swipe right app</string>
     <string name="clock_click_app">Clock click app</string>
@@ -32,6 +34,7 @@
     <string name="_6" translatable="false">6</string>
     <string name="_7" translatable="false">7</string>
     <string name="_8" translatable="false">8</string>
+    <string name="commit">Commit</string>
     <string name="app_drawer_tips">Tip: Swipe down to dismiss. Scroll to hide keyboard.</string>
     <string name="okay">Okay</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
@@ -59,14 +62,6 @@
     <string name="close">Close</string>
     <string name="app_language">Interface Language</string>
     <string name="lang_system">System</string>
-    <string name="lang_en" translatable="false">English</string>
-    <string name="lang_de" translatable="false">Deutsch</string>
-    <string name="lang_es" translatable="false">Español</string>
-    <string name="lang_fr" translatable="false">Français</string>
-    <string name="lang_it" translatable="false">Italiano</string>
-    <string name="lang_se" translatable="false">Svenska</string>
-    <string name="lang_tr" translatable="false">Türkçe</string>
-    <string name="lang_gr" translatable="false">Ελληνικά</string>
 
     <string name="app_text_size">Text Size</string>
     <string name="text_size_huge">Huge</string>

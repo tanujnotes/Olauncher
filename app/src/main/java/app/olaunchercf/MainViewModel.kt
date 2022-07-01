@@ -8,13 +8,11 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.work.*
 import app.olaunchercf.data.AppModel
 import app.olaunchercf.data.Constants
 import app.olaunchercf.data.Prefs
 import app.olaunchercf.helper.*
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val appContext by lazy { application.applicationContext }
@@ -25,11 +23,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val toggleDateTime = MutableLiveData<Boolean>()
     val updateSwipeApps = MutableLiveData<Any>()
     val updateClickApps = MutableLiveData<Any>()
-    val appList = MutableLiveData<List<AppModel>>()
-    val hiddenApps = MutableLiveData<List<AppModel>>()
+    val appList = MutableLiveData<List<AppModel>?>()
+    val hiddenApps = MutableLiveData<List<AppModel>?>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
-    val homeAppAlignment = MutableLiveData<Int>()
+    val homeAppAlignment = MutableLiveData<Constants.Gravity>()
+    val timeAlignment = MutableLiveData<Constants.Gravity>()
     val showMessageDialog = MutableLiveData<String>()
     val showSupportDialog = MutableLiveData<Boolean>()
 
@@ -42,6 +41,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 launchApp(appModel)
             }
             Constants.FLAG_SET_HOME_APP -> {
+                Log.d("homeapps", "$n")
                 appModel.let {
                     prefs.setHomeAppValues(n, it.appLabel, it.appPackage, it.user.toString(), it.appActivityName)
                 }
@@ -155,9 +155,19 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         ).contains(".")
     }
 
-    fun updateHomeAlignment(gravity: Int) {
+    fun updateHomeAlignment(gravity: Constants.Gravity) {
         prefs.homeAlignment = gravity
-        homeAppAlignment.value = prefs.homeAlignment
+        homeAppAlignment.value = gravity
+    }
+
+    fun updateDrawerAlignment(gravity: Constants.Gravity) {
+        prefs.drawerAlignment = gravity
+        // drawerAppAlignment.value = gravity
+    }
+
+    fun updateTimeAlignment(gravity: Constants.Gravity) {
+        prefs.timeAlignment = gravity
+        timeAlignment.value = gravity
     }
 
     fun showMessageDialog(message: String) {

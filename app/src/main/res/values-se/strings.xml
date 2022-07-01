@@ -18,7 +18,7 @@
     <string name="left">Vänster</string>
     <string name="right">Höger</string>
     <string name="center">Centrerat</string>
-    <string name="home_layout_alignment">Justera appar</string>
+    <string name="home_alignment">Justera appar</string>
     <string name="swipe_left_app">App svepning åt vänster</string>
     <string name="swipe_right_app">App svepning åt höger</string>
     <string name="clock_click_app">App vid pekning på klockan</string>

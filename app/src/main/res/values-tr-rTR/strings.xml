@@ -18,7 +18,7 @@
     <string name="left" translatable="false">Sol</string>
     <string name="right" translatable="false">Sağ</string>
     <string name="center" translatable="false">Orta</string>
-    <string name="home_layout_alignment" translatable="false">Uygulama hizalaması</string>
+    <string name="home_alignment" translatable="false">Uygulama hizalaması</string>
     <string name="swipe_left_app" translatable="false">Uygulamayı sola kaydırın</string>
     <string name="swipe_right_app" translatable="false">Uygulamayı sağa kaydırın</string>
     <string name="clock_click_app">Saat tıklama uygulaması</string>

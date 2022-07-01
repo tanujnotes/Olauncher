@@ -18,7 +18,7 @@
     <string name="left">Αριστερά</string>
     <string name="right">Δεξιά</string>
     <string name="center">Κέντρο</string>
-    <string name="home_layout_alignment">Ευθυγράμμιση εφαρμογών</string>
+    <string name="home_alignment">Ευθυγράμμιση εφαρμογών</string>
     <string name="swipe_left_app">Σύρσιμο αριστερά για άνοιγμα</string>
     <string name="swipe_right_app">Σύρσιμο δεξιά για άνοιγμα</string>
     <string name="clock_click_app">Εφαρμογή ρολογιού</string>

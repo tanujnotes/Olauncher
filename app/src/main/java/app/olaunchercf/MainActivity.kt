@@ -1,15 +1,12 @@
 package app.olaunchercf
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import app.olaunchercf.data.Constants
+import app.olaunchercf.data.Constants.value
 import app.olaunchercf.data.Prefs
-import app.olaunchercf.helper.*
-import kotlinx.android.synthetic.main.activity_main.*
+import app.olaunchercf.databinding.ActivityMainBinding
+import app.olaunchercf.helper.isTablet
+import app.olaunchercf.helper.showToastLong
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: Prefs
     private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
+    private lateinit var binding: ActivityMainBinding
 
     override fun onBackPressed() {
         if (navController.currentDestination?.id != R.id.mainFragment)
@@ -37,10 +37,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         prefs = Prefs(this)
-        AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
+        val themeMode = when (prefs.appTheme) {
+            Constants.Theme.Light -> AppCompatDelegate.MODE_NIGHT_NO
+            Constants.Theme.Dark -> AppCompatDelegate.MODE_NIGHT_YES
+            Constants.Theme.System -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        }
+        AppCompatDelegate.setDefaultNightMode(themeMode)
+        //super.onCreate(savedInstanceState)
+        //setContentView(R.layout.activity_main)
+
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         useLanguage()
-        setContentView(R.layout.activity_main)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -59,11 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     @Suppress("DEPRECATION")
     private fun useLanguage() {
-        val locale = if (prefs.language == Constants.LANG_SYSTEM) {
-            Locale(Locale.getDefault().language)
-        } else {
-            Locale(prefs.language)
-        }
+        val locale = Locale(prefs.language.value())
         Locale.setDefault(locale)
         val config = resources.configuration
         config.locale = locale
@@ -91,33 +98,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initClickListeners() {
-        okay.setOnClickListener {
-            messageLayout.visibility = View.GONE
+        binding.okay.setOnClickListener {
+            binding.messageLayout.visibility = View.GONE
             viewModel.showMessageDialog("")
         }
-        closeOneLink.setOnClickListener {
-            viewModel.showSupportDialog(false)
-        }
-        copyOneLink.setOnClickListener {
-            // this.copyToClipboard(Constants.URL_AFFILIATE)
-            viewModel.showSupportDialog(false)
-        }
-        openOneLink.setOnClickListener {
-            // this.openUrl(Constants.URL_AFFILIATE)
+        binding.closeOneLink.setOnClickListener {
             viewModel.showSupportDialog(false)
         }
     }
 
     private fun initObservers(viewModel: MainViewModel) {
-        viewModel.launcherResetFailed.observe(this, {
+        viewModel.launcherResetFailed.observe(this) {
             openLauncherChooser(it)
-        })
-        viewModel.showMessageDialog.observe(this, {
+        }
+        viewModel.showMessageDialog.observe(this) {
             showMessage(it)
-        })
-        viewModel.showSupportDialog.observe(this, {
-            supportOlauncherLayout.isVisible = it
-        })
+        }
+        viewModel.showSupportDialog.observe(this) {
+            binding.supportOlauncherLayout.isVisible = it
+        }
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -151,15 +150,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMessage(message: String) {
         if (message.isEmpty()) return
-        messageTextView.text = message
-        messageLayout.visibility = View.VISIBLE
+        binding.messageTextView.text = message
+        binding.messageLayout.visibility = View.VISIBLE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     prefs.lockModeOn = true
                     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
                         showMessage(getString(R.string.double_tap_lock_is_enabled_message))

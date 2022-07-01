@@ -18,7 +18,7 @@
     <string name="left">偏左</string>
     <string name="right">偏右</string>
     <string name="center">居中</string>
-    <string name="home_layout_alignment">应用对齐</string>
+    <string name="home_alignment">应用对齐</string>
     <string name="swipe_left_app">左滑应用</string>
     <string name="swipe_right_app">右滑应用</string>
     <string name="clock_click_app">单击时钟启动的应用</string>

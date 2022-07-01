@@ -1,12 +1,10 @@
 package app.olaunchercf.helper
 
-import android.app.WallpaperManager
 import android.content.*
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.graphics.*
 import android.net.Uri
 import android.os.UserHandle
 import android.os.UserManager
@@ -22,18 +20,12 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
-import androidx.appcompat.app.AppCompatDelegate
 import app.olaunchercf.BuildConfig
 import app.olaunchercf.R
 import app.olaunchercf.data.AppModel
-import app.olaunchercf.data.Constants
 import app.olaunchercf.data.Prefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 import java.text.Collator
 import java.util.*
 import kotlin.math.pow

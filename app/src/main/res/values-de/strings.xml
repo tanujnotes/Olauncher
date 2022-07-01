@@ -18,7 +18,7 @@
     <string name="left">Links</string>
     <string name="right">Rechts</string>
     <string name="center">Zentriert</string>
-    <string name="home_layout_alignment">Apps ausrichten</string>
+    <string name="home_alignment">Apps ausrichten</string>
     <string name="swipe_left_app">App für nach links wischen</string>
     <string name="swipe_right_app">App für nach rechts wischen</string>
     <string name="clock_click_app">App bei Tippen auf Uhr</string>

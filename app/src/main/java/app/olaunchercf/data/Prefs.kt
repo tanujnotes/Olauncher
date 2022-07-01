@@ -2,10 +2,6 @@ package app.olaunchercf.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Resources
-import android.view.Gravity
-import androidx.appcompat.app.AppCompatDelegate
-import java.util.*
 
 class Prefs(context: Context) {
 
@@ -20,7 +16,8 @@ class Prefs(context: Context) {
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val AUTO_SHOW_KEYBOARD = "AUTO_SHOW_KEYBOARD"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
-    private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
+    private val DRAWER_ALIGNMENT = "DRAWER_ALIGNMENT"
+    private val TIME_ALIGNMENT = "TIME_ALIGNMENT"
     private val STATUS_BAR = "STATUS_BAR"
     private val DATE_TIME = "DATE_TIME"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
@@ -68,10 +65,6 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(FIRST_SETTINGS_OPEN, true)
         set(value) = prefs.edit().putBoolean(FIRST_SETTINGS_OPEN, value).apply()
 
-    var firstHide: Boolean
-        get() = prefs.getBoolean(FIRST_HIDE, true)
-        set(value) = prefs.edit().putBoolean(FIRST_HIDE, value).apply()
-
     var lockModeOn: Boolean
         get() = prefs.getBoolean(LOCK_MODE, false)
         set(value) = prefs.edit().putBoolean(LOCK_MODE, value).apply()
@@ -81,16 +74,48 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putBoolean(AUTO_SHOW_KEYBOARD, value).apply()
 
     var homeAppsNum: Int
-        get() = prefs.getInt(HOME_APPS_NUM, 4)
+        get() {
+            return try {
+                prefs.getInt(HOME_APPS_NUM, 4)
+            } catch (_: Exception) {
+                4
+            }
+        }
         set(value) = prefs.edit().putInt(HOME_APPS_NUM, value).apply()
 
-    var homeAlignment: Int
-        get() = prefs.getInt(HOME_ALIGNMENT, Gravity.START)
-        set(value) = prefs.edit().putInt(HOME_ALIGNMENT, value).apply()
+    var homeAlignment: Constants.Gravity
+        get() {
+            return try {
+                val string = prefs.getString(
+                    HOME_ALIGNMENT,
+                    Constants.Gravity.Left.name
+                ).toString()
+                Constants.Gravity.valueOf(string)
+            } catch (_: Exception) {
+                Constants.Gravity.Left
+            }
+        }
+        set(value) = prefs.edit().putString(HOME_ALIGNMENT, value.toString()).apply()
 
-    var appLabelAlignment: Int
-        get() = prefs.getInt(APP_LABEL_ALIGNMENT, Gravity.START)
-        set(value) = prefs.edit().putInt(APP_LABEL_ALIGNMENT, value).apply()
+    var timeAlignment: Constants.Gravity
+        get() {
+            val string = prefs.getString(
+                TIME_ALIGNMENT,
+                Constants.Gravity.Left.name
+            ).toString()
+            return Constants.Gravity.valueOf(string)
+        }
+        set(value) = prefs.edit().putString(TIME_ALIGNMENT, value.toString()).apply()
+
+    var drawerAlignment: Constants.Gravity
+        get() {
+            val string = prefs.getString(
+                DRAWER_ALIGNMENT,
+                Constants.Gravity.Right.name
+            ).toString()
+            return Constants.Gravity.valueOf(string)
+        }
+        set(value) = prefs.edit().putString(DRAWER_ALIGNMENT, value.name).apply()
 
     var showStatusBar: Boolean
         get() = prefs.getBoolean(STATUS_BAR, false)
@@ -108,17 +133,25 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(SWIPE_RIGHT_ENABLED, true)
         set(value) = prefs.edit().putBoolean(SWIPE_RIGHT_ENABLED, value).apply()
 
-    var appTheme: Int
-        get() = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_YES)
-        set(value) = prefs.edit().putInt(APP_THEME, value).apply()
+    var appTheme: Constants.Theme
+        get() {
+            return try {
+                Constants.Theme.valueOf(prefs.getString(APP_THEME, Constants.Theme.System.name).toString())
+            } catch (_: Exception) {
+                Constants.Theme.System
+            }
+        }
+        set(value) = prefs.edit().putString(APP_THEME, value.name).apply()
 
-    var language: String
-        get() = prefs.getString(APP_LANGUAGE, Constants.LANG_EN).toString()
-        set(value) = prefs.edit().putString(APP_LANGUAGE, value).apply()
-
-    var screenTimeout: Int
-        get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds
-        set(value) = prefs.edit().putInt(SCREEN_TIMEOUT, value).apply()
+    var language: Constants.Language
+        get() {
+            return try {
+                Constants.Language.valueOf(prefs.getString(APP_LANGUAGE, Constants.Language.English.name).toString())
+            } catch (_: Exception) {
+                Constants.Language.English
+            }
+        }
+        set(value) = prefs.edit().putString(APP_LANGUAGE, value.name).apply()
 
     var hiddenApps: MutableSet<String>
         get() = prefs.getStringSet(HIDDEN_APPS, mutableSetOf()) as MutableSet<String>
@@ -235,9 +268,15 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_ACTIVITY_CLICK_DATE, "").toString()
         set(value) = prefs.edit().putString(APP_ACTIVITY_CLICK_DATE, value).apply()
 
-    var textSize: Float
-        get() = prefs.getFloat(TEXT_SIZE, Constants.TEXT_SIZE_NORMAL)
-        set(value) = prefs.edit().putFloat(TEXT_SIZE, value).apply()
+    var textSize: Int
+        get() {
+            return try {
+                prefs.getInt(TEXT_SIZE, 18)
+            } catch (_: Exception) {
+                18
+            }
+        }
+        set(value) = prefs.edit().putInt(TEXT_SIZE, value).apply()
 
     fun getAppName(location: Int): String {
         val (name, _, _, _) = this.getHomeAppValues(location)

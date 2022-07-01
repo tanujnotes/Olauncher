@@ -18,7 +18,7 @@
     <string name="left">Gauche</string>
     <string name="right">Droite</string>
     <string name="center">Centre</string>
-    <string name="home_layout_alignment">Alignement des applications</string>
+    <string name="home_alignment">Alignement des applications</string>
     <string name="swipe_left_app">Balayage vers la gauche</string>
     <string name="swipe_right_app">Balayage vers la droite</string>
     <string name="clock_click_app">Appui sur l\'horloge</string>

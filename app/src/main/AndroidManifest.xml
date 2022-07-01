@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.olaunchercf">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <!--<uses-permission android:name="android.permission.SET_WALLPAPER" />-->
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <!--For opening alarm app-->
