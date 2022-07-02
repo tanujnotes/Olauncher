@@ -16,3 +16,4 @@
       * Spanish
       * Swedish
       * Turkish
+      * Persian

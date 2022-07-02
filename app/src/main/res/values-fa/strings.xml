@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Olauncher Clutter Free</string>
+    <string name="app">برنامه</string>
+    <string name="set_as_default_launcher">تنظیم به عنوان لانچر اصلی</string>
+    <string name="app_text_color">رنگ متن</string>
+    <string name="double_tap_to_lock_screen">دوبار ضربه زدن برای قفل</string>
+    <string name="experimental_">(آزمایشی)</string>
+    <string name="admin_permission_message">Olauncher قول می دهد که از مجوز قفل صفحه مسئولانه استفاده کند</string>
+    <string name="about">درباره</string>
+    <string name="off">خاموش</string>
+    <string name="on">روشن</string>
+    <string name="black">سیاه</string>
+    <string name="white">سفید</string>
+    <string name="change_default_launcher">تغییر لانچر اصلی</string>
+    <string name="long_press_for_settings">لمس طولانی صفحه برای بازکردن تنظیمات</string>
+    <string name="swipe_up_for_apps">کشیدن به بالا برای نمایش برنامه ها</string>
+    <string name="apps_on_home_screen">برنامه های روی صفحه اصلی</string>
+    <string name="left">چپ</string>
+    <string name="right">راست</string>
+    <string name="center">وسط</string>
+    <string name="home_layout_alignment">موقعیت برنامه ها</string>
+    <string name="swipe_left_app">برنامه ای  که باکشیدن به چپ باز می شود</string>
+    <string name="swipe_right_app">برنامه ای که با کشیدن به راست باز می شود</string>
+    <string name="clock_click_app">برنامه ای که با ضربه روی ساعت باز می شود</string>
+    <string name="date_click_app">برنامه ای که با ضربه روی تاریخ باز می شود</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="app_drawer_tips">نکته: برای ردکردن، انگشت خود را به پایین بکشید. برای مخفی کردن صفحه کلید، پیمایش کنید</string>
+    <string name="okay">باشه</string>
+    <string name="double_tap_lock_is_enabled_message">اگر دوبار ضربه برای قفل صفحه، اثر انگشت یا قفل با چهره را غیرفعال می‌کند، تنظیمات Olauncher را باز کنید، روی «آزمایشی» ضربه بزنید و دستورالعمل‌ها را دنبال کنید. متشکرم.</string>
+    <string name="triple_tap_lock_message">چگونه کار می کند:
+        \nوقتی دوبار ضربه بزنید، صفحه تاریک می‌شود و گوشی در عرض 5 ثانیه قفل می‌شود.
+        \n\nدر این مدت، می‌توانید برای <b>باز کردن قفل</b> دو بار ضربه بزنید یا هر زمان که بخواهید سه ضربه بزنید تا فوراً تلفن را کاملاً قفل کنید.
+        \n\nتوجه: اگر تصمیم به حذف Olauncher دارید، ابتدا آن را خاموش کنید. متشکرم.</string>
+    <string name="auto_show_keyboard">نمایش خودکار صفحه کلید</string>
+    <string name="hide">مخفی کردن</string>
+    <string name="status_bar">نمابش نواروضعیت</string>
+    <string name="rename">تغییرنام</string>
+    <string name="show_date_time">نمابش تاریخ و ساعت</string>
+    <string name="appearance">ظاهر</string>
+    <string name="gestures">اشاره های حرکتی</string>
+    <string name="theme_mode">حالت نمایه</string>
+    <string name="system_default">سیستم</string>
+    <string name="dark">تاریک</string>
+    <string name="light">روشن</string>
+    <string name="double_tap_lock_uninstall_message">دو ضربه زدن برای قفل فعال است.
+        \n\nتوجه: اگر تصمیم به حذف Olauncher دارید، ابتدا آن را خاموش کنید.</string>
+    <string name="accessibility_service_description">برای فعال کردن دوبار ضربه زدن برای قفل، مجوز دسترس‌پذیری لازم است. هر گونه داده ای که توسط سرویس به دست می آید از دستگاه شما خارج نمی شود.</string>
+    <string name="lock_layout_description">شرح چیدمان قفل برای استفاده از یک شناسه منحصر به فرد برای قفل کردن صفحه</string>
+    <string name="open">بازکردن پیوند</string>
+    <string name="copy">رونوشت</string>
+    <string name="close">بستن</string>
+    <string name="app_language">زبان</string>
+    <string name="lang_system">سیستم</string>
+    <string name="lang_en" translatable="false">انگلیسی</string>
+    <string name="lang_de" translatable="false">آلمانی</string>
+    <string name="lang_es" translatable="false">اسپانیولی</string>
+    <string name="lang_fr" translatable="false">فرانسوی</string>
+    <string name="lang_it" translatable="false">ایتالیایی</string>
+    <string name="lang_se" translatable="false">سوئدی</string>
+    <string name="lang_tr" translatable="false">ترکی</string>
+    <string name="lang_gr" translatable="false">یونانی</string>
+
+    <string name="app_text_size">اندازه متن</string>
+    <string name="text_size_huge">درشت</string>
+    <string name="text_size_normal">عادی</string>
+    <string name="text_size_small">کوچک</string>
+
+    <string name="hidden_apps">برنامه های مخفی</string>
+
+</resources>
