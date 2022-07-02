@@ -19,7 +19,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 32
         versionCode 9
-        versionName "fork1.9"
+        versionName "v1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
