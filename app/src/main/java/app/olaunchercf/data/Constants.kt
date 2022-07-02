@@ -26,16 +26,16 @@ object Constants {
 
     enum class Language {
         System,
-        English,
+        Chinese,
         Deutsch,
-        Spanish,
+        English,
         French,
+        Greek,
         Italian,
+        Portuguese,
+        Spanish,
         Swedish,
         Turkish,
-        Greek,
-        Chinese,
-        Portuguese
     }
 
     fun Language.value(): String {
