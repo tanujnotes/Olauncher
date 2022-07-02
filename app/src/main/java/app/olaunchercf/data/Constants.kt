@@ -34,7 +34,8 @@ object Constants {
         Swedish,
         Turkish,
         Greek,
-        Chinese
+        Chinese,
+        Portuguese
     }
 
     fun Language.value(): String {
@@ -49,6 +50,7 @@ object Constants {
             Language.Turkish -> "tr"
             Language.Greek -> "gr"
             Language.Chinese -> "cn"
+            Language.Portuguese -> "pt"
         }
     }
 
