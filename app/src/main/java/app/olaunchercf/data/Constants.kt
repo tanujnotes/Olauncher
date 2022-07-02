@@ -27,9 +27,9 @@ object Constants {
     enum class Language {
         System,
         Chinese,
-        Deutsch,
         English,
         French,
+        German,
         Greek,
         Italian,
         Portuguese,
@@ -42,7 +42,7 @@ object Constants {
         return when(this) {
             Language.System -> Locale(Locale.getDefault().language).toString()
             Language.English -> "en"
-            Language.Deutsch -> "de"
+            Language.German -> "de"
             Language.Spanish -> "es"
             Language.French -> "fr"
             Language.Italian -> "it"
