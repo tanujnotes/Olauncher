@@ -36,4 +36,5 @@ Olauncher is a minimal CF launcher app for Android. CF stands for clutter free. 
 
 ## Contribute
 
-- If you are unhappy with any part of the app or feel like missing something you can open a PR or an issue as you like
+- If you are unhappy with any part of the app or feel like missing something you can open a **[pull request](https://help.github.com/articles/about-pull-requests/)** or an **[issue](https://github.com/jooooscha/Olauncher/issues/new) as you like
+- Any help in translating Olauncher CF into other languages is greatly appreciated, If you don't know how to perform a  **[pull request](https://help.github.com/articles/about-pull-requests/)** then feel free to check out our dedicated **[Wiki](https://github.com/jooooscha/Olauncher/wiki)**
