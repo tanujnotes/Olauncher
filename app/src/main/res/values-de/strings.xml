@@ -1,4 +1,4 @@
-﻿<resources>
+<resources>
     <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Als Standard-Launcher wählen</string>
@@ -19,11 +19,11 @@
     <string name="right">Rechts</string>
     <string name="center">Zentriert</string>
     <string name="home_alignment">Apps ausrichten</string>
-    <string name="swipe_left_app">App für nach links wischen</string>
-    <string name="swipe_right_app">App für nach rechts wischen</string>
-    <string name="clock_click_app">App bei Tippen auf Uhr</string>
-    <string name="date_click_app">App bei Tippen auf Datum</string>
-    <string name="app_drawer_tips">Tipp: Verwerfen: nach unten wischen. Tastatur ausblenden: scrollen.</string>
+    <string name="swipe_left_app">App öffnen (links wischen)</string>
+    <string name="swipe_right_app">App öffen (rechts wischen)</string>
+    <string name="clock_click_app">App öffnen (Tippen auf Uhr)</string>
+    <string name="date_click_app">App öffnen (Tippen auf Datum)</string>
+    <string name="app_drawer_tips">Tipp! Zurück: nach unten wischen. Tastatur ausblenden: scrollen.</string>
     <string name="okay">OK</string>
     <string name="double_tap_lock_is_enabled_message">Wenn Doppeltippen das Entsperren mittels Fingerabdruck oder Gesicht deaktiviert: Olauncher-Einstellungen öffnen, auf \‘experimentell\' tippen und Anweisungen befolgen. Danke!</string>
     <string name="triple_tap_lock_message">So geht es:
@@ -43,10 +43,11 @@
     <string name="light">Hell</string>
     <string name="double_tap_lock_uninstall_message">Sperren durch Doppeltippen aktiviert. \n\nHinweis: Wenn Olauncher deinstalliert werden soll, diese Funktion zuerst AUSSCHALTEN.</string>
     <string name="accessibility_service_description">Die Zugriffserlaubnis ist erforderlich für das Sperren des Bildschirms durch Doppeltippen. Die hierzu benötigten Daten werden nirgends außerhalb Ihres Geräts gespeichert.</string>
-    <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
+    <string name="lock_layout_description">Beschreibung des Sperrlayouts, die verwendet werden soll, um eine eindeutige ID zum Sperren des Bildschirms zu verwenden.</string>
     <string name="open">Link öffnen</string>
     <string name="copy">Kopieren</string>
     <string name="close">Schließen</string>
     <string name="hidden_apps">Versteckte Apps</string>
     <string name="app_language">Sprache</string>
 </resources>
+
