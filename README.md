@@ -14,6 +14,7 @@
   - Greek
   - Italian
   - Persian
+  - Portuguese (European)
   - Spanish
   - Swedish
   - Turkish 
