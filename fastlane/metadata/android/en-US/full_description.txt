@@ -3,9 +3,11 @@
 
     Also added some features
     * Removed clutter
+    * Does not require network permission
     * Rename apps in normal app list
     * Change clock app
     * Change Calendar app
+    * Resizable font
     * Multilingual support:
       * Chinese
       * English
@@ -13,7 +15,8 @@
       * German
       * Greek
       * Italian
+      * Persian
+      * Portuguese (European)
       * Spanish
       * Swedish
       * Turkish
-      * Persian
