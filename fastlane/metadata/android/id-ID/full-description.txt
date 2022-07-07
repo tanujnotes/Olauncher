@@ -1,0 +1,19 @@
+    Cabang dari <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a>
+    karena versi original yang berantakan
+
+    Juga menambahkan beberapa fitur:
+    * Kekacauan yang dihapus
+    * Ubah nama aplikasi di daftar aplikasi normal
+    * Ubah aplikasi jam
+    * Ubah aplikasi kalender
+    * Dukungan multibahasa:
+      * Bahasa Inggris
+      * Bahasa Italia
+      * Bahasa Jerman
+      * Bahasa Mandarin
+      * Bahasa Spanyol
+      * Bahasa Swedia
+      * Bahasa Turki
+      * Bahasa Perancis
+      * Bahasa Persia
+      * Bahasa Yunani
