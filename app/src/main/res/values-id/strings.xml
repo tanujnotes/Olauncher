@@ -53,9 +53,9 @@
     <string name="system_default">Sistem</string>
     <string name="dark">Gelap</string>
     <string name="light">Terang</string>
-    <string name="double_tap_lock_uninstall_message">'Ketuk dua kali untuk mengunci' telah diaktifkan.
+    <string name="double_tap_lock_uninstall_message">\'Ketuk dua kali untuk mengunci\' telah diaktifkan.
         \n\nCatatan: MATIKAN opsi ini apabila Anda akan menghapus Olauncher.</string>
-    <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan fitur 'Kunci layar menggunakan 2 kali ketukan'. Data apapun yang diperoleh layanan kami tidak akan meninggalkan perangkat Anda.</string>
+    <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan fitur \'Kunci layar menggunakan 2 kali ketukan\'. Data apapun yang diperoleh layanan kami tidak akan meninggalkan perangkat Anda.</string>
     <string name="lock_layout_description">Deskripsi tata letak kunci untuk digunakan id unik untuk mengunci layar</string>
     <string name="open">Buka tautan</string>
     <string name="copy">Salin</string>
