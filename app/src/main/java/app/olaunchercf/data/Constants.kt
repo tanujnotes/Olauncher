@@ -1,6 +1,16 @@
 package app.olaunchercf.data
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ComposeCompilerApi
+import androidx.compose.ui.res.stringResource
+import app.olaunchercf.R
+import app.olaunchercf.data.Constants.toString
 import java.util.*
+
+interface EnumOption {
+    @Composable
+    fun string(): String
+}
 
 object Constants {
 
@@ -24,7 +34,7 @@ object Constants {
     const val TEXT_SIZE_MIN = 16
     const val TEXT_SIZE_MAX = 30
 
-    enum class Language {
+    enum class Language: EnumOption {
         System,
         Chinese,
         English,
@@ -37,7 +47,26 @@ object Constants {
         Portuguese,
         Spanish,
         Swedish,
-        Turkish,
+        Turkish;
+
+        @Composable
+        override fun string(): String {
+            return when(this) {
+                System -> stringResource(R.string.lang_system)
+                Chinese -> "中国人"
+                English -> "English"
+                French -> "Français"
+                German -> "Deutsch"
+                Greek -> "Ελληνική"
+                Italian -> "Italiano"
+                Korean -> "조선말"
+                Persian -> "فارسی"
+                Portuguese -> "Português"
+                Spanish -> "Español"
+                Swedish -> "Svenska"
+                Turkish -> "Türkçe"
+            }
+        }
     }
 
     fun Language.value(): String {
@@ -58,15 +87,33 @@ object Constants {
         }
     }
 
-    enum class Gravity {
+    enum class Gravity: EnumOption {
         Left,
         Center,
-        Right
+        Right;
+
+        @Composable
+        override fun string(): String {
+            return when(this) {
+                Left -> stringResource(R.string.left)
+                Center -> stringResource(R.string.center)
+                Right -> stringResource(R.string.right)
+            }
+        }
     }
 
-    enum class Theme {
+    enum class Theme: EnumOption {
         System,
         Dark,
-        Light
+        Light;
+
+        @Composable
+        override fun string(): String {
+            return when(this) {
+                System -> stringResource(R.string.lang_system)
+                Dark -> stringResource(R.string.dark)
+                Light -> stringResource(R.string.light)
+            }
+        }
     }
 }

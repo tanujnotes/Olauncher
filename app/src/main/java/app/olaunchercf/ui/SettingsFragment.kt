@@ -92,7 +92,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         // observer
         Column {
             SettingsArea(
-                title = "Appearance",
+                title = stringResource(R.string.appearance),
                 arrayOf(
                     { open, onChange ->
                         SettingsNumberItem(
@@ -196,7 +196,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                     }
                 )
             )
-            SettingsArea(title = "Gestures",
+            SettingsArea(title = stringResource(R.string.gestures),
                 arrayOf(
                     { _, _ ->
                         SettingsAppSelector(
@@ -421,14 +421,7 @@ class SettingsFragment : Fragment(), View.OnClickListener {
     private fun setLang(lang_int: Constants.Language) {
 
         prefs.language = lang_int
-
-        // restart activity
-        activity?.let {
-            val intent = Intent(context, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            it.startActivity(intent)
-            it.finish()
-        }
+        requireActivity().recreate()
     }
     private fun setTextSize(size: Int) {
         prefs.textSize = size

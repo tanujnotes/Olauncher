@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        useLanguage()
+        setLanguage()
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Suppress("DEPRECATION")
-    private fun useLanguage() {
+    fun setLanguage() {
         val locale = Locale(prefs.language.value())
         Locale.setDefault(locale)
         val config = resources.configuration

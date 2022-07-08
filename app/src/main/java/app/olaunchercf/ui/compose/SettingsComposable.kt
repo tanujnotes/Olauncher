@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import app.olaunchercf.R
+import app.olaunchercf.data.EnumOption
 import app.olaunchercf.style.CORNER_RADIUS
 
 object SettingsComposable {
@@ -72,7 +73,7 @@ object SettingsComposable {
         onChange: (Boolean) -> Unit,
         onToggle: () -> Unit
     ) {
-        val buttonText = if (state.value) "On" else "Off"
+        val buttonText = if (state.value) stringResource(R.string.on) else stringResource(R.string.off)
         SettingsRow(
             title = title,
             onClick = {
@@ -85,7 +86,7 @@ object SettingsComposable {
     }
 
     @Composable
-    fun <T> SettingsItem(
+    fun <T: EnumOption> SettingsItem(
         title: String,
         currentSelection: MutableState<T>,
         values: Array<T>,
@@ -117,7 +118,7 @@ object SettingsComposable {
             SettingsRow(
                 title = title,
                 onClick = { onChange(true) },
-                buttonText = currentSelection.value.toString()
+                buttonText = currentSelection.value.string()
             )
         }
     }
@@ -187,9 +188,6 @@ object SettingsComposable {
                 Text(
                     title,
                     style = SettingsTheme.typography.item,
-                    /*overflow = TextOverflow.Ellipsis,
-                    maxLines = 3,
-                    textAlign = TextAlign.Left,*/
                 modifier = Modifier.align(Alignment.CenterStart)
                 )
             }
@@ -211,7 +209,7 @@ object SettingsComposable {
     }
 
     @Composable
-    private fun <T> SettingsSelector(options: Array<T>, onSelect: (T) -> Unit) {
+    private fun <T: EnumOption> SettingsSelector(options: Array<T>, onSelect: (T) -> Unit) {
         Box(
             modifier = Modifier
                 .background(SettingsTheme.color.selector, SettingsTheme.shapes.settings)
@@ -229,7 +227,7 @@ object SettingsComposable {
                             onClick = { onSelect(opt) },
                         ) {
                             Text(
-                                text = opt.toString(),
+                                text = opt.string(),
                                 style = SettingsTheme.typography.button
                             )
                         }
