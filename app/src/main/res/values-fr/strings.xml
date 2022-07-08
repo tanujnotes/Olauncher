@@ -37,7 +37,8 @@
     <string name="hide">Masquer</string>
     <string name="status_bar">Afficher la barre d\'état</string>
     <string name="rename">Renommer</string>
-    <string name="show_date_time">Afficher la date et l\'heure</string>
+    <string name="show_time">Afficher l\'heure</string>
+    <string name="show_date">Afficher la date</string>
     <string name="appearance">Apparence</string>
     <string name="gestures">Gestuels</string>
     <string name="theme_mode">Thème</string>
