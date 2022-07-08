@@ -1,0 +1,1 @@
+Version modifié d'Olauncher, -bogues, +fonctionnalités
