@@ -13,11 +13,12 @@
   - German
   - Greek
   - Italian
+  - Korean
   - Persian
   - Portuguese (European)
   - Spanish
   - Swedish
-  - Turkish 
+  - Turkish
 
 # Olauncher | Minimal CF
 Olauncher is a minimal CF launcher app for Android. CF stands for clutter free. :)

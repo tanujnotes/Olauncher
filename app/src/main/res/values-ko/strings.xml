@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">난잡하지 않은 Olauncher</string>
+    <string name="app">앱</string>
+    <string name="set_as_default_launcher">기본 런처로 설정</string>
+    <string name="app_text_color">텍스트 색상</string>
+    <string name="double_tap_to_lock_screen">두번 탭하여 화면 잠그기</string>
+    <string name="experimental_">(실험실)</string>
+    <string name="admin_permission_message">Olauncher는 책임감 있게 잠금 화면 권한을 사용할 것을 약속합니다.</string>
+    <string name="about">정보</string>
+    <string name="off">꺼짐</string>
+    <string name="on">켜짐</string>
+    <string name="black">검정</string>
+    <string name="white">하양</string>
+    <string name="change_default_launcher">기본 런처 변경</string>
+    <string name="long_press_for_settings">런처 설정은 아무 곳이나 길게 누르세요.</string>
+    <string name="swipe_up_for_apps">모든 앱을 보기 위해서는 위로 스와이프 하세요.</string>
+    <string name="apps_on_home_screen">홈 화면에 있는 앱</string>
+    <string name="left">왼쪽</string>
+    <string name="right">오른쪽</string>
+    <string name="center">가운데</string>
+    <string name="home_alignment">앱 정렬</string>
+    <string name="clock_alignment">시계 정렬</string>
+    <string name="drawer_alignment">앱 서랍 정렬</string>
+    <string name="swipe_left_app">왼쪽 스와이프 앱</string>
+    <string name="swipe_right_app">오른쪽 스와이프 시 실행 앱</string>
+    <string name="clock_click_app">시계 클릭 시 실행 앱</string>
+    <string name="date_click_app">날짜 클릭 시 실행 앱</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="commit">커밋</string>
+    <string name="app_drawer_tips">팁: 아래로 스와이프 하면 무시할 수 있고, 키보드를 숨기려면 스크롤 하세요.</string>
+    <string name="okay">네</string>
+    <string name="double_tap_lock_is_enabled_message">만약 두 번 탭 하여 잠금을 활성화 후. 지문 인식이나 얼굴 인식이 작동하지 않는다면, \'실험실\'을 클릭하여 지침을 따라 주세요.</string>
+    <string name="triple_tap_lock_message">어떻게 작동하나요?:
+        \n당신이 두 번 탭 하면 화면이 어두워지고 기기가 스스로 5초 후에 잠깁니다.
+        \n\n이 시간 동안 당신은 두 번 탭 하여 기기를 <b>잠금 해제</b> 할 수 있거나, 세 번 탭할 경우 기기를 바로 잠금 해제 할 수 있습니다.
+        \n\n노트: 만약 Olauncher를 제거하시기로 결정하셨다면, 이 기능을 먼저 비활성화 후 제거해 주세요.</string>
+    <string name="auto_show_keyboard">자동으로 키보드 보여주기</string>
+    <string name="hide">숨기기</string>
+    <string name="status_bar">상태 표시줄 보여주기</string>
+    <string name="rename">이름 변경</string>
+    <string name="show_date_time">날짜와 시간 보여주기</string>
+    <string name="appearance">외관</string>
+    <string name="gestures">제스처</string>
+    <string name="theme_mode">테마 모드</string>
+    <string name="system_default">시스템 기본값</string>
+    <string name="dark">어두운 모드</string>
+    <string name="light">밝은 모드</string>
+    <string name="double_tap_lock_uninstall_message">두 번 탭 하여 잠금이 활성화되어 있습니다.
+        \n\n노트: 만약 Olauncher를 제거하시기로 결정하셨다면, 이 기능을 먼저 비활성화 후 제거해 주세요.</string>
+    <string name="accessibility_service_description">두 번 탭하여 잠금 기능은 접근성 권한을 필요로 합니다. 획득한 어떠한 데이터도 당신의 단말기에서 외부로 나가지 않습니다.</string>
+    <string name="lock_layout_description">잠금 레이아웃 설명은 잠금화면의 고유 아이디로 사용됩니다.</string>
+    <string name="open">링크 열기</string>
+    <string name="copy">복사</string>
+    <string name="close">닫기</string>
+    <string name="app_language">인터페이스 언어</string>
+    <string name="lang_system">시스템</string>
+
+    <string name="app_text_size">텍스트 크기</string>
+    <string name="text_size_huge">크게</string>
+    <string name="text_size_normal">기본</string>
+    <string name="text_size_small">작게</string>
+
+    <string name="hidden_apps">숨겨진 앱</string>
+
+</resources>
