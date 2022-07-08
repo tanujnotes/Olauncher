@@ -19,10 +19,13 @@
     <string name="right">Derecha</string>
     <string name="center">Centro</string>
     <string name="home_alignment">Alineación</string>
+    <string name="clock_alignment">Alineación del reloj</string>
+    <string name="drawer_alignment">Alineación de aplicaciones</string>
     <string name="swipe_left_app">Deslizar a izquierda</string>
     <string name="swipe_right_app">Deslizar a derecha</string>
     <string name="clock_click_app">Pulsar reloj</string>
     <string name="date_click_app">Pulsar fecha</string>
+    <string name="commit">Guardar</string>
     <string name="app_drawer_tips">Sugerencia: deslice hacia abajo para descartar. Desplace para ocultar el teclado.</string>
     <string name="okay">OK</string>
     <string name="double_tap_lock_is_enabled_message">Si el bloqueo con doble toque desactiva la huella digital o el desbloqueo facial, abra la configuración de Olauncher, toque \'experimental\' y sigua las instrucciones. Gracias.</string>
@@ -49,6 +52,7 @@
     <string name="copy">Copiar</string>
     <string name="close">Cerrar</string>
     <string name="app_language">Idioma</string>
+    <string name="lang_system">Sistema</string>
     
     <string name="app_text_size">Texto en pantalla</string>
     <string name="text_size_huge">Grande</string>
