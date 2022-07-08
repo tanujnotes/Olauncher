@@ -32,6 +32,7 @@ object Constants {
         German,
         Greek,
         Italian,
+        Korean,
         Persian,
         Portuguese,
         Spanish,
@@ -53,6 +54,7 @@ object Constants {
             Language.Chinese -> "cn"
             Language.Persian -> "fa"
             Language.Portuguese -> "pt"
+            Language.Korean -> "ko"
         }
     }
 
