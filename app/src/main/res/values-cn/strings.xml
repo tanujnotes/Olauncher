@@ -7,28 +7,41 @@
     <string name="experimental_">(实验性)</string>
     <string name="admin_permission_message">Olauncher 承诺负责任地使用锁屏权限。</string>
     <string name="about">关于</string>
-    <string name="off">关闭</string>
-    <string name="on">打开</string>
-    <string name="black">黑色</string>
-    <string name="white">白色</string>
+    <string name="off">关</string>
+    <string name="on">开</string>
+    <string name="black">黑</string>
+    <string name="white">白</string>
     <string name="change_default_launcher">更改默认启动器</string>
-    <string name="long_press_for_settings">在任何地方长按进入设置</string>
-    <string name="swipe_up_for_apps">向上滑动查找所有应用程序</string>
-    <string name="apps_on_home_screen">主屏幕上的应用</string>
-    <string name="left">偏左</string>
-    <string name="right">偏右</string>
-    <string name="center">居中</string>
+    <string name="long_press_for_settings">在屏幕上任意一处长按进入设置</string>
+    <string name="swipe_up_for_apps">上滑查看所有应用</string>
+    <string name="apps_on_home_screen">主屏应用</string>
+    <string name="left">左</string>
+    <string name="right">右</string>
+    <string name="center">中</string>
     <string name="home_alignment">应用对齐</string>
+    <string name="clock_alignment">时钟对齐</string>
+    <string name="drawer_alignment">抽屉对齐</string>
     <string name="swipe_left_app">左滑应用</string>
     <string name="swipe_right_app">右滑应用</string>
     <string name="clock_click_app">单击时钟启动的应用</string>
     <string name="date_click_app">单击日期启动的应用</string>
-    <string name="app_drawer_tips">提示：向下滑动以关闭。滚动隐藏键盘。</string>
-    <string name="double_tap_lock_is_enabled_message">如果“双按锁定”禁用指纹或面部解锁, 打开 Olauncher 设置, 轻按 \'实验性\' 并按照指示去做。谢谢你！</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="commit">Commit</string>
+    <string name="app_drawer_tips">提示：下滑不予理会。滚动隐藏键盘。</string>
+    <string name="okay">好的</string>
+    <string name="double_tap_lock_is_enabled_message">如“轻按两次锁定”禁用指纹或面部解锁，打开 Olauncher 设置，轻按 \'实验性\' 并遵照指示去做。谢谢你。</string>
     <string name="triple_tap_lock_message">工作方式：
-        \n一旦你双击，屏幕就会变暗，手机会在5秒内自动锁定。
-        \n\n在此期间，你可以双击<b>解锁</b>。你也可以随时轻按三次，立即锁定手机。
-		\n\n注：如你决定删除 Olauncher，请先关闭此选项。谢谢你。</string>
+        \n轻按两次后，屏幕会变暗，手机会在5秒内自动锁定。
+        \n\n在此期间，你可以轻按两次 <b>解除锁定</b> 或在任何时候轻按三次立即完全锁定手机。
+        \n\n注意： 若你决定删除Olauncher, 请先禁用此选项 。谢谢你。</string>
     <string name="auto_show_keyboard">自动显示键盘</string>
     <string name="hide">隐藏</string>
     <string name="status_bar">显示状态栏</string>
@@ -37,14 +50,24 @@
     <string name="appearance">外观</string>
     <string name="gestures">手势</string>
     <string name="theme_mode">主题模式</string>
-	<string name="system_default">系统默认</string>
+    <string name="system_default">系统</string>
     <string name="dark">深色</string>
     <string name="light">浅色</string>
-	<string name="double_tap_lock_uninstall_message">轻敲两次启用锁定
-        \n\n注：如果您决定删除 Olauncher，请先关闭此功能。</string>
-    <string name="accessibility_service_description">需要无障碍权限启用双击锁定。该服务获取的任何数据都不会离开您的设备。</string>
+    <string name="double_tap_lock_uninstall_message">已启用“轻按两次解锁”
+        \n\n注意：若你决定删除Olauncher, 请先关闭此选项。</string>
+    <string name="accessibility_service_description">需要授予无障碍权限方可启用“轻按两次解锁”。 该服务获取的任何数据都不会离开你的设备。</string>
     <string name="lock_layout_description">锁定将被用作锁屏唯一 id 的布局描述</string>
     <string name="open">打开链接</string>
     <string name="copy">复制</string>
     <string name="close">关闭</string>
+    <string name="app_language">应用界面语言</string>
+    <string name="lang_system">系统</string>
+
+    <string name="app_text_size">文本尺寸</string>
+    <string name="text_size_huge">巨大</string>
+    <string name="text_size_normal">正常</string>
+    <string name="text_size_small">小</string>
+
+    <string name="hidden_apps">隐藏的应用</string>
+
 </resources>
