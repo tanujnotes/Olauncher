@@ -121,10 +121,17 @@ class SettingsFragment : Fragment(), View.OnClickListener {
                     },
                     { _, onChange ->
                         SettingsToggle(
-                            title = stringResource(R.string.show_date_time),
+                            title = stringResource(R.string.show_time),
                             onChange = onChange,
-                            state = remember { mutableStateOf(prefs.showDateTime) }
-                        ) { toggleDateTime() }
+                            state = remember { mutableStateOf(prefs.showTime) }
+                        ) { toggleShowTime() }
+                    },
+                    { _, onChange ->
+                        SettingsToggle(
+                            title = stringResource(R.string.show_date),
+                            onChange = onChange,
+                            state = remember { mutableStateOf(prefs.showDate) }
+                        ) { toggleShowDate() }
                     },
                     { open, onChange ->
                         SettingsItem(
@@ -315,9 +322,14 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun toggleDateTime() {
-        prefs.showDateTime = !prefs.showDateTime
-        viewModel.toggleDateTime(prefs.showDateTime)
+    private fun toggleShowDate() {
+        prefs.showDate = !prefs.showDate
+        viewModel.setShowDate(prefs.showDate)
+    }
+
+    private fun toggleShowTime() {
+        prefs.showTime = !prefs.showTime
+        viewModel.setShowTime(prefs.showTime)
     }
 
     private fun showStatusBar() {

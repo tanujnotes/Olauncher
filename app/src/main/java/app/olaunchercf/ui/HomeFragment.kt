@@ -121,10 +121,24 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             timeAlignment.observe(viewLifecycleOwner) {
                 setTimeAlignment(it)
             }
-            toggleDateTime.observe(viewLifecycleOwner) {
+            timeVisible.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.clock.visibility = View.VISIBLE
+                } else {
+                    binding.clock.visibility = View.GONE
+                }
+            }
+            dateVisible.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.date.visibility = View.VISIBLE
+                } else {
+                    binding.date.visibility = View.GONE
+                }
+            }
+            /*toggleDateTime.observe(viewLifecycleOwner) {
                 if (it) binding.dateTimeLayout.visibility = View.VISIBLE
                 else binding.dateTimeLayout.visibility = View.GONE
-            }
+            }*/
         }
     }
 
@@ -180,8 +194,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun populateHomeApps(appCountUpdated: Boolean) {
         if (appCountUpdated) initHomeApps()
 
-        if (prefs.showDateTime) binding.dateTimeLayout.visibility = View.VISIBLE
-        else binding.dateTimeLayout.visibility = View.GONE
+        if (prefs.showTime) binding.clock.visibility = View.VISIBLE
+        else binding.clock.visibility = View.GONE
+        if (prefs.showDate) binding.date.visibility = View.VISIBLE
+        else binding.date.visibility = View.GONE
 
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return // TODO: place clock in center when no apps are shown
