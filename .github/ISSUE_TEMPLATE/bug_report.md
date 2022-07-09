@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help Olauncher CF improve
 title: ''
 labels: bug
-
+assignees: ''
 ---
 
 <!--
