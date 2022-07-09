@@ -41,12 +41,13 @@
     <string name="triple_tap_lock_message">工作方式：
         \n轻按两次后，屏幕会变暗，手机会在5秒内自动锁定。
         \n\n在此期间，你可以轻按两次 <b>解除锁定</b> 或在任何时候轻按三次立即完全锁定手机。
-        \n\n注意： 若你决定删除Olauncher, 请先禁用此选项 。谢谢你。</string>
+        \n\n注意：若你决定删除Olauncher, 请先禁用此选项 。谢谢你。</string>
     <string name="auto_show_keyboard">自动显示键盘</string>
     <string name="hide">隐藏</string>
     <string name="status_bar">显示状态栏</string>
     <string name="rename">重命名</string>
-    <string name="show_date_time">显示日期时间</string>
+    <string name="show_time">显示时间</string>
+    <string name="show_date">显示日期</string>
     <string name="appearance">外观</string>
     <string name="gestures">手势</string>
     <string name="theme_mode">主题模式</string>
