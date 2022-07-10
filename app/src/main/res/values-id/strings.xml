@@ -34,7 +34,7 @@
     <string name="_6" translatable="false">6</string>
     <string name="_7" translatable="false">7</string>
     <string name="_8" translatable="false">8</string>
-    <string name="commit">Commit</string>
+    <string name="commit">Lakukan</string>
     <string name="app_drawer_tips">Tip: Geser ke bawah untuk menutup. Scroll untuk menyembunyikan papan ketik.</string>
     <string name="okay">OK</string>
     <string name="double_tap_lock_is_enabled_message">Jika mengunci layar dengan mengetuk dua kali akan menonaktifkan fingerprint atau face unlock, buka pengaturan Olauncher, tekan \'eksperimental\' dan ikuti instruksinya. Terima kasih.</string>
