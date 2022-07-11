@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Olauncher</string>
+    <string name="app">Aplikasi</string>
+    <string name="set_as_default_launcher">Atur sebagai launcher default</string>
+    <string name="app_text_color">Warna teks</string>
+    <string name="double_tap_to_lock_screen">Ketuk dua kali untuk mengunci layar</string>
+    <string name="experimental_">(eksperimental)</string>
+    <string name="admin_permission_message">Olauncher akan menggunakan izin layar dengan penuh tanggung jawab</string>
+    <string name="about">Tentang</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
+    <string name="black">Hitam</string>
+    <string name="white">Putih</string>
+    <string name="change_default_launcher">Ubah launcher default</string>
+    <string name="long_press_for_settings">Tahan dimana saja untuk membuka pengaturan</string>
+    <string name="swipe_up_for_apps">Geser ke atas untuk buka semua aplikasi</string>
+    <string name="apps_on_home_screen">Aplikasi dalam tampilan depan</string>
+    <string name="left">Kiri</string>
+    <string name="right">Kanan</string>
+    <string name="center">Tengah</string>
+    <string name="home_alignment">Posisi aplikasi</string>
+    <string name="clock_alignment">Posisi jam</string>
+    <string name="drawer_alignment">Posisi drawer aplikasi</string>
+    <string name="swipe_left_app">Geser ke kiri</string>
+    <string name="swipe_right_app">Geser ke kanan</string>
+    <string name="clock_click_app">Aplikasi ketika menekan jam </string>
+    <string name="date_click_app">Aplikasi ketika menekan tanggal</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="commit">Lakukan</string>
+    <string name="app_drawer_tips">Tip: Geser ke bawah untuk menutup. Scroll untuk menyembunyikan papan ketik.</string>
+    <string name="okay">OK</string>
+    <string name="double_tap_lock_is_enabled_message">Jika mengunci layar dengan mengetuk dua kali akan menonaktifkan fingerprint atau face unlock, buka pengaturan Olauncher, tekan \'eksperimental\' dan ikuti instruksinya. Terima kasih.</string>
+    <string name="triple_tap_lock_message">Cara kerja:
+        \nSaat Anda mengetuk dua kali, layar akan menjadi gelap dan perangkat Anda akan terkunci dalam 5 detik.
+        \n\nDi saat itu, Anda dapat mengetuk dua kali untuk <b>membuka</b> atau ketuk tiga kali untuk mengunci perangkat dengan langsung.
+        \n\nCatatan: MATIKAN opsi ini apabila Anda akan menghapus Olauncher. Terima kasih.</string>
+    <string name="auto_show_keyboard">Otomatis tampilkan papan ketik</string>
+    <string name="hide">Sembunyikan</string>
+    <string name="status_bar">Tampilkan status bar</string>
+    <string name="rename">Ganti nama</string>
+    <string name="show_date_time">Tampilkan tanggal dan waktu</string>
+    <string name="appearance">Tampilan</string>
+    <string name="gestures">Gestur</string>
+    <string name="theme_mode">Mode tema</string>
+    <string name="system_default">Sistem</string>
+    <string name="dark">Gelap</string>
+    <string name="light">Terang</string>
+    <string name="double_tap_lock_uninstall_message">\'Ketuk dua kali untuk mengunci\' telah diaktifkan.
+        \n\nCatatan: MATIKAN opsi ini apabila Anda akan menghapus Olauncher.</string>
+    <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan fitur \'Kunci layar menggunakan 2 kali ketukan\'. Data apapun yang diperoleh layanan kami tidak akan meninggalkan perangkat Anda.</string>
+    <string name="lock_layout_description">Deskripsi tata letak kunci untuk digunakan id unik untuk mengunci layar</string>
+    <string name="open">Buka tautan</string>
+    <string name="copy">Salin</string>
+    <string name="close">Tutup</string>
+    <string name="app_language">Bahasa antarmuka</string>
+    <string name="lang_system">Sistem</string>
+
+    <string name="app_text_size">Ukuran teks</string>
+    <string name="text_size_huge">Besar</string>
+    <string name="text_size_normal">Sedang</string>
+    <string name="text_size_small">Kecil</string>
+
+    <string name="hidden_apps">Aplikasi tersembunyi</string>
+
+</resources>
