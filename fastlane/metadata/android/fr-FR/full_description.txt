@@ -13,6 +13,7 @@
        * Espagnol
        * Français
        * Grec
+       * Indonésien
        * Italien
        * Persan
        * Portugais (européen)
