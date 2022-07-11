@@ -41,6 +41,7 @@ object Constants {
         French,
         German,
         Greek,
+        Indonesian,
         Italian,
         Korean,
         Persian,
@@ -58,6 +59,7 @@ object Constants {
                 French -> "Français"
                 German -> "Deutsch"
                 Greek -> "Ελληνική"
+                Indonesian -> "Bahasa Indonesia"
                 Italian -> "Italiano"
                 Korean -> "조선말"
                 Persian -> "فارسی"
@@ -84,6 +86,7 @@ object Constants {
             Language.Persian -> "fa"
             Language.Portuguese -> "pt"
             Language.Korean -> "ko"
+            Language.Indonesian -> "id"
         }
     }
 
