@@ -13,6 +13,7 @@ Forked from <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a> 
   - French
   - German
   - Greek
+  - Indonesian
   - Italian
   - Korean
   - Persian
