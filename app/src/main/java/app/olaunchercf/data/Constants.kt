@@ -41,7 +41,7 @@ object Constants {
         French,
         German,
         Greek,
-        Indonesian
+        Indonesian,
         Italian,
         Korean,
         Persian,
