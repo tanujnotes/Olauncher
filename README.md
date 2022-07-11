@@ -19,6 +19,7 @@
   - French
   - German
   - Greek
+  - Indonesian
   - Italian
   - Korean
   - Persian
