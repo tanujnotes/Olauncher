@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import app.olaunchercf.R
 import app.olaunchercf.data.AppModel
 import app.olaunchercf.data.Constants
 import app.olaunchercf.data.Prefs
 import app.olaunchercf.databinding.AdapterAppDrawerBinding
+import kotlinx.coroutines.NonCancellable.cancel
 import java.text.Normalizer
 
 class AppDrawerAdapter(
@@ -136,7 +138,12 @@ class AppDrawerAdapter(
         ) =
             with(itemView) {
                 appHideLayout.visibility = View.GONE
-                appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
+                appHideButton.text = if (flag == Constants.FLAG_HIDDEN_APPS) {
+                    context.getString(R.string.show)
+                } else {
+                    context.getString(R.string.hide)
+                }
+
 
                 appRenameEdit.addTextChangedListener(object : TextWatcher {
 
@@ -149,11 +156,11 @@ class AppDrawerAdapter(
                     override fun onTextChanged(s: CharSequence, start: Int,
                                                before: Int, count: Int) {
                         if (appRenameEdit.text.isEmpty()) {
-                            appRenameButton.text = "Reset"
+                            appRenameButton.text = context.getString(R.string.reset)
                         } else if (appRenameEdit.text.toString() == appModel.appAlias || appRenameEdit.text.toString() == appModel.appLabel) {
-                            appRenameButton.text = "Cancel"
+                            appRenameButton.text = context.getString(R.string.cancel)
                         } else {
-                            appRenameButton.text = "Rename"
+                            appRenameButton.text = context.getString(R.string.rename)
                         }
                     }
                 })

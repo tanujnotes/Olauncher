@@ -71,4 +71,9 @@
 
     <string name="hidden_apps">Hidden apps</string>
 
+    <string name="show">Show</string>
+    <string name="reset">Reset</string>
+    <string name="cancel">Cancel</string>
+
+
 </resources>
