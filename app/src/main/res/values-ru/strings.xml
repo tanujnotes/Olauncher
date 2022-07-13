@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Olauncher Clutter Free</string>
+    <string name="app">Приложение</string>
+    <string name="set_as_default_launcher">Назначить главным лаунчером</string>
+    <string name="app_text_color">Цвет текста</string>
+    <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>
+    <string name="experimental_">(экспериментальный)</string>
+    <string name="admin_permission_message">Olauncher обещает ответственно использовать разрешение экрана блокировки.</string>
+    <string name="about">О приложении</string>
+    <string name="off">Выкл</string>
+    <string name="on">Вкл</string>
+    <string name="black">Черный</string>
+    <string name="white">Белый</string>
+    <string name="change_default_launcher">Выбрать лаунчер</string>
+    <string name="long_press_for_settings">Длительное нажатие для настройки</string>
+    <string name="swipe_up_for_apps">Свайп вверх для всех приложений</string>
+    <string name="apps_on_home_screen">Приложения на главном экране</string>
+    <string name="left">Слева</string>
+    <string name="right">Справа</string>
+    <string name="center">По центру</string>
+    <string name="home_alignment">Выравнивание приложений</string>
+    <string name="clock_alignment">Выравнивание часов</string>
+    <string name="drawer_alignment">Выравнивание ящика приложений</string>
+    <string name="swipe_left_app">Свайпом влево открыть</string>
+    <string name="swipe_right_app">Свайпом вправо открыть</string>
+    <string name="clock_click_app">Тапом часов открыть</string>
+    <string name="date_click_app">Тапом даты открыть</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="commit">Применить</string>
+    <string name="app_drawer_tips">Совет: Свайпните вниз, чтобы закрыть. Прокрутите, чтобы скрыть клавиатуру.</string>
+    <string name="okay">Хорошо</string>
+    <string name="double_tap_lock_is_enabled_message">Если блокировка двойным тапом отключает разблокировку по отпечатку пальца или лицу, откройте настройки Olauncher, нажмите «Экспериментальный» и следуйте инструкциям. Спасибо.</string>
+    <string name="triple_tap_lock_message">Как это работает:
+        \nПосле двойного тапа экран погаснет, а телефон заблокируется через 5 секунд.
+        \n\nВ это время вы можете дважды тапнуть, чтобы <b>разблокировать</b>, или трижды тапнуть, чтобы немедленно полностью заблокировать телефон.
+        \n\nПримечание. Сначала выключите этот параметр, если вы решите удалить Olauncher. Спасибо.</string>
+    <string name="auto_show_keyboard">Автопоказ клавиатуры</string>
+    <string name="hide">Скрыть</string>
+    <string name="status_bar">Показывать строку состояния</string>
+    <string name="rename">Переименовать</string>
+    <string name="show_time">Показывать время</string>
+    <string name="show_date">Показывать дату</string>
+    <string name="appearance">Внешний вид</string>
+    <string name="gestures">Действия</string>
+    <string name="theme_mode">Тема</string>
+    <string name="system_default">Системная</string>
+    <string name="dark">Темная</string>
+    <string name="light">Светлая</string>
+    <string name="double_tap_lock_uninstall_message">Блокировка двойным тапом включена.
+        \n\nПримечание: Выключите это, если решите удалить Olauncher.</string>
+    <string name="accessibility_service_description">Разрешение на специальные возможности требуется, чтобы включить двойное касание для блокировки. Любые данные, полученные службой, не покинут ваше устройство.</string>
+    <string name="lock_layout_description">описание макета блокировки для использования уникального идентификатора для блокировки экрана</string>
+    <string name="open">Открыть ссылку</string>
+    <string name="copy">Копировать</string>
+    <string name="close">Закрыть</string>
+    <string name="app_language">Язык интерфейса</string>
+    <string name="lang_system">Системный</string>
+
+    <string name="app_text_size">Размер текста</string>
+    <string name="text_size_huge">Huge</string>
+    <string name="text_size_normal">Normal</string>
+    <string name="text_size_small">Small</string>
+
+    <string name="hidden_apps">Скрытые приложения</string>
+
+    <string name="show">Показывать</string>
+    <string name="reset">Сбросить</string>
+    <string name="cancel">Отмена</string>
+
+
+</resources>

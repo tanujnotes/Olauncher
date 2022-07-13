@@ -18,6 +18,7 @@ Forked from <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a> 
   - Korean
   - Persian
   - Portuguese (European)
+  - Russian
   - Spanish
   - Swedish
   - Turkish
