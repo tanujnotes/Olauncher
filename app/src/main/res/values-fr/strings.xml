@@ -61,5 +61,10 @@
     <string name="text_size_small">Petite</string>
     
     <string name="hidden_apps">Applications masquées</string>
-    
+
+    <string name="show">Afficher</string>
+    <string name="reset">Réinitialiser</string>
+    <string name="cancel">Annuler</string>
+
+
 </resources>
