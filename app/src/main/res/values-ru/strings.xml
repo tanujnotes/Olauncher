@@ -6,11 +6,11 @@
     <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>
     <string name="experimental_">(экспериментальный)</string>
     <string name="admin_permission_message">Olauncher обещает ответственно использовать разрешение экрана блокировки.</string>
-    <string name="about">About</string>
+    <string name="about">О приложении</string>
     <string name="off">Выкл</string>
     <string name="on">Вкл</string>
-    <string name="black">Black</string>
-    <string name="white">White</string>
+    <string name="black">Черный</string>
+    <string name="white">Белый</string>
     <string name="change_default_launcher">Выбрать лаунчер</string>
     <string name="long_press_for_settings">Длительное нажатие для настройки</string>
     <string name="swipe_up_for_apps">Свайп вверх для всех приложений</string>
@@ -35,12 +35,12 @@
     <string name="_7" translatable="false">7</string>
     <string name="_8" translatable="false">8</string>
     <string name="commit">Применить</string>
-    <string name="app_drawer_tips">Совет: Проведите вниз, чтобы закрыть. Прокрутите, чтобы скрыть клавиатуру.</string>
+    <string name="app_drawer_tips">Совет: Свайпните вниз, чтобы закрыть. Прокрутите, чтобы скрыть клавиатуру.</string>
     <string name="okay">Хорошо</string>
-    <string name="double_tap_lock_is_enabled_message">Если блокировка двойным нажатием отключает разблокировку по отпечатку пальца или лицу, откройте настройки Olauncher, нажмите «Экспериментальный» и следуйте инструкциям. Спасибо.</string>
+    <string name="double_tap_lock_is_enabled_message">Если блокировка двойным тапом отключает разблокировку по отпечатку пальца или лицу, откройте настройки Olauncher, нажмите «Экспериментальный» и следуйте инструкциям. Спасибо.</string>
     <string name="triple_tap_lock_message">Как это работает:
-        \nПосле двойного нажатия экран погаснет, а телефон заблокируется через 5 секунд.
-        \n\nВ это время вы можете дважды нажать, чтобы <b>разблокировать</b>, или тройным нажатием, чтобы немедленно полностью заблокировать телефон.
+        \nПосле двойного тапа экран погаснет, а телефон заблокируется через 5 секунд.
+        \n\nВ это время вы можете дважды тапнуть, чтобы <b>разблокировать</b>, или трижды тапнуть, чтобы немедленно полностью заблокировать телефон.
         \n\nПримечание. Сначала выключите этот параметр, если вы решите удалить Olauncher. Спасибо.</string>
     <string name="auto_show_keyboard">Автопоказ клавиатуры</string>
     <string name="hide">Скрыть</string>
@@ -54,7 +54,7 @@
     <string name="system_default">Системная</string>
     <string name="dark">Темная</string>
     <string name="light">Светлая</string>
-    <string name="double_tap_lock_uninstall_message">Блокировка двойным нажатием включена.
+    <string name="double_tap_lock_uninstall_message">Блокировка двойным тапом включена.
         \n\nПримечание: Выключите это, если решите удалить Olauncher.</string>
     <string name="accessibility_service_description">Разрешение на специальные возможности требуется, чтобы включить двойное касание для блокировки. Любые данные, полученные службой, не покинут ваше устройство.</string>
     <string name="lock_layout_description">описание макета блокировки для использования уникального идентификатора для блокировки экрана</string>
