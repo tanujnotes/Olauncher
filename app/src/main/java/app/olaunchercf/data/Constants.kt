@@ -65,7 +65,7 @@ object Constants {
                 Korean -> "조선말"
                 Persian -> "فارسی"
                 Portuguese -> "Português"
-                Russian -> "русский"
+                Russian -> "Русский"
                 Spanish -> "Español"
                 Swedish -> "Svenska"
                 Turkish -> "Türkçe"
