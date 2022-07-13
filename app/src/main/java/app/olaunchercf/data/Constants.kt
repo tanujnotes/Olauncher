@@ -46,6 +46,7 @@ object Constants {
         Korean,
         Persian,
         Portuguese,
+        Russian,
         Spanish,
         Swedish,
         Turkish;
@@ -64,6 +65,7 @@ object Constants {
                 Korean -> "조선말"
                 Persian -> "فارسی"
                 Portuguese -> "Português"
+                Russian -> "русский"
                 Spanish -> "Español"
                 Swedish -> "Svenska"
                 Turkish -> "Türkçe"
@@ -87,6 +89,7 @@ object Constants {
             Language.Portuguese -> "pt"
             Language.Korean -> "ko"
             Language.Indonesian -> "id"
+            Language.Russian -> "ru"
         }
     }
 
