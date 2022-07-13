@@ -26,6 +26,7 @@ We try to balance customizability and clutter :)</h3>
   - Korean
   - Persian
   - Portuguese (European)
+  - Russian
   - Spanish
   - Swedish
   - Turkish
