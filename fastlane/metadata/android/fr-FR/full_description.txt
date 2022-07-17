@@ -1,21 +1,25 @@
-     Version modifié de <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a>
-     car que la version originale est buggée
-
-     Avec l'ajout de fonctionnalités
-     * Suppression des bogues
-     * Renommer les applications depuis le tiroir d'applications
-     * Changer l'application horloge
-     * Changer l'application Calendrier
-     * Prise en charge multilingue:
-       * Allemand
-       * Anglais
-       * Chinois
-       * Espagnol
-       * Français
-       * Grec
-       * Indonésien
-       * Italien
-       * Persan
-       * Portugais (européen)
-       * Suédois
-       * Turc
+Version modifié de <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a> parce que la version originale est encombrée, et buggé
+    
+- Suppression de l'encombrement, comme les publicités et les liens
+- Vous pouvez renommer les applications dans le tiroir d'application _(Renommer les applications sur l'écran d'accueil est déjà pris en charge. Il suffit de faire un clic long sur une application sur l'écran d'accueil et de commencer à taper)
+- Possibilité de changer l'application appeler en cliquant sur l'horloge
+- Possibilité de changer l'application appeler en cliquant sur la date
+- Alignement de l'horloge indépendant de celui des applications d'accueil
+- Possibilité de changer l'alignement des applications dans le tiroir d'applications
+- Changer la taille de la police
+- De nombreuses personnes ont traduit l'application dans les langues suivantes. Merci beaucoup à eux ❤️
+  - Allemand
+  - Anglais
+  - Chinois
+  - Coréen
+  - Espagnol
+  - Français
+  - Grec
+  - Indonésien
+  - Italien
+  - Persan
+  - Portugais (européen)
+  - Russe
+  - Suédois
+  - Turc
+- Ne requiert plus l'autorisation d'accès au réseau
