@@ -10,7 +10,7 @@ Version modifié de <a href="https://f-droid.org/packages/app.olauncher/">Olaunc
 - De nombreuses personnes ont traduit l'application dans les langues suivantes. Merci beaucoup à eux ❤️
   - Allemand
   - Anglais
-  - chinois
+  - Chinois
   - Coréen
   - Espagnol
   - Français
@@ -22,4 +22,4 @@ Version modifié de <a href="https://f-droid.org/packages/app.olauncher/">Olaunc
   - Russe
   - Suédois
   - Turc
-- Ne requiert plud l'autorisation d'accès au réseau
+- Ne requiert plus l'autorisation d'accès au réseau
