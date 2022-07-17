@@ -1,0 +1,6 @@
+- Toggle Date and Time independently on homescreen
+- Update Chinese
+- Update French
+- Update Spanish
+- Add Indonesian
+- Fix package renaming in app drawer
