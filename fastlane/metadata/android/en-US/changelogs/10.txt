@@ -3,4 +3,6 @@
 - Update French
 - Update Spanish
 - Add Indonesian
+- Add Korean
+- Add Russian
 - Fix package renaming in app drawer
