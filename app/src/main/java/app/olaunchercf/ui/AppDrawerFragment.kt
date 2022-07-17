@@ -184,10 +184,10 @@ class AppDrawerFragment : Fragment() {
 
             if (newSet.isEmpty()) findNavController().popBackStack()
         }
-    private fun appRenameListener(): (appName: String, appAlias: String) -> Unit =
-        { appName, appAlias ->
+    private fun appRenameListener(): (appPackage: String, appAlias: String) -> Unit =
+        { appPackage, appAlias ->
             val prefs = Prefs(requireContext())
-            prefs.setAppAlias(appName, appAlias)
+            prefs.setAppAlias(appPackage, appAlias)
         }
 
     private fun renameListener(flag: Int, i: Int) {

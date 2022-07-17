@@ -55,32 +55,42 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
             val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
             val collator = Collator.getInstance()
 
+            val prefs = Prefs(context)
+
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
-                    if (showHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
-                        appList.add(
-                            AppModel(
-                                app.label.toString(),
-                                collator.getCollationKey(app.label.toString()),
-                                app.applicationInfo.packageName,
-                                app.componentName.className,
-                                profile,
-                                Prefs(context).getAppAlias(app.label.toString())
-                            )
+
+
+                    // we have changed the alias identifier from app.label to app.applicationInfo.packageName
+                    // therefore, we check if the old one is set if the new one is empty
+                    val appAlias = prefs.getAppAlias(app.applicationInfo.packageName).ifEmpty {
+                        prefs.getAppAlias(app.label.toString())
+                    }
+
+                    if (showHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID) {
+                        val appModel = AppModel(
+                            app.label.toString(),
+                            collator.getCollationKey(app.label.toString()),
+                            app.applicationInfo.packageName,
+                            app.componentName.className,
+                            profile,
+                            appAlias,
                         )
-                    else if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
+                        appList.add(appModel)
+                    } else if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
                         && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID
-                    )
-                        appList.add(
-                            AppModel(
-                                app.label.toString(),
-                                collator.getCollationKey(app.label.toString()),
-                                app.applicationInfo.packageName,
-                                app.componentName.className,
-                                profile,
-                                Prefs(context).getAppAlias(app.label.toString())
-                            )
+                    ) {
+                        val appModel = AppModel(
+                            app.label.toString(),
+                            collator.getCollationKey(app.label.toString()),
+                            app.applicationInfo.packageName,
+                            app.componentName.className,
+                            profile,
+                            appAlias,
                         )
+                        appList.add(appModel)
+                    }
+
                 }
             }
 

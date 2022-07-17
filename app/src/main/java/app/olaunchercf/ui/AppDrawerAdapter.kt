@@ -2,6 +2,7 @@ package app.olaunchercf.ui
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +58,8 @@ class AppDrawerAdapter(
             val name = holder.appRenameEdit.text.toString().trim()
             appModel.appAlias = name
             notifyItemChanged(holder.adapterPosition)
-            appRenameListener(appModel.appLabel, appModel.appAlias)
+            Log.d("rename", "$appModel")
+            appRenameListener(appModel.appPackage, appModel.appAlias)
         }
 
         try { // Automatically open the app when there's only one search result

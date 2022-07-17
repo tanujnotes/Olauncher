@@ -291,8 +291,8 @@ class Prefs(context: Context) {
     fun getAppAlias(appName: String): String {
         return prefs.getString(appName, "").toString()
     }
-    fun setAppAlias(appName: String, appAlias: String) {
-        prefs.edit().putString(appName, appAlias).apply()
+    fun setAppAlias(appPackage: String, appAlias: String) {
+        prefs.edit().putString(appPackage, appAlias).apply()
     }
 
     fun getAppPackage(location: Int): String {
