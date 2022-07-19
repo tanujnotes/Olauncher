@@ -65,9 +65,6 @@
     <string name="lang_system">System</string>
 
     <string name="app_text_size">Text Size</string>
-    <string name="text_size_huge">Huge</string>
-    <string name="text_size_normal">Normal</string>
-    <string name="text_size_small">Small</string>
 
     <string name="hidden_apps">Hidden apps</string>
 

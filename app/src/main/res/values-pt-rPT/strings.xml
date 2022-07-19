@@ -25,15 +25,6 @@
     <string name="swipe_right_app">Deslize para a direita app</string>
     <string name="clock_click_app">Aplicativo de relógio</string>
     <string name="date_click_app">Aplicativo de calendário</string>
-    <string name="_0" translatable="false">0</string>
-    <string name="_1" translatable="false">1</string>
-    <string name="_2" translatable="false">2</string>
-    <string name="_3" translatable="false">3</string>
-    <string name="_4" translatable="false">4</string>
-    <string name="_5" translatable="false">5</string>
-    <string name="_6" translatable="false">6</string>
-    <string name="_7" translatable="false">7</string>
-    <string name="_8" translatable="false">8</string>
     <string name="commit">Commit</string>
     <string name="app_drawer_tips">Dica: Deslize para baixo para dispensar. Scroll para ocultar o teclado.</string>
     <string name="okay">Okay</string>
@@ -62,20 +53,8 @@
     <string name="close">Fechar</string>
     <string name="app_language">Idioma da interface</string>
     <string name="lang_system">Sistema</string>
-    <string name="lang_en" translatable="false">English</string>
-    <string name="lang_de" translatable="false">Deutsch</string>
-    <string name="lang_es" translatable="false">Español</string>
-    <string name="lang_fr" translatable="false">Français</string>
-    <string name="lang_it" translatable="false">Italiano</string>
-    <string name="lang_pt" translatable="false">Português (Portugal)</string>
-    <string name="lang_se" translatable="false">Svenska</string>
-    <string name="lang_tr" translatable="false">Türkçe</string>
-    <string name="lang_gr" translatable="false">Ελληνικά</string>
 
     <string name="app_text_size">Tamanho de texto</string>
-    <string name="text_size_huge">Grande</string>
-    <string name="text_size_normal">Normal</string>
-    <string name="text_size_small">Pequeno</string>
 
     <string name="hidden_apps">Aplicações escondidas</string>
 

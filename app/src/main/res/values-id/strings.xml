@@ -25,15 +25,6 @@
     <string name="swipe_right_app">Geser ke kanan</string>
     <string name="clock_click_app">Aplikasi ketika menekan jam </string>
     <string name="date_click_app">Aplikasi ketika menekan tanggal</string>
-    <string name="_0" translatable="false">0</string>
-    <string name="_1" translatable="false">1</string>
-    <string name="_2" translatable="false">2</string>
-    <string name="_3" translatable="false">3</string>
-    <string name="_4" translatable="false">4</string>
-    <string name="_5" translatable="false">5</string>
-    <string name="_6" translatable="false">6</string>
-    <string name="_7" translatable="false">7</string>
-    <string name="_8" translatable="false">8</string>
     <string name="commit">Lakukan</string>
     <string name="app_drawer_tips">Tip: Geser ke bawah untuk menutup. Scroll untuk menyembunyikan papan ketik.</string>
     <string name="okay">OK</string>
@@ -64,9 +55,6 @@
     <string name="lang_system">Sistem</string>
 
     <string name="app_text_size">Ukuran teks</string>
-    <string name="text_size_huge">Besar</string>
-    <string name="text_size_normal">Sedang</string>
-    <string name="text_size_small">Kecil</string>
 
     <string name="hidden_apps">Aplikasi tersembunyi</string>
 

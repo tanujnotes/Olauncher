@@ -56,9 +56,6 @@
     <string name="lang_system">Identique au Système</string>
     
     <string name="app_text_size">Taille de la police</string>
-    <string name="text_size_huge">Grande</string>
-    <string name="text_size_normal">Normal</string>
-    <string name="text_size_small">Petite</string>
     
     <string name="hidden_apps">Applications masquées</string>
 

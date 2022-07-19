@@ -25,15 +25,6 @@
     <string name="swipe_right_app">右滑应用</string>
     <string name="clock_click_app">单击时钟启动的应用</string>
     <string name="date_click_app">单击日期启动的应用</string>
-    <string name="_0" translatable="false">0</string>
-    <string name="_1" translatable="false">1</string>
-    <string name="_2" translatable="false">2</string>
-    <string name="_3" translatable="false">3</string>
-    <string name="_4" translatable="false">4</string>
-    <string name="_5" translatable="false">5</string>
-    <string name="_6" translatable="false">6</string>
-    <string name="_7" translatable="false">7</string>
-    <string name="_8" translatable="false">8</string>
     <string name="commit">Commit</string>
     <string name="app_drawer_tips">提示：下滑不予理会。滚动隐藏键盘。</string>
     <string name="okay">好的</string>
@@ -65,9 +56,6 @@
     <string name="lang_system">系统</string>
 
     <string name="app_text_size">文本尺寸</string>
-    <string name="text_size_huge">巨大</string>
-    <string name="text_size_normal">正常</string>
-    <string name="text_size_small">小</string>
 
     <string name="hidden_apps">隐藏的应用</string>
     

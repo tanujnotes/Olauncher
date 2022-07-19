@@ -53,9 +53,6 @@
     <string name="lang_system">Sistema</string>
     
     <string name="app_text_size">Dimensione Testo</string>
-    <string name="text_size_huge">Grande</string>
-    <string name="text_size_normal">Normale</string>
-    <string name="text_size_small">Piccolo</string>
 
     <string name="hidden_apps">App nascoste</string>
 

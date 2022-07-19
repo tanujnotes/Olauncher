@@ -25,15 +25,6 @@
     <string name="swipe_right_app">오른쪽 스와이프 시 실행 앱</string>
     <string name="clock_click_app">시계 클릭 시 실행 앱</string>
     <string name="date_click_app">날짜 클릭 시 실행 앱</string>
-    <string name="_0" translatable="false">0</string>
-    <string name="_1" translatable="false">1</string>
-    <string name="_2" translatable="false">2</string>
-    <string name="_3" translatable="false">3</string>
-    <string name="_4" translatable="false">4</string>
-    <string name="_5" translatable="false">5</string>
-    <string name="_6" translatable="false">6</string>
-    <string name="_7" translatable="false">7</string>
-    <string name="_8" translatable="false">8</string>
     <string name="commit">커밋</string>
     <string name="app_drawer_tips">팁: 아래로 스와이프 하면 무시할 수 있고, 키보드를 숨기려면 스크롤 하세요.</string>
     <string name="okay">네</string>
@@ -65,9 +56,6 @@
     <string name="lang_system">시스템</string>
 
     <string name="app_text_size">텍스트 크기</string>
-    <string name="text_size_huge">크게</string>
-    <string name="text_size_normal">기본</string>
-    <string name="text_size_small">작게</string>
 
     <string name="hidden_apps">숨겨진 앱</string>
 

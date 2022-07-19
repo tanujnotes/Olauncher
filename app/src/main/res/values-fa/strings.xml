@@ -23,15 +23,6 @@
     <string name="swipe_right_app">برنامه ای که با کشیدن به راست باز می شود</string>
     <string name="clock_click_app">برنامه ای که با ضربه روی ساعت باز می شود</string>
     <string name="date_click_app">برنامه ای که با ضربه روی تاریخ باز می شود</string>
-    <string name="_0" translatable="false">0</string>
-    <string name="_1" translatable="false">1</string>
-    <string name="_2" translatable="false">2</string>
-    <string name="_3" translatable="false">3</string>
-    <string name="_4" translatable="false">4</string>
-    <string name="_5" translatable="false">5</string>
-    <string name="_6" translatable="false">6</string>
-    <string name="_7" translatable="false">7</string>
-    <string name="_8" translatable="false">8</string>
     <string name="app_drawer_tips">نکته: برای ردکردن، انگشت خود را به پایین بکشید. برای مخفی کردن صفحه کلید، پیمایش کنید</string>
     <string name="okay">باشه</string>
     <string name="double_tap_lock_is_enabled_message">اگر دوبار ضربه برای قفل صفحه، اثر انگشت یا قفل با چهره را غیرفعال می‌کند، تنظیمات Olauncher را باز کنید، روی «آزمایشی» ضربه بزنید و دستورالعمل‌ها را دنبال کنید. متشکرم.</string>
@@ -59,20 +50,10 @@
     <string name="close">بستن</string>
     <string name="app_language">زبان</string>
     <string name="lang_system">سیستم</string>
-    <string name="lang_en" translatable="false">انگلیسی</string>
-    <string name="lang_de" translatable="false">آلمانی</string>
-    <string name="lang_es" translatable="false">اسپانیولی</string>
-    <string name="lang_fr" translatable="false">فرانسوی</string>
-    <string name="lang_it" translatable="false">ایتالیایی</string>
-    <string name="lang_se" translatable="false">سوئدی</string>
-    <string name="lang_tr" translatable="false">ترکی</string>
-    <string name="lang_gr" translatable="false">یونانی</string>
 
     <string name="app_text_size">اندازه متن</string>
-    <string name="text_size_huge">درشت</string>
-    <string name="text_size_normal">عادی</string>
-    <string name="text_size_small">کوچک</string>
 
     <string name="hidden_apps">برنامه های مخفی</string>
+
 
 </resources>
