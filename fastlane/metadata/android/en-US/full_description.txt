@@ -1,0 +1,25 @@
+Forked from <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a> because original version is cluttered
+    
+- Removed clutter, like ads and links
+- You can rename apps in the app-drawer _(Renaming apps on the home screen is already supported. Just long-click on an app on the home screen and start typing)_
+- Ability to change the app when clicking on the clock
+- Ability to change the app when clicking on the date
+- Align clock independently of home apps
+- Change alignment of apps in app-drawer
+- Change font size
+- A lot of people have translated the app to the following languages. Many thanks to you ❤️
+  - Chinese
+  - English
+  - French
+  - German
+  - Greek
+  - Indonesian
+  - Italian
+  - Korean
+  - Persian
+  - Portuguese (European)
+  - Russian
+  - Spanish
+  - Swedish
+  - Turkish
+- Removed internet permission

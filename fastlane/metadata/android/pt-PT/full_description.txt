@@ -1,0 +1,19 @@
+    Bifurcado de <a href="https://f-droid.org/packages/app.olauncher/">Olauncher</a>
+    porque a versão original é desordenada
+
+    Também adicionar alguns recursos
+    * Removido desordem
+    * Renomear aplicaçõesna lista normal de aplicações
+    * Alterar aplicação de relógio
+    * Alterar aplicação de calendário
+    * Suporte multilíngue:
+      * Chinese
+      * English
+      * French
+      * German
+      * Greek
+      * Italian
+      * Portuguese (Portugal)	
+      * Spanish
+      * Swedish
+      * Turkish

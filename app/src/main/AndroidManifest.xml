@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.olauncher">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <!--<uses-permission android:name="android.permission.SET_WALLPAPER" />-->
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <!--For opening alarm app-->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
@@ -18,12 +16,13 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
+            android:name="app.olaunchercf.MainActivity"
             android:configChanges="uiMode"
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
             android:taskAffinity=""
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,10 +33,11 @@
         </activity>
 
         <activity
-            android:name=".helper.FakeHomeActivity"
+            android:name="app.olaunchercf.helper.FakeHomeActivity"
             android:enabled="false"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,8 +48,9 @@
         </activity>
 
         <receiver
-            android:name=".listener.DeviceAdmin"
-            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            android:name="app.olaunchercf.listener.DeviceAdmin"
+            android:permission="android.permission.BIND_DEVICE_ADMIN"
+            android:exported="false">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/policies" />
@@ -59,10 +60,11 @@
         </receiver>
 
         <service
-            android:name=".helper.MyAccessibilityService"
+            android:name="app.olaunchercf.helper.MyAccessibilityService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-            android:process=":serviceProcess">
+            android:process=":serviceProcess"
+            android:exported="false">
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
