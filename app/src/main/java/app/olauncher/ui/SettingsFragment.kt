@@ -33,7 +33,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
@@ -87,6 +87,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
+            R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -125,7 +126,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
             }
             R.id.dailyWallpaper -> removeWallpaper()
-            R.id.appThemeText -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
             R.id.toggleLock -> {
@@ -158,6 +158,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
+        themeSystem.setOnClickListener(this)
 
         about.setOnClickListener(this)
         share.setOnClickListener(this)
@@ -190,19 +191,19 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         if (prefs.firstSettingsOpen) {
             prefs.firstSettingsOpen = false
         }
-        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, {
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner) {
             if (it) {
                 setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
                 publicRoadmap.visibility = View.VISIBLE
             }
-        })
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
+        }
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             populateAlignment()
-        })
-        viewModel.updateSwipeApps.observe(viewLifecycleOwner, {
+        }
+        viewModel.updateSwipeApps.observe(viewLifecycleOwner) {
             populateSwipeApps()
-        })
+        }
     }
 
     private fun toggleSwipeLeft() {
