@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:paddingHorizontal="24dp"
+        android:paddingHorizontal="20dp"
         android:paddingVertical="@dimen/app_padding_vertical"
         android:text="@string/app" />
 
@@ -20,10 +20,11 @@
         android:layout_width="4dp"
         android:layout_height="4dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
         android:gravity="center"
-        android:src="@drawable/ic_outline_info_24" />
+        android:src="@drawable/ic_outline_info_24"
+        app:tint="?attr/primaryColor" />
 
     <FrameLayout
         android:id="@+id/appHideLayout"

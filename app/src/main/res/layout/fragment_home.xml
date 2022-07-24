@@ -20,9 +20,8 @@
         android:id="@+id/dateTimeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="24dp"
         android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="visible">
@@ -55,9 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="24dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
         android:orientation="vertical">
 
         <TextView
@@ -156,10 +154,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="20sp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="56dp"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="visible">
@@ -186,8 +183,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="56dp"
         android:text="@string/set_as_default_launcher"
         android:visibility="gone" />

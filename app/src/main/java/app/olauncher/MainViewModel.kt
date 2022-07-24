@@ -22,7 +22,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val firstOpen = MutableLiveData<Boolean>()
     val refreshHome = MutableLiveData<Boolean>()
-    val toggleDateTime = MutableLiveData<Boolean>()
+    val toggleDateTime = MutableLiveData<Unit>()
     val updateSwipeApps = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>>()
     val hiddenApps = MutableLiveData<List<AppModel>>()
@@ -111,8 +111,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         refreshHome.value = appCountUpdated
     }
 
-    fun toggleDateTime(visibility: Boolean) {
-        toggleDateTime.value = visibility
+    fun toggleDateTime() {
+        toggleDateTime.postValue(Unit)
     }
 
     private fun updateSwipeApps() {

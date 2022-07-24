@@ -8,7 +8,10 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.provider.Settings
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -54,7 +57,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onResume() {
         super.onResume()
-        populateHomeApps(false)
+        populateHomeScreen(false)
         viewModel.isOlauncherDefault()
         if (prefs.showStatusBar) showStatusBar()
         else hideStatusBar()
@@ -98,21 +101,20 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             setDefaultLauncher.visibility = View.GONE
         } else firstRunTips.visibility = View.GONE
 
-        viewModel.refreshHome.observe(viewLifecycleOwner, {
-            populateHomeApps(it)
-        })
+        viewModel.refreshHome.observe(viewLifecycleOwner) {
+            populateHomeScreen(it)
+        }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
             if (firstRunTips.visibility == View.VISIBLE) return@Observer
             if (it) setDefaultLauncher.visibility = View.GONE
             else setDefaultLauncher.visibility = View.VISIBLE
         })
-        viewModel.homeAppAlignment.observe(viewLifecycleOwner, {
+        viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             setHomeAlignment(it)
-        })
-        viewModel.toggleDateTime.observe(viewLifecycleOwner, {
-            if (it) dateTimeLayout.visibility = View.VISIBLE
-            else dateTimeLayout.visibility = View.GONE
-        })
+        }
+        viewModel.toggleDateTime.observe(viewLifecycleOwner) {
+            populateDateTime()
+        }
     }
 
     private fun initSwipeTouchListener() {
@@ -148,10 +150,25 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         homeApp8.gravity = gravity
     }
 
-    private fun populateHomeApps(appCountUpdated: Boolean) {
+    private fun populateDateTime() {
+        when (prefs.showDateTime) {
+            Constants.DateTime.DATE_ONLY -> {
+                dateTimeLayout.visibility = View.VISIBLE
+                clock.visibility = View.GONE
+                date.visibility = View.VISIBLE
+            }
+            Constants.DateTime.ON -> {
+                dateTimeLayout.visibility = View.VISIBLE
+                clock.visibility = View.VISIBLE
+                date.visibility = View.VISIBLE
+            }
+            else -> dateTimeLayout.visibility = View.GONE
+        }
+    }
+
+    private fun populateHomeScreen(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
-        if (prefs.showDateTime) dateTimeLayout.visibility = View.VISIBLE
-        else dateTimeLayout.visibility = View.GONE
+        populateDateTime()
 
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return

@@ -21,6 +21,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
 import app.olauncher.listener.DeviceAdmin
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -66,6 +67,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onClick(view: View) {
         appsNumSelectLayout.visibility = View.GONE
+        dateTimeSelectLayout.visibility = View.GONE
         alignmentSelectLayout.visibility = View.GONE
         appThemeSelectLayout.visibility = View.GONE
         when (view.id) {
@@ -83,7 +85,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
             R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
             R.id.statusBar -> toggleStatusBar()
-            R.id.dateTime -> toggleDateTime()
+            R.id.dateTime -> dateTimeSelectLayout.visibility = View.VISIBLE
+            R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
+            R.id.dateTimeOff -> toggleDateTime(Constants.DateTime.OFF)
+            R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
             R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
@@ -153,6 +158,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         alignmentRight.setOnClickListener(this)
         statusBar.setOnClickListener(this)
         dateTime.setOnClickListener(this)
+        dateTimeOn.setOnClickListener(this)
+        dateTimeOff.setOnClickListener(this)
+        dateOnly.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
         appThemeText.setOnClickListener(this)
@@ -243,15 +251,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
     }
 
-    private fun toggleDateTime() {
-        prefs.showDateTime = !prefs.showDateTime
+    private fun toggleDateTime(selected: Int) {
+        prefs.showDateTime = selected
         populateDateTime()
-        viewModel.toggleDateTime(prefs.showDateTime)
+        viewModel.toggleDateTime()
     }
 
     private fun populateDateTime() {
-        if (prefs.showDateTime) dateTime.text = getString(R.string.on)
-        else dateTime.text = getString(R.string.off)
+        dateTime.text = getString(when (prefs.showDateTime) {
+            Constants.DateTime.DATE_ONLY -> R.string.date
+            Constants.DateTime.ON -> R.string.on
+            else -> R.string.off
+        })
     }
 
     private fun showStatusBar() {

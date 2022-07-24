@@ -330,6 +330,60 @@
                     android:layout_marginEnd="4dp"
                     android:padding="8dp"
                     android:text="@string/on" />
+
+                <!-- date time layout-->
+                <LinearLayout
+                    android:id="@+id/dateTimeSelectLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:background="@drawable/rounded_primary_gradient"
+                    android:elevation="8dp"
+                    android:orientation="horizontal"
+                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="2dp"
+                    android:visibility="gone"
+                    tools:ignore="UnusedAttribute">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/dateTimeOn"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/on" />
+
+                    <TextView
+                        android:id="@+id/dateTimeOff"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="24dp"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/off" />
+
+                    <TextView
+                        android:id="@+id/dateOnly"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/date_only" />
+
+                </LinearLayout>
+
             </FrameLayout>
 
             <FrameLayout
@@ -479,6 +533,15 @@
                         android:gravity="center"
                         android:paddingVertical="6dp"
                         android:text="@string/light" />
+
+                    <TextView
+                        android:id="@+id/themeSystem"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/system_default" />
 
                 </LinearLayout>
 
