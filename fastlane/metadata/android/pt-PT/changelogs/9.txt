@@ -1,7 +1,0 @@
-* Refatoração principal: Settings reescritas no Jetpack Compose
-* Esta atualização pode levar à perda (única) de algumas definições
-* Se tiveres quaisquer falhas ou problemas. Abre um issue no GitHub
-
-* Adicionado Chinese (Não tenho a certeza se esta tradução está completa)
-* Portuguese
-* Persian
