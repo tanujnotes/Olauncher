@@ -1,1 +1,0 @@
-Forked from Olauncher, -clutter, +features

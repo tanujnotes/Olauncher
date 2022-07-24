@@ -1,7 +1,0 @@
-* Major refactor: Settings rewritten in Jetpack Compose
-* This update could lead to (onetime) loss of some settings
-* If you experience any Crashes or problems. Please open an issue on GitHub
-
-* Add Chinese (I am not sure this translation is complete)
-* Portuguese
-* Persian
