@@ -117,11 +117,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 prefs.rateClicked = true
                 rateApp()
             }
-            R.id.roadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
             R.id.instagram -> requireContext().openUrl(Constants.URL_INSTA_OLAUNCHER)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
+            R.id.moreApps -> requireContext().openUrl(Constants.URL_PLAY_STORE_DEV)
         }
     }
 
@@ -173,11 +173,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         about.setOnClickListener(this)
         share.setOnClickListener(this)
         rate.setOnClickListener(this)
-        roadmap.setOnClickListener(this)
         twitter.setOnClickListener(this)
         instagram.setOnClickListener(this)
         privacy.setOnClickListener(this)
         github.setOnClickListener(this)
+        moreApps.setOnClickListener(this)
 
         maxApps0.setOnClickListener(this)
         maxApps1.setOnClickListener(this)

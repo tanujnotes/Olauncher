@@ -9,8 +9,10 @@
     android:background="?attr/primaryShadeDarkColor"
     android:clipChildren="false"
     android:clipToPadding="false"
+    android:fadingEdgeLength="24dp"
     android:overScrollMode="never"
-    android:padding="56dp"
+    android:paddingHorizontal="72dp"
+    android:requiresFadingEdge="vertical"
     android:scrollbars="none">
 
     <LinearLayout
@@ -19,7 +21,8 @@
         android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingVertical="56dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -659,85 +662,96 @@
             </FrameLayout>
         </LinearLayout>
 
-        <HorizontalScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:overScrollMode="never"
-            android:scrollbars="none">
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/about"
+                style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp">
+                android:layout_marginHorizontal="12dp"
+                android:padding="12dp"
+                android:text="@string/about" />
 
-                <TextView
-                    android:id="@+id/about"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/about" />
+            <TextView
+                android:id="@+id/share"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:padding="12dp"
+                android:text="@string/share" />
 
-                <TextView
-                    android:id="@+id/share"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/share" />
+            <TextView
+                android:id="@+id/rate"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:padding="12dp"
+                android:text="@string/rate" />
 
-                <TextView
-                    android:id="@+id/rate"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/rate" />
+            <TextView
+                android:id="@+id/privacy"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:padding="12dp"
+                android:text="@string/privacy" />
 
-                <TextView
-                    android:id="@+id/roadmap"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/roadmap" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/twitter"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/twitter" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
 
-                <TextView
-                    android:id="@+id/instagram"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/instagram" />
+            <TextView
+                android:id="@+id/twitter"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:padding="12dp"
+                android:text="@string/twitter" />
 
-                <TextView
-                    android:id="@+id/github"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/github" />
+            <TextView
+                android:id="@+id/instagram"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:padding="12dp"
+                android:text="@string/instagram" />
 
-                <TextView
-                    android:id="@+id/privacy"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:text="@string/privacy" />
+            <TextView
+                android:id="@+id/github"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:padding="12dp"
+                android:text="@string/github" />
 
-            </LinearLayout>
-        </HorizontalScrollView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/moreApps"
+            style="@style/TextSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/more_ad_free_apps_by_us" />
 
     </LinearLayout>
 

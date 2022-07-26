@@ -45,6 +45,7 @@ object Constants {
     const val URL_PUBLIC_ROADMAP = "https://tanujnotes.notion.site/Olauncher-Roadmap-1522aa8182424415b5b89bed923b0ccd"
     const val URL_OLAUNCHER_GITHUB = "https://www.github.com/tanujnotes/Olauncher"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
+    const val URL_PLAY_STORE_DEV = "https://play.google.com/store/apps/dev?id=7198807840081074933"
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
     const val URL_INSTA_OLAUNCHER = "https://instagram.com/olauncherapp"
     const val URL_AFFILIATE = "https://amzn.to/3uftwFW"
