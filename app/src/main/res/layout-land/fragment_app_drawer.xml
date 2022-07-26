@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
+        android:layout_marginHorizontal="56dp"
         android:layout_marginTop="24dp"
         android:animateLayoutChanges="true"
         android:orientation="horizontal">
@@ -49,21 +49,21 @@
         android:id="@+id/appDrawerTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="76dp"
         android:layout_marginTop="52dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="12dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/app_drawer_tips"
         android:textColor="?attr/primaryColor"
         android:textSize="16sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="56dp"
         android:layout_marginTop="80dp"
         android:clipChildren="false"
         android:clipToPadding="false"
