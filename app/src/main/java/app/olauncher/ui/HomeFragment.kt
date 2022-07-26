@@ -102,6 +102,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             populateHomeScreen(it)
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
+            if (it != true) {
+                prefs.homeBottomAlignment = false
+                setHomeAlignment()
+            }
             if (firstRunTips.visibility == View.VISIBLE) return@Observer
             if (it) setDefaultLauncher.visibility = View.GONE
             else setDefaultLauncher.visibility = View.VISIBLE
@@ -134,7 +138,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         setDefaultLauncher.setOnClickListener(this)
     }
 
-    private fun setHomeAlignment(horizontalGravity: Int) {
+    private fun setHomeAlignment(horizontalGravity: Int = prefs.homeAlignment) {
         val verticalGravity = if (prefs.homeBottomAlignment) Gravity.BOTTOM else Gravity.CENTER_VERTICAL
         homeAppsLayout.gravity = horizontalGravity or verticalGravity
         dateTimeLayout.gravity = horizontalGravity

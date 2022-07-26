@@ -79,4 +79,5 @@
     <string name="date_only">Date only</string>
     <string name="bottom_on">Bottom: On</string>
     <string name="bottom_off">Bottom: Off</string>
+    <string name="please_set_olauncher_as_default_first">Please set Olauncher as your default launcher first</string>
 </resources>
