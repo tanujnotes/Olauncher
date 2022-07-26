@@ -21,7 +21,6 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
 import app.olauncher.listener.DeviceAdmin
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -68,8 +67,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     override fun onClick(view: View) {
         appsNumSelectLayout.visibility = View.GONE
         dateTimeSelectLayout.visibility = View.GONE
-        alignmentSelectLayout.visibility = View.GONE
         appThemeSelectLayout.visibility = View.GONE
+        if (view.id != R.id.alignmentBottom)
+            alignmentSelectLayout.visibility = View.GONE
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
@@ -84,6 +84,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
             R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
             R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
+            R.id.alignmentBottom -> updateHomeBottomAlignment()
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> dateTimeSelectLayout.visibility = View.VISIBLE
             R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
@@ -156,6 +157,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         alignmentLeft.setOnClickListener(this)
         alignmentCenter.setOnClickListener(this)
         alignmentRight.setOnClickListener(this)
+        alignmentBottom.setOnClickListener(this)
         statusBar.setOnClickListener(this)
         dateTime.setOnClickListener(this)
         dateTimeOn.setOnClickListener(this)
@@ -400,7 +402,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
     }
 
-
     private fun populateAppThemeText(appTheme: Int = prefs.appTheme) {
         when (appTheme) {
             AppCompatDelegate.MODE_NIGHT_YES -> appThemeText.text = getString(R.string.dark)
@@ -419,12 +420,21 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         else dailyWallpaper.text = getString(R.string.off)
     }
 
+    private fun updateHomeBottomAlignment() {
+        prefs.homeBottomAlignment = !prefs.homeBottomAlignment
+        populateAlignment()
+        viewModel.updateHomeAlignment(prefs.homeAlignment)
+    }
+
     private fun populateAlignment() {
         when (prefs.homeAlignment) {
             Gravity.START -> alignment.text = getString(R.string.left)
             Gravity.CENTER -> alignment.text = getString(R.string.center)
             Gravity.END -> alignment.text = getString(R.string.right)
         }
+        alignmentBottom.text = if (prefs.homeBottomAlignment)
+            getString(R.string.bottom_on)
+        else getString(R.string.bottom_off)
     }
 
     private fun populateLockSettings() {

@@ -18,6 +18,7 @@ class Prefs(context: Context) {
     private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
     private val WALLPAPER_UPDATED_DAY = "WALLPAPER_UPDATED_DAY"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
+    private val HOME_BOTTOM_ALIGNMENT = "HOME_BOTTOM_ALIGNMENT"
     private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
     private val STATUS_BAR = "STATUS_BAR"
     private val DATE_TIME = "DATE_TIME"
@@ -104,6 +105,10 @@ class Prefs(context: Context) {
     var homeAlignment: Int
         get() = prefs.getInt(HOME_ALIGNMENT, Gravity.START)
         set(value) = prefs.edit().putInt(HOME_ALIGNMENT, value).apply()
+
+    var homeBottomAlignment: Boolean
+        get() = prefs.getBoolean(HOME_BOTTOM_ALIGNMENT, false)
+        set(value) = prefs.edit().putBoolean(HOME_BOTTOM_ALIGNMENT, value).apply()
 
     var appLabelAlignment: Int
         get() = prefs.getInt(APP_LABEL_ALIGNMENT, Gravity.START)

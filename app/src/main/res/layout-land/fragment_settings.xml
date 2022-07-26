@@ -429,6 +429,15 @@
                     android:visibility="gone"
                     tools:ignore="UnusedAttribute">
 
+                    <TextView
+                        android:id="@+id/alignmentBottom"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/bottom_off" />
+
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

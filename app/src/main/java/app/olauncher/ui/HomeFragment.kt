@@ -8,10 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.provider.Settings
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowInsets
+import android.view.*
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -137,17 +134,18 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         setDefaultLauncher.setOnClickListener(this)
     }
 
-    private fun setHomeAlignment(gravity: Int) {
-        dateTimeLayout.gravity = gravity
-        homeAppsLayout.gravity = gravity
-        homeApp1.gravity = gravity
-        homeApp2.gravity = gravity
-        homeApp3.gravity = gravity
-        homeApp4.gravity = gravity
-        homeApp5.gravity = gravity
-        homeApp6.gravity = gravity
-        homeApp7.gravity = gravity
-        homeApp8.gravity = gravity
+    private fun setHomeAlignment(horizontalGravity: Int) {
+        val verticalGravity = if (prefs.homeBottomAlignment) Gravity.BOTTOM else Gravity.CENTER_VERTICAL
+        homeAppsLayout.gravity = horizontalGravity or verticalGravity
+        dateTimeLayout.gravity = horizontalGravity
+        homeApp1.gravity = horizontalGravity
+        homeApp2.gravity = horizontalGravity
+        homeApp3.gravity = horizontalGravity
+        homeApp4.gravity = horizontalGravity
+        homeApp5.gravity = horizontalGravity
+        homeApp6.gravity = horizontalGravity
+        homeApp7.gravity = horizontalGravity
+        homeApp8.gravity = horizontalGravity
     }
 
     private fun populateDateTime() {
