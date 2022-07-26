@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         initClickListeners()
         initObservers(viewModel)
         viewModel.getAppList()
-//        setupOrientation()
+        setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
     }
