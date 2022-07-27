@@ -82,4 +82,5 @@
     <string name="please_set_olauncher_as_default_first">Please set Olauncher as your default launcher first</string>
     <string name="more_ad_free_apps_by_us"><u>More ad-free apps by us</u></string>
     <string name="affiliate">Affiliate</string>
+    <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
 </resources>

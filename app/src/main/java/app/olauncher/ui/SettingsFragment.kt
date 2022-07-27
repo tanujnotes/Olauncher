@@ -510,13 +510,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                     scrollView.fullScroll(View.FOCUS_DOWN)
                 }
             }
-            Constants.HINT_SHARE -> {
-                viewModel.showMessageDialog(getString(R.string.share_message))
-                share.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-                scrollView.post {
-                    scrollView.fullScroll(View.FOCUS_DOWN)
-                }
-            }
         }
         if (prefs.aboutClicked.not())
             about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)

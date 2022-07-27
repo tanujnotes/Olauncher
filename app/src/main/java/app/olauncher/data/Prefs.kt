@@ -31,6 +31,7 @@ class Prefs(context: Context) {
     private val APP_THEME = "APP_THEME"
     private val ABOUT_CLICKED = "ABOUT_CLICKED"
     private val RATE_CLICKED = "RATE_CLICKED"
+    private val RENAME_TIP_SHOWN = "RENAME_TIP_SHOWN"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -157,6 +158,10 @@ class Prefs(context: Context) {
     var rateClicked: Boolean
         get() = prefs.getBoolean(RATE_CLICKED, false)
         set(value) = prefs.edit().putBoolean(RATE_CLICKED, value).apply()
+
+    var renameTipShown: Boolean
+        get() = prefs.getBoolean(RENAME_TIP_SHOWN, false)
+        set(value) = prefs.edit().putBoolean(RENAME_TIP_SHOWN, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

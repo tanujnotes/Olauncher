@@ -28,20 +28,29 @@ import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 class AppDrawerFragment : Fragment() {
 
+    private lateinit var prefs: Prefs
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.fragment_app_drawer, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        prefs = Prefs(requireContext())
         val flag = arguments?.getInt("flag", Constants.FLAG_LAUNCH_APP) ?: Constants.FLAG_LAUNCH_APP
         val rename = arguments?.getBoolean("rename", false) ?: false
-        if (rename) appRename.setOnClickListener { renameListener(flag) }
+        if (rename) {
+            appRename.setOnClickListener { renameListener(flag) }
+            if (prefs.renameTipShown.not()) {
+                appDrawerTip.text = getString(R.string.tip_start_typing_for_rename)
+                appDrawerTip.visibility = View.VISIBLE
+                prefs.renameTipShown = true
+            }
+        }
 
         val viewModel = activity?.run {
             ViewModelProvider(this).get(MainViewModel::class.java)
@@ -49,14 +58,14 @@ class AppDrawerFragment : Fragment() {
 
         val appAdapter = AppDrawerAdapter(
             flag,
-            Prefs(requireContext()).appLabelAlignment,
+            prefs.appLabelAlignment,
             appClickListener(viewModel, flag),
             appInfoListener(),
             appShowHideListener()
         )
 
         val searchTextView = search.findViewById<TextView>(R.id.search_src_text)
-        if (searchTextView != null) searchTextView.gravity = Prefs(requireContext()).appLabelAlignment
+        if (searchTextView != null) searchTextView.gravity = prefs.appLabelAlignment
 
         initViewModel(flag, viewModel, appAdapter)
 
@@ -75,6 +84,7 @@ class AppDrawerFragment : Fragment() {
                 newText?.let {
                     appAdapter.filter.filter(it.trim())
                     appRename.isVisible = rename && it.trim().isNotEmpty()
+                    appDrawerTip.visibility = View.GONE
                 }
                 return false
             }
@@ -101,9 +111,9 @@ class AppDrawerFragment : Fragment() {
             populateAppList(it, appAdapter)
         })
 
-        viewModel.firstOpen.observe(viewLifecycleOwner, {
+        viewModel.firstOpen.observe(viewLifecycleOwner) {
             if (it) appDrawerTip.visibility = View.VISIBLE
-        })
+        }
     }
 
     override fun onStart() {
@@ -122,8 +132,8 @@ class AppDrawerFragment : Fragment() {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    private fun View.showKeyboard() {
-        if (!Prefs(requireContext()).autoShowKeyboard) return
+    private fun View.showKeyboard(forceShowKeyboard: Boolean = false) {
+        if (!prefs.autoShowKeyboard && !forceShowKeyboard) return
         view?.requestFocus()
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
@@ -153,7 +163,6 @@ class AppDrawerFragment : Fragment() {
 
     private fun appShowHideListener(): (flag: Int, appModel: AppModel) -> Unit =
         { flag, appModel ->
-            val prefs = Prefs(requireContext())
             val newSet = mutableSetOf<String>()
             newSet.addAll(prefs.hiddenApps)
 
@@ -176,17 +185,21 @@ class AppDrawerFragment : Fragment() {
 
     private fun renameListener(flag: Int) {
         val name = search.query.toString().trim()
-        if (name.isEmpty()) return
+        if (name.isEmpty()) {
+            showToastShort(requireContext(), "Type a new app name first")
+            search.showKeyboard(true)
+            return
+        }
 
         when (flag) {
-            Constants.FLAG_SET_HOME_APP_1 -> Prefs(requireContext()).appName1 = name
-            Constants.FLAG_SET_HOME_APP_2 -> Prefs(requireContext()).appName2 = name
-            Constants.FLAG_SET_HOME_APP_3 -> Prefs(requireContext()).appName3 = name
-            Constants.FLAG_SET_HOME_APP_4 -> Prefs(requireContext()).appName4 = name
-            Constants.FLAG_SET_HOME_APP_5 -> Prefs(requireContext()).appName5 = name
-            Constants.FLAG_SET_HOME_APP_6 -> Prefs(requireContext()).appName6 = name
-            Constants.FLAG_SET_HOME_APP_7 -> Prefs(requireContext()).appName7 = name
-            Constants.FLAG_SET_HOME_APP_8 -> Prefs(requireContext()).appName8 = name
+            Constants.FLAG_SET_HOME_APP_1 -> prefs.appName1 = name
+            Constants.FLAG_SET_HOME_APP_2 -> prefs.appName2 = name
+            Constants.FLAG_SET_HOME_APP_3 -> prefs.appName3 = name
+            Constants.FLAG_SET_HOME_APP_4 -> prefs.appName4 = name
+            Constants.FLAG_SET_HOME_APP_5 -> prefs.appName5 = name
+            Constants.FLAG_SET_HOME_APP_6 -> prefs.appName6 = name
+            Constants.FLAG_SET_HOME_APP_7 -> prefs.appName7 = name
+            Constants.FLAG_SET_HOME_APP_8 -> prefs.appName8 = name
         }
         findNavController().popBackStack()
     }
