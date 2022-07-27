@@ -22,13 +22,13 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.openAppInfo
-import app.olauncher.helper.showToastLong
 import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 class AppDrawerFragment : Fragment() {
 
     private lateinit var prefs: Prefs
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +41,10 @@ class AppDrawerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
+        viewModel = activity?.run {
+            ViewModelProvider(this).get(MainViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+
         val flag = arguments?.getInt("flag", Constants.FLAG_LAUNCH_APP) ?: Constants.FLAG_LAUNCH_APP
         val rename = arguments?.getBoolean("rename", false) ?: false
         if (rename) {
@@ -51,10 +55,6 @@ class AppDrawerFragment : Fragment() {
                 prefs.renameTipShown = true
             }
         }
-
-        val viewModel = activity?.run {
-            ViewModelProvider(this).get(MainViewModel::class.java)
-        } ?: throw Exception("Invalid Activity")
 
         val appAdapter = AppDrawerAdapter(
             flag,
@@ -176,9 +176,7 @@ class AppDrawerFragment : Fragment() {
             if (newSet.isEmpty()) findNavController().popBackStack()
             if (prefs.firstHide) {
                 prefs.firstHide = false
-                // Deploying a weird strategy to make sure that people read this message
-                showToastShort(requireContext(), "To see hidden apps, tap Olauncher text on the top.")
-                showToastLong(requireContext(), "To see hidden apps, tap Olauncher text on the top.")
+                viewModel.showMessageDialog(getString(R.string.hidden_apps_message))
                 findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
             }
         }

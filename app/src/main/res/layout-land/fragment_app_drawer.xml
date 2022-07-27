@@ -57,7 +57,7 @@
         android:text="@string/app_drawer_tips"
         android:textColor="?attr/primaryColor"
         android:textSize="16sp"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

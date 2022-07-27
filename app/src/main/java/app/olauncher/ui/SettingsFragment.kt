@@ -511,9 +511,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 }
             }
         }
-        if (prefs.aboutClicked.not())
+        if (viewModel.isOlauncherDefault.value != true) return
+        if (prefs.aboutClicked.not() && prefs.toShowHintCounter < Constants.HINT_RATE_US)
             about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-        if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US)
+        if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US && prefs.toShowHintCounter < Constants.HINT_RATE_US + 10)
             rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
     }
 }
