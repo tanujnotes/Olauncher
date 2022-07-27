@@ -1,6 +1,5 @@
 package app.olauncher.ui
 
-import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
@@ -24,6 +23,7 @@ import app.olauncher.helper.*
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.android.synthetic.main.fragment_home.*
+
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
@@ -62,8 +62,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.lock -> {
-            }
+            R.id.lock -> {}
             R.id.clock -> openAlarmApp(requireContext())
             R.id.date -> openCalendar(requireContext())
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
@@ -286,16 +285,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    @SuppressLint("WrongConstant", "PrivateApi")
-    private fun expandNotificationDrawer(context: Context) {
-        // Source: https://stackoverflow.com/a/51132142
-        try {
-            val statusBarService = context.getSystemService("statusbar")
-            val statusBarManager = Class.forName("android.app.StatusBarManager")
-            val method = statusBarManager.getMethod("expandNotificationsPanel")
-            method.invoke(statusBarService)
-        } catch (e: Exception) {
-            e.printStackTrace()
+    private fun swipeDownAction() {
+        when (prefs.swipeDownAction) {
+            Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
+            else -> expandNotificationDrawer(requireContext())
         }
     }
 
@@ -384,7 +377,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                expandNotificationDrawer(context)
+                swipeDownAction()
             }
 
             override fun onLongClick() {
@@ -439,7 +432,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                expandNotificationDrawer(context)
+                swipeDownAction()
             }
 
             override fun onLongClick(view: View) {

@@ -8,6 +8,11 @@ object Constants {
         const val DATE_ONLY = 2
     }
 
+    object SwipeDownAction {
+        const val SEARCH = 1
+        const val NOTIFICATIONS = 2
+    }
+
     const val WALL_TYPE_LIGHT = "light"
     const val WALL_TYPE_DARK = "dark"
 

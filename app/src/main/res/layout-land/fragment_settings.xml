@@ -640,6 +640,77 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:lines="1"
+                    android:paddingVertical="8dp"
+                    android:text="@string/swipe_down_for"
+                    android:textColor="?attr/primaryColor" />
+
+                <TextView
+                    android:id="@+id/swipeDownAction"
+                    style="@style/TextSmallBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginEnd="4dp"
+                    android:lines="1"
+                    android:padding="8dp" />
+
+                <!-- Swipe down select layout-->
+                <LinearLayout
+                    android:id="@+id/swipeDownSelectLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:background="@drawable/rounded_primary_gradient"
+                    android:elevation="8dp"
+                    android:orientation="horizontal"
+                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="2dp"
+                    android:visibility="gone"
+                    tools:ignore="UnusedAttribute">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/notifications"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/notifications" />
+
+                    <TextView
+                        android:id="@+id/search"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/search" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:visibility="visible">

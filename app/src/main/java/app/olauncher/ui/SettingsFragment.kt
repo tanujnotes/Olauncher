@@ -59,6 +59,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateStatusBar()
         populateDateTime()
         populateSwipeApps()
+        populateSwipeDownAction()
         populateActionHints()
         initClickListeners()
         initObservers()
@@ -68,8 +69,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         appsNumSelectLayout.visibility = View.GONE
         dateTimeSelectLayout.visibility = View.GONE
         appThemeSelectLayout.visibility = View.GONE
+        swipeDownSelectLayout.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             alignmentSelectLayout.visibility = View.GONE
+
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
@@ -107,6 +110,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
+            R.id.swipeDownAction -> swipeDownSelectLayout.visibility = View.VISIBLE
+            R.id.notifications -> updateSwipeDownAction(Constants.SwipeDownAction.NOTIFICATIONS)
+            R.id.search -> updateSwipeDownAction(Constants.SwipeDownAction.SEARCH)
 
             R.id.about -> {
                 prefs.aboutClicked = true
@@ -173,6 +179,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         dateOnly.setOnClickListener(this)
         swipeLeftApp.setOnClickListener(this)
         swipeRightApp.setOnClickListener(this)
+        swipeDownAction.setOnClickListener(this)
+        search.setOnClickListener(this)
+        notifications.setOnClickListener(this)
         appThemeText.setOnClickListener(this)
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
@@ -453,6 +462,19 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateLockSettings() {
         if (prefs.lockModeOn) toggleLock.text = getString(R.string.on)
         else toggleLock.text = getString(R.string.off)
+    }
+
+    private fun populateSwipeDownAction() {
+        swipeDownAction.text = when (prefs.swipeDownAction) {
+            Constants.SwipeDownAction.NOTIFICATIONS -> getString(R.string.notifications)
+            else -> getString(R.string.search)
+        }
+    }
+
+    private fun updateSwipeDownAction(swipeDownFor: Int) {
+        if (prefs.swipeDownAction == swipeDownFor) return
+        prefs.swipeDownAction = swipeDownFor
+        populateSwipeDownAction()
     }
 
     private fun shareApp() {

@@ -1,5 +1,7 @@
 package app.olauncher.helper
 
+import android.annotation.SuppressLint
+import android.app.SearchManager
 import android.app.WallpaperManager
 import android.content.*
 import android.content.pm.LauncherApps
@@ -353,6 +355,28 @@ fun getBackupWallpaper(wallType: String): String {
     else Constants.URL_DEFAULT_DARK_WALLPAPER
 }
 
+fun openSearch(context: Context) {
+    val intent = Intent(Intent.ACTION_WEB_SEARCH)
+    intent.putExtra(SearchManager.QUERY, "")
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+    context.startActivity(intent)
+}
+
+@SuppressLint("WrongConstant", "PrivateApi")
+fun expandNotificationDrawer(context: Context) {
+    // Source: https://stackoverflow.com/a/51132142
+    try {
+        val statusBarService = context.getSystemService("statusbar")
+        val statusBarManager = Class.forName("android.app.StatusBarManager")
+        val method = statusBarManager.getMethod("expandNotificationsPanel")
+        method.invoke(statusBarService)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
+
 fun openDialerApp(context: Context) {
     try {
         val sendIntent = Intent(Intent.ACTION_DIAL)
@@ -444,7 +468,7 @@ fun Context.openUrl(url: String) {
 fun Context.getColorFromAttr(
     @AttrRes attrColor: Int,
     typedValue: TypedValue = TypedValue(),
-    resolveRefs: Boolean = true
+    resolveRefs: Boolean = true,
 ): Int {
     theme.resolveAttribute(attrColor, typedValue, resolveRefs)
     return typedValue.data
