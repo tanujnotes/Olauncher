@@ -8,6 +8,7 @@
         </item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:colorEdgeEffect">@android:color/transparent</item>
 
         <item name="android:fitsSystemWindows">false</item>
         <item name="android:windowShowWallpaper">true</item>
@@ -56,7 +57,7 @@
         <item name="android:editTextColor">?attr/primaryColor</item>
         <item name="android:textColorHint">?attr/primaryColor</item>
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:inputType">textCapSentences</item>
+        <item name="android:inputType">textCapSentences|textNoSuggestions</item>
         <item name="android:letterSpacing">-0.1</item>
         <item name="android:cursorVisible">false</item>
     </style>
