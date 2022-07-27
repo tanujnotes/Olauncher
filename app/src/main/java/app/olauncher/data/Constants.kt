@@ -49,10 +49,12 @@ object Constants {
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
     const val URL_INSTA_OLAUNCHER = "https://instagram.com/olauncherapp"
     const val URL_AFFILIATE = "https://amzn.to/3uftwFW"
-
-    const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
+    const val URL_AFFILIATE_IN = "https://www.amazon.in/?tag=tanujnotes-20"
     const val URL_NOTIFY = "https://gist.githubusercontent.com/tanujnotes/da9490348422979650ccb3ec9392a40f/raw"
     const val URL_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/bf400a269746c5c124a599af040dd82e/raw"
     const val URL_DEFAULT_DARK_WALLPAPER = "https://images.unsplash.com/photo-1512551980832-13df02babc9e"
     const val URL_DEFAULT_LIGHT_WALLPAPER = "https://images.unsplash.com/photo-1515549832467-8783363e19b6"
+
+    const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
+    const val IST_NAME = "India Standard Time"
 }

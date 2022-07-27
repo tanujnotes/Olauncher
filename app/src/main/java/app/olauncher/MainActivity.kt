@@ -8,6 +8,7 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.*
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -85,28 +87,27 @@ class MainActivity : AppCompatActivity() {
             viewModel.showMessageDialog("")
         }
         closeOneLink.setOnClickListener {
-            viewModel.showSupportDialog(false)
+            supportOlauncherLayout.visibility = View.GONE
         }
         copyOneLink.setOnClickListener {
-            this.copyToClipboard(Constants.URL_AFFILIATE)
-            viewModel.showSupportDialog(false)
+            copyToClipboard(getAffiliateUrl())
+            supportOlauncherLayout.visibility = View.GONE
         }
         openOneLink.setOnClickListener {
-            this.openUrl(Constants.URL_AFFILIATE)
-            viewModel.showSupportDialog(false)
+            openUrl(getAffiliateUrl())
         }
     }
 
     private fun initObservers(viewModel: MainViewModel) {
-        viewModel.launcherResetFailed.observe(this, {
+        viewModel.launcherResetFailed.observe(this) {
             openLauncherChooser(it)
-        })
-        viewModel.showMessageDialog.observe(this, {
+        }
+        viewModel.showMessageDialog.observe(this) {
             showMessage(it)
-        })
-        viewModel.showSupportDialog.observe(this, {
+        }
+        viewModel.showSupportDialog.observe(this) {
             supportOlauncherLayout.isVisible = it
-        })
+        }
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -118,6 +119,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun backToHomeScreen() {
+        messageLayout.visibility = View.GONE
+        supportOlauncherLayout.visibility = View.GONE
         // Whenever home button is pressed or user leaves the launcher,
         // pop all the fragments except main
         if (navController.currentDestination?.id != R.id.mainFragment)
@@ -148,6 +151,13 @@ class MainActivity : AppCompatActivity() {
         if (message.isEmpty()) return
         messageTextView.text = message
         messageLayout.visibility = View.VISIBLE
+    }
+
+    private fun getAffiliateUrl(): String {
+        return if (TimeZone.getDefault().displayName.equals(Constants.IST_NAME, true))
+            Constants.URL_AFFILIATE_IN
+        else
+            Constants.URL_AFFILIATE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

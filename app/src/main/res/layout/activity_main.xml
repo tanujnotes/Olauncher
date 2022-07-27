@@ -96,15 +96,15 @@
             tools:targetApi="p">
 
             <TextView
-                style="@style/TextLarge"
+                style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:text="@string/keeping_it_ad_free"
+                android:text="@string/support_olauncher_for_free"
                 android:textColor="?attr/primaryColor" />
 
             <TextView
-                style="@style/TextSmall"
+                style="@style/TextSmallLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -115,7 +115,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -123,7 +123,7 @@
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="8dp"
+                    android:paddingVertical="4dp"
                     android:text="@string/close"
                     android:textAllCaps="true" />
 
@@ -138,16 +138,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
-                    android:paddingVertical="8dp"
+                    android:paddingVertical="4dp"
                     android:text="@string/copy"
                     android:textAllCaps="true" />
 
                 <TextView
                     android:id="@+id/openOneLink"
-                    style="@style/TextSmall"
+                    style="@style/TextSmallBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="8dp"
+                    android:paddingVertical="4dp"
                     android:text="@string/open"
                     android:textAllCaps="true" />
 
