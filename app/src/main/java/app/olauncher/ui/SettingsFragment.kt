@@ -136,6 +136,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
             }
             R.id.dailyWallpaper -> removeWallpaper()
+            R.id.appThemeText -> {
+                appThemeSelectLayout.visibility = View.VISIBLE
+                themeSystem.visibility = View.VISIBLE
+            }
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
             R.id.toggleLock -> {

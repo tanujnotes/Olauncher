@@ -530,6 +530,17 @@
                         android:layout_weight="1" />
 
                     <TextView
+                        android:id="@+id/themeSystem"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:gravity="center"
+                        android:paddingVertical="6dp"
+                        android:text="@string/system_default"
+                        android:visibility="gone" />
+
+                    <TextView
                         android:id="@+id/themeDark"
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
@@ -544,19 +555,9 @@
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
                         android:gravity="center"
                         android:paddingVertical="6dp"
                         android:text="@string/light" />
-
-                    <TextView
-                        android:id="@+id/themeSystem"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/system_default" />
 
                 </LinearLayout>
 
