@@ -19,8 +19,8 @@
     <LinearLayout
         android:id="@+id/dateTimeLayout"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="56dp"
         android:orientation="vertical"
         android:visibility="gone"
@@ -53,9 +53,10 @@
         android:id="@+id/homeAppsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
         android:layout_marginHorizontal="74dp"
-        android:orientation="vertical">
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/home_app_padding_vertical">
 
         <TextView
             android:id="@+id/homeApp1"
