@@ -20,13 +20,13 @@
             android:layout_weight="1"
             android:gravity="end"
             android:imeOptions="actionSearch"
-            android:paddingHorizontal="8dp"
+            android:paddingHorizontal="3dp"
             android:paddingVertical="0dp"
             android:textCursorDrawable="@null"
             app:closeIcon="@null"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
-            app:queryHint="__"
+            app:queryHint="___"
             app:searchIcon="@null"
             app:theme="@style/AppSearchText" />
 
