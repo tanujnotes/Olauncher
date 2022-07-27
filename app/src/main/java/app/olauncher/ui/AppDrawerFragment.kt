@@ -22,6 +22,7 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.openUrl
 import app.olauncher.helper.showToastShort
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
@@ -76,7 +77,10 @@ class AppDrawerFragment : Fragment() {
         if (flag == Constants.FLAG_HIDDEN_APPS) search.queryHint = "Hidden apps"
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                appAdapter.launchFirstInList()
+                if (query?.startsWith("!") == true)
+                    requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
+                else
+                    appAdapter.launchFirstInList()
                 return false
             }
 
