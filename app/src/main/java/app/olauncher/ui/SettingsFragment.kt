@@ -441,7 +441,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun updateHomeBottomAlignment() {
         if (viewModel.isOlauncherDefault.value != true) {
             showToastLong(requireContext(), getString(R.string.please_set_olauncher_as_default_first))
-            findNavController().popBackStack()
+            return
         }
         prefs.homeBottomAlignment = !prefs.homeBottomAlignment
         populateAlignment()

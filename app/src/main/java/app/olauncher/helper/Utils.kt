@@ -19,7 +19,6 @@ import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.AttrRes
@@ -41,17 +40,11 @@ import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-fun showToastLong(context: Context, message: String) {
-    val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG)
-    toast.setGravity(Gravity.CENTER, 0, 0)
-    toast.show()
-}
+fun showToastLong(context: Context, message: String) =
+    Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG).show()
 
-fun showToastShort(context: Context, message: String) {
-    val toast = Toast.makeText(context.applicationContext, message, Toast.LENGTH_SHORT)
-    toast.setGravity(Gravity.CENTER, 0, 0)
-    toast.show()
-}
+fun showToastShort(context: Context, message: String) =
+    Toast.makeText(context.applicationContext, message, Toast.LENGTH_SHORT).show()
 
 suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
