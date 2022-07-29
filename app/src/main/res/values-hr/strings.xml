@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">Olauncher</string>
+    <string name="app">Aplikacija</string>
+    <string name="set_as_default_launcher">Postavi kao zadani pokretač</string>
+    <string name="app_text_color">Boja teksta</string>
+    <string name="double_tap_to_lock_screen">Dvostruki dodir za zaključavanje</string>
+    <string name="experimental_">(eksperimentalno)</string>
+    <string name="admin_permission_message">Olauncher obećava da će odgovorno koristiti dozvolu za zaključavanje zaslona.</string>
+    <string name="about">Informacije</string>
+    <string name="off">Isklj.</string>
+    <string name="on">Uklj.</string>
+    <string name="black">Crno</string>
+    <string name="white">Bijelo</string>
+    <string name="change_default_launcher">Promijeni zadani pokretač</string>
+    <string name="privacy">Privatnost</string>
+    <string name="share">Podijeli</string>
+    <string name="rate">Ocijeni</string>
+    <string name="follow">Prati</string>
+    <string name="email">E-pošta</string>
+    <string name="github">Github</string>
+    <string name="donate">Doniraj</string>
+    <string name="swipe_up_for_apps">1. Povuci prema gore za aplikacije</string>
+    <string name="long_press_for_settings">2. Dugo pritisni za postavke</string>
+    <string name="apps_on_home_screen">Aplikacije na početnoj stranici</string>
+    <string name="daily_wallpaper_update">Dnevne pozadine</string>
+    <string name="left">Lijevo</string>
+    <string name="right">Desno</string>
+    <string name="center">Sredina</string>
+    <string name="home_layout_alignment">Poravnanje aplikacija</string>
+    <string name="swipe_left_app">Aplikacija za lijevi potez</string>
+    <string name="swipe_right_app">Aplikacija za desni potez</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Savjet: Povuci prema dolje za zatvaranje. Pomakni zaslon za zatvaranje tipkovnice.</string>
+    <string name="okay">U redu</string>
+    <string name="double_tap_lock_is_enabled_message">Ako zaključavanje dvostrukim dodirom onemogući otključavanje otiskom prsta ili licem, otvori postavke Olaunchera, dodirni \'eksperimentalno\' i slijedi upute. Hvala ti.</string>
+    <string name="triple_tap_lock_message">Kako funkcionira:
+        \nNakon dvostrukog dodira, zaslon se isključuje i uređaj se zaključava nakon 5 sekundi.
+        \n\nTijekom tog vremena može dva puta dodirnuti zaslon za <b>otključavanje</b> ili triputa dotaknuti bilo kada da se uređaj odmah potpuno zaključa.
+        \n\nPazi: Prije brisanja Olaunchera, prvo ISKLJUČI ovo. Hvala.</string>
+    <string name="auto_show_keyboard">Automatski prikaži tipkovnicu</string>
+    <string name="hide">Sakrij</string>
+    <string name="status_bar">Prikaži statusnu traku</string>
+    <string name="rename">Preimenuj</string>
+    <string name="show_date_time">Prikaži datum i vrijeme</string>
+    <string name="appearance">Izgled</string>
+    <string name="gestures">Geste</string>
+    <string name="theme_mode">Tema</string>
+    <string name="system_default">Sustav</string>
+    <string name="dark">Tamna</string>
+    <string name="light">Svijetla</string>
+    <string name="double_tap_lock_uninstall_message">Zaključavanje dvostrukim dodirom je uključeno.
+        \n\nPazi: Prije brisanja Olaunchera, prvo ISKLJUČI ovo.</string>
+    <string name="welcome_to_olauncher_settings">Naša stranica s informacijama na dnu zaslona ima odgovore na sva tvoja pitanja. Nemoj zaboraviti to. :)
+        \n\nHvala ti.</string>
+    <string name="rate_us_message">Ovu poruku više nećeš vidjeti.
+        \n\nBok, ako uživaš u korištenju Olaunchera, možeš li nam dati recenziju s 5 zvijezdica? To nam donosi više korisnika i usrećuje nas.\nHvala ti i sretan ostatak dana!</string>
+    <string name="share_message">Bok, misliš li da bi i tvoji prijatelji voljeli Olauncher?
+        \n\nPodijeli aplikaciju i širi riječ o nama. Hvala ti!</string>
+    <string name="accessibility_service_description">Dozvola za pristupačnost potrebna je za omogućavanje zaključavanja dvostrukim dodirom. Bilo koji podatci prikupljeni ovim servisom neće napustiti tvoj uređaj.</string>
+    <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
+    <string name="support_olauncher_for_free">Besplatno podrži Olauncher korištenjem naše sponzorske poveznice za Amazon.</string>
+    <string name="support_olauncher_message">Svaki puta kada kupiš nešto pomoću naše poveznice, mi primimo malu naknadu. Molimo spremi poveznicu i koristi ju svaki puta kada kupuješ online.\nHvala ti!</string>
+    <string name="open">Otvori poveznicu</string>
+    <string name="copy">Kopiraj</string>
+    <string name="close">Zatvori</string>
+    <string name="public_roadmap">Javni plan razvoja Olaunchera</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="roadmap">Plan razvoja</string>
+    <string name="date">Datum</string>
+    <string name="date_only">Samo datum</string>
+    <string name="bottom_on">Dno: uklj.</string>
+    <string name="bottom_off">Dno: isklj.</string>
+    <string name="please_set_olauncher_as_default_first">Prvo postavite Olauncher kao zadani pokretač</string>
+    <string name="more_ad_free_apps_by_us"><u>Više naših aplikacija bez oglasa</u></string>
+    <string name="affiliate">Sponzorstvo</string>
+    <string name="tip_start_typing_for_rename">Savjet: počni pisati za opciju preimenovanja aplikacija</string>
+    <string name="hidden_apps_message">Pazi: Dodirni \'Olauncher\' na vrhu da pronađeš svoje skrivene aplikacije.\n\nViše detalja dostupno dolje na našoj stranici Informacije.</string>
+    <string name="swipe_down_for">Povuci prema dolje za</string>
+    <string name="search">Pretraživanje</string>
+    <string name="notifications">Obavijesti</string>
+</resources>
