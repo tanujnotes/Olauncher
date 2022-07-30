@@ -60,11 +60,6 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
     }
 
-    override fun onUserLeaveHint() {
-        backToHomeScreen()
-        super.onUserLeaveHint()
-    }
-
     override fun onNewIntent(intent: Intent?) {
         backToHomeScreen()
         super.onNewIntent(intent)
