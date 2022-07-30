@@ -40,6 +40,7 @@
     <string name="_8">8</string>
     <string name="app_drawer_tips">Tip: Swipe down to dismiss. Scroll to hide keyboard.</string>
     <string name="okay">Okay</string>
+    <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
     <string name="triple_tap_lock_message">How it works:
         \nOnce you double-tap, screen will go dark and the phone will lock itself in 5 seconds.
@@ -60,8 +61,8 @@
         \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
-    <string name="rate_us_message">You won\'t see this message again.
-        \n\nHi, if you enjoy using Olauncher, could you give us a 5-star review? It gets us more users and makes us very happy. Please consider it.\nThank you and have a great day!</string>
+    <string name="rate_us_message">Hey, we\'re aiming to be the highest rated launcher on Play Store, ever. If you think we deserve it, please rate us 5-stars.
+        \n\nThank you and you won\'t see this again.</string>
     <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
         \n\nShare the app and help us spread the word. Thank you!</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
