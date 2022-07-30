@@ -240,21 +240,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         else launchApp(
             prefs.getAppName(location),
             prefs.getAppPackage(location),
-            prefs.getAppActivity(location),
             prefs.getAppUser(location)
         )
     }
 
-    private fun launchApp(appName: String, packageName: String, appActivity: String,
-                          userString: String) {
+    private fun launchApp(appName: String, packageName: String, userString: String) {
         viewModel.selectedApp(
-            AppModel(
-                appName,
-                null,
-                packageName,
-                appActivity,
-                getUserHandleFromString(requireContext(), userString)
-            ),
+            AppModel(appName, null, packageName, getUserHandleFromString(requireContext(), userString)),
             Constants.FLAG_LAUNCH_APP
         )
     }
@@ -291,24 +283,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun openSwipeRightApp() {
         if (!prefs.swipeRightEnabled) return
         if (prefs.appPackageSwipeRight.isNotEmpty())
-            launchApp(
-                prefs.appNameSwipeRight,
-                prefs.appPackageSwipeRight,
-                prefs.appActivitySwipeRight,
-                android.os.Process.myUserHandle().toString()
-            )
+            launchApp(prefs.appNameSwipeRight, prefs.appPackageSwipeRight, android.os.Process.myUserHandle().toString())
         else openDialerApp(requireContext())
     }
 
     private fun openSwipeLeftApp() {
         if (!prefs.swipeLeftEnabled) return
         if (prefs.appPackageSwipeLeft.isNotEmpty())
-            launchApp(
-                prefs.appNameSwipeLeft,
-                prefs.appPackageSwipeLeft,
-                prefs.appActivitySwipeLeft,
-                android.os.Process.myUserHandle().toString()
-            )
+            launchApp(prefs.appNameSwipeLeft, prefs.appPackageSwipeLeft, android.os.Process.myUserHandle().toString())
         else openCameraApp(requireContext())
     }
 
