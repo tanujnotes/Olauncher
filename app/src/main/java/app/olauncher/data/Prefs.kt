@@ -120,8 +120,8 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(STATUS_BAR, false)
         set(value) = prefs.edit().putBoolean(STATUS_BAR, value).apply()
 
-    var showDateTime: Int
-        get() = prefs.getInt(DATE_TIME, 1)
+    var dateTimeVisibility: Int
+        get() = prefs.getInt(DATE_TIME, Constants.DateTime.ON)
         set(value) = prefs.edit().putInt(DATE_TIME, value).apply()
 
     var swipeLeftEnabled: Boolean

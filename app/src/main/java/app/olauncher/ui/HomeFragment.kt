@@ -152,7 +152,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun populateDateTime() {
-        when (prefs.showDateTime) {
+        when (prefs.dateTimeVisibility) {
             Constants.DateTime.DATE_ONLY -> {
                 dateTimeLayout.visibility = View.VISIBLE
                 clock.visibility = View.GONE

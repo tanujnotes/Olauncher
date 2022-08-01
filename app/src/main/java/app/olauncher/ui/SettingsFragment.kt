@@ -272,13 +272,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun toggleDateTime(selected: Int) {
-        prefs.showDateTime = selected
+        prefs.dateTimeVisibility = selected
         populateDateTime()
         viewModel.toggleDateTime()
     }
 
     private fun populateDateTime() {
-        dateTime.text = getString(when (prefs.showDateTime) {
+        dateTime.text = getString(when (prefs.dateTimeVisibility) {
             Constants.DateTime.DATE_ONLY -> R.string.date
             Constants.DateTime.ON -> R.string.on
             else -> R.string.off
