@@ -153,8 +153,8 @@ class AppDrawerFragment : Fragment() {
         { appModel ->
             search.hideKeyboard()
             viewModel.selectedApp(appModel, flag)
-            if (flag != Constants.FLAG_LAUNCH_APP && flag != Constants.FLAG_HIDDEN_APPS)
-                findNavController().popBackStack()
+            // if (flag != Constants.FLAG_LAUNCH_APP && flag != Constants.FLAG_HIDDEN_APPS)
+            findNavController().popBackStack()
         }
 
     private fun appInfoListener(): (appModel: AppModel) -> Unit =
