@@ -86,7 +86,7 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             android:padding="12dp"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <TextView
                 style="@style/TextLarge"
@@ -435,19 +435,26 @@
                     android:visibility="gone"
                     tools:ignore="UnusedAttribute">
 
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
                     <TextView
                         android:id="@+id/alignmentBottom"
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_marginEnd="16dp"
                         android:paddingVertical="6dp"
                         android:text="@string/bottom_off" />
 
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="?attr/primaryColorTrans50" />
 
                     <TextView
                         android:id="@+id/alignmentLeft"
@@ -753,6 +760,7 @@
                 style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:padding="10dp"
                 android:text="@string/about" />
 
@@ -769,6 +777,7 @@
                 style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:padding="10dp"
                 android:text="@string/rate" />
 
