@@ -54,6 +54,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
+        populateAutoOpenText()
         populateAppThemeText()
         populateAlignment()
         populateStatusBar()
@@ -97,6 +98,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            R.id.autoAppOpen -> toggleAutoOpenApp()
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -186,6 +188,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         themeLight.setOnClickListener(this)
         themeDark.setOnClickListener(this)
         themeSystem.setOnClickListener(this)
+        autoAppOpen.setOnClickListener(this)
 
         about.setOnClickListener(this)
         share.setOnClickListener(this)
@@ -408,6 +411,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         requireActivity().recreate()
     }
 
+    private fun toggleAutoOpenApp() {
+        prefs.autoOpenApp = !prefs.autoOpenApp
+        populateAutoOpenText()
+    }
+
     private fun setPlainWallpaper(appTheme: Int) {
         when (appTheme) {
             AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(requireContext(), android.R.color.black)
@@ -431,6 +439,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateKeyboardText() {
         if (prefs.autoShowKeyboard) autoShowKeyboard.text = getString(R.string.on)
         else autoShowKeyboard.text = getString(R.string.off)
+    }
+
+    private fun populateAutoOpenText() {
+        if (prefs.autoOpenApp) autoAppOpen.text = getString(R.string.on)
+        else autoAppOpen.text = getString(R.string.off)
     }
 
     private fun populateWallpaperText() {

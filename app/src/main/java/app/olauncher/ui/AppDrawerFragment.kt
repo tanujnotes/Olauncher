@@ -60,6 +60,7 @@ class AppDrawerFragment : Fragment() {
         val appAdapter = AppDrawerAdapter(
             flag,
             prefs.appLabelAlignment,
+            prefs.autoOpenApp,
             appClickListener(viewModel, flag),
             appInfoListener(),
             appShowHideListener()

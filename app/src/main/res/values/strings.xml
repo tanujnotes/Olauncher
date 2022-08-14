@@ -54,6 +54,7 @@
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
     <string name="theme_mode">Theme mode</string>
+    <string name="auto_app_open">Auto app open in search</string>
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>

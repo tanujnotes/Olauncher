@@ -33,6 +33,7 @@ class Prefs(context: Context) {
     private val RATE_CLICKED = "RATE_CLICKED"
     private val RENAME_TIP_SHOWN = "RENAME_TIP_SHOWN"
     private val SWIPE_DOWN_ACTION = "SWIPE_DOWN_ACTION"
+    private val AUTO_OPEN_APP = "AUTO_OPEN_APP"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -287,6 +288,10 @@ class Prefs(context: Context) {
     var appUserSwipeRight: String
         get() = prefs.getString(APP_USER_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_USER_SWIPE_RIGHT, value).apply()
+
+    var autoOpenApp: Boolean
+        get() = prefs.getBoolean(AUTO_OPEN_APP, true)
+        set(value) = prefs.edit().putBoolean(AUTO_OPEN_APP, value).apply()
 
     fun getAppName(location: Int): String {
         return when (location) {

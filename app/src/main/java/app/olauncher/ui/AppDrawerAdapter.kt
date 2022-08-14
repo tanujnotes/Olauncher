@@ -16,6 +16,7 @@ import java.text.Normalizer
 class AppDrawerAdapter(
     private var flag: Int,
     private val appLabelGravity: Int,
+    private val appAutoOpen: Boolean,
     private val clickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
     private val appHideListener: (Int, AppModel) -> Unit
@@ -42,11 +43,13 @@ class AppDrawerAdapter(
             notifyItemRemoved(holder.adapterPosition)
             appHideListener(flag, appModel)
         }
-        try { // Automatically open the app when there's only one search result
-            if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP))
-                clickListener(appFilteredList[position])
-        } catch (e: Exception) {
+        if (appAutoOpen){
+            try { // Automatically open the app when there's only one search result
+                if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP))
+                    clickListener(appFilteredList[position])
+            } catch (e: Exception) {
 
+            }
         }
     }
 
