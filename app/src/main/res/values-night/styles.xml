@@ -51,7 +51,7 @@
     </style>
 
     <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
-        <item name="android:maxLength">20</item>
+        <item name="android:maxLength">50</item>
         <item name="android:textSize">@dimen/text_large</item>
         <item name="android:textColor">?attr/primaryColor</item>
         <item name="android:editTextColor">?attr/primaryColor</item>

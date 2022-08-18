@@ -14,6 +14,7 @@ class Prefs(context: Context) {
     private val LOCK_MODE = "LOCK_MODE"
     private val HOME_APPS_NUM = "HOME_APPS_NUM"
     private val AUTO_SHOW_KEYBOARD = "AUTO_SHOW_KEYBOARD"
+    private val KEYBOARD_MESSAGE = "KEYBOARD_MESSAGE"
     private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
     private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
     private val WALLPAPER_UPDATED_DAY = "WALLPAPER_UPDATED_DAY"
@@ -97,6 +98,10 @@ class Prefs(context: Context) {
     var autoShowKeyboard: Boolean
         get() = prefs.getBoolean(AUTO_SHOW_KEYBOARD, true)
         set(value) = prefs.edit().putBoolean(AUTO_SHOW_KEYBOARD, value).apply()
+
+    var keyboardMessageShown: Boolean
+        get() = prefs.getBoolean(KEYBOARD_MESSAGE, false)
+        set(value) = prefs.edit().putBoolean(KEYBOARD_MESSAGE, value).apply()
 
     var dailyWallpaper: Boolean
         get() = prefs.getBoolean(DAILY_WALLPAPER, false)

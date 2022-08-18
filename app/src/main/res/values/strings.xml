@@ -65,6 +65,8 @@
         \n\nThank you and you won\'t see this again.</string>
     <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
         \n\nShare the app and help us spread the word. Thank you!</string>
+    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
+        \n\nThe choice is always yours.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
