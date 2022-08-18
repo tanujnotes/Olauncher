@@ -93,6 +93,10 @@ class AppDrawerFragment : Fragment() {
                 return false
             }
         })
+        appDrawerTip.setOnClickListener {
+            appDrawerTip.isSelected = false
+            appDrawerTip.isSelected = true
+        }
     }
 
     private fun initViewModel(flag: Int, viewModel: MainViewModel, appAdapter: AppDrawerAdapter) {
@@ -117,6 +121,9 @@ class AppDrawerFragment : Fragment() {
 
         viewModel.firstOpen.observe(viewLifecycleOwner) {
             if (it) appDrawerTip.visibility = View.VISIBLE
+            appDrawerTip.postDelayed({
+                appDrawerTip.isSelected = true
+            }, 1500)
         }
     }
 
