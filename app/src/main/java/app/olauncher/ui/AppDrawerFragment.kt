@@ -122,7 +122,8 @@ class AppDrawerFragment : Fragment() {
         viewModel.firstOpen.observe(viewLifecycleOwner) {
             if (it) appDrawerTip.visibility = View.VISIBLE
             appDrawerTip.postDelayed({
-                appDrawerTip.isSelected = true
+                if (appDrawerTip != null)
+                    appDrawerTip.isSelected = true
             }, 1500)
         }
     }
