@@ -93,6 +93,10 @@ class AppDrawerFragment : Fragment() {
                 return false
             }
         })
+        appDrawerTip.setOnClickListener {
+            appDrawerTip.isSelected = false
+            appDrawerTip.isSelected = true
+        }
     }
 
     private fun initViewModel(flag: Int, viewModel: MainViewModel, appAdapter: AppDrawerAdapter) {
@@ -117,6 +121,9 @@ class AppDrawerFragment : Fragment() {
 
         viewModel.firstOpen.observe(viewLifecycleOwner) {
             if (it) appDrawerTip.visibility = View.VISIBLE
+            appDrawerTip.postDelayed({
+                appDrawerTip.isSelected = true
+            }, 1500)
         }
     }
 
@@ -151,10 +158,11 @@ class AppDrawerFragment : Fragment() {
 
     private fun appClickListener(viewModel: MainViewModel, flag: Int): (appModel: AppModel) -> Unit =
         { appModel ->
-            search.hideKeyboard()
             viewModel.selectedApp(appModel, flag)
-            // if (flag != Constants.FLAG_LAUNCH_APP && flag != Constants.FLAG_HIDDEN_APPS)
-            findNavController().popBackStack()
+            if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
+                findNavController().popBackStack(R.id.mainFragment, false)
+            else
+                findNavController().popBackStack()
         }
 
     private fun appInfoListener(): (appModel: AppModel) -> Unit =
