@@ -388,8 +388,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun toggleKeyboardText() {
-        prefs.autoShowKeyboard = !prefs.autoShowKeyboard
-        populateKeyboardText()
+        if (prefs.autoShowKeyboard && prefs.keyboardMessageShown.not()) {
+            viewModel.showMessageDialog(getString(R.string.keyboard_message))
+            prefs.keyboardMessageShown = true
+        } else {
+            prefs.autoShowKeyboard = !prefs.autoShowKeyboard
+            populateKeyboardText()
+        }
     }
 
     private fun updateTheme(appTheme: Int) {
