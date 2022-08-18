@@ -51,6 +51,14 @@ class Prefs(context: Context) {
     private val APP_PACKAGE_6 = "APP_PACKAGE_6"
     private val APP_PACKAGE_7 = "APP_PACKAGE_7"
     private val APP_PACKAGE_8 = "APP_PACKAGE_8"
+    private val APP_ACTIVITY_CLASS_NAME_1 = "APP_ACTIVITY_CLASS_NAME_1"
+    private val APP_ACTIVITY_CLASS_NAME_2 = "APP_ACTIVITY_CLASS_NAME_2"
+    private val APP_ACTIVITY_CLASS_NAME_3 = "APP_ACTIVITY_CLASS_NAME_3"
+    private val APP_ACTIVITY_CLASS_NAME_4 = "APP_ACTIVITY_CLASS_NAME_4"
+    private val APP_ACTIVITY_CLASS_NAME_5 = "APP_ACTIVITY_CLASS_NAME_5"
+    private val APP_ACTIVITY_CLASS_NAME_6 = "APP_ACTIVITY_CLASS_NAME_6"
+    private val APP_ACTIVITY_CLASS_NAME_7 = "APP_ACTIVITY_CLASS_NAME_7"
+    private val APP_ACTIVITY_CLASS_NAME_8 = "APP_ACTIVITY_CLASS_NAME_8"
     private val APP_USER_1 = "APP_USER_1"
     private val APP_USER_2 = "APP_USER_2"
     private val APP_USER_3 = "APP_USER_3"
@@ -64,6 +72,8 @@ class Prefs(context: Context) {
     private val APP_NAME_SWIPE_RIGHT = "APP_NAME_SWIPE_RIGHT"
     private val APP_PACKAGE_SWIPE_LEFT = "APP_PACKAGE_SWIPE_LEFT"
     private val APP_PACKAGE_SWIPE_RIGHT = "APP_PACKAGE_SWIPE_RIGHT"
+    private val APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT = "APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT"
+    private val APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT = "APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT"
     private val APP_USER_SWIPE_LEFT = "APP_USER_SWIPE_LEFT"
     private val APP_USER_SWIPE_RIGHT = "APP_USER_SWIPE_RIGHT"
 
@@ -237,6 +247,38 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_PACKAGE_8, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_8, value).apply()
 
+    var appActivityClassName1: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_1, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_1, value).apply()
+
+    var appActivityClassName2: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_2, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_2, value).apply()
+
+    var appActivityClassName3: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_3, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_3, value).apply()
+
+    var appActivityClassName4: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_4, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_4, value).apply()
+
+    var appActivityClassName5: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_5, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_5, value).apply()
+
+    var appActivityClassName6: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_6, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_6, value).apply()
+
+    var appActivityClassName7: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_7, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_7, value).apply()
+
+    var appActivityClassName8: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_8, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_8, value).apply()
+
     var appUser1: String
         get() = prefs.getString(APP_USER_1, "").toString()
         set(value) = prefs.edit().putString(APP_USER_1, value).apply()
@@ -281,9 +323,17 @@ class Prefs(context: Context) {
         get() = prefs.getString(APP_PACKAGE_SWIPE_LEFT, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_LEFT, value).apply()
 
+    var appActivityClassNameSwipeLeft: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_SWIPE_LEFT, value).apply()
+
     var appPackageSwipeRight: String
         get() = prefs.getString(APP_PACKAGE_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_PACKAGE_SWIPE_RIGHT, value).apply()
+
+    var appActivityClassNameRight: String?
+        get() = prefs.getString(APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT, "").toString()
+        set(value) = prefs.edit().putString(APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT, value).apply()
 
     var appUserSwipeLeft: String
         get() = prefs.getString(APP_USER_SWIPE_LEFT, "").toString()
@@ -317,6 +367,20 @@ class Prefs(context: Context) {
             6 -> prefs.getString(APP_PACKAGE_6, "").toString()
             7 -> prefs.getString(APP_PACKAGE_7, "").toString()
             8 -> prefs.getString(APP_PACKAGE_8, "").toString()
+            else -> ""
+        }
+    }
+
+    fun getAppActivityClassName(location: Int): String {
+        return when (location) {
+            1 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_1, "").toString()
+            2 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_2, "").toString()
+            3 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_3, "").toString()
+            4 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_4, "").toString()
+            5 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_5, "").toString()
+            6 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_6, "").toString()
+            7 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_7, "").toString()
+            8 -> prefs.getString(APP_ACTIVITY_CLASS_NAME_8, "").toString()
             else -> ""
         }
     }
