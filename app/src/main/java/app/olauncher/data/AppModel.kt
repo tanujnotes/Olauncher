@@ -7,6 +7,7 @@ data class AppModel(
         val appLabel: String,
         val key: CollationKey?,
         val appPackage: String,
+        val activityClassName: String?,
         val user: UserHandle
 ) : Comparable<AppModel> {
     override fun compareTo(other: AppModel): Int = when {
