@@ -18,7 +18,7 @@ You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/m
 
 ## Contribute
 * Please go through the issues marked as [`bug`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug), [`enhancement`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement) or [`send PR`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3A%22send+PR%22)
-* Please don't send features without discussing first
+* Please don't send features without [discussing](https://github.com/tanujnotes/Olauncher/discussions) first
 * Make pull requests to [`master`](https://github.com/tanujnotes/olauncher) branch
 
 ## Sponsor
