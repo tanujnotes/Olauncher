@@ -19,9 +19,9 @@ import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.databinding.FragmentSettingsBinding
 import app.olauncher.helper.*
 import app.olauncher.listener.DeviceAdmin
-import kotlinx.android.synthetic.main.fragment_settings.*
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
@@ -30,12 +30,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private lateinit var deviceManager: DevicePolicyManager
     private lateinit var componentName: ComponentName
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    private var _binding: FragmentSettingsBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
-        homeAppsNum.text = prefs.homeAppsNum.toString()
+        binding.homeAppsNum.text = prefs.homeAppsNum.toString()
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
@@ -66,12 +66,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     override fun onClick(view: View) {
-        appsNumSelectLayout.visibility = View.GONE
-        dateTimeSelectLayout.visibility = View.GONE
-        appThemeSelectLayout.visibility = View.GONE
-        swipeDownSelectLayout.visibility = View.GONE
+        binding.appsNumSelectLayout.visibility = View.GONE
+        binding.dateTimeSelectLayout.visibility = View.GONE
+        binding.appThemeSelectLayout.visibility = View.GONE
+        binding.swipeDownSelectLayout.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
-            alignmentSelectLayout.visibility = View.GONE
+            binding.alignmentSelectLayout.visibility = View.GONE
 
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
@@ -80,20 +80,20 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.publicRoadmap -> requireContext().openUrl(Constants.URL_PUBLIC_ROADMAP)
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
-            R.id.homeAppsNum -> appsNumSelectLayout.visibility = View.VISIBLE
+            R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
-            R.id.alignment -> alignmentSelectLayout.visibility = View.VISIBLE
+            R.id.alignment -> binding.alignmentSelectLayout.visibility = View.VISIBLE
             R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
             R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
             R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
             R.id.alignmentBottom -> updateHomeBottomAlignment()
             R.id.statusBar -> toggleStatusBar()
-            R.id.dateTime -> dateTimeSelectLayout.visibility = View.VISIBLE
+            R.id.dateTime -> binding.dateTimeSelectLayout.visibility = View.VISIBLE
             R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
             R.id.dateTimeOff -> toggleDateTime(Constants.DateTime.OFF)
             R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
-            R.id.appThemeText -> appThemeSelectLayout.visibility = View.VISIBLE
+            R.id.appThemeText -> binding.appThemeSelectLayout.visibility = View.VISIBLE
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
@@ -110,7 +110,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
-            R.id.swipeDownAction -> swipeDownSelectLayout.visibility = View.VISIBLE
+            R.id.swipeDownAction -> binding.swipeDownSelectLayout.visibility = View.VISIBLE
             R.id.notifications -> updateSwipeDownAction(Constants.SwipeDownAction.NOTIFICATIONS)
             R.id.search -> updateSwipeDownAction(Constants.SwipeDownAction.SEARCH)
 
@@ -143,8 +143,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             }
             R.id.dailyWallpaper -> removeWallpaper()
             R.id.appThemeText -> {
-                appThemeSelectLayout.visibility = View.VISIBLE
-                themeSystem.visibility = View.VISIBLE
+                binding.appThemeSelectLayout.visibility = View.VISIBLE
+                binding.themeSystem.visibility = View.VISIBLE
             }
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
@@ -157,62 +157,62 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initClickListeners() {
-        olauncherHiddenApps.setOnClickListener(this)
-        scrollLayout.setOnClickListener(this)
-        appInfo.setOnClickListener(this)
-        setLauncher.setOnClickListener(this)
-        publicRoadmap.setOnClickListener(this)
-        autoShowKeyboard.setOnClickListener(this)
-        toggleLock.setOnClickListener(this)
-        homeAppsNum.setOnClickListener(this)
-        dailyWallpaperUrl.setOnClickListener(this)
-        dailyWallpaper.setOnClickListener(this)
-        alignment.setOnClickListener(this)
-        alignmentLeft.setOnClickListener(this)
-        alignmentCenter.setOnClickListener(this)
-        alignmentRight.setOnClickListener(this)
-        alignmentBottom.setOnClickListener(this)
-        statusBar.setOnClickListener(this)
-        dateTime.setOnClickListener(this)
-        dateTimeOn.setOnClickListener(this)
-        dateTimeOff.setOnClickListener(this)
-        dateOnly.setOnClickListener(this)
-        swipeLeftApp.setOnClickListener(this)
-        swipeRightApp.setOnClickListener(this)
-        swipeDownAction.setOnClickListener(this)
-        search.setOnClickListener(this)
-        notifications.setOnClickListener(this)
-        appThemeText.setOnClickListener(this)
-        themeLight.setOnClickListener(this)
-        themeDark.setOnClickListener(this)
-        themeSystem.setOnClickListener(this)
+        binding.olauncherHiddenApps.setOnClickListener(this)
+        binding.scrollLayout.setOnClickListener(this)
+        binding.appInfo.setOnClickListener(this)
+        binding.setLauncher.setOnClickListener(this)
+        binding.publicRoadmap.setOnClickListener(this)
+        binding.autoShowKeyboard.setOnClickListener(this)
+        binding.toggleLock.setOnClickListener(this)
+        binding.homeAppsNum.setOnClickListener(this)
+        binding.dailyWallpaperUrl.setOnClickListener(this)
+        binding.dailyWallpaper.setOnClickListener(this)
+        binding.alignment.setOnClickListener(this)
+        binding.alignmentLeft.setOnClickListener(this)
+        binding.alignmentCenter.setOnClickListener(this)
+        binding.alignmentRight.setOnClickListener(this)
+        binding.alignmentBottom.setOnClickListener(this)
+        binding.statusBar.setOnClickListener(this)
+        binding.dateTime.setOnClickListener(this)
+        binding.dateTimeOn.setOnClickListener(this)
+        binding.dateTimeOff.setOnClickListener(this)
+        binding.dateOnly.setOnClickListener(this)
+        binding.swipeLeftApp.setOnClickListener(this)
+        binding.swipeRightApp.setOnClickListener(this)
+        binding.swipeDownAction.setOnClickListener(this)
+        binding.search.setOnClickListener(this)
+        binding.notifications.setOnClickListener(this)
+        binding.appThemeText.setOnClickListener(this)
+        binding.themeLight.setOnClickListener(this)
+        binding.themeDark.setOnClickListener(this)
+        binding.themeSystem.setOnClickListener(this)
 
-        about.setOnClickListener(this)
-        share.setOnClickListener(this)
-        rate.setOnClickListener(this)
-        twitter.setOnClickListener(this)
-        instagram.setOnClickListener(this)
-        privacy.setOnClickListener(this)
-        github.setOnClickListener(this)
-        affiliate.setOnClickListener(this)
-        moreApps.setOnClickListener(this)
+        binding.about.setOnClickListener(this)
+        binding.share.setOnClickListener(this)
+        binding.rate.setOnClickListener(this)
+        binding.twitter.setOnClickListener(this)
+        binding.instagram.setOnClickListener(this)
+        binding.privacy.setOnClickListener(this)
+        binding.github.setOnClickListener(this)
+        binding.affiliate.setOnClickListener(this)
+        binding.moreApps.setOnClickListener(this)
 
-        maxApps0.setOnClickListener(this)
-        maxApps1.setOnClickListener(this)
-        maxApps2.setOnClickListener(this)
-        maxApps3.setOnClickListener(this)
-        maxApps4.setOnClickListener(this)
-        maxApps5.setOnClickListener(this)
-        maxApps6.setOnClickListener(this)
-        maxApps7.setOnClickListener(this)
-        maxApps8.setOnClickListener(this)
+        binding.maxApps0.setOnClickListener(this)
+        binding.maxApps1.setOnClickListener(this)
+        binding.maxApps2.setOnClickListener(this)
+        binding.maxApps3.setOnClickListener(this)
+        binding.maxApps4.setOnClickListener(this)
+        binding.maxApps5.setOnClickListener(this)
+        binding.maxApps6.setOnClickListener(this)
+        binding.maxApps7.setOnClickListener(this)
+        binding.maxApps8.setOnClickListener(this)
 
-        dailyWallpaper.setOnLongClickListener(this)
-        alignment.setOnLongClickListener(this)
-        appThemeText.setOnLongClickListener(this)
-        swipeLeftApp.setOnLongClickListener(this)
-        swipeRightApp.setOnLongClickListener(this)
-        toggleLock.setOnLongClickListener(this)
+        binding.dailyWallpaper.setOnLongClickListener(this)
+        binding.alignment.setOnLongClickListener(this)
+        binding.appThemeText.setOnLongClickListener(this)
+        binding.swipeLeftApp.setOnLongClickListener(this)
+        binding.swipeRightApp.setOnLongClickListener(this)
+        binding.toggleLock.setOnLongClickListener(this)
     }
 
     private fun initObservers() {
@@ -221,9 +221,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner) {
             if (it) {
-                setLauncher.text = getString(R.string.change_default_launcher)
+                binding.setLauncher.text = getString(R.string.change_default_launcher)
                 prefs.toShowHintCounter = prefs.toShowHintCounter + 1
-                publicRoadmap.visibility = View.VISIBLE
+                binding.publicRoadmap.visibility = View.VISIBLE
             }
         }
         viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
@@ -237,10 +237,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun toggleSwipeLeft() {
         prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
         if (prefs.swipeLeftEnabled) {
-            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
+            binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             showToastShort(requireContext(), "Swipe left app enabled")
         } else {
-            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+            binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
             showToastShort(requireContext(), "Swipe left app disabled")
         }
     }
@@ -248,10 +248,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun toggleSwipeRight() {
         prefs.swipeRightEnabled = !prefs.swipeRightEnabled
         if (prefs.swipeRightEnabled) {
-            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
+            binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
             showToastShort(requireContext(), "Swipe right app enabled")
         } else {
-            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+            binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
             showToastShort(requireContext(), "Swipe right app disabled")
         }
     }
@@ -264,10 +264,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateStatusBar() {
         if (prefs.showStatusBar) {
             showStatusBar()
-            statusBar.text = getString(R.string.on)
+            binding.statusBar.text = getString(R.string.on)
         } else {
             hideStatusBar()
-            statusBar.text = getString(R.string.off)
+            binding.statusBar.text = getString(R.string.off)
         }
     }
 
@@ -278,7 +278,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateDateTime() {
-        dateTime.text = getString(when (prefs.dateTimeVisibility) {
+        binding.dateTime.text = getString(when (prefs.dateTimeVisibility) {
             Constants.DateTime.DATE_ONLY -> R.string.date
             Constants.DateTime.ON -> R.string.on
             else -> R.string.off
@@ -381,8 +381,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun updateHomeAppsNum(num: Int) {
-        homeAppsNum.text = num.toString()
-        appsNumSelectLayout.visibility = View.GONE
+        binding.homeAppsNum.text = num.toString()
+        binding.appsNumSelectLayout.visibility = View.GONE
         prefs.homeAppsNum = num
         viewModel.refreshHome(true)
     }
@@ -427,20 +427,20 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateAppThemeText(appTheme: Int = prefs.appTheme) {
         when (appTheme) {
-            AppCompatDelegate.MODE_NIGHT_YES -> appThemeText.text = getString(R.string.dark)
-            AppCompatDelegate.MODE_NIGHT_NO -> appThemeText.text = getString(R.string.light)
-            else -> appThemeText.text = getString(R.string.system_default)
+            AppCompatDelegate.MODE_NIGHT_YES -> binding.appThemeText.text = getString(R.string.dark)
+            AppCompatDelegate.MODE_NIGHT_NO -> binding.appThemeText.text = getString(R.string.light)
+            else -> binding.appThemeText.text = getString(R.string.system_default)
         }
     }
 
     private fun populateKeyboardText() {
-        if (prefs.autoShowKeyboard) autoShowKeyboard.text = getString(R.string.on)
-        else autoShowKeyboard.text = getString(R.string.off)
+        if (prefs.autoShowKeyboard) binding.autoShowKeyboard.text = getString(R.string.on)
+        else binding.autoShowKeyboard.text = getString(R.string.off)
     }
 
     private fun populateWallpaperText() {
-        if (prefs.dailyWallpaper) dailyWallpaper.text = getString(R.string.on)
-        else dailyWallpaper.text = getString(R.string.off)
+        if (prefs.dailyWallpaper) binding.dailyWallpaper.text = getString(R.string.on)
+        else binding.dailyWallpaper.text = getString(R.string.off)
     }
 
     private fun updateHomeBottomAlignment() {
@@ -455,22 +455,22 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateAlignment() {
         when (prefs.homeAlignment) {
-            Gravity.START -> alignment.text = getString(R.string.left)
-            Gravity.CENTER -> alignment.text = getString(R.string.center)
-            Gravity.END -> alignment.text = getString(R.string.right)
+            Gravity.START -> binding.alignment.text = getString(R.string.left)
+            Gravity.CENTER -> binding.alignment.text = getString(R.string.center)
+            Gravity.END -> binding.alignment.text = getString(R.string.right)
         }
-        alignmentBottom.text = if (prefs.homeBottomAlignment)
+        binding.alignmentBottom.text = if (prefs.homeBottomAlignment)
             getString(R.string.bottom_on)
         else getString(R.string.bottom_off)
     }
 
     private fun populateLockSettings() {
-        if (prefs.lockModeOn) toggleLock.text = getString(R.string.on)
-        else toggleLock.text = getString(R.string.off)
+        if (prefs.lockModeOn) binding.toggleLock.text = getString(R.string.on)
+        else binding.toggleLock.text = getString(R.string.off)
     }
 
     private fun populateSwipeDownAction() {
-        swipeDownAction.text = when (prefs.swipeDownAction) {
+        binding.swipeDownAction.text = when (prefs.swipeDownAction) {
             Constants.SwipeDownAction.NOTIFICATIONS -> getString(R.string.notifications)
             else -> getString(R.string.search)
         }
@@ -507,12 +507,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateSwipeApps() {
-        swipeLeftApp.text = prefs.appNameSwipeLeft
-        swipeRightApp.text = prefs.appNameSwipeRight
+        binding.swipeLeftApp.text = prefs.appNameSwipeLeft
+        binding.swipeRightApp.text = prefs.appNameSwipeRight
         if (!prefs.swipeLeftEnabled)
-            swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+            binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
         if (!prefs.swipeRightEnabled)
-            swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+            binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
     }
 
     private fun showAppListIfEnabled(flag: Int) {
@@ -536,16 +536,21 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         when (prefs.toShowHintCounter) {
             Constants.HINT_RATE_US -> {
                 viewModel.showMessageDialog(getString(R.string.rate_us_message))
-                rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-                scrollView.post {
-                    scrollView.fullScroll(View.FOCUS_DOWN)
+                binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+                binding.scrollView.post {
+                    binding.scrollView.fullScroll(View.FOCUS_DOWN)
                 }
             }
         }
         if (viewModel.isOlauncherDefault.value != true) return
         if (prefs.aboutClicked.not() && prefs.toShowHintCounter < Constants.HINT_RATE_US)
-            about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+            binding.about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
         if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US && prefs.toShowHintCounter < Constants.HINT_RATE_US + 10)
-            rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+            binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

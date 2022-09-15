@@ -7,10 +7,9 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
-import kotlinx.android.synthetic.main.adapter_app_drawer.view.*
+import app.olauncher.databinding.AdapterAppDrawerBinding
 import java.text.Normalizer
 
 class AppDrawerAdapter(
@@ -18,7 +17,7 @@ class AppDrawerAdapter(
     private val appLabelGravity: Int,
     private val clickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
-    private val appHideListener: (Int, AppModel) -> Unit
+    private val appHideListener: (Int, AppModel) -> Unit,
 ) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
     private var appFilter = createAppFilter()
@@ -26,10 +25,7 @@ class AppDrawerAdapter(
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_app_drawer, parent, false)
-        )
+        ViewHolder(AdapterAppDrawerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (appFilteredList.size == 0) return
@@ -93,17 +89,17 @@ class AppDrawerAdapter(
             clickListener(appFilteredList[0])
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val appHideButton: TextView = itemView.appHide
+    class ViewHolder(private val binding: AdapterAppDrawerBinding) : RecyclerView.ViewHolder(binding.root) {
+        val appHideButton: TextView = binding.appHide
 
         fun bind(
             flag: Int,
             appLabelGravity: Int,
             appModel: AppModel,
             listener: (AppModel) -> Unit,
-            appInfoListener: (AppModel) -> Unit
+            appInfoListener: (AppModel) -> Unit,
         ) =
-            with(itemView) {
+            with(binding) {
                 appHideLayout.visibility = View.GONE
                 appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
                 appTitle.text = appModel.appLabel

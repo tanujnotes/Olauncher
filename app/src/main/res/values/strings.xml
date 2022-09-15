@@ -38,7 +38,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Tip: Type app name to fast search and launch. Scroll for more.</string>
+    <string name="app_drawer_tips">Tip: Type your favorite app to auto-launch</string>
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>

@@ -18,8 +18,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.databinding.ActivityMainBinding
 import app.olauncher.helper.*
-import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs: Prefs
     private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
+    private lateinit var binding: ActivityMainBinding
 
     override fun onBackPressed() {
         if (navController.currentDestination?.id != R.id.mainFragment)
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         prefs = Prefs(this)
         AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -81,18 +83,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initClickListeners() {
-        okay.setOnClickListener {
-            messageLayout.visibility = View.GONE
+        binding.okay.setOnClickListener {
+            binding.messageLayout.visibility = View.GONE
             viewModel.showMessageDialog("")
         }
-        closeOneLink.setOnClickListener {
-            supportOlauncherLayout.visibility = View.GONE
+        binding.closeOneLink.setOnClickListener {
+            binding.supportOlauncherLayout.visibility = View.GONE
         }
-        copyOneLink.setOnClickListener {
+        binding.copyOneLink.setOnClickListener {
             copyToClipboard(getAffiliateUrl())
-            supportOlauncherLayout.visibility = View.GONE
+            binding.supportOlauncherLayout.visibility = View.GONE
         }
-        openOneLink.setOnClickListener {
+        binding.openOneLink.setOnClickListener {
             openUrl(getAffiliateUrl())
         }
     }
@@ -105,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             showMessage(it)
         }
         viewModel.showSupportDialog.observe(this) {
-            supportOlauncherLayout.isVisible = it
+            binding.supportOlauncherLayout.isVisible = it
         }
     }
 
@@ -118,8 +120,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun backToHomeScreen() {
-        messageLayout.visibility = View.GONE
-        supportOlauncherLayout.visibility = View.GONE
+        binding.messageLayout.visibility = View.GONE
+        binding.supportOlauncherLayout.visibility = View.GONE
         // Whenever home button is pressed or user leaves the launcher,
         // pop all the fragments except main
         if (navController.currentDestination?.id != R.id.mainFragment)
@@ -148,8 +150,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMessage(message: String) {
         if (message.isEmpty()) return
-        messageTextView.text = message
-        messageLayout.visibility = View.VISIBLE
+        binding.messageTextView.text = message
+        binding.messageLayout.visibility = View.VISIBLE
     }
 
     private fun getAffiliateUrl(): String {
