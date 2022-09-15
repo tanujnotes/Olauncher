@@ -40,6 +40,7 @@ import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+
 fun showToastLong(context: Context, message: String) =
     Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG).show()
 
@@ -401,13 +402,11 @@ fun openAlarmApp(context: Context) {
 
 fun openCalendar(context: Context) {
     try {
-        val cal: Calendar = Calendar.getInstance()
-        cal.time = Date()
-        val time = cal.time.time
-        val builder: Uri.Builder = CalendarContract.CONTENT_URI.buildUpon()
-        builder.appendPath("time")
-        builder.appendPath(time.toString())
-        context.startActivity(Intent(Intent.ACTION_VIEW, builder.build()))
+        val calendarUri = CalendarContract.CONTENT_URI
+            .buildUpon()
+            .appendPath("time")
+            .build()
+        context.startActivity(Intent(Intent.ACTION_VIEW, calendarUri))
     } catch (e: Exception) {
         try {
             val intent = Intent(Intent.ACTION_MAIN)
