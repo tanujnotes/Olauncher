@@ -21,6 +21,7 @@ class AppDrawerAdapter(
 ) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
     private var appFilter = createAppFilter()
+    private var isBangSearch = false
     var appsList: MutableList<AppModel> = mutableListOf()
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
@@ -39,10 +40,12 @@ class AppDrawerAdapter(
             appHideListener(flag, appModel)
         }
         try { // Automatically open the app when there's only one search result
-            if ((itemCount == 1) and (flag == Constants.FLAG_LAUNCH_APP))
-                clickListener(appFilteredList[position])
+            if (itemCount == 1
+                && isBangSearch.not()
+                && flag == Constants.FLAG_LAUNCH_APP
+            ) clickListener(appFilteredList[position])
         } catch (e: Exception) {
-
+            e.printStackTrace()
         }
     }
 
@@ -54,6 +57,7 @@ class AppDrawerAdapter(
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val searchChars = constraint.toString()
+                isBangSearch = searchChars.startsWith("!")
                 val appFilteredList = (if (searchChars.isEmpty()) appsList
                 else appsList.filter { app -> appLabelMatches(app.appLabel, searchChars) } as MutableList<AppModel>)
 

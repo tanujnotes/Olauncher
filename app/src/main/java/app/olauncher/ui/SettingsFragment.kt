@@ -314,7 +314,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.getHiddenApps()
         findNavController().navigate(
             R.id.action_settingsFragment_to_appListFragment,
-            bundleOf("flag" to Constants.FLAG_HIDDEN_APPS)
+            bundleOf(Constants.Key.FLAG to Constants.FLAG_HIDDEN_APPS)
         )
     }
 
@@ -528,7 +528,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.getAppList()
         findNavController().navigate(
             R.id.action_settingsFragment_to_appListFragment,
-            bundleOf("flag" to flag)
+            bundleOf(Constants.Key.FLAG to flag)
         )
     }
 

@@ -46,8 +46,8 @@ class AppDrawerFragment : Fragment() {
             ViewModelProvider(this).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
-        val flag = arguments?.getInt("flag", Constants.FLAG_LAUNCH_APP) ?: Constants.FLAG_LAUNCH_APP
-        val rename = arguments?.getBoolean("rename", false) ?: false
+        val flag = arguments?.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP) ?: Constants.FLAG_LAUNCH_APP
+        val rename = arguments?.getBoolean(Constants.Key.RENAME, false) ?: false
         if (rename) {
             binding.appRename.setOnClickListener { renameListener(flag) }
             if (prefs.renameTipShown.not()) {

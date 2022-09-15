@@ -2,6 +2,11 @@ package app.olauncher.data
 
 object Constants {
 
+    object Key {
+        const val FLAG = "flag"
+        const val RENAME = "rename"
+    }
+
     object DateTime {
         const val OFF = 0
         const val ON = 1
