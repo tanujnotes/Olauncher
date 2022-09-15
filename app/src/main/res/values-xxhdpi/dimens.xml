@@ -5,6 +5,6 @@
     <dimen name="app_padding_vertical">12dp</dimen>
     <dimen name="home_app_padding_vertical">10dp</dimen>
 
-    <dimen name="time_size">46sp</dimen>
+    <dimen name="time_size">48sp</dimen>
     <dimen name="date_size">16sp</dimen>
 </resources>
