@@ -837,7 +837,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/more_ad_free_apps_by_us" />
+            android:text="@string/a_new_notes_app_by_us" />
 
     </LinearLayout>
 
