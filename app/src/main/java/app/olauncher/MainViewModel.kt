@@ -179,9 +179,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun resetDefaultLauncherApp(context: Context) {
         resetDefaultLauncher(context)
-        launcherResetFailed.value = getDefaultLauncherPackage(
-            appContext
-        ).contains(".")
+        launcherResetFailed.value = getDefaultLauncherPackage(appContext).contains(".")
     }
 
     fun setWallpaperWorker() {
