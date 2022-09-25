@@ -101,6 +101,15 @@ class AppDrawerAdapter(
     }
 
     fun setAppList(appsList: MutableList<AppModel>) {
+        // Empty element at the bottom of the list for bottom padding
+        // We can't use bottomPadding in xml because recyclerview fading edges don't work
+        appsList.add(AppModel(
+            "",
+            null,
+            "",
+            null,
+            android.os.Process.myUserHandle()
+        ))
         this.appsList = appsList
         this.appFilteredList = appsList
         submitList(appsList)
