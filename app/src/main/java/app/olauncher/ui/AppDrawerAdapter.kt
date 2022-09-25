@@ -100,7 +100,7 @@ class AppDrawerAdapter(
     fun setAppList(appsList: MutableList<AppModel>) {
         this.appsList = appsList
         this.appFilteredList = appsList
-        notifyDataSetChanged()
+        submitList(appsList)
     }
 
     fun launchFirstInList() {
