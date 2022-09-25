@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import app.olauncher.data.Constants
+import kotlinx.coroutines.*
 import java.util.*
 import kotlin.concurrent.schedule
 import kotlin.math.abs
@@ -45,7 +46,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
 
         override fun onDoubleTap(e: MotionEvent): Boolean {
             doubleTapOn = true
-            Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS.toLong()) {
+            Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS) {
                 if (doubleTapOn) {
                     doubleTapOn = false
                     onDoubleClick()
@@ -56,8 +57,12 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
 
         override fun onLongPress(e: MotionEvent) {
             longPressOn = true
-            Timer().schedule(Constants.LONG_PRESS_DELAY_MS.toLong()) {
-                if (longPressOn) onLongClick()
+            GlobalScope.launch {
+                delay(Constants.LONG_PRESS_DELAY_MS)
+                withContext(Dispatchers.Main) {
+                    if (isActive && longPressOn)
+                        onLongClick()
+                }
             }
             super.onLongPress(e)
         }
@@ -66,7 +71,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
             event1: MotionEvent,
             event2: MotionEvent,
             velocityX: Float,
-            velocityY: Float
+            velocityY: Float,
         ): Boolean {
             try {
                 val diffY = event2.y - event1.y

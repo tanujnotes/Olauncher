@@ -43,7 +43,7 @@ internal open class LockTouchListener(c: Context?) : OnTouchListener {
 
         override fun onDoubleTap(e: MotionEvent): Boolean {
             doubleTapOn = true
-            Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS.toLong()) {
+            Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS) {
                 if (doubleTapOn) {
                     onDoubleClick()
                     doubleTapOn = false
