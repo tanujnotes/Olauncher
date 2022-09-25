@@ -38,7 +38,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Tip: Type your favorite app to auto-launch</string>
+    <string name="app_drawer_tips">Tip: Start typing an app name to auto-launch</string>
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
@@ -61,7 +61,7 @@
         \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
-    <string name="rate_us_message">Hey, we\'re aiming to be the highest rated launcher on Play Store, ever. If you think we deserve it, please rate us 5-stars.
+    <string name="rate_us_message">Hey, do you find Olauncher useful? If yes, a 5-star rating is the best way to support us.
         \n\nThank you and you won\'t see this again.</string>
     <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
         \n\nShare the app and help us spread the word. Thank you!</string>
