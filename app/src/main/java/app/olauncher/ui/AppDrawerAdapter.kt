@@ -54,14 +54,6 @@ class AppDrawerAdapter(
             notifyItemRemoved(holder.adapterPosition)
             appHideListener(flag, appModel)
         }
-        try { // Automatically open the app when there's only one search result
-            if (itemCount == 1
-                && isBangSearch.not()
-                && flag == Constants.FLAG_LAUNCH_APP
-            ) clickListener(appFilteredList[position])
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     override fun getItemCount(): Int = appFilteredList.size
@@ -84,8 +76,19 @@ class AppDrawerAdapter(
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 appFilteredList = results?.values as MutableList<AppModel>
-                notifyDataSetChanged()
+                submitList(appFilteredList) {
+                    autoLaunch()
+                }
             }
+        }
+    }
+
+    private fun autoLaunch() {
+        try { // Automatically open the app when there's only one search result
+            if (itemCount == 1 && isBangSearch.not() && flag == Constants.FLAG_LAUNCH_APP)
+                clickListener(appFilteredList[0])
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
