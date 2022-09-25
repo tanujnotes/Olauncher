@@ -162,6 +162,7 @@ class MainActivity : AppCompatActivity() {
             Constants.URL_AFFILIATE
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {

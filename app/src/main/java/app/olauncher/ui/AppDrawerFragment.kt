@@ -43,7 +43,7 @@ class AppDrawerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
         viewModel = activity?.run {
-            ViewModelProvider(this).get(MainViewModel::class.java)
+            ViewModelProvider(this)[MainViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
         val flag = arguments?.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP) ?: Constants.FLAG_LAUNCH_APP
