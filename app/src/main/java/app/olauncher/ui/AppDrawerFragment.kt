@@ -143,9 +143,11 @@ class AppDrawerFragment : Fragment() {
 
     private fun View.showKeyboard(forceShowKeyboard: Boolean = false) {
         if (!prefs.autoShowKeyboard && !forceShowKeyboard) return
-        view?.requestFocus()
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        binding.search.postDelayed({
+            binding.search.requestFocus()
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        }, 100)
     }
 
     private fun populateAppList(apps: List<AppModel>, appAdapter: AppDrawerAdapter) {
