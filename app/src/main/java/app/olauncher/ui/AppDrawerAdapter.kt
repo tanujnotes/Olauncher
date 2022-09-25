@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
@@ -18,12 +20,25 @@ class AppDrawerAdapter(
     private val clickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
     private val appHideListener: (Int, AppModel) -> Unit,
-) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
+) : ListAdapter<AppModel, AppDrawerAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
 
     private var appFilter = createAppFilter()
     private var isBangSearch = false
     var appsList: MutableList<AppModel> = mutableListOf()
     var appFilteredList: MutableList<AppModel> = mutableListOf()
+
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
+            override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean {
+                return oldItem.appPackage == newItem.appPackage
+            }
+
+            override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(AdapterAppDrawerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
