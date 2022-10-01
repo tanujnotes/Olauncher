@@ -111,10 +111,6 @@ class AppDrawerFragment : Fragment() {
 
         viewModel.appList.observe(viewLifecycleOwner, Observer {
             if (flag == Constants.FLAG_HIDDEN_APPS) return@Observer
-            if (it.isNullOrEmpty()) {
-                findNavController().popBackStack()
-                return@Observer
-            }
             if (it == appAdapter.appsList) return@Observer
             populateAppList(it, appAdapter)
         })
@@ -151,8 +147,8 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun populateAppList(apps: List<AppModel>, appAdapter: AppDrawerAdapter) {
-        val animation = AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
-        binding.recyclerView.layoutAnimation = animation
+//        val animation = AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+//        binding.recyclerView.layoutAnimation = animation
         appAdapter.setAppList(apps.toMutableList())
     }
 
