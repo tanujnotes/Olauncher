@@ -756,28 +756,26 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/affiliate"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/affiliate" />
+
+            <TextView
                 android:id="@+id/about"
                 style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
                 android:padding="10dp"
                 android:text="@string/about" />
-
-            <TextView
-                android:id="@+id/github"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/github" />
 
             <TextView
                 android:id="@+id/rate"
                 style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
                 android:padding="10dp"
                 android:text="@string/rate" />
 
@@ -796,7 +794,6 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="@string/privacy" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -806,28 +803,29 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/affiliate"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/affiliate" />
-
-            <TextView
-                android:id="@+id/instagram"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/instagram" />
-
-            <TextView
                 android:id="@+id/twitter"
                 style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="@string/twitter" />
+
+            <TextView
+                android:id="@+id/instagram"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="2dp"
+                android:padding="10dp"
+                android:text="@string/instagram" />
+
+            <TextView
+                android:id="@+id/github"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/github" />
 
         </LinearLayout>
 
@@ -838,7 +836,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="10dp"
-            android:text="@string/a_new_notes_app_by_us" />
+            android:text="@string/settings_footer" />
 
     </LinearLayout>
 
