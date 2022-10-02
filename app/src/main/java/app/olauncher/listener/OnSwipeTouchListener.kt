@@ -8,8 +8,6 @@ import android.view.View
 import android.view.View.OnTouchListener
 import app.olauncher.data.Constants
 import kotlinx.coroutines.*
-import java.util.*
-import kotlin.concurrent.schedule
 import kotlin.math.abs
 
 /*
@@ -19,7 +17,8 @@ Source: https://www.tutorialspoint.com/how-to-handle-swipe-gestures-in-kotlin
 
 internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
     private var longPressOn = false
-    private var doubleTapOn = false
+
+    //    private var doubleTapOn = false
     private val gestureDetector: GestureDetector
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
@@ -37,21 +36,22 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
         }
 
         override fun onSingleTapUp(e: MotionEvent): Boolean {
-            if (doubleTapOn) {
-                doubleTapOn = false
-                onTripleClick()
-            }
+//            if (doubleTapOn) {
+//                doubleTapOn = false
+//                onTripleClick()
+//            }
             return super.onSingleTapUp(e)
         }
 
         override fun onDoubleTap(e: MotionEvent): Boolean {
-            doubleTapOn = true
-            Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS) {
-                if (doubleTapOn) {
-                    doubleTapOn = false
-                    onDoubleClick()
-                }
-            }
+//            doubleTapOn = true
+//            Timer().schedule(Constants.TRIPLE_TAP_DELAY_MS) {
+//                if (doubleTapOn) {
+//                    doubleTapOn = false
+//                    onDoubleClick()
+//                }
+//            }
+            onDoubleClick()
             return super.onDoubleTap(e)
         }
 
