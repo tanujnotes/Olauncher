@@ -54,9 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:lineSpacingExtra="1dp"
-                android:text="@string/double_tap_lock_is_enabled_message"
-                android:textColor="?attr/primaryColor" />
+                android:lineSpacingExtra="2dp"
+                android:textColor="?attr/primaryColor"
+                tools:text="@string/double_tap_lock_is_enabled_message" />
 
             <TextView
                 android:id="@+id/okay"

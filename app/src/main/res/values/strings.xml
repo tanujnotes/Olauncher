@@ -67,7 +67,7 @@
         \n\nShare the app and help us spread the word. Thank you!</string>
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
-    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by the service will not leave your device.</string>
+    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
@@ -90,4 +90,7 @@
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
+    <string name="accessibility_disclosure">We need Accessibility Service permission to enable double tap to lock on your device. Any data acquired by Olauncher via this service will not leave your device.\n\n
+    To continue, turn on double tap to lock in settings.\n\n
+    Note: If double tap to lock stops working, enable Autostart permission (if available) and disable battery optimization for Olauncher from your phone settings</string>
 </resources>

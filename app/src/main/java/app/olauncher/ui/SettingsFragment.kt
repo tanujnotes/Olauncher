@@ -33,6 +33,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
+    private var accessibilityDisclosure = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
@@ -325,6 +327,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun toggleLockMode() {
+        if (accessibilityDisclosure.not()) {
+            accessibilityDisclosure = true
+            viewModel.showMessageDialog(getString(R.string.accessibility_disclosure))
+            return
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             when {
                 prefs.lockModeOn -> {
