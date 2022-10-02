@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
@@ -86,9 +85,9 @@ class AppDrawerFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 newText?.let {
-                    appAdapter.filter.filter(it.trim())
                     binding.appRename.isVisible = rename && it.trim().isNotEmpty()
                     binding.appDrawerTip.visibility = View.GONE
+                    appAdapter.filter.filter(it.trim())
                 }
                 return false
             }
