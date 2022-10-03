@@ -852,7 +852,7 @@
         android:id="@+id/accessibilityLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/primaryShadeDarkColor"
+        android:background="?attr/dialogShadeColor"
         android:clickable="true"
         android:clipToPadding="false"
         android:focusable="true"

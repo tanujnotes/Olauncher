@@ -42,6 +42,7 @@
         <item name="primaryColorInverseTrans90">@color/blackInverseTrans90</item>
         <item name="primaryShadeColor">@color/blackInverseTrans10</item>
         <item name="primaryShadeDarkColor">@color/blackInverseTrans25</item>
+        <item name="dialogShadeColor">@color/blackInverseTrans50</item>
 
     </style>
 

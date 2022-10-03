@@ -9,5 +9,6 @@
     <attr name="primaryColorInverseTrans80" format="color" />
     <attr name="primaryColorInverseTrans50" format="color" />
     <attr name="primaryShadeColor" format="color" />
+    <attr name="dialogShadeColor" format="color" />
     <attr name="primaryShadeDarkColor" format="color" />
 </resources>
