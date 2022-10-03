@@ -33,8 +33,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
-    private var accessibilityDisclosure = false
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
@@ -99,6 +97,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            R.id.acceptAccessibility -> openAccessibilityService()
+            R.id.closeAccessibility -> binding.accessibilityLayout.visibility = View.GONE
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -188,6 +188,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.themeLight.setOnClickListener(this)
         binding.themeDark.setOnClickListener(this)
         binding.themeSystem.setOnClickListener(this)
+        binding.acceptAccessibility.setOnClickListener(this)
+        binding.closeAccessibility.setOnClickListener(this)
 
         binding.about.setOnClickListener(this)
         binding.share.setOnClickListener(this)
@@ -326,12 +328,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             prefs.lockModeOn = isAdmin
     }
 
-    private fun toggleLockMode() {
-        if (accessibilityDisclosure.not()) {
-            accessibilityDisclosure = true
-            viewModel.showMessageDialog(getString(R.string.accessibility_disclosure))
-            return
+    private fun openAccessibilityService() {
+        binding.accessibilityLayout.visibility = View.GONE
+        prefs.lockModeOn = true
+        populateLockSettings()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            showToastLong(requireContext(), "Please turn on Accessibility for Olauncher")
+            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
+    }
+
+    private fun toggleLockMode() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             when {
                 prefs.lockModeOn -> {
@@ -339,10 +346,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                     deviceManager.removeActiveAdmin(componentName) // for backward compatibility
                 }
                 isAccessServiceEnabled(requireContext()) -> prefs.lockModeOn = true
-                else -> {
-                    showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
-                    startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
-                }
+                else -> binding.accessibilityLayout.visibility = View.VISIBLE
             }
         } else {
             val isAdmin: Boolean = deviceManager.isAdminActive(componentName)

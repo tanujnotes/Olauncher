@@ -90,7 +90,8 @@
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">We need Accessibility Service permission to enable double tap to lock on your device. Any data acquired by Olauncher via this service will not leave your device.\n\n
-    To continue, turn on double tap to lock in settings.\n\n
-    Note: If double tap to lock stops working, enable Autostart permission (if available) and disable battery optimization for Olauncher from your phone settings</string>
+    <string name="accessibility_disclosure">We need Accessibility Service permission to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.
+        \n\nIf you agree, please tap on Accept and grant Accessibility permission.
+        \n\nNote: If double tap to lock stops working, enable Autostart permission (if available) from your phone settings</string>
+    <string name="accept">Accept</string>
 </resources>

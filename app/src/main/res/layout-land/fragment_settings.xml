@@ -1,843 +1,917 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollView"
+    android:id="@+id/mainActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="?attr/primaryShadeDarkColor"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-    android:fadingEdgeLength="24dp"
-    android:overScrollMode="never"
-    android:paddingHorizontal="72dp"
-    android:requiresFadingEdge="vertical"
-    android:scrollbars="none">
+    android:animateLayoutChanges="true">
 
-    <LinearLayout
-        android:id="@+id/scrollLayout"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="?attr/primaryShadeDarkColor"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingVertical="56dp">
+        android:fadingEdgeLength="24dp"
+        android:overScrollMode="never"
+        android:paddingHorizontal="72dp"
+        android:requiresFadingEdge="vertical"
+        android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/scrollLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/rounded_rect_shade_color"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:paddingVertical="56dp">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/rounded_rect_shade_color"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/olauncherHiddenApps"
+                        style="@style/TextLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/app_name" />
+
+                    <ImageView
+                        android:id="@+id/appInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_outline_info_24"
+                        app:tint="?attr/primaryColor" />
+                </FrameLayout>
 
                 <TextView
-                    android:id="@+id/olauncherHiddenApps"
+                    android:id="@+id/setLauncher"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/set_as_default_launcher" />
+
+                <TextView
+                    android:id="@+id/publicRoadmap"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/public_roadmap"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:background="@drawable/rounded_rect_shade_color"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
                     style="@style/TextLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/app_name" />
-
-                <ImageView
-                    android:id="@+id/appInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_outline_info_24"
-                    app:tint="?attr/primaryColor" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/setLauncher"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/set_as_default_launcher" />
-
-            <TextView
-                android:id="@+id/publicRoadmap"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/public_roadmap"
-                android:visibility="gone"
-                tools:visibility="visible" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:background="@drawable/rounded_rect_shade_color"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:padding="12dp">
-
-            <TextView
-                style="@style/TextLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@string/appearance"
-                android:textColor="?attr/primaryColor" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:animateLayoutChanges="true"
-                android:clipChildren="false"
-                android:clipToPadding="false">
-
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/apps_on_home_screen"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/appearance"
                     android:textColor="?attr/primaryColor" />
 
-                <TextView
-                    android:id="@+id/homeAppsNum"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:padding="8dp" />
-
-                <!-- Home apps numbers layout-->
-                <LinearLayout
-                    android:id="@+id/appsNumSelectLayout"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:animateLayoutChanges="true"
-                    android:background="@drawable/rounded_primary_gradient"
-                    android:elevation="8dp"
-                    android:orientation="horizontal"
-                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
-                    android:visibility="gone"
-                    tools:ignore="UnusedAttribute">
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <TextView
-                        android:id="@+id/maxApps0"
                         style="@style/TextSmall"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
+                        android:layout_marginStart="8dp"
                         android:paddingVertical="8dp"
-                        android:text="@string/_0" />
+                        android:text="@string/apps_on_home_screen"
+                        android:textColor="?attr/primaryColor" />
 
                     <TextView
-                        android:id="@+id/maxApps1"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_1" />
-
-                    <TextView
-                        android:id="@+id/maxApps2"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_2" />
-
-                    <TextView
-                        android:id="@+id/maxApps3"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_3" />
-
-                    <TextView
-                        android:id="@+id/maxApps4"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_4" />
-
-                    <TextView
-                        android:id="@+id/maxApps5"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_5" />
-
-                    <TextView
-                        android:id="@+id/maxApps6"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_6" />
-
-                    <TextView
-                        android:id="@+id/maxApps7"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_7" />
-
-                    <TextView
-                        android:id="@+id/maxApps8"
-                        style="@style/TextSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:paddingVertical="8dp"
-                        android:text="@string/_8" />
-
-                </LinearLayout>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:animateLayoutChanges="true">
-
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/auto_show_keyboard"
-                    android:textColor="?attr/primaryColor" />
-
-                <TextView
-                    android:id="@+id/autoShowKeyboard"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:padding="8dp"
-                    android:text="@string/on" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:animateLayoutChanges="true">
-
-                <TextView
-                    android:id="@+id/dailyWallpaperUrl"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/daily_wallpaper_update" />
-
-                <TextView
-                    android:id="@+id/dailyWallpaper"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:padding="8dp"
-                    android:text="@string/off" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:animateLayoutChanges="true">
-
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/status_bar"
-                    android:textColor="?attr/primaryColor" />
-
-                <TextView
-                    android:id="@+id/statusBar"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:padding="8dp"
-                    android:text="@string/off" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:animateLayoutChanges="true">
-
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/show_date_time"
-                    android:textColor="?attr/primaryColor" />
-
-                <TextView
-                    android:id="@+id/dateTime"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:padding="8dp"
-                    android:text="@string/on" />
-
-                <!-- date time layout-->
-                <LinearLayout
-                    android:id="@+id/dateTimeSelectLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:background="@drawable/rounded_primary_gradient"
-                    android:elevation="8dp"
-                    android:orientation="horizontal"
-                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="2dp"
-                    android:visibility="gone"
-                    tools:ignore="UnusedAttribute">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/dateTimeOn"
+                        android:id="@+id/homeAppsNum"
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:padding="8dp" />
+
+                    <!-- Home apps numbers layout-->
+                    <LinearLayout
+                        android:id="@+id/appsNumSelectLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:orientation="horizontal"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
+
+                        <TextView
+                            android:id="@+id/maxApps0"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_0" />
+
+                        <TextView
+                            android:id="@+id/maxApps1"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_1" />
+
+                        <TextView
+                            android:id="@+id/maxApps2"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_2" />
+
+                        <TextView
+                            android:id="@+id/maxApps3"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_3" />
+
+                        <TextView
+                            android:id="@+id/maxApps4"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_4" />
+
+                        <TextView
+                            android:id="@+id/maxApps5"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_5" />
+
+                        <TextView
+                            android:id="@+id/maxApps6"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_6" />
+
+                        <TextView
+                            android:id="@+id/maxApps7"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_7" />
+
+                        <TextView
+                            android:id="@+id/maxApps8"
+                            style="@style/TextSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="8dp"
+                            android:text="@string/_8" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:animateLayoutChanges="true">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/auto_show_keyboard"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/autoShowKeyboard"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:padding="8dp"
+                        android:text="@string/on" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:animateLayoutChanges="true">
+
+                    <TextView
+                        android:id="@+id/dailyWallpaperUrl"
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/daily_wallpaper_update" />
+
+                    <TextView
+                        android:id="@+id/dailyWallpaper"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:padding="8dp"
+                        android:text="@string/off" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:animateLayoutChanges="true">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/status_bar"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/statusBar"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:padding="8dp"
+                        android:text="@string/off" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:animateLayoutChanges="true">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/show_date_time"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/dateTime"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:padding="8dp"
                         android:text="@string/on" />
 
-                    <TextView
-                        android:id="@+id/dateTimeOff"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
+                    <!-- date time layout-->
+                    <LinearLayout
+                        android:id="@+id/dateTimeSelectLayout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="24dp"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/off" />
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:orientation="horizontal"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="2dp"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
 
-                    <TextView
-                        android:id="@+id/dateOnly"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/date_only" />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/dateTimeOn"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/on" />
 
-            </FrameLayout>
+                        <TextView
+                            android:id="@+id/dateTimeOff"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="24dp"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/off" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:animateLayoutChanges="true"
-                android:clipChildren="false"
-                android:clipToPadding="false">
+                        <TextView
+                            android:id="@+id/dateOnly"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/date_only" />
 
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/home_layout_alignment"
-                    android:textColor="?attr/primaryColor" />
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/alignment"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:padding="8dp"
-                    android:text="@string/left" />
+                </FrameLayout>
 
-                <!-- alignment layout-->
-                <LinearLayout
-                    android:id="@+id/alignmentSelectLayout"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
                     android:animateLayoutChanges="true"
-                    android:background="@drawable/rounded_primary_gradient"
-                    android:elevation="8dp"
-                    android:orientation="horizontal"
-                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="2dp"
-                    android:visibility="gone"
-                    tools:ignore="UnusedAttribute">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <TextView
-                        android:id="@+id/alignmentBottom"
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/home_layout_alignment"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/alignment"
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
-                        android:paddingVertical="6dp"
-                        android:text="@string/bottom_off" />
-
-                    <View
-                        android:layout_width="0.5dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="4dp"
-                        android:layout_marginEnd="24dp"
-                        android:background="?attr/primaryColorTrans50" />
-
-                    <TextView
-                        android:id="@+id/alignmentLeft"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:padding="8dp"
                         android:text="@string/left" />
 
+                    <!-- alignment layout-->
+                    <LinearLayout
+                        android:id="@+id/alignmentSelectLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:orientation="horizontal"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="2dp"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/alignmentBottom"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:paddingVertical="6dp"
+                            android:text="@string/bottom_off" />
+
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginVertical="4dp"
+                            android:layout_marginEnd="24dp"
+                            android:background="?attr/primaryColorTrans50" />
+
+                        <TextView
+                            android:id="@+id/alignmentLeft"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/left" />
+
+                        <TextView
+                            android:id="@+id/alignmentCenter"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="24dp"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/center" />
+
+                        <TextView
+                            android:id="@+id/alignmentRight"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/right" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:animateLayoutChanges="true">
+
                     <TextView
-                        android:id="@+id/alignmentCenter"
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/theme_mode"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/appThemeText"
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="24dp"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/center" />
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:padding="8dp"
+                        android:text="@string/dark" />
 
-                    <TextView
-                        android:id="@+id/alignmentRight"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
+                    <!-- theme color select layout-->
+                    <LinearLayout
+                        android:id="@+id/appThemeSelectLayout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/right" />
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:orientation="horizontal"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="2dp"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
 
-                </LinearLayout>
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
-            </FrameLayout>
+                        <TextView
+                            android:id="@+id/themeSystem"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/system_default" />
 
-            <FrameLayout
+                        <TextView
+                            android:id="@+id/themeDark"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/dark" />
+
+                        <TextView
+                            android:id="@+id/themeLight"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/light" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="4dp"
-                android:animateLayoutChanges="true">
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/rounded_rect_shade_color"
+                android:orientation="vertical"
+                android:padding="12dp">
 
                 <TextView
-                    style="@style/TextSmall"
+                    style="@style/TextLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:paddingVertical="8dp"
-                    android:text="@string/theme_mode"
+                    android:text="@string/gestures"
                     android:textColor="?attr/primaryColor" />
 
-                <TextView
-                    android:id="@+id/appThemeText"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:padding="8dp"
-                    android:text="@string/dark" />
-
-                <!-- theme color select layout-->
                 <LinearLayout
-                    android:id="@+id/appThemeSelectLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:background="@drawable/rounded_primary_gradient"
-                    android:elevation="8dp"
-                    android:orientation="horizontal"
-                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="2dp"
-                    android:visibility="gone"
-                    tools:ignore="UnusedAttribute">
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
 
-                    <Space
+                    <TextView
+                        style="@style/TextSmall"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/themeSystem"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:layout_marginEnd="24dp"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/system_default" />
+                        android:layout_weight="1"
+                        android:lines="1"
+                        android:paddingVertical="8dp"
+                        android:text="@string/swipe_left_app"
+                        android:textColor="?attr/primaryColor" />
 
                     <TextView
-                        android:id="@+id/themeDark"
+                        android:id="@+id/swipeLeftApp"
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/dark" />
-
-                    <TextView
-                        android:id="@+id/themeLight"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/light" />
-
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:lines="1"
+                        android:padding="8dp" />
                 </LinearLayout>
 
-            </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_weight="1"
+                        android:lines="1"
+                        android:paddingVertical="8dp"
+                        android:text="@string/swipe_right_app"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/swipeRightApp"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:lines="1"
+                        android:padding="8dp" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:lines="1"
+                        android:paddingVertical="8dp"
+                        android:text="@string/swipe_down_for"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/swipeDownAction"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:lines="1"
+                        android:padding="8dp" />
+
+                    <!-- Swipe down select layout-->
+                    <LinearLayout
+                        android:id="@+id/swipeDownSelectLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:orientation="horizontal"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="2dp"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/notifications"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/notifications" />
+
+                        <TextView
+                            android:id="@+id/search"
+                            style="@style/TextSmallBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/search" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:text="@string/double_tap_to_lock_screen"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/toggleLock"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:padding="10dp"
+                        android:text="@string/off" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/affiliate"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/affiliate" />
+
+                <TextView
+                    android:id="@+id/about"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/about" />
+
+                <TextView
+                    android:id="@+id/rate"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/rate" />
+
+                <TextView
+                    android:id="@+id/share"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/share" />
+
+                <TextView
+                    android:id="@+id/privacy"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/privacy" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/twitter"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/twitter" />
+
+                <TextView
+                    android:id="@+id/instagram"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/instagram" />
+
+                <TextView
+                    android:id="@+id/github"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/github" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/moreApps"
+                style="@style/TextSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/settings_footer" />
 
         </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/accessibilityLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/primaryShadeDarkColor"
+        android:clickable="true"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:padding="24dp"
+        android:visibility="gone"
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/rounded_rect_shade_color"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_rectangle_dark"
+            android:elevation="8dp"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+            android:outlineSpotShadowColor="@color/colorPrimaryDark"
+            android:padding="24dp"
+            tools:targetApi="p">
 
             <TextView
-                style="@style/TextLarge"
+                style="@style/TextSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/gestures"
+                android:clickable="false"
+                android:text="@string/accessibility_disclosure"
                 android:textColor="?attr/primaryColor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    style="@style/TextSmall"
+                <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_weight="1"
-                    android:lines="1"
-                    android:paddingVertical="8dp"
-                    android:text="@string/swipe_left_app"
-                    android:textColor="?attr/primaryColor" />
+                    android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/swipeLeftApp"
-                    style="@style/TextSmallBold"
+                    android:id="@+id/closeAccessibility"
+                    style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:lines="1"
-                    android:padding="8dp" />
+                    android:layout_marginEnd="20dp"
+                    android:paddingVertical="4dp"
+                    android:text="@string/close" />
+
+                <TextView
+                    android:id="@+id/acceptAccessibility"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="4dp"
+                    android:text="@string/accept" />
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_weight="1"
-                    android:lines="1"
-                    android:paddingVertical="8dp"
-                    android:text="@string/swipe_right_app"
-                    android:textColor="?attr/primaryColor" />
-
-                <TextView
-                    android:id="@+id/swipeRightApp"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:lines="1"
-                    android:padding="8dp" />
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:lines="1"
-                    android:paddingVertical="8dp"
-                    android:text="@string/swipe_down_for"
-                    android:textColor="?attr/primaryColor" />
-
-                <TextView
-                    android:id="@+id/swipeDownAction"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_marginEnd="4dp"
-                    android:lines="1"
-                    android:padding="8dp" />
-
-                <!-- Swipe down select layout-->
-                <LinearLayout
-                    android:id="@+id/swipeDownSelectLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:background="@drawable/rounded_primary_gradient"
-                    android:elevation="8dp"
-                    android:orientation="horizontal"
-                    android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-                    android:outlineSpotShadowColor="@color/colorPrimaryDark"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="2dp"
-                    android:visibility="gone"
-                    tools:ignore="UnusedAttribute">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/notifications"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/notifications" />
-
-                    <TextView
-                        android:id="@+id/search"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingVertical="6dp"
-                        android:text="@string/search" />
-
-                </LinearLayout>
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:visibility="visible">
-
-                <TextView
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="8dp"
-                    android:text="@string/double_tap_to_lock_screen"
-                    android:textColor="?attr/primaryColor" />
-
-                <TextView
-                    android:id="@+id/toggleLock"
-                    style="@style/TextSmallBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:padding="10dp"
-                    android:text="@string/off" />
-            </FrameLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+    </FrameLayout>
 
-            <TextView
-                android:id="@+id/affiliate"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/affiliate" />
-
-            <TextView
-                android:id="@+id/about"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/about" />
-
-            <TextView
-                android:id="@+id/rate"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/rate" />
-
-            <TextView
-                android:id="@+id/share"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/share" />
-
-            <TextView
-                android:id="@+id/privacy"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/privacy" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/twitter"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/twitter" />
-
-            <TextView
-                android:id="@+id/instagram"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/instagram" />
-
-            <TextView
-                android:id="@+id/github"
-                style="@style/TextSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="4dp"
-                android:padding="10dp"
-                android:text="@string/github" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/moreApps"
-            style="@style/TextSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/settings_footer" />
-
-    </LinearLayout>
-
-</ScrollView>
+</FrameLayout>
