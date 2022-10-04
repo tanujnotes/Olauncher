@@ -2,11 +2,9 @@ package app.olauncher.ui
 
 import android.app.admin.DevicePolicyManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import android.provider.Settings
 import android.view.*
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -420,8 +418,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                                 binding.lock.performClick()
                             else {
                                 prefs.lockModeOn = false
-                                showToastLong(requireContext(), "Please turn on accessibility service for Olauncher")
-                                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                                showToastLong(requireContext(), "Enable double tap to lock in settings")
                             }
                         }
                     } else

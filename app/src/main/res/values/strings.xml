@@ -38,7 +38,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Tip: Typing an app name will auto-launch it</string>
+    <string name="app_drawer_tips">Tip: Start typing an app name to auto-launch it</string>
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
@@ -74,6 +74,7 @@
     <string name="open">Open link</string>
     <string name="copy">Copy</string>
     <string name="close">Close</string>
+    <string name="not_now">Not now</string>
     <string name="public_roadmap">Olauncher public roadmap</string>
     <string name="instagram">Instagram</string>
     <string name="twitter">Twitter</string>
@@ -90,8 +91,8 @@
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">We need Accessibility Service permission to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.
-        \n\nIf you agree, please tap on Accept and grant Accessibility permission.
-        \n\nNote: If double tap to lock stops working, enable Autostart permission (if available) from your phone settings</string>
+    <string name="accessibility_disclosure">Olauncher needs Accessibility Service permission to enable double tap to lock feature. Olauncher does NOT collect or share any data using this permission.
+        \n\nIf you agree with these terms, please tap on Accept and grant the Accessibility permission to Olauncher in next screen.</string>
     <string name="accept">Accept</string>
+    <string name="permission">Permission</string>
 </resources>
