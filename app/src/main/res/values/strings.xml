@@ -91,8 +91,11 @@
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">Olauncher needs Accessibility Service permission to enable double tap to lock feature. Olauncher does NOT collect or share any data using this permission.
-        \n\nIf you agree with these terms, please tap on Accept and grant the Accessibility permission to Olauncher in next screen.</string>
+    <string name="accessibility_disclosure">Please turn on Olauncher\'s accessibility service in Android\'s settings to use this feature.
+        \n\nThis service is only used to let you quickly turn off your device\'s screen using the double tap gesture. Our accessibility service does not collect or share any data.</string>
     <string name="accept">Accept</string>
     <string name="permission">Permission</string>
+    <string name="enable_double_tap_background_lock">Enable double tap background lock</string>
+    <string name="enable">Enable</string>
+    <string name="cancel">Cancel</string>
 </resources>

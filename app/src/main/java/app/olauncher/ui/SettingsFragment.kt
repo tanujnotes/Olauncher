@@ -330,7 +330,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun openAccessibilityService() {
         binding.accessibilityLayout.visibility = View.GONE
-        prefs.lockModeOn = true
+        // prefs.lockModeOn = true
         populateLockSettings()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             showToastLong(requireContext(), "Please turn on Accessibility for Olauncher")
