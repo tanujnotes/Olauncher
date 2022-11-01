@@ -111,10 +111,6 @@ class Prefs(context: Context) {
         get() = prefs.getString(DAILY_WALLPAPER_URL, "").toString()
         set(value) = prefs.edit().putString(DAILY_WALLPAPER_URL, value).apply()
 
-    var wallpaperUpdatedDay: String
-        get() = prefs.getString(WALLPAPER_UPDATED_DAY, "").toString()
-        set(value) = prefs.edit().putString(WALLPAPER_UPDATED_DAY, value).apply()
-
     var homeAppsNum: Int
         get() = prefs.getInt(HOME_APPS_NUM, 4)
         set(value) = prefs.edit().putInt(HOME_APPS_NUM, value).apply()
