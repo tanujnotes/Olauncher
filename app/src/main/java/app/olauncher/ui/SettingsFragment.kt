@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -98,7 +99,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.acceptAccessibility -> openAccessibilityService()
-            R.id.closeAccessibility -> binding.accessibilityLayout.visibility = View.GONE
+            R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -328,12 +329,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             prefs.lockModeOn = isAdmin
     }
 
+    private fun toggleAccessibilityVisibility(show: Boolean) {
+        binding.scrollView.isVisible = show.not()
+        binding.accessibilityLayout.isVisible = show
+    }
+
     private fun openAccessibilityService() {
-        binding.accessibilityLayout.visibility = View.GONE
+        toggleAccessibilityVisibility(false)
         // prefs.lockModeOn = true
         populateLockSettings()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            showToastLong(requireContext(), "Please turn on Accessibility for Olauncher")
+            showToastLong(requireContext(), "Toggle accessibility permission for Olauncher")
             startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
     }
@@ -344,9 +350,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 prefs.lockModeOn -> {
                     prefs.lockModeOn = false
                     deviceManager.removeActiveAdmin(componentName) // for backward compatibility
+                    openAccessibilityService()
                 }
                 isAccessServiceEnabled(requireContext()) -> prefs.lockModeOn = true
-                else -> binding.accessibilityLayout.visibility = View.VISIBLE
+                else -> toggleAccessibilityVisibility(true)
             }
         } else {
             val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
