@@ -11,6 +11,7 @@
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/logo"
@@ -54,8 +55,8 @@
 
         <receiver
             android:name=".listener.DeviceAdmin"
-            android:permission="android.permission.BIND_DEVICE_ADMIN"
-            android:exported="false">
+            android:exported="false"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
                 android:name="android.app.device_admin"
                 android:resource="@xml/policies" />
