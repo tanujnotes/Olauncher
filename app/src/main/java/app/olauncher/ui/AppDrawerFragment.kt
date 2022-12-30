@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
@@ -13,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.MainViewModel
 import app.olauncher.R
@@ -69,9 +69,11 @@ class AppDrawerFragment : Fragment() {
 
         initViewModel(flag, viewModel, appAdapter)
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = appAdapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
+        binding.recyclerView.itemAnimator = null
+        binding.recyclerView.layoutAnimation =
+            AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
 
         if (flag == Constants.FLAG_HIDDEN_APPS) binding.search.queryHint = "Hidden apps"
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
