@@ -68,17 +68,6 @@
                     android:layout_marginBottom="8dp"
                     android:text="@string/set_as_default_launcher" />
 
-                <TextView
-                    android:id="@+id/publicRoadmap"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/public_roadmap"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
             </LinearLayout>
 
             <LinearLayout
