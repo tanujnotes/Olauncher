@@ -876,7 +876,7 @@
                 style="@style/TextLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/permission" />
+                android:text="@string/double_tap_lock" />
 
             <TextView
                 style="@style/TextSmall"
@@ -905,15 +905,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
                     android:paddingVertical="4dp"
-                    android:text="@string/not_now" />
+                    android:text="@string/close" />
 
                 <TextView
-                    android:id="@+id/acceptAccessibility"
+                    android:id="@+id/actionAccessibility"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="4dp"
-                    android:text="@string/accept" />
+                    android:text="@string/enable" />
 
             </LinearLayout>
 

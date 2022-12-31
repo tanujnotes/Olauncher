@@ -5,7 +5,7 @@
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="experimental_">(experimental)</string>
-    <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly.</string>
+    <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
     <string name="about">About</string>
     <string name="off">Off</string>
     <string name="on">On</string>
@@ -91,11 +91,12 @@
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">Please turn on Olauncher\'s accessibility service in Android\'s settings to use this feature.
-        \n\nThis service is only used to let you quickly turn off your device\'s screen using the double tap gesture. Our accessibility service does not collect or share any data.</string>
+    <string name="accessibility_disclosure">Please turn on or off Olauncher\'s accessibility service in your device\'s settings to enable or disable this feature.
+    \n\nPlease note that this service is only used to let you turn off your device\'s screen using the double tap gesture.
+    Our accessibility service does not collect or share any data.</string>
     <string name="accept">Accept</string>
     <string name="permission">Permission</string>
-    <string name="enable_double_tap_background_lock">Enable double tap background lock</string>
+    <string name="double_tap_lock">Double tap to lock</string>
     <string name="enable">Enable</string>
-    <string name="cancel">Cancel</string>
+    <string name="disable">Disable</string>
 </resources>
