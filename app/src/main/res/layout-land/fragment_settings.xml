@@ -57,8 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|center_vertical"
                         android:padding="4dp"
-                        android:src="@drawable/ic_outline_info_24"
-                        app:tint="?attr/primaryColor" />
+                        android:src="@drawable/ic_info" />
                 </FrameLayout>
 
                 <TextView

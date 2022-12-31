@@ -23,8 +23,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="1dp"
         android:gravity="center"
-        android:src="@drawable/ic_outline_info_24"
-        app:tint="?attr/primaryColor" />
+        android:src="@drawable/ic_info" />
 
     <FrameLayout
         android:id="@+id/appHideLayout"
@@ -35,7 +34,7 @@
         android:clickable="true"
         android:focusable="true"
         android:paddingHorizontal="@dimen/app_padding_vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/appHide"
@@ -55,8 +54,7 @@
             android:layout_gravity="end|center_vertical"
             android:contentDescription="@string/app"
             android:padding="@dimen/app_padding_vertical"
-            android:src="@drawable/ic_outline_info_24"
-            app:tint="?attr/primaryColor" />
+            android:src="@drawable/ic_info" />
 
     </FrameLayout>
 
