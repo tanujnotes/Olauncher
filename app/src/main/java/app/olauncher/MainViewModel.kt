@@ -30,7 +30,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
     val showMessageDialog = MutableLiveData<String>()
-    val showSupportDialog = SingleLiveEvent<Boolean>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -211,9 +210,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun showMessageDialog(message: String) {
         showMessageDialog.postValue(message)
-    }
-
-    fun showSupportDialog(value: Boolean) {
-        showSupportDialog.postValue(value)
     }
 }

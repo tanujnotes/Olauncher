@@ -70,7 +70,8 @@
         android:layout_marginTop="80dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:paddingBottom="24dp" />
+        android:fadingEdgeLength="24dp"
+        android:requiresFadingEdge="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </FrameLayout>

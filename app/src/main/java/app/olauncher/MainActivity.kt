@@ -12,7 +12,6 @@ import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -87,16 +86,6 @@ class MainActivity : AppCompatActivity() {
             binding.messageLayout.visibility = View.GONE
             viewModel.showMessageDialog("")
         }
-        binding.closeOneLink.setOnClickListener {
-            binding.supportOlauncherLayout.visibility = View.GONE
-        }
-        binding.copyOneLink.setOnClickListener {
-            copyToClipboard(getAffiliateUrl())
-            binding.supportOlauncherLayout.visibility = View.GONE
-        }
-        binding.openOneLink.setOnClickListener {
-            openUrl(getAffiliateUrl())
-        }
     }
 
     private fun initObservers(viewModel: MainViewModel) {
@@ -105,9 +94,6 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.showMessageDialog.observe(this) {
             showMessage(it)
-        }
-        viewModel.showSupportDialog.observe(this) {
-            binding.supportOlauncherLayout.isVisible = it
         }
     }
 
@@ -121,9 +107,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun backToHomeScreen() {
         binding.messageLayout.visibility = View.GONE
-        binding.supportOlauncherLayout.visibility = View.GONE
-        // Whenever home button is pressed or user leaves the launcher,
-        // pop all the fragments except main
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)
     }
@@ -153,13 +136,6 @@ class MainActivity : AppCompatActivity() {
         if (message.isEmpty()) return
         binding.messageTextView.text = message
         binding.messageLayout.visibility = View.VISIBLE
-    }
-
-    private fun getAffiliateUrl(): String {
-        return if (TimeZone.getDefault().displayName.equals(Constants.IST_NAME, true))
-            Constants.URL_AFFILIATE_IN
-        else
-            Constants.URL_AFFILIATE
     }
 
     @Deprecated("Deprecated in Java")

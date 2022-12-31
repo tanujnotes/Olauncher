@@ -125,10 +125,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 prefs.rateClicked = true
                 rateApp()
             }
-            R.id.affiliate -> {
-                viewModel.showSupportDialog(true)
-                findNavController().popBackStack()
-            }
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
             R.id.instagram -> requireContext().openUrl(Constants.URL_INSTA_OLAUNCHER)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
@@ -197,7 +193,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.instagram.setOnClickListener(this)
         binding.privacy.setOnClickListener(this)
         binding.github.setOnClickListener(this)
-        binding.affiliate.setOnClickListener(this)
         binding.moreApps.setOnClickListener(this)
 
         binding.maxApps0.setOnClickListener(this)

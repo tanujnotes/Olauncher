@@ -39,7 +39,8 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
 
                     <TextView
                         android:id="@+id/olauncherHiddenApps"
@@ -86,7 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/appearance"
                     android:textColor="?attr/primaryColor" />
 
@@ -581,6 +582,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
                     android:text="@string/gestures"
                     android:textColor="?attr/primaryColor" />
 
@@ -749,42 +751,38 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/affiliate"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@string/affiliate" />
-
-                <TextView
                     android:id="@+id/about"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
                     android:padding="10dp"
                     android:text="@string/about" />
-
-                <TextView
-                    android:id="@+id/rate"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@string/rate" />
 
                 <TextView
                     android:id="@+id/share"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
                     android:padding="10dp"
                     android:text="@string/share" />
+
+                <TextView
+                    android:id="@+id/rate"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
+                    android:padding="10dp"
+                    android:text="@string/rate" />
 
                 <TextView
                     android:id="@+id/privacy"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="4dp"
                     android:padding="10dp"
                     android:text="@string/privacy" />
             </LinearLayout>
@@ -808,7 +806,6 @@
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="2dp"
                     android:padding="10dp"
                     android:text="@string/instagram" />
 
@@ -829,7 +826,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/settings_footer" />
+                android:text="@string/settings_footer"
+                android:visibility="gone" />
 
         </LinearLayout>
 

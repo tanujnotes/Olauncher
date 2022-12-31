@@ -46,7 +46,7 @@ internal open class ViewSwipeTouchListener(c: Context?, v: View) : OnTouchListen
             event1: MotionEvent,
             event2: MotionEvent,
             velocityX: Float,
-            velocityY: Float
+            velocityY: Float,
         ): Boolean {
             try {
                 val diffY = event2.y - event1.y
