@@ -27,7 +27,6 @@ class AppDrawerAdapter(
     var appsList: MutableList<AppModel> = mutableListOf()
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
-
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
             override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean {

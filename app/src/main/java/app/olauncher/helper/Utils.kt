@@ -42,7 +42,6 @@ import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-
 fun showToastLong(context: Context, message: String) =
     Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG).show()
 
@@ -89,7 +88,8 @@ suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): Muta
             }
             appList.sort()
 
-        } catch (e: java.lang.Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         appList
     }
@@ -217,6 +217,7 @@ fun setPlainWallpaper(context: Context, color: Int) {
         manager.setBitmap(bitmap)
         bitmap.recycle()
     } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
@@ -251,7 +252,8 @@ suspend fun getBitmapFromURL(src: String?): Bitmap? {
             connection.connect()
             val input: InputStream = connection.inputStream
             bitmap = BitmapFactory.decodeStream(input)
-        } catch (e: java.lang.Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         bitmap
     }
@@ -301,6 +303,7 @@ suspend fun setWallpaper(appContext: Context, url: String): Boolean {
             originalImageBitmap.recycle()
             scaledBitmap.recycle()
         } catch (e: Exception) {
+            e.printStackTrace()
         }
         true
     }
@@ -319,7 +322,7 @@ suspend fun getTodaysWallpaper(wallType: String): String {
         val calendar = Calendar.getInstance()
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val key = String.format("%d_%d", (month % 3) + 1, day)
+        val key = String.format("%d_%d", month + 1, day)
 
         try {
             val url = URL(Constants.URL_WALLPAPERS)
@@ -374,13 +377,12 @@ fun expandNotificationDrawer(context: Context) {
     }
 }
 
-
 fun openDialerApp(context: Context) {
     try {
         val sendIntent = Intent(Intent.ACTION_DIAL)
         context.startActivity(sendIntent)
-    } catch (e: java.lang.Exception) {
-
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
@@ -388,8 +390,8 @@ fun openCameraApp(context: Context) {
     try {
         val sendIntent = Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA)
         context.startActivity(sendIntent)
-    } catch (e: java.lang.Exception) {
-
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
 }
 
@@ -397,7 +399,7 @@ fun openAlarmApp(context: Context) {
     try {
         val intent = Intent(AlarmClock.ACTION_SHOW_ALARMS)
         context.startActivity(intent)
-    } catch (e: java.lang.Exception) {
+    } catch (e: Exception) {
         Log.d("TAG", e.toString())
     }
 }
@@ -415,6 +417,7 @@ fun openCalendar(context: Context) {
             intent.addCategory(Intent.CATEGORY_APP_CALENDAR)
             context.startActivity(intent)
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

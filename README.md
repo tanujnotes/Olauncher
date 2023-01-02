@@ -29,9 +29,7 @@ Support Olauncher - https://buymeacoff.ee/tanujnotes
   * Etheruem: `0xcBb95AF4D76fba34bf8D1808905BF5365239E2ba`
   * Bitcoin: `33VFtQSa6HZr2FZphmNA5jZ9fEKPNbeEmL`
   * Monero: `46bCqsiEtqj4p48HbQjw4c6RVtWeN59Uy4NBGGferBe7HEFKoskBbouFuuTxKvhTXhNuXQbLiEUFCaeMDTrfBGK7Qhp3dRn`
-  * Amazon affiliate: [amzn.to/3uftwFW](https://amzn.to/3uftwFW)
   * Paypal: [paypal.me/tanujnotes](https://paypal.me/tanujnotes)
-  * UPI: tanujnotes@upi
 
 </details>
 

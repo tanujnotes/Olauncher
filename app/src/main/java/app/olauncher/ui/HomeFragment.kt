@@ -22,7 +22,6 @@ import app.olauncher.helper.*
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 
-
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
     private lateinit var prefs: Prefs
@@ -452,7 +451,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

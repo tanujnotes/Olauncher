@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 
-
 class DeviceAdmin : DeviceAdminReceiver() {
     fun onEnabled(intent: Intent?, context: Context) {
         super.onEnabled(context, intent!!)
