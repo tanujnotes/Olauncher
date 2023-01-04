@@ -3,7 +3,7 @@ buildscript {
     ext.kotlin_version = "1.7.20"
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
@@ -17,7 +17,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
