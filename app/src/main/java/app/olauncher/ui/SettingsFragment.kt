@@ -99,6 +99,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
+            R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -185,6 +186,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.themeSystem.setOnClickListener(this)
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
+        binding.notWorking.setOnClickListener(this)
 
         binding.about.setOnClickListener(this)
         binding.share.setOnClickListener(this)
@@ -322,6 +324,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun toggleAccessibilityVisibility(show: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+            binding.notWorking.visibility = View.VISIBLE
         if (isAccessServiceEnabled(requireContext()))
             binding.actionAccessibility.text = getString(R.string.disable)
         binding.accessibilityLayout.isVisible = show
