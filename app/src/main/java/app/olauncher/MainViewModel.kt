@@ -24,8 +24,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val refreshHome = MutableLiveData<Boolean>()
     val toggleDateTime = MutableLiveData<Unit>()
     val updateSwipeApps = MutableLiveData<Any>()
-    val appList = MutableLiveData<List<AppModel>>()
-    val hiddenApps = MutableLiveData<List<AppModel>>()
+    val appList = MutableLiveData<List<AppModel>?>()
+    val hiddenApps = MutableLiveData<List<AppModel>?>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
@@ -133,7 +133,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val activityInfo = launcher.getActivityList(packageName, userHandle)
 
         val component = if (activityClassName.isNullOrBlank()) {
-            // TODO: Handle multiple launch activities in an app. This is NOT the way.
             // activityClassName will be null for hidden apps.
             when (activityInfo.size) {
                 0 -> {

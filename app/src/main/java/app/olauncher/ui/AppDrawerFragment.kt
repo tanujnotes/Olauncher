@@ -113,8 +113,10 @@ class AppDrawerFragment : Fragment() {
         })
 
         viewModel.appList.observe(viewLifecycleOwner, Observer {
-            if (flag == Constants.FLAG_HIDDEN_APPS) return@Observer
-            if (it == appAdapter.appsList) return@Observer
+            if (it == null
+                || it == appAdapter.appsList
+                || flag == Constants.FLAG_HIDDEN_APPS
+            ) return@Observer
             populateAppList(it, appAdapter)
         })
 
