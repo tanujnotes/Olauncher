@@ -85,11 +85,13 @@ class AppDrawerFragment : Fragment() {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
-                    binding.appRename.isVisible = rename && it.trim().isNotEmpty()
+            override fun onQueryTextChange(newText: String): Boolean {
+                try {
+                    binding.appRename.isVisible = rename && newText.isNotBlank()
                     binding.appDrawerTip.visibility = View.GONE
-                    appAdapter.filter.filter(it.trim())
+                    appAdapter.filter.filter(newText.trim())
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
                 return false
             }
