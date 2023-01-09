@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
+import app.olauncher.helper.isSystemApp
 import java.text.Normalizer
 
 class AppDrawerAdapter(
@@ -19,6 +20,7 @@ class AppDrawerAdapter(
     private val appLabelGravity: Int,
     private val clickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
+    private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (Int, AppModel) -> Unit,
 ) : ListAdapter<AppModel, AppDrawerAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
 
@@ -45,7 +47,7 @@ class AppDrawerAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (appFilteredList.size == 0) return
         val appModel = appFilteredList[holder.adapterPosition]
-        holder.bind(flag, appLabelGravity, appModel, clickListener, appInfoListener)
+        holder.bind(flag, appLabelGravity, appModel, clickListener, appDeleteListener, appInfoListener)
 
         holder.appHideButton.setOnClickListener {
             appFilteredList.removeAt(holder.adapterPosition)
@@ -127,13 +129,15 @@ class AppDrawerAdapter(
             appLabelGravity: Int,
             appModel: AppModel,
             listener: (AppModel) -> Unit,
+            appDeleteListener: (AppModel) -> Unit,
             appInfoListener: (AppModel) -> Unit,
         ) =
             with(binding) {
                 appHideLayout.visibility = View.GONE
-                appHideButton.text = (if (flag == Constants.FLAG_HIDDEN_APPS) "SHOW" else "HIDE")
+                appHideButton.text = if (flag == Constants.FLAG_HIDDEN_APPS) "Show" else "Hide"
                 appTitle.text = appModel.appLabel
                 appTitle.gravity = appLabelGravity
+                appDelete.alpha = if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
 
                 if (appModel.user == android.os.Process.myUserHandle())
                     otherProfileIndicator.visibility = View.GONE
@@ -144,7 +148,7 @@ class AppDrawerAdapter(
                     appHideLayout.visibility = View.VISIBLE
                     true
                 }
-
+                appDelete.setOnClickListener { appDeleteListener(appModel) }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
                 appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
             }

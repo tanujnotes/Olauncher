@@ -20,9 +20,7 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
-import app.olauncher.helper.openAppInfo
-import app.olauncher.helper.openUrl
-import app.olauncher.helper.showToastShort
+import app.olauncher.helper.*
 
 class AppDrawerFragment : Fragment() {
 
@@ -60,6 +58,7 @@ class AppDrawerFragment : Fragment() {
             prefs.appLabelAlignment,
             appClickListener(viewModel, flag),
             appInfoListener(),
+            appDeleteListener(),
             appShowHideListener()
         )
 
@@ -173,6 +172,14 @@ class AppDrawerFragment : Fragment() {
                 appModel.appPackage
             )
             findNavController().popBackStack(R.id.mainFragment, false)
+        }
+
+    private fun appDeleteListener(): (appModel: AppModel) -> Unit =
+        { appModel ->
+            if (requireContext().isSystemApp(appModel.appPackage))
+                showToastShort(requireContext(), "System app, cannot delete")
+            else
+                requireContext().uninstall(appModel.appPackage)
         }
 
     private fun appShowHideListener(): (flag: Int, appModel: AppModel) -> Unit =

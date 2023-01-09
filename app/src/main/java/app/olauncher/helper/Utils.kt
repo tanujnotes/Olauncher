@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.app.WallpaperManager
 import android.content.*
+import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -460,6 +461,19 @@ fun Context.openUrl(url: String) {
     if (url.isEmpty()) return
     val intent = Intent(Intent.ACTION_VIEW)
     intent.data = Uri.parse(url)
+    startActivity(intent)
+}
+
+fun Context.isSystemApp(packageName: String): Boolean {
+    if (packageName.isBlank()) return true
+    val applicationInfo = packageManager.getApplicationInfo(packageName, 0)
+    return (applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0)
+            || (applicationInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0)
+}
+
+fun Context.uninstall(packageName: String) {
+    val intent = Intent(Intent.ACTION_DELETE)
+    intent.data = Uri.parse("package:$packageName")
     startActivity(intent)
 }
 
