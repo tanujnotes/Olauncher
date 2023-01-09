@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Vibrator
 import android.view.*
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -329,10 +330,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             try {
                 deviceManager.lockNow()
             } catch (e: SecurityException) {
-                showToastLong(requireContext(), "Please turn on double tap to lock")
+                requireContext().showToast("Please turn on double tap to lock", Toast.LENGTH_LONG)
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             } catch (e: Exception) {
-                showToastLong(requireContext(), "Olauncher failed to lock device.\nPlease check your app settings.")
+                requireContext().showToast("Olauncher failed to lock device.\nPlease check your app settings.", Toast.LENGTH_LONG)
                 prefs.lockModeOn = false
             }
         }
@@ -370,7 +371,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         requireActivity().recreate()
     }
 
-    private fun showLongPressToast() = showToastShort(requireContext(), "Long press to select app")
+    private fun showLongPressToast() = requireContext().showToast("Long press to select app")
 
     private fun textOnClick(view: View) = onClick(view)
 

@@ -43,11 +43,14 @@ import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-fun showToastLong(context: Context, message: String) =
-    Toast.makeText(context.applicationContext, message, Toast.LENGTH_LONG).show()
+fun Context.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
+    if (message.isNullOrBlank()) return
+    Toast.makeText(this, message, duration).show()
+}
 
-fun showToastShort(context: Context, message: String) =
-    Toast.makeText(context.applicationContext, message, Toast.LENGTH_SHORT).show()
+fun Context.showToast(stringResource: Int, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(this, getString(stringResource), duration).show()
+}
 
 suspend fun getAppsList(context: Context, showHiddenApps: Boolean = false): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
@@ -239,7 +242,7 @@ fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
     intent?.let {
         launcher.startAppDetailsActivity(intent.component, userHandle, null, null)
-    } ?: showToastShort(context, "Unable to to open app info")
+    } ?: context.showToast("Unable to to open app info")
 }
 
 suspend fun getBitmapFromURL(src: String?): Bitmap? {
@@ -454,7 +457,7 @@ fun Context.copyToClipboard(text: String) {
     val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clipData = ClipData.newPlainText(getString(R.string.app_name), text)
     clipboardManager.setPrimaryClip(clipData)
-    showToastShort(this, "Copied")
+    showToast("Copied")
 }
 
 fun Context.openUrl(url: String) {

@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -237,10 +238,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
         if (prefs.swipeLeftEnabled) {
             binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            showToastShort(requireContext(), "Swipe left app enabled")
+            requireContext().showToast("Swipe left app enabled")
         } else {
             binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
-            showToastShort(requireContext(), "Swipe left app disabled")
+            requireContext().showToast("Swipe left app disabled")
         }
     }
 
@@ -248,10 +249,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         prefs.swipeRightEnabled = !prefs.swipeRightEnabled
         if (prefs.swipeRightEnabled) {
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            showToastShort(requireContext(), "Swipe right app enabled")
+            requireContext().showToast("Swipe right app enabled")
         } else {
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
-            showToastShort(requireContext(), "Swipe right app disabled")
+            requireContext().showToast("Swipe right app disabled")
         }
     }
 
@@ -307,7 +308,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showHiddenApps() {
         if (prefs.hiddenApps.isEmpty()) {
-            showToastShort(requireContext(), "No hidden apps")
+            requireContext().showToast("No hidden apps")
             return
         }
         viewModel.getHiddenApps()
@@ -352,7 +353,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             if (isAdmin) {
                 deviceManager.removeActiveAdmin(componentName)
                 prefs.lockModeOn = false
-                showToastShort(requireContext(), "Admin permission removed.")
+                requireContext().showToast("Admin permission removed.")
             } else {
                 val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
                 intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
@@ -385,9 +386,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showWallpaperToasts() {
         if (isOlauncherDefault(requireContext()))
-            showToastShort(requireContext(), "Your wallpaper will update shortly")
+            requireContext().showToast("Your wallpaper will update shortly")
         else
-            showToastLong(requireContext(), "Olauncher is not default launcher.\nDaily wallpaper update may fail.")
+            requireContext().showToast("Olauncher is not default launcher.\nDaily wallpaper update may fail.", Toast.LENGTH_LONG)
     }
 
     private fun updateHomeAppsNum(num: Int) {
@@ -455,7 +456,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun updateHomeBottomAlignment() {
         if (viewModel.isOlauncherDefault.value != true) {
-            showToastLong(requireContext(), getString(R.string.please_set_olauncher_as_default_first))
+            requireContext().showToast(getString(R.string.please_set_olauncher_as_default_first), Toast.LENGTH_LONG)
             return
         }
         prefs.homeBottomAlignment = !prefs.homeBottomAlignment
@@ -536,11 +537,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showAppListIfEnabled(flag: Int) {
         if ((flag == Constants.FLAG_SET_SWIPE_LEFT_APP) and !prefs.swipeLeftEnabled) {
-            showToastShort(requireContext(), "Long press to enable")
+            requireContext().showToast("Long press to enable")
             return
         }
         if ((flag == Constants.FLAG_SET_SWIPE_RIGHT_APP) and !prefs.swipeRightEnabled) {
-            showToastShort(requireContext(), "Long press to enable")
+            requireContext().showToast("Long press to enable")
             return
         }
 

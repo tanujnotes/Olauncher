@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -122,10 +123,7 @@ class MainActivity : AppCompatActivity() {
             val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             else {
-                showToastLong(
-                    this,
-                    "Search for Launcher or Home app"
-                )
+                showToast("Search for Launcher or Home app", Toast.LENGTH_LONG)
                 Intent(Settings.ACTION_SETTINGS)
             }
             startActivity(intent)

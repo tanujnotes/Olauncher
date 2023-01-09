@@ -177,7 +177,7 @@ class AppDrawerFragment : Fragment() {
     private fun appDeleteListener(): (appModel: AppModel) -> Unit =
         { appModel ->
             if (requireContext().isSystemApp(appModel.appPackage))
-                showToastShort(requireContext(), "System app, cannot delete")
+                requireContext().showToast("System app, cannot delete")
             else
                 requireContext().uninstall(appModel.appPackage)
         }
@@ -205,7 +205,7 @@ class AppDrawerFragment : Fragment() {
     private fun renameListener(flag: Int) {
         val name = binding.search.query.toString().trim()
         if (name.isEmpty()) {
-            showToastShort(requireContext(), "Type a new app name first")
+            requireContext().showToast("Type a new app name first")
             binding.search.showKeyboard(true)
             return
         }
