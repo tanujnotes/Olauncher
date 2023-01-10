@@ -2,6 +2,7 @@ package app.olauncher.ui
 
 import android.app.admin.DevicePolicyManager
 import android.content.Context
+import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
@@ -9,6 +10,7 @@ import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -22,6 +24,8 @@ import app.olauncher.databinding.FragmentHomeBinding
 import app.olauncher.helper.*
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
@@ -154,18 +158,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun populateDateTime() {
-        when (prefs.dateTimeVisibility) {
-            Constants.DateTime.DATE_ONLY -> {
-                binding.dateTimeLayout.visibility = View.VISIBLE
-                binding.clock.visibility = View.GONE
-                binding.date.visibility = View.VISIBLE
-            }
-            Constants.DateTime.ON -> {
-                binding.dateTimeLayout.visibility = View.VISIBLE
-                binding.clock.visibility = View.VISIBLE
-                binding.date.visibility = View.VISIBLE
-            }
-            else -> binding.dateTimeLayout.visibility = View.GONE
+        binding.dateTimeLayout.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF
+        binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
+        binding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
+        val day = SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(Date())
+        if (prefs.showStatusBar)
+            binding.date.text = day
+        else {
+            val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
+                .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+            binding.date.text = getString(R.string.day_battery, day, battery)
         }
     }
 
@@ -250,9 +252,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.visibility = View.GONE
         binding.homeApp7.visibility = View.GONE
         binding.homeApp8.visibility = View.GONE
-
-        // TODO: Set date time programmatically to fix the clock freeze issue
-        binding.dateTimeLayout.visibility = View.GONE
     }
 
     private fun homeAppClicked(location: Int) {

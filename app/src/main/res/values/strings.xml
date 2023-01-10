@@ -102,4 +102,5 @@
     <string name="not_working"><u>Not working?</u></string>
     <string name="info">Info</string>
     <string name="delete">Delete</string>
+    <string name="day_battery">%s, %d%%</string>
 </resources>

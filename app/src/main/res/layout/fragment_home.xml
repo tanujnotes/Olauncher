@@ -36,7 +36,7 @@
             android:textSize="@dimen/time_size"
             tools:text="02:34" />
 
-        <TextClock
+        <TextView
             android:id="@+id/date"
             style="@style/TextDefault"
             android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
             android:format12Hour="EEE, dd MMM"
             android:format24Hour="EEE, dd MMM"
             android:paddingHorizontal="2dp"
-            android:textSize="@dimen/date_size"
+            android:textSize="14sp"
             tools:text="Thu, 30 Dec" />
     </LinearLayout>
 
@@ -56,8 +56,8 @@
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:paddingBottom="48dp"
-        android:paddingTop="112dp">
+        android:paddingTop="112dp"
+        android:paddingBottom="48dp">
 
         <TextView
             android:id="@+id/homeApp1"
