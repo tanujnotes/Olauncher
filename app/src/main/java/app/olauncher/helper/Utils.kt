@@ -433,8 +433,8 @@ fun isAccessServiceEnabled(context: Context): Boolean {
         0
     }
     if (enabled == 1) {
-        val enabledServicesString = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
-        return enabledServicesString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
+        val enabledServicesString: String? = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+        return enabledServicesString?.contains(context.packageName + "/" + MyAccessibilityService::class.java.name) ?: false
     }
     return false
 }
