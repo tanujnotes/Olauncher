@@ -427,12 +427,14 @@ fun openCalendar(context: Context) {
 }
 
 fun isAccessServiceEnabled(context: Context): Boolean {
-    val enabled =
+    val enabled = try {
         Settings.Secure.getInt(context.applicationContext.contentResolver, Settings.Secure.ACCESSIBILITY_ENABLED)
+    } catch (e: Exception) {
+        0
+    }
     if (enabled == 1) {
-        val prefString: String =
-            Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
-        return prefString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
+        val enabledServicesString = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+        return enabledServicesString.contains(context.packageName + "/" + MyAccessibilityService::class.java.name)
     }
     return false
 }
