@@ -31,13 +31,11 @@ class AppDrawerAdapter(
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
-            override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean {
-                return oldItem.appPackage == newItem.appPackage
-            }
+            override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
+                oldItem.appPackage == newItem.appPackage
 
-            override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean {
-                return oldItem == newItem
-            }
+            override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
+                oldItem == newItem
         }
     }
 
@@ -45,15 +43,19 @@ class AppDrawerAdapter(
         ViewHolder(AdapterAppDrawerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (appFilteredList.size == 0) return
-        val appModel = appFilteredList[holder.adapterPosition]
-        holder.bind(flag, appLabelGravity, appModel, clickListener, appDeleteListener, appInfoListener)
+        try {
+            if (appFilteredList.size == 0) return
+            val appModel = appFilteredList[holder.bindingAdapterPosition]
+            holder.bind(flag, appLabelGravity, appModel, clickListener, appDeleteListener, appInfoListener)
 
-        holder.appHideButton.setOnClickListener {
-            appFilteredList.removeAt(holder.adapterPosition)
-            appsList.remove(appModel)
-            notifyItemRemoved(holder.adapterPosition)
-            appHideListener(flag, appModel)
+            holder.appHideButton.setOnClickListener {
+                appFilteredList.removeAt(holder.bindingAdapterPosition)
+                appsList.remove(appModel)
+                notifyItemRemoved(holder.bindingAdapterPosition)
+                appHideListener(flag, appModel)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -102,15 +104,6 @@ class AppDrawerAdapter(
     }
 
     fun setAppList(appsList: MutableList<AppModel>) {
-        // Empty element at the bottom of the list for bottom padding
-        // We can't use bottomPadding in xml because recyclerview fading edges don't work
-        appsList.add(AppModel(
-            "",
-            null,
-            "",
-            null,
-            android.os.Process.myUserHandle()
-        ))
         this.appsList = appsList
         this.appFilteredList = appsList
         submitList(appsList)
