@@ -120,6 +120,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
         viewModel.toggleDateTime.observe(viewLifecycleOwner) {
             populateDateTime()
+            viewModel.updateRecentApp()
         }
     }
 
@@ -134,6 +135,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.setOnTouchListener(getViewSwipeTouchListener(context, binding.homeApp6))
         binding.homeApp7.setOnTouchListener(getViewSwipeTouchListener(context, binding.homeApp7))
         binding.homeApp8.setOnTouchListener(getViewSwipeTouchListener(context, binding.homeApp8))
+        binding.homeApp9.setOnTouchListener(getViewSwipeTouchListener(context, binding.homeApp9))
     }
 
     private fun initClickListeners() {
@@ -155,6 +157,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.gravity = horizontalGravity
         binding.homeApp7.gravity = horizontalGravity
         binding.homeApp8.gravity = horizontalGravity
+        binding.homeApp9.gravity = horizontalGravity
     }
 
     private fun populateDateTime() {
@@ -175,6 +178,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (appCountUpdated) hideHomeApps()
         populateDateTime()
 
+        
+        binding.homeApp9.visibility = View.VISIBLE
+        if (!setHomeAppText(binding.homeApp9, "Frequent: " + prefs.appName9, prefs.appPackage9, prefs.appUser9)) {
+            prefs.appName9 = ""
+            prefs.appPackage9 = ""
+        }
+        
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
 
@@ -232,6 +242,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appName8 = ""
             prefs.appPackage8 = ""
         }
+        
     }
 
     private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String): Boolean {
@@ -252,10 +263,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.visibility = View.GONE
         binding.homeApp7.visibility = View.GONE
         binding.homeApp8.visibility = View.GONE
+        binding.homeApp9.visibility = View.GONE
     }
 
     private fun homeAppClicked(location: Int) {
-        if (prefs.getAppName(location).isEmpty()) showLongPressToast()
+        val appName = prefs.getAppName(location)
+         
+        if (appName.isEmpty() && location < 9) showLongPressToast()
+        else if (appName.isEmpty() && location == 9) showRecentToast()
         else launchApp(
             prefs.getAppName(location),
             prefs.getAppPackage(location),
@@ -370,6 +385,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         requireActivity().recreate()
     }
 
+    private fun showRecentToast() = requireContext().showToast("Recent app")
     private fun showLongPressToast() = requireContext().showToast("Long press to select app")
 
     private fun textOnClick(view: View) = onClick(view)

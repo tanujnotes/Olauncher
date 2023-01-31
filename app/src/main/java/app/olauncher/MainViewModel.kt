@@ -25,6 +25,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val toggleDateTime = MutableLiveData<Unit>()
     val updateSwipeApps = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>?>()
+    val recentApps = MutableLiveData<List<AppModel>?>()
     val hiddenApps = MutableLiveData<List<AppModel>?>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
@@ -93,6 +94,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appPackage8 = appModel.appPackage
                 prefs.appUser8 = appModel.user.toString()
                 prefs.appActivityClassName8 = appModel.activityClassName
+                refreshHome(false)
+            }
+            Constants.FLAG_SET_HOME_APP_9 -> {
+                prefs.appName9 = appModel.appLabel
+                prefs.appPackage9 = appModel.appPackage
+                prefs.appUser9 = appModel.user.toString()
+                prefs.appActivityClassName9 = appModel.activityClassName
                 refreshHome(false)
             }
             Constants.FLAG_SET_SWIPE_LEFT_APP -> {
@@ -195,6 +203,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 ExistingPeriodicWorkPolicy.REPLACE,
                 uploadWorkRequest
             )
+    }
+
+    fun updateRecentApp(){
+        viewModelScope.launch {
+            val appList = getRecentUsedApps(appContext)
+            if (appList.isNotEmpty()){
+                recentApps.value = appList
+                val appModel = appList[0]
+                selectedApp(appModel, Constants.FLAG_SET_HOME_APP_9)
+            }
+        }
     }
 
     fun cancelWallpaperWorker() {

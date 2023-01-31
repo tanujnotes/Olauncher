@@ -110,6 +110,8 @@ class AppDrawerFragment : Fragment() {
             populateAppList(it, appAdapter)
         })
 
+     
+
         viewModel.appList.observe(viewLifecycleOwner, Observer {
             if (it == null
                 || it == appAdapter.appsList
@@ -219,6 +221,7 @@ class AppDrawerFragment : Fragment() {
             Constants.FLAG_SET_HOME_APP_6 -> prefs.appName6 = name
             Constants.FLAG_SET_HOME_APP_7 -> prefs.appName7 = name
             Constants.FLAG_SET_HOME_APP_8 -> prefs.appName8 = name
+            Constants.FLAG_SET_HOME_APP_9 -> prefs.appName9 = name
         }
         findNavController().popBackStack()
     }

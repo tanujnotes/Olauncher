@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.firstOpen(true)
             prefs.firstOpen = false
         }
-
         initClickListeners()
         initObservers(viewModel)
         viewModel.getAppList()
@@ -67,6 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent?) {
+        viewModel.updateRecentApp()
         backToHomeScreen()
         super.onNewIntent(intent)
     }

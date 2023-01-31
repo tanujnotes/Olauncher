@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Olauncher</string>
     <string name="app">App</string>
+    <string name="frequent_app">Most Frequent App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
@@ -38,6 +39,8 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_recent">9</string>
     <string name="app_drawer_tips">Tip: Start typing an app name to auto-launch it</string>
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>

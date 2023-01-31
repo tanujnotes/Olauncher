@@ -1,8 +1,11 @@
 package app.olauncher.helper
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
+import android.app.AppOpsManager
 import android.app.SearchManager
 import android.app.WallpaperManager
+import android.app.usage.UsageStatsManager
 import android.content.*
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherApps
@@ -18,6 +21,7 @@ import android.provider.CalendarContract
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.DisplayMetrics
+import android.content.Intent
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
@@ -42,6 +46,10 @@ import java.text.Collator
 import java.util.*
 import kotlin.math.pow
 import kotlin.math.sqrt
+import android.content.Context
+import android.os.Build
+import java.util.*
+
 
 fun Context.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
     if (message.isNullOrBlank()) return
@@ -499,4 +507,101 @@ fun View.animateAlpha(alpha: Float = 1.0f) {
         alpha(alpha)
         start()
     }
+}
+
+
+fun checkUsageStatsPermission(context: Context): Boolean {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        val appOpsManager = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+        val mode = appOpsManager.checkOpNoThrow("android:get_usage_stats", android.os.Process.myUid(), context.packageName)
+        return mode == AppOpsManager.MODE_ALLOWED
+    }
+    return false
+}
+    
+suspend fun getRecentUsedApps(context: Context): MutableList<AppModel> {
+    return withContext(Dispatchers.IO) {
+    if (!checkUsageStatsPermission(context)) {
+        val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+        context.startActivity(intent)
+    }
+
+    val allowApps = getAppsList(context)
+    val allowedPackages = allowApps.map { it.appPackage }
+    val prefs = Prefs(context)
+    val prefApps: List<String> = listOf(
+        prefs.appPackage1,
+        prefs.appPackage2,
+        prefs.appPackage3,
+        prefs.appPackage4,
+        prefs.appPackage5,
+        prefs.appPackage6,
+        prefs.appPackage7,
+        prefs.appPackage8,
+    )
+
+    val mostUsedApps = HashMap<String, Int>()
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val calendar = Calendar.getInstance()
+        val endTime = calendar.timeInMillis
+        calendar.add(Calendar.YEAR, -1)
+        val startTime = calendar.timeInMillis
+
+        val queryUsageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_WEEKLY, startTime, endTime)
+
+        for (usageStats in queryUsageStats) {
+            val packageName = usageStats.packageName
+            if (!allowedPackages.contains(packageName) || prefApps.contains(packageName)) {
+                continue
+            }
+            val appLaunchCount = try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    Class
+                        .forName("android.app.usage.UsageStats")
+                        .getMethod("getAppLaunchCount")
+                        .invoke(usageStats) as Int
+                } else {
+                    usageStats::class.java.getDeclaredField("mLaunchCount")
+                        .getInt(usageStats)
+                }
+            } catch (e: Exception) {
+                0
+            }
+            if (appLaunchCount == 0) {
+                continue
+            }
+            mostUsedApps[packageName] = appLaunchCount
+            
+        }
+    } else {
+        // For API level lower than 21
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val runningTasks = activityManager.getRunningTasks(Int.MAX_VALUE)
+
+        for (runningTask in runningTasks) {
+            var packageName = ""
+            runningTask.baseActivity?.let{
+                packageName = it.packageName
+            }
+            if (mostUsedApps.containsKey(packageName)) {
+                mostUsedApps[packageName] = mostUsedApps[packageName]!! + 1
+            } else {
+                mostUsedApps[packageName] = 1
+            }
+        }
+    }
+
+    val mostUsedAppsSorted = mostUsedApps.toList().sortedBy { (_, value) -> value }.map { (key, _) -> key }.reversed()
+    val recentUsedApps = mutableListOf<AppModel>()
+    for (packageName in mostUsedAppsSorted) {
+        val appModel = allowApps.find { it.appPackage == packageName }
+        if (appModel != null) {
+            recentUsedApps.add(appModel)
+        }
+    }
+    recentUsedApps
+    }
+
 }
