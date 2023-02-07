@@ -161,14 +161,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.dateTimeLayout.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF
         binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
         binding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
-        val day = SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(Date())
-        if (prefs.showStatusBar)
-            binding.date.text = day
-        else {
+
+        var dateText = SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(Date())
+        if (!prefs.showStatusBar) {
             val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
                 .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-            binding.date.text = getString(R.string.day_battery, day, battery)
+            dateText = getString(R.string.day_battery, dateText, battery)
         }
+        binding.date.text = dateText.replace(".,", ",")
     }
 
     private fun populateHomeScreen(appCountUpdated: Boolean) {
@@ -266,11 +266,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun launchApp(appName: String, packageName: String, activityClassName: String?, userString: String) {
         viewModel.selectedApp(
-            AppModel(appName,
+            AppModel(
+                appName,
                 null,
                 packageName,
                 activityClassName,
-                getUserHandleFromString(requireContext(), userString)),
+                getUserHandleFromString(requireContext(), userString)
+            ),
             Constants.FLAG_LAUNCH_APP
         )
     }
@@ -307,20 +309,24 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun openSwipeRightApp() {
         if (!prefs.swipeRightEnabled) return
         if (prefs.appPackageSwipeRight.isNotEmpty())
-            launchApp(prefs.appNameSwipeRight,
+            launchApp(
+                prefs.appNameSwipeRight,
                 prefs.appPackageSwipeRight,
                 prefs.appActivityClassNameRight,
-                android.os.Process.myUserHandle().toString())
+                android.os.Process.myUserHandle().toString()
+            )
         else openDialerApp(requireContext())
     }
 
     private fun openSwipeLeftApp() {
         if (!prefs.swipeLeftEnabled) return
         if (prefs.appPackageSwipeLeft.isNotEmpty())
-            launchApp(prefs.appNameSwipeLeft,
+            launchApp(
+                prefs.appNameSwipeLeft,
                 prefs.appPackageSwipeLeft,
                 prefs.appActivityClassNameSwipeLeft,
-                android.os.Process.myUserHandle().toString())
+                android.os.Process.myUserHandle().toString()
+            )
         else openCameraApp(requireContext())
     }
 
