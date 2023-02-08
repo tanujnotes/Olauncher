@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_large">28sp</dimen>
-    <dimen name="text_small">18sp</dimen>
+    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_small">16sp</dimen>
     <dimen name="app_padding_vertical">16dp</dimen>
     <dimen name="home_app_padding_vertical">14dp</dimen>
 
     <dimen name="time_size">60sp</dimen>
-    <dimen name="date_size">18sp</dimen>
+    <dimen name="date_size">16sp</dimen>
 </resources>
