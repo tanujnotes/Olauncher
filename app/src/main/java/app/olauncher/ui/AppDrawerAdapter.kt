@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
@@ -22,24 +20,13 @@ class AppDrawerAdapter(
     private val appInfoListener: (AppModel) -> Unit,
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (Int, AppModel) -> Unit,
-) : ListAdapter<AppModel, AppDrawerAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
+) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
     private var appFilter = createAppFilter()
     private var isBangSearch = false
+    private var autoLaunch = true
     var appsList: MutableList<AppModel> = mutableListOf()
     var appFilteredList: MutableList<AppModel> = mutableListOf()
-
-    companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
-            override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
-                oldItem.appPackage == newItem.appPackage
-                        && oldItem.user == newItem.user
-                        && oldItem.activityClassName == newItem.activityClassName
-
-            override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
-                oldItem == newItem
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(AdapterAppDrawerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -67,11 +54,12 @@ class AppDrawerAdapter(
 
     private fun createAppFilter(): Filter {
         return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val searchChars = constraint.toString()
-                isBangSearch = searchChars.startsWith("!")
-                val appFilteredList = (if (searchChars.isEmpty()) appsList
-                else appsList.filter { app -> appLabelMatches(app.appLabel, searchChars) } as MutableList<AppModel>)
+            override fun performFiltering(charSearch: CharSequence?): FilterResults {
+                isBangSearch = charSearch?.startsWith("!") ?: false
+                autoLaunch = charSearch?.startsWith(" ")?.not() ?: true
+
+                val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
+                else appsList.filter { app -> appLabelMatches(app.appLabel, charSearch) } as MutableList<AppModel>)
 
                 val filterResults = FilterResults()
                 filterResults.values = appFilteredList
@@ -81,34 +69,36 @@ class AppDrawerAdapter(
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 appFilteredList = results?.values as MutableList<AppModel>
-                submitList(appFilteredList) {
-                    autoLaunch()
-                }
+                notifyItemRangeChanged(0, appsList.size)
+                autoLaunch()
             }
         }
     }
 
     private fun autoLaunch() {
-        try { // Automatically open the app when there's only one search result
-            if (itemCount == 1 && isBangSearch.not() && flag == Constants.FLAG_LAUNCH_APP)
-                clickListener(appFilteredList[0])
+        try {
+            if (itemCount == 1
+                && autoLaunch
+                && isBangSearch.not()
+                && flag == Constants.FLAG_LAUNCH_APP
+            ) clickListener(appFilteredList[0])
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    private fun appLabelMatches(appLabel: String, searchChars: String): Boolean {
-        return (appLabel.contains(searchChars, true) or
+    private fun appLabelMatches(appLabel: String, charSearch: CharSequence): Boolean {
+        return (appLabel.contains(charSearch.trim(), true) or
                 Normalizer.normalize(appLabel, Normalizer.Form.NFD)
                     .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
                     .replace(Regex("[-_+,. ]"), "")
-                    .contains(searchChars, true))
+                    .contains(charSearch, true))
     }
 
     fun setAppList(appsList: MutableList<AppModel>) {
         this.appsList = appsList
         this.appFilteredList = appsList
-        submitList(appsList)
+        notifyItemRangeChanged(0, appsList.size)
     }
 
     fun launchFirstInList() {
@@ -143,8 +133,8 @@ class AppDrawerAdapter(
                     appHideLayout.visibility = View.VISIBLE
                     true
                 }
-                appDelete.setOnClickListener { appDeleteListener(appModel) }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
+                appDelete.setOnClickListener { appDeleteListener(appModel) }
                 appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
             }
     }

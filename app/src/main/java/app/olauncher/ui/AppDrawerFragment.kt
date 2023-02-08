@@ -71,14 +71,15 @@ class AppDrawerFragment : Fragment() {
                     requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
                 else
                     adapter.launchFirstInList()
-                return false
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
                 try {
-                    adapter.filter.filter(newText.trim())
+                    adapter.filter.filter(newText)
                     binding.appDrawerTip.visibility = View.GONE
                     binding.appRename.visibility = if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+                    return true
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
