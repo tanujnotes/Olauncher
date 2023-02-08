@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,7 @@ class AppDrawerFragment : Fragment() {
             canRename = getBoolean(Constants.Key.RENAME, false)
         }
         initViews()
+        initSearch()
         initAdapter()
         initObservers()
         initClickListeners()
@@ -60,6 +62,29 @@ class AppDrawerFragment : Fragment() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun initSearch() {
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query?.startsWith("!") == true)
+                    requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
+                else
+                    adapter.launchFirstInList()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                try {
+                    adapter.filter.filter(newText.trim())
+                    binding.appDrawerTip.visibility = View.GONE
+                    binding.appRename.visibility = if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                return false
+            }
+        })
     }
 
     private fun initAdapter() {
