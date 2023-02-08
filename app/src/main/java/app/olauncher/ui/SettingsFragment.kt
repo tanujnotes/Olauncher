@@ -278,11 +278,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateDateTime() {
-        binding.dateTime.text = getString(when (prefs.dateTimeVisibility) {
-            Constants.DateTime.DATE_ONLY -> R.string.date
-            Constants.DateTime.ON -> R.string.on
-            else -> R.string.off
-        })
+        binding.dateTime.text = getString(
+            when (prefs.dateTimeVisibility) {
+                Constants.DateTime.DATE_ONLY -> R.string.date
+                Constants.DateTime.ON -> R.string.on
+                else -> R.string.off
+            }
+        )
     }
 
     private fun showStatusBar() {
@@ -544,8 +546,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             requireContext().showToast("Long press to enable")
             return
         }
-
-        viewModel.getAppList()
+        viewModel.getAppList(true)
         findNavController().navigate(
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf(Constants.Key.FLAG to flag)

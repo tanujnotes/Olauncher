@@ -33,6 +33,8 @@ class AppDrawerAdapter(
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
             override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
                 oldItem.appPackage == newItem.appPackage
+                        && oldItem.user == newItem.user
+                        && oldItem.activityClassName == newItem.activityClassName
 
             override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
                 oldItem == newItem
