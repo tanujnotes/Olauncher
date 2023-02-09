@@ -93,6 +93,7 @@ class AppDrawerFragment : Fragment() {
             flag,
             prefs.appLabelAlignment,
             clickListener = {
+                if (it.appPackage.isEmpty()) return@AppDrawerAdapter
                 viewModel.selectedApp(it, flag)
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
                     findNavController().popBackStack(R.id.mainFragment, false)

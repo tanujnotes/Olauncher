@@ -96,6 +96,8 @@ class AppDrawerAdapter(
     }
 
     fun setAppList(appsList: MutableList<AppModel>) {
+        // Add empty app for bottom padding in recyclerview
+        appsList.add(AppModel("", null, "", "", android.os.Process.myUserHandle()))
         this.appsList = appsList
         this.appFilteredList = appsList
         notifyItemRangeChanged(0, appsList.size)
@@ -130,7 +132,8 @@ class AppDrawerAdapter(
 
                 appTitle.setOnClickListener { listener(appModel) }
                 appTitle.setOnLongClickListener {
-                    appHideLayout.visibility = View.VISIBLE
+                    if (appModel.appPackage.isNotEmpty())
+                        appHideLayout.visibility = View.VISIBLE
                     true
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
