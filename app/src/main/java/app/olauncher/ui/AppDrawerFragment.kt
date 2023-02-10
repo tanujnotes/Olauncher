@@ -92,8 +92,9 @@ class AppDrawerFragment : Fragment() {
         adapter = AppDrawerAdapter(
             flag,
             prefs.appLabelAlignment,
-            clickListener = {
-                if (it.appPackage.isEmpty()) return@AppDrawerAdapter
+            appClickListener = {
+                if (it.appPackage.isEmpty())
+                    return@AppDrawerAdapter
                 viewModel.selectedApp(it, flag)
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
                     findNavController().popBackStack(R.id.mainFragment, false)
@@ -109,15 +110,20 @@ class AppDrawerFragment : Fragment() {
                 findNavController().popBackStack(R.id.mainFragment, false)
             },
             appDeleteListener = {
-                if (requireContext().isSystemApp(it.appPackage))
-                    requireContext().showToast("System app, cannot delete")
-                else
-                    requireContext().uninstall(it.appPackage)
+                requireContext().apply {
+                    if (isSystemApp(it.appPackage))
+                        showToast("System app, cannot delete")
+                    else
+                        uninstall(it.appPackage)
+                }
             },
-            appHideListener = { flag, appModel ->
+            appHideListener = { appModel, position ->
+                adapter.appFilteredList.removeAt(position)
+                adapter.notifyItemRemoved(position)
+                adapter.appsList.remove(appModel)
+
                 val newSet = mutableSetOf<String>()
                 newSet.addAll(prefs.hiddenApps)
-
                 if (flag == Constants.FLAG_HIDDEN_APPS) {
                     newSet.remove(appModel.appPackage) // for backward compatibility
                     newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
@@ -125,7 +131,8 @@ class AppDrawerFragment : Fragment() {
                     newSet.add(appModel.appPackage + "|" + appModel.user.toString())
 
                 prefs.hiddenApps = newSet
-                if (newSet.isEmpty()) findNavController().popBackStack()
+                if (newSet.isEmpty())
+                    findNavController().popBackStack()
                 if (prefs.firstHide) {
                     prefs.firstHide = false
                     viewModel.showMessageDialog(getString(R.string.hidden_apps_message))

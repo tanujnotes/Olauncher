@@ -1,11 +1,13 @@
 package app.olauncher.ui
 
+import android.annotation.SuppressLint
+import android.os.UserHandle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
@@ -13,18 +15,21 @@ import app.olauncher.databinding.AdapterAppDrawerBinding
 import app.olauncher.helper.isSystemApp
 import java.text.Normalizer
 
+@SuppressLint("NotifyDataSetChanged")
 class AppDrawerAdapter(
     private var flag: Int,
     private val appLabelGravity: Int,
-    private val clickListener: (AppModel) -> Unit,
+    private val appClickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
     private val appDeleteListener: (AppModel) -> Unit,
-    private val appHideListener: (Int, AppModel) -> Unit,
+    private val appHideListener: (AppModel, Int) -> Unit,
 ) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
-    private var appFilter = createAppFilter()
-    private var isBangSearch = false
     private var autoLaunch = true
+    private var isBangSearch = false
+    private val appFilter = createAppFilter()
+    private val myUserHandle = android.os.Process.myUserHandle()
+
     var appsList: MutableList<AppModel> = mutableListOf()
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
@@ -35,14 +40,7 @@ class AppDrawerAdapter(
         try {
             if (appFilteredList.size == 0) return
             val appModel = appFilteredList[holder.bindingAdapterPosition]
-            holder.bind(flag, appLabelGravity, appModel, clickListener, appDeleteListener, appInfoListener)
-
-            holder.appHideButton.setOnClickListener {
-                appFilteredList.removeAt(holder.bindingAdapterPosition)
-                appsList.remove(appModel)
-                notifyItemRemoved(holder.bindingAdapterPosition)
-                appHideListener(flag, appModel)
-            }
+            holder.bind(flag, appLabelGravity, myUserHandle, appModel, appClickListener, appDeleteListener, appInfoListener, appHideListener)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -69,7 +67,7 @@ class AppDrawerAdapter(
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 appFilteredList = results?.values as MutableList<AppModel>
-                notifyItemRangeChanged(0, appsList.size)
+                notifyDataSetChanged()
                 autoLaunch()
             }
         }
@@ -81,7 +79,7 @@ class AppDrawerAdapter(
                 && autoLaunch
                 && isBangSearch.not()
                 && flag == Constants.FLAG_LAUNCH_APP
-            ) clickListener(appFilteredList[0])
+            ) appClickListener(appFilteredList[0])
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -100,45 +98,45 @@ class AppDrawerAdapter(
         appsList.add(AppModel("", null, "", "", android.os.Process.myUserHandle()))
         this.appsList = appsList
         this.appFilteredList = appsList
-        notifyItemRangeChanged(0, appsList.size)
+        notifyDataSetChanged()
     }
 
     fun launchFirstInList() {
         if (appFilteredList.size > 0)
-            clickListener(appFilteredList[0])
+            appClickListener(appFilteredList[0])
     }
 
     class ViewHolder(private val binding: AdapterAppDrawerBinding) : RecyclerView.ViewHolder(binding.root) {
-        val appHideButton: TextView = binding.appHide
 
         fun bind(
             flag: Int,
             appLabelGravity: Int,
+            myUserHandle: UserHandle,
             appModel: AppModel,
-            listener: (AppModel) -> Unit,
+            clickListener: (AppModel) -> Unit,
             appDeleteListener: (AppModel) -> Unit,
             appInfoListener: (AppModel) -> Unit,
+            appHideListener: (AppModel, Int) -> Unit,
         ) =
             with(binding) {
                 appHideLayout.visibility = View.GONE
-                appHideButton.text = if (flag == Constants.FLAG_HIDDEN_APPS) "Show" else "Hide"
                 appTitle.text = appModel.appLabel
                 appTitle.gravity = appLabelGravity
-                appDelete.alpha = if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
+                otherProfileIndicator.isVisible = appModel.user != myUserHandle
 
-                if (appModel.user == android.os.Process.myUserHandle())
-                    otherProfileIndicator.visibility = View.GONE
-                else otherProfileIndicator.visibility = View.VISIBLE
-
-                appTitle.setOnClickListener { listener(appModel) }
+                appTitle.setOnClickListener { clickListener(appModel) }
                 appTitle.setOnLongClickListener {
-                    if (appModel.appPackage.isNotEmpty())
+                    if (appModel.appPackage.isNotEmpty()) {
+                        appDelete.alpha = if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
+                        appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS) "Show" else "Hide"
                         appHideLayout.visibility = View.VISIBLE
+                    }
                     true
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
                 appDelete.setOnClickListener { appDeleteListener(appModel) }
                 appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
+                appHide.setOnClickListener { appHideListener(appModel, bindingAdapterPosition) }
             }
     }
 }
