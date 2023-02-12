@@ -471,9 +471,14 @@ fun Context.openUrl(url: String) {
 
 fun Context.isSystemApp(packageName: String): Boolean {
     if (packageName.isBlank()) return true
-    val applicationInfo = packageManager.getApplicationInfo(packageName, 0)
-    return (applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0)
-            || (applicationInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0)
+    return try {
+        val applicationInfo = packageManager.getApplicationInfo(packageName, 0)
+        ((applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0)
+                || (applicationInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0))
+    } catch (e: Exception) {
+        e.printStackTrace()
+        false
+    }
 }
 
 fun Context.uninstall(packageName: String) {
