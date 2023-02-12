@@ -38,9 +38,9 @@ class AppDrawerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
-        requireArguments().apply {
-            flag = getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
-            canRename = getBoolean(Constants.Key.RENAME, false)
+        arguments?.let {
+            flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
+            canRename = it.getBoolean(Constants.Key.RENAME, false)
         }
         initViews()
         initSearch()
