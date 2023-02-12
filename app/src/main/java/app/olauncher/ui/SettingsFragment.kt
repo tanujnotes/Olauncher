@@ -348,14 +348,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             toggleAccessibilityVisibility(true)
             if (prefs.lockModeOn) {
                 prefs.lockModeOn = false
-                deviceManager.removeActiveAdmin(componentName) // for backward compatibility
+                removeActiveAdmin()
             }
         } else {
             val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
             if (isAdmin) {
-                deviceManager.removeActiveAdmin(componentName)
+                removeActiveAdmin("Admin permission removed.")
                 prefs.lockModeOn = false
-                requireContext().showToast("Admin permission removed.")
             } else {
                 val intent = Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
                 intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName)
@@ -363,10 +362,19 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                     DevicePolicyManager.EXTRA_ADD_EXPLANATION,
                     getString(R.string.admin_permission_message)
                 )
-                activity?.startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
+                requireActivity().startActivityForResult(intent, Constants.REQUEST_CODE_ENABLE_ADMIN)
             }
         }
         populateLockSettings()
+    }
+
+    private fun removeActiveAdmin(toastMessage: String? = null) {
+        try {
+            deviceManager.removeActiveAdmin(componentName) // for backward compatibility
+            requireContext().showToast(toastMessage)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun removeWallpaper() {
