@@ -363,8 +363,6 @@ fun getBackupWallpaper(wallType: String): String {
 fun openSearch(context: Context) {
     val intent = Intent(Intent.ACTION_WEB_SEARCH)
     intent.putExtra(SearchManager.QUERY, "")
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
     context.startActivity(intent)
 }
 
