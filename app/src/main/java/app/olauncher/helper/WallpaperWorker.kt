@@ -10,24 +10,29 @@ import kotlinx.coroutines.coroutineScope
 
 class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : CoroutineWorker(appContext, workerParams) {
 
+    private val prefs = Prefs(applicationContext)
+
     override suspend fun doWork(): Result = coroutineScope {
-        val wallType = checkWallpaperType()
-        val wallpaperUrl = getTodaysWallpaper(wallType)
-        if (Prefs(applicationContext).dailyWallpaperUrl == wallpaperUrl) {
+        val success = if (prefs.dailyWallpaper) {
+            val wallType = checkWallpaperType()
+            val wallpaperUrl = getTodaysWallpaper(wallType)
+            if (prefs.dailyWallpaperUrl == wallpaperUrl)
+                true
+            else {
+                prefs.dailyWallpaperUrl = wallpaperUrl
+                setWallpaper(applicationContext, wallpaperUrl)
+            }
+        } else
+            true
+
+        if (success)
             Result.success()
-        }
-        val success = setWallpaper(
-            applicationContext,
-            wallpaperUrl
-        )
-        if (success) {
-            Prefs(applicationContext).dailyWallpaperUrl = wallpaperUrl
-            Result.success()
-        } else Result.retry()
+        else
+            Result.retry()
     }
 
     private fun checkWallpaperType(): String {
-        return when (Prefs(applicationContext).appTheme) {
+        return when (prefs.appTheme) {
             AppCompatDelegate.MODE_NIGHT_YES -> Constants.WALL_TYPE_DARK
             AppCompatDelegate.MODE_NIGHT_NO -> Constants.WALL_TYPE_LIGHT
             else -> if (applicationContext.isDarkThemeOn())

@@ -272,10 +272,14 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
         val originalHeight: Float = originalImage.height.toFloat()
 
         val canvas = Canvas(background)
-        val scale: Float = height / originalHeight
+        val heightScale: Float = height / originalHeight
+        val widthScale: Float = width / originalWidth
+        val scale = maxOf(heightScale, widthScale)
 
-        val xTranslation: Float = (width - originalWidth * scale) / 2.0f
-        val yTranslation = 0.0f
+        val (xTranslation, yTranslation) = if (heightScale > widthScale)
+            Pair((width - originalWidth * heightScale) / 2.0f, 0f)
+        else
+            Pair(0f, (height - originalHeight * widthScale) / 2.0f)
 
         val transformation = Matrix()
         transformation.postTranslate(xTranslation, yTranslation)

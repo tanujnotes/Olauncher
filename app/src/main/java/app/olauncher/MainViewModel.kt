@@ -198,7 +198,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun cancelWallpaperWorker() {
-        WorkManager.getInstance(appContext).cancelUniqueWork(Constants.WALLPAPER_WORKER_NAME)
+        WorkManager.getInstance(appContext).cancelAllWork()
         prefs.dailyWallpaperUrl = ""
     }
 
