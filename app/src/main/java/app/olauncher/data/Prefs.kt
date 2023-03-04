@@ -34,6 +34,7 @@ class Prefs(context: Context) {
     private val RATE_CLICKED = "RATE_CLICKED"
     private val RENAME_TIP_SHOWN = "RENAME_TIP_SHOWN"
     private val SWIPE_DOWN_ACTION = "SWIPE_DOWN_ACTION"
+    private val TEXT_SIZE_SCALE = "TEXT_SIZE_SCALE"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -146,6 +147,10 @@ class Prefs(context: Context) {
     var appTheme: Int
         get() = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_YES)
         set(value) = prefs.edit().putInt(APP_THEME, value).apply()
+
+    var textSizeScale: Float
+        get() = prefs.getFloat(TEXT_SIZE_SCALE, 1.0f)
+        set(value) = prefs.edit().putFloat(TEXT_SIZE_SCALE, value).apply()
 
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds

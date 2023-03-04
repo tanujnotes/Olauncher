@@ -2,6 +2,7 @@ package app.olauncher
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
@@ -32,6 +33,13 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (navController.currentDestination?.id != R.id.mainFragment)
             super.onBackPressed()
+    }
+
+    override fun attachBaseContext(context: Context) {
+        val newConfig = Configuration(context.resources.configuration)
+        newConfig.fontScale = Prefs(context).textSizeScale
+        applyOverrideConfiguration(newConfig)
+        super.attachBaseContext(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

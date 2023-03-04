@@ -26,6 +26,16 @@ object Constants {
         const val NOTIFICATIONS = 2
     }
 
+    object TextSize {
+        const val ONE = 0.5f
+        const val TWO = 0.75f
+        const val THREE = 0.9f
+        const val FOUR = 1f
+        const val FIVE = 1.1f
+        const val SIX = 1.25f
+        const val SEVEN = 1.5f
+    }
+
     const val WALL_TYPE_LIGHT = "light"
     const val WALL_TYPE_DARK = "dark"
 

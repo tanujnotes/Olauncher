@@ -57,6 +57,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateLockSettings()
         populateWallpaperText()
         populateAppThemeText()
+        populateTextSize()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -72,6 +73,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.dateTimeSelectLayout.visibility = View.GONE
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
+        binding.textSizesLayout.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
 
@@ -98,6 +100,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            R.id.textSizeValue -> binding.textSizesLayout.visibility = View.VISIBLE
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
@@ -111,6 +114,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.maxApps6 -> updateHomeAppsNum(6)
             R.id.maxApps7 -> updateHomeAppsNum(7)
             R.id.maxApps8 -> updateHomeAppsNum(8)
+
+            R.id.textSize1 -> updateTextSizeScale(Constants.TextSize.ONE)
+            R.id.textSize2 -> updateTextSizeScale(Constants.TextSize.TWO)
+            R.id.textSize3 -> updateTextSizeScale(Constants.TextSize.THREE)
+            R.id.textSize4 -> updateTextSizeScale(Constants.TextSize.FOUR)
+            R.id.textSize5 -> updateTextSizeScale(Constants.TextSize.FIVE)
+            R.id.textSize6 -> updateTextSizeScale(Constants.TextSize.SIX)
+            R.id.textSize7 -> updateTextSizeScale(Constants.TextSize.SEVEN)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -185,6 +196,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.themeLight.setOnClickListener(this)
         binding.themeDark.setOnClickListener(this)
         binding.themeSystem.setOnClickListener(this)
+        binding.textSizeValue.setOnClickListener(this)
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
@@ -207,6 +219,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.maxApps6.setOnClickListener(this)
         binding.maxApps7.setOnClickListener(this)
         binding.maxApps8.setOnClickListener(this)
+
+        binding.textSize1.setOnClickListener(this)
+        binding.textSize2.setOnClickListener(this)
+        binding.textSize3.setOnClickListener(this)
+        binding.textSize4.setOnClickListener(this)
+        binding.textSize5.setOnClickListener(this)
+        binding.textSize6.setOnClickListener(this)
+        binding.textSize7.setOnClickListener(this)
 
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
@@ -408,6 +428,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.refreshHome(true)
     }
 
+    private fun updateTextSizeScale(sizeScale: Float) {
+        prefs.textSizeScale = sizeScale
+        requireActivity().recreate()
+    }
+
     private fun toggleKeyboardText() {
         if (prefs.autoShowKeyboard && prefs.keyboardMessageShown.not()) {
             viewModel.showMessageDialog(getString(R.string.keyboard_message))
@@ -452,6 +477,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             AppCompatDelegate.MODE_NIGHT_NO -> binding.appThemeText.text = getString(R.string.light)
             else -> binding.appThemeText.text = getString(R.string.system_default)
         }
+    }
+
+    private fun populateTextSize() {
+        binding.textSizeValue.text = when (prefs.textSizeScale) {
+            Constants.TextSize.TWO -> 2
+            Constants.TextSize.THREE -> 3
+            Constants.TextSize.FOUR -> 4
+            Constants.TextSize.FIVE -> 5
+            Constants.TextSize.SIX -> 6
+            Constants.TextSize.SEVEN -> 7
+            else -> 1
+        }.toString()
     }
 
     private fun populateKeyboardText() {
