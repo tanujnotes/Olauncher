@@ -138,6 +138,10 @@ class AppDrawerFragment : Fragment() {
                     viewModel.showMessageDialog(getString(R.string.hidden_apps_message))
                     findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
                 }
+            },
+            appRenameListener = { appModel, renameLabel ->
+                prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
+                viewModel.getAppList()
             }
         )
         binding.recyclerView.adapter = adapter

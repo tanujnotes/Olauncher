@@ -52,6 +52,18 @@
             app:drawableTopCompat="@drawable/ic_delete" />
 
         <TextView
+            android:id="@+id/appRename"
+            style="@style/TextSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="2dp"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="@string/rename"
+            android:textSize="12sp"
+            app:drawableTopCompat="@drawable/ic_rename" />
+
+        <TextView
             android:id="@+id/appHide"
             style="@style/TextSmall"
             android:layout_width="wrap_content"
@@ -74,6 +86,45 @@
             android:text="@string/info"
             android:textSize="12sp"
             app:drawableTopCompat="@drawable/ic_info" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/renameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="?attr/primaryColorInverseTrans80"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <EditText
+            android:id="@+id/etAppRename"
+            style="@style/TextLarge"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:inputType="textCapWords"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:textColorHint="?attr/primaryColorTrans50" />
+
+        <TextView
+            android:id="@+id/tvSaveRename"
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:text="@string/rename"
+            android:textAllCaps="true" />
 
     </LinearLayout>
 

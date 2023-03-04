@@ -399,4 +399,8 @@ class Prefs(context: Context) {
             else -> ""
         }
     }
+
+    fun getAppRenameLabel(appPackage: String): String = prefs.getString(appPackage, "").toString()
+
+    fun setAppRenameLabel(appPackage: String, renameLabel: String) = prefs.edit().putString(appPackage, renameLabel).apply()
 }

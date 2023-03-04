@@ -13,6 +13,7 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
 import app.olauncher.helper.isSystemApp
+import app.olauncher.helper.showKeyboard
 import java.text.Normalizer
 
 @SuppressLint("NotifyDataSetChanged")
@@ -23,6 +24,7 @@ class AppDrawerAdapter(
     private val appInfoListener: (AppModel) -> Unit,
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
+    private val appRenameListener: (AppModel, String) -> Unit,
 ) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
 
     private var autoLaunch = true
@@ -40,7 +42,17 @@ class AppDrawerAdapter(
         try {
             if (appFilteredList.size == 0) return
             val appModel = appFilteredList[holder.bindingAdapterPosition]
-            holder.bind(flag, appLabelGravity, myUserHandle, appModel, appClickListener, appDeleteListener, appInfoListener, appHideListener)
+            holder.bind(
+                flag,
+                appLabelGravity,
+                myUserHandle,
+                appModel,
+                appClickListener,
+                appDeleteListener,
+                appInfoListener,
+                appHideListener,
+                appRenameListener
+            )
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -117,6 +129,7 @@ class AppDrawerAdapter(
             appDeleteListener: (AppModel) -> Unit,
             appInfoListener: (AppModel) -> Unit,
             appHideListener: (AppModel, Int) -> Unit,
+            appRenameListener: (AppModel, String) -> Unit,
         ) =
             with(binding) {
                 appHideLayout.visibility = View.GONE
@@ -132,6 +145,19 @@ class AppDrawerAdapter(
                         appHideLayout.visibility = View.VISIBLE
                     }
                     true
+                }
+                appRename.setOnClickListener {
+                    if (appModel.appPackage.isNotEmpty()) {
+                        etAppRename.hint = appModel.appLabel
+                        renameLayout.visibility = View.VISIBLE
+                        appHideLayout.visibility = View.GONE
+                        etAppRename.showKeyboard()
+                    }
+                }
+                tvSaveRename.setOnClickListener {
+                    val renameLabel = etAppRename.text.toString().trim()
+                    if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank())
+                        appRenameListener(appModel, renameLabel)
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
                 appDelete.setOnClickListener { appDeleteListener(appModel) }

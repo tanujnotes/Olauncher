@@ -52,7 +52,7 @@ fun Context.showToast(stringResource: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, getString(stringResource), duration).show()
 }
 
-suspend fun getAppsList(context: Context, includeHiddenApps: Boolean = false): MutableList<AppModel> {
+suspend fun getAppsList(context: Context, prefs: Prefs, includeHiddenApps: Boolean = false): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
 
@@ -66,10 +66,13 @@ suspend fun getAppsList(context: Context, includeHiddenApps: Boolean = false): M
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
+
+                    val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName).ifBlank { app.label.toString() }
+
                     if (includeHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
                         appList.add(
                             AppModel(
-                                app.label.toString(),
+                                appLabelShown,
                                 collator.getCollationKey(app.label.toString()),
                                 app.applicationInfo.packageName,
                                 app.componentName.className,
@@ -81,7 +84,7 @@ suspend fun getAppsList(context: Context, includeHiddenApps: Boolean = false): M
                     )
                         appList.add(
                             AppModel(
-                                app.label.toString(),
+                                appLabelShown,
                                 collator.getCollationKey(app.label.toString()),
                                 app.applicationInfo.packageName,
                                 app.componentName.className,
@@ -90,7 +93,7 @@ suspend fun getAppsList(context: Context, includeHiddenApps: Boolean = false): M
                         )
                 }
             }
-            appList.sort()
+            appList.sortBy { it.appLabel.lowercase() }
 
         } catch (e: Exception) {
             e.printStackTrace()
