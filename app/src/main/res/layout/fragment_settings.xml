@@ -864,7 +864,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -873,7 +873,7 @@
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginHorizontal="6dp"
                     android:padding="10dp"
                     android:text="@string/about" />
 
@@ -882,7 +882,7 @@
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginHorizontal="6dp"
                     android:padding="10dp"
                     android:text="@string/share" />
 
@@ -891,7 +891,7 @@
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginHorizontal="6dp"
                     android:padding="10dp"
                     android:text="@string/rate" />
 
@@ -900,7 +900,7 @@
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginHorizontal="6dp"
                     android:padding="10dp"
                     android:text="@string/privacy" />
             </LinearLayout>
@@ -917,6 +917,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:paddingHorizontal="2dp"
                     android:text="@string/twitter" />
 
                 <TextView
@@ -925,6 +926,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:paddingHorizontal="2dp"
                     android:text="@string/instagram" />
 
                 <TextView
@@ -933,6 +935,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:paddingHorizontal="2dp"
                     android:text="@string/github" />
 
             </LinearLayout>
