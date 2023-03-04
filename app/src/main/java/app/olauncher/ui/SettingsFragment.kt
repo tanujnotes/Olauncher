@@ -429,6 +429,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun updateTextSizeScale(sizeScale: Float) {
+        if (prefs.textSizeScale == sizeScale) return
         prefs.textSizeScale = sizeScale
         requireActivity().recreate()
     }
