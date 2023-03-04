@@ -159,10 +159,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             }
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
-            R.id.toggleLock -> {
-                startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
-                deviceManager.removeActiveAdmin(componentName) // for backward compatibility
-            }
+            R.id.toggleLock -> startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
         }
         return true
     }
