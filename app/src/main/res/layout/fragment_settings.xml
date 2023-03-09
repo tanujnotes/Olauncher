@@ -946,9 +946,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:letterSpacing="0.03"
                 android:padding="10dp"
-                android:text="@string/settings_footer"
-                android:visibility="visible" />
+                android:text="@string/settings_footer" />
 
         </LinearLayout>
 
