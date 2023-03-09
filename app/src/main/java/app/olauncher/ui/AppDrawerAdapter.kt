@@ -110,7 +110,7 @@ class AppDrawerAdapter(
         appsList.add(AppModel("", null, "", "", android.os.Process.myUserHandle()))
         this.appsList = appsList
         this.appFilteredList = appsList
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, appFilteredList.size)
     }
 
     fun launchFirstInList() {
