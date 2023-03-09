@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_large">26sp</dimen>
+    <dimen name="text_large">24sp</dimen>
     <dimen name="text_small">16sp</dimen>
     <dimen name="app_padding_vertical">12dp</dimen>
     <dimen name="home_app_padding_vertical">10dp</dimen>
