@@ -133,6 +133,7 @@ class AppDrawerAdapter(
         ) =
             with(binding) {
                 appHideLayout.visibility = View.GONE
+                renameLayout.visibility = View.GONE
                 appTitle.text = appModel.appLabel
                 appTitle.gravity = appLabelGravity
                 otherProfileIndicator.isVisible = appModel.user != myUserHandle
