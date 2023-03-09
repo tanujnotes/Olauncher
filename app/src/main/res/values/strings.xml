@@ -84,7 +84,7 @@
     <string name="bottom_on">"Bottom: On "</string>
     <string name="bottom_off">Bottom: Off</string>
     <string name="please_set_olauncher_as_default_first">Please set Olauncher as your default launcher first</string>
-    <string name="settings_footer"><u>New: Private Notes App</u></string>
+    <string name="settings_footer"><u>PROlauncher</u></string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
     <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page below.</string>

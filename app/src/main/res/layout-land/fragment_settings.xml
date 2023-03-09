@@ -934,12 +934,12 @@
             <TextView
                 android:id="@+id/moreApps"
                 style="@style/TextSmall"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/settings_footer"
-                android:visibility="gone" />
+                android:text="@string/settings_footer" />
 
         </LinearLayout>
 

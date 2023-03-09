@@ -948,7 +948,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/settings_footer"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 
