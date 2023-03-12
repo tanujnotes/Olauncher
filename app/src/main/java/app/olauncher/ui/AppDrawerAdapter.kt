@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
+import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
 import java.text.Normalizer
@@ -155,6 +156,7 @@ class AppDrawerAdapter(
                         appDelete.alpha = if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
                         appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS) "Show" else "Hide"
                         appHideLayout.visibility = View.VISIBLE
+                        appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
                     }
                     true
                 }

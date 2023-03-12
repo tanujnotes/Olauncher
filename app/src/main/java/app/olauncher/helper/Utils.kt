@@ -102,12 +102,12 @@ suspend fun getAppsList(context: Context, prefs: Prefs, includeHiddenApps: Boole
     }
 }
 
-suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
+suspend fun getHiddenAppsList(context: Context, prefs: Prefs): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val pm = context.packageManager
-        if (!Prefs(context).hiddenAppsUpdated) upgradeHiddenApps(Prefs(context))
+        if (!prefs.hiddenAppsUpdated) upgradeHiddenApps(prefs)
 
-        val hiddenAppsSet = Prefs(context).hiddenApps
+        val hiddenAppsSet = prefs.hiddenApps
         val appList: MutableList<AppModel> = mutableListOf()
         if (hiddenAppsSet.isEmpty()) return@withContext appList
 
@@ -123,14 +123,14 @@ suspend fun getHiddenAppsList(context: Context): MutableList<AppModel> {
                 }
 
                 val appInfo = pm.getApplicationInfo(appPackage, 0)
-                val appName = pm.getApplicationLabel(appInfo).toString()
-                val appKey = collator.getCollationKey(appName)
-                appList.add(AppModel(appName, appKey, appPackage, null, userHandle))
+                val appLabelShown = prefs.getAppRenameLabel(appPackage).ifBlank { pm.getApplicationLabel(appInfo).toString() }
+                val appKey = collator.getCollationKey(appLabelShown)
+                appList.add(AppModel(appLabelShown, appKey, appPackage, null, userHandle))
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-        appList.sort()
+        appList.sortBy { it.appLabel.lowercase() }
         appList
     }
 }
