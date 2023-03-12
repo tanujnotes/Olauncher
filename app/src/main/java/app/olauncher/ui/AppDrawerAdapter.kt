@@ -1,6 +1,5 @@
 package app.olauncher.ui
 
-import android.annotation.SuppressLint
 import android.os.UserHandle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
@@ -16,7 +17,6 @@ import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
 import java.text.Normalizer
 
-@SuppressLint("NotifyDataSetChanged")
 class AppDrawerAdapter(
     private var flag: Int,
     private val appLabelGravity: Int,
@@ -25,7 +25,17 @@ class AppDrawerAdapter(
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
-) : RecyclerView.Adapter<AppDrawerAdapter.ViewHolder>(), Filterable {
+) : ListAdapter<AppModel, AppDrawerAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
+            override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
+                oldItem.appPackage == newItem.appPackage && oldItem.user == newItem.user
+
+            override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
+                oldItem == newItem
+        }
+    }
 
     private var autoLaunch = true
     private var isBangSearch = false
@@ -79,8 +89,9 @@ class AppDrawerAdapter(
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 appFilteredList = results?.values as MutableList<AppModel>
-                notifyDataSetChanged()
-                autoLaunch()
+                submitList(appFilteredList) {
+                    autoLaunch()
+                }
             }
         }
     }
@@ -110,7 +121,7 @@ class AppDrawerAdapter(
         appsList.add(AppModel("", null, "", "", android.os.Process.myUserHandle()))
         this.appsList = appsList
         this.appFilteredList = appsList
-        notifyItemRangeChanged(0, appFilteredList.size)
+        submitList(appsList)
     }
 
     fun launchFirstInList() {
