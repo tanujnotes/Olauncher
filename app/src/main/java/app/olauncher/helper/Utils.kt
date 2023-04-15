@@ -11,6 +11,7 @@ import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.*
 import android.net.Uri
+import android.os.Build
 import android.os.UserHandle
 import android.os.UserManager
 import android.provider.AlarmClock
@@ -221,7 +222,11 @@ fun setPlainWallpaper(context: Context, color: Int) {
         val bitmap = Bitmap.createBitmap(1000, 2000, Bitmap.Config.ARGB_8888)
         bitmap.eraseColor(context.getColor(color))
         val manager = WallpaperManager.getInstance(context)
-        manager.setBitmap(bitmap)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_SYSTEM)
+            manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_LOCK)
+        } else
+            manager.setBitmap(bitmap)
         bitmap.recycle()
     } catch (e: Exception) {
         e.printStackTrace()
@@ -305,7 +310,11 @@ suspend fun setWallpaper(appContext: Context, url: String): Boolean {
         val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
 
         try {
-            wallpaperManager.setBitmap(scaledBitmap)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_SYSTEM)
+                wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_LOCK)
+            } else
+                wallpaperManager.setBitmap(scaledBitmap)
         } catch (e: Exception) {
             return@withContext false
         }
