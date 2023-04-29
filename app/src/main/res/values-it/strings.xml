@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app">App</string>
+    <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
+    <string name="app_text_color">Colore del testo</string>
+    <string name="double_tap_to_lock_screen">Tocca due volte per bloccare</string>
+    <string name="experimental_">(sperimentale)</string>
+    <string name="admin_permission_message">
+Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in modo responsabile. Olauncher non raccoglie né condivide alcun dato.</string>
+    <string name="about">Di</string>
+    <string name="off">Spento</string>
+    <string name="on">SU</string>
+    <string name="black">Nera</string>
+    <string name="white">Bianca</string>
+    <string name="change_default_launcher">Cambia il programma di avvio predefinito</string>
+    <string name="privacy">Riservatezza</string>
+    <string name="share">Condividere</string>
+    <string name="rate">Valutare</string>
+    <string name="follow">Seguire</string>
+    <string name="email">E-mail</string>
+    <string name="github">Github</string>
+    <string name="donate">Donare</string>
+    <string name="swipe_up_for_apps">1. Scorri verso l\'alto per tutte le app</string>
+    <string name="long_press_for_settings">2. Premi a lungo ovunque per le impostazioni</string>
+    <string name="apps_on_home_screen">App sulla schermata iniziale</string>
+    <string name="daily_wallpaper_update">Nuovo sfondo quotidiano</string>
+    <string name="left">Sinistra</string>
+    <string name="right">Destra</string>
+    <string name="center">Centro</string>
+    <string name="home_layout_alignment">Allineamento dell\'app</string>
+    <string name="swipe_left_app">Scorri l\'app verso sinistra</string>
+    <string name="swipe_right_app">Scorri verso destra l\'app</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Suggerimento: inizia a digitare il nome di un\'app per avviarla automaticamente</string>
+    <string name="okay">Va bene</string>
+    <string name="cool">Freddo!</string>
+    <string name="double_tap_lock_is_enabled_message">Se il doppio tocco di blocco disabilita l\'impronta digitale o lo sblocco facciale, apri le impostazioni di Olauncher, tocca \'sperimentale\' e segui le istruzioni. Grazie.</string>
+    <string name="triple_tap_lock_message">Come funziona:
+        \n Dopo aver toccato due volte, lo schermo si oscurerà e il telefono si bloccherà in 5 secondi.
+        \n\n Durante questo periodo, puoi toccare due volte per <b>sbloccare</b> o tocca tre volte in qualsiasi momento per bloccare immediatamente il telefono.
+        \n\n Nota: disattiva prima questa opzione se decidi di eliminare Olauncher. Grazie.</string>
+    <string name="auto_show_keyboard">Tastiera di visualizzazione automatica</string>
+    <string name="hide">Nascondere</string>
+    <string name="status_bar">Mostra la barra di stato</string>
+    <string name="rename">Rinominare</string>
+    <string name="show_date_time">Mostra data e ora</string>
+    <string name="appearance">Aspetto</string>
+    <string name="gestures">Gesti</string>
+    <string name="theme_mode">Modalità tema</string>
+    <string name="system_default">Sistema</string>
+    <string name="dark">Buia</string>
+    <string name="light">Leggera</string>
+    <string name="double_tap_lock_uninstall_message">Tocca due volte per bloccare abilitato.
+        \n\n Nota: disattiva prima questa opzione se decidi di eliminare Olauncher.</string>
+    <string name="welcome_to_olauncher_settings">La nostra pagina Informazioni in basso ha le risposte a tutte le tue domande. Non dimenticare. :)
+        \n\n Grazie.</string>
+    <string name="rate_us_message">Ehi, trovi utile Olauncher? Se sì, una valutazione a 5 stelle è il modo migliore per sostenerci.
+        \n\n Grazie e non lo vedrai più.</string>
+    <string name="share_message">Ciao, pensi che i tuoi amici adorerebbero Olauncher tanto quanto te?
+        \n\n Condividi l'app e aiutaci a spargere la voce. Grazie!</string>
+    <string name="keyboard_message">Ciao, la tastiera è il modo più veloce per trovare e avviare app in Olauncher. Possiamo chiederti di tenerlo acceso ancora per qualche giorno e poi decidere?
+        \n\n La scelta è sempre tua.</string>
+    <string name="accessibility_service_description">L\'autorizzazione di accessibilità è necessaria per abilitare il doppio tocco per bloccare. Qualsiasi dato acquisito da Olauncher tramite questo servizio non lascerà il tuo dispositivo.</string>
+    <string name="lock_layout_description">descrizione del layout di blocco da utilizzare un ID univoco per bloccare lo schermo</string>
+    <string name="support_olauncher_for_free">Supporta Olauncher gratuitamente utilizzando il nostro link di affiliazione Amazon.</string>
+    <string name="support_olauncher_message">Ogni volta che acquisti qualcosa utilizzando il nostro link, riceviamo una piccola commissione. Salva il link e usalo ogni volta che fai acquisti online.\n Grazie!</string>
+    <string name="open">Link aperto</string>
+    <string name="copy">copia</string>
+    <string name="close">Vicina</string>
+    <string name="not_now">Non adesso</string>
+    <string name="public_roadmap">Roadmap pubblica di Olauncher</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Cinguettio</string>
+    <string name="roadmap">Tabella di marcia</string>
+    <string name="date">Data</string>
+    <string name="date_only">Solo data</string>
+    <string name="bottom_on">"In basso: acceso"</string>
+    <string name="bottom_off">In basso: spento</string>
+    <string name="please_set_olauncher_as_default_first">Per prima cosa imposta Olauncher come launcher predefinito</string>
+    <string name="settings_footer"><u>PROlauncher</u></string>
+    <string name="affiliate">Affiliato</string>
+    <string name="tip_start_typing_for_rename">Suggerimento: inizia a digitare per l\'opzione RENAME dell'app</string>
+    <string name="hidden_apps_message">Nota: tocca \'Olauncher\' nella parte superiore di questa pagina Impostazioni per trovare le tue app nascoste.\n\nUlteriori dettagli sono disponibili nella nostra pagina Informazioni di seguito.</string>
+    <string name="swipe_down_for">Scorri verso il basso per</string>
+    <string name="search">Ricerca</string>
+    <string name="notifications">Notifiche</string>
+    <string name="accessibility_disclosure">Attiva o disattiva il servizio di accessibilità di Olauncher nelle impostazioni del tuo dispositivo per abilitare o disabilitare questa funzione.
+    \n\n Tieni presente che questo servizio viene utilizzato solo per consentirti di spegnere lo schermo del tuo dispositivo utilizzando il gesto del doppio tocco.
+   Il nostro servizio di accessibilità non raccoglie né condivide alcun dato.</string>
+    <string name="accept">Accettare</string>
+    <string name="permission">Autorizzazione</string>
+    <string name="double_tap_lock">Tocca due volte per bloccare</string>
+    <string name="enable">Abilitare</string>
+    <string name="disable">disattivare</string>
+    <string name="not_working"><u>Non funziona?</u></string>
+    <string name="info">Informazioni</string>
+    <string name="delete">Eliminare</string>
+    <string name="day_battery">%s, %d%%</string>
+    <string name="text_size">Dimensione del testo</string>
+</resources>
