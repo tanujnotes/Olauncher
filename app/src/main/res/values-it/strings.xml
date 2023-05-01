@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
     <string name="app_text_color">Colore del testo</string>
@@ -63,9 +64,8 @@ Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in 
     <string name="welcome_to_olauncher_settings">La nostra pagina Informazioni in basso ha le risposte a tutte le tue domande. Non dimenticare. :)
         \n\n Grazie.</string>
     <string name="rate_us_message">Ehi, trovi utile Olauncher? Se sì, una valutazione a 5 stelle è il modo migliore per sostenerci.
-        \n\n Grazie e non lo vedrai più.</string>
-    <string name="share_message">Ciao, pensi che i tuoi amici adorerebbero Olauncher tanto quanto te?
-        \n\n Condividi l'app e aiutaci a spargere la voce. Grazie!</string>
+        \n\nGrazie e non lo vedrai più.</string>
+    <string name="share_message">Ciao, pensi che i tuoi amici adorerebbero Olauncher tanto quanto te? \n\nCondividi l\'app e aiutaci a spargere la voce. Grazie!</string>
     <string name="keyboard_message">Ciao, la tastiera è il modo più veloce per trovare e avviare app in Olauncher. Possiamo chiederti di tenerlo acceso ancora per qualche giorno e poi decidere?
         \n\n La scelta è sempre tua.</string>
     <string name="accessibility_service_description">L\'autorizzazione di accessibilità è necessaria per abilitare il doppio tocco per bloccare. Qualsiasi dato acquisito da Olauncher tramite questo servizio non lascerà il tuo dispositivo.</string>
@@ -87,7 +87,7 @@ Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in 
     <string name="please_set_olauncher_as_default_first">Per prima cosa imposta Olauncher come launcher predefinito</string>
     <string name="settings_footer"><u>PROlauncher</u></string>
     <string name="affiliate">Affiliato</string>
-    <string name="tip_start_typing_for_rename">Suggerimento: inizia a digitare per l\'opzione RENAME dell'app</string>
+    <string name="tip_start_typing_for_rename">Suggerimento: inizia a digitare per l\'opzione RENAME dell\'app</string>
     <string name="hidden_apps_message">Nota: tocca \'Olauncher\' nella parte superiore di questa pagina Impostazioni per trovare le tue app nascoste.\n\nUlteriori dettagli sono disponibili nella nostra pagina Informazioni di seguito.</string>
     <string name="swipe_down_for">Scorri verso il basso per</string>
     <string name="search">Ricerca</string>
@@ -101,8 +101,8 @@ Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in 
     <string name="enable">Abilitare</string>
     <string name="disable">disattivare</string>
     <string name="not_working"><u>Non funziona?</u></string>
-    <string name="info">Informazioni</string>
+    <string name="info" formatted="false">Informazioni</string>
     <string name="delete">Eliminare</string>
-    <string name="day_battery">%s, %d%%</string>
+    <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Dimensione del testo</string>
 </resources>

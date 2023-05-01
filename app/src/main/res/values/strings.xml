@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Olauncher</string>
+    <string name="app_name" >Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
@@ -100,8 +100,8 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="not_working"><u>Not working?</u></string>
-    <string name="info">Info</string>
+    <string name="info" >Info</string>
     <string name="delete">Delete</string>
-    <string name="day_battery">%s, %d%%</string>
+    <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Text size</string>
 </resources>
