@@ -21,18 +21,8 @@ You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/m
 * Please let's [discuss](https://github.com/tanujnotes/Olauncher/discussions) before sending pull requests
 * Make pull requests to [`master`](https://github.com/tanujnotes/olauncher) branch
 
-## Sponsor
+##
 Support Olauncher - https://buymeacoff.ee/tanujnotes
-<details>
-    <summary>More options -</summary>
-    
-  * Etheruem: `0xcBb95AF4D76fba34bf8D1808905BF5365239E2ba`
-  * Bitcoin: `33VFtQSa6HZr2FZphmNA5jZ9fEKPNbeEmL`
-  * Monero: `46bCqsiEtqj4p48HbQjw4c6RVtWeN59Uy4NBGGferBe7HEFKoskBbouFuuTxKvhTXhNuXQbLiEUFCaeMDTrfBGK7Qhp3dRn`
-  * Paypal: [paypal.me/tanujnotes](https://paypal.me/tanujnotes)
-
-</details>
-
 
 License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
@@ -40,4 +30,6 @@ Contact - [@tanujnotes](https://twitter.com/tanujnotes)
 
 Thank you and have a great day!
 
-*P.S. Checking out our [About](https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings is highly recommended.*
+##
+
+**P.S.** To maintain the simplicity of Olauncher, a few niche features are availble but hidden. Please check out the [About](https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list.
