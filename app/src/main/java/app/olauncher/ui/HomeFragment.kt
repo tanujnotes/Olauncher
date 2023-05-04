@@ -335,10 +335,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             try {
                 deviceManager.lockNow()
             } catch (e: SecurityException) {
-                requireContext().showToast("Please turn on double tap to lock", Toast.LENGTH_LONG)
+                requireContext().showToast(getString(R.string.please_turn_on_double_tap_to_unlock), Toast.LENGTH_LONG)
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             } catch (e: Exception) {
-                requireContext().showToast("Olauncher failed to lock device.\nPlease check your app settings.", Toast.LENGTH_LONG)
+                requireContext().showToast(getString(R.string.launcher_failed_to_lock_device), Toast.LENGTH_LONG)
                 prefs.lockModeOn = false
             }
         }
@@ -376,7 +376,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         requireActivity().recreate()
     }
 
-    private fun showLongPressToast() = requireContext().showToast("Long press to select app")
+    private fun showLongPressToast() = requireContext().showToast(getString(R.string.long_press_to_select_app))
 
     private fun textOnClick(view: View) = onClick(view)
 

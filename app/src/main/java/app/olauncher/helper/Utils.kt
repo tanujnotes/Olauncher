@@ -28,6 +28,7 @@ import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.res.TypedArrayUtils.getString
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.AppModel
@@ -248,9 +249,10 @@ fun getChangedAppTheme(context: Context, currentAppTheme: Int): Int {
 fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
+    
     intent?.let {
         launcher.startAppDetailsActivity(intent.component, userHandle, null, null)
-    } ?: context.showToast("Unable to to open app info")
+    } ?: context.showToast(context.getString(R.string.unable_to_open_app))
 }
 
 suspend fun getBitmapFromURL(src: String?): Bitmap? {
@@ -473,7 +475,7 @@ fun Context.copyToClipboard(text: String) {
     val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     val clipData = ClipData.newPlainText(getString(R.string.app_name), text)
     clipboardManager.setPrimaryClip(clipData)
-    showToast("Copied")
+    showToast("")
 }
 
 fun Context.openUrl(url: String) {

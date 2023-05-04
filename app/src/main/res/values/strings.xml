@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name" >Olauncher</string>
+    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
-    <string name="experimental_">(experimental)</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
     <string name="about">About</string>
     <string name="off">Off</string>
@@ -42,10 +41,7 @@
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
-    <string name="triple_tap_lock_message">How it works:
-        \nOnce you double-tap, screen will go dark and the phone will lock itself in 5 seconds.
-        \n\nDuring this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.
-        \n\nNote: Turn this OFF first if you decide to delete Olauncher. Thank you.</string>
+    <string name="triple_tap_lock_message">How it works:          Once you double-tap, screen will go dark and the phone will lock itself in 5 seconds.           During this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.           Note: Turn this OFF first if you decide to delete Olauncher. Thank you.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
     <string name="status_bar">Show status bar</string>
@@ -65,8 +61,7 @@
         \n\nThank you and you won\'t see this again.</string>
     <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
         \n\nShare the app and help us spread the word. Thank you!</string>
-    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
-        \n\nThe choice is always yours.</string>
+    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?           The choice is always yours.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
@@ -100,8 +95,33 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="not_working"><u>Not working?</u></string>
-    <string name="info" >Info</string>
+    <string name="info">Info</string>
     <string name="delete">Delete</string>
     <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Text size</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
+    <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.
+Please check your app settings.</string>
+    <string name="long_press_to_select_app">Long press to select app</string>
+    <string name="unable_to_open_app">Unable  to open app info</string>
+    <string name="copied">Copied</string>
+    <string name="system_app_cannot_delete">System app, cannot delete</string>
+    <string name="type_a_new_app_name_first">Type a new app name first</string>
+    <string name="app_not_found">App not found</string>
+    <string name="unable_to_launch_app">Unable to launch app</string>
+    <string name="search_for_Launcher_or_home_app">Search for Launcher or Home app</string>
+    <string name="swipe_left_app_enabled">Swipe left app enabled</string>
+    <string name="swipe_right_app_enabled">Swipe right app enabled</string>
+    <string name="swipe_left_app_disabled">Swipe left app disabled</string>
+    <string name="swipe_right_app_disabled">Swipe right app disabled</string>
+    <string name="your_wallpaper_will_update_shortly">Your wallpaper will update shortly</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher is not default launcher.
+Daily wallpaper update may fail.</string>
+    <string name="long_press_to_enable">Long press to enable</string>
+    <string name="no_hidden_apps">No hidden apps"</string>
+    <string name="experimental_">experimental</string>
+
+
 </resources>
