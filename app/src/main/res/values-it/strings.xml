@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lanciatore</string>
+    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
     <string name="app_text_color">Colore del testo</string>
@@ -9,8 +9,8 @@
     <string name="admin_permission_message">
 Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in modo responsabile. Olauncher non raccoglie né condivide alcun dato.</string>
     <string name="about">Di</string>
-    <string name="off">Spento</string>
-    <string name="on">SU</string>
+    <string name="off">Off</string>
+    <string name="on">On</string>
     <string name="black">Nera</string>
     <string name="white">Bianca</string>
     <string name="change_default_launcher">Cambia il programma di avvio predefinito</string>

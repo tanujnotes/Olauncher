@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">lanzador</string>
+    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Establecer como iniciador predeterminado</string>
     <string name="app_text_color">Color de texto</string>
@@ -8,9 +8,9 @@
     <string name="experimental_">(experimental)</string>
     <string name="admin_permission_message">Olauncher promete usar el permiso de la pantalla de bloqueo de manera responsable. Olauncher no recopila ni comparte ningún dato.</string>
     <string name="about">Acerca de</string>
-    <string name="off">Apagado</string>
+    <string name="off">De</string>
     <string name="on">En</string>
-    <string name="black">Negro</string>
+    <string name="black">Black</string>
     <string name="white">Blanco</string>
     <string name="change_default_launcher">Cambiar lanzador predeterminado</string>
     <string name="privacy">Privacidad</string>
@@ -74,8 +74,8 @@
     <string name="roadmap">Mapa vial</string>
     <string name="date">Fecha</string>
     <string name="date_only">Solo fecha</string>
-    <string name="bottom_on">Abajo: encendido</string>
-    <string name="bottom_off">Abajo: Apagado</string>
+    <string name="bottom_on">Abajo: En</string>
+    <string name="bottom_off">Abajo: De</string>
     <string name="please_set_olauncher_as_default_first">Primero configure Olauncher como su iniciador predeterminado</string>
     <string name="settings_footer"><u>PRO lanzador</u></string>
     <string name="affiliate">Afiliado</string>

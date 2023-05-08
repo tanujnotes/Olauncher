@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Olauncher</string>
+    <string name="app_name" translatable="false">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
@@ -16,7 +16,7 @@
     <string name="rate">Rate</string>
     <string name="follow">Follow</string>
     <string name="email">Email</string>
-    <string name="github">Github</string>
+    <string name="github" translatable="false">Github</string>
     <string name="donate">Donate</string>
     <string name="swipe_up_for_apps">1. Swipe up for all apps</string>
     <string name="long_press_for_settings">2. Long press anywhere for settings</string>

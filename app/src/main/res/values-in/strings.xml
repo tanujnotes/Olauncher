@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Peluncur</string>
+    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Tetapkan sebagai peluncur default</string>
     <string name="app_text_color">Warna teks</string>
