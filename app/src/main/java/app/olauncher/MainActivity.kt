@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() {
             val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
                 Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             else {
-                showToast("Search for Launcher or Home app", Toast.LENGTH_LONG)
+                showToast(getString(R.string.search_for_Launcher_or_home_app), Toast.LENGTH_LONG)
                 Intent(Settings.ACTION_SETTINGS)
             }
             startActivity(intent)

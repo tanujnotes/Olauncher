@@ -255,10 +255,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         prefs.swipeLeftEnabled = !prefs.swipeLeftEnabled
         if (prefs.swipeLeftEnabled) {
             binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            requireContext().showToast("Swipe left app enabled")
+            requireContext().showToast(getString(R.string.swipe_left_app_enabled))
         } else {
             binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
-            requireContext().showToast("Swipe left app disabled")
+            requireContext().showToast(getString(R.string.swipe_left_app_disabled))
         }
     }
 
@@ -266,10 +266,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         prefs.swipeRightEnabled = !prefs.swipeRightEnabled
         if (prefs.swipeRightEnabled) {
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColor))
-            requireContext().showToast("Swipe right app enabled")
+            requireContext().showToast(getString(R.string.swipe_right_app_enabled))
         } else {
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
-            requireContext().showToast("Swipe right app disabled")
+            requireContext().showToast(getString(R.string.swipe_right_app_disabled))
         }
     }
 
@@ -327,7 +327,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showHiddenApps() {
         if (prefs.hiddenApps.isEmpty()) {
-            requireContext().showToast("No hidden apps")
+            requireContext().showToast(getString(R.string.no_hidden_apps))
             return
         }
         viewModel.getHiddenApps()
@@ -413,9 +413,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showWallpaperToasts() {
         if (isOlauncherDefault(requireContext()))
-            requireContext().showToast("Your wallpaper will update shortly")
+            requireContext().showToast(getString(R.string.your_wallpaper_will_update_shortly))
         else
-            requireContext().showToast("Olauncher is not default launcher.\nDaily wallpaper update may fail.", Toast.LENGTH_LONG)
+            requireContext().showToast(getString(R.string.olauncher_is_not_default_launcher), Toast.LENGTH_LONG)
     }
 
     private fun updateHomeAppsNum(num: Int) {
@@ -582,11 +582,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showAppListIfEnabled(flag: Int) {
         if ((flag == Constants.FLAG_SET_SWIPE_LEFT_APP) and !prefs.swipeLeftEnabled) {
-            requireContext().showToast("Long press to enable")
+            requireContext().showToast(getString(R.string.long_press_to_enable))
             return
         }
         if ((flag == Constants.FLAG_SET_SWIPE_RIGHT_APP) and !prefs.swipeRightEnabled) {
-            requireContext().showToast("Long press to enable")
+            requireContext().showToast(getString(R.string.long_press_to_enable))
             return
         }
         viewModel.getAppList(true)
