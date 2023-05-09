@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lanceur</string>
+    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Définir comme lanceur par défaut</string>
     <string name="app_text_color">Couleur du texte</string>
@@ -18,7 +18,7 @@
     <string name="rate">Taux</string>
     <string name="follow">Suivre</string>
     <string name="email">E-mail</string>
-    <string name="github">GithubGenericName</string>
+    <string name="github">Github</string>
     <string name="donate">Donner</string>
     <string name="swipe_up_for_apps">1. Balayez vers le haut pour toutes les applications</string>
     <string name="long_press_for_settings">2. Appuyez longuement n\'importe où pour les paramètres</string>
@@ -39,11 +39,11 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Conseil : Commencez à saisir le nom d\'une application pour la lancer automatiquement</string>
+    <string name="app_drawer_tips">Conseil: Commencez à saisir le nom d\'une application pour la lancer automatiquement</string>
     <string name="okay">D\'accord</string>
     <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">Si le verrouillage par double pression désactive le déverrouillage des empreintes digitales ou du visage, ouvrez les paramètres d\'Olauncher, appuyez sur \"expérimental\" et suivez les instructions. Merci.</string>
-    <string name="triple_tap_lock_message">Comment ça marche : Une fois que vous appuyez deux fois, l\'écran s\'assombrit et le téléphone se verrouille en 5 secondes. Pendant ce temps, vous pouvez appuyer deux fois pour <b>déverrouiller</b> ou appuyer trois fois à tout moment pour verrouiller complètement le téléphone immédiatement. Remarque : Désactivez-le d\'abord si vous décidez de supprimer Olauncher. Merci.</string>
+    <string name="triple_tap_lock_message">Comment ça marche : Une fois que vous appuyez deux fois, l\'écran s\'assombrit et le téléphone se verrouille en 5 secondes. Pendant ce temps, vous pouvez appuyer deux fois pour <b>déverrouiller</b> ou appuyer trois fois à tout moment pour verrouiller complètement le téléphone immédiatement. Remarque: Désactivez-le d\'abord si vous décidez de supprimer Olauncher. Merci.</string>
     <string name="auto_show_keyboard">Clavier d\'affichage automatique</string>
     <string name="hide">Cacher</string>
     <string name="status_bar">Afficher la barre d\'état</string>
@@ -57,9 +57,9 @@
     <string name="light">Lumière</string>
     <string name="double_tap_lock_uninstall_message">Appuyez deux fois pour verrouiller activé.</string>
     <string name="welcome_to_olauncher_settings">Notre page À propos en bas a des réponses à toutes vos questions. N\'oubliez pas. :)</string>
-    <string name="rate_us_message">Hé, trouvez-vous Olauncher utile ? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.</string>
-    <string name="share_message">Bonjour, pensez-vous que vos amis aimeraient Olauncher autant que vous ?</string>
-    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de garder cela allumé pendant quelques jours de plus, puis de décider ? Le choix vous appartient toujours.</string>
+    <string name="rate_us_message">Hé, trouvez-vous Olauncher utile Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.</string>
+    <string name="share_message">Bonjour, pensez-vous que vos amis aimeraient Olauncher autant que vous</string>
+    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de garder cela allumé pendant quelques jours de plus, puis de décider Le choix vous appartient toujours.</string>
     <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller. Toutes les données acquises par Olauncher via ce service ne quitteront pas votre appareil.</string>
     <string name="lock_layout_description">verrouiller la description de la disposition à utiliser un identifiant unique pour verrouiller l\'écran</string>
     <string name="support_olauncher_for_free">Soutenez Olauncher gratuitement en utilisant notre lien d\'affiliation Amazon.</string>
@@ -74,13 +74,13 @@
     <string name="roadmap">Feuille de route</string>
     <string name="date">Date</string>
     <string name="date_only">Rendez-vous uniquement</string>
-    <string name="bottom_on">En bas : Activé</string>
-    <string name="bottom_off">Bas : Désactivé</string>
+    <string name="bottom_on">En bas: Activé</string>
+    <string name="bottom_off">Bas: Désactivé</string>
     <string name="please_set_olauncher_as_default_first">Veuillez d\'abord définir Olauncher comme lanceur par défaut</string>
     <string name="settings_footer"><u>PROlanceur</u></string>
     <string name="affiliate">Affilier</string>
-    <string name="tip_start_typing_for_rename">Conseil : Commencez à saisir l\'option RENAME de l\'application</string>
-    <string name="hidden_apps_message">Remarque : Appuyez sur \"Olauncher\" en haut de cette page Paramètres pour trouver vos applications cachées.\n\nPlus de détails disponibles dans notre page À propos ci-dessous.</string>
+    <string name="tip_start_typing_for_rename">Conseil: Commencez à saisir l\'option RENAME de l\'application</string>
+    <string name="hidden_apps_message">Remarque: Appuyez sur \"Olauncher\" en haut de cette page Paramètres pour trouver vos applications cachées.\n\nPlus de détails disponibles dans notre page À propos ci-dessous.</string>
     <string name="swipe_down_for">Balayez vers le bas pour</string>
     <string name="search">Recherche</string>
     <string name="notifications">Avis</string>
@@ -90,7 +90,7 @@
     <string name="double_tap_lock">Appuyez deux fois pour verrouiller</string>
     <string name="enable">Activer</string>
     <string name="disable">Désactiver</string>
-    <string name="not_working"><u>Ne fonctionne pas ?</u></string>
+    <string name="not_working"><u>Ne fonctionne pas</u></string>
     <string name="info">Info</string>
     <string name="delete">Supprimer</string>
     <string name="day_battery" formatted="false">%Dakota du Sud%%</string>

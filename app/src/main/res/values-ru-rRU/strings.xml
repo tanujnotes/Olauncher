@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Олаунчер</string>
+    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Сделать лаунчером по умолчанию</string>
     <string name="app_text_color">Цвет текста</string>
@@ -18,7 +18,7 @@
     <string name="rate">Ставка</string>
     <string name="follow">Следовать</string>
     <string name="email">Электронная почта</string>
-    <string name="github">Гитхаб</string>
+    <string name="github">Github</string>
     <string name="donate">Пожертвовать</string>
     <string name="swipe_up_for_apps">1. Проведите вверх, чтобы открыть все приложения.</string>
     <string name="long_press_for_settings">2. Длительное нажатие в любом месте для настроек</string>
