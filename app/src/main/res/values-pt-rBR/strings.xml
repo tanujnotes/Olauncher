@@ -115,6 +115,9 @@
     <string name="olauncher_is_not_default_launcher">Olauncher não é lançador padrão. A atualização diária do papel de parede pode falhar.</string>
     <string name="long_press_to_enable">Pressione por muito tempo para ativar</string>
     <string name="no_hidden_apps">Sem aplicativos ocultos</string>
+    <string name="adapter_show">demonstre</string>
+    <string name="adapter_hide">esconder</string>
+    <string name="adapter_hide">esconder</string>
 
 
 </resources>
