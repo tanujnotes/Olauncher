@@ -122,6 +122,8 @@ Daily wallpaper update may fail.</string>
     <string name="long_press_to_enable">Long press to enable</string>
     <string name="no_hidden_apps">No hidden apps"</string>
     <string name="experimental_">experimental</string>
+    <string name="adapter_show">Show</string>
+    <string name="adapter_hide">Hide</string>
 
 
 </resources>

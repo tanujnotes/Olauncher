@@ -1,5 +1,7 @@
 package app.olauncher.ui
 
+import android.content.Context
+import android.content.res.Resources
 import android.os.UserHandle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
@@ -154,7 +157,9 @@ class AppDrawerAdapter(
                 appTitle.setOnLongClickListener {
                     if (appModel.appPackage.isNotEmpty()) {
                         appDelete.alpha = if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
-                        appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS) "Show" else "Hide"
+                        appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS) Resources.getSystem().getString(
+                            R.string.adapter_show) else Resources.getSystem().getString(
+                            R.string.adapter_show)
                         appHideLayout.visibility = View.VISIBLE
                         appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
                     }
