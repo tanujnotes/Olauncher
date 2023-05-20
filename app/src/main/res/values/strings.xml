@@ -124,6 +124,32 @@ Daily wallpaper update may fail.</string>
     <string name="experimental_">experimental</string>
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
+    <string name="a">A</string>
+    <string name="b">B</string>
+    <string name="c">C</string>
+    <string name="x">X</string>
+    <string name="y">Y</string>
+    <string name="z">Z</string>
+    <string name="v">V</string>
+    <string name="u">U</string>
+    <string name="t">T</string>
+    <string name="s">S</string>
+    <string name="r">R</string>
+    <string name="q">Q</string>
+    <string name="p">P</string>
+    <string name="o">O</string>
+    <string name="n">N</string>
+    <string name="m">M</string>
+    <string name="l">L</string>
+    <string name="k">K</string>
+    <string name="j">J</string>
+    <string name="i">I</string>
+    <string name="h">H</string>
+    <string name="g">G</string>
+    <string name="f">F</string>
+    <string name="e">E</string>
+    <string name="d">D</string>
+    <string name="w">W</string>
 
 
 </resources>

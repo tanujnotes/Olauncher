@@ -1,5 +1,9 @@
 package app.olauncher.ui
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,15 +14,17 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.MainViewModel
 import app.olauncher.R
+import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.*
 
-class AppDrawerFragment : Fragment() {
+class AppDrawerFragment : Fragment(),AlphabetAdapter.AlphabetClickListener {
 
     private lateinit var prefs: Prefs
     private lateinit var adapter: AppDrawerAdapter
@@ -47,6 +53,14 @@ class AppDrawerFragment : Fragment() {
         initAdapter()
         initObservers()
         initClickListeners()
+        alphabetView()
+    }
+
+    private fun alphabetView() {
+        val alphabetList= listOf(getString(R.string.a),getString(R.string.b),getString(R.string.c),getString(R.string.d),getString(R.string.e),getString(R.string.f),getString(R.string.g),getString(R.string.h),getString(R.string.i),getString(R.string.j),getString(R.string.k),getString(R.string.l),getString(R.string.m),getString(R.string.n),getString(R.string.o),getString(R.string.p),getString(R.string.q),getString(R.string.r),getString(R.string.s),getString(R.string.t),getString(R.string.u),getString(R.string.v),getString(R.string.w),getString(R.string.x),getString(R.string.y),getString(R.string.z))
+        val alphabetAdapter = AlphabetAdapter(alphabetList, this)
+        binding.alphabetRecyclerView?.adapter = alphabetAdapter
+        binding.alphabetRecyclerView?.layoutManager= LinearLayoutManager(requireContext())
     }
 
     private fun initViews() {
@@ -90,6 +104,14 @@ class AppDrawerFragment : Fragment() {
             }
         })
     }
+    override fun onAlphabetClick(alphabet: String) {
+        val filteredApps = adapter.appsList.filter { app ->
+            val appName = app.appLabel
+            appName.startsWith(alphabet, ignoreCase = true)
+        }
+        adapter.updateAppListWithAlphabet(filteredApps)
+    }
+
 
     private fun initAdapter() {
         adapter = AppDrawerAdapter(
@@ -240,4 +262,5 @@ class AppDrawerFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

@@ -50,7 +50,13 @@ class AppDrawerAdapter(
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(AdapterAppDrawerBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        ViewHolder(
+            AdapterAppDrawerBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         try {
@@ -82,8 +88,16 @@ class AppDrawerAdapter(
                 isBangSearch = charSearch?.startsWith("!") ?: false
                 autoLaunch = charSearch?.startsWith(" ")?.not() ?: true
 
-                val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
-                else appsList.filter { app -> appLabelMatches(app.appLabel, charSearch) } as MutableList<AppModel>)
+                appFilteredList = if (charSearch.isNullOrBlank()) {
+                    appsList.toMutableList()
+                } else {
+                    appsList.filter { app ->
+                        appLabelMatches(
+                            app.appLabel,
+                            charSearch
+                        )
+                    }.toMutableList()
+                }
 
                 val filterResults = FilterResults()
                 filterResults.values = appFilteredList
@@ -112,6 +126,14 @@ class AppDrawerAdapter(
         }
     }
 
+    fun updateAppListWithAlphabet(filteredApps: List<AppModel>) {
+        appFilteredList.clear()
+        appFilteredList.addAll(filteredApps)
+        notifyDataSetChanged() // Notify the adapter that the data has changed
+        autoLaunch()
+    }
+
+
     private fun appLabelMatches(appLabel: String, charSearch: CharSequence): Boolean {
         return (appLabel.contains(charSearch.trim(), true) or
                 Normalizer.normalize(appLabel, Normalizer.Form.NFD)
@@ -133,7 +155,8 @@ class AppDrawerAdapter(
             appClickListener(appFilteredList[0])
     }
 
-    class ViewHolder(private val binding: AdapterAppDrawerBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: AdapterAppDrawerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
             flag: Int,
@@ -156,10 +179,14 @@ class AppDrawerAdapter(
                 appTitle.setOnClickListener { clickListener(appModel) }
                 appTitle.setOnLongClickListener {
                     if (appModel.appPackage.isNotEmpty()) {
-                        appDelete.alpha = if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
-                        appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS) Resources.getSystem().getString(
-                            R.string.adapter_show) else Resources.getSystem().getString(
-                            R.string.adapter_show)
+                        appDelete.alpha =
+                            if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
+                        appHide.text =
+                            if (flag == Constants.FLAG_HIDDEN_APPS) Resources.getSystem().getString(
+                                R.string.adapter_show
+                            ) else Resources.getSystem().getString(
+                                R.string.adapter_show
+                            )
                         appHideLayout.visibility = View.VISIBLE
                         appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
                     }

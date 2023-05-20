@@ -127,5 +127,4 @@ Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in 
     <string name="no_hidden_apps">Nessuna app nascosta</string>
     <string name="adapter_show">dimostrare</string>
     <string name="adapter_hide">nascondere</string>
-    <string name="adapter_hide">nascondere</string>
 </resources>

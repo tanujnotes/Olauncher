@@ -47,6 +47,10 @@
             android:textSize="@dimen/date_size"
             tools:text="Thu, 30 Dec" />
     </LinearLayout>
+    <!--    Alphabet Scrollbars-->
+
+
+
 
     <!-- Home apps-->
     <LinearLayout
