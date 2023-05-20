@@ -117,7 +117,4 @@
     <string name="no_hidden_apps">Sin aplicaciones ocultas</string>
     <string name="adapter_show">demostrar</string>
     <string name="adapter_hide">esconder</string>
-    <string name="adapter_hide">esconder</string>
-
-
 </resources>

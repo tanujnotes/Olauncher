@@ -16,7 +16,13 @@ import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
-import app.olauncher.helper.*
+import app.olauncher.helper.hideKeyboard
+import app.olauncher.helper.isSystemApp
+import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.openUrl
+import app.olauncher.helper.showKeyboard
+import app.olauncher.helper.showToast
+import app.olauncher.helper.uninstall
 
 class AppDrawerFragment : Fragment() {
 
