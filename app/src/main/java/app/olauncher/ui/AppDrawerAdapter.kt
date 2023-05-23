@@ -1,6 +1,5 @@
 package app.olauncher.ui
 
-import android.content.res.Resources
 import android.os.UserHandle
 import android.view.LayoutInflater
 import android.view.View
@@ -156,9 +155,9 @@ class AppDrawerAdapter(
                     if (appModel.appPackage.isNotEmpty()) {
                         appDelete.alpha = if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
                         appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS)
-                            Resources.getSystem().getString(R.string.adapter_show)
+                            root.context.getString(R.string.adapter_show)
                         else
-                            Resources.getSystem().getString(R.string.adapter_show)
+                            root.context.getString(R.string.adapter_show)
                         appHideLayout.visibility = View.VISIBLE
                         appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
                     }
