@@ -182,9 +182,9 @@ class AppDrawerAdapter(
                         appDelete.alpha =
                             if (root.context.isSystemApp(appModel.appPackage)) 0.5f else 1.0f
                         appHide.text =
-                            if (flag == Constants.FLAG_HIDDEN_APPS) Resources.getSystem().getString(
-                                R.string.adapter_show
-                            ) else Resources.getSystem().getString(
+                            if (flag == Constants.FLAG_HIDDEN_APPS) binding.root.context.getString(
+                                R.string.adapter_hide
+                            ) else binding.root.context.getString(
                                 R.string.adapter_show
                             )
                         appHideLayout.visibility = View.VISIBLE

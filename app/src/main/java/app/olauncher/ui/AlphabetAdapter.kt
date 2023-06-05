@@ -6,21 +6,24 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.R
+import app.olauncher.data.AppModel
+
 
 class AlphabetAdapter(
     private val alphabetList: List<String>,
-    private val clickListener: AlphabetClickListener
+    private val clickListener: AlphabetClickListener,
+
 ) :
     RecyclerView.Adapter<AlphabetAdapter.AlphabetViewHolder>() {
-    interface AlphabetClickListener {
-        fun onAlphabetClick(alphabet: String){
 
-        }
+    interface AlphabetClickListener {
+        fun onAlphabetClick(alphabet: String)
 
     }
 
     inner class AlphabetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val alphabetTextView: TextView = itemView.findViewById(R.id.alphabetTextView)
+
         fun bind(alphabet: String) {
             alphabetTextView.text = alphabet
 
@@ -28,8 +31,6 @@ class AlphabetAdapter(
                 clickListener.onAlphabetClick(alphabet)
             }
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlphabetViewHolder {
@@ -45,4 +46,6 @@ class AlphabetAdapter(
         val alphabet = alphabetList[position]
         holder.bind(alphabet)
     }
+
+
 }
