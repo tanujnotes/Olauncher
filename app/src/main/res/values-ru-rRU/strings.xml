@@ -93,7 +93,6 @@
     <string name="not_working"><u>Не работает?</u></string>
     <string name="info">Информация</string>
     <string name="delete">Удалить</string>
-    <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Размер текста</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Неполноценный</string>

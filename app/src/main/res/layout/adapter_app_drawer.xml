@@ -42,11 +42,14 @@
         <TextView
             android:id="@+id/appDelete"
             style="@style/TextSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:drawablePadding="2dp"
+            android:ellipsize="end"
             android:gravity="center"
-            android:paddingHorizontal="20dp"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
             android:text="@string/delete"
             android:textSize="12sp"
             app:drawableTopCompat="@drawable/ic_delete" />
@@ -54,11 +57,14 @@
         <TextView
             android:id="@+id/appRename"
             style="@style/TextSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:drawablePadding="2dp"
+            android:ellipsize="end"
             android:gravity="center"
-            android:paddingHorizontal="12dp"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
             android:text="@string/rename"
             android:textSize="12sp"
             app:drawableTopCompat="@drawable/ic_rename" />
@@ -66,11 +72,14 @@
         <TextView
             android:id="@+id/appHide"
             style="@style/TextSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:drawablePadding="2dp"
+            android:ellipsize="end"
             android:gravity="center"
-            android:paddingHorizontal="20dp"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
             android:text="@string/hide"
             android:textSize="12sp"
             app:drawableTopCompat="@drawable/ic_hide" />
@@ -78,11 +87,14 @@
         <TextView
             android:id="@+id/appInfo"
             style="@style/TextSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:drawablePadding="2dp"
+            android:ellipsize="end"
             android:gravity="center"
-            android:paddingHorizontal="20dp"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
             android:text="@string/info"
             android:textSize="12sp"
             app:drawableTopCompat="@drawable/ic_info" />
@@ -100,7 +112,7 @@
         android:gravity="end|center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
-        tools:visibility="visible">
+        tools:visibility="gone">
 
         <EditText
             android:id="@+id/etAppRename"
@@ -109,12 +121,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_weight="1"
-            android:paddingVertical="@dimen/app_padding_vertical"
             android:background="@null"
             android:gravity="center_vertical"
             android:inputType="textCapWords"
             android:maxLength="30"
             android:maxLines="1"
+            android:paddingVertical="@dimen/app_padding_vertical"
             android:textColorHint="?attr/primaryColorTrans50" />
 
         <TextView

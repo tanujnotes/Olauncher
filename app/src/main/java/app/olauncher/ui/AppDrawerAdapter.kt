@@ -157,7 +157,7 @@ class AppDrawerAdapter(
                         appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS)
                             root.context.getString(R.string.adapter_show)
                         else
-                            root.context.getString(R.string.adapter_show)
+                            root.context.getString(R.string.adapter_hide)
                         appHideLayout.visibility = View.VISIBLE
                         appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
                     }

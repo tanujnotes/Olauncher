@@ -93,7 +93,6 @@
     <string name="not_working"><u>Ne fonctionne pas</u></string>
     <string name="info">Info</string>
     <string name="delete">Supprimer</string>
-    <string name="day_battery" formatted="false">%Dakota du Sud%%</string>
     <string name="text_size">Taille du texte</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
