@@ -166,7 +166,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (!prefs.showStatusBar) {
             val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
                 .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-            dateText = getString(R.string.day_battery, dateText, battery)
+            if (battery > 0)
+                dateText = getString(R.string.day_battery, dateText, battery)
         }
         binding.date.text = dateText.replace(".,", ",")
     }
