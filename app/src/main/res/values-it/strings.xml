@@ -69,7 +69,6 @@ Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in 
     <string name="keyboard_message">Ciao, la tastiera è il modo più veloce per trovare e avviare app in Olauncher. Possiamo chiederti di tenerlo acceso ancora per qualche giorno e poi decidere?
         \n\n La scelta è sempre tua.</string>
     <string name="accessibility_service_description">L\'autorizzazione di accessibilità è necessaria per abilitare il doppio tocco per bloccare. Qualsiasi dato acquisito da Olauncher tramite questo servizio non lascerà il tuo dispositivo.</string>
-    <string name="lock_layout_description">descrizione del layout di blocco da utilizzare un ID univoco per bloccare lo schermo</string>
     <string name="support_olauncher_for_free">Supporta Olauncher gratuitamente utilizzando il nostro link di affiliazione Amazon.</string>
     <string name="support_olauncher_message">Ogni volta che acquisti qualcosa utilizzando il nostro link, riceviamo una piccola commissione. Salva il link e usalo ogni volta che fai acquisti online.\n Grazie!</string>
     <string name="open">Link aperto</string>

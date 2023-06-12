@@ -61,7 +61,6 @@
     <string name="share_message">Obrigado.</string>
     <string name="keyboard_message">Oi, teclado é a maneira mais rápida de encontrar e iniciar aplicativos no Olauncher. Podemos pedir-lhe que mantenha isto ligado por mais alguns dias e depois decidir? A escolha é sempre sua.</string>
     <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear. Quaisquer dados adquiridos pelo Olauncher através deste serviço não sairão do seu dispositivo.</string>
-    <string name="lock_layout_description">Descrição do layout de bloqueio a ser usado Um ID exclusivo para a tela de bloqueio</string>
     <string name="support_olauncher_for_free">Apoie o Olauncher gratuitamente usando nosso link de afiliado da Amazon.</string>
     <string name="support_olauncher_message">Toda vez que você compra algo usando nosso link, recebemos uma pequena comissão. Salve o link e use-o sempre que fizer compras online. Obrigado!</string>
     <string name="open">Abrir link</string>
