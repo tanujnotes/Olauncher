@@ -20,6 +20,7 @@ android {
         versionCode 63
         versionName "v4.0.5"
 
+        resourceConfigurations += ["en", "in", "it", "es-rES", "es-rUS", "fr-rFR", "pt-rBR", "ru-rRU"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
