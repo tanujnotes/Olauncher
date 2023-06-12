@@ -45,7 +45,7 @@ class AppDrawerAdapter(
     private var isBangSearch = false
     private val appFilter = createAppFilter()
     private val myUserHandle = android.os.Process.myUserHandle()
-
+    var dataList: List<AppModel> = emptyList()
     var appsList: MutableList<AppModel> = mutableListOf()
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
@@ -81,6 +81,7 @@ class AppDrawerAdapter(
     override fun getItemCount(): Int = appFilteredList.size
 
     override fun getFilter(): Filter = this.appFilter
+
 
     private fun createAppFilter(): Filter {
         return object : Filter() {
@@ -125,6 +126,16 @@ class AppDrawerAdapter(
             e.printStackTrace()
         }
     }
+    fun getFirstItemPositionStartingWith(letter: String): Int {
+        return appsList.indexOfFirst { it.appLabel.startsWith(letter, ignoreCase = true) }
+    }
+
+    public override fun getItem(position: Int): AppModel? {
+        if (position in 0 until itemCount) {
+            return appFilteredList[position]
+        }
+        return null
+    }
 
     fun updateAppListWithAlphabet(filteredApps: List<AppModel>) {
         appFilteredList.clear()
@@ -149,6 +160,10 @@ class AppDrawerAdapter(
         this.appFilteredList = appsList
         submitList(appsList)
     }
+    fun getAppModelList(): List<AppModel> {
+        return dataList
+    }
+
 
     fun launchFirstInList() {
         if (appFilteredList.size > 0)

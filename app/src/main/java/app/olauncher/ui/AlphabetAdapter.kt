@@ -12,14 +12,13 @@ import app.olauncher.data.AppModel
 class AlphabetAdapter(
     private val alphabetList: List<String>,
     private val clickListener: AlphabetClickListener,
-
-) :
-    RecyclerView.Adapter<AlphabetAdapter.AlphabetViewHolder>() {
+) : RecyclerView.Adapter<AlphabetAdapter.AlphabetViewHolder>() {
 
     interface AlphabetClickListener {
         fun onAlphabetClick(alphabet: String)
-
     }
+
+    var dataList: List<String> = alphabetList
 
     inner class AlphabetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val alphabetTextView: TextView = itemView.findViewById(R.id.alphabetTextView)
