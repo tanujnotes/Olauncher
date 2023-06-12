@@ -131,6 +131,18 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appActivityClassNameRight = appModel.activityClassName
                 updateSwipeApps()
             }
+
+            Constants.FLAG_SET_CLOCK_APP -> {
+                prefs.clockAppPackage = appModel.appPackage
+                prefs.clockAppUser = appModel.user.toString()
+                prefs.clockAppClassName = appModel.activityClassName
+            }
+
+            Constants.FLAG_SET_CALENDAR_APP -> {
+                prefs.calendarAppPackage = appModel.appPackage
+                prefs.calendarAppUser = appModel.user.toString()
+                prefs.calendarAppClassName = appModel.activityClassName
+            }
         }
     }
 

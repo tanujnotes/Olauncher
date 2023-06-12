@@ -77,6 +77,12 @@ class Prefs(context: Context) {
     private val APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT = "APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT"
     private val APP_USER_SWIPE_LEFT = "APP_USER_SWIPE_LEFT"
     private val APP_USER_SWIPE_RIGHT = "APP_USER_SWIPE_RIGHT"
+    private val CLOCK_APP_PACKAGE = "CLOCK_APP_PACKAGE"
+    private val CLOCK_APP_USER = "CLOCK_APP_USER"
+    private val CLOCK_APP_CLASS_NAME = "CLOCK_APP_CLASS_NAME"
+    private val CALENDAR_APP_PACKAGE = "CALENDAR_APP_PACKAGE"
+    private val CALENDAR_APP_USER = "CALENDAR_APP_USER"
+    private val CALENDAR_APP_CLASS_NAME = "CALENDAR_APP_CLASS_NAME"
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
@@ -343,6 +349,30 @@ class Prefs(context: Context) {
     var appUserSwipeRight: String
         get() = prefs.getString(APP_USER_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_USER_SWIPE_RIGHT, value).apply()
+
+    var clockAppPackage: String
+        get() = prefs.getString(CLOCK_APP_PACKAGE, "").toString()
+        set(value) = prefs.edit().putString(CLOCK_APP_PACKAGE, value).apply()
+
+    var clockAppUser: String
+        get() = prefs.getString(CLOCK_APP_USER, "").toString()
+        set(value) = prefs.edit().putString(CLOCK_APP_USER, value).apply()
+
+    var clockAppClassName: String?
+        get() = prefs.getString(CLOCK_APP_CLASS_NAME, "").toString()
+        set(value) = prefs.edit().putString(CLOCK_APP_CLASS_NAME, value).apply()
+
+    var calendarAppPackage: String
+        get() = prefs.getString(CALENDAR_APP_PACKAGE, "").toString()
+        set(value) = prefs.edit().putString(CALENDAR_APP_PACKAGE, value).apply()
+
+    var calendarAppUser: String
+        get() = prefs.getString(CALENDAR_APP_USER, "").toString()
+        set(value) = prefs.edit().putString(CALENDAR_APP_USER, value).apply()
+
+    var calendarAppClassName: String?
+        get() = prefs.getString(CALENDAR_APP_CLASS_NAME, "").toString()
+        set(value) = prefs.edit().putString(CALENDAR_APP_CLASS_NAME, value).apply()
 
     fun getAppName(location: Int): String {
         return when (location) {

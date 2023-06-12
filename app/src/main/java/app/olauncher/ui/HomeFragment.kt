@@ -69,8 +69,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     override fun onClick(view: View) {
         when (view.id) {
             R.id.lock -> {}
-            R.id.clock -> openAlarmApp(requireContext())
-            R.id.date -> openCalendar(requireContext())
+            R.id.clock -> openClockApp()
+            R.id.date -> openCalendarApp()
             R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
             else -> {
                 try { // Launch app
@@ -83,6 +83,30 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
+    private fun openClockApp() {
+        if (prefs.clockAppPackage.isBlank())
+            openAlarmApp(requireContext())
+        else
+            launchApp(
+                "Clock",
+                prefs.clockAppPackage,
+                prefs.clockAppClassName,
+                prefs.clockAppUser
+            )
+    }
+
+    private fun openCalendarApp() {
+        if (prefs.calendarAppPackage.isBlank())
+            openCalendar(requireContext())
+        else
+            launchApp(
+                "Calendar",
+                prefs.calendarAppPackage,
+                prefs.calendarAppClassName,
+                prefs.calendarAppUser
+            )
+    }
+
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
             R.id.homeApp1 -> showAppList(Constants.FLAG_SET_HOME_APP_1, prefs.appName1.isNotEmpty(), true)
@@ -93,6 +117,19 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.homeApp6 -> showAppList(Constants.FLAG_SET_HOME_APP_6, prefs.appName6.isNotEmpty(), true)
             R.id.homeApp7 -> showAppList(Constants.FLAG_SET_HOME_APP_7, prefs.appName7.isNotEmpty(), true)
             R.id.homeApp8 -> showAppList(Constants.FLAG_SET_HOME_APP_8, prefs.appName8.isNotEmpty(), true)
+            R.id.clock -> {
+                showAppList(Constants.FLAG_SET_CLOCK_APP)
+                prefs.clockAppPackage = ""
+                prefs.clockAppClassName = ""
+                prefs.clockAppUser = ""
+            }
+
+            R.id.date -> {
+                showAppList(Constants.FLAG_SET_CALENDAR_APP)
+                prefs.calendarAppPackage = ""
+                prefs.calendarAppClassName = ""
+                prefs.calendarAppUser = ""
+            }
         }
         return true
     }
@@ -140,6 +177,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.lock.setOnClickListener(this)
         binding.clock.setOnClickListener(this)
         binding.date.setOnClickListener(this)
+        binding.clock.setOnLongClickListener(this)
+        binding.date.setOnLongClickListener(this)
         binding.setDefaultLauncher.setOnClickListener(this)
     }
 

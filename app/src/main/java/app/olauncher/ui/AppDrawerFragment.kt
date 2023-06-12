@@ -58,7 +58,7 @@ class AppDrawerFragment : Fragment() {
     private fun initViews() {
         if (flag == Constants.FLAG_HIDDEN_APPS)
             binding.search.queryHint = "Hidden apps"
-        else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_SWIPE_RIGHT_APP)
+        else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
             binding.search.queryHint = "Please select an app"
         if (canRename && prefs.renameTipShown.not()) {
             binding.appDrawerTip.text = getString(R.string.tip_start_typing_for_rename)
