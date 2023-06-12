@@ -353,7 +353,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 prefs.appNameSwipeRight,
                 prefs.appPackageSwipeRight,
                 prefs.appActivityClassNameRight,
-                android.os.Process.myUserHandle().toString()
+                prefs.appUserSwipeRight
             )
         else openDialerApp(requireContext())
     }
@@ -365,7 +365,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 prefs.appNameSwipeLeft,
                 prefs.appPackageSwipeLeft,
                 prefs.appActivityClassNameSwipeLeft,
-                android.os.Process.myUserHandle().toString()
+                prefs.appUserSwipeLeft
             )
         else openCameraApp(requireContext())
     }
