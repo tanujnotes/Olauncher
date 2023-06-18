@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Сделать лаунчером по умолчанию</string>
     <string name="app_text_color">Цвет текста</string>
@@ -76,7 +75,6 @@
     <string name="bottom_on">Внизу: Вкл.</string>
     <string name="bottom_off">Внизу: Выкл.</string>
     <string name="please_set_olauncher_as_default_first">Сначала установите Olauncher в качестве лаунчера по умолчанию.</string>
-    <string name="settings_footer"><u>PRO-лаунчер</u></string>
     <string name="affiliate">Партнер</string>
     <string name="tip_start_typing_for_rename">Совет: начните вводить текст для параметра ПЕРЕИМЕНОВАТЬ приложение.</string>
     <string name="hidden_apps_message">Примечание. Нажмите «Olauncher» в верхней части страницы настроек, чтобы найти скрытые приложения.\n\nБолее подробная информация доступна на нашей странице «О нас» ниже.</string>

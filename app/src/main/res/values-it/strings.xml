@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
     <string name="app_text_color">Colore del testo</string>
@@ -84,7 +83,6 @@ Olauncher promette di utilizzare l\'autorizzazione della schermata di blocco in 
     <string name="bottom_on">"In basso: acceso"</string>
     <string name="bottom_off">In basso: spento</string>
     <string name="please_set_olauncher_as_default_first">Per prima cosa imposta Olauncher come launcher predefinito</string>
-    <string name="settings_footer"><u>PROlauncher</u></string>
     <string name="affiliate">Affiliato</string>
     <string name="tip_start_typing_for_rename">Suggerimento: inizia a digitare per l\'opzione RENAME dell\'app</string>
     <string name="hidden_apps_message">Nota: tocca \'Olauncher\' nella parte superiore di questa pagina Impostazioni per trovare le tue app nascoste.\n\nUlteriori dettagli sono disponibili nella nostra pagina Informazioni di seguito.</string>
