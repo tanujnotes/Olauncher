@@ -89,7 +89,9 @@ class AppDrawerAdapter(
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                appFilteredList = results?.values as MutableList<AppModel>
+                results?.values?.let {
+                    appFilteredList = it as MutableList<AppModel>
+                }
                 submitList(appFilteredList) {
                     autoLaunch()
                 }
