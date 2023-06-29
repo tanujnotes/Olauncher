@@ -60,11 +60,6 @@ class AppDrawerFragment : Fragment() {
             binding.search.queryHint = "Hidden apps"
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
             binding.search.queryHint = "Please select an app"
-        if (canRename && prefs.renameTipShown.not()) {
-            binding.appDrawerTip.text = getString(R.string.tip_start_typing_for_rename)
-            binding.appDrawerTip.visibility = View.VISIBLE
-            prefs.renameTipShown = true
-        }
         try {
             val searchTextView = binding.search.findViewById<TextView>(R.id.search_src_text)
             if (searchTextView != null) searchTextView.gravity = prefs.appLabelAlignment
@@ -162,8 +157,10 @@ class AppDrawerFragment : Fragment() {
 
     private fun initObservers() {
         viewModel.firstOpen.observe(viewLifecycleOwner) {
-            if (it) binding.appDrawerTip.visibility = View.VISIBLE
-            binding.appDrawerTip.isSelected = true
+            if (it && flag == Constants.FLAG_LAUNCH_APP) {
+                binding.appDrawerTip.visibility = View.VISIBLE
+                binding.appDrawerTip.isSelected = true
+            }
         }
         if (flag == Constants.FLAG_HIDDEN_APPS)
             viewModel.hiddenApps.observe(viewLifecycleOwner) {
