@@ -223,7 +223,7 @@ class AppDrawerFragment : Fragment() {
                             binding.search.hideKeyboard()
                         } else if (!recyclerView.canScrollVertically(-1)) {
                             if (onTop) findNavController().popBackStack()
-                            else binding.search.showKeyboard()
+                            else binding.search.showKeyboard(prefs.autoShowKeyboard)
                         }
                     }
                 }
@@ -233,8 +233,7 @@ class AppDrawerFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if (prefs.autoShowKeyboard)
-            binding.search.showKeyboard()
+        binding.search.showKeyboard(prefs.autoShowKeyboard)
     }
 
     override fun onStop() {
