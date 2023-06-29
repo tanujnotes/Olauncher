@@ -80,7 +80,7 @@
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:padding="12dp"
-                tools:visibility="visible">
+                tools:visibility="gone">
 
                 <TextView
                     style="@style/TextLarge"
@@ -873,80 +873,61 @@
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="6dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:padding="10dp"
                     android:text="@string/about" />
-
-                <TextView
-                    android:id="@+id/share"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="6dp"
-                    android:padding="10dp"
-                    android:text="@string/share" />
-
-                <TextView
-                    android:id="@+id/rate"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="6dp"
-                    android:padding="10dp"
-                    android:text="@string/rate" />
-
-                <TextView
-                    android:id="@+id/privacy"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="6dp"
-                    android:padding="10dp"
-                    android:text="@string/privacy" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/twitter"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:padding="10dp"
-                    android:paddingHorizontal="2dp"
                     android:text="@string/twitter" />
 
                 <TextView
-                    android:id="@+id/instagram"
+                    android:id="@+id/rate"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:padding="10dp"
-                    android:paddingHorizontal="2dp"
-                    android:text="@string/instagram" />
+                    android:text="@string/rate" />
 
                 <TextView
-                    android:id="@+id/github"
+                    android:id="@+id/share"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:padding="10dp"
-                    android:paddingHorizontal="2dp"
-                    android:text="@string/github" />
+                    android:text="@string/share" />
 
+                <TextView
+                    android:id="@+id/privacy"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="1dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:text="@string/privacy" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/moreApps"
+                android:id="@+id/footer"
                 style="@style/TextSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:letterSpacing="0.03"
+                android:letterSpacing="0.02"
                 android:padding="10dp"
                 android:text="@string/settings_footer" />
 

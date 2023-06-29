@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Olauncher</string>
     <string name="app">App</string>
-    <string name="set_as_default_launcher">Set as default launcher</string>
+    <string name="set_as_default_launcher"><u>Set as default launcher</u></string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>

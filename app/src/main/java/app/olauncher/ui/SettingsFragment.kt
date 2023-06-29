@@ -141,10 +141,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             }
 
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
-            R.id.instagram -> requireContext().openUrl(Constants.URL_INSTA_OLAUNCHER)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
-            R.id.moreApps -> requireContext().openUrl(Constants.URL_PLAY_STORE_DEV)
+            R.id.footer -> requireContext().openUrl(Constants.URL_PLAY_STORE_DEV)
         }
     }
 
@@ -206,10 +204,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.share.setOnClickListener(this)
         binding.rate.setOnClickListener(this)
         binding.twitter.setOnClickListener(this)
-        binding.instagram.setOnClickListener(this)
         binding.privacy.setOnClickListener(this)
-        binding.github.setOnClickListener(this)
-        binding.moreApps.setOnClickListener(this)
+        binding.footer.setOnClickListener(this)
 
         binding.maxApps0.setOnClickListener(this)
         binding.maxApps1.setOnClickListener(this)
