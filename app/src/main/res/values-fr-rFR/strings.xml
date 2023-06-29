@@ -42,7 +42,6 @@
     <string name="okay">D\'accord</string>
     <string name="cool">Cool !</string>
     <string name="double_tap_lock_is_enabled_message">Si le verrouillage par double pression désactive le déverrouillage par empreinte digitale ou reconnaissance faciale, ouvrez les paramètres d\'Olauncher, appuyez sur \"expérimental\" et suivez les instructions. Merci.</string>
-    <string name="triple_tap_lock_message">Fonctionnement : Une fois que vous avez appuyé deux fois, l\'écran s\'assombrit et le téléphone se verrouille après 5 secondes. Pendant ce temps, vous pouvez appuyer deux fois pour <b>rallumer</b> le téléphone ou appuyer trois fois pour le verrouiller immédiatement. Remarque : Désactivez d\'abord cette fonctionnalité si vous décidez de désinstaller Olauncher. Merci.</string>
     <string name="auto_show_keyboard">Afficher automatiquement le clavier</string>
     <string name="hide">Cacher</string>
     <string name="status_bar">Afficher la barre d\'état</string>
@@ -57,11 +56,11 @@
     <string name="double_tap_lock_uninstall_message">Double appui pour verrouiller activé.
         \n\nRemarque : Désactivez d\'abord cette fonctionnalité si vous décidez de désinstaller Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Notre page \"À propos\" en bas a des réponses à toutes vos questions. Pensez-y. :)</string>
-    <string name="rate_us_message">Hé, trouvez-vous Olauncher utile ? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
+    <string name="rate_us_message">Hé, trouvez-vous Olauncher utile? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
         \n\nMerci, vous ne verrez plus ce message.</string>
-    <string name="share_message">Bonjour, pensez-vous que vos amis aimeraient Olauncher autant que vous ?
+    <string name="share_message">Bonjour, pensez-vous que vos amis aimeraient Olauncher autant que vous?
         \n\nSoutenez-nous en partageant l\'appli. Merci !</string>
-    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de garder cela activé pendant quelques jours de plus, puis de décider ? Le choix vous appartient toujours.</string>
+    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de garder cela activé pendant quelques jours de plus, puis de décider? Le choix vous appartient toujours.</string>
     <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller. Toutes les données acquises par Olauncher via ce service ne quitteront pas votre appareil.</string>
     <string name="support_olauncher_for_free">Soutenez Olauncher gratuitement en utilisant notre lien d\'affiliation Amazon.</string>
     <string name="support_olauncher_message">Chaque fois que vous achetez quelque chose en utilisant notre lien, nous recevons une petite commission. Enregistrez le lien et utilisez le chaque fois que vous commandez en ligne. Merci!</string>
@@ -92,7 +91,7 @@
     <string name="double_tap_lock">Appuyer deux fois pour verrouiller</string>
     <string name="enable">Activer</string>
     <string name="disable">Désactiver</string>
-    <string name="not_working"><u>Ne fonctionne pas ?</u></string>
+    <string name="not_working"><u>Ne fonctionne pas?</u></string>
     <string name="info">Info</string>
     <string name="delete">Supprimer</string>
     <string name="day_battery" formatted="false">%s, %d%%</string>

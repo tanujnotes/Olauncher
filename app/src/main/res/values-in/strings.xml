@@ -42,7 +42,6 @@
     <string name="okay">Oke</string>
     <string name="cool">Dingin!</string>
     <string name="double_tap_lock_is_enabled_message">Jika kunci ketuk ganda menonaktifkan sidik jari atau buka kunci wajah, buka pengaturan Olauncher, ketuk \'eksperimental\' dan ikuti petunjuknya. Terima kasih.</string>
-    <string name="triple_tap_lock_message">Cara kerjanya: Setelah Anda mengetuk dua kali, layar akan menjadi gelap dan ponsel akan mengunci sendiri dalam 5 detik. Selama waktu ini, Anda dapat mengetuk dua kali untuk <b>membuka kunci</b> atau mengetuk tiga kali kapan saja untuk segera mengunci ponsel sepenuhnya. Catatan: MATIKAN ini terlebih dahulu jika Anda memutuskan untuk menghapus Olauncher. Terima kasih.</string>
     <string name="auto_show_keyboard">Tampilkan keyboard secara otomatis</string>
     <string name="hide">Bersembunyi</string>
     <string name="status_bar">Tampilkan bilah status</string>
@@ -81,7 +80,7 @@
     <string name="swipe_down_for">Geser ke bawah untuk</string>
     <string name="search">Mencari</string>
     <string name="notifications">Notifikasi</string>
-    <string name="accessibility_disclosure">Harap aktifkan atau nonaktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan atau menonaktifkan fitur ini.\n    \n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk memungkinkan Anda mematikan layar perangkat menggunakan gerakan ketuk dua kali.\n    Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
+    <string name="accessibility_disclosure">Harap aktifkan atau nonaktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan atau menonaktifkan fitur ini.\n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk memungkinkan Anda mematikan layar perangkat menggunakan gerakan ketuk dua kali. Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
     <string name="accept">Menerima</string>
     <string name="permission">Izin</string>
     <string name="double_tap_lock">Ketuk dua kali untuk mengunci</string>

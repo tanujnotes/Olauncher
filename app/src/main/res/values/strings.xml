@@ -41,7 +41,6 @@
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
-    <string name="triple_tap_lock_message">How it works:          Once you double-tap, screen will go dark and the phone will lock itself in 5 seconds.           During this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.           Note: Turn this OFF first if you decide to delete Olauncher. Thank you.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
     <string name="status_bar">Show status bar</string>
@@ -57,11 +56,11 @@
         \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
-    <string name="rate_us_message">Hey, do you find Olauncher useful? If yes, a 5-star rating is the best way to support us.
+    <string name="rate_us_message">Hey, if you find Olauncher useful, a 5-star rating will make us very happy. :)
         \n\nThank you and you won\'t see this again.</string>
     <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
         \n\nShare the app and help us spread the word. Thank you!</string>
-    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?           The choice is always yours.</string>
+    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?\n\nThe choice is always yours.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
@@ -87,8 +86,7 @@
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
     <string name="accessibility_disclosure">Please turn on or off Olauncher\'s accessibility service in your device\'s settings to enable or disable this feature.
-    \n\nPlease note that this service is only used to let you turn off your device\'s screen using the double tap gesture.
-    Our accessibility service does not collect or share any data.</string>
+    \n\nPlease note that this service is only used to let you turn off your device\'s screen using the double tap gesture. Our accessibility service does not collect or share any data.</string>
     <string name="accept">Accept</string>
     <string name="permission">Permission</string>
     <string name="double_tap_lock">Double tap to lock</string>
@@ -102,8 +100,7 @@
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
-    <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.
-Please check your app settings.</string>
+    <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.\nPlease check your app settings.</string>
     <string name="long_press_to_select_app">Long press to select app</string>
     <string name="unable_to_open_app">Unable  to open app info</string>
     <string name="copied">Copied</string>
@@ -117,13 +114,10 @@ Please check your app settings.</string>
     <string name="swipe_left_app_disabled">Swipe left app disabled</string>
     <string name="swipe_right_app_disabled">Swipe right app disabled</string>
     <string name="your_wallpaper_will_update_shortly">Your wallpaper will update shortly</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher is not default launcher.
-Daily wallpaper update may fail.</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher is not default.\nDaily wallpaper update may fail.</string>
     <string name="long_press_to_enable">Long press to enable</string>
     <string name="no_hidden_apps">No hidden apps"</string>
     <string name="experimental_">experimental</string>
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
-
-
 </resources>

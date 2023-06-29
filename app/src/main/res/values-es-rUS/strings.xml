@@ -42,7 +42,6 @@
     <string name="okay">Bueno</string>
     <string name="cool">¡Fresco!</string>
     <string name="double_tap_lock_is_enabled_message">Si el bloqueo de doble toque desactiva la huella digital o el desbloqueo facial, abra la configuración de Olauncher, toque \'experimental\' y siga las instrucciones. Gracias.</string>
-    <string name="triple_tap_lock_message">Cómo funciona: Una vez que toque dos veces, la pantalla se oscurecerá y el teléfono se bloqueará en 5 segundos. Durante este tiempo, puede tocar dos veces para <b>desbloquear</b> o tocar tres veces en cualquier momento para ubicar completamente</string>
     <string name="auto_show_keyboard">Teclado de exhibición automática</string>
     <string name="hide">Esconder</string>
     <string name="status_bar">Mostrar barra de estado</string>

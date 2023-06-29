@@ -42,7 +42,6 @@
     <string name="okay">Ok</string>
     <string name="cool">Boa!</string>
     <string name="double_tap_lock_is_enabled_message">Se o bloqueio de toque duplo desativar a impressão digital ou o desbloqueio facial, abra as configurações do Olauncher, toque em \"experimental\" e siga as instruções. Obrigado.</string>
-    <string name="triple_tap_lock_message">Como funciona: Depois de tocar duas vezes, a tela ficará escura e o telefone se bloqueará em 5 segundos. Durante esse tempo, você pode tocar duas vezes para <b>desbloquear</b> ou triplo toque a qualquer momento para bloquear o telefone completamente</string>
     <string name="auto_show_keyboard">Exibição automática do teclado</string>
     <string name="hide">Esconder</string>
     <string name="status_bar">Mostrar barra de status</string>
