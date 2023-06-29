@@ -32,4 +32,4 @@ Thank you and have a great day!
 
 ##
 
-**P.S.** To maintain the simplicity of Olauncher, a few niche features are availble but hidden. Please check out the [About](https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list.
+**P.S.** To maintain the simplicity of Olauncher, a few niche features are available but hidden. Please check out the [About](https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list.
