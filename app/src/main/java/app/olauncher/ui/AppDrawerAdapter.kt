@@ -91,9 +91,9 @@ class AppDrawerAdapter(
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 results?.values?.let {
                     appFilteredList = it as MutableList<AppModel>
-                }
-                submitList(appFilteredList) {
-                    autoLaunch()
+                    submitList(appFilteredList) {
+                        autoLaunch()
+                    }
                 }
             }
         }
