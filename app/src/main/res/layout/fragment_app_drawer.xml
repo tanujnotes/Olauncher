@@ -83,19 +83,13 @@
                 <!-- AlphabetFastScroller -->
 
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/alphabetRecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="180dp" />
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/alphabetRecyclerView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:layout_marginTop="180dp" />-->
 
-    <app.olauncher.ui.AlphabetFastScroller
-        android:id="@+id/alphabetFastScroller"
-        android:layout_width="50dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_marginTop="180dp" />
 
 
 </FrameLayout>

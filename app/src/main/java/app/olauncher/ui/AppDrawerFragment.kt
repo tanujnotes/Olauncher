@@ -27,11 +27,11 @@ import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.*
 
-class AppDrawerFragment : Fragment(), AlphabetAdapter.AlphabetClickListener {
+class AppDrawerFragment : Fragment(){
 
     private lateinit var prefs: Prefs
     private lateinit var adapter: AppDrawerAdapter
-    private lateinit var layoutManager: LinearLayoutManager
+//    private lateinit var layoutManager: LinearLayoutManagera
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
 
@@ -58,63 +58,10 @@ class AppDrawerFragment : Fragment(), AlphabetAdapter.AlphabetClickListener {
         initAdapter()
         initObservers()
         initClickListeners()
-        alphabetView()
-    }
-
-    private fun alphabetView() {
-        val alphabetList = listOf(
-            getString(R.string.a),
-            getString(R.string.b),
-            getString(R.string.c),
-            getString(R.string.d),
-            getString(R.string.e),
-            getString(R.string.f),
-            getString(R.string.g),
-            getString(R.string.h),
-            getString(R.string.i),
-            getString(R.string.j),
-            getString(R.string.k),
-            getString(R.string.l),
-            getString(R.string.m),
-            getString(R.string.n),
-            getString(R.string.o),
-            getString(R.string.p),
-            getString(R.string.q),
-            getString(R.string.r),
-            getString(R.string.s),
-            getString(R.string.t),
-            getString(R.string.u),
-            getString(R.string.v),
-            getString(R.string.w),
-            getString(R.string.x),
-            getString(R.string.y),
-            getString(R.string.z)
-        )
-        val alphabetAdapter = AlphabetAdapter(alphabetList, this)
-
-        val fastScroller = AlphabetFastScroller(requireContext())
-        fastScroller.setRecyclerView(binding.recyclerView)
-        binding.alphabetFastScroller?.setAlphabetList(alphabetList) // Replace `yourAlphabetList` with your actual list of alphabet letters
-        binding.alphabetFastScroller?.setRecyclerView(binding.alphabetRecyclerView!!)
-        binding.alphabetRecyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-                val firstVisibleAppModel = adapter.getItem(firstVisibleItemPosition)
-                val letter = getFirstLetter(firstVisibleAppModel?.appLabel)
-
-                binding.alphabetFastScroller?.highlightLetter(letter)
-            }
-        })
     }
 
 
-    private fun getFirstLetter(text: String?): String {
-        if (text.isNullOrBlank()) return ""
 
-        val firstChar = text[0]
-        return firstChar.toString().toUpperCase()
-    }
 
 
 private fun initViews() {
@@ -162,13 +109,6 @@ private fun initSearch() {
     })
 }
 
- override fun onAlphabetClick(alphabet: String) {
-    val layoutManager = binding.alphabetRecyclerView?.layoutManager as? LinearLayoutManager
-    val position = adapter.getFirstItemPositionStartingWith(alphabet)
-    if (position != -1) {
-        layoutManager?.scrollToPositionWithOffset(position, 0)
-    }
-}
 
 
 

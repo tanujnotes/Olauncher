@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Olauncher</string>
-    <string name="app">App</string>
+    <string name="app" translatable="false">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
-    <string name="app_text_color">Text color</string>
-    <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
     <string name="about">About</string>
     <string name="off">Off</string>
@@ -38,10 +36,8 @@
     <string name="_7">7</string>
     <string name="_8">8</string>
     <string name="app_drawer_tips">Tip: Start typing an app name to auto-launch it</string>
-    <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
-    <string name="triple_tap_lock_message">How it works:          Once you double-tap, screen will go dark and the phone will lock itself in 5 seconds.           During this time, you can double-tap to <b>unlock</b> or triple-tap anytime to fully lock the phone immediately.           Note: Turn this OFF first if you decide to delete Olauncher. Thank you.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
     <string name="status_bar">Show status bar</string>
@@ -53,8 +49,6 @@
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="double_tap_lock_uninstall_message">Double tap to lock enabled.
-        \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
     <string name="rate_us_message">Hey, do you find Olauncher useful? If yes, a 5-star rating is the best way to support us.
@@ -65,11 +59,7 @@
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
-    <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
-    <string name="open">Open link</string>
-    <string name="copy">Copy</string>
     <string name="close">Close</string>
-    <string name="not_now">Not now</string>
     <string name="public_roadmap">Olauncher public roadmap</string>
     <string name="instagram">Instagram</string>
     <string name="twitter">Twitter</string>
@@ -124,32 +114,15 @@ Daily wallpaper update may fail.</string>
     <string name="experimental_">experimental</string>
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
-    <string name="a">A</string>
-    <string name="b">B</string>
-    <string name="c">C</string>
-    <string name="x">X</string>
-    <string name="y">Y</string>
-    <string name="z">Z</string>
-    <string name="v">V</string>
-    <string name="u">U</string>
-    <string name="t">T</string>
-    <string name="s">S</string>
-    <string name="r">R</string>
-    <string name="q">Q</string>
-    <string name="p">P</string>
-    <string name="o">O</string>
-    <string name="n">N</string>
-    <string name="m">M</string>
-    <string name="l">L</string>
-    <string name="k">K</string>
-    <string name="j">J</string>
-    <string name="i">I</string>
-    <string name="h">H</string>
-    <string name="g">G</string>
-    <string name="f">F</string>
-    <string name="e">E</string>
-    <string name="d">D</string>
-    <string name="w">W</string>
+    <string name="app_text_color">Text color</string>
+    <string name="double_tap_to_lock_screen">Double tap to lock</string>
+    <string name="okay">Okay</string>
+    <string name="double_tap_lock_uninstall_message">Double tap to lock enabled.           Note: Turn this OFF first if you decide to delete Olauncher.</string>
+    <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online. Thank you!</string>
+    <string name="open">Open link</string>
+    <string name="copy">Copy</string>
+    <string name="not_now">Not now</string>
+    <string name="triple_tap_lock_message">How it works: After you double-tap, the screen will darken and the phone will lock itself in 5 seconds. During this time, you can double-tap to <b>unlock</b> or triple-tap at any time to completely lock your phone immediately. Note: Turn this OFF first if you decide to uninstall Olauncher. Thank You.</string>
 
 
 </resources>

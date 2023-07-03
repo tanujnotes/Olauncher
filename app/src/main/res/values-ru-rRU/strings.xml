@@ -117,32 +117,7 @@
     <string name="no_hidden_apps">Нет скрытых приложений</string>
     <string name="adapter_show">показ</string>
     <string name="adapter_hide">скрывать</string>
-    <string name="a">A</string>
-    <string name="b">Б</string>
-    <string name="c">Ц</string>
-    <string name="x">Икс</string>
-    <string name="y">Ы</string>
-    <string name="z">З</string>
-    <string name="v">В</string>
-    <string name="u">У</string>
-    <string name="t">Т</string>
-    <string name="s">С</string>
-    <string name="r">Р</string>
-    <string name="q">Я</string>
-    <string name="p"> П</string>
-    <string name="o">O</string>
-    <string name="n">Н</string>
-    <string name="m">M</string>
-    <string name="l">Л</string>
-    <string name="k">K</string>
-    <string name="j">J</string>
-    <string name="i">Й</string>
-    <string name="h">Х</string>
-    <string name="g">Г</string>
-    <string name="f">Ф</string>
-    <string name="e">E</string>
-    <string name="d">Д</string>
-    <string name="w">Ш</string>
+
 
 
 </resources>
