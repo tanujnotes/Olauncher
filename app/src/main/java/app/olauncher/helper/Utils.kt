@@ -532,7 +532,7 @@ fun View.animateAlpha(alpha: Float = 1.0f) {
 }
 
 fun Context.shareApp() {
-    val message = "Are you using your phone or your phone is using you?\n" +
+    val message = "Are you using your phone, or is your phone using you?\n" +
             Constants.URL_OLAUNCHER_PLAY_STORE
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
