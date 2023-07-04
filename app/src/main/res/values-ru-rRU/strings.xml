@@ -5,7 +5,7 @@
     <string name="app_text_color">Цвет текста</string>
     <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>
     <string name="admin_permission_message">Olauncher обещает ответственно использовать разрешение экрана блокировки. Olauncher не собирает и не передает какие-либо данные.</string>
-    <string name="about">О</string>
+    <string name="about">О нас</string>
     <string name="off">Выкл</string>
     <string name="on">Вкл</string>
     <string name="black">Черный</string>
@@ -14,20 +14,20 @@
     <string name="privacy">Конфиденциальность</string>
     <string name="share">Поделиться</string>
     <string name="rate">Оценить</string>
-    <string name="follow">Следовать</string>
+    <string name="follow">Перейти</string>
     <string name="email">Электронная почта</string>
 
     <string name="donate">Пожертвовать</string>
-    <string name="swipe_up_for_apps">1. Свайпом вверх открываются все приложения.</string>
+    <string name="swipe_up_for_apps">1. Проведите вверх чтобы открыть все приложения.</string>
     <string name="long_press_for_settings">2. Длительным нажатием в любом месте открываются настройки</string>
-    <string name="apps_on_home_screen">Приложения на главном экране</string>
+    <string name="apps_on_home_screen">Количество приложений на главном экране</string>
     <string name="daily_wallpaper_update">Ежедневно новые обои</string>
     <string name="left">Слева</string>
     <string name="right">Справа</string>
-    <string name="center">Центр</string>
+    <string name="center">По центру</string>
     <string name="home_layout_alignment">Выравнивание приложений</string>
-    <string name="swipe_left_app">Свайпом влево открыть</string>
-    <string name="swipe_right_app">Свайпом вправо открыть</string>
+    <string name="swipe_left_app">Проведите влево для</string>
+    <string name="swipe_right_app">Проведите вправо для</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -37,7 +37,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Совет. Начните вводить название приложения, чтобы оно запускалось автоматически.</string>
+    <string name="app_drawer_tips">Совет. Начните вводить название приложения, чтобы оно запустилось автоматически.</string>
     <string name="okay">Хорошо</string>
     <string name="cool">Круто!</string>
     <string name="auto_show_keyboard">Автопоказ клавиатуры</string>
@@ -45,7 +45,7 @@
     <string name="status_bar">Показывать строку состояния</string>
     <string name="rename">Переименовать</string>
     <string name="show_date_time">Показывать дату и время</string>
-    <string name="appearance">Вид</string>
+    <string name="appearance">Появление</string>
     <string name="gestures">Жесты</string>
     <string name="theme_mode">Тема</string>
     <string name="system_default">Системная</string>
@@ -73,17 +73,17 @@
     <string name="bottom_off">Внизу: Выкл</string>
     <string name="please_set_olauncher_as_default_first">Сначала установите Olauncher в качестве лаунчера по умолчанию.</string>
     <string name="affiliate">Партнер</string>
-    <string name="tip_start_typing_for_rename">Совет: начните вводить текст для параметра ПЕРЕИМЕНОВАТЬ приложение.</string>
+    <string name="tip_start_typing_for_rename">Совет: начните вводить текст чтобы ПЕРЕИМЕНОВАТЬ приложение.</string>
     <string name="hidden_apps_message">Примечание. Нажмите «Olauncher» в верхней части страницы настроек, чтобы найти скрытые приложения.
         \n\nБолее подробная информация доступна на нашей странице «О нас» ниже.</string>
-    <string name="swipe_down_for">Свайпом вниз открыть</string>
+    <string name="swipe_down_for">Проведите вниз для</string>
     <string name="search">Поиск</string>
     <string name="notifications">Уведомления</string>
     <string name="accessibility_disclosure">Включите или отключите службу специальных возможностей Olauncher в настройках вашего устройства, чтобы включить или отключить эту функцию.
         \n\nОбратите внимание, что эта служба используется только для того, чтобы вы могли выключить экран вашего устройства с помощью жеста двойного касания. Наша служба доступности не собирает и не передает какие-либо данные.</string>
     <string name="accept">Принять</string>
     <string name="permission">Разрешение</string>
-    <string name="double_tap_lock">Блокировка двойным тапом</string>
+    <string name="double_tap_lock">Блокировка двойным касанием</string>
     <string name="enable">Включить</string>
     <string name="disable">Выключить</string>
     <string name="not_working"><u>Не работает?</u></string>
@@ -92,12 +92,12 @@
     <string name="text_size">Размер текста</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Выключено</string>
-    <string name="please_turn_on_double_tap_to_unlock">Пожалуйста, включите двойной тап для блокировки</string>
+    <string name="please_turn_on_double_tap_to_unlock">Пожалуйста, включите двойное касание для блокировки</string>
     <string name="launcher_failed_to_lock_device">Olauncher не удалось заблокировать устройство.\nПожалуйста, проверьте настройки вашего приложения.</string>
     <string name="long_press_to_select_app">Длительное нажатие для выбора приложения</string>
     <string name="unable_to_open_app">Не удалось открыть информацию о приложении</string>
     <string name="copied">Скопировано</string>
-    <string name="system_app_cannot_delete">Системное приложение, не могу удалить</string>
+    <string name="system_app_cannot_delete">Не могу удалить системное приложение</string>
     <string name="type_a_new_app_name_first">Сначала введите новое имя приложения</string>
     <string name="app_not_found">Приложение не найдено</string>
     <string name="unable_to_launch_app">Не удается запустить приложение</string>
