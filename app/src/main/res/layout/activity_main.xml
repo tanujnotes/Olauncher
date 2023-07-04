@@ -14,8 +14,7 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
-        tools:ignore="FragmentTagUsage" /><!--Changing <fragment> to FragmentContainerView crashes
-    the app on initialising navController-->
+        tools:ignore="FragmentTagUsage" />
 
     <FrameLayout
         android:id="@+id/messageLayout"
