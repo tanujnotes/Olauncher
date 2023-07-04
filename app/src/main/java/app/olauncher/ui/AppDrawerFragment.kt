@@ -1,27 +1,18 @@
 package app.olauncher.ui
 
-import android.app.AlertDialog
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.MainViewModel
 import app.olauncher.R
-import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
@@ -33,11 +24,11 @@ import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
 
-class AppDrawerFragment : Fragment(){
+class AppDrawerFragment : Fragment() {
 
     private lateinit var prefs: Prefs
     private lateinit var adapter: AppDrawerAdapter
-//    private lateinit var layoutManager: LinearLayoutManagera
+
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
 
@@ -45,9 +36,7 @@ class AppDrawerFragment : Fragment(){
     private var _binding: FragmentAppDrawerBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAppDrawerBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -79,44 +68,85 @@ class AppDrawerFragment : Fragment(){
         }
     }
 
-private fun initSearch() {
-    binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String?): Boolean {
-            if (query?.startsWith("!") == true) requireContext().openUrl(
-                Constants.URL_DUCK_SEARCH + query.replace(
-                    " ",
-                    "%20"
-                )
-            )
-            else adapter.launchFirstInList()
-            return true
-        }
-
-        override fun onQueryTextChange(newText: String): Boolean {
-            try {
-                adapter.filter.filter(newText)
-                binding.appDrawerTip.visibility = View.GONE
-                binding.appRename.visibility =
-                    if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+    private fun initSearch() {
+        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query?.startsWith("!") == true)
+                    requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
+                else
+                    adapter.launchFirstInList()
                 return true
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
-            return false
-        }
-    })
-}
 
-
-
+            override fun onQueryTextChange(newText: String): Boolean {
+                try {
+                    adapter.filter.filter(newText)
+                    binding.appDrawerTip.visibility = View.GONE
+                    binding.appRename.visibility = if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+                    return true
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+                return false
+            }
+        })
+    }
 
     private fun initAdapter() {
-    adapter = AppDrawerAdapter(flag, prefs.appLabelAlignment, appClickListener = {
-        if (it.appPackage.isEmpty()) return@AppDrawerAdapter
-        viewModel.selectedApp(it, flag)
-        if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS) findNavController().popBackStack(
-            R.id.mainFragment,
-            false
+        adapter = AppDrawerAdapter(
+            flag,
+            prefs.appLabelAlignment,
+            appClickListener = {
+                if (it.appPackage.isEmpty())
+                    return@AppDrawerAdapter
+                viewModel.selectedApp(it, flag)
+                if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
+                    findNavController().popBackStack(R.id.mainFragment, false)
+                else
+                    findNavController().popBackStack()
+            },
+            appInfoListener = {
+                openAppInfo(
+                    requireContext(),
+                    it.user,
+                    it.appPackage
+                )
+                findNavController().popBackStack(R.id.mainFragment, false)
+            },
+            appDeleteListener = {
+                requireContext().apply {
+                    if (isSystemApp(it.appPackage))
+                        showToast(getString(R.string.system_app_cannot_delete))
+                    else
+                        uninstall(it.appPackage)
+                }
+            },
+            appHideListener = { appModel, position ->
+                adapter.appFilteredList.removeAt(position)
+                adapter.notifyItemRemoved(position)
+                adapter.appsList.remove(appModel)
+
+                val newSet = mutableSetOf<String>()
+                newSet.addAll(prefs.hiddenApps)
+                if (flag == Constants.FLAG_HIDDEN_APPS) {
+                    newSet.remove(appModel.appPackage) // for backward compatibility
+                    newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
+                } else
+                    newSet.add(appModel.appPackage + "|" + appModel.user.toString())
+
+                prefs.hiddenApps = newSet
+                if (newSet.isEmpty())
+                    findNavController().popBackStack()
+                if (prefs.firstHide) {
+                    prefs.firstHide = false
+                    viewModel.showMessageDialog(getString(R.string.hidden_apps_message))
+                    findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
+                }
+            },
+            appRenameListener = { appModel, renameLabel ->
+                prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
+                viewModel.getAppList()
+            }
         )
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
@@ -127,95 +157,65 @@ private fun initSearch() {
 
     private fun initObservers() {
         viewModel.firstOpen.observe(viewLifecycleOwner) {
+            if (it) binding.appDrawerTip.visibility = View.VISIBLE
+            binding.appDrawerTip.isSelected = true
             if (it && flag == Constants.FLAG_LAUNCH_APP) {
                 binding.appDrawerTip.visibility = View.VISIBLE
                 binding.appDrawerTip.isSelected = true
             }
         }
-    }, appHideListener = { appModel, position ->
-        adapter.appFilteredList.removeAt(position)
-        adapter.notifyItemRemoved(position)
-        adapter.appsList.remove(appModel)
+        if (flag == Constants.FLAG_HIDDEN_APPS)
+            viewModel.hiddenApps.observe(viewLifecycleOwner) {
+                it?.let { adapter.setAppList(it.toMutableList()) }
+            }
+        else
+            viewModel.appList.observe(viewLifecycleOwner) {
+                it?.let { adapter.setAppList(it.toMutableList()) }
+            }
+    }
 
-        val newSet = mutableSetOf<String>()
-        newSet.addAll(prefs.hiddenApps)
-        if (flag == Constants.FLAG_HIDDEN_APPS) {
-            newSet.remove(appModel.appPackage) // for backward compatibility
-            newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
-        } else newSet.add(appModel.appPackage + "|" + appModel.user.toString())
-
-        prefs.hiddenApps = newSet
-        if (newSet.isEmpty()) findNavController().popBackStack()
-        if (prefs.firstHide) {
-            prefs.firstHide = false
-            viewModel.showMessageDialog(getString(R.string.hidden_apps_message))
-            findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
+    private fun initClickListeners() {
+        binding.appDrawerTip.setOnClickListener {
+            binding.appDrawerTip.isSelected = false
+            binding.appDrawerTip.isSelected = true
         }
-    }, appRenameListener = { appModel, renameLabel ->
-        prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
-        viewModel.getAppList()
-    })
-    binding.recyclerView.adapter = adapter
-    binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
-    binding.recyclerView.itemAnimator = null
-    binding.recyclerView.layoutAnimation =
-        AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
-}
+        binding.appRename.setOnClickListener {
+            val name = binding.search.query.toString().trim()
+            if (name.isEmpty()) {
+                requireContext().showToast(getString(R.string.type_a_new_app_name_first))
+                binding.search.showKeyboard()
+                return@setOnClickListener
+            }
 
-private fun initObservers() {
-    viewModel.firstOpen.observe(viewLifecycleOwner) {
-        if (it) binding.appDrawerTip.visibility = View.VISIBLE
-        binding.appDrawerTip.isSelected = true
-    }
-    if (flag == Constants.FLAG_HIDDEN_APPS) viewModel.hiddenApps.observe(viewLifecycleOwner) {
-        it?.let { adapter.setAppList(it.toMutableList()) }
-    }
-    else viewModel.appList.observe(viewLifecycleOwner) {
-        it?.let { adapter.setAppList(it.toMutableList()) }
-    }
-}
-
-private fun initClickListeners() {
-    binding.appDrawerTip.setOnClickListener {
-        binding.appDrawerTip.isSelected = false
-        binding.appDrawerTip.isSelected = true
-    }
-    binding.appRename.setOnClickListener {
-        val name = binding.search.query.toString().trim()
-        if (name.isEmpty()) {
-            requireContext().showToast(getString(R.string.type_a_new_app_name_first))
-            binding.search.showKeyboard()
-            return@setOnClickListener
+            when (flag) {
+                Constants.FLAG_SET_HOME_APP_1 -> prefs.appName1 = name
+                Constants.FLAG_SET_HOME_APP_2 -> prefs.appName2 = name
+                Constants.FLAG_SET_HOME_APP_3 -> prefs.appName3 = name
+                Constants.FLAG_SET_HOME_APP_4 -> prefs.appName4 = name
+                Constants.FLAG_SET_HOME_APP_5 -> prefs.appName5 = name
+                Constants.FLAG_SET_HOME_APP_6 -> prefs.appName6 = name
+                Constants.FLAG_SET_HOME_APP_7 -> prefs.appName7 = name
+                Constants.FLAG_SET_HOME_APP_8 -> prefs.appName8 = name
+            }
+            findNavController().popBackStack()
         }
-
-        when (flag) {
-            Constants.FLAG_SET_HOME_APP_1 -> prefs.appName1 = name
-            Constants.FLAG_SET_HOME_APP_2 -> prefs.appName2 = name
-            Constants.FLAG_SET_HOME_APP_3 -> prefs.appName3 = name
-            Constants.FLAG_SET_HOME_APP_4 -> prefs.appName4 = name
-            Constants.FLAG_SET_HOME_APP_5 -> prefs.appName5 = name
-            Constants.FLAG_SET_HOME_APP_6 -> prefs.appName6 = name
-            Constants.FLAG_SET_HOME_APP_7 -> prefs.appName7 = name
-            Constants.FLAG_SET_HOME_APP_8 -> prefs.appName8 = name
-        }
-        findNavController().popBackStack()
     }
-}
 
-private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
-    return object : RecyclerView.OnScrollListener() {
+    private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
+        return object : RecyclerView.OnScrollListener() {
 
-        var onTop = false
+            var onTop = false
 
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            when (newState) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                when (newState) {
 
-                RecyclerView.SCROLL_STATE_DRAGGING -> {
-                    onTop = !recyclerView.canScrollVertically(-1)
-                    if (onTop) binding.search.hideKeyboard()
-                    if (onTop && !recyclerView.canScrollVertically(1)) findNavController().popBackStack()
-                }
+                    RecyclerView.SCROLL_STATE_DRAGGING -> {
+                        onTop = !recyclerView.canScrollVertically(-1)
+                        if (onTop) binding.search.hideKeyboard()
+                        if (onTop && !recyclerView.canScrollVertically(1))
+                            findNavController().popBackStack()
+                    }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
                         if (!recyclerView.canScrollVertically(1)) {
@@ -229,21 +229,19 @@ private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
             }
         }
     }
-}
 
     override fun onStart() {
         super.onStart()
         binding.search.showKeyboard(prefs.autoShowKeyboard)
     }
 
-override fun onStop() {
-    binding.search.hideKeyboard()
-    super.onStop()
-}
+    override fun onStop() {
+        binding.search.hideKeyboard()
+        super.onStop()
+    }
 
-override fun onDestroyView() {
-    super.onDestroyView()
-    _binding = null
-}
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
