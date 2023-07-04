@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="alphabet_recycler_margin_bottom">16dp</dimen>
+    <dimen name="alphabet_recycler_margin_end">10dp</dimen>
+    <dimen name="alphabet_recycler_margin_start">320dp</dimen>
+</resources>

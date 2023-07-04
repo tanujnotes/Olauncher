@@ -201,7 +201,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
         binding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
 
-        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
+//        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
+        val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
+        var dateText = dateFormat.format(Date())
+
         if (!prefs.showStatusBar) {
             val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
                 .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
