@@ -478,13 +478,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateTextSize() {
         binding.textSizeValue.text = when (prefs.textSizeScale) {
+            Constants.TextSize.ONE -> 1
             Constants.TextSize.TWO -> 2
             Constants.TextSize.THREE -> 3
             Constants.TextSize.FOUR -> 4
             Constants.TextSize.FIVE -> 5
             Constants.TextSize.SIX -> 6
             Constants.TextSize.SEVEN -> 7
-            else -> 1
+            else -> "--"
         }.toString()
     }
 

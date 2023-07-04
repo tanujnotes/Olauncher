@@ -34,13 +34,13 @@ object Constants {
     }
 
     object TextSize {
-        const val ONE = 0.5f
-        const val TWO = 0.75f
+        const val ONE = 0.7f
+        const val TWO = 0.8f
         const val THREE = 0.9f
         const val FOUR = 1f
         const val FIVE = 1.1f
-        const val SIX = 1.25f
-        const val SEVEN = 1.5f
+        const val SIX = 1.2f
+        const val SEVEN = 1.3f
     }
 
     const val WALL_TYPE_LIGHT = "light"
