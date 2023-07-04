@@ -53,8 +53,10 @@
     <string name="light">Claro</string>
     <string name="welcome_to_olauncher_settings">Nossa página Sobre, na parte inferior, tem respostas para todas as suas perguntas. Não se esqueça. :)</string>
     <string name="rate_us_message">Ei, você acha Olauncher útil? Se sim, uma classificação de 5 estrelas é a melhor maneira de nos apoiar. Obrigado.</string>
-    <string name="share_message">Obrigado.</string>
-    <string name="keyboard_message">Olá, o teclado é a maneira mais rápida de encontrar e iniciar aplicativos no Olauncher. Podemos pedir-lhe que mantenha isto ligado por mais alguns dias para depois decidir? A escolha é sempre sua!</string>
+    <string name="share_message">Olá, você acha que seus amigos amariam o Olauncher tanto quanto você?
+         \n\nCompartilhe o aplicativo e ajude-nos a divulgar. Obrigado!</string>
+    <string name="keyboard_message">Olá, o teclado é a maneira mais rápida de encontrar e iniciar aplicativos no Olauncher. Podemos pedir-lhe que mantenha isto ligado por mais alguns dias para depois decidir?
+        \n\nA escolha é sempre sua!</string>
     <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear. Quaisquer dados adquiridos pelo Olauncher através deste serviço não sairão do seu dispositivo.</string>
     <string name="support_olauncher_for_free">Apoie o Olauncher gratuitamente usando nosso link de afiliado da Amazon.</string>
     <string name="support_olauncher_message">Sempre que você comprar algo usando nosso link, receberemos uma pequena comissão. Salve o link e use-o sempre que fizer compras online. Obrigado!</string>
@@ -73,11 +75,13 @@
     <string name="please_set_olauncher_as_default_first">Por favor, defina Olauncher como seu lançador padrão primeiro</string>
     <string name="affiliate">Afiliar</string>
     <string name="tip_start_typing_for_rename">Dica: comece a digitar para a opção RENAME do aplicativo</string>
-    <string name="hidden_apps_message">Nota: Toque em \"Olauncher\" na parte superior desta página de Configurações para encontrar seus aplicativos ocultos. Mais detalhes disponíveis em nossa página Sobre abaixo.</string>
+    <string name="hidden_apps_message">Nota: Toque em \"Olauncher\" na parte superior desta página de Configurações para encontrar seus aplicativos ocultos.
+        \n\nMais detalhes disponíveis em nossa página Sobre abaixo.</string>
     <string name="swipe_down_for">Deslize para baixo para</string>
     <string name="search">Procurar</string>
     <string name="notifications">Notificações</string>
-    <string name="accessibility_disclosure">Ative ou desative o serviço de acessibilidade do Olauncher nas configurações do seu dispositivo para ativar ou desativar esse recurso. Por favor, note que este serviço é usado apenas para permitir que você desligue o scree do seu dispositivo</string>
+    <string name="accessibility_disclosure">Ative ou desative o serviço de acessibilidade do Olauncher nas configurações do seu dispositivo para ativar ou desativar esse recurso.
+        \n\nPor favor, note que este serviço é usado apenas para permitir que você desligue o scree do seu dispositivo</string>
     <string name="accept">Aceitar</string>
     <string name="permission">Permissão</string>
     <string name="double_tap_lock">Toque duas vezes para bloquear</string>

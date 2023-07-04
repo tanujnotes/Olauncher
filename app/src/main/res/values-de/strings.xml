@@ -19,11 +19,13 @@
     <string name="olauncher_is_not_default_launcher">Olauncher ist kein Standard-Launcher. Die tägliche Aktualisierung des Hintergrundbilds schlägt möglicherweise fehl.</string>
     <string name="long_press_to_enable">Zum Aktivieren lange drücken</string>
     <string name="no_hidden_apps">Keine versteckten Apps</string>
-    <string name="hidden_apps_message">Hinweis: Tippen Sie oben auf dieser Einstellungsseite auf „Olauncher“, um Ihre versteckten Apps zu finden.  Weitere Einzelheiten finden Sie auf der Seite „Über“ unten.</string>
+    <string name="hidden_apps_message">Hinweis: Tippen Sie oben auf dieser Einstellungsseite auf „Olauncher“, um Ihre versteckten Apps zu finden.
+        \n\nWeitere Einzelheiten finden Sie auf der Seite „Über“ unten.</string>
     <string name="swipe_down_for">Wischen Sie nach unten für</string>
     <string name="search">Suchen</string>
     <string name="notifications">Benachrichtigungen</string>
-    <string name="accessibility_disclosure">Bitte schalten Sie den Barrierefreiheitsdienst von Olauncher in den Einstellungen Ihres Geräts ein oder aus, um diese Funktion zu aktivieren oder zu deaktivieren.       Bitte beachten Sie, dass dieser Dienst nur dazu dient, den Bildschirm Ihres Geräts mit der Doppeltipp-Geste auszuschalten.     Unser Barrierefreiheitsdienst erfasst oder gibt keine Daten weiter.</string>
+    <string name="accessibility_disclosure">Bitte schalten Sie den Barrierefreiheitsdienst von Olauncher in den Einstellungen Ihres Geräts ein oder aus, um diese Funktion zu aktivieren oder zu deaktivieren.
+        \n\nBitte beachten Sie, dass dieser Dienst nur dazu dient, den Bildschirm Ihres Geräts mit der Doppeltipp-Geste auszuschalten. Unser Barrierefreiheitsdienst erfasst oder gibt keine Daten weiter.</string>
     <string name="accept">Akzeptieren</string>
     <string name="permission">Erlaubnis</string>
     <string name="double_tap_lock">Zum Sperren zweimal tippen</string>
@@ -81,10 +83,11 @@
     <string name="system_default">System</string>
     <string name="dark">Dunkel</string>
     <string name="light">Licht</string>
-    <string name="welcome_to_olauncher_settings">Auf unserer About-Seite unten finden Sie Antworten auf alle Ihre Fragen. Vergiss es nicht. :) :)           Danke schön.</string>
-    <string name="rate_us_message">Hey, findest du Olauncher nützlich? Wenn ja, ist eine 5-Sterne-Bewertung die beste Möglichkeit, uns zu unterstützen.           Vielen Dank und Sie werden das nicht noch einmal sehen.</string>
-    <string name="share_message">Hallo, glauben Sie, dass Ihre Freunde Olauncher genauso lieben würden wie Sie?           Teilen Sie die App und helfen Sie uns, die Nachricht zu verbreiten. Danke schön!</string>
-    <string name="keyboard_message">Hallo, die Tastatur ist der schnellste Weg, Apps in Olauncher zu finden und zu starten. Können wir Sie bitten, die Funktion noch ein paar Tage eingeschaltet zu lassen und dann zu entscheiden? Die Wahl liegt immer bei Ihnen.</string>
+    <string name="welcome_to_olauncher_settings">Auf unserer About-Seite unten finden Sie Antworten auf alle Ihre Fragen. Vergiss es nicht. :)\n\nDanke schön.</string>
+    <string name="rate_us_message">Hey, findest du Olauncher nützlich? Wenn ja, ist eine 5-Sterne-Bewertung die beste Möglichkeit, uns zu unterstützen.\n\nVielen Dank und Sie werden das nicht noch einmal sehen.</string>
+    <string name="share_message">Hallo, glauben Sie, dass Ihre Freunde Olauncher genauso lieben würden wie Sie?\n\nTeilen Sie die App und helfen Sie uns, die Nachricht zu verbreiten. Danke schön!</string>
+    <string name="keyboard_message">Hallo, die Tastatur ist der schnellste Weg, Apps in Olauncher zu finden und zu starten. Können wir Sie bitten, die Funktion noch ein paar Tage eingeschaltet zu lassen und dann zu entscheiden?
+        \n\nDie Wahl liegt immer bei Ihnen.</string>
     <string name="accessibility_service_description">Die Zugriffsberechtigung ist erforderlich, um das Sperren durch Doppeltippen zu ermöglichen. Die von Olauncher über diesen Dienst erfassten Daten verlassen Ihr Gerät nicht.</string>
     <string name="support_olauncher_for_free">Unterstützen Sie Olauncher kostenlos, indem Sie unseren Amazon-Partnerlink verwenden.</string>
     <string name="support_olauncher_message">Jedes Mal, wenn Sie über unseren Link etwas kaufen, erhalten wir eine kleine Provision. Bitte speichern Sie den Link und verwenden Sie ihn bei jedem Online-Einkauf. Danke schön!</string>

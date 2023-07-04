@@ -51,7 +51,7 @@
     <string name="system_default">Système</string>
     <string name="dark">Sombre</string>
     <string name="light">Clair</string>
-    <string name="welcome_to_olauncher_settings">Notre page \"À propos\" en bas a des réponses à toutes vos questions. Pensez-y. :)</string>
+    <string name="welcome_to_olauncher_settings">Notre page \"À propos\" en bas a des réponses à toutes vos questions. :)\n\nMerci!</string>
     <string name="rate_us_message">Hé, trouvez-vous Olauncher utile? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
         \n\nMerci, vous ne verrez plus ce message.</string>
     <string name="share_message">Bonjour, pensez-vous que vos amis aimeraient Olauncher autant que vous?

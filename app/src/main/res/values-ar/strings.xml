@@ -25,7 +25,7 @@
     <string name="swipe_down_for">اسحب لأسفل من أجل</string>
     <string name="search">يبحث</string>
     <string name="notifications">إشعارات</string>
-    <string name="accessibility_disclosure">يرجى تشغيل أو إيقاف تشغيل خدمة الوصول في Olauncher في إعدادات جهازك لتمكين هذه الميزة أو تعطيلها.       يرجى ملاحظة أن هذه الخدمة تُستخدم فقط للسماح لك بإيقاف تشغيل شاشة جهازك باستخدام إيماءة النقر المزدوج.     خدمة الوصول لدينا لا تجمع أو تشارك أي بيانات.</string>
+    <string name="accessibility_disclosure">يرجى تشغيل أو إيقاف تشغيل خدمة الوصول في Olauncher في إعدادات جهازك لتمكين هذه الميزة أو تعطيلها.       يرجى ملاحظة أن هذه الخدمة تُستخدم فقط للسماح لك بإيقاف تشغيل شاشة جهازك باستخدام إيماءة النقر المزدوج. خدمة الوصول لدينا لا تجمع أو تشارك أي بيانات.</string>
     <string name="accept">يقبل</string>
     <string name="permission">إذن</string>
     <string name="double_tap_lock">انقر نقرًا مزدوجًا للقفل</string>
@@ -82,9 +82,9 @@
     <string name="system_default">نظام</string>
     <string name="dark">مظلم</string>
     <string name="light">ضوء</string>
-    <string name="welcome_to_olauncher_settings">تحتوي صفحة \"حول\" في الأسفل على إجابات لجميع أسئلتك. لا تنسى. :)           شكرًا لك.</string>
-    <string name="rate_us_message">مرحبًا ، هل تجد Olauncher مفيدًا؟ إذا كانت الإجابة بنعم ، فإن التصنيف 5 نجوم هو أفضل طريقة لدعمنا.           شكرا لك ولن ترى هذا مرة أخرى.</string>
-    <string name="share_message">مرحباً ، هل تعتقد أن أصدقاءك سيحبون Olauncher بقدر ما تحب؟           شارك التطبيق وساعدنا في نشر الكلمة. شكرًا لك!</string>
+    <string name="welcome_to_olauncher_settings">تحتوي صفحة \"حول\" في الأسفل على إجابات لجميع أسئلتك. لا تنسى. شكرًا لك.</string>
+    <string name="rate_us_message">مرحبًا ، هل تجد Olauncher مفيدًا؟ إذا كانت الإجابة بنعم ، فإن التصنيف 5 نجوم هو أفضل طريقة لدعمنا. شكرا لك ولن ترى هذا مرة أخرى.</string>
+    <string name="share_message">مرحباً ، هل تعتقد أن أصدقاءك سيحبون Olauncher بقدر ما تحب؟ شارك التطبيق وساعدنا في نشر الكلمة. شكرًا لك!</string>
     <string name="keyboard_message">مرحبًا ، لوحة المفاتيح هي أسرع طريقة للعثور على التطبيقات وتشغيلها في Olauncher. هل يمكننا أن نطلب منك الاحتفاظ بهذا الأمر لبضعة أيام أخرى ثم اتخاذ القرار؟ الاختيار دائما لك.</string>
     <string name="accessibility_service_description">إذن الوصول مطلوب لتمكين النقر المزدوج للقفل. أي بيانات حصل عليها Olauncher عبر هذه الخدمة لن تترك جهازك.</string>
     <string name="support_olauncher_for_free">ادعم Olauncher مجانًا باستخدام رابط الشراكة التابع لشركة Amazon.</string>

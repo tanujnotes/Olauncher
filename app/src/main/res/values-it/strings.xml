@@ -51,13 +51,13 @@
     <string name="dark">Scuro</string>
     <string name="light">Chiaro</string>
     <string name="welcome_to_olauncher_settings">La nostra pagina Informazioni in basso ha le risposto a tutte le tue domande. Non dimenticare. :)
-        \n\n Grazie.</string>
+        \n\nGrazie.</string>
     <string name="rate_us_message">Ehi, trovi utile Olauncher? Se sì, una valutazione a 5 stelle è il modo migliore per sostenerci.
         \n\nGrazie e non lo vedrai più.</string>
     <string name="share_message">Ciao, pensi che ai tuoi amici potrebbe piacere  Olauncher tanto quanto piace a te?
         \n\nCondividi l\'app e aiutaci a spargere la voce. Grazie!</string>
     <string name="keyboard_message">Ciao, la tastiera è il modo più veloce per trovare e avviare le app in Olauncher. Possiamo chiederti di metterlo alla prova ancora per qualche giorno e poi decidere?
-        \n\n Sei sempre tu a scegliere.</string>
+        \n\nSei sempre tu a scegliere.</string>
     <string name="accessibility_service_description">L\'autorizzazione di accessibilità è necessaria per abilitare il doppio tocco per il blocco schermo. Qualsiasi dato acquisito da Olauncher tramite questo servizio rimarrà all’interno del telefono</string>
     <string name="support_olauncher_for_free">Supporta Olauncher gratuitamente utilizzando il nostro link di affiliazione su Amazon.</string>
     <string name="support_olauncher_message">Ogni volta che acquisti qualcosa utilizzando il nostro link, riceviamo una piccola commissione. Salva il link e usalo ogni volta che fai acquisti online.\n Grazie!</string>
@@ -76,7 +76,8 @@
     <string name="please_set_olauncher_as_default_first">Imposta Olauncher come launcher predefinito</string>
     <string name="affiliate">Affiliazione</string>
     <string name="tip_start_typing_for_rename">Suggerimento: inizia a digitare per RINOMINARE l\'app</string>
-    <string name="hidden_apps_message">Nota: tocca \'Olauncher\' nella parte superiore di questa pagina per trovare le tue app nascoste.\n\nUlteriori dettagli sono disponibili nella pagina Informazioni di seguito.</string>
+    <string name="hidden_apps_message">Nota: tocca \'Olauncher\' nella parte superiore di questa pagina per trovare le tue app nascoste.
+        \n\nUlteriori dettagli sono disponibili nella pagina Informazioni di seguito.</string>
     <string name="swipe_down_for">Scorri verso il basso per</string>
     <string name="search">Ricerca</string>
     <string name="notifications">Notifiche</string>

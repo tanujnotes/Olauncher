@@ -20,11 +20,13 @@
     <string name="olauncher_is_not_default_launcher">Olauncher はデフォルトのランチャーではありません。 毎日の壁紙の更新に失敗する場合があります。</string>
     <string name="long_press_to_enable">長押しして有効にします</string>
     <string name="no_hidden_apps">隠れたアプリはありません</string>
-    <string name="hidden_apps_message">注: この設定ページの上部にある「Olauncher」をタップして、隠れたアプリを見つけます。  詳細については、以下の About ページをご覧ください。</string>
+    <string name="hidden_apps_message">注: この設定ページの上部にある「Olauncher」をタップして、隠れたアプリを見つけます。
+        \n\n詳細については、以下の About ページをご覧ください。</string>
     <string name="swipe_down_for">下にスワイプして</string>
     <string name="search">検索</string>
     <string name="notifications">通知</string>
-    <string name="accessibility_disclosure">この機能を有効または無効にするには、デバイスの設定で Olauncher のアクセシビリティ サービスをオンまたはオフにしてください。       このサービスは、ダブルタップ ジェスチャを使用してデバイスの画面をオフにするためにのみ使用されることに注意してください。     当社のアクセシビリティ サービスは、いかなるデータも収集または共有しません。</string>
+    <string name="accessibility_disclosure">この機能を有効または無効にするには、デバイスの設定で Olauncher のアクセシビリティ サービスをオンまたはオフにしてください。
+        \n\nこのサービスは、ダブルタップ ジェスチャを使用してデバイスの画面をオフにするためにのみ使用されることに注意してください。 当社のアクセシビリティ サービスは、いかなるデータも収集または共有しません。</string>
     <string name="accept">受け入れる</string>
     <string name="permission">許可</string>
     <string name="double_tap_lock">ダブルタップしてロックします</string>
@@ -82,9 +84,9 @@
     <string name="system_default">システム</string>
     <string name="dark">暗い</string>
     <string name="light">ライト</string>
-    <string name="welcome_to_olauncher_settings">下部にある当社の概要ページには、すべての質問への回答が記載されています。忘れないで。 :)           ありがとう。</string>
-    <string name="rate_us_message">ねえ、Olauncher は役に立つと思いますか? 「はい」の場合、5 つ星の評価が私たちをサポートする最善の方法です。           ありがとう、もうこれを見ることはないだろう。</string>
-    <string name="share_message">こんにちは、あなたの友達もあなたと同じくらいオランチャーを好きだと思いますか?           アプリを共有して、情報を広めてください。ありがとう！</string>
+    <string name="welcome_to_olauncher_settings">下部にある当社の概要ページには、すべての質問への回答が記載されています。忘れないで。 :)\n\nありがとう。</string>
+    <string name="rate_us_message">ねえ、Olauncher は役に立つと思いますか? 「はい」の場合、5 つ星の評価が私たちをサポートする最善の方法です。\n\nありがとう、もうこれを見ることはないだろう。</string>
+    <string name="share_message">こんにちは、あなたの友達もあなたと同じくらいオランチャーを好きだと思いますか?\n\nアプリを共有して、情報を広めてください。ありがとう！</string>
     <string name="keyboard_message">こんにちは、キーボードは Olauncher でアプリを見つけて起動する最も速い方法です。もう数日間これをオンにしてから判断していただくようお願いできますか?選択は常にあなた次第です。</string>
     <string name="accessibility_service_description">ダブルタップしてロックを有効にするには、アクセシビリティ許可が必要です。このサービスを通じて Olauncher が取得したデータは、デバイスから流出することはありません。</string>
     <string name="support_olauncher_for_free">Amazon アフィリエイト リンクを使用して、Olauncher を無料でサポートしてください。</string>

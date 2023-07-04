@@ -19,11 +19,13 @@
     <string name="olauncher_is_not_default_launcher">Olauncher, varsayılan başlatıcı değildir. Günlük duvar kağıdı güncellemesi başarısız olabilir.</string>
     <string name="long_press_to_enable">Etkinleştirmek için uzun basın</string>
     <string name="no_hidden_apps">Gizli uygulama yok</string>
-    <string name="hidden_apps_message">Not: Gizli uygulamalarınızı bulmak için bu ayarlar sayfasının üst kısmındaki \"Olauncher\" seçeneğine dokunun.  Daha fazla ayrıntı aşağıdaki Hakkında sayfasında mevcuttur.</string>
+    <string name="hidden_apps_message">Not: Gizli uygulamalarınızı bulmak için bu ayarlar sayfasının üst kısmındaki \"Olauncher\" seçeneğine dokunun.
+        \n\nDaha fazla ayrıntı aşağıdaki Hakkında sayfasında mevcuttur.</string>
     <string name="swipe_down_for">için aşağı kaydırın</string>
     <string name="search">Aramak</string>
     <string name="notifications">Bildirimler</string>
-    <string name="accessibility_disclosure">Bu özelliği etkinleştirmek veya devre dışı bırakmak için lütfen cihazınızın ayarlarında Olauncher\'ın erişilebilirlik hizmetini açın veya kapatın.       Lütfen bu hizmetin yalnızca cihazınızın ekranını çift dokunma hareketini kullanarak kapatmanıza izin vermek için kullanıldığını unutmayın.     Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
+    <string name="accessibility_disclosure">Bu özelliği etkinleştirmek veya devre dışı bırakmak için lütfen cihazınızın ayarlarında Olauncher\'ın erişilebilirlik hizmetini açın veya kapatın.
+        \n\nLütfen bu hizmetin yalnızca cihazınızın ekranını çift dokunma hareketini kullanarak kapatmanıza izin vermek için kullanıldığını unutmayın. Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
     <string name="accept">Kabul etmek</string>
     <string name="permission">İzin</string>
     <string name="double_tap_lock">Kilitlemek için iki kez dokunun</string>
@@ -81,10 +83,11 @@
     <string name="system_default">sistem</string>
     <string name="dark">Karanlık</string>
     <string name="light">Işık</string>
-    <string name="welcome_to_olauncher_settings">Alt kısımdaki Hakkında sayfamızda tüm sorularınızın yanıtları bulunmaktadır. unutma :)           Teşekkür ederim.</string>
-    <string name="rate_us_message">Hey, Olanuncher\'ı faydalı buluyor musunuz? Cevabınız evet ise, 5 yıldız derecelendirmesi bizi desteklemenin en iyi yoludur.           Teşekkürler ve bunu bir daha görmeyeceksin.</string>
-    <string name="share_message">Merhaba, arkadaşlarının Olauncher\'ı senin kadar seveceğini düşünüyor musun?           Uygulamayı paylaşın ve haberi yaymamıza yardımcı olun. Teşekkür ederim!</string>
-    <string name="keyboard_message">Merhaba, klavye, Olauncher\'da uygulamaları bulmanın ve başlatmanın en hızlı yoludur. Bunu birkaç gün daha Açık tutmanızı ve sonra karar vermenizi rica edebilir miyiz? Seçim her zaman senindir.</string>
+    <string name="welcome_to_olauncher_settings">Alt kısımdaki Hakkında sayfamızda tüm sorularınızın yanıtları bulunmaktadır. unutma :)\n\nTeşekkür ederim.</string>
+    <string name="rate_us_message">Hey, Olanuncher\'ı faydalı buluyor musunuz? Cevabınız evet ise, 5 yıldız derecelendirmesi bizi desteklemenin en iyi yoludur.\n\nTeşekkürler ve bunu bir daha görmeyeceksin.</string>
+    <string name="share_message">Merhaba, arkadaşlarının Olauncher\'ı senin kadar seveceğini düşünüyor musun?\n\nUygulamayı paylaşın ve haberi yaymamıza yardımcı olun. Teşekkür ederim!</string>
+    <string name="keyboard_message">Merhaba, klavye, Olauncher\'da uygulamaları bulmanın ve başlatmanın en hızlı yoludur. Bunu birkaç gün daha Açık tutmanızı ve sonra karar vermenizi rica edebilir miyiz?
+        \n\nSeçim her zaman senindir.</string>
     <string name="accessibility_service_description">Kilitlemek için çift dokunmayı etkinleştirmek için erişilebilirlik izni gereklidir. Olauncher tarafından bu hizmet aracılığıyla elde edilen hiçbir veri cihazınızdan ayrılmayacaktır.</string>
     <string name="support_olauncher_for_free">Amazon ortaklık bağlantımızı kullanarak Olauncher\'ı ücretsiz olarak destekleyin.</string>
     <string name="support_olauncher_message">Bağlantımızı kullanarak her bir şey satın aldığınızda, küçük bir komisyon alırız. Lütfen bağlantıyı kaydedin ve çevrimiçi alışveriş yaptığınızda kullanın. Teşekkür ederim!</string>
