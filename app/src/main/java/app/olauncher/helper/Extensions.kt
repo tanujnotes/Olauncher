@@ -10,7 +10,8 @@ fun View.hideKeyboard() {
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun View.showKeyboard() {
+fun View.showKeyboard(show: Boolean = true) {
+    if (show.not()) return
     if (this.requestFocus())
         postDelayed({
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

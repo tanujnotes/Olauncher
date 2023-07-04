@@ -25,7 +25,13 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
-import app.olauncher.helper.*
+import app.olauncher.helper.hideKeyboard
+import app.olauncher.helper.isSystemApp
+import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.openUrl
+import app.olauncher.helper.showKeyboard
+import app.olauncher.helper.showToast
+import app.olauncher.helper.uninstall
 
 class AppDrawerFragment : Fragment(){
 
@@ -60,26 +66,18 @@ class AppDrawerFragment : Fragment(){
         initClickListeners()
     }
 
-
-
-
-
-private fun initViews() {
-    if (flag == Constants.FLAG_HIDDEN_APPS) binding.search.queryHint = "Hidden apps"
-    else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_SWIPE_RIGHT_APP) binding.search.queryHint =
-        "Please select an app"
-    if (canRename && prefs.renameTipShown.not()) {
-        binding.appDrawerTip.text = getString(R.string.tip_start_typing_for_rename)
-        binding.appDrawerTip.visibility = View.VISIBLE
-        prefs.renameTipShown = true
+    private fun initViews() {
+        if (flag == Constants.FLAG_HIDDEN_APPS)
+            binding.search.queryHint = "Hidden apps"
+        else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
+            binding.search.queryHint = "Please select an app"
+        try {
+            val searchTextView = binding.search.findViewById<TextView>(R.id.search_src_text)
+            if (searchTextView != null) searchTextView.gravity = prefs.appLabelAlignment
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
-    try {
-        val searchTextView = binding.search.findViewById<TextView>(R.id.search_src_text)
-        if (searchTextView != null) searchTextView.gravity = prefs.appLabelAlignment
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
 
 private fun initSearch() {
     binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -120,16 +118,19 @@ private fun initSearch() {
             R.id.mainFragment,
             false
         )
-        else findNavController().popBackStack()
-    }, appInfoListener = {
-        openAppInfo(
-            requireContext(), it.user, it.appPackage
-        )
-        findNavController().popBackStack(R.id.mainFragment, false)
-    }, appDeleteListener = {
-        requireContext().apply {
-            if (isSystemApp(it.appPackage)) showToast(getString(R.string.system_app_cannot_delete))
-            else uninstall(it.appPackage)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
+        binding.recyclerView.itemAnimator = null
+        binding.recyclerView.layoutAnimation =
+            AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+    }
+
+    private fun initObservers() {
+        viewModel.firstOpen.observe(viewLifecycleOwner) {
+            if (it && flag == Constants.FLAG_LAUNCH_APP) {
+                binding.appDrawerTip.visibility = View.VISIBLE
+                binding.appDrawerTip.isSelected = true
+            }
         }
     }, appHideListener = { appModel, position ->
         adapter.appFilteredList.removeAt(position)
@@ -216,12 +217,13 @@ private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
                     if (onTop && !recyclerView.canScrollVertically(1)) findNavController().popBackStack()
                 }
 
-                RecyclerView.SCROLL_STATE_IDLE -> {
-                    if (!recyclerView.canScrollVertically(1)) {
-                        binding.search.hideKeyboard()
-                    } else if (!recyclerView.canScrollVertically(-1)) {
-                        if (onTop) findNavController().popBackStack()
-                        else binding.search.showKeyboard()
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        if (!recyclerView.canScrollVertically(1)) {
+                            binding.search.hideKeyboard()
+                        } else if (!recyclerView.canScrollVertically(-1)) {
+                            if (onTop) findNavController().popBackStack()
+                            else binding.search.showKeyboard(prefs.autoShowKeyboard)
+                        }
                     }
                 }
             }
@@ -229,10 +231,10 @@ private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
     }
 }
 
-override fun onStart() {
-    super.onStart()
-    if (prefs.autoShowKeyboard) binding.search.showKeyboard()
-}
+    override fun onStart() {
+        super.onStart()
+        binding.search.showKeyboard(prefs.autoShowKeyboard)
+    }
 
 override fun onStop() {
     binding.search.hideKeyboard()

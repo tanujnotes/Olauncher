@@ -32,7 +32,6 @@ class Prefs(context: Context) {
     private val APP_THEME = "APP_THEME"
     private val ABOUT_CLICKED = "ABOUT_CLICKED"
     private val RATE_CLICKED = "RATE_CLICKED"
-    private val RENAME_TIP_SHOWN = "RENAME_TIP_SHOWN"
     private val SWIPE_DOWN_ACTION = "SWIPE_DOWN_ACTION"
     private val TEXT_SIZE_SCALE = "TEXT_SIZE_SCALE"
 
@@ -77,6 +76,12 @@ class Prefs(context: Context) {
     private val APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT = "APP_ACTIVITY_CLASS_NAME_SWIPE_RIGHT"
     private val APP_USER_SWIPE_LEFT = "APP_USER_SWIPE_LEFT"
     private val APP_USER_SWIPE_RIGHT = "APP_USER_SWIPE_RIGHT"
+    private val CLOCK_APP_PACKAGE = "CLOCK_APP_PACKAGE"
+    private val CLOCK_APP_USER = "CLOCK_APP_USER"
+    private val CLOCK_APP_CLASS_NAME = "CLOCK_APP_CLASS_NAME"
+    private val CALENDAR_APP_PACKAGE = "CALENDAR_APP_PACKAGE"
+    private val CALENDAR_APP_USER = "CALENDAR_APP_USER"
+    private val CALENDAR_APP_CLASS_NAME = "CALENDAR_APP_CLASS_NAME"
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
 
@@ -113,7 +118,7 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putString(DAILY_WALLPAPER_URL, value).apply()
 
     var homeAppsNum: Int
-        get() = prefs.getInt(HOME_APPS_NUM, 4)
+        get() = prefs.getInt(HOME_APPS_NUM, 5)
         set(value) = prefs.edit().putInt(HOME_APPS_NUM, value).apply()
 
     var homeAlignment: Int
@@ -175,10 +180,6 @@ class Prefs(context: Context) {
     var rateClicked: Boolean
         get() = prefs.getBoolean(RATE_CLICKED, false)
         set(value) = prefs.edit().putBoolean(RATE_CLICKED, value).apply()
-
-    var renameTipShown: Boolean
-        get() = prefs.getBoolean(RENAME_TIP_SHOWN, false)
-        set(value) = prefs.edit().putBoolean(RENAME_TIP_SHOWN, value).apply()
 
     var swipeDownAction: Int
         get() = prefs.getInt(SWIPE_DOWN_ACTION, Constants.SwipeDownAction.NOTIFICATIONS)
@@ -343,6 +344,30 @@ class Prefs(context: Context) {
     var appUserSwipeRight: String
         get() = prefs.getString(APP_USER_SWIPE_RIGHT, "").toString()
         set(value) = prefs.edit().putString(APP_USER_SWIPE_RIGHT, value).apply()
+
+    var clockAppPackage: String
+        get() = prefs.getString(CLOCK_APP_PACKAGE, "").toString()
+        set(value) = prefs.edit().putString(CLOCK_APP_PACKAGE, value).apply()
+
+    var clockAppUser: String
+        get() = prefs.getString(CLOCK_APP_USER, "").toString()
+        set(value) = prefs.edit().putString(CLOCK_APP_USER, value).apply()
+
+    var clockAppClassName: String?
+        get() = prefs.getString(CLOCK_APP_CLASS_NAME, "").toString()
+        set(value) = prefs.edit().putString(CLOCK_APP_CLASS_NAME, value).apply()
+
+    var calendarAppPackage: String
+        get() = prefs.getString(CALENDAR_APP_PACKAGE, "").toString()
+        set(value) = prefs.edit().putString(CALENDAR_APP_PACKAGE, value).apply()
+
+    var calendarAppUser: String
+        get() = prefs.getString(CALENDAR_APP_USER, "").toString()
+        set(value) = prefs.edit().putString(CALENDAR_APP_USER, value).apply()
+
+    var calendarAppClassName: String?
+        get() = prefs.getString(CALENDAR_APP_CLASS_NAME, "").toString()
+        set(value) = prefs.edit().putString(CALENDAR_APP_CLASS_NAME, value).apply()
 
     fun getAppName(location: Int): String {
         return when (location) {

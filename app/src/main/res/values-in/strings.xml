@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Tetapkan sebagai peluncur default</string>
     <string name="app_text_color">Warna teks</string>
@@ -43,7 +42,6 @@
     <string name="okay">Oke</string>
     <string name="cool">Dingin!</string>
     <string name="double_tap_lock_is_enabled_message">Jika kunci ketuk ganda menonaktifkan sidik jari atau buka kunci wajah, buka pengaturan Olauncher, ketuk \'eksperimental\' dan ikuti petunjuknya. Terima kasih.</string>
-    <string name="triple_tap_lock_message">Cara kerjanya: Setelah Anda mengetuk dua kali, layar akan menjadi gelap dan ponsel akan mengunci sendiri dalam 5 detik. Selama waktu ini, Anda dapat mengetuk dua kali untuk <b>membuka kunci</b> atau mengetuk tiga kali kapan saja untuk segera mengunci ponsel sepenuhnya. Catatan: MATIKAN ini terlebih dahulu jika Anda memutuskan untuk menghapus Olauncher. Terima kasih.</string>
     <string name="auto_show_keyboard">Tampilkan keyboard secara otomatis</string>
     <string name="hide">Bersembunyi</string>
     <string name="status_bar">Tampilkan bilah status</string>
@@ -61,7 +59,6 @@
     <string name="share_message">Hai, apakah menurut Anda teman Anda akan menyukai Olauncher seperti Anda?</string>
     <string name="keyboard_message">Hai, keyboard adalah cara tercepat untuk menemukan dan meluncurkan aplikasi di Olauncher. Bisakah kami meminta Anda untuk mengaktifkannya selama beberapa hari lagi dan kemudian memutuskan?           Pilihan selalu menjadi milik Anda.</string>
     <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan ketuk dua kali untuk mengunci. Data apa pun yang diperoleh Olauncher melalui layanan ini tidak akan meninggalkan perangkat Anda.</string>
-    <string name="lock_layout_description">deskripsi tata letak kunci untuk digunakan id unik untuk mengunci layar</string>
     <string name="support_olauncher_for_free">Dukung Olauncher secara gratis dengan menggunakan tautan afiliasi Amazon kami.</string>
     <string name="support_olauncher_message">Setiap kali Anda membeli sesuatu menggunakan tautan kami, kami mendapat komisi kecil. Harap simpan tautan dan gunakan setiap kali Anda berbelanja online.\nTerima kasih!</string>
     <string name="open">Buka tautan</string>
@@ -77,14 +74,13 @@
     <string name="bottom_on">Bawah: Aktif</string>
     <string name="bottom_off">Bawah: Mati</string>
     <string name="please_set_olauncher_as_default_first">Silakan atur Olauncher sebagai peluncur default Anda terlebih dahulu</string>
-    <string name="settings_footer"><u>Peluncur PRO</u></string>
     <string name="affiliate">Afiliasi</string>
     <string name="tip_start_typing_for_rename">Tip: Mulailah mengetik untuk opsi RENAME aplikasi</string>
     <string name="hidden_apps_message">Catatan: Ketuk \'Olauncher\' di bagian atas halaman Pengaturan ini untuk menemukan aplikasi tersembunyi Anda.\n\nRincian lebih lanjut tersedia di halaman Tentang kami di bawah ini.</string>
     <string name="swipe_down_for">Geser ke bawah untuk</string>
     <string name="search">Mencari</string>
     <string name="notifications">Notifikasi</string>
-    <string name="accessibility_disclosure">Harap aktifkan atau nonaktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan atau menonaktifkan fitur ini.\n    \n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk memungkinkan Anda mematikan layar perangkat menggunakan gerakan ketuk dua kali.\n    Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
+    <string name="accessibility_disclosure">Harap aktifkan atau nonaktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan atau menonaktifkan fitur ini.\n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk memungkinkan Anda mematikan layar perangkat menggunakan gerakan ketuk dua kali. Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
     <string name="accept">Menerima</string>
     <string name="permission">Izin</string>
     <string name="double_tap_lock">Ketuk dua kali untuk mengunci</string>
@@ -93,7 +89,6 @@
     <string name="not_working"><u>Tidak bekerja?</u></string>
     <string name="info">Info</string>
     <string name="delete">Menghapus</string>
-    <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Ukuran teks</string>
     <string name="enabled">Diaktifkan</string>
     <string name="disabled">Dengan disabilitas</string>
@@ -117,32 +112,4 @@
     <string name="no_hidden_apps">Tidak ada aplikasi tersembunyi</string>
     <string name="adapter_show">memperlihatkan</string>
     <string name="adapter_hide">bersembunyi</string>
-<!--    <string name="a">A</string>-->
-<!--    <string name="b">B</string>-->
-<!--    <string name="c">C</string>-->
-<!--    <string name="x">X</string>-->
-<!--    <string name="y">Y</string>-->
-<!--    <string name="z">Z</string>-->
-<!--    <string name="v">V</string>-->
-<!--    <string name="u">U</string>-->
-<!--    <string name="t">T</string>-->
-<!--    <string name="s">S</string>-->
-<!--    <string name="r">R</string>-->
-<!--    <string name="q">Q</string>-->
-<!--    <string name="p">P</string>-->
-<!--    <string name="o">O</string>-->
-<!--    <string name="n">N</string>-->
-<!--    <string name="m">M</string>-->
-<!--    <string name="l">L</string>-->
-<!--    <string name="k">K</string>-->
-<!--    <string name="j">J</string>-->
-<!--    <string name="i">I</string>-->
-<!--    <string name="h">H</string>-->
-<!--    <string name="g">G</string>-->
-<!--    <string name="f">F</string>-->
-<!--    <string name="e">E</string>-->
-<!--    <string name="d">D</string>-->
-<!--    <string name="w">W</string>-->
-
-
 </resources>

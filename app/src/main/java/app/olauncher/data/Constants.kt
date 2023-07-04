@@ -57,11 +57,13 @@ object Constants {
 
     const val FLAG_SET_SWIPE_LEFT_APP = 11
     const val FLAG_SET_SWIPE_RIGHT_APP = 12
+    const val FLAG_SET_CLOCK_APP = 13
+    const val FLAG_SET_CALENDAR_APP = 14
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
 
-    const val HINT_RATE_US = 30
-    const val HINT_SHARE = 50
+    const val HINT_RATE_US = 20
+    const val HINT_SHARE = 30
 
     const val TRIPLE_TAP_DELAY_MS = 300L
     const val LONG_PRESS_DELAY_MS = 500L
@@ -73,7 +75,7 @@ object Constants {
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_PLAY_STORE_DEV = "https://play.google.com/store/apps/dev?id=7198807840081074933"
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
-    const val URL_INSTA_OLAUNCHER = "https://instagram.com/olauncherapp"
+    const val URL_INSTA_OLAUNCHER = "https://instagram.com/prolauncher.app"
     const val URL_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/bf400a269746c5c124a599af040dd82e/raw"
     const val URL_DEFAULT_DARK_WALLPAPER = "https://images.unsplash.com/photo-1512551980832-13df02babc9e"
     const val URL_DEFAULT_LIGHT_WALLPAPER = "https://images.unsplash.com/photo-1515549832467-8783363e19b6"

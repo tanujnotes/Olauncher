@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Establecer como iniciador predeterminado</string>
     <string name="app_text_color">Color de texto</string>
@@ -43,7 +42,6 @@
     <string name="okay">Bueno</string>
     <string name="cool">¡Fresco!</string>
     <string name="double_tap_lock_is_enabled_message">Si el bloqueo de doble toque desactiva la huella digital o el desbloqueo facial, abra la configuración de Olauncher, toque \'experimental\' y siga las instrucciones. Gracias.</string>
-    <string name="triple_tap_lock_message">Cómo funciona: Una vez que toque dos veces, la pantalla se oscurecerá y el teléfono se bloqueará en 5 segundos. Durante este tiempo, puede tocar dos veces para <b>desbloquear</b> o tocar tres veces en cualquier momento para ubicar completamente</string>
     <string name="auto_show_keyboard">Teclado de exhibición automática</string>
     <string name="hide">Esconder</string>
     <string name="status_bar">Mostrar barra de estado</string>
@@ -61,7 +59,6 @@
     <string name="share_message">Hola, ¿crees que a tus amigos les encantaría Olauncher tanto como a ti? Comparte la aplicación y ayúdanos a correr la voz. ¡Gracias!</string>
     <string name="keyboard_message">Hola, el teclado es la forma más rápida de encontrar y lanzar aplicaciones en Olauncher. ¿Podemos pedirle que mantenga esto encendido por unos días más y luego decidir? La elección es siempre tuya.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
-    <string name="lock_layout_description">Bloquear descripción del diseño que se utilizará un identificador único para bloquear la pantalla</string>
     <string name="support_olauncher_for_free">Apoye Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
     <string name="support_olauncher_message">Cada vez que compras algo usando nuestro enlace, obtenemos una pequeña comisión. Por favor, guarde el enlace y úselo cada vez que compre en línea. ¡Gracias!</string>
     <string name="open">Abrir enlace</string>
@@ -77,7 +74,6 @@
     <string name="bottom_on">Abajo: Activado</string>
     <string name="bottom_off">Abajo: Desactivado</string>
     <string name="please_set_olauncher_as_default_first">Configura Olauncher como tu lanzador predeterminado primero</string>
-    <string name="settings_footer"><u>PROlauncher</u></string>
     <string name="affiliate">Afiliar</string>
     <string name="tip_start_typing_for_rename">Consejo: Comience a escribir para la opción RENAME de la aplicación</string>
     <string name="hidden_apps_message">Nota: Toque \'Olauncher\' en la parte superior de esta página de Configuración para encontrar sus aplicaciones ocultas. Más detalles disponibles en nuestra página Acerca de abajo.</string>
@@ -93,7 +89,6 @@
     <string name="not_working"><u>¿No funciona?</u></string>
     <string name="info">Información</string>
     <string name="delete">Borrar</string>
-    <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="enabled">Habilitado</string>
     <string name="disabled">Deshabilitado</string>
@@ -117,6 +112,4 @@
     <string name="no_hidden_apps">Sin aplicaciones ocultas</string>
     <string name="adapter_show">demostrar</string>
     <string name="adapter_hide">esconder</string>
-
-
 </resources>

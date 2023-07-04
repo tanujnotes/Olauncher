@@ -3,13 +3,22 @@ package app.olauncher.helper
 import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.app.WallpaperManager
-import android.content.*
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Matrix
+import android.graphics.Paint
+import android.graphics.Point
 import android.net.Uri
 import android.os.Build
 import android.os.UserHandle
@@ -28,7 +37,6 @@ import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.res.TypedArrayUtils.getString
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.AppModel
@@ -41,7 +49,8 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.Collator
-import java.util.*
+import java.util.Calendar
+import java.util.Scanner
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -249,7 +258,7 @@ fun getChangedAppTheme(context: Context, currentAppTheme: Int): Int {
 fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
-    
+
     intent?.let {
         launcher.startAppDetailsActivity(intent.component, userHandle, null, null)
     } ?: context.showToast(context.getString(R.string.unable_to_open_app))

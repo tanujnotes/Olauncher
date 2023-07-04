@@ -7,7 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
 import app.olauncher.data.Constants
-import java.util.*
+import java.util.Timer
 import kotlin.concurrent.schedule
 
 /*
