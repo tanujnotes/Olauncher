@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="settings_footer" translatable="false"><u>Olauncher PRO</u></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="app_text_color">Text color</string>
@@ -16,7 +21,6 @@
     <string name="rate">Rate</string>
     <string name="follow">Follow</string>
     <string name="email">Email</string>
-    <string name="github" translatable="false">Github</string>
     <string name="donate">Donate</string>
     <string name="swipe_up_for_apps">1. Swipe up for all apps</string>
     <string name="long_press_for_settings">2. Long press anywhere for settings</string>
@@ -40,7 +44,6 @@
     <string name="app_drawer_tips">Tip: Start typing an app name to auto-launch it</string>
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
-    <string name="double_tap_lock_is_enabled_message">If double tap lock disables fingerprint or face unlock, open Olauncher settings, tap on \'experimental\' and follow the instructions. Thank you.</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
     <string name="status_bar">Show status bar</string>
@@ -52,8 +55,6 @@
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="double_tap_lock_uninstall_message">Double tap to lock enabled.
-        \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
@@ -62,7 +63,6 @@
         \n\nShare the app and help us spread the word. Thank you!</string>
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?\n\nThe choice is always yours.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
     <string name="open">Open link</string>
@@ -78,7 +78,6 @@
     <string name="bottom_on">"Bottom: On "</string>
     <string name="bottom_off">Bottom: Off</string>
     <string name="please_set_olauncher_as_default_first">Please set Olauncher as your default launcher first</string>
-    <string name="settings_footer" translatable="false"><u>Olauncher PRO</u></string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
     <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page below.</string>
@@ -95,7 +94,6 @@
     <string name="not_working"><u>Not working?</u></string>
     <string name="info">Info</string>
     <string name="delete">Delete</string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
     <string name="text_size">Text size</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
@@ -117,7 +115,6 @@
     <string name="olauncher_is_not_default_launcher">Olauncher is not default.\nDaily wallpaper update may fail.</string>
     <string name="long_press_to_enable">Long press to enable</string>
     <string name="no_hidden_apps">No hidden apps"</string>
-    <string name="experimental_">experimental</string>
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
 </resources>

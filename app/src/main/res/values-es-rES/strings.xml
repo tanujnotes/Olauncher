@@ -4,7 +4,6 @@
     <string name="set_as_default_launcher">Establecer como iniciador predeterminado</string>
     <string name="app_text_color">Color del texto</string>
     <string name="double_tap_to_lock_screen">Tocar dos veces para bloquear</string>
-    <string name="experimental_">experimental</string>
     <string name="admin_permission_message">Olauncher promete usar el permiso de la pantalla de bloqueo de manera responsable. Olauncher no recopila ni comparte ningún dato.</string>
     <string name="about">Acerca de</string>
     <string name="off">No</string>
@@ -17,7 +16,7 @@
     <string name="rate">Valorar</string>
     <string name="follow">Seguir</string>
     <string name="email">Correo electrónico</string>
-    <string name="github">Github</string>
+
     <string name="donate">Donar</string>
     <string name="swipe_up_for_apps">1. Deslice hacia arriba para ver todas las aplicaciones</string>
     <string name="long_press_for_settings">2. Mantenga pulsado en cualquier lugar para abrir la configuración</string>
@@ -41,7 +40,6 @@
     <string name="app_drawer_tips">Sugerencia: comience a escribir el nombre de una aplicación para iniciarla automáticamente</string>
     <string name="okay">De acuerdo</string>
     <string name="cool">¡Guay!</string>
-    <string name="double_tap_lock_is_enabled_message">Si el bloqueo de doble toque desactiva la huella digital o el desbloqueo facial, abra la configuración de Olauncher, toque \'experimental\' y siga las instrucciones. Gracias.</string>
     <string name="auto_show_keyboard">Mostrar teclado automáticamente</string>
     <string name="hide">Ocultar</string>
     <string name="status_bar">Mostrar barra de estado</string>
@@ -53,7 +51,6 @@
     <string name="system_default">Sistema</string>
     <string name="dark">Oscuro</string>
     <string name="light">Claro</string>
-    <string name="double_tap_lock_uninstall_message">Doble toque para bloquear activado.\n\nNota: Desactive esta opción si decide desinstalar Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Nuestra página \'Acerca de\' en la parte inferior tiene respuestas a todas sus preguntas. no lo olvides :)\n\nGracias.</string>
     <string name="rate_us_message">Hola, ¿le resulta útil Olauncher? Si es así, una calificación de 5 estrellas es la mejor manera de apoyarnos.\n\nGracias, no volverá a ver esto.</string>
     <string name="share_message">Hola, ¿cree que a sus amigos les encantará Olauncher tanto como a usted?\n\nComparta la apilcación y ayúdenos a difundir el mensaje. ¡Gracias!</string>

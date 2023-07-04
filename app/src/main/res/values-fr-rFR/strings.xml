@@ -4,7 +4,6 @@
     <string name="set_as_default_launcher">Définir comme lanceur par défaut</string>
     <string name="app_text_color">Couleur du texte</string>
     <string name="double_tap_to_lock_screen">Double appui pour verrouiller</string>
-    <string name="experimental_">(expérimental)</string>
     <string name="admin_permission_message">Olauncher promet d\'utiliser l\'autorisation d\'écran de verrouillage de manière responsable. Olauncher ne collecte ni ne partage aucune donnée.</string>
     <string name="about">À propos</string>
     <string name="off">Désactivé</string>
@@ -17,7 +16,7 @@
     <string name="rate">Évaluer</string>
     <string name="follow">Suivre</string>
     <string name="email">E-mail</string>
-    <string name="github">GitHub</string>
+
     <string name="donate">Donner</string>
     <string name="swipe_up_for_apps">1. Balayez vers le haut pour toutes les applications.</string>
     <string name="long_press_for_settings">2. Appuyez longuement n\'importe où pour les paramètres.</string>
@@ -41,7 +40,6 @@
     <string name="app_drawer_tips">Conseil : Commencez à saisir le nom d\'une application pour la lancer automatiquement.</string>
     <string name="okay">D\'accord</string>
     <string name="cool">Cool !</string>
-    <string name="double_tap_lock_is_enabled_message">Si le verrouillage par double pression désactive le déverrouillage par empreinte digitale ou reconnaissance faciale, ouvrez les paramètres d\'Olauncher, appuyez sur \"expérimental\" et suivez les instructions. Merci.</string>
     <string name="auto_show_keyboard">Afficher automatiquement le clavier</string>
     <string name="hide">Cacher</string>
     <string name="status_bar">Afficher la barre d\'état</string>
@@ -53,8 +51,6 @@
     <string name="system_default">Système</string>
     <string name="dark">Sombre</string>
     <string name="light">Clair</string>
-    <string name="double_tap_lock_uninstall_message">Double appui pour verrouiller activé.
-        \n\nRemarque : Désactivez d\'abord cette fonctionnalité si vous décidez de désinstaller Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Notre page \"À propos\" en bas a des réponses à toutes vos questions. Pensez-y. :)</string>
     <string name="rate_us_message">Hé, trouvez-vous Olauncher utile? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
         \n\nMerci, vous ne verrez plus ce message.</string>

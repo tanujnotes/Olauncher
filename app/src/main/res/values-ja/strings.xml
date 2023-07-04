@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">デフォルトのランチャーとして設定</string>
     <string name="_0">〇</string>
@@ -15,15 +14,12 @@
     <string name="app_drawer_tips">ヒント: アプリ名の入力を開始すると、アプリが自動的に起動します</string>
     <string name="okay">わかった</string>
     <string name="cool">いいね！</string>
-    <string name="double_tap_lock_is_enabled_message">ダブルタップロックにより指紋または顔によるロック解除が無効になる場合は、Olauncher 設定を開き、「実験的」をタップして指示に従います。ありがとう。</string>
 
     <string name="tip_start_typing_for_rename">ヒント: アプリの RENAME オプションの入力を開始します</string>
     <string name="your_wallpaper_will_update_shortly">壁紙は間もなく更新されます</string>
     <string name="olauncher_is_not_default_launcher">Olauncher はデフォルトのランチャーではありません。 毎日の壁紙の更新に失敗する場合があります。</string>
     <string name="long_press_to_enable">長押しして有効にします</string>
     <string name="no_hidden_apps">隠れたアプリはありません</string>
-    <string name="experimental_">実験的な</string>
-    <string name="triple_tap_lock_message">仕組み: ダブルタップすると画面が暗くなり、5 秒以内に電話が自動的にロックされます。この間、いつでもダブルタップして<b>ロックを解除</b>したり、トリプルタップしてすぐに携帯電話を完全にロックしたりできます。注: Olauncher をアンインストールする場合は、まずこれをオフにしてください。ありがとう。</string>
     <string name="hidden_apps_message">注: この設定ページの上部にある「Olauncher」をタップして、隠れたアプリを見つけます。  詳細については、以下の About ページをご覧ください。</string>
     <string name="swipe_down_for">下にスワイプして</string>
     <string name="search">検索</string>
@@ -37,7 +33,6 @@
     <string name="not_working"><u>機能しない場合</u></string>
     <string name="info">情報</string>
     <string name="delete">消去</string>
-    <string name="day_battery">%s, %d%%</string>
     <string name="text_size">文字サイズ</string>
     <string name="enabled">有効</string>
     <string name="disabled">無効</string>
@@ -64,7 +59,7 @@
     <string name="rate">レート</string>
     <string name="follow">従う</string>
     <string name="email">Eメール</string>
-    <string name="github">Github</string>
+
     <string name="donate">寄付</string>
     <string name="swipe_up_for_apps">1. 上にスワイプしてすべてのアプリを表示します</string>
     <string name="long_press_for_settings">2. 設定を行うには任意の場所を長押しします2。設定するには任意の場所を長押しします</string>
@@ -87,13 +82,11 @@
     <string name="system_default">システム</string>
     <string name="dark">暗い</string>
     <string name="light">ライト</string>
-    <string name="double_tap_lock_uninstall_message">ダブルタップしてロックを有効にします。注: Olauncher を削除する場合は、まずこれをオフにしてください。</string>
     <string name="welcome_to_olauncher_settings">下部にある当社の概要ページには、すべての質問への回答が記載されています。忘れないで。 :)           ありがとう。</string>
     <string name="rate_us_message">ねえ、Olauncher は役に立つと思いますか? 「はい」の場合、5 つ星の評価が私たちをサポートする最善の方法です。           ありがとう、もうこれを見ることはないだろう。</string>
     <string name="share_message">こんにちは、あなたの友達もあなたと同じくらいオランチャーを好きだと思いますか?           アプリを共有して、情報を広めてください。ありがとう！</string>
     <string name="keyboard_message">こんにちは、キーボードは Olauncher でアプリを見つけて起動する最も速い方法です。もう数日間これをオンにしてから判断していただくようお願いできますか?選択は常にあなた次第です。</string>
     <string name="accessibility_service_description">ダブルタップしてロックを有効にするには、アクセシビリティ許可が必要です。このサービスを通じて Olauncher が取得したデータは、デバイスから流出することはありません。</string>
-    <string name="lock_layout_description">画面をロックするために使用されるロック レイアウトの説明</string>
     <string name="support_olauncher_for_free">Amazon アフィリエイト リンクを使用して、Olauncher を無料でサポートしてください。</string>
     <string name="support_olauncher_message">あなたが私たちのリンクを使用して何かを購入するたびに、私たちは少額の手数料を受け取ります。リンクを保存し、オンライン ショッピングの際には必ずご利用ください。 ありがとう！</string>
     <string name="open">リンクを開く</string>
@@ -109,7 +102,6 @@
     <string name="bottom_on">下: オン</string>
     <string name="bottom_off">下：オフ</string>
     <string name="please_set_olauncher_as_default_first">まず Olauncher をデフォルトのランチャーとして設定してください</string>
-    <string name="settings_footer"><u>プロランチャー</u></string>
     <string name="affiliate">アフィリエイト</string>
     <string name="app_not_found">アプリが見つかりません</string>
     <string name="unable_to_launch_app">アプリを起動できません</string>

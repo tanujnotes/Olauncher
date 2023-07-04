@@ -3,7 +3,6 @@
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
     <string name="app_text_color"> Colore del testo</string>
     <string name="double_tap_to_lock_screen">Tocca due volte per bloccare</string>
-    <string name="experimental_"> Sperimentale </string>
     <string name="admin_permission_message">Olauncher userà l’autorizzazione della schermata di blocco in modo responsabile. Olauncher non raccoglie né condivide alcun dato.</string>
     <string name="about">Info</string>
     <string name="off">Off</string>
@@ -16,7 +15,7 @@
     <string name="rate">Valuta</string>
     <string name="follow">Segui</string>
     <string name="email">E-mail</string>
-    <string name="github">Github</string>
+
     <string name="donate">Donazioni</string>
     <string name="swipe_up_for_apps">1. Scorri verso l\'alto per tutte le app</string>
     <string name="long_press_for_settings">2. Premi a lungo in qualsiasi punto per le impostazioni</string>
@@ -40,7 +39,6 @@
     <string name="app_drawer_tips">Suggerimento: inizia a digitare il nome di un\'app per avviarla automaticamente</string>
     <string name="okay">OK</string>
     <string name="cool">Freddo</string>
-    <string name="double_tap_lock_is_enabled_message">Se il doppio tocco per bloccare disabilita l\'impronta digitale o lo sblocco facciale, apri le impostazioni di Olauncher, clicca \'sperimentale\' e segui le istruzioni. Grazie.</string>
     <string name="auto_show_keyboard">Tastiera di visualizzazione automatica</string>
     <string name="hide">Nascondi</string>
     <string name="status_bar">Mostra la barra di stato</string>
@@ -52,8 +50,6 @@
     <string name="system_default">di sistema</string>
     <string name="dark">Scuro</string>
     <string name="light">Chiaro</string>
-    <string name="double_tap_lock_uninstall_message">Tocca due volte per bloccare disinstallazione.
-        \n\n Nota: disattiva prima questa opzione se decidi di eliminare Olauncher.</string>
     <string name="welcome_to_olauncher_settings">La nostra pagina Informazioni in basso ha le risposto a tutte le tue domande. Non dimenticare. :)
         \n\n Grazie.</string>
     <string name="rate_us_message">Ehi, trovi utile Olauncher? Se sì, una valutazione a 5 stelle è il modo migliore per sostenerci.

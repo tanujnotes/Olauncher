@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">设置为默认启动器</string>
     <string name="_0">〇</string>
@@ -15,14 +14,11 @@
     <string name="app_drawer_tips">提示：开始输入应用程序名称以自动启动它</string>
     <string name="okay">好的</string>
     <string name="cool">凉爽的！</string>
-    <string name="double_tap_lock_is_enabled_message">如果双击锁定禁用指纹或面部解锁，请打开 Olauncher 设置，点击“实验”并按照说明进行操作。谢谢。</string>
     <string name="tip_start_typing_for_rename">提示：开始输入应用程序重命名选项</string>
     <string name="your_wallpaper_will_update_shortly">您的壁纸即将更新</string>
     <string name="olauncher_is_not_default_launcher">Olauncher 不是默认启动器。 每日壁纸更新可能会失败。</string>
     <string name="long_press_to_enable">长按即可启用</string>
     <string name="no_hidden_apps">没有隐藏的应用程序</string>
-    <string name="experimental_">实验性的</string>
-    <string name="triple_tap_lock_message">工作原理：双击后，屏幕会变暗，手机将在 5 秒后自行锁定。在此期间，您可以随时双击<b>解锁</b>或双击三次立即完全锁定您的手机。注意：如果您决定卸载 Olauncher，请先将其关闭。谢谢。</string>
     <string name="hidden_apps_message">注意：点击此设置页面顶部的“Olauncher”即可找到隐藏的应用程序。  更多详细信息请参阅下面的“关于”页面。</string>
     <string name="swipe_down_for">向下滑动查看</string>
     <string name="search">搜索</string>
@@ -36,7 +32,6 @@
     <string name="not_working"><u>不工作？</u></string>
     <string name="info">信息</string>
     <string name="delete">删除</string>
-    <string name="day_battery">%s, %d%%</string>
     <string name="text_size">字体大小</string>
     <string name="enabled">启用</string>
     <string name="disabled">残疾人</string>
@@ -63,7 +58,7 @@
     <string name="rate">速度</string>
     <string name="follow">跟随</string>
     <string name="email">电子邮件</string>
-    <string name="github">Github</string>
+
     <string name="donate">捐</string>
     <string name="swipe_up_for_apps">1. 向上滑动查看所有应用</string>
     <string name="long_press_for_settings">2.长按任意位置进行设置</string>
@@ -86,13 +81,11 @@
     <string name="system_default">系统</string>
     <string name="dark">黑暗的</string>
     <string name="light">光</string>
-    <string name="double_tap_lock_uninstall_message">双击即可锁定启用。注意：如果您决定删除 Olauncher，请先将其关闭。</string>
-    <string name="welcome_to_olauncher_settings">我们底部的“关于”页面可以解答您的所有问题。别忘了。 :)           谢谢。</string>
+    <string name="welcome_to_olauncher_settings">我们底部的“关于”页面可以解答您的所有问题。别忘了。 :)\n\n谢谢。</string>
     <string name="rate_us_message">嘿，你觉得 Olauncher 有用吗？如果是，五星级评级是支持我们的最佳方式。           谢谢你，你不会再看到这个了。</string>
     <string name="share_message">你好，你认为你的朋友会像你一样喜欢 Olauncher 吗？           分享该应用程序并帮助我们传播信息。谢谢你！</string>
     <string name="keyboard_message">您好，键盘是在 Olauncher 中查找和启动应用程序的最快方式。我们可以要求您再保留几天，然后再决定吗？选择权永远是你的。</string>
     <string name="accessibility_service_description">需要辅助功能权限才能启用双击锁定。 Olauncher 通过此服务获取的任何数据都不会离开您的设备。</string>
-    <string name="lock_layout_description">锁定布局描述，用于锁定屏幕的唯一 ID</string>
     <string name="support_olauncher_for_free">使用我们的亚马逊附属链接免费支持 Olauncher。</string>
     <string name="support_olauncher_message">每次您使用我们的链接购买商品时，我们都会获得少量佣金。请保存链接并在网上购物时使用它。 谢谢你！</string>
     <string name="open">打开链接</string>
@@ -108,7 +101,6 @@
     <string name="bottom_on">底部：开</string>
     <string name="bottom_off">底部：关闭</string>
     <string name="please_set_olauncher_as_default_first">请先将 Olauncher 设置为默认启动器</string>
-    <string name="settings_footer"><u>PRO启动器</u></string>
     <string name="affiliate">附属机构</string>
     <string name="app_not_found">找不到应用程序</string>
     <string name="unable_to_launch_app">无法启动应用程序</string>

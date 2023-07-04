@@ -4,7 +4,6 @@
     <string name="set_as_default_launcher">Definir como launcher padrão</string>
     <string name="app_text_color">Cor do texto</string>
     <string name="double_tap_to_lock_screen">Toque duplo para bloquear</string>
-    <string name="experimental_">(experimental)</string>
     <string name="admin_permission_message">Olauncher promete usar a permissão de bloqueio de telemóvel de forma responsável. Olauncher não faz coleção ou compartilha quaisquer dados.</string>
     <string name="about">Sobre</string>
     <string name="off">Desligado</string>
@@ -17,7 +16,7 @@
     <string name="rate">Taxa</string>
     <string name="follow">Seguir</string>
     <string name="email">E-mail</string>
-    <string name="github">Github</string>
+
     <string name="donate">Fazer donativo</string>
     <string name="swipe_up_for_apps">1. Deslize para cima para ver todos os aplicativos</string>
     <string name="long_press_for_settings">2. Pressione continuamente em qualquer ponto do ecrã para aceder às configurações</string>
@@ -41,7 +40,6 @@
     <string name="app_drawer_tips">Dica: comece a digitar um nome de aplicativo para iniciá-lo automaticamente</string>
     <string name="okay">Ok</string>
     <string name="cool">Boa!</string>
-    <string name="double_tap_lock_is_enabled_message">Se o bloqueio de toque duplo desativar a impressão digital ou o desbloqueio facial, abra as configurações do Olauncher, toque em \"experimental\" e siga as instruções. Obrigado.</string>
     <string name="auto_show_keyboard">Exibição automática do teclado</string>
     <string name="hide">Esconder</string>
     <string name="status_bar">Mostrar barra de status</string>
@@ -53,13 +51,11 @@
     <string name="system_default">Sistema</string>
     <string name="dark">Escuro</string>
     <string name="light">Claro</string>
-    <string name="double_tap_lock_uninstall_message">Toque duplo para bloquear ativado. Nota: Desative esta feature antes de desativar o Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Nossa página Sobre, na parte inferior, tem respostas para todas as suas perguntas. Não se esqueça. :)</string>
     <string name="rate_us_message">Ei, você acha Olauncher útil? Se sim, uma classificação de 5 estrelas é a melhor maneira de nos apoiar. Obrigado.</string>
     <string name="share_message">Obrigado.</string>
     <string name="keyboard_message">Olá, o teclado é a maneira mais rápida de encontrar e iniciar aplicativos no Olauncher. Podemos pedir-lhe que mantenha isto ligado por mais alguns dias para depois decidir? A escolha é sempre sua!</string>
     <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear. Quaisquer dados adquiridos pelo Olauncher através deste serviço não sairão do seu dispositivo.</string>
-    <string name="lock_layout_description">Descrição do layout de bloqueio a ser usado num ID exclusivo para a tela de bloqueio</string>
     <string name="support_olauncher_for_free">Apoie o Olauncher gratuitamente usando nosso link de afiliado da Amazon.</string>
     <string name="support_olauncher_message">Sempre que você comprar algo usando nosso link, receberemos uma pequena comissão. Salve o link e use-o sempre que fizer compras online. Obrigado!</string>
     <string name="open">Abrir link</string>

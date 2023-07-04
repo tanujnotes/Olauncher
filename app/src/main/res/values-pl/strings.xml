@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Ustaw jako domyślny program uruchamiający</string>
-#    <string name="_0">0</string>
+    <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -15,14 +14,11 @@
     <string name="app_drawer_tips">Wskazówka: zacznij wpisywać nazwę aplikacji, aby uruchomić ją automatycznie</string>
     <string name="okay">Dobra</string>
     <string name="cool">Fajny!</string>
-    <string name="double_tap_lock_is_enabled_message">Jeśli blokada podwójnego dotknięcia wyłącza odblokowywanie odciskiem palca lub twarzą, otwórz ustawienia Olaunchera, dotknij „eksperymentalne” i postępuj zgodnie z instrukcjami. Dziękuję.</string>
     <string name="tip_start_typing_for_rename">Wskazówka: zacznij pisać dla opcji ZMIEŃ NAZWĘ aplikacji</string>
     <string name="your_wallpaper_will_update_shortly">Twoja tapeta zostanie wkrótce zaktualizowana</string>
     <string name="olauncher_is_not_default_launcher">Olauncher nie jest domyślnym programem uruchamiającym. Codzienna aktualizacja tapety może się nie powieść.</string>
     <string name="long_press_to_enable">Naciśnij długo, aby włączyć</string>
     <string name="no_hidden_apps">Brak ukrytych aplikacji</string>
-    <string name="experimental_">eksperymentalny</string>
-    <string name="triple_tap_lock_message">Jak to działa: Po dwukrotnym dotknięciu ekran przyciemni się, a telefon zablokuje się w ciągu 5 sekund. W tym czasie możesz stuknąć dwukrotnie, aby <b>odblokować</b> lub stuknąć trzykrotnie, aby natychmiast całkowicie zablokować telefon. Uwaga: najpierw wyłącz to, jeśli zdecydujesz się odinstalować Olauncher. Dziękuję.</string>
     <string name="hidden_apps_message">Uwaga: Stuknij w „Olauncher” u góry tej strony ustawień, aby znaleźć ukryte aplikacje.  Więcej informacji znajduje się na stronie Informacje poniżej.</string>
     <string name="swipe_down_for">Przesuń w dół, aby</string>
     <string name="search">Szukaj</string>
@@ -36,7 +32,6 @@
     <string name="not_working"><u>Nie działa?</u></string>
     <string name="info">Informacje</string>
     <string name="delete">Usuwać</string>
-    <string name="day_battery">%s, %d%%</string>
     <string name="text_size">Rozmiar czcionki</string>
     <string name="enabled">Włączony</string>
     <string name="disabled">Wyłączony</string>
@@ -63,7 +58,7 @@
     <string name="rate">Wskaźnik</string>
     <string name="follow">Podążać</string>
     <string name="email">E-mail</string>
-    <string name="github">Github</string>
+
     <string name="donate">Podarować</string>
     <string name="swipe_up_for_apps">1. Przesuń palcem w górę, aby wyświetlić wszystkie aplikacje</string>
     <string name="long_press_for_settings">2. Naciśnij i przytrzymaj dowolne miejsce, aby przejść do ustawień</string>
@@ -86,13 +81,11 @@
     <string name="system_default">System</string>
     <string name="dark">Ciemny</string>
     <string name="light">Światło</string>
-    <string name="double_tap_lock_uninstall_message">Kliknij dwukrotnie, aby włączyć blokadę. Uwaga: najpierw wyłącz to, jeśli zdecydujesz się usunąć Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Nasza strona Informacje na dole zawiera odpowiedzi na wszystkie Twoje pytania. Nie zapomnij. :)           Dziękuję.</string>
     <string name="rate_us_message">Hej, czy uważasz, że Olauncher jest przydatny? Jeśli tak, ocena 5 gwiazdek to najlepszy sposób, aby nas wesprzeć.           Dziękuję i więcej tego nie zobaczysz.</string>
     <string name="share_message">Cześć, myślisz, że Twoi znajomi pokochaliby Olaunchera tak samo jak Ty?           Udostępnij aplikację i pomóż nam rozpowszechniać informacje. Dziękuję!</string>
     <string name="keyboard_message">Cześć, klawiatura to najszybszy sposób znajdowania i uruchamiania aplikacji w Olauncher. Czy możemy poprosić o pozostawienie tego włączonego jeszcze przez kilka dni, a następnie podjęcie decyzji? Wybór zawsze należy do Ciebie.</string>
     <string name="accessibility_service_description">Uprawnienia dostępu są wymagane, aby włączyć podwójne dotknięcie, aby zablokować. Wszelkie dane pozyskane przez Olauncher za pośrednictwem tej usługi nie opuszczą Twojego urządzenia.</string>
-    <string name="lock_layout_description">opis układu blokady, który ma być używany, unikalny identyfikator do zablokowania ekranu</string>
     <string name="support_olauncher_for_free">Wesprzyj Olauncher za darmo, korzystając z naszego linku afiliacyjnego Amazon.</string>
     <string name="support_olauncher_message">Za każdym razem, gdy kupujesz coś za pomocą naszego linku, otrzymujemy niewielką prowizję. Zapisz link i używaj go podczas zakupów online. Dziękuję!</string>
     <string name="open">Otwórz łącze</string>
@@ -108,7 +101,6 @@
     <string name="bottom_on">Dół: włączony</string>
     <string name="bottom_off">Dół: wyłączone</string>
     <string name="please_set_olauncher_as_default_first">Najpierw ustaw Olauncher jako domyślny program uruchamiający</string>
-    <string name="settings_footer"><u>PROlauncher</u></string>
     <string name="affiliate">Przyłączać</string>
     <string name="app_not_found">Nie znaleziono aplikacji</string>
     <string name="unable_to_launch_app">Nie można uruchomić aplikacji</string>
