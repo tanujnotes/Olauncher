@@ -56,8 +56,8 @@
         \n\nNote: Turn this OFF first if you decide to delete Olauncher.</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
-    <string name="rate_us_message">Hey, if you find Olauncher useful, a 5-star rating will make us very happy. :)
-        \n\nThank you and you won\'t see this again.</string>
+    <string name="rate_us_message">Hi, you won\'t see this message again.
+        \n\nIf you like Olauncher, can you please give us a 5-star rating? It helps us improve our ranking and makes us happy. Thank you!</string>
     <string name="share_message">Hi, do you think your friends would love Olauncher as much as you do?
         \n\nShare the app and help us spread the word. Thank you!</string>
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?\n\nThe choice is always yours.</string>

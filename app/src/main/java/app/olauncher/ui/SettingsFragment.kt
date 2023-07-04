@@ -4,7 +4,6 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -134,10 +133,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 requireContext().openUrl(Constants.URL_ABOUT_OLAUNCHER)
             }
 
-            R.id.share -> shareApp()
+            R.id.share -> requireActivity().shareApp()
             R.id.rate -> {
                 prefs.rateClicked = true
-                rateApp()
+                requireActivity().rateApp()
             }
 
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
@@ -433,7 +432,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun toggleKeyboardText() {
         if (prefs.autoShowKeyboard && prefs.keyboardMessageShown.not()) {
-            viewModel.showMessageDialog(getString(R.string.keyboard_message))
+            viewModel.showDialog.postValue(Constants.Dialog.KEYBOARD)
             prefs.keyboardMessageShown = true
         } else {
             prefs.autoShowKeyboard = !prefs.autoShowKeyboard
@@ -547,30 +546,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateSwipeDownAction()
     }
 
-    private fun shareApp() {
-        val message = "Are you using your phone or your phone is using you?\n" +
-                Constants.URL_OLAUNCHER_PLAY_STORE
-        val sendIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, message)
-            type = "text/plain"
-        }
-
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
-    }
-
-    private fun rateApp() {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse(Constants.URL_OLAUNCHER_PLAY_STORE)
-        )
-        var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
-        flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-        intent.addFlags(flags)
-        startActivity(intent)
-    }
-
     private fun populateSwipeApps() {
         binding.swipeLeftApp.text = prefs.appNameSwipeLeft
         binding.swipeRightApp.text = prefs.appNameSwipeRight
@@ -597,15 +572,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateActionHints() {
-        when (prefs.toShowHintCounter) {
-            Constants.HINT_RATE_US -> {
-                viewModel.showMessageDialog(getString(R.string.rate_us_message))
-                binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-                binding.scrollView.post {
-                    binding.scrollView.fullScroll(View.FOCUS_DOWN)
-                }
-            }
-        }
+//        when (prefs.toShowHintCounter) {
+//            Constants.HINT_RATE_US -> {
+//                viewModel.showDialog.postValue(Constants.Dialog.RATE)
+//                binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
+//                binding.scrollView.post {
+//                    binding.scrollView.fullScroll(View.FOCUS_DOWN)
+//                }
+//            }
+//        }
         if (viewModel.isOlauncherDefault.value != true) return
         if (prefs.aboutClicked.not() && prefs.toShowHintCounter < Constants.HINT_RATE_US)
             binding.about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)

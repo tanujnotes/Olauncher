@@ -530,3 +530,27 @@ fun View.animateAlpha(alpha: Float = 1.0f) {
         start()
     }
 }
+
+fun Context.shareApp() {
+    val message = "Are you using your phone or your phone is using you?\n" +
+            Constants.URL_OLAUNCHER_PLAY_STORE
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, message)
+        type = "text/plain"
+    }
+
+    val shareIntent = Intent.createChooser(sendIntent, null)
+    startActivity(shareIntent)
+}
+
+fun Context.rateApp() {
+    val intent = Intent(
+        Intent.ACTION_VIEW,
+        Uri.parse(Constants.URL_OLAUNCHER_PLAY_STORE)
+    )
+    var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+    flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+    intent.addFlags(flags)
+    startActivity(intent)
+}

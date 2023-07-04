@@ -450,8 +450,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onLongClick() {
                 super.onLongClick()
                 try {
-                    findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
-                    viewModel.firstOpen(false)
+                    if (prefs.toShowHintCounter == Constants.HINT_RATE_US && prefs.rateClicked.not()) {
+                        viewModel.showDialog.postValue(Constants.Dialog.RATE)
+                        prefs.toShowHintCounter = prefs.toShowHintCounter + 1
+                    } else if (prefs.toShowHintCounter == Constants.HINT_SHARE) {
+                        viewModel.showDialog.postValue(Constants.Dialog.SHARE)
+                        prefs.toShowHintCounter = prefs.toShowHintCounter + 1
+                    } else {
+                        findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                        viewModel.firstOpen(false)
+                    }
                 } catch (e: java.lang.Exception) {
                     e.printStackTrace()
                 }

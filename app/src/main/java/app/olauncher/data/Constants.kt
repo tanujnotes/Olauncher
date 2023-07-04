@@ -7,6 +7,13 @@ object Constants {
         const val RENAME = "rename"
     }
 
+    object Dialog {
+        const val RATE = "RATE"
+        const val SHARE = "SHARE"
+        const val HIDDEN = "HIDDEN"
+        const val KEYBOARD = "KEYBOARD"
+    }
+
     object DateTime {
         const val OFF = 0
         const val ON = 1
@@ -62,8 +69,8 @@ object Constants {
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
 
-    const val HINT_RATE_US = 20
-    const val HINT_SHARE = 30
+    const val HINT_RATE_US = 15
+    const val HINT_SHARE = 25
 
     const val TRIPLE_TAP_DELAY_MS = 300L
     const val LONG_PRESS_DELAY_MS = 500L

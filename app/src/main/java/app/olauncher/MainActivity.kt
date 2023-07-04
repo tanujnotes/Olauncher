@@ -91,9 +91,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initClickListeners() {
-        binding.okay.setOnClickListener {
+        binding.ivClose.setOnClickListener {
             binding.messageLayout.visibility = View.GONE
-            viewModel.showMessageDialog("")
         }
     }
 
@@ -101,9 +100,44 @@ class MainActivity : AppCompatActivity() {
         viewModel.launcherResetFailed.observe(this) {
             openLauncherChooser(it)
         }
-        viewModel.showMessageDialog.observe(this) {
-            showMessage(it)
+        viewModel.showDialog.observe(this) {
+            when (it) {
+                Constants.Dialog.RATE -> {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), "Rate now") {
+                        binding.messageLayout.visibility = View.GONE
+                        prefs.rateClicked = true
+                        rateApp()
+                    }
+                }
+
+                Constants.Dialog.SHARE -> {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share)) {
+                        binding.messageLayout.visibility = View.GONE
+                        shareApp()
+                    }
+                }
+
+                Constants.Dialog.HIDDEN -> {
+                    showMessageDialog("Hidden apps", getString(R.string.hidden_apps_message), getString(R.string.okay)) {
+                        binding.messageLayout.visibility = View.GONE
+                    }
+                }
+
+                Constants.Dialog.KEYBOARD -> {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.keyboard_message), getString(R.string.okay)) {
+                        binding.messageLayout.visibility = View.GONE
+                    }
+                }
+            }
         }
+    }
+
+    private fun showMessageDialog(title: String, message: String, action: String, clickListener: () -> Unit) {
+        binding.tvTitle.text = title
+        binding.tvMessage.text = message
+        binding.tvAction.text = action
+        binding.tvAction.setOnClickListener { clickListener() }
+        binding.messageLayout.visibility = View.VISIBLE
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
@@ -138,24 +172,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showMessage(message: String) {
-        if (message.isEmpty()) return
-        binding.messageTextView.text = message
-        binding.messageLayout.visibility = View.VISIBLE
-    }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == Activity.RESULT_OK)
                     prefs.lockModeOn = true
-                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
-                        showMessage(getString(R.string.double_tap_lock_is_enabled_message))
-                    else
-                        showMessage(getString(R.string.double_tap_lock_uninstall_message))
-                }
             }
         }
     }

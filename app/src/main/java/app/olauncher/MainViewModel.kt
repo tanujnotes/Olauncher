@@ -17,6 +17,7 @@ import androidx.work.WorkManager
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
 import app.olauncher.helper.getAppsList
 import app.olauncher.helper.getDefaultLauncherPackage
@@ -40,7 +41,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
-    val showMessageDialog = MutableLiveData<String>()
+    val showDialog = SingleLiveEvent<String>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -240,9 +241,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateHomeAlignment(gravity: Int) {
         prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
-    }
-
-    fun showMessageDialog(message: String) {
-        showMessageDialog.postValue(message)
     }
 }

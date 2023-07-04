@@ -139,7 +139,7 @@ class AppDrawerFragment : Fragment() {
                     findNavController().popBackStack()
                 if (prefs.firstHide) {
                     prefs.firstHide = false
-                    viewModel.showMessageDialog(getString(R.string.hidden_apps_message))
+                    viewModel.showDialog.postValue(Constants.Dialog.HIDDEN)
                     findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
                 }
             },
