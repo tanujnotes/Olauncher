@@ -22,7 +22,6 @@ You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/m
 * Make pull requests to [`master`](https://github.com/tanujnotes/olauncher) branch
 
 ##
-Support Olauncher - https://buymeacoff.ee/tanujnotes
 
 License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
@@ -30,6 +29,7 @@ Contact - [@tanujnotes](https://twitter.com/tanujnotes)
 
 Thank you and have a great day!
 
+<a href="https://www.buymeacoffee.com/tanujnotes"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
 ##
 
 **P.S.** To maintain the simplicity of Olauncher, a few niche features are available but hidden. Please check out the [About](https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list.
