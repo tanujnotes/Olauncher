@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_1"
+            android:tag="@string/tag_1"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_2"
+            android:tag="@string/tag_2"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_3"
+            android:tag="@string/tag_3"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_4"
+            android:tag="@string/tag_4"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_5"
+            android:tag="@string/tag_5"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_6"
+            android:tag="@string/tag_6"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_7"
+            android:tag="@string/tag_7"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/app"
             android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/_8"
+            android:tag="@string/tag_8"
             android:visibility="gone"
             tools:visibility="visible" />
 
