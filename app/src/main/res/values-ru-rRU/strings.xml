@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app">App</string>
+    <string name="app">Приложение</string>
     <string name="set_as_default_launcher">Сделать лаунчером по умолчанию</string>
     <string name="app_text_color">Цвет текста</string>
     <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>

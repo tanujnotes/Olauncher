@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app">App</string>
+    <string name="app">应用程序</string>
     <string name="set_as_default_launcher">设置为默认启动器</string>
     <string name="_0">〇</string>
     <string name="_1">一</string>

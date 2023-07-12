@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app">App</string>
+    <string name="app">Aplicativo</string>
     <string name="set_as_default_launcher">Definir como launcher padrão</string>
     <string name="app_text_color">Cor do texto</string>
     <string name="double_tap_to_lock_screen">Toque duplo para bloquear</string>
