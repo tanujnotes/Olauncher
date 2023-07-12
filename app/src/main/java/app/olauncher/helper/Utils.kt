@@ -49,7 +49,9 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.Collator
-import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.Scanner
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -350,12 +352,11 @@ fun getScreenDimensions(context: Context): Pair<Int, Int> {
 suspend fun getTodaysWallpaper(wallType: String): String {
     return withContext(Dispatchers.IO) {
         var wallpaperUrl: String
-        val calendar = Calendar.getInstance()
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val key = String.format("%d_%d", month + 1, day)
-
         try {
+            val month = SimpleDateFormat("M", Locale.ENGLISH).format(Date()) ?: ""
+            val day = SimpleDateFormat("d", Locale.ENGLISH).format(Date()) ?: ""
+            val key = String.format("%s_%s", month, day)
+
             val url = URL(Constants.URL_WALLPAPERS)
             val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
             connection.doInput = true
