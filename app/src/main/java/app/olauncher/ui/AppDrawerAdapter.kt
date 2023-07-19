@@ -4,6 +4,7 @@ import android.os.UserHandle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.core.view.isVisible
@@ -14,6 +15,7 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
+import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
 import java.text.Normalizer
@@ -171,12 +173,25 @@ class AppDrawerAdapter(
                         renameLayout.visibility = View.VISIBLE
                         appHideLayout.visibility = View.GONE
                         etAppRename.showKeyboard()
+                        etAppRename.imeOptions = EditorInfo.IME_ACTION_DONE;
                     }
                 }
+                etAppRename.setOnEditorActionListener { _, actionCode, _ ->
+                    if(actionCode == EditorInfo.IME_ACTION_DONE) {
+                        val renameLabel = etAppRename.text.toString().trim()
+                        if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
+                            appRenameListener(appModel, renameLabel)
+                        }
+                        true
+                    }
+                    false
+                }
                 tvSaveRename.setOnClickListener {
+                    etAppRename.hideKeyboard()
                     val renameLabel = etAppRename.text.toString().trim()
-                    if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank())
+                    if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
                         appRenameListener(appModel, renameLabel)
+                    }
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
                 appDelete.setOnClickListener { appDeleteListener(appModel) }
