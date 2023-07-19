@@ -181,6 +181,7 @@ class AppDrawerAdapter(
                         val renameLabel = etAppRename.text.toString().trim()
                         if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
                             appRenameListener(appModel, renameLabel)
+                            renameLayout.visibility = View.GONE
                         }
                         true
                     }
@@ -191,6 +192,7 @@ class AppDrawerAdapter(
                     val renameLabel = etAppRename.text.toString().trim()
                     if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
                         appRenameListener(appModel, renameLabel)
+                        renameLayout.visibility = View.GONE
                     }
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
