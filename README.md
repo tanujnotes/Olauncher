@@ -22,7 +22,7 @@ Please do a quick search in [issues](https://github.com/tanujnotes/Olauncher/iss
 ## Contribute
 * Please go through the issues marked as [`bug` or `enhancement`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug%2Cenhancement+)
 * Please let's [discuss](https://github.com/tanujnotes/Olauncher/discussions) before sending pull requests
-* Make pull requests to [`master`](https://github.com/tanujnotes/olauncher) branch
+* Make pull requests to the [`master`](https://github.com/tanujnotes/olauncher) branch
 
 ##
 
