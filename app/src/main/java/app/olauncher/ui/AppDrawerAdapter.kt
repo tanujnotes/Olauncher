@@ -51,7 +51,7 @@ class AppDrawerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         try {
-            if (appFilteredList.size == 0) return
+            if (appFilteredList.size == 0 || position == RecyclerView.NO_POSITION) return
             val appModel = appFilteredList[holder.bindingAdapterPosition]
             holder.bind(
                 flag,
@@ -68,8 +68,6 @@ class AppDrawerAdapter(
             e.printStackTrace()
         }
     }
-
-    override fun getItemCount(): Int = appFilteredList.size
 
     override fun getFilter(): Filter = this.appFilter
 
@@ -105,6 +103,7 @@ class AppDrawerAdapter(
                 && autoLaunch
                 && isBangSearch.not()
                 && flag == Constants.FLAG_LAUNCH_APP
+                && appFilteredList.size > 0
             ) appClickListener(appFilteredList[0])
         } catch (e: Exception) {
             e.printStackTrace()
