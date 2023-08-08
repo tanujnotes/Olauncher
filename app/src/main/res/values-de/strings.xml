@@ -84,8 +84,10 @@
     <string name="dark">Dunkel</string>
     <string name="light">Licht</string>
     <string name="welcome_to_olauncher_settings">Auf unserer About-Seite unten finden Sie Antworten auf alle Ihre Fragen. Vergiss es nicht. :)\n\nDanke schön.</string>
-    <string name="rate_us_message">Hey, findest du Olauncher nützlich? Wenn ja, ist eine 5-Sterne-Bewertung die beste Möglichkeit, uns zu unterstützen.\n\nVielen Dank und Sie werden das nicht noch einmal sehen.</string>
-    <string name="share_message">Hallo, glauben Sie, dass Ihre Freunde Olauncher genauso lieben würden wie Sie?\n\nTeilen Sie die App und helfen Sie uns, die Nachricht zu verbreiten. Danke schön!</string>
+    <string name="rate_us_message">Hallo, diese Nachricht wird Ihnen nicht mehr angezeigt.
+        \n\nWenn Ihnen Olauncher gefällt, können Sie uns bitte eine 5-Sterne-Bewertung geben? Es hilft uns, unser Ranking zu verbessern und macht uns glücklich. Danke schön!</string>
+    <string name="share_message">Hallo, wir haben eine große Bitte! Wir wollen bis zum Ende des Jahres 2023 eine Million Downloads erreichen und brauchen dazu Ihre Hilfe.
+        \n\nKönnten Sie Olauncher bitte mit Ihren Freunden teilen? Das wäre wirklich hilfreich. Danke schön!</string>
     <string name="keyboard_message">Hallo, die Tastatur ist der schnellste Weg, Apps in Olauncher zu finden und zu starten. Können wir Sie bitten, die Funktion noch ein paar Tage eingeschaltet zu lassen und dann zu entscheiden?
         \n\nDie Wahl liegt immer bei Ihnen.</string>
     <string name="accessibility_service_description">Die Zugriffsberechtigung ist erforderlich, um das Sperren durch Doppeltippen zu ermöglichen. Die von Olauncher über diesen Dienst erfassten Daten verlassen Ihr Gerät nicht.</string>

@@ -84,8 +84,10 @@
     <string name="dark">黑暗的</string>
     <string name="light">光</string>
     <string name="welcome_to_olauncher_settings">我们底部的“关于”页面可以解答您的所有问题。别忘了。 :)\n\n谢谢。</string>
-    <string name="rate_us_message">嘿，你觉得 Olauncher 有用吗？如果是，五星级评级是支持我们的最佳方式。\n\n谢谢你，你不会再看到这个了。</string>
-    <string name="share_message">你好，你认为你的朋友会像你一样喜欢 Olauncher 吗？\n\n分享该应用程序并帮助我们传播信息。谢谢你！</string>
+    <string name="rate_us_message">您好，您不会再看到此消息。
+        \n\n如果您喜欢 Olauncher，能给我们一个 5 星评价吗？ 它帮助我们提高排名并使我们高兴。 谢谢你！</string>
+    <string name="share_message">你好，我们有一个很大的要求！ 我们希望在 2023 年底之前达到 100 万下载量，我们需要您的帮助。
+        \n\n您能与您的朋友分享 Olauncher 吗？ 这真的很有帮助。 谢谢你！</string>
     <string name="keyboard_message">您好，键盘是在 Olauncher 中查找和启动应用程序的最快方式。我们可以要求您再保留几天?
         \n\n然后再决定吗？选择权永远是你的。</string>
     <string name="accessibility_service_description">需要辅助功能权限才能启用双击锁定。 Olauncher 通过此服务获取的任何数据都不会离开您的设备。</string>

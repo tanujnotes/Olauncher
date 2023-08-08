@@ -52,8 +52,10 @@
     <string name="dark">Gelap</string>
     <string name="light">Lampu</string>
     <string name="welcome_to_olauncher_settings">Halaman Tentang kami di bagian bawah memiliki jawaban atas semua pertanyaan Anda. Jangan lupa. :)</string>
-    <string name="rate_us_message">Hei, apakah menurut Anda Olauncher berguna? Jika ya, peringkat 5 bintang adalah cara terbaik untuk mendukung kami.</string>
-    <string name="share_message">Hai, apakah menurut Anda teman Anda akan menyukai Olauncher seperti Anda?</string>
+    <string name="rate_us_message">Hai, Anda tidak akan melihat pesan ini lagi.
+        \n\nJika Anda menyukai Olauncher, bisakah Anda memberi kami peringkat bintang 5? Ini membantu kami meningkatkan peringkat kami dan membuat kami bahagia. Terima kasih!</string>
+    <string name="share_message">Hai, kami punya permintaan besar! Kami ingin mencapai satu juta unduhan sebelum tahun 2023 berakhir, dan kami membutuhkan bantuan Anda.
+        \n\nBisakah Anda berbagi Olauncher dengan teman-teman Anda? Itu akan sangat membantu. Terima kasih!</string>
     <string name="keyboard_message">Hai, keyboard adalah cara tercepat untuk menemukan dan meluncurkan aplikasi di Olauncher. Bisakah kami meminta Anda untuk mengaktifkannya selama beberapa hari lagi dan kemudian memutuskan?           Pilihan selalu menjadi milik Anda.</string>
     <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan ketuk dua kali untuk mengunci. Data apa pun yang diperoleh Olauncher melalui layanan ini tidak akan meninggalkan perangkat Anda.</string>
     <string name="support_olauncher_for_free">Dukung Olauncher secara gratis dengan menggunakan tautan afiliasi Amazon kami.</string>

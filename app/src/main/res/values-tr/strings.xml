@@ -84,8 +84,10 @@
     <string name="dark">Karanlık</string>
     <string name="light">Işık</string>
     <string name="welcome_to_olauncher_settings">Alt kısımdaki Hakkında sayfamızda tüm sorularınızın yanıtları bulunmaktadır. unutma :)\n\nTeşekkür ederim.</string>
-    <string name="rate_us_message">Hey, Olanuncher\'ı faydalı buluyor musunuz? Cevabınız evet ise, 5 yıldız derecelendirmesi bizi desteklemenin en iyi yoludur.\n\nTeşekkürler ve bunu bir daha görmeyeceksin.</string>
-    <string name="share_message">Merhaba, arkadaşlarının Olauncher\'ı senin kadar seveceğini düşünüyor musun?\n\nUygulamayı paylaşın ve haberi yaymamıza yardımcı olun. Teşekkür ederim!</string>
+    <string name="rate_us_message">Merhaba, bu mesajı bir daha görmeyeceksiniz.
+        \n\nOlauncher\'ı beğendiyseniz, lütfen bize 5 yıldız verebilir misiniz? Sıralamamızı yükseltmemize yardımcı oluyor ve bizi mutlu ediyor. Teşekkür ederim!</string>
+    <string name="share_message">Merhaba, büyük bir isteğimiz var! 2023 bitmeden bir milyon indirmeye ulaşmak istiyoruz ve yardımınıza ihtiyacımız var.
+        \n\nOlauncher\'ı arkadaşlarınızla paylaşır mısınız lütfen? Bu gerçekten yardımcı olacaktır. Teşekkür ederim!</string>
     <string name="keyboard_message">Merhaba, klavye, Olauncher\'da uygulamaları bulmanın ve başlatmanın en hızlı yoludur. Bunu birkaç gün daha Açık tutmanızı ve sonra karar vermenizi rica edebilir miyiz?
         \n\nSeçim her zaman senindir.</string>
     <string name="accessibility_service_description">Kilitlemek için çift dokunmayı etkinleştirmek için erişilebilirlik izni gereklidir. Olauncher tarafından bu hizmet aracılığıyla elde edilen hiçbir veri cihazınızdan ayrılmayacaktır.</string>

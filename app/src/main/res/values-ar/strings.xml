@@ -83,8 +83,10 @@
     <string name="dark">مظلم</string>
     <string name="light">ضوء</string>
     <string name="welcome_to_olauncher_settings">تحتوي صفحة \"حول\" في الأسفل على إجابات لجميع أسئلتك. لا تنسى. شكرًا لك.</string>
-    <string name="rate_us_message">مرحبًا ، هل تجد Olauncher مفيدًا؟ إذا كانت الإجابة بنعم ، فإن التصنيف 5 نجوم هو أفضل طريقة لدعمنا. شكرا لك ولن ترى هذا مرة أخرى.</string>
-    <string name="share_message">مرحباً ، هل تعتقد أن أصدقاءك سيحبون Olauncher بقدر ما تحب؟ شارك التطبيق وساعدنا في نشر الكلمة. شكرًا لك!</string>
+    <string name="rate_us_message">مرحبًا ، لن ترى هذه الرسالة مرة أخرى.
+        \n\nإذا كنت تحب Olauncher ، فهل يمكنك أن تعطينا تصنيف 5 نجوم؟ يساعدنا ذلك على تحسين تصنيفنا ويجعلنا سعداء. شكرًا لك!</string>
+    <string name="share_message">مرحبا ، لدينا طلب كبير! نريد الوصول إلى مليون عملية تنزيل قبل نهاية عام 2023 ، ونحتاج إلى مساعدتك.
+        \n\nهل يمكنك مشاركة Olauncher مع أصدقائك ، من فضلك؟ ذلك سيكون عونا حقا. شكرًا لك!</string>
     <string name="keyboard_message">مرحبًا ، لوحة المفاتيح هي أسرع طريقة للعثور على التطبيقات وتشغيلها في Olauncher. هل يمكننا أن نطلب منك الاحتفاظ بهذا الأمر لبضعة أيام أخرى ثم اتخاذ القرار؟ الاختيار دائما لك.</string>
     <string name="accessibility_service_description">إذن الوصول مطلوب لتمكين النقر المزدوج للقفل. أي بيانات حصل عليها Olauncher عبر هذه الخدمة لن تترك جهازك.</string>
     <string name="support_olauncher_for_free">ادعم Olauncher مجانًا باستخدام رابط الشراكة التابع لشركة Amazon.</string>
