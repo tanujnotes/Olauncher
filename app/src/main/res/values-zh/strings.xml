@@ -63,6 +63,15 @@
     <string name="home_layout_alignment">应用对齐方式</string>
     <string name="swipe_left_app">向左滑动应用程序</string>
     <string name="swipe_right_app">向右滑动应用程序</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
     <string name="auto_show_keyboard">自动显示键盘</string>
     <string name="hide">隐藏</string>
     <string name="status_bar">显示状态栏</string>
