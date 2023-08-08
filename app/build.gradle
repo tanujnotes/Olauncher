@@ -20,7 +20,7 @@ android {
         versionCode 67
         versionName "v4.0.9"
 
-        resourceConfigurations += ["en", "ar", "de", "es-rES", "es-rUS", "fr-rFR", "in", "it", "ja", "pl", "pt-rBR", "ru-rRU", "uk", "tr", "zh"]
+        resourceConfigurations += ["en", "ar", "de", "es-rES", "es-rUS", "fr-rFR", "in", "it", "ja", "pl", "pt-rBR", "ru-rRU", "se", "tr", "uk", "zh"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
