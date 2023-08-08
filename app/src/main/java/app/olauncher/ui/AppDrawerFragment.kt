@@ -158,8 +158,6 @@ class AppDrawerFragment : Fragment() {
 
     private fun initObservers() {
         viewModel.firstOpen.observe(viewLifecycleOwner) {
-            if (it) binding.appDrawerTip.visibility = View.VISIBLE
-            binding.appDrawerTip.isSelected = true
             if (it && flag == Constants.FLAG_LAUNCH_APP) {
                 binding.appDrawerTip.visibility = View.VISIBLE
                 binding.appDrawerTip.isSelected = true
