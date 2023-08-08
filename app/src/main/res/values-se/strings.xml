@@ -1,0 +1,130 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="settings_footer" translatable="false"><u>Olauncher PRO</u></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+
+    <string name="app">App</string>
+    <string name="set_as_default_launcher">Ange som förvald startskärmsapp</string>
+    <string name="app_text_color">Textfärg</string>
+    <string name="double_tap_to_lock_screen">Dubbeltryck för att låsa</string>
+    <string name="admin_permission_message">Olauncher lovar att använda skärmlåsningsbehörigheten ansvarsfullt. Olauncher varken samlar in eller delar några data.</string>
+    <string name="about">Om</string>
+    <string name="off">Av</string>
+    <string name="on">På</string>
+    <string name="black">Svart</string>
+    <string name="white">Vit</string>
+    <string name="change_default_launcher">Ändra förvald startskärmsapp</string>
+    <string name="privacy">Integritet</string>
+    <string name="share">Dela</string>
+    <string name="rate">Betygsätt</string>
+    <string name="follow">Följ</string>
+    <string name="email">E-post</string>
+    <string name="donate">Donera</string>
+    <string name="swipe_up_for_apps">1. Svep uppåt för alla appar</string>
+    <string name="long_press_for_settings">2. Långtryck var som helst för inställningar</string>
+    <string name="apps_on_home_screen">Appar på startskärmen</string>
+    <string name="daily_wallpaper_update">Daglig ny bakgrundsbild</string>
+    <string name="left">Vänster</string>
+    <string name="right">Höger</string>
+    <string name="center">Mitten</string>
+    <string name="home_layout_alignment">App-placering</string>
+    <string name="swipe_left_app">Vänstersvepsapp</string>
+    <string name="swipe_right_app">Högersvepsapp</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Tips: Börja skriv namnet på en app för att autostarta den</string>
+    <string name="okay">Okej</string>
+    <string name="cool">Coolt!</string>
+    <string name="auto_show_keyboard">Visa tangentbord automatiskt</string>
+    <string name="hide">Dölj</string>
+    <string name="status_bar">Visa statusfält</string>
+    <string name="rename">Byt namn</string>
+    <string name="show_date_time">Visa datum och tid</string>
+    <string name="appearance">Utseende</string>
+    <string name="gestures">Gester</string>
+    <string name="theme_mode">Tema</string>
+    <string name="system_default">System</string>
+    <string name="dark">Mörkt</string>
+    <string name="light">Ljust</string>
+    <string name="welcome_to_olauncher_settings">Vår Om-sida längst ner har svar på alla dina frågor. Glöm inte det. :)
+        \n\nTack.</string>
+    <string name="rate_us_message">Hejsan, du kommer inte att se detta meddelande igen.
+        \n\nOm du gillar Olauncher, kan du vänligen ge oss ett 5-stjärnigt betyg? Det hjälper oss att förbättra vår rankning och gör oss glada. Tack!</string>
+    <string name="share_message">Hej, vi har en stor förfrågan! Vi vill nå en miljon nedladdningar innan 2023 tar slut, och vi behöver din hjälp.
+        \n\nKan du dela Olauncher med dina vänner, snälla du? Det skulle verkligen vara till hjälp. Tack!</string>
+    <string name="keyboard_message">Hejsan, tangentbordet är det snabbaste sättet att hitta och starta appar i Olauncher. Får vi be dig att behålla denna På i några dagar till innan du bestämmer dig?
+        \n\nValet är alltid ditt.</string>
+    <string name="accessibility_service_description">Tillgänglighetsbehörigheten krävs för att aktivera dubbeltryck för att låsa. Eventuella data förvärvade av Olauncher genom denna tjänst kommer inte att lämna din enhet.</string>
+    <string name="support_olauncher_for_free">Stöd Olauncher utan kostnad genom att använda vår Amazon-affiliatelänk.</string>
+    <string name="support_olauncher_message">Varje gång du köper något via vår länk får vi en liten provision. Vänligen spara länken och använd den när du handlar på nätet.\nTack!</string>
+    <string name="open">Öppna länk</string>
+    <string name="copy">Kopiera</string>
+    <string name="close">Stäng</string>
+    <string name="not_now">Inte nu</string>
+    <string name="public_roadmap">Olaunchers offentliga färdplan</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Twitter</string>
+    <string name="roadmap">Färdplan</string>
+    <string name="date">Datum</string>
+    <string name="date_only">Endast datum</string>
+    <string name="bottom_on">Botten: På</string>
+    <string name="bottom_off">Botten: Av</string>
+    <string name="please_set_olauncher_as_default_first">Vänligen ange Olauncher som din förvalda startskärmsapp först</string>
+    <string name="affiliate">Affiliate</string>
+    <string name="tip_start_typing_for_rename">Tips: Börja skriv för BYT NAMN-alternativ för appen</string>
+    <string name="hidden_apps_message">Observera: Tryck på \'Olauncher\' högst upp på denna Inställningar-sida för att hitta dina dolda appar.\n\nMer information finns på vår Om-sida nedan.</string>
+    <string name="swipe_down_for">Svep nedåt för</string>
+    <string name="search">Sök</string>
+    <string name="notifications">Aviseringar</string>
+    <string name="accessibility_disclosure">Vänligen sätt på eller stäng av Olaunchers tillgänglighetstjänst i din enhets inställningar för att aktivera eller inaktivera denna funktion.
+    \n\nVänligen observera att denna tjänst endast används för att låta dig stänga av skärmen på din enhet genom dubbeltrycksgesten. Vår tillgänglighetstjänst varken samlar in eller delar några data.</string>
+    <string name="accept">Godkänn</string>
+    <string name="permission">Behörighet</string>
+    <string name="double_tap_lock">Dubbeltryck för att låsa</string>
+    <string name="enable">Aktivera</string>
+    <string name="disable">Inaktivera</string>
+    <string name="not_working"><u>Fungerar inte?</u></string>
+    <string name="info">Info</string>
+    <string name="delete">Radera</string>
+    <string name="text_size">Textstorlek</string>
+    <string name="enabled">Aktiverad</string>
+    <string name="disabled">Inaktiverad</string>
+    <string name="please_turn_on_double_tap_to_unlock">Vänligen sätt på dubbeltryck för att låsa</string>
+    <string name="launcher_failed_to_lock_device">Olauncher lyckades inte låsa enheten.\nVänligen kontrollera dina appinställningar.</string>
+    <string name="long_press_to_select_app">Långtryck för att välja app</string>
+    <string name="unable_to_open_app">Kunde inte öppna appinfon</string>
+    <string name="copied">Kopierad</string>
+    <string name="system_app_cannot_delete">Systemapp, kan inte raderas</string>
+    <string name="type_a_new_app_name_first">Skriv ett nytt appnamn först</string>
+    <string name="app_not_found">Appen hittades inte</string>
+    <string name="unable_to_launch_app">Kunde inte starta appen</string>
+    <string name="search_for_Launcher_or_home_app">Sök efter startskärmsapp</string>
+    <string name="swipe_left_app_enabled">Vänstersvepsapp aktiverad</string>
+    <string name="swipe_right_app_enabled">Högersvepsapp aktiverad</string>
+    <string name="swipe_left_app_disabled">Vänstersvepsapp inaktiverad</string>
+    <string name="swipe_right_app_disabled">Högersvepsapp inaktiverad</string>
+    <string name="your_wallpaper_will_update_shortly">Din bakgrundsbild kommer att uppdateras inom kort</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher är inte förvald.\nUppdatering av daglig bakgrundsbild kanske misslyckas.</string>
+    <string name="long_press_to_enable">Långtryck för att aktivera</string>
+    <string name="no_hidden_apps">Inga dolda appar</string>
+    <string name="adapter_show">Visa</string>
+    <string name="adapter_hide">Dölj</string>
+</resources>

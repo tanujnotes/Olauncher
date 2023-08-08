@@ -70,7 +70,7 @@
     <string name="roadmap">Roteiro</string>
     <string name="date">Data</string>
     <string name="date_only">Apenas data</string>
-    <string name="bottom_on">Parte inferior: Ativado</string>
+    <string name="bottom_on">Fundo: Ativado</string>
     <string name="bottom_off">Fundo: Desligado</string>
     <string name="please_set_olauncher_as_default_first">Por favor, defina Olauncher como seu lançador padrão primeiro</string>
     <string name="affiliate">Afiliar</string>
