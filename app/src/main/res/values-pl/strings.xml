@@ -110,4 +110,5 @@
     <string name="swipe_right_app_enabled">Aplikacja Przesuń w prawo jest włączona</string>
     <string name="swipe_left_app_disabled">Aplikacja Przesuń w lewo wyłączona</string>
     <string name="swipe_right_app_disabled">Aplikacja Przesuń w prawo jest wyłączona</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Czy używasz telefonu, czy telefon używa ciebie?</string>
 </resources>

@@ -113,4 +113,5 @@
     <string name="no_hidden_apps">Нет скрытых приложений</string>
     <string name="adapter_show">Показать</string>
     <string name="adapter_hide">Скрыть</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Вы используете свой телефон, или ваш телефон использует вас?</string>
 </resources>

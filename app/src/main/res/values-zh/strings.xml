@@ -113,4 +113,5 @@
     <string name="swipe_right_app_enabled">向右滑动应用程序启用</string>
     <string name="swipe_left_app_disabled">向左滑动应用程序已禁用</string>
     <string name="swipe_right_app_disabled">向右滑动应用程序已禁用</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">是你在用手机，还是手机在用你？</string>
 </resources>

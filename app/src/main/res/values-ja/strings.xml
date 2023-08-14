@@ -111,4 +111,5 @@
     <string name="swipe_right_app_enabled">アプリを右にスワイプ有効</string>
     <string name="swipe_left_app_disabled">左にスワイプするとアプリが無効になります</string>
     <string name="swipe_right_app_disabled">アプリを右にスワイプすると無効になります</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">あなたは電話を使っていますか、それともあなたの電話があなたを使っていますか？</string>
 </resources>

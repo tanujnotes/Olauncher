@@ -113,4 +113,5 @@
     <string name="swipe_right_app_enabled">Nach rechts wischen, App aktiviert</string>
     <string name="swipe_left_app_disabled">App nach links wischen deaktiviert</string>
     <string name="swipe_right_app_disabled">App nach rechts wischen deaktiviert</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Benutzen Sie Ihr Telefon, oder nutzt Ihr Telefon Sie?</string>
 </resources>

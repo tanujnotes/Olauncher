@@ -109,4 +109,5 @@
     <string name="search_for_Launcher_or_home_app">ابحث عن Launcher أو Home app</string>
     <string name="swipe_left_app_enabled">انتقاد اليسار التطبيق تمكين</string>
     <string name="swipe_right_app_enabled">انتقاد الحق التطبيق تمكين</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">هل تستخدم هاتفك أم أن هاتفك يستخدمك؟</string>
 </resources>
