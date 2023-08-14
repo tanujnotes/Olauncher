@@ -18,8 +18,7 @@
     <string name="email">Correo electrónico</string>
 
     <string name="donate">Donar</string>
-    <string name="swipe_up_for_apps">1. Desliza hacia arriba para todas las aplicaciones</string>
-    <string name="long_press_for_settings">2. Mantenga pulsado en cualquier lugar para la configuración</string>
+    <string name="swipe_up_for_apps">1. Desliza hacia arriba para todas las aplicaciones\n2. Mantenga pulsado en cualquier lugar para la configuración</string>
     <string name="apps_on_home_screen">Aplicaciones en la pantalla de inicio</string>
     <string name="daily_wallpaper_update">Nuevo fondo de pantalla diario</string>
     <string name="left">Izquierda</string>

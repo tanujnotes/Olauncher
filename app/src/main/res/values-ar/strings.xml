@@ -61,8 +61,7 @@
     <string name="follow">يتبع</string>
     <string name="email">بريد إلكتروني</string>
     <string name="donate">يتبرع</string>
-    <string name="swipe_up_for_apps">1. مرر لأعلى لجميع التطبيقات</string>
-    <string name="long_press_for_settings">2. اضغط لفترة طويلة في أي مكان للإعدادات</string>
+    <string name="swipe_up_for_apps">1. مرر لأعلى لجميع التطبيقات\n2. اضغط لفترة طويلة في أي مكان للإعدادات</string>
     <string name="apps_on_home_screen">تطبيقات على الشاشة الرئيسية</string>
     <string name="daily_wallpaper_update">تطبيقات على الشاشة الرئيسية</string>
     <string name="left">غادر</string>

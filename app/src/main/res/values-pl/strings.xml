@@ -62,8 +62,7 @@
     <string name="email">E-mail</string>
 
     <string name="donate">Podarować</string>
-    <string name="swipe_up_for_apps">1. Przesuń palcem w górę, aby wyświetlić wszystkie aplikacje</string>
-    <string name="long_press_for_settings">2. Naciśnij i przytrzymaj dowolne miejsce, aby przejść do ustawień</string>
+    <string name="swipe_up_for_apps">1. Przesuń palcem w górę, aby wyświetlić wszystkie aplikacje\n2. Naciśnij i przytrzymaj dowolne miejsce, aby przejść do ustawień</string>
     <string name="apps_on_home_screen">Aplikacje na ekranie głównym</string>
     <string name="daily_wallpaper_update">Codziennie nowa tapeta</string>
     <string name="left">Lewy</string>

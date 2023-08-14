@@ -18,8 +18,7 @@
     <string name="email">E-mail</string>
 
     <string name="donate">Donner</string>
-    <string name="swipe_up_for_apps">1. Balayez vers le haut pour toutes les applications.</string>
-    <string name="long_press_for_settings">2. Appuyez longuement n\'importe où pour les paramètres.</string>
+    <string name="swipe_up_for_apps">1. Balayez vers le haut pour toutes les applications.\n2. Appuyez longuement n\'importe où pour les paramètres.</string>
     <string name="apps_on_home_screen">Applications sur l\'écran d\'accueil</string>
     <string name="daily_wallpaper_update">Nouveau fond d\'écran quotidien</string>
     <string name="left">Gauche</string>

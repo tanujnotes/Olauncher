@@ -18,8 +18,7 @@
     <string name="email">Электронная почта</string>
 
     <string name="donate">Пожертвовать</string>
-    <string name="swipe_up_for_apps">1. Проведите вверх чтобы открыть все приложения.</string>
-    <string name="long_press_for_settings">2. Длительным нажатием в любом месте открываются настройки</string>
+    <string name="swipe_up_for_apps">1. Проведите вверх чтобы открыть все приложения.\n2. Длительным нажатием в любом месте открываются настройки</string>
     <string name="apps_on_home_screen">Количество приложений на главном экране</string>
     <string name="daily_wallpaper_update">Ежедневно новые обои</string>
     <string name="left">Слева</string>

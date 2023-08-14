@@ -31,8 +31,7 @@
     <string name="follow">Följ</string>
     <string name="email">E-post</string>
     <string name="donate">Donera</string>
-    <string name="swipe_up_for_apps">1. Svep uppåt för alla appar</string>
-    <string name="long_press_for_settings">2. Långtryck var som helst för inställningar</string>
+    <string name="swipe_up_for_apps">1. Svep uppåt för alla appar\n2. Långtryck var som helst för inställningar</string>
     <string name="apps_on_home_screen">Appar på startskärmen</string>
     <string name="daily_wallpaper_update">Daglig ny bakgrundsbild</string>
     <string name="left">Vänster</string>

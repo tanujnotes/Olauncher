@@ -18,8 +18,7 @@
     <string name="email">Электронна пошта</string>
 
     <string name="donate">Пожертвувати</string>
-    <string name="swipe_up_for_apps">1. Проведіть вгору, щоб відкрити всі програми.</string>
-    <string name="long_press_for_settings">2. Тривалим натисканням будь-де відкриваються налаштування</string>
+    <string name="swipe_up_for_apps">1. Проведіть вгору, щоб відкрити всі програми.\n2. Тривалим натисканням будь-де відкриваються налаштування</string>
     <string name="apps_on_home_screen">Кількість програм на головному екрані</string>
     <string name="daily_wallpaper_update">Щодня нові шпалери</string>
     <string name="left">Ліворуч</string>

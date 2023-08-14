@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="48dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="visible">
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:format12Hour="EEE, dd MMM"
             android:format24Hour="EEE, dd MMM"
-            android:paddingHorizontal="2dp"
+            android:paddingHorizontal="3dp"
             android:textSize="@dimen/date_size"
             tools:text="Thu, 30 Dec" />
     </LinearLayout>
@@ -148,34 +149,16 @@
 
     </LinearLayout>
 
-    <!-- First run tips -->
-    <LinearLayout
+    <TextView
         android:id="@+id/firstRunTips"
-        android:layout_width="match_parent"
+        style="@style/TextSmall"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginBottom="56dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <TextView
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="@string/swipe_up_for_apps" />
-
-        <TextView
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/long_press_for_settings" />
-
-    </LinearLayout>
+        android:gravity="center"
+        android:text="@string/swipe_up_for_apps" />
 
     <!-- Set default launcher -->
     <TextView

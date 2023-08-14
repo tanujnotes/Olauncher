@@ -63,8 +63,7 @@
     <string name="email">Eメール</string>
 
     <string name="donate">寄付</string>
-    <string name="swipe_up_for_apps">1. 上にスワイプしてすべてのアプリを表示します</string>
-    <string name="long_press_for_settings">2. 設定を行うには任意の場所を長押しします2。設定するには任意の場所を長押しします</string>
+    <string name="swipe_up_for_apps">1. 上にスワイプしてすべてのアプリを表示します\n2. 設定を行うには任意の場所を長押しします2。設定するには任意の場所を長押しします</string>
     <string name="apps_on_home_screen">ホーム画面のアプリ</string>
     <string name="daily_wallpaper_update">毎日新しい壁紙</string>
     <string name="left">左</string>

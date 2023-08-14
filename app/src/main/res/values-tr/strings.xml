@@ -62,8 +62,7 @@
     <string name="email">E-posta</string>
 
     <string name="donate">Bağış yapmak</string>
-    <string name="swipe_up_for_apps">1. Tüm uygulamalar için yukarı kaydırın</string>
-    <string name="long_press_for_settings">2. Ayarlar için herhangi bir yere uzun basın</string>
+    <string name="swipe_up_for_apps">1. Tüm uygulamalar için yukarı kaydırın\n2. Ayarlar için herhangi bir yere uzun basın</string>
     <string name="apps_on_home_screen">Ana ekrandaki uygulamalar</string>
     <string name="daily_wallpaper_update">Günlük yeni duvar kağıdı</string>
     <string name="left">Sol</string>

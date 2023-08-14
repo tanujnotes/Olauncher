@@ -18,8 +18,7 @@
     <string name="email">E-mail</string>
 
     <string name="donate">Fazer donativo</string>
-    <string name="swipe_up_for_apps">1. Deslize para cima para ver todos os aplicativos</string>
-    <string name="long_press_for_settings">2. Pressione continuamente em qualquer ponto do ecrã para aceder às configurações</string>
+    <string name="swipe_up_for_apps">1. Deslize para cima para ver todos os aplicativos\n2. Pressione continuamente em qualquer ponto do ecrã para aceder às configurações</string>
     <string name="apps_on_home_screen">Aplicativos na home</string>
     <string name="daily_wallpaper_update">Novo fundo de ecrã diariamente</string>
     <string name="left">Esquerda</string>

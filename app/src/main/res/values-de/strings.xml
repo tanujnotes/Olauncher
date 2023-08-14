@@ -62,8 +62,7 @@
     <string name="email">Email</string>
 
     <string name="donate">Spenden</string>
-    <string name="swipe_up_for_apps">1. Für alle Apps nach oben wischen</string>
-    <string name="long_press_for_settings">2. Drücken Sie lange auf eine beliebige Stelle, um Einstellungen vorzunehmen</string>
+    <string name="swipe_up_for_apps">1. Für alle Apps nach oben wischen\n2. Drücken Sie lange auf eine beliebige Stelle, um Einstellungen vorzunehmen</string>
     <string name="apps_on_home_screen">Apps auf dem Startbildschirm</string>
     <string name="daily_wallpaper_update">Täglich neue Tapeten</string>
     <string name="left">Links</string>

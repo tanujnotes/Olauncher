@@ -18,8 +18,7 @@
     <string name="email">Surel</string>
 
     <string name="donate">Menyumbangkan</string>
-    <string name="swipe_up_for_apps">1. Geser ke atas untuk semua aplikasi</string>
-    <string name="long_press_for_settings">2. Tekan lama di mana saja untuk pengaturan</string>
+    <string name="swipe_up_for_apps">1. Geser ke atas untuk semua aplikasi\n2. Tekan lama di mana saja untuk pengaturan</string>
     <string name="apps_on_home_screen">Aplikasi di layar awal</string>
     <string name="daily_wallpaper_update">Wallpaper baru setiap hari</string>
     <string name="left">Kiri</string>

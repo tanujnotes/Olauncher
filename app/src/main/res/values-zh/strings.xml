@@ -53,8 +53,7 @@
     <string name="email">电子邮件</string>
 
     <string name="donate">捐赠</string>
-    <string name="swipe_up_for_apps">1. 向上滑动查看所有应用</string>
-    <string name="long_press_for_settings">2.长按任意位置进行设置</string>
+    <string name="swipe_up_for_apps">1. 向上滑动查看所有应用\n2.长按任意位置进行设置</string>
     <string name="apps_on_home_screen">主屏幕上的应用程序</string>
     <string name="daily_wallpaper_update">每日新壁纸</string>
     <string name="left">左对齐</string>

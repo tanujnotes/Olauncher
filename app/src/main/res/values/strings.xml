@@ -31,8 +31,7 @@
     <string name="follow">Follow</string>
     <string name="email">Email</string>
     <string name="donate">Donate</string>
-    <string name="swipe_up_for_apps">1. Swipe up for all apps</string>
-    <string name="long_press_for_settings">2. Long press anywhere for settings</string>
+    <string name="swipe_up_for_apps">1. Swipe up for all apps\n2. Long press anywhere for settings</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
     <string name="daily_wallpaper_update">Daily new wallpaper</string>
     <string name="left">Left</string>
