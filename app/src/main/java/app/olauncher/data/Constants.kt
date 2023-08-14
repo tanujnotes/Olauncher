@@ -70,7 +70,7 @@ object Constants {
     const val REQUEST_CODE_ENABLE_ADMIN = 666
 
     const val HINT_RATE_US = 15
-    const val HINT_SHARE = 20
+    const val HINT_SHARE = 22
 
     const val LONG_PRESS_DELAY_MS = 500L
 
