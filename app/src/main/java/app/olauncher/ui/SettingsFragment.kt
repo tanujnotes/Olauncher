@@ -141,7 +141,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.footer -> requireContext().openUrl(Constants.URL_PLAY_STORE_DEV)
+            R.id.footer -> requireContext().openUrl(Constants.URL_BMAC)
         }
     }
 

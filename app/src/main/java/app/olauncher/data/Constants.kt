@@ -80,6 +80,7 @@ object Constants {
     const val URL_OLAUNCHER_GITHUB = "https://www.github.com/tanujnotes/Olauncher"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_PLAY_STORE_DEV = "https://play.google.com/store/apps/dev?id=7198807840081074933"
+    const val URL_BMAC = "https://www.buymeacoffee.com/tanujnotes"
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
     const val URL_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/bf400a269746c5c124a599af040dd82e/raw"
     const val URL_DEFAULT_DARK_WALLPAPER = "https://images.unsplash.com/photo-1512551980832-13df02babc9e"
