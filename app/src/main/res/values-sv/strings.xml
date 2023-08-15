@@ -2,7 +2,6 @@
     <string name="app_name" translatable="false">Olauncher</string>
     <string name="github" translatable="false">Github</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="settings_footer" translatable="false"><u>Olauncher PRO</u></string>
     <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
     <string name="tag_0" translatable="false">0</string>
     <string name="tag_1" translatable="false">1</string>
