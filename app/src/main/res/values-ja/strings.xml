@@ -50,9 +50,9 @@
     <string name="app_text_color">テキストの色</string>
     <string name="double_tap_to_lock_screen">ダブルタップしてロックします</string>
     <string name="admin_permission_message">Olauncher は、ロック画面のアクセス許可を責任を持って使用することを約束します。 Olauncher はデータを収集または共有しません。</string>
-    <string name="about">だいたい</string>
+    <string name="about">アバウト</string>
     <string name="off">オフ</string>
-    <string name="on">の上</string>
+    <string name="on">オン</string>
     <string name="black">黒</string>
     <string name="white">白</string>
     <string name="change_default_launcher">デフォルトのランチャーを変更する</string>
@@ -63,7 +63,7 @@
     <string name="email">Eメール</string>
 
     <string name="donate">寄付</string>
-    <string name="swipe_up_for_apps">1. 上にスワイプしてすべてのアプリを表示します\n2. 設定を行うには任意の場所を長押しします2。設定するには任意の場所を長押しします</string>
+    <string name="swipe_up_for_apps">1. 上にスワイプしてすべてのアプリを表示します\n2. 設定を行うには任意の場所を長押しします</string>
     <string name="apps_on_home_screen">ホーム画面のアプリ</string>
     <string name="daily_wallpaper_update">毎日新しい壁紙</string>
     <string name="left">左</string>
@@ -81,7 +81,7 @@
     <string name="gestures">ジェスチャー</string>
     <string name="theme_mode">テーマモード</string>
     <string name="system_default">システム</string>
-    <string name="dark">暗い</string>
+    <string name="dark">ダーク</string>
     <string name="light">ライト</string>
     <string name="welcome_to_olauncher_settings">下部にある当社の概要ページには、すべての質問への回答が記載されています。忘れないで。 :)\n\nありがとう。</string>
     <string name="rate_us_message">ねえ、Olauncher は役に立つと思いますか? 「はい」の場合、5 つ星の評価が私たちをサポートする最善の方法です。\n\nありがとう、もうこれを見ることはないだろう。</string>
@@ -92,7 +92,7 @@
     <string name="support_olauncher_message">あなたが私たちのリンクを使用して何かを購入するたびに、私たちは少額の手数料を受け取ります。リンクを保存し、オンライン ショッピングの際には必ずご利用ください。 ありがとう！</string>
     <string name="open">リンクを開く</string>
     <string name="copy">コピー</string>
-    <string name="close">近い</string>
+    <string name="close">閉じる</string>
     <string name="not_now">今はやめろ</string>
     <string name="public_roadmap">Olauncher の公開ロードマップ</string>
     <string name="instagram">インスタグラム</string>
