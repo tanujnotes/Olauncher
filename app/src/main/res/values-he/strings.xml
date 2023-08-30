@@ -1,6 +1,6 @@
 <resources>
     <string name="app">יישום</string>
-    <string name="set_as_default_launcher">Set as default launcher</string>
+    <string name="set_as_default_launcher">הגדרה בתור משגר ברירת המחדל</string>
     <string name="app_text_color">צבע הטקסט</string>
     <string name="double_tap_to_lock_screen">לחיצה כפולה לנעילת המסך</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
@@ -9,7 +9,7 @@
     <string name="on">מופעל</string>
     <string name="black">שחור</string>
     <string name="white">לבן</string>
-    <string name="change_default_launcher">Change default launcher</string>
+    <string name="change_default_launcher">שינוי משגר ברירת המחדל</string>
     <string name="privacy">פרטיות</string>
     <string name="share">שיתוף</string>
     <string name="rate">דירוג</string>
@@ -69,8 +69,8 @@
     <string name="roadmap">Roadmap</string>
     <string name="date">תאריך</string>
     <string name="date_only">תאריך בלבד</string>
-    <string name="bottom_on">Bottom: On</string>
-    <string name="bottom_off">Bottom: Off</string>
+    <string name="bottom_on">הצגה למטה: מופעל</string>
+    <string name="bottom_off">הצגה למטה: כבוי</string>
     <string name="please_set_olauncher_as_default_first">Please set Olauncher as your default launcher first</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
@@ -98,18 +98,18 @@
     <string name="copied">Copied</string>
     <string name="system_app_cannot_delete">System app, cannot delete</string>
     <string name="type_a_new_app_name_first">Type a new app name first</string>
-    <string name="app_not_found">App not found</string>
-    <string name="unable_to_launch_app">Unable to launch app</string>
-    <string name="search_for_Launcher_or_home_app">Search for Launcher or Home app</string>
-    <string name="swipe_left_app_enabled">Swipe left app enabled</string>
-    <string name="swipe_right_app_enabled">Swipe right app enabled</string>
-    <string name="swipe_left_app_disabled">Swipe left app disabled</string>
-    <string name="swipe_right_app_disabled">Swipe right app disabled</string>
+    <string name="app_not_found">היישום לא נמצא</string>
+    <string name="unable_to_launch_app">אין אפשרות להפעיל את היישום</string>
+    <string name="search_for_Launcher_or_home_app">חיפוש יישום מסך בית או משגר</string>
+    <string name="swipe_left_app_enabled">פתיחת היישום בהחלקה שמאלה מופעלת</string>
+    <string name="swipe_right_app_enabled">פתיחת היישום בהחלקה ימינה מופעלת</string>
+    <string name="swipe_left_app_disabled">פתיחת היישום בהחלקה שמאלה כבויה</string>
+    <string name="swipe_right_app_disabled">פתיחת היישום בהחלקה ימינה כבויה</string>
     <string name="your_wallpaper_will_update_shortly">הרקע שלך תכף יתעדכן</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher is not default.\nDaily wallpaper update may fail.</string>
-    <string name="long_press_to_enable">Long press to enable</string>
+    <string name="olauncher_is_not_default_launcher">יישום Olauncher לא מוגדר בתור ברירת מחדל.\nייתכן שעדכון הרקע היומי לא יצליח.</string>
+    <string name="long_press_to_enable">לחיצה ארוכה להפעלה</string>
     <string name="no_hidden_apps">אין יישומים מוסתרים</string>
     <string name="adapter_show">הצגה</string>
-    <string name="adapter_hide">Hide</string>
-    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
+    <string name="adapter_hide">הסתרה</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">האם אתם משתמשים בטלפון, או שהוא משתמש בכם?</string>
 </resources>
