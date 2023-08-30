@@ -3,7 +3,7 @@
     <string name="set_as_default_launcher">הגדרה בתור משגר ברירת המחדל</string>
     <string name="app_text_color">צבע הטקסט</string>
     <string name="double_tap_to_lock_screen">לחיצה כפולה לנעילת המסך</string>
-    <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
+    <string name="admin_permission_message">יישום Olauncher ישתמש בהרשאה של נעילת המסך באופן מתון. יישום Olauncher אינו אוסף או משתף נתונים כלל.</string>
     <string name="about">מידע כללי</string>
     <string name="off">כבוי</string>
     <string name="on">מופעל</string>
@@ -34,10 +34,10 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Tip: Start typing an app name to auto-launch it</string>
+    <string name="app_drawer_tips">עצה: אפשר להתחיל להקליד שם של יישום מסוים ואז הוא ייפתח אוטומטית</string>
     <string name="okay">אישור</string>
     <string name="cool">מגניב!</string>
-    <string name="auto_show_keyboard">Auto show keyboard</string>
+    <string name="auto_show_keyboard">הצגת המקלדת באופן אוטומטי</string>
     <string name="hide">הסתרה</string>
     <string name="status_bar">הצגת שורת המצב</string>
     <string name="rename">שינוי שם</string>
