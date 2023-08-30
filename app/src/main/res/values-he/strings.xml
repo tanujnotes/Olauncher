@@ -1,10 +1,10 @@
 <resources>
-    <string name="app">App</string>
+    <string name="app">יישום</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
-    <string name="app_text_color">Text color</string>
+    <string name="app_text_color">צבע הטקסט</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
-    <string name="about">About</string>
+    <string name="about">מידע כללי</string>
     <string name="off">Off</string>
     <string name="on">On</string>
     <string name="black">Black</string>
@@ -19,9 +19,9 @@
     <string name="swipe_up_for_apps">1. Swipe up for all apps\n2. Long press anywhere for settings</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
     <string name="daily_wallpaper_update">Daily new wallpaper</string>
-    <string name="left">Left</string>
-    <string name="right">Right</string>
-    <string name="center">Center</string>
+    <string name="left">ימין</string>
+    <string name="right">שמאל</string>
+    <string name="center">מרכז</string>
     <string name="home_layout_alignment">App alignment</string>
     <string name="swipe_left_app">Swipe left app</string>
     <string name="swipe_right_app">Swipe right app</string>
@@ -38,9 +38,9 @@
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
-    <string name="hide">Hide</string>
+    <string name="hide">הסתרה</string>
     <string name="status_bar">Show status bar</string>
-    <string name="rename">Rename</string>
+    <string name="rename">שינוי שם</string>
     <string name="show_date_time">Show date time</string>
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
@@ -76,7 +76,7 @@
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
     <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page below.</string>
     <string name="swipe_down_for">Swipe down for</string>
-    <string name="search">Search</string>
+    <string name="search">חיפוש</string>
     <string name="notifications">Notifications</string>
     <string name="accessibility_disclosure">Please turn on or off Olauncher\'s accessibility service in your device\'s settings to enable or disable this feature.
     \n\nPlease note that this service is only used to let you turn off your device\'s screen using the double tap gesture. Our accessibility service does not collect or share any data.</string>
