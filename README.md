@@ -19,17 +19,14 @@ You can also clone the [`master`](https://github.com/tanujnotes/olauncher/tree/m
 ## Feature requests
 Please do a quick search in [issues](https://github.com/tanujnotes/Olauncher/issues) before creating a new one. Most likely it has alredy been discussed.
 
-## Contribute
-* Please go through the issues marked as [`bug` or `enhancement`](https://github.com/tanujnotes/Olauncher/issues?q=is%3Aissue+is%3Aopen+label%3Abug%2Cenhancement+)
-* Please let's [discuss](https://github.com/tanujnotes/Olauncher/discussions) before sending pull requests
-* Make pull requests to the [`master`](https://github.com/tanujnotes/olauncher) branch
-
 ##
 
 License - [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 Contact - [@tanujnotes](https://twitter.com/tanujnotes)
 
-Thank you and have a great day!
+<small>Thank you and have a great day!</small>
 
 <a href="https://www.buymeacoffee.com/tanujnotes"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+
+P.S. Feel free to mention your favourite coffee brand. I'll try it if I can.
