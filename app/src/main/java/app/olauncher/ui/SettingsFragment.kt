@@ -104,6 +104,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
 
+            R.id.tvGestures -> binding.flSwipeDown.visibility = View.VISIBLE
+
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
             R.id.maxApps2 -> updateHomeAppsNum(2)
@@ -141,12 +143,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.footer -> {
-                requireContext().openUrl(
-                    if (binding.footer.text.toString() == getString(R.string.buy_me_a_coffee)) Constants.URL_BMAC
-                    else Constants.URL_PLAY_STORE_DEV
-                )
-            }
+            R.id.footer -> requireContext().openUrl(Constants.URL_PLAY_STORE_DEV)
         }
     }
 

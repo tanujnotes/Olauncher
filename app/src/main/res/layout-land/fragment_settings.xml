@@ -16,7 +16,7 @@
         android:clipToPadding="false"
         android:fadingEdgeLength="24dp"
         android:overScrollMode="never"
-        android:paddingHorizontal="72dp"
+        android:paddingHorizontal="100dp"
         android:requiresFadingEdge="vertical"
         android:scrollbars="none">
 
@@ -690,6 +690,7 @@
                 android:padding="12dp">
 
                 <TextView
+                    android:id="@+id/tvGestures"
                     style="@style/TextLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -756,10 +757,12 @@
                 </LinearLayout>
 
                 <FrameLayout
+                    android:id="@+id/flSwipeDown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         style="@style/TextSmall"
@@ -915,7 +918,7 @@
                 android:gravity="center"
                 android:letterSpacing="0.03"
                 android:padding="10dp"
-                android:text="@string/buy_me_a_coffee" />
+                android:text="@string/olauncher_pro" />
 
         </LinearLayout>
 
