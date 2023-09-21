@@ -4,14 +4,15 @@
     android:id="@+id/mainActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    android:background="?attr/primaryColorInverseTrans50">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginVertical="8dp"
         android:animateLayoutChanges="true"
-        android:background="?attr/primaryColorInverseTrans50"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:fadingEdgeLength="48dp"
@@ -1018,7 +1019,7 @@
 
                 <TextView
                     android:id="@+id/closeAccessibility"
-                    style="@style/TextSmall"
+                    style="@style/TextSmallBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
@@ -1027,7 +1028,7 @@
 
                 <TextView
                     android:id="@+id/actionAccessibility"
-                    style="@style/TextSmall"
+                    style="@style/TextSmallBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
