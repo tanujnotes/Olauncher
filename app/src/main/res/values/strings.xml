@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Olauncher</string>
     <string name="github" translatable="false">Github</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false"><u>Olauncher PRO</u></string>
+    <string name="olauncher_pro" translatable="false"><u>Olauncher Pro</u></string>
     <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
     <string name="tag_0" translatable="false">0</string>
     <string name="tag_1" translatable="false">1</string>
@@ -127,4 +127,5 @@
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
+    <string name="about_olauncher">About Olauncher</string>
 </resources>

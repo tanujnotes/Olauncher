@@ -126,4 +126,5 @@
     <string name="adapter_show">Visa</string>
     <string name="adapter_hide">Dölj</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Använder du din telefon, eller använder din telefon dig?</string>
+    <string name="about_olauncher">Om Olauncher</string>
 </resources>

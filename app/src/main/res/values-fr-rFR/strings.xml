@@ -116,4 +116,5 @@
     <string name="adapter_show">Afficher</string>
     <string name="adapter_hide">Masquer</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Utilisez-vous votre téléphone, ou votre téléphone vous utilise-t-il?</string>
+    <string name="about_olauncher">À propos Olauncher</string>
 </resources>

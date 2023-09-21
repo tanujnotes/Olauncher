@@ -130,7 +130,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.notifications -> updateSwipeDownAction(Constants.SwipeDownAction.NOTIFICATIONS)
             R.id.search -> updateSwipeDownAction(Constants.SwipeDownAction.SEARCH)
 
-            R.id.about -> {
+            R.id.aboutOlauncher -> {
                 prefs.aboutClicked = true
                 requireContext().openUrl(Constants.URL_ABOUT_OLAUNCHER)
             }
@@ -142,6 +142,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             }
 
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
+            R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
             R.id.footer -> requireContext().openUrl(Constants.URL_PLAY_STORE_DEV)
         }
@@ -172,6 +173,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.scrollLayout.setOnClickListener(this)
         binding.appInfo.setOnClickListener(this)
         binding.setLauncher.setOnClickListener(this)
+        binding.aboutOlauncher.setOnClickListener(this)
         binding.autoShowKeyboard.setOnClickListener(this)
         binding.toggleLock.setOnClickListener(this)
         binding.homeAppsNum.setOnClickListener(this)
@@ -201,10 +203,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
 
-        binding.about.setOnClickListener(this)
         binding.share.setOnClickListener(this)
         binding.rate.setOnClickListener(this)
         binding.twitter.setOnClickListener(this)
+        binding.github.setOnClickListener(this)
         binding.privacy.setOnClickListener(this)
         binding.footer.setOnClickListener(this)
 
@@ -575,18 +577,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateActionHints() {
-//        when (prefs.toShowHintCounter) {
-//            Constants.HINT_RATE_US -> {
-//                viewModel.showDialog.postValue(Constants.Dialog.RATE)
-//                binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-//                binding.scrollView.post {
-//                    binding.scrollView.fullScroll(View.FOCUS_DOWN)
-//                }
-//            }
-//        }
         if (viewModel.isOlauncherDefault.value != true) return
-        if (prefs.aboutClicked.not() && prefs.toShowHintCounter < Constants.HINT_RATE_US)
-            binding.about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
         if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US && prefs.toShowHintCounter < Constants.HINT_RATE_US + 10)
             binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
     }
