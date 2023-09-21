@@ -12,7 +12,9 @@
     <string name="change_default_launcher">Cambia il launcher  predefinito</string>
     <string name="privacy">Privacy</string>
     <string name="share">Condividi</string>
+    <string name="share_now">Condividi</string>
     <string name="rate">Valuta</string>
+    <string name="rate_now">Valuta</string>
     <string name="follow">Segui</string>
     <string name="email">E-mail</string>
 

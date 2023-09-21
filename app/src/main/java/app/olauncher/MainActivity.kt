@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.showDialog.observe(this) {
             when (it) {
                 Constants.Dialog.RATE -> {
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), "Rate now") {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), getString(R.string.rate_now)) {
                         binding.messageLayout.visibility = View.GONE
                         prefs.rateClicked = true
                         rateApp()
@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 Constants.Dialog.SHARE -> {
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share)) {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share_now)) {
                         binding.messageLayout.visibility = View.GONE
                         shareApp()
                     }

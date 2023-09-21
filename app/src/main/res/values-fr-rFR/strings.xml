@@ -13,7 +13,9 @@
     <string name="change_default_launcher">Changer le lanceur par défaut</string>
     <string name="privacy">Confidentialité</string>
     <string name="share">Partager</string>
+    <string name="share_now">Partager</string>
     <string name="rate">Évaluer</string>
+    <string name="rate_now">Évaluer</string>
     <string name="follow">Suivre</string>
     <string name="email">E-mail</string>
 

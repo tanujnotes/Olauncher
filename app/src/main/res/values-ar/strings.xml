@@ -57,7 +57,9 @@
     <string name="change_default_launcher">تغيير المشغل الافتراضي</string>
     <string name="privacy">خصوصية</string>
     <string name="share">يشارك</string>
+    <string name="share_now">يشارك</string>
     <string name="rate">معدل</string>
+    <string name="rate_now">معدل</string>
     <string name="follow">يتبع</string>
     <string name="email">بريد إلكتروني</string>
     <string name="donate">يتبرع</string>

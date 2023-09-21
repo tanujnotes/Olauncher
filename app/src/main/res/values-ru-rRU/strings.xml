@@ -13,7 +13,9 @@
     <string name="change_default_launcher">Изменить лаунчер по умолчанию</string>
     <string name="privacy">Конфиденциальность</string>
     <string name="share">Поделиться</string>
+    <string name="share_now">Поделиться</string>
     <string name="rate">Оценить</string>
+    <string name="rate_now">Оценить</string>
     <string name="follow">Перейти</string>
     <string name="email">Электронная почта</string>
 

@@ -57,7 +57,9 @@
     <string name="change_default_launcher">Standard-Launcher ändern</string>
     <string name="privacy">Privatsphäre</string>
     <string name="share">Aktie</string>
+    <string name="share_now">Aktie</string>
     <string name="rate">Rate</string>
+    <string name="rate_now">Rate</string>
     <string name="follow">Folgen</string>
     <string name="email">Email</string>
 

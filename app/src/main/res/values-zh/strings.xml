@@ -48,7 +48,9 @@
     <string name="change_default_launcher">更改默认启动器</string>
     <string name="privacy">隐私</string>
     <string name="share">分享</string>
+    <string name="share_now">分享</string>
     <string name="rate">评分</string>
+    <string name="rate_now">评分</string>
     <string name="follow">关注</string>
     <string name="email">电子邮件</string>
 

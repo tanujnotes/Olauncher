@@ -57,7 +57,9 @@
     <string name="change_default_launcher">Varsayılan başlatıcıyı değiştir</string>
     <string name="privacy">Mahremiyet</string>
     <string name="share">Paylaşmak</string>
+    <string name="share_now">Paylaşmak</string>
     <string name="rate">Oran</string>
+    <string name="rate_now">Oran</string>
     <string name="follow">Takip etmek</string>
     <string name="email">E-posta</string>
 

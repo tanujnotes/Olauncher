@@ -57,7 +57,9 @@
     <string name="change_default_launcher">Zmień domyślny program uruchamiający</string>
     <string name="privacy">Prywatność</string>
     <string name="share">Udostępnij</string>
+    <string name="share_now">Udostępnij</string>
     <string name="rate">Oceń</string>
+    <string name="rate_now">Oceń</string>
     <string name="follow">Śledź</string>
     <string name="email">E-mail</string>
 

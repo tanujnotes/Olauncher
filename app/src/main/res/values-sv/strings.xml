@@ -26,7 +26,9 @@
     <string name="change_default_launcher">Ändra förvald startskärmsapp</string>
     <string name="privacy">Integritet</string>
     <string name="share">Dela</string>
+    <string name="share_now">Dela</string>
     <string name="rate">Betygsätt</string>
+    <string name="rate_now">Betygsätt</string>
     <string name="follow">Följ</string>
     <string name="email">E-post</string>
     <string name="donate">Donera</string>

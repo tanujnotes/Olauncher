@@ -58,7 +58,9 @@
     <string name="change_default_launcher">デフォルトのランチャーを変更する</string>
     <string name="privacy">プライバシー</string>
     <string name="share">共有</string>
+    <string name="share_now">共有</string>
     <string name="rate">レート</string>
+    <string name="rate_now">レート</string>
     <string name="follow">従う</string>
     <string name="email">Eメール</string>
 

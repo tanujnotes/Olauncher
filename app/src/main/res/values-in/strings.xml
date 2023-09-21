@@ -13,7 +13,9 @@
     <string name="change_default_launcher">Ubah peluncur default</string>
     <string name="privacy">Pribadi</string>
     <string name="share">Membagikan</string>
+    <string name="share_now">Membagikan</string>
     <string name="rate">Kecepatan</string>
+    <string name="rate_now">Kecepatan</string>
     <string name="follow">Mengikuti</string>
     <string name="email">Surel</string>
 

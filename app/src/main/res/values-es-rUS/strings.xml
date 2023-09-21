@@ -13,7 +13,9 @@
     <string name="change_default_launcher">Cambiar lanzador predeterminado</string>
     <string name="privacy">Privacidad</string>
     <string name="share">Compartir</string>
+    <string name="share_now">Compartir</string>
     <string name="rate">Tasa</string>
+    <string name="rate_now">Tasa</string>
     <string name="follow">Seguir</string>
     <string name="email">Correo electrónico</string>
 
