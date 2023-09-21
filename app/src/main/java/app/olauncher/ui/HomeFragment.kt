@@ -71,7 +71,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.lock -> {}
             R.id.clock -> openClockApp()
             R.id.date -> openCalendarApp()
-            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.setDefaultLauncher -> viewModel.resetLauncherLiveData.call()
             else -> {
                 try { // Launch app
                     val appLocation = view.tag.toString().toInt()

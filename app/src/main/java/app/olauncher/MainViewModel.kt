@@ -20,10 +20,8 @@ import app.olauncher.data.Prefs
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
 import app.olauncher.helper.getAppsList
-import app.olauncher.helper.getDefaultLauncherPackage
 import app.olauncher.helper.getHiddenAppsList
 import app.olauncher.helper.isOlauncherDefault
-import app.olauncher.helper.resetDefaultLauncher
 import app.olauncher.helper.showToast
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -42,6 +40,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
     val showDialog = SingleLiveEvent<String>()
+    val resetLauncherLiveData = SingleLiveEvent<Unit?>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
         when (flag) {
@@ -211,10 +210,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         isOlauncherDefault.value = isOlauncherDefault(appContext)
     }
 
-    fun resetDefaultLauncherApp(context: Context) {
-        resetDefaultLauncher(context)
-        launcherResetFailed.value = getDefaultLauncherPackage(appContext).contains(".")
-    }
+//    fun resetDefaultLauncherApp(context: Context) {
+//        resetDefaultLauncher(context)
+//        launcherResetFailed.value = getDefaultLauncherPackage(appContext).contains(".")
+//    }
 
     fun setWallpaperWorker() {
         val constraints = Constraints.Builder()

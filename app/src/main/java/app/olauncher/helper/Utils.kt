@@ -194,29 +194,6 @@ fun getDefaultLauncherPackage(context: Context): String {
     } else "android"
 }
 
-// Source: https://stackoverflow.com/a/13239706
-fun resetDefaultLauncher(context: Context) {
-    try {
-        val packageManager = context.packageManager
-        val componentName = ComponentName(context, FakeHomeActivity::class.java)
-        packageManager.setComponentEnabledSetting(
-            componentName,
-            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-            PackageManager.DONT_KILL_APP
-        )
-        val selector = Intent(Intent.ACTION_MAIN)
-        selector.addCategory(Intent.CATEGORY_HOME)
-        context.startActivity(selector)
-        packageManager.setComponentEnabledSetting(
-            componentName,
-            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-            PackageManager.DONT_KILL_APP
-        )
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-}
-
 fun setPlainWallpaperByTheme(context: Context, appTheme: Int) {
     when (appTheme) {
         AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(context, android.R.color.black)

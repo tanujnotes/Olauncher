@@ -100,6 +100,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.launcherResetFailed.observe(this) {
             openLauncherChooser(it)
         }
+        viewModel.resetLauncherLiveData.observe(this) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
+                resetDefaultLauncher()
+            else
+                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
+        }
         viewModel.showDialog.observe(this) {
             when (it) {
                 Constants.Dialog.RATE -> {
@@ -175,10 +181,14 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) return
         when (requestCode) {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
-                if (resultCode == Activity.RESULT_OK)
-                    prefs.lockModeOn = true
+                prefs.lockModeOn = true
+            }
+
+            Constants.REQUEST_CODE_LAUNCHER_SELECTOR -> {
+                resetDefaultLauncher()
             }
         }
     }
