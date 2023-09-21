@@ -28,5 +28,3 @@ Contact - [@tanujnotes](https://twitter.com/tanujnotes)
 <small>Thank you and have a great day!</small>
 
 <a href="https://www.buymeacoffee.com/tanujnotes"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
-
-P.S. Feel free to mention your favourite coffee brand. I'll try it if I can.
