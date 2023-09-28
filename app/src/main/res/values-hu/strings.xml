@@ -16,6 +16,7 @@
 
     <string name="app">Alkalmazás</string>
     <string name="set_as_default_launcher">Beállítás alapértelmezett indítóként</string>
+    <string name="set_as_default_launcher_first">Beállítás alapértelmezett indítóként</string>
     <string name="app_text_color">Szövegszín</string>
     <string name="double_tap_to_lock_screen">Dupla koppintás a képernyő lezárásához</string>
     <string name="admin_permission_message">Az Olauncher vállalja, hogy felelősségteljesen használja a képernyő lezárásához szükséges engedélyt. Az Olauncher nem gyűjt vagy oszt meg semmilyen adatot.</string>
