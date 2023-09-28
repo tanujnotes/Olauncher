@@ -406,6 +406,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun toggleDailyWallpaperUpdate() {
+        if (prefs.dailyWallpaper.not() && viewModel.isOlauncherDefault.value == false) {
+            requireContext().showToast(R.string.set_as_default_launcher_first)
+            return
+        }
         prefs.dailyWallpaper = !prefs.dailyWallpaper
         populateWallpaperText()
         if (prefs.dailyWallpaper) {

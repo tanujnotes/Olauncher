@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Aplikasi</string>
     <string name="set_as_default_launcher">Tetapkan sebagai peluncur default</string>
+    <string name="set_as_default_launcher_first">Tetapkan sebagai peluncur default</string>
     <string name="app_text_color">Warna teks</string>
     <string name="double_tap_to_lock_screen">Ketuk dua kali untuk mengunci</string>
     <string name="admin_permission_message">Olauncher berjanji untuk menggunakan izin layar kunci secara bertanggung jawab. Olauncher tidak mengumpulkan atau membagikan data apa pun.</string>

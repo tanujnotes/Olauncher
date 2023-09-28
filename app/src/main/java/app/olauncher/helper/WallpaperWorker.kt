@@ -13,17 +13,20 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
     private val prefs = Prefs(applicationContext)
 
     override suspend fun doWork(): Result = coroutineScope {
-        val success = if (prefs.dailyWallpaper) {
-            val wallType = checkWallpaperType()
-            val wallpaperUrl = getTodaysWallpaper(wallType)
-            if (prefs.dailyWallpaperUrl == wallpaperUrl)
+        val success =
+            if (isOlauncherDefault(applicationContext).not())
                 true
-            else {
-                prefs.dailyWallpaperUrl = wallpaperUrl
-                setWallpaper(applicationContext, wallpaperUrl)
-            }
-        } else
-            true
+            else if (prefs.dailyWallpaper) {
+                val wallType = checkWallpaperType()
+                val wallpaperUrl = getTodaysWallpaper(wallType)
+                if (prefs.dailyWallpaperUrl == wallpaperUrl)
+                    true
+                else {
+                    prefs.dailyWallpaperUrl = wallpaperUrl
+                    setWallpaper(applicationContext, wallpaperUrl)
+                }
+            } else
+                true
 
         if (success)
             Result.success()

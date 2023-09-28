@@ -145,6 +145,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
             if (it != true) {
+                if (prefs.dailyWallpaper) {
+                    prefs.dailyWallpaper = false
+                    viewModel.cancelWallpaperWorker()
+                }
                 prefs.homeBottomAlignment = false
                 setHomeAlignment()
             }

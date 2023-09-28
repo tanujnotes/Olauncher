@@ -15,6 +15,7 @@
 
     <string name="app">App</string>
     <string name="set_as_default_launcher">Ange som förvald startskärmsapp</string>
+    <string name="set_as_default_launcher_first">Ange som förvald startskärmsapp</string>
     <string name="app_text_color">Textfärg</string>
     <string name="double_tap_to_lock_screen">Dubbeltryck för att låsa</string>
     <string name="admin_permission_message">Olauncher lovar att använda skärmlåsningsbehörigheten ansvarsfullt. Olauncher varken samlar in eller delar några data.</string>

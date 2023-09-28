@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Définir comme lanceur par défaut</string>
+    <string name="set_as_default_launcher_first">Définir comme lanceur par défaut</string>
     <string name="app_text_color">Couleur du texte</string>
     <string name="double_tap_to_lock_screen">Double appui pour verrouiller</string>
     <string name="admin_permission_message">Olauncher promet d\'utiliser l\'autorisation d\'écran de verrouillage de manière responsable. Olauncher ne collecte ni ne partage aucune donnée.</string>

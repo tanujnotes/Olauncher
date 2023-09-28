@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Додаток</string>
     <string name="set_as_default_launcher">Зробити лаунчером за замовчування</string>
+    <string name="set_as_default_launcher_first">Зробити лаунчером за замовчування</string>
     <string name="app_text_color">Кольор тексту</string>
     <string name="double_tap_to_lock_screen">Блокування подвійним тапом</string>
     <string name="admin_permission_message">Olauncher обіцяє відповідально використовувати роздільну здатність екрана блокування. Olauncher не збирає і не передає будь-які дані.</string>

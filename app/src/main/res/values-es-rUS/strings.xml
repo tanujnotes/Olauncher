@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Establecer como iniciador predeterminado</string>
+    <string name="set_as_default_launcher_first">Establecer como iniciador predeterminado</string>
     <string name="app_text_color">Color de texto</string>
     <string name="double_tap_to_lock_screen">Toca dos veces para bloquear</string>
     <string name="admin_permission_message">Olauncher promete usar el permiso de la pantalla de bloqueo de manera responsable. Olauncher no recopila ni comparte ningún dato.</string>

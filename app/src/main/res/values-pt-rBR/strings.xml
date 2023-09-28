@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Aplicativo</string>
     <string name="set_as_default_launcher">Definir como launcher padrão</string>
+    <string name="set_as_default_launcher_first">Definir como launcher padrão</string>
     <string name="app_text_color">Cor do texto</string>
     <string name="double_tap_to_lock_screen">Toque duplo para bloquear</string>
     <string name="admin_permission_message">Olauncher promete usar a permissão de bloqueio de telemóvel de forma responsável. Olauncher não faz coleção ou compartilha quaisquer dados.</string>

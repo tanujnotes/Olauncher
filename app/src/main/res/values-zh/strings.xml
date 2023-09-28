@@ -2,6 +2,7 @@
 <resources>
     <string name="app">应用程序</string>
     <string name="set_as_default_launcher">设置为默认启动器</string>
+    <string name="set_as_default_launcher_first">设置为默认启动器</string>
     <string name="app_drawer_tips">提示：输入应用程序名称以查找并启动它</string>
     <string name="okay">好的</string>
     <string name="cool">非常棒！</string>

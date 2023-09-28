@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Als Standard-Launcher festlegen</string>
+    <string name="set_as_default_launcher_first">Als Standard-Launcher festlegen</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>

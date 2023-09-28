@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Приложение</string>
     <string name="set_as_default_launcher">Сделать лаунчером по умолчанию</string>
+    <string name="set_as_default_launcher_first">Сделать лаунчером по умолчанию</string>
     <string name="app_text_color">Цвет текста</string>
     <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>
     <string name="admin_permission_message">Olauncher обещает ответственно использовать разрешение экрана блокировки. Olauncher не собирает и не передает какие-либо данные.</string>
