@@ -117,6 +117,6 @@
     <string name="swipe_right_app_enabled">Sağa kaydırma uygulaması etkin</string>
     <string name="swipe_left_app_disabled">Sola kaydırma uygulaması devre dışı bırakıldı</string>
     <string name="swipe_right_app_disabled">Sağa kaydırma uygulaması devre dışı bırakıldı</string>
-    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Sen mi telefonunu kullanıyorsun yoksa telefon mu seni kullanıyor?</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Sen mi telefonunu, kullanıyorsun yoksa telefon mu seni kullanıyor?</string>
     <string name="about_olauncher">Hakkında Olauncher</string>
 </resources>
