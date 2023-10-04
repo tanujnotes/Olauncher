@@ -457,7 +457,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     if (prefs.toShowHintCounter == Constants.HINT_RATE_US && prefs.rateClicked.not()) {
                         viewModel.showDialog.postValue(Constants.Dialog.RATE)
                         prefs.toShowHintCounter = prefs.toShowHintCounter + 1
-                    } else if (prefs.toShowHintCounter == Constants.HINT_SHARE) {
+                    } else if (prefs.toShowHintCounter % Constants.HINT_SHARE == 0) {
                         viewModel.showDialog.postValue(Constants.Dialog.SHARE)
                         prefs.toShowHintCounter = prefs.toShowHintCounter + 1
                     } else {

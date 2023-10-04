@@ -110,7 +110,8 @@
     <string name="your_wallpaper_will_update_shortly">Wallpaper Anda akan segera diperbarui</string>
     <string name="olauncher_is_not_default_launcher">Olauncher bukan peluncur default.\nPembaruan wallpaper harian mungkin gagal.</string>
     <string name="long_press_to_enable">Tekan lama untuk mengaktifkan</string>
-    <string name="no_hidden_apps">Tidak ada aplikasi tersembunyi</string>
+    <string name="no_hidden_apps">Tiada apl tersembunyi</string>
+    <string name="hidden_apps">Aplikasi tersembunyi</string>
     <string name="adapter_show">memperlihatkan</string>
     <string name="adapter_hide">bersembunyi</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Apakah Anda menggunakan ponsel Anda, atau ponsel Anda menggunakan Anda?</string>

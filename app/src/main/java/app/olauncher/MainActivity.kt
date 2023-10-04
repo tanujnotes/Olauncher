@@ -124,7 +124,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 Constants.Dialog.HIDDEN -> {
-                    showMessageDialog("Hidden apps", getString(R.string.hidden_apps_message), getString(R.string.okay)) {
+                    showMessageDialog(getString(R.string.hidden_apps), getString(R.string.hidden_apps_message), getString(R.string.okay)) {
                         binding.messageLayout.visibility = View.GONE
                     }
                 }

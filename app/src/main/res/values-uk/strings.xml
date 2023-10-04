@@ -114,6 +114,7 @@
     <string name="olauncher_is_not_default_launcher">Olauncher не є стандартним лаунчером.\nЩоденне оновлення шпалер може завершитися помилкою.</string>
     <string name="long_press_to_enable">Натисніть та утримуйте, щоб увімкнути</string>
     <string name="no_hidden_apps">Немає прихованих додатків</string>
+    <string name="hidden_apps">Приховані додатків</string>
     <string name="adapter_show">Показати</string>
     <string name="adapter_hide">Приховати</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ви користуєтеся своїм телефоном, чи ваш телефон використовує вас?</string>

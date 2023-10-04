@@ -71,7 +71,7 @@ object Constants {
     const val REQUEST_CODE_LAUNCHER_SELECTOR = 678
 
     const val HINT_RATE_US = 15
-    const val HINT_SHARE = 22
+    const val HINT_SHARE = 25
 
     const val LONG_PRESS_DELAY_MS = 500L
 
