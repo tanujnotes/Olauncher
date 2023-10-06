@@ -227,7 +227,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .getInstance(appContext)
             .enqueueUniquePeriodicWork(
                 Constants.WALLPAPER_WORKER_NAME,
-                ExistingPeriodicWorkPolicy.REPLACE,
+                ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
                 uploadWorkRequest
             )
     }
