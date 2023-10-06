@@ -13,9 +13,9 @@
     <string name="_7">7</string>
     <string name="_8">8</string>
     <string name="app_drawer_tips">Wskazówka: zacznij wpisywać nazwę aplikacji, aby uruchomić ją automatycznie</string>
-    <string name="okay">Dobra</string>
+    <string name="okay">OK</string>
     <string name="cool">Fajny!</string>
-    <string name="tip_start_typing_for_rename">Wskazówka: zacznij pisać dla opcji ZMIEŃ NAZWĘ aplikacji</string>
+    <string name="tip_start_typing_for_rename">Wskazówka: zacznij pisać by zmienić nazwę aplikacji</string>
     <string name="your_wallpaper_will_update_shortly">Twoja tapeta zostanie wkrótce zaktualizowana</string>
     <string name="olauncher_is_not_default_launcher">Olauncher nie jest domyślnym programem uruchamiającym. Codzienna aktualizacja tapety może się nie powieść.</string>
     <string name="long_press_to_enable">Naciśnij długo, aby włączyć</string>
@@ -51,9 +51,9 @@
     <string name="app_text_color">Kolor tekstu</string>
     <string name="double_tap_to_lock_screen">Kliknij dwukrotnie, aby zablokować</string>
     <string name="admin_permission_message">Olauncher obiecuje odpowiedzialnie korzystać z uprawnień blokady ekranu. Olauncher nie gromadzi ani nie udostępnia żadnych danych.</string>
-    <string name="about">O</string>
-    <string name="off">Wyłączony</string>
-    <string name="on">NA</string>
+    <string name="about">Informacje</string>
+    <string name="off">Nie</string>
+    <string name="on">Tak</string>
     <string name="black">Czarny</string>
     <string name="white">Biały</string>
     <string name="change_default_launcher">Zmień domyślny program uruchamiający</string>
@@ -78,7 +78,7 @@
     <string name="auto_show_keyboard">Automatyczne wyświetlanie klawiatury</string>
     <string name="hide">Ukryj</string>
     <string name="status_bar">Pokaż pasek stanu</string>
-    <string name="rename">Zmień</string>
+    <string name="rename">Zmień nazwę</string>
     <string name="show_date_time">Pokaż datę i godzinę</string>
     <string name="appearance">Wygląd</string>
     <string name="gestures">Gesty</string>
@@ -110,10 +110,10 @@
     <string name="app_not_found">Nie znaleziono aplikacji</string>
     <string name="unable_to_launch_app">Nie można uruchomić aplikacji</string>
     <string name="search_for_Launcher_or_home_app">Wyszukaj program uruchamiający lub aplikację domową</string>
-    <string name="swipe_left_app_enabled">Aplikacja Przesuń w lewo jest włączona</string>
-    <string name="swipe_right_app_enabled">Aplikacja Przesuń w prawo jest włączona</string>
-    <string name="swipe_left_app_disabled">Aplikacja Przesuń w lewo wyłączona</string>
-    <string name="swipe_right_app_disabled">Aplikacja Przesuń w prawo jest wyłączona</string>
+    <string name="swipe_left_app_enabled">Gest Przesuń w lewo jest włączony</string>
+    <string name="swipe_right_app_enabled">Gest Przesuń w prawo jest włączony</string>
+    <string name="swipe_left_app_disabled">Gest Przesuń w lewo wyłączony</string>
+    <string name="swipe_right_app_disabled">Gest Przesuń w prawo jest wyłączony</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Czy używasz telefonu, czy telefon używa ciebie?</string>
     <string name="about_olauncher">O Olauncher</string>
 </resources>
