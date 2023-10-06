@@ -233,8 +233,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun cancelWallpaperWorker() {
-        WorkManager.getInstance(appContext).cancelAllWork()
+        WorkManager.getInstance(appContext).cancelUniqueWork(Constants.WALLPAPER_WORKER_NAME)
         prefs.dailyWallpaperUrl = ""
+        prefs.dailyWallpaper = false
     }
 
     fun updateHomeAlignment(gravity: Int) {
