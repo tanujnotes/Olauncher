@@ -181,14 +181,15 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode != Activity.RESULT_OK) return
         when (requestCode) {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
-                prefs.lockModeOn = true
+                if (resultCode == Activity.RESULT_OK)
+                    prefs.lockModeOn = true
             }
 
             Constants.REQUEST_CODE_LAUNCHER_SELECTOR -> {
-                resetDefaultLauncher()
+                if (resultCode != Activity.RESULT_OK)
+                    resetDefaultLauncher()
             }
         }
     }
