@@ -101,10 +101,10 @@ class MainActivity : AppCompatActivity() {
             openLauncherChooser(it)
         }
         viewModel.resetLauncherLiveData.observe(this) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
-                resetDefaultLauncher()
-            else
-                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
+//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
+            resetDefaultLauncher()
+//            else
+//                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
         }
         viewModel.showDialog.observe(this) {
             when (it) {
@@ -188,8 +188,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             Constants.REQUEST_CODE_LAUNCHER_SELECTOR -> {
-                if (resultCode != Activity.RESULT_OK)
-                    resetDefaultLauncher()
+                resetDefaultLauncher()
             }
         }
     }
