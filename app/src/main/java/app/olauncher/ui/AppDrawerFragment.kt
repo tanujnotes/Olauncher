@@ -19,6 +19,7 @@ import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.openSearch
 import app.olauncher.helper.openUrl
 import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
@@ -73,6 +74,8 @@ class AppDrawerFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query?.startsWith("!") == true)
                     requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
+                else if (adapter.itemCount == 0)
+                    requireContext().openSearch(query?.trim())
                 else
                     adapter.launchFirstInList()
                 return true
