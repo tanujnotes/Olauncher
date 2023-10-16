@@ -30,6 +30,7 @@
     <string name="home_layout_alignment">Posición de aplicaciones</string>
     <string name="swipe_left_app">Deslizar hacia la izquierda para abrir</string>
     <string name="swipe_right_app">Deslizar hacia la derecha para abrir</string>
+    <string name="text_style_bold">Texto en negrita</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>

@@ -30,6 +30,7 @@
     <string name="home_layout_alignment">Alignement des applications</string>
     <string name="swipe_left_app">Balayer vers la gauche</string>
     <string name="swipe_right_app">Balayer vers la droite</string>
+    <string name="text_style_bold">Texte en gras</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>

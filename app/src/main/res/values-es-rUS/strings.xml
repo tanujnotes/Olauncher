@@ -30,6 +30,7 @@
     <string name="home_layout_alignment">Alineación de aplicaciones</string>
     <string name="swipe_left_app">Deslizar la aplicación hacia la izquierda</string>
     <string name="swipe_right_app">Deslizar la aplicación hacia la derecha</string>
+    <string name="text_style_bold">Texto en negrita</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>

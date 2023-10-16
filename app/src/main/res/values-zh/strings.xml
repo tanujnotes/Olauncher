@@ -66,6 +66,7 @@
     <string name="home_layout_alignment">应用对齐方式</string>
     <string name="swipe_left_app">向左滑动应用程序</string>
     <string name="swipe_right_app">向右滑动应用程序</string>
+    <string name="text_style_bold">加粗字体</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>

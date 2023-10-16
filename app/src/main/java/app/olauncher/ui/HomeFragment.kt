@@ -2,6 +2,7 @@ package app.olauncher.ui
 
 import android.app.admin.DevicePolicyManager
 import android.content.Context
+import android.graphics.Typeface
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
@@ -54,6 +55,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
+        setBoldStyle(prefs.textStyleBold)
         initSwipeTouchListener()
         initClickListeners()
     }
@@ -198,6 +200,18 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.gravity = horizontalGravity
         binding.homeApp7.gravity = horizontalGravity
         binding.homeApp8.gravity = horizontalGravity
+    }
+
+    private fun setBoldStyle(value: Boolean = prefs.textStyleBold) {
+        val fontWeight: Typeface = if (value) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+        binding.homeApp1.typeface = fontWeight
+        binding.homeApp2.typeface = fontWeight
+        binding.homeApp3.typeface = fontWeight
+        binding.homeApp4.typeface = fontWeight
+        binding.homeApp5.typeface = fontWeight
+        binding.homeApp6.typeface = fontWeight
+        binding.homeApp7.typeface = fontWeight
+        binding.homeApp8.typeface = fontWeight
     }
 
     private fun populateDateTime() {

@@ -43,6 +43,7 @@
     <string name="home_layout_alignment">App alignment</string>
     <string name="swipe_left_app">Swipe left app</string>
     <string name="swipe_right_app">Swipe right app</string>
+    <string name="text_style_bold">Bold text</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
