@@ -2,7 +2,6 @@ package app.olauncher.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Typeface
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatDelegate
 
