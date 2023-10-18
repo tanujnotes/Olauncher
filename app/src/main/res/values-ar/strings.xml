@@ -3,7 +3,11 @@
     <string name="app">App</string>
     <string name="set_as_default_launcher">تعيين كمشغل افتراضي</string>
     <string name="set_as_default_launcher_first">تعيين كمشغل افتراضي</string>
-    <string name="text_style_bold">نص غامق</string>
+    <string name="text_style">نمط النص</string>
+    <string name="widget_bold_text_on">الحاجيات الغامقة: تشغيل</string>
+    <string name="widget_bold_text_off">الحاجيات الغامقة: معطلة</string>
+    <string name="normal">طبيعي</string>
+    <string name="bold">غامق</string>
     <string name="_0">صفر</string>
     <string name="_1">واحد</string>
     <string name="_2">إثنان</string>
