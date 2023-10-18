@@ -39,7 +39,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
-    val homeTextStyle = MutableLiveData<Boolean>()
+    val homeTextStyle = MutableLiveData<Int>()
     val showDialog = SingleLiveEvent<String>()
     val resetLauncherLiveData = SingleLiveEvent<Unit?>()
 
@@ -244,8 +244,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         homeAppAlignment.value = prefs.homeAlignment
     }
 
-    fun updateTextStyle(value: Boolean) {
-        prefs.textStyleBold = value
-        homeTextStyle.value = prefs.textStyleBold
+    fun updateTextStyle(style: Int) {
+        prefs.homeTextStyle = style
+        homeTextStyle.value = prefs.homeTextStyle
     }
 }

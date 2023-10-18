@@ -706,7 +706,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:animateLayoutChanges="true">
+                    android:animateLayoutChanges="true"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <TextView
                         style="@style/TextSmall"
@@ -714,18 +716,87 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:paddingVertical="8dp"
-                        android:text="@string/text_style_bold"
+                        android:text="@string/text_style"
                         android:textColor="?attr/primaryColor" />
 
                     <TextView
-                        android:id="@+id/textStyleBold"
+                        android:id="@+id/textStyle"
                         style="@style/TextSmallBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end|bottom"
                         android:layout_marginEnd="4dp"
                         android:padding="8dp"
-                        android:text="@string/off" />
+                        android:text="@string/normal" />
+
+                    <!-- alignment layout-->
+                    <HorizontalScrollView
+                        android:id="@+id/textStyleSelectStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:fadingEdgeLength="8dp"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="2dp"
+                        android:requiresFadingEdge="horizontal"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:orientation="horizontal">
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/textStyleWidget"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:paddingVertical="6dp"
+                                android:text="@string/widget_bold_text_off" />
+
+                            <View
+                                android:layout_width="0.5dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginVertical="4dp"
+                                android:layout_marginEnd="16dp"
+                                android:background="?attr/primaryColorTrans50" />
+
+                            <TextView
+                                android:id="@+id/textStyleNormal"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:gravity="center"
+                                android:paddingVertical="6dp"
+                                android:text="@string/normal" />
+
+                            <TextView
+                                android:id="@+id/textStyleBold"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="16dp"
+                                android:gravity="center"
+                                android:paddingVertical="6dp"
+                                android:text="@string/bold" />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
                 </FrameLayout>
 
             </LinearLayout>

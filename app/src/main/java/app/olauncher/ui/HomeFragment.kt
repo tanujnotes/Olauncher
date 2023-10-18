@@ -25,7 +25,9 @@ import app.olauncher.databinding.FragmentHomeBinding
 import app.olauncher.helper.*
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
+import java.lang.reflect.Type
 import java.text.SimpleDateFormat
+import java.time.format.TextStyle
 import java.util.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -55,7 +57,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
-        setBoldStyle(prefs.textStyleBold)
+        setHomeTextStyle(prefs.homeTextStyle)
         initSwipeTouchListener()
         initClickListeners()
     }
@@ -153,6 +155,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 }
                 prefs.homeBottomAlignment = false
                 setHomeAlignment()
+                prefs.homeTextStyleWidget = false
+                setHomeTextStyle()
             }
             if (binding.firstRunTips.visibility == View.VISIBLE) return@Observer
             if (it) binding.setDefaultLauncher.visibility = View.GONE
@@ -160,6 +164,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             setHomeAlignment(it)
+        }
+        viewModel.homeTextStyle.observe(viewLifecycleOwner) {
+            setHomeTextStyle(it)
         }
         viewModel.toggleDateTime.observe(viewLifecycleOwner) {
             populateDateTime()
@@ -202,16 +209,18 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp8.gravity = horizontalGravity
     }
 
-    private fun setBoldStyle(value: Boolean = prefs.textStyleBold) {
-        val fontWeight: Typeface = if (value) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
-        binding.homeApp1.typeface = fontWeight
-        binding.homeApp2.typeface = fontWeight
-        binding.homeApp3.typeface = fontWeight
-        binding.homeApp4.typeface = fontWeight
-        binding.homeApp5.typeface = fontWeight
-        binding.homeApp6.typeface = fontWeight
-        binding.homeApp7.typeface = fontWeight
-        binding.homeApp8.typeface = fontWeight
+    private fun setHomeTextStyle(textStyle: Int = prefs.homeTextStyle) {
+        val textStyleWidget = if (prefs.homeTextStyleWidget) Typeface.BOLD else Typeface.NORMAL
+        binding.clock.setTypeface(null, textStyleWidget)
+        binding.date.setTypeface(null, textStyleWidget)
+        binding.homeApp1.setTypeface(null, textStyle)
+        binding.homeApp2.setTypeface(null, textStyle)
+        binding.homeApp3.setTypeface(null, textStyle)
+        binding.homeApp4.setTypeface(null, textStyle)
+        binding.homeApp5.setTypeface(null, textStyle)
+        binding.homeApp6.setTypeface(null, textStyle)
+        binding.homeApp7.setTypeface(null, textStyle)
+        binding.homeApp8.setTypeface(null, textStyle)
     }
 
     private fun populateDateTime() {

@@ -4,6 +4,7 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -76,6 +77,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.textSizesLayout.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
+        if (view.id != R.id.textStyleWidget)
+            binding.textStyleSelectStyle?.visibility = View.GONE
 
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
@@ -101,7 +104,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.textSizeValue -> binding.textSizesLayout.visibility = View.VISIBLE
-            R.id.textStyleBold -> toggleBoldText()
+            R.id.textStyle -> binding.textStyleSelectStyle?.visibility = View.VISIBLE
+            R.id.textStyleNormal -> viewModel.updateTextStyle(Typeface.NORMAL)
+            R.id.textStyleBold -> viewModel.updateTextStyle(Typeface.BOLD)
+            R.id.textStyleWidget -> updateHomeTextStyleWidget()
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
@@ -201,7 +207,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.themeDark.setOnClickListener(this)
         binding.themeSystem.setOnClickListener(this)
         binding.textSizeValue.setOnClickListener(this)
+        binding.textStyle?.setOnClickListener(this)
+        binding.textStyleNormal?.setOnClickListener(this)
         binding.textStyleBold?.setOnClickListener(this)
+        binding.textStyleWidget?.setOnClickListener(this)
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
@@ -233,6 +242,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
+        binding.textStyle?.setOnClickListener(this)
         binding.appThemeText.setOnLongClickListener(this)
         binding.swipeLeftApp.setOnLongClickListener(this)
         binding.swipeRightApp.setOnLongClickListener(this)
@@ -251,6 +261,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
         viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             populateAlignment()
+        }
+        viewModel.homeTextStyle.observe(viewLifecycleOwner) {
+            populateTextStyle()
         }
         viewModel.updateSwipeApps.observe(viewLifecycleOwner) {
             populateSwipeApps()
@@ -531,18 +544,24 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         else getString(R.string.bottom_off)
     }
 
-    private fun toggleBoldText() {
-        prefs.textStyleBold = !prefs.textStyleBold
+    private fun updateHomeTextStyleWidget() {
+        if (viewModel.isOlauncherDefault.value != true) {
+            requireContext().showToast(getString(R.string.please_set_olauncher_as_default_first), Toast.LENGTH_LONG)
+            return
+        }
+        prefs.homeTextStyleWidget = !prefs.homeTextStyleWidget
         populateTextStyle()
-        viewModel.updateTextStyle(prefs.textStyleBold)
+        viewModel.updateTextStyle(prefs.homeTextStyle)
     }
 
     private fun populateTextStyle() {
-        if (prefs.textStyleBold) {
-            binding.textStyleBold?.text = getString(R.string.on)
-        } else {
-            binding.textStyleBold?.text = getString(R.string.off)
+        when (prefs.homeTextStyle) {
+            Typeface.NORMAL -> binding.textStyle?.text = getString(R.string.normal)
+            Typeface.BOLD -> binding.textStyle?.text = getString(R.string.bold)
         }
+        binding.textStyleWidget?.text = if (prefs.homeTextStyleWidget)
+            getString(R.string.widget_bold_text_on)
+        else getString(R.string.widget_bold_text_off)
     }
 
     private fun populateLockSettings() {
