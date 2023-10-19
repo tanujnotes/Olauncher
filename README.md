@@ -19,7 +19,7 @@ AF stands for Ad-Free :D
 
 Note: To maintain the simplicity of the launcher, a few niche features are available but hidden.
 
-Please check out the [About](https://www.notion.so/tanujnotes/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list.
+Please check out the [About](https://www.notion.so/tanujnotes/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list and FAQs.
 
 ##
 
