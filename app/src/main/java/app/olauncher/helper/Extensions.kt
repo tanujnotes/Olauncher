@@ -68,13 +68,13 @@ fun Context.openSearch(query: String? = null) {
     startActivity(intent)
 }
 
-fun Context.getRefreshRate(): Float {
-    val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-    return windowManager.defaultDisplay.refreshRate
-}
-
 fun Context.isEinkDisplay(): Boolean {
-    showToast(getRefreshRate().toString())
-    return getRefreshRate() <= Constants.MIN_ANIM_REFRESH_RATE
+    return try {
+        val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowManager.defaultDisplay.refreshRate <= Constants.MIN_ANIM_REFRESH_RATE
+    } catch (e: Exception) {
+        e.printStackTrace()
+        false
+    }
 }
 
