@@ -9,8 +9,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
+import app.olauncher.data.Constants
 
 fun View.hideKeyboard() {
     this.clearFocus()
@@ -64,5 +66,15 @@ fun Context.openSearch(query: String? = null) {
     val intent = Intent(Intent.ACTION_WEB_SEARCH)
     intent.putExtra(SearchManager.QUERY, query ?: "")
     startActivity(intent)
+}
+
+fun Context.getRefreshRate(): Float {
+    val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    return windowManager.defaultDisplay.refreshRate
+}
+
+fun Context.isEinkDisplay(): Boolean {
+    showToast(getRefreshRate().toString())
+    return getRefreshRate() <= Constants.MIN_ANIM_REFRESH_RATE
 }
 
