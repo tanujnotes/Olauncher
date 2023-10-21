@@ -17,17 +17,16 @@ AF stands for Ad-Free :D
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
 
-## Feature requests
-Please do a quick search in [issues](https://github.com/tanujnotes/Olauncher/issues) before creating a new one.
+Note: To maintain the simplicity of the launcher, a few niche features are available but hidden.
 
-Most likely it has alredy been discussed.
+Please check out the [About](https://www.notion.so/tanujnotes/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list and FAQs.
 
 ##
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-Connect: [@tanujnotes](https://twitter.com/tanujnotes)
+Developer: [@tanujnotes](https://twitter.com/tanujnotes)
 
 Thank you and have a great day!
 
-<a href="https://www.buymeacoffee.com/tanujnotes"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+<a href="https://www.buymeacoffee.com/tanujnotes/wishlist"><img src="https://img.buymeacoffee.com/button-api/?text=Buy Tanuj a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
