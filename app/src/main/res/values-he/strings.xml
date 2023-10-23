@@ -48,7 +48,7 @@
     <string name="system_default">מערכת</string>
     <string name="dark">כהה</string>
     <string name="light">בהירה</string>
-    <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
+    <string name="welcome_to_olauncher_settings">למטה מופיע קישור לעמוד ה"מידע כללי", ובו אפשר למצוא תשובות לכל השאלות. לא לשכוח :)
         \n\nThank you.</string>
     <string name="rate_us_message">היי, לא נציג לך הודעה זו בשנית.
         \n\nאם כיף לך להשתמש ב־Olauncher, האם נוכל בבקשה לקבל ממך דירוג של 5 כוכבים? זה יעזור לנו להתקדם בדירוג ויעשה לנו טוב על הלב. תודה מראש!</string>
@@ -57,8 +57,8 @@
     <string name="keyboard_message">היי, יותר מהיר למצוא ולפתוח יישומים ב־Olauncher בעזרת ההקלדה. אולי בכל זאת היית רוצה להשאיר את ההגדרה הזאת ולתת לה עוד הזדמנות?
         \n\nThe choice is always yours.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
-    <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
-    <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
+    <string name="support_olauncher_for_free">אפשר לתמוך ב־Olauncher מבלי לשלם שקל, בעזרת שימוש בקישור ה־Amazon affiliate שלנו.</string>
+    <string name="support_olauncher_message">על כל רכישה שתבוצע דרך הקישור שלנו אנחנו נקבל עמלה קטנה. נשמח אם תשמרו את הקישור ותשתמשו בו בקניות מהאינטרנט.\nתודה רבה!</string>
     <string name="open">פתיחת קישור</string>
     <string name="copy">העתקה</string>
     <string name="close">סגירה</string>
@@ -89,8 +89,8 @@
     <string name="info">מידע</string>
     <string name="delete">מחיקה</string>
     <string name="text_size">גודל הטקסט</string>
-    <string name="enabled">Enabled</string>
-    <string name="disabled">Disabled</string>
+    <string name="enabled">מופעל</string>
+    <string name="disabled">מושבת</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
     <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.\nPlease check your app settings.</string>
     <string name="long_press_to_select_app">לבחירת יישום יש ללחוץ לחיצה ארוכה</string>
