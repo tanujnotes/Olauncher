@@ -16,7 +16,7 @@
         android:clipToPadding="false"
         android:fadingEdgeLength="24dp"
         android:overScrollMode="never"
-        android:paddingHorizontal="72dp"
+        android:paddingHorizontal="100dp"
         android:requiresFadingEdge="vertical"
         android:scrollbars="none">
 
@@ -68,6 +68,16 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/set_as_default_launcher" />
+
+                <TextView
+                    android:id="@+id/aboutOlauncher"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/about_olauncher" />
 
             </LinearLayout>
 
@@ -690,6 +700,7 @@
                 android:padding="12dp">
 
                 <TextView
+                    android:id="@+id/tvGestures"
                     style="@style/TextLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -756,10 +767,12 @@
                 </LinearLayout>
 
                 <FrameLayout
+                    android:id="@+id/flSwipeDown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         style="@style/TextSmall"
@@ -860,15 +873,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/about"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:padding="10dp"
-                    android:text="@string/about" />
-
-                <TextView
                     android:id="@+id/twitter"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
@@ -876,6 +880,15 @@
                     android:layout_marginHorizontal="8dp"
                     android:padding="10dp"
                     android:text="@string/twitter" />
+
+                <TextView
+                    android:id="@+id/share"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:padding="10dp"
+                    android:text="@string/share" />
 
                 <TextView
                     android:id="@+id/rate"
@@ -887,13 +900,13 @@
                     android:text="@string/rate" />
 
                 <TextView
-                    android:id="@+id/share"
+                    android:id="@+id/github"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:padding="10dp"
-                    android:text="@string/share" />
+                    android:text="@string/github" />
 
                 <TextView
                     android:id="@+id/privacy"
@@ -914,8 +927,9 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:letterSpacing="0.03"
-                android:padding="10dp"
-                android:text="@string/buy_me_a_coffee" />
+                android:padding="12dp"
+                android:text="@string/olauncher_pro"
+                android:textSize="18sp" />
 
         </LinearLayout>
 

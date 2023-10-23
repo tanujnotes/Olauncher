@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Uygulama</string>
     <string name="set_as_default_launcher">Varsayılan başlatıcı olarak ayarla</string>
+    <string name="set_as_default_launcher_first">Varsayılan başlatıcı olarak ayarla</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -19,6 +20,7 @@
     <string name="olauncher_is_not_default_launcher">Olauncher, varsayılan başlatıcı değildir. Günlük duvar kağıdı güncellemesi başarısız olabilir.</string>
     <string name="long_press_to_enable">Etkinleştirmek için uzun basın</string>
     <string name="no_hidden_apps">Gizli uygulama yok</string>
+    <string name="hidden_apps">Gizli uygulamalar</string>
     <string name="hidden_apps_message">Not: Gizli uygulamalarınızı bulmak için bu ayarlar sayfasının üst kısmındaki \"Olauncher\" seçeneğine dokunun.
         \n\nDaha fazla ayrıntı aşağıdaki Hakkında sayfasında mevcuttur.</string>
     <string name="swipe_down_for">için aşağı kaydırın</string>
@@ -57,7 +59,9 @@
     <string name="change_default_launcher">Varsayılan başlatıcıyı değiştir</string>
     <string name="privacy">Mahremiyet</string>
     <string name="share">Paylaşmak</string>
+    <string name="share_now">Paylaşmak</string>
     <string name="rate">Oran</string>
+    <string name="rate_now">Oran</string>
     <string name="follow">Takip etmek</string>
     <string name="email">E-posta</string>
 
@@ -113,5 +117,6 @@
     <string name="swipe_right_app_enabled">Sağa kaydırma uygulaması etkin</string>
     <string name="swipe_left_app_disabled">Sola kaydırma uygulaması devre dışı bırakıldı</string>
     <string name="swipe_right_app_disabled">Sağa kaydırma uygulaması devre dışı bırakıldı</string>
-    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Sen mi telefonunu kullanıyorsun yoksa telefon mu seni kullanıyor?</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Sen mi telefonunu, kullanıyorsun yoksa telefon mu seni kullanıyor?</string>
+    <string name="about_olauncher">Hakkında Olauncher</string>
 </resources>

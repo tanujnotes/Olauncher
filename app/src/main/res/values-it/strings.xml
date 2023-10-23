@@ -1,6 +1,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
+    <string name="set_as_default_launcher_first">Imposta come launcher predefinito</string>
     <string name="app_text_color"> Colore del testo</string>
     <string name="double_tap_to_lock_screen">Tocca due volte per bloccare</string>
     <string name="admin_permission_message">Olauncher userà l’autorizzazione della schermata di blocco in modo responsabile. Olauncher non raccoglie né condivide alcun dato.</string>
@@ -12,7 +13,9 @@
     <string name="change_default_launcher">Cambia il launcher  predefinito</string>
     <string name="privacy">Privacy</string>
     <string name="share">Condividi</string>
+    <string name="share_now">Condividi</string>
     <string name="rate">Valuta</string>
+    <string name="rate_now">Valuta</string>
     <string name="follow">Segui</string>
     <string name="email">E-mail</string>
 
@@ -111,7 +114,9 @@
     <string name="olauncher_is_not_default_launcher">Olauncher non è il programma di avvio predefinito.\nL\'aggiornamento giornaliero dello sfondo potrebbe non riuscire.</string>
     <string name="long_press_to_enable">Premere a lungo per abilitare</string>
     <string name="no_hidden_apps">Nessuna app nascosta</string>
+    <string name="hidden_apps">App nascoste</string>
     <string name="adapter_show">mostra</string>
     <string name="adapter_hide">nascondi</string>
-    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Stai usando il tuo telefono o è il tuo telefono che sta usando te?</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Stai usando il tuo telefono, o è il tuo telefono che sta usando te?</string>
+    <string name="about_olauncher">Info Olauncher</string>
 </resources>

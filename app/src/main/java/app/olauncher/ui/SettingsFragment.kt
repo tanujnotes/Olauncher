@@ -79,7 +79,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
-            R.id.setLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.setLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
@@ -103,6 +103,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
+
+            R.id.tvGestures -> binding.flSwipeDown.visibility = View.VISIBLE
 
             R.id.maxApps0 -> updateHomeAppsNum(0)
             R.id.maxApps1 -> updateHomeAppsNum(1)
@@ -128,7 +130,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.notifications -> updateSwipeDownAction(Constants.SwipeDownAction.NOTIFICATIONS)
             R.id.search -> updateSwipeDownAction(Constants.SwipeDownAction.SEARCH)
 
-            R.id.about -> {
+            R.id.aboutOlauncher -> {
                 prefs.aboutClicked = true
                 requireContext().openUrl(Constants.URL_ABOUT_OLAUNCHER)
             }
@@ -140,13 +142,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             }
 
             R.id.twitter -> requireContext().openUrl(Constants.URL_TWITTER_TANUJ)
+            R.id.github -> requireContext().openUrl(Constants.URL_OLAUNCHER_GITHUB)
             R.id.privacy -> requireContext().openUrl(Constants.URL_OLAUNCHER_PRIVACY)
-            R.id.footer -> {
-                requireContext().openUrl(
-                    if (binding.footer.text.toString() == getString(R.string.buy_me_a_coffee)) Constants.URL_BMAC
-                    else Constants.URL_PLAY_STORE_DEV
-                )
-            }
+            R.id.footer -> requireContext().openUrl(Constants.URL_PLAY_STORE_DEV)
         }
     }
 
@@ -175,6 +173,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.scrollLayout.setOnClickListener(this)
         binding.appInfo.setOnClickListener(this)
         binding.setLauncher.setOnClickListener(this)
+        binding.aboutOlauncher.setOnClickListener(this)
         binding.autoShowKeyboard.setOnClickListener(this)
         binding.toggleLock.setOnClickListener(this)
         binding.homeAppsNum.setOnClickListener(this)
@@ -204,10 +203,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
 
-        binding.about.setOnClickListener(this)
         binding.share.setOnClickListener(this)
         binding.rate.setOnClickListener(this)
         binding.twitter.setOnClickListener(this)
+        binding.github.setOnClickListener(this)
         binding.privacy.setOnClickListener(this)
         binding.footer.setOnClickListener(this)
 
@@ -407,6 +406,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun toggleDailyWallpaperUpdate() {
+        if (prefs.dailyWallpaper.not() && viewModel.isOlauncherDefault.value == false) {
+            requireContext().showToast(R.string.set_as_default_launcher_first)
+            return
+        }
         prefs.dailyWallpaper = !prefs.dailyWallpaper
         populateWallpaperText()
         if (prefs.dailyWallpaper) {
@@ -578,18 +581,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateActionHints() {
-//        when (prefs.toShowHintCounter) {
-//            Constants.HINT_RATE_US -> {
-//                viewModel.showDialog.postValue(Constants.Dialog.RATE)
-//                binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
-//                binding.scrollView.post {
-//                    binding.scrollView.fullScroll(View.FOCUS_DOWN)
-//                }
-//            }
-//        }
         if (viewModel.isOlauncherDefault.value != true) return
-        if (prefs.aboutClicked.not() && prefs.toShowHintCounter < Constants.HINT_RATE_US)
-            binding.about.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
         if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US && prefs.toShowHintCounter < Constants.HINT_RATE_US + 10)
             binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
     }

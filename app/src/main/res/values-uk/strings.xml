@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Додаток</string>
     <string name="set_as_default_launcher">Зробити лаунчером за замовчування</string>
+    <string name="set_as_default_launcher_first">Зробити лаунчером за замовчування</string>
     <string name="app_text_color">Кольор тексту</string>
     <string name="double_tap_to_lock_screen">Блокування подвійним тапом</string>
     <string name="admin_permission_message">Olauncher обіцяє відповідально використовувати роздільну здатність екрана блокування. Olauncher не збирає і не передає будь-які дані.</string>
@@ -13,7 +14,9 @@
     <string name="change_default_launcher">Змінити лаунчер за замовчуванням</string>
     <string name="privacy">Конфіденційність</string>
     <string name="share">Поділитися</string>
+    <string name="share_now">Поділитися</string>
     <string name="rate">Оцінити</string>
+    <string name="rate_now">Оцінити</string>
     <string name="follow">Перейти</string>
     <string name="email">Электронна пошта</string>
 
@@ -111,7 +114,9 @@
     <string name="olauncher_is_not_default_launcher">Olauncher не є стандартним лаунчером.\nЩоденне оновлення шпалер може завершитися помилкою.</string>
     <string name="long_press_to_enable">Натисніть та утримуйте, щоб увімкнути</string>
     <string name="no_hidden_apps">Немає прихованих додатків</string>
+    <string name="hidden_apps">Приховані додатків</string>
     <string name="adapter_show">Показати</string>
     <string name="adapter_hide">Приховати</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ви користуєтеся своїм телефоном, чи ваш телефон використовує вас?</string>
+    <string name="about_olauncher">Про нас Olauncher</string>
 </resources>

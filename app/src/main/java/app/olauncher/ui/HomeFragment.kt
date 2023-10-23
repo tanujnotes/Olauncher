@@ -71,7 +71,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.lock -> {}
             R.id.clock -> openClockApp()
             R.id.date -> openCalendarApp()
-            R.id.setDefaultLauncher -> viewModel.resetDefaultLauncherApp(requireContext())
+            R.id.setDefaultLauncher -> viewModel.resetLauncherLiveData.call()
             else -> {
                 try { // Launch app
                     val appLocation = view.tag.toString().toInt()
@@ -145,6 +145,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
             if (it != true) {
+                if (prefs.dailyWallpaper) {
+                    prefs.dailyWallpaper = false
+                    viewModel.cancelWallpaperWorker()
+                }
                 prefs.homeBottomAlignment = false
                 setHomeAlignment()
             }
@@ -453,7 +457,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     if (prefs.toShowHintCounter == Constants.HINT_RATE_US && prefs.rateClicked.not()) {
                         viewModel.showDialog.postValue(Constants.Dialog.RATE)
                         prefs.toShowHintCounter = prefs.toShowHintCounter + 1
-                    } else if (prefs.toShowHintCounter == Constants.HINT_SHARE) {
+                    } else if (prefs.toShowHintCounter % Constants.HINT_SHARE == 0) {
                         viewModel.showDialog.postValue(Constants.Dialog.SHARE)
                         prefs.toShowHintCounter = prefs.toShowHintCounter + 1
                     } else {

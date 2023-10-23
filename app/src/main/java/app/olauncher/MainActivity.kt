@@ -100,10 +100,16 @@ class MainActivity : AppCompatActivity() {
         viewModel.launcherResetFailed.observe(this) {
             openLauncherChooser(it)
         }
+        viewModel.resetLauncherLiveData.observe(this) {
+//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
+            resetDefaultLauncher()
+//            else
+//                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
+        }
         viewModel.showDialog.observe(this) {
             when (it) {
                 Constants.Dialog.RATE -> {
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), "Rate now") {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), getString(R.string.rate_now)) {
                         binding.messageLayout.visibility = View.GONE
                         prefs.rateClicked = true
                         rateApp()
@@ -111,14 +117,14 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 Constants.Dialog.SHARE -> {
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share)) {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share_now)) {
                         binding.messageLayout.visibility = View.GONE
                         shareApp()
                     }
                 }
 
                 Constants.Dialog.HIDDEN -> {
-                    showMessageDialog("Hidden apps", getString(R.string.hidden_apps_message), getString(R.string.okay)) {
+                    showMessageDialog(getString(R.string.hidden_apps), getString(R.string.hidden_apps_message), getString(R.string.okay)) {
                         binding.messageLayout.visibility = View.GONE
                     }
                 }
@@ -179,6 +185,10 @@ class MainActivity : AppCompatActivity() {
             Constants.REQUEST_CODE_ENABLE_ADMIN -> {
                 if (resultCode == Activity.RESULT_OK)
                     prefs.lockModeOn = true
+            }
+
+            Constants.REQUEST_CODE_LAUNCHER_SELECTOR -> {
+                resetDefaultLauncher()
             }
         }
     }

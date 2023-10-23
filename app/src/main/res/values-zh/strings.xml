@@ -2,6 +2,7 @@
 <resources>
     <string name="app">应用程序</string>
     <string name="set_as_default_launcher">设置为默认启动器</string>
+    <string name="set_as_default_launcher_first">设置为默认启动器</string>
     <string name="app_drawer_tips">提示：输入应用程序名称以查找并启动它</string>
     <string name="okay">好的</string>
     <string name="cool">非常棒！</string>
@@ -10,6 +11,7 @@
     <string name="olauncher_is_not_default_launcher">Olauncher 不是默认启动器。 每日壁纸更新可能会失败。</string>
     <string name="long_press_to_enable">长按即可启用</string>
     <string name="no_hidden_apps">没有隐藏的应用程序</string>
+    <string name="hidden_apps">隐藏的应用程序</string>
     <string name="hidden_apps_message">注意：点击此设置页面顶部的“Olauncher”即可找到隐藏的应用程序。
         \n\n更多详细信息请参阅下面的“关于”页面。</string>
     <string name="swipe_down_for">向下滑动查看</string>
@@ -48,7 +50,9 @@
     <string name="change_default_launcher">更改默认启动器</string>
     <string name="privacy">隐私</string>
     <string name="share">分享</string>
+    <string name="share_now">分享</string>
     <string name="rate">评分</string>
+    <string name="rate_now">评分</string>
     <string name="follow">关注</string>
     <string name="email">电子邮件</string>
 
@@ -114,4 +118,5 @@
     <string name="swipe_left_app_disabled">向左滑动应用程序已禁用</string>
     <string name="swipe_right_app_disabled">向右滑动应用程序已禁用</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">是你在用手机，还是手机在用你？</string>
+    <string name="about_olauncher">关于 Olauncher</string>
 </resources>

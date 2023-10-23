@@ -2,8 +2,7 @@
     <string name="app_name" translatable="false">Olauncher</string>
     <string name="github" translatable="false">Github</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false"><u>Olauncher PRO</u></string>
-    <string name="buy_me_a_coffee" translatable="false"><u>Buy me a coffee!</u></string>
+    <string name="olauncher_pro" translatable="false"><u>Olauncher Pro</u></string>
     <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
     <string name="tag_0" translatable="false">0</string>
     <string name="tag_1" translatable="false">1</string>
@@ -17,6 +16,7 @@
 
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
+    <string name="set_as_default_launcher_first">Set Olauncher default first</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
@@ -28,7 +28,9 @@
     <string name="change_default_launcher">Change default launcher</string>
     <string name="privacy">Privacy</string>
     <string name="share">Share</string>
+    <string name="share_now">Share now</string>
     <string name="rate">Rate</string>
+    <string name="rate_now">Rate now</string>
     <string name="follow">Follow</string>
     <string name="email">Email</string>
     <string name="donate">Donate</string>
@@ -55,7 +57,7 @@
     <string name="cool">Cool!</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
     <string name="hide">Hide</string>
-    <string name="status_bar">Show status bar</string>
+    <string name="status_bar">Status bar on top</string>
     <string name="rename">Rename</string>
     <string name="show_date_time">Show date time</string>
     <string name="appearance">Appearance</string>
@@ -64,12 +66,12 @@
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
+    <string name="welcome_to_olauncher_settings">Tip: Our About page has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
         \n\nIf you like Olauncher, could you please give us a 5-star rating? It helps us improve our ranking and makes us very happy. Thank you!</string>
-    <string name="share_message">Hi, we have a big request! We want to hit a million downloads before 2023 ends, and we need your help.
-        \n\nCould you share Olauncher with your friends, please? That would be really helpful. Thank you!</string>
+    <string name="share_message">Hi, we need your help! We want to hit a million downloads before 2023 ends but we can\'t do it alone.
+        \n\nWould you be kind enough to share Olauncher with your friends, please? Thank you and have a wonderful day!</string>
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
@@ -87,7 +89,7 @@
     <string name="date_only">Date only</string>
     <string name="bottom_on">Bottom: On</string>
     <string name="bottom_off">Bottom: Off</string>
-    <string name="please_set_olauncher_as_default_first">Please set Olauncher as your default launcher first</string>
+    <string name="please_set_olauncher_as_default_first">Please set Olauncher as default first</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
     <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page below.</string>
@@ -122,10 +124,12 @@
     <string name="swipe_left_app_disabled">Swipe left app disabled</string>
     <string name="swipe_right_app_disabled">Swipe right app disabled</string>
     <string name="your_wallpaper_will_update_shortly">Your wallpaper will update shortly</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher is not default.\nDaily wallpaper update may fail.</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher is not default. Wallpaper update will fail.</string>
     <string name="long_press_to_enable">Long press to enable</string>
     <string name="no_hidden_apps">No hidden apps</string>
+    <string name="hidden_apps">Hidden apps</string>
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
+    <string name="about_olauncher">About Olauncher</string>
 </resources>

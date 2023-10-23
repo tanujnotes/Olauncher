@@ -68,11 +68,14 @@ object Constants {
     const val FLAG_SET_CALENDAR_APP = 14
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
+    const val REQUEST_CODE_LAUNCHER_SELECTOR = 678
 
     const val HINT_RATE_US = 15
-    const val HINT_SHARE = 22
+    const val HINT_SHARE = 25
 
     const val LONG_PRESS_DELAY_MS = 500L
+
+    const val MIN_ANIM_REFRESH_RATE = 10f
 
     const val URL_ABOUT_OLAUNCHER = "https://tanujnotes.notion.site/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd"
     const val URL_OLAUNCHER_PRIVACY = "https://tanujnotes.notion.site/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
@@ -80,9 +83,8 @@ object Constants {
     const val URL_OLAUNCHER_GITHUB = "https://www.github.com/tanujnotes/Olauncher"
     const val URL_OLAUNCHER_PLAY_STORE = "https://play.google.com/store/apps/details?id=app.olauncher"
     const val URL_PLAY_STORE_DEV = "https://play.google.com/store/apps/dev?id=7198807840081074933"
-    const val URL_BMAC = "https://www.buymeacoffee.com/tanujnotes"
     const val URL_TWITTER_TANUJ = "https://twitter.com/tanujnotes"
-    const val URL_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/bf400a269746c5c124a599af040dd82e/raw"
+    const val URL_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/85e2d0343ace71e76615ac346fbff82b/raw"
     const val URL_DEFAULT_DARK_WALLPAPER = "https://images.unsplash.com/photo-1512551980832-13df02babc9e"
     const val URL_DEFAULT_LIGHT_WALLPAPER = "https://images.unsplash.com/photo-1515549832467-8783363e19b6"
     const val URL_DUCK_SEARCH = "https://duck.co/?q="

@@ -15,6 +15,7 @@
 
     <string name="app">App</string>
     <string name="set_as_default_launcher">Ange som förvald startskärmsapp</string>
+    <string name="set_as_default_launcher_first">Ange som förvald startskärmsapp</string>
     <string name="app_text_color">Textfärg</string>
     <string name="double_tap_to_lock_screen">Dubbeltryck för att låsa</string>
     <string name="admin_permission_message">Olauncher lovar att använda skärmlåsningsbehörigheten ansvarsfullt. Olauncher varken samlar in eller delar några data.</string>
@@ -26,7 +27,9 @@
     <string name="change_default_launcher">Ändra förvald startskärmsapp</string>
     <string name="privacy">Integritet</string>
     <string name="share">Dela</string>
+    <string name="share_now">Dela</string>
     <string name="rate">Betygsätt</string>
+    <string name="rate_now">Betygsätt</string>
     <string name="follow">Följ</string>
     <string name="email">E-post</string>
     <string name="donate">Donera</string>
@@ -123,7 +126,9 @@
     <string name="olauncher_is_not_default_launcher">Olauncher är inte förvald.\nUppdatering av daglig bakgrundsbild kanske misslyckas.</string>
     <string name="long_press_to_enable">Långtryck för att aktivera</string>
     <string name="no_hidden_apps">Inga dolda appar</string>
+    <string name="hidden_apps">Dolda appar</string>
     <string name="adapter_show">Visa</string>
     <string name="adapter_hide">Dölj</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Använder du din telefon, eller använder din telefon dig?</string>
+    <string name="about_olauncher">Om Olauncher</string>
 </resources>

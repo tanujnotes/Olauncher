@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Aplikasi</string>
     <string name="set_as_default_launcher">Tetapkan sebagai peluncur default</string>
+    <string name="set_as_default_launcher_first">Tetapkan sebagai peluncur default</string>
     <string name="app_text_color">Warna teks</string>
     <string name="double_tap_to_lock_screen">Ketuk dua kali untuk mengunci</string>
     <string name="admin_permission_message">Olauncher berjanji untuk menggunakan izin layar kunci secara bertanggung jawab. Olauncher tidak mengumpulkan atau membagikan data apa pun.</string>
@@ -13,7 +14,9 @@
     <string name="change_default_launcher">Ubah peluncur default</string>
     <string name="privacy">Pribadi</string>
     <string name="share">Membagikan</string>
+    <string name="share_now">Membagikan</string>
     <string name="rate">Kecepatan</string>
+    <string name="rate_now">Kecepatan</string>
     <string name="follow">Mengikuti</string>
     <string name="email">Surel</string>
 
@@ -107,8 +110,10 @@
     <string name="your_wallpaper_will_update_shortly">Wallpaper Anda akan segera diperbarui</string>
     <string name="olauncher_is_not_default_launcher">Olauncher bukan peluncur default.\nPembaruan wallpaper harian mungkin gagal.</string>
     <string name="long_press_to_enable">Tekan lama untuk mengaktifkan</string>
-    <string name="no_hidden_apps">Tidak ada aplikasi tersembunyi</string>
+    <string name="no_hidden_apps">Tiada apl tersembunyi</string>
+    <string name="hidden_apps">Aplikasi tersembunyi</string>
     <string name="adapter_show">memperlihatkan</string>
     <string name="adapter_hide">bersembunyi</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Apakah Anda menggunakan ponsel Anda, atau ponsel Anda menggunakan Anda?</string>
+    <string name="about_olauncher">Tentang Olauncher</string>
 </resources>

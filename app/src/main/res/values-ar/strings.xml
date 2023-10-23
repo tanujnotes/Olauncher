@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">تعيين كمشغل افتراضي</string>
+    <string name="set_as_default_launcher_first">تعيين كمشغل افتراضي</string>
     <string name="_0">صفر</string>
     <string name="_1">واحد</string>
     <string name="_2">إثنان</string>
@@ -19,6 +20,7 @@
     <string name="olauncher_is_not_default_launcher">Olauncher ليس المشغل الافتراضي. قد يفشل التحديث اليومي للخلفية.</string>
     <string name="long_press_to_enable">اضغط لفترة طويلة للتمكين</string>
     <string name="no_hidden_apps">لا توجد تطبيقات مخفية</string>
+    <string name="hidden_apps">تطبيقات مخفية</string>
     <string name="swipe_left_app_disabled">انتقاد اليسار تعطيل التطبيق</string>
     <string name="swipe_right_app_disabled">انتقاد الحق التطبيق تعطيل</string>
     <string name="hidden_apps_message">ملاحظة: اضغط على \"Olauncher\" أعلى صفحة الإعدادات هذه للعثور على تطبيقاتك المخفية.  المزيد من التفاصيل متوفرة في صفحة \"حول\" أدناه.</string>
@@ -57,7 +59,9 @@
     <string name="change_default_launcher">تغيير المشغل الافتراضي</string>
     <string name="privacy">خصوصية</string>
     <string name="share">يشارك</string>
+    <string name="share_now">يشارك</string>
     <string name="rate">معدل</string>
+    <string name="rate_now">معدل</string>
     <string name="follow">يتبع</string>
     <string name="email">بريد إلكتروني</string>
     <string name="donate">يتبرع</string>
@@ -110,4 +114,5 @@
     <string name="swipe_left_app_enabled">انتقاد اليسار التطبيق تمكين</string>
     <string name="swipe_right_app_enabled">انتقاد الحق التطبيق تمكين</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">هل تستخدم هاتفك أم أن هاتفك يستخدمك؟</string>
+    <string name="about_olauncher">عن Olauncher</string>
 </resources>
