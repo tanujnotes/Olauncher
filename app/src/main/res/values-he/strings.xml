@@ -2,7 +2,7 @@
     <string name="app">יישום</string>
     <string name="set_as_default_launcher">הגדרה בתור משגר ברירת המחדל</string>
     <string name="app_text_color">צבע הטקסט</string>
-    <string name="double_tap_to_lock_screen">לחיצה כפולה לנעילת המסך</string>
+    <string name="double_tap_to_lock_screen">נעילת המסך בהקשה כפולה</string>
     <string name="admin_permission_message">יישום Olauncher ישתמש בהרשאה של נעילת המסך באופן מתון. יישום Olauncher אינו אוסף או משתף נתונים כלל.</string>
     <string name="about">מידע כללי</string>
     <string name="off">כבוי</string>
@@ -56,7 +56,7 @@
         \n\nהיית רוצה אולי לספר לחברים שלך על Olauncher? זה יכול לסייע לנו מאוד. תודה רבה!</string>
     <string name="keyboard_message">היי, יותר מהיר למצוא ולפתוח יישומים ב־Olauncher בעזרת ההקלדה. אולי בכל זאת היית רוצה להשאיר את ההגדרה הזאת ולתת לה עוד הזדמנות?
         \n\nThe choice is always yours.</string>
-    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
+    <string name="accessibility_service_description">הרשאת הנגישות נחוצה להפעלת הנעילה בהקשה כפולה. כל הנתונים שייאספו על ידי Olauncher דרך השירות הזה לא יועברו הלאה ממכשירך.</string>
     <string name="support_olauncher_for_free">אפשר לתמוך ב־Olauncher מבלי לשלם שקל, בעזרת שימוש בקישור ה־Amazon affiliate שלנו.</string>
     <string name="support_olauncher_message">על כל רכישה שתבוצע דרך הקישור שלנו אנחנו נקבל עמלה קטנה. נשמח אם תשמרו את הקישור ותשתמשו בו בקניות מהאינטרנט.\nתודה רבה!</string>
     <string name="open">פתיחת קישור</string>
@@ -71,10 +71,10 @@
     <string name="date_only">תאריך בלבד</string>
     <string name="bottom_on">הצגה למטה: מופעל</string>
     <string name="bottom_off">הצגה למטה: כבוי</string>
-    <string name="please_set_olauncher_as_default_first">Please set Olauncher as your default launcher first</string>
+    <string name="please_set_olauncher_as_default_first">ראשית, נא להגדיר את Olauncher בתור ברירת המחדל למסך בית.</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
-    <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page below.</string>
+    <string name="hidden_apps_message">הערה: בשביל להגיע ליישומים המוסתרים, יש ללחוץ על הכיתוב \'Olauncher\' שנמצא בראש עמוד ההגדרות.\n\nפרטים נוספים אפשר למצוא בעמוד ה"מידע כללי" שלנו למטה.</string>
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">חיפוש</string>
     <string name="notifications">התראות</string>
