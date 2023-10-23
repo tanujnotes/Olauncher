@@ -16,13 +16,13 @@
     <string name="follow">עקבו אחריי</string>
     <string name="email">דואר אלקטרוני</string>
     <string name="donate">תרומה</string>
-    <string name="swipe_up_for_apps">1. Swipe up for all apps\n2. Long press anywhere for settings</string>
+    <string name="swipe_up_for_apps">1. החלקה כלפי מעלה תפתח את הרשימה של כל היישומים\n2. לפתיחת הגדרות מסך הבית יש ללחוץ לחיצה ארוכה מכל מקום על גבי המסך.</string>
     <string name="apps_on_home_screen">יישומים במסך הבית</string>
     <string name="daily_wallpaper_update">רקע חדש בכל יום</string>
     <string name="left">ימין</string>
     <string name="right">שמאל</string>
     <string name="center">מרכז</string>
-    <string name="home_layout_alignment">App alignment</string>
+    <string name="home_layout_alignment">יישור היישומים</string>
     <string name="swipe_left_app">יישום לפתיחה בהחלקה שמאלה</string>
     <string name="swipe_right_app">יישום לפתיחה בהחלקה ימינה</string>
     <string name="_0">0</string>
@@ -50,19 +50,19 @@
     <string name="light">בהירה</string>
     <string name="welcome_to_olauncher_settings">Our About page on the bottom has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
-    <string name="rate_us_message">Hi, you won\'t see this message again.
-        \n\nIf you like Olauncher, could you please give us a 5-star rating? It helps us improve our ranking and makes us very happy. Thank you!</string>
-    <string name="share_message">Hi, we have a big request! We want to hit a million downloads before 2023 ends, and we need your help.
-        \n\nCould you share Olauncher with your friends, please? That would be really helpful. Thank you!</string>
-    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
+    <string name="rate_us_message">היי, לא נציג לך הודעה זו בשנית.
+        \n\nאם כיף לך להשתמש ב־Olauncher, האם נוכל בבקשה לקבל ממך דירוג של 5 כוכבים? זה יעזור לנו להתקדם בדירוג ויעשה לנו טוב על הלב. תודה מראש!</string>
+    <string name="share_message">שלום, יש לנו משימה ענקית! אנחנו רוצים להגיע למיליון הורדות לפני סוף שנת 2023, ואנו זקוקים לעזרתך.
+        \n\nהיית רוצה אולי לספר לחברים שלך על Olauncher? זה יכול לסייע לנו מאוד. תודה רבה!</string>
+    <string name="keyboard_message">היי, יותר מהיר למצוא ולפתוח יישומים ב־Olauncher בעזרת ההקלדה. אולי בכל זאת היית רוצה להשאיר את ההגדרה הזאת ולתת לה עוד הזדמנות?
         \n\nThe choice is always yours.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
-    <string name="open">Open link</string>
-    <string name="copy">Copy</string>
-    <string name="close">Close</string>
-    <string name="not_now">Not now</string>
+    <string name="open">פתיחת קישור</string>
+    <string name="copy">העתקה</string>
+    <string name="close">סגירה</string>
+    <string name="not_now">לא כעת</string>
     <string name="public_roadmap">Olauncher public roadmap</string>
     <string name="instagram">אינסטגרם</string>
     <string name="twitter">המפתח</string>
@@ -80,24 +80,24 @@
     <string name="notifications">התראות</string>
     <string name="accessibility_disclosure">Please turn on or off Olauncher\'s accessibility service in your device\'s settings to enable or disable this feature.
     \n\nPlease note that this service is only used to let you turn off your device\'s screen using the double tap gesture. Our accessibility service does not collect or share any data.</string>
-    <string name="accept">Accept</string>
+    <string name="accept">הסכמה</string>
     <string name="permission">הרשאה</string>
     <string name="double_tap_lock">לחיצה כפולה לנעילת המסך</string>
-    <string name="enable">Enable</string>
-    <string name="disable">Disable</string>
-    <string name="not_working"><u>Not working?</u></string>
-    <string name="info">Info</string>
+    <string name="enable">הפעלה</string>
+    <string name="disable">השבתהe</string>
+    <string name="not_working"><u>לא עובד?</u></string>
+    <string name="info">מידע</string>
     <string name="delete">מחיקה</string>
     <string name="text_size">גודל הטקסט</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
     <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.\nPlease check your app settings.</string>
-    <string name="long_press_to_select_app">Long press to select app</string>
-    <string name="unable_to_open_app">Unable  to open app info</string>
-    <string name="copied">Copied</string>
-    <string name="system_app_cannot_delete">System app, cannot delete</string>
-    <string name="type_a_new_app_name_first">Type a new app name first</string>
+    <string name="long_press_to_select_app">לבחירת יישום יש ללחוץ לחיצה ארוכה</string>
+    <string name="unable_to_open_app">אין אפשרות לפתוח את המידע על היישום</string>
+    <string name="copied">הועתק ללוח</string>
+    <string name="system_app_cannot_delete">יישום מערכת, ולכן אי אפשר למחוק אותו</string>
+    <string name="type_a_new_app_name_first">נא לתת שם חדש ליישום תחילה</string>
     <string name="app_not_found">היישום לא נמצא</string>
     <string name="unable_to_launch_app">אין אפשרות להפעיל את היישום</string>
     <string name="search_for_Launcher_or_home_app">חיפוש יישום מסך בית או משגר</string>
