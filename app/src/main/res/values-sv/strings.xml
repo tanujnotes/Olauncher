@@ -1,21 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
-    <string name="github" translatable="false">Github</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
-    <string name="tag_0" translatable="false">0</string>
-    <string name="tag_1" translatable="false">1</string>
-    <string name="tag_2" translatable="false">2</string>
-    <string name="tag_3" translatable="false">3</string>
-    <string name="tag_4" translatable="false">4</string>
-    <string name="tag_5" translatable="false">5</string>
-    <string name="tag_6" translatable="false">6</string>
-    <string name="tag_7" translatable="false">7</string>
-    <string name="tag_8" translatable="false">8</string>
-
     <string name="app">App</string>
     <string name="set_as_default_launcher">Ange som förvald startskärmsapp</string>
-    <string name="set_as_default_launcher_first">Ange som förvald startskärmsapp</string>
+    <string name="set_as_default_launcher_first">Ange Olauncher som förvald först</string>
     <string name="app_text_color">Textfärg</string>
     <string name="double_tap_to_lock_screen">Dubbeltryck för att låsa</string>
     <string name="admin_permission_message">Olauncher lovar att använda skärmlåsningsbehörigheten ansvarsfullt. Olauncher varken samlar in eller delar några data.</string>
@@ -27,9 +14,9 @@
     <string name="change_default_launcher">Ändra förvald startskärmsapp</string>
     <string name="privacy">Integritet</string>
     <string name="share">Dela</string>
-    <string name="share_now">Dela</string>
+    <string name="share_now">Dela nu</string>
     <string name="rate">Betygsätt</string>
-    <string name="rate_now">Betygsätt</string>
+    <string name="rate_now">Betygsätt nu</string>
     <string name="follow">Följ</string>
     <string name="email">E-post</string>
     <string name="donate">Donera</string>
@@ -56,7 +43,7 @@
     <string name="cool">Coolt!</string>
     <string name="auto_show_keyboard">Visa tangentbord automatiskt</string>
     <string name="hide">Dölj</string>
-    <string name="status_bar">Visa statusfält</string>
+    <string name="status_bar">Statusfält överst</string>
     <string name="rename">Byt namn</string>
     <string name="show_date_time">Visa datum och tid</string>
     <string name="appearance">Utseende</string>
@@ -65,12 +52,11 @@
     <string name="system_default">System</string>
     <string name="dark">Mörkt</string>
     <string name="light">Ljust</string>
-    <string name="welcome_to_olauncher_settings">Vår Om-sida längst ner har svar på alla dina frågor. Glöm inte det. :)
-        \n\nTack.</string>
+    <string name="welcome_to_olauncher_settings">Tips: Vår Om-sida har svar på alla dina frågor. Glöm inte det. :) \n\nTack.</string>
     <string name="rate_us_message">Hejsan, du kommer inte att se detta meddelande igen.
-        \n\nOm du gillar Olauncher, kan du vänligen ge oss ett 5-stjärnigt betyg? Det hjälper oss att förbättra vår rankning och gör oss glada. Tack!</string>
-    <string name="share_message">Hej, vi har en stor förfrågan! Vi vill nå en miljon nedladdningar innan 2023 tar slut, och vi behöver din hjälp.
-        \n\nKan du dela Olauncher med dina vänner, snälla du? Det skulle verkligen vara till hjälp. Tack!</string>
+        \n\nOm du gillar Olauncher, skulle du vänligen kunna ge oss ett 5-stjärnigt omdöme? Det hjälper oss att förbättra vår rankning och gör oss väldigt glada. Tack!</string>
+    <string name="share_message">Hejsan, vi behöver din hjälp! Vi vill nå en miljon nedladdningar innan 2023 är slut, men vi kan inte göra det på egen hand.
+        \n\nSkulle du kunna vara vänlig nog att dela Olauncher med dina vänner, är du snäll? Tack, och ha en underbar dag!</string>
     <string name="keyboard_message">Hejsan, tangentbordet är det snabbaste sättet att hitta och starta appar i Olauncher. Får vi be dig att behålla denna På i några dagar till innan du bestämmer dig?
         \n\nValet är alltid ditt.</string>
     <string name="accessibility_service_description">Tillgänglighetsbehörigheten krävs för att aktivera dubbeltryck för att låsa. Eventuella data förvärvade av Olauncher genom denna tjänst kommer inte att lämna din enhet.</string>
@@ -82,13 +68,13 @@
     <string name="not_now">Inte nu</string>
     <string name="public_roadmap">Olaunchers offentliga färdplan</string>
     <string name="instagram">Instagram</string>
-    <string name="twitter">Twitter</string>
+    <string name="twitter">Utvecklare</string>
     <string name="roadmap">Färdplan</string>
     <string name="date">Datum</string>
     <string name="date_only">Endast datum</string>
     <string name="bottom_on">Botten: På</string>
     <string name="bottom_off">Botten: Av</string>
-    <string name="please_set_olauncher_as_default_first">Vänligen ange Olauncher som din förvalda startskärmsapp först</string>
+    <string name="please_set_olauncher_as_default_first">Vänligen ange Olauncher som förvald först</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tips: Börja skriv för BYT NAMN-alternativ för appen</string>
     <string name="hidden_apps_message">Observera: Tryck på \'Olauncher\' högst upp på denna Inställningar-sida för att hitta dina dolda appar.\n\nMer information finns på vår Om-sida nedan.</string>
@@ -96,7 +82,7 @@
     <string name="search">Sök</string>
     <string name="notifications">Aviseringar</string>
     <string name="accessibility_disclosure">Vänligen sätt på eller stäng av Olaunchers tillgänglighetstjänst i din enhets inställningar för att aktivera eller inaktivera denna funktion.
-    \n\nVänligen observera att denna tjänst endast används för att låta dig stänga av skärmen på din enhet genom dubbeltrycksgesten. Vår tillgänglighetstjänst varken samlar in eller delar några data.</string>
+        \n\nVänligen observera att denna tjänst endast används för att låta dig stänga av skärmen på din enhet genom dubbeltrycksgesten. Vår tillgänglighetstjänst varken samlar in eller delar några data.</string>
     <string name="accept">Godkänn</string>
     <string name="permission">Behörighet</string>
     <string name="double_tap_lock">Dubbeltryck för att låsa</string>
@@ -123,7 +109,7 @@
     <string name="swipe_left_app_disabled">Vänstersvepsapp inaktiverad</string>
     <string name="swipe_right_app_disabled">Högersvepsapp inaktiverad</string>
     <string name="your_wallpaper_will_update_shortly">Din bakgrundsbild kommer att uppdateras inom kort</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher är inte förvald.\nUppdatering av daglig bakgrundsbild kanske misslyckas.</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher är inte förvald. Uppdatering av bakgrundsbild kommer att misslyckas.</string>
     <string name="long_press_to_enable">Långtryck för att aktivera</string>
     <string name="no_hidden_apps">Inga dolda appar</string>
     <string name="hidden_apps">Dolda appar</string>
