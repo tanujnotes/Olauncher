@@ -2,6 +2,7 @@
     <string name="app_name">Olauncher</string>
     <string name="app">Aplikacija</string>
     <string name="set_as_default_launcher">Postavi kao zadani pokretač</string>
+    <string name="set_as_default_launcher_first">Postavi kao zadani pokretač</string>
     <string name="app_text_color">Boja teksta</string>
     <string name="double_tap_to_lock_screen">Dvostruki dodir za zaključavanje</string>
     <string name="admin_permission_message">Olauncher obećava da će odgovorno koristiti dozvolu za zaključavanje zaslona.</string>
@@ -13,7 +14,9 @@
     <string name="change_default_launcher">Promijeni zadani pokretač</string>
     <string name="privacy">Privatnost</string>
     <string name="share">Podijeli</string>
+    <string name="share_now">Podijeli</string>
     <string name="rate">Ocijeni</string>
+    <string name="rate_now">Ocijeni</string>
     <string name="follow">Prati</string>
     <string name="email">E-pošta</string>
     <string name="github">Github</string>
