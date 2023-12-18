@@ -90,6 +90,8 @@
     <string name="rate_us_message">Hej, czy uważasz, że Olauncher jest przydatny? Jeśli tak, ocena 5 gwiazdek to najlepszy sposób, aby nas wesprzeć.\n\nDziękuję i więcej tego nie zobaczysz.</string>
     <string name="share_message">Cześć, myślisz, że Twoi znajomi pokochaliby Olaunchera tak samo jak Ty?\n\nUdostępnij aplikację i pomóż nam rozpowszechniać informacje. Dziękuję!</string>
     <string name="keyboard_message">Cześć, klawiatura to najszybszy sposób znajdowania i uruchamiania aplikacji w Olauncher. Czy możemy poprosić o pozostawienie tego włączonego jeszcze przez kilka dni, a następnie podjęcie decyzji?\n\nWybór zawsze należy do Ciebie.</string>
+    <string name="digital_wellbeing_message">Jeśli chcesz ustawić limity czasowe dla niektórych aplikacji, funkcja Cyfrowa równowaga w systemie Android może Ci w tym pomóc.
+        \n\nWyszukaj opcję Cyfrowa równowaga w ustawieniach telefonu i włącz ją.</string>
     <string name="accessibility_service_description">Uprawnienia dostępu są wymagane, aby włączyć podwójne dotknięcie, aby zablokować. Wszelkie dane pozyskane przez Olauncher za pośrednictwem tej usługi nie opuszczą Twojego urządzenia.</string>
     <string name="support_olauncher_for_free">Wesprzyj Olauncher za darmo, korzystając z naszego linku afiliacyjnego Amazon.</string>
     <string name="support_olauncher_message">Za każdym razem, gdy kupujesz coś za pomocą naszego linku, otrzymujemy niewielką prowizję. Zapisz link i używaj go podczas zakupów online. Dziękuję!</string>

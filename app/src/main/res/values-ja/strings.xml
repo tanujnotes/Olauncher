@@ -91,6 +91,8 @@
     <string name="rate_us_message">ねえ、Olauncher は役に立つと思いますか? 「はい」の場合、5 つ星の評価が私たちをサポートする最善の方法です。\n\nありがとう、もうこれを見ることはないだろう。</string>
     <string name="share_message">こんにちは、あなたの友達もあなたと同じくらいオランチャーを好きだと思いますか?\n\nアプリを共有して、情報を広めてください。ありがとう！</string>
     <string name="keyboard_message">こんにちは、キーボードは Olauncher でアプリを見つけて起動する最も速い方法です。もう数日間これをオンにしてから判断していただくようお願いできますか?選択は常にあなた次第です。</string>
+    <string name="digital_wellbeing_message">特定のアプリに時間制限を設定したい場合は、Android の Digital Wellbeing 機能を使用すると便利です。
+        \n\n携帯電話の設定で Digital Wellbeing を検索し、有効にしてください。</string>
     <string name="accessibility_service_description">ダブルタップしてロックを有効にするには、アクセシビリティ許可が必要です。このサービスを通じて Olauncher が取得したデータは、デバイスから流出することはありません。</string>
     <string name="support_olauncher_for_free">Amazon アフィリエイト リンクを使用して、Olauncher を無料でサポートしてください。</string>
     <string name="support_olauncher_message">あなたが私たちのリンクを使用して何かを購入するたびに、私たちは少額の手数料を受け取ります。リンクを保存し、オンライン ショッピングの際には必ずご利用ください。 ありがとう！</string>

@@ -59,6 +59,8 @@
     <string name="share_message">Bonjour, pensez-vous que vos amis aimeraient Olauncher autant que vous?
         \n\nSoutenez-nous en partageant l\'appli. Merci !</string>
     <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de garder cela activé pendant quelques jours de plus, puis de décider? Le choix vous appartient toujours.</string>
+    <string name="digital_wellbeing_message">Si vous souhaitez définir des limites de temps pour certaines applications, la fonctionnalité Digital Wellbeing d\'Android peut vous aider à le faire.
+        \n\nVeuillez rechercher Digital Wellbeing dans les paramètres de votre téléphone et l\'activer.</string>
     <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller. Toutes les données acquises par Olauncher via ce service ne quitteront pas votre appareil.</string>
     <string name="support_olauncher_for_free">Soutenez Olauncher gratuitement en utilisant notre lien d\'affiliation Amazon.</string>
     <string name="support_olauncher_message">Chaque fois que vous achetez quelque chose en utilisant notre lien, nous recevons une petite commission. Enregistrez le lien et utilisez le chaque fois que vous commandez en ligne. Merci!</string>

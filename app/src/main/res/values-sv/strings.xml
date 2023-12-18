@@ -59,6 +59,8 @@
         \n\nSkulle du kunna vara vänlig nog att dela Olauncher med dina vänner, är du snäll? Tack, och ha en underbar dag!</string>
     <string name="keyboard_message">Hejsan, tangentbordet är det snabbaste sättet att hitta och starta appar i Olauncher. Får vi be dig att behålla denna På i några dagar till innan du bestämmer dig?
         \n\nValet är alltid ditt.</string>
+    <string name="digital_wellbeing_message">Om du vill ställa in tidsgränser för vissa appar kan Digital Wellbeing-funktionen i Android hjälpa dig att göra det.
+        \n\nSök efter Digital Wellbeing i dina telefoninställningar och aktivera det.</string>
     <string name="accessibility_service_description">Tillgänglighetsbehörigheten krävs för att aktivera dubbeltryck för att låsa. Eventuella data förvärvade av Olauncher genom denna tjänst kommer inte att lämna din enhet.</string>
     <string name="support_olauncher_for_free">Stöd Olauncher utan kostnad genom att använda vår Amazon-affiliatelänk.</string>
     <string name="support_olauncher_message">Varje gång du köper något via vår länk får vi en liten provision. Vänligen spara länken och använd den när du handlar på nätet.\nTack!</string>

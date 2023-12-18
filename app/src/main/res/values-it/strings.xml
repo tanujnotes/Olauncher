@@ -60,6 +60,8 @@
         \n\nCondividi l\'app e aiutaci a spargere la voce. Grazie!</string>
     <string name="keyboard_message">Ciao, la tastiera è il modo più veloce per trovare e avviare le app in Olauncher. Possiamo chiederti di metterlo alla prova ancora per qualche giorno e poi decidere?
         \n\nSei sempre tu a scegliere.</string>
+    <string name="digital_wellbeing_message">Se desideri impostare limiti di tempo per determinate app, la funzionalità Benessere digitale di Android può aiutarti a farlo.
+        \n\nCerca Benessere digitale nelle impostazioni del telefono e attivalo.</string>
     <string name="accessibility_service_description">L\'autorizzazione di accessibilità è necessaria per abilitare il doppio tocco per il blocco schermo. Qualsiasi dato acquisito da Olauncher tramite questo servizio rimarrà all’interno del telefono</string>
     <string name="support_olauncher_for_free">Supporta Olauncher gratuitamente utilizzando il nostro link di affiliazione su Amazon.</string>
     <string name="support_olauncher_message">Ogni volta che acquisti qualcosa utilizzando il nostro link, riceviamo una piccola commissione. Salva il link e usalo ogni volta che fai acquisti online.\n Grazie!</string>

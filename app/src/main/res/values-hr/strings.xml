@@ -58,6 +58,8 @@
         \n\nBok, ako uživaš u korištenju Olaunchera, možeš li nam dati recenziju s 5 zvijezdica? To nam donosi više korisnika i usrećuje nas.\nHvala ti i sretan ostatak dana!</string>
     <string name="share_message">Bok, misliš li da bi i tvoji prijatelji voljeli Olauncher?
         \n\nPodijeli aplikaciju i širi riječ o nama. Hvala ti!</string>
+    <string name="digital_wellbeing_message">Ako želite postaviti vremenska ograničenja za određene aplikacije, značajka Digital Wellbeing na Androidu može vam pomoći u tome.
+        \n\nPotražite Digital Wellbeing u postavkama telefona i omogućite ga.</string>
     <string name="accessibility_service_description">Dozvola za pristupačnost potrebna je za omogućavanje zaključavanja dvostrukim dodirom. Bilo koji podatci prikupljeni ovim servisom neće napustiti tvoj uređaj.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Besplatno podrži Olauncher korištenjem naše sponzorske poveznice za Amazon.</string>

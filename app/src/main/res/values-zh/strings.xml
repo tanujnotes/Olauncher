@@ -93,7 +93,9 @@
         \n\n您能与您的朋友分享 Olauncher 吗？ 这真的很有帮助。 谢谢你！</string>
     <string name="keyboard_message">您好，键盘是在 Olauncher 中查找和启动应用程序的最快方式。我们可以要求您再保留几天?
         \n\n然后再决定吗？选择权永远在你手中。</string>
-    <string name="accessibility_service_description">需要辅助功能权限才能启用双击锁定。 Olauncher 通过此服务获取的任何数据都不会离开您的设备。</string>
+    <string name="digital_wellbeing_message">如果您想为某些应用程序设置时间限制，Android 的数字健康功能可以帮助您做到这一点。
+        \n\n请在手机设置中搜索数字健康并启用它。</string>
+    <string name="accessibility_service_description">请在手机设置中搜索数字健康并启用它。</string>
     <string name="support_olauncher_for_free">使用我们的亚马逊附属链接免费支持 Olauncher。</string>
     <string name="support_olauncher_message">每次您使用我们的链接购买商品时，我们都会获得少量佣金。请保存链接并在网上购物时使用它。 谢谢！</string>
     <string name="open">打开链接</string>

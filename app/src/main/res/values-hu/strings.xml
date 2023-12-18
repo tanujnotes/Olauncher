@@ -59,6 +59,8 @@
             \n\nOssza meg az Olauncher-t az Önnek fontos emberekkel.</string>
     <string name="keyboard_message">Üdv, a billentyűzet a leggyorsabb módja a alkalmazások megtalálásához és elindításához az Olauncherben. Kérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön.
             \n\nA választás mindig az Öné.</string>
+    <string name="digital_wellbeing_message">Ha időkorlátokat szeretne beállítani bizonyos alkalmazásokhoz, az Android Digital Wellbeing funkciója segíthet ebben.
+            \n\nKeresse meg a Digitális jólét elemet a telefon beállításai között, és engedélyezze.</string>
     <string name="accessibility_service_description">A dupla koppintás zárolásához szükséges a hozzáférhetőségi engedély. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
     <string name="support_olauncher_for_free">Támogasson minket ingyenesen az Amazon affiliate linkünk használatával.</string>
     <string name="support_olauncher_message">Minden alkalommal, amikor vásárol valamit a linkünket használva, egy kis jutalékot kapunk. Kérjük, mentse el a linket, és használja fel, amikor csak online vásárol.

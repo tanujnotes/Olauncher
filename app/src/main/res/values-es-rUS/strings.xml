@@ -59,6 +59,8 @@
     <string name="share_message">Hola, tenemos una gran solicitud! Queremos alcanzar el millón de descargas antes de que finalice 2023 y necesitamos tu ayuda.
         \n\n¿Podrías compartir Olauncher con tus amigos, por favor? Eso sería realmente útil. ¡Gracias!</string>
     <string name="keyboard_message">Hola, el teclado es la forma más rápida de encontrar y lanzar aplicaciones en Olauncher. ¿Podemos pedirle que mantenga esto encendido por unos días más y luego decidir? La elección es siempre tuya.</string>
+    <string name="digital_wellbeing_message">Si desea establecer límites de tiempo para determinadas aplicaciones, la función Bienestar digital de Android puede ayudarle a hacerlo.
+        \n\nBusque Bienestar digital en la configuración de su teléfono y habilítelo.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="support_olauncher_for_free">Apoye Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
     <string name="support_olauncher_message">Cada vez que compras algo usando nuestro enlace, obtenemos una pequeña comisión. Por favor, guarde el enlace y úselo cada vez que compre en línea. ¡Gracias!</string>
