@@ -7,6 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.WindowManager
@@ -78,3 +79,21 @@ fun Context.isEinkDisplay(): Boolean {
     }
 }
 
+fun Context.searchOnPlayStore(query: String? = null): Boolean {
+    return try {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/search?q=$query&c=apps")
+            ).addFlags(
+                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            )
+        )
+        true
+    } catch (e: Exception) {
+        e.printStackTrace()
+        false
+    }
+}
