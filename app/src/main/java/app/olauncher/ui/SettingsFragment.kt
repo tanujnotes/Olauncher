@@ -6,8 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Process
 import android.provider.Settings
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
@@ -21,7 +26,18 @@ import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentSettingsBinding
-import app.olauncher.helper.*
+import app.olauncher.helper.animateAlpha
+import app.olauncher.helper.getColorFromAttr
+import app.olauncher.helper.isAccessServiceEnabled
+import app.olauncher.helper.isDarkThemeOn
+import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.isPackageInstalled
+import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.openUrl
+import app.olauncher.helper.rateApp
+import app.olauncher.helper.setPlainWallpaper
+import app.olauncher.helper.shareApp
+import app.olauncher.helper.showToast
 import app.olauncher.listener.DeviceAdmin
 
 class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -52,6 +68,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         checkAdminPermission()
 
         binding.homeAppsNum.text = prefs.homeAppsNum.toString()
+        populateDigitalWellbeing()
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
@@ -78,7 +95,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
-            R.id.appInfo -> openAppInfo(requireContext(), android.os.Process.myUserHandle(), BuildConfig.APPLICATION_ID)
+            R.id.digitalWellbeing -> viewModel.showDialog.postValue(Constants.Dialog.DIGITAL_WELLBEING)
+            R.id.appInfo -> openAppInfo(requireContext(), Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
@@ -174,6 +192,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.appInfo.setOnClickListener(this)
         binding.setLauncher.setOnClickListener(this)
         binding.aboutOlauncher.setOnClickListener(this)
+        binding.digitalWellbeing.setOnClickListener(this)
         binding.autoShowKeyboard.setOnClickListener(this)
         binding.toggleLock.setOnClickListener(this)
         binding.homeAppsNum.setOnClickListener(this)
@@ -562,6 +581,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             binding.swipeLeftApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
         if (!prefs.swipeRightEnabled)
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
+    }
+
+    private fun populateDigitalWellbeing() {
+        binding.digitalWellbeing.isVisible = isPackageInstalled(
+            requireContext(),
+            Constants.DIGITAL_WELLBEING_PACKAGE_NAME,
+            Process.myUserHandle().toString()
+        ).not()
     }
 
     private fun showAppListIfEnabled(flag: Int) {

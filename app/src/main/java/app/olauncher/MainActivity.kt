@@ -134,6 +134,13 @@ class MainActivity : AppCompatActivity() {
                         binding.messageLayout.visibility = View.GONE
                     }
                 }
+
+                Constants.Dialog.DIGITAL_WELLBEING -> {
+                    showMessageDialog("Hi", getString(R.string.digital_wellbeing_message), getString(R.string.learn_more)) {
+                        binding.messageLayout.visibility = View.GONE
+                        openUrl(Constants.URL_DIGITAL_WELLBEING_LEARN_MORE)
+                    }
+                }
             }
         }
     }
