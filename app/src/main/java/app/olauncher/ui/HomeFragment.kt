@@ -2,6 +2,7 @@ package app.olauncher.ui
 
 import android.app.admin.DevicePolicyManager
 import android.content.Context
+import android.graphics.Typeface
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
@@ -24,7 +25,9 @@ import app.olauncher.databinding.FragmentHomeBinding
 import app.olauncher.helper.*
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
+import java.lang.reflect.Type
 import java.text.SimpleDateFormat
+import java.time.format.TextStyle
 import java.util.*
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
@@ -54,6 +57,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
+        setHomeTextStyle(prefs.homeTextStyle)
         initSwipeTouchListener()
         initClickListeners()
     }
@@ -151,6 +155,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 }
                 prefs.homeBottomAlignment = false
                 setHomeAlignment()
+                prefs.homeTextStyleWidget = false
+                setHomeTextStyle()
             }
             if (binding.firstRunTips.visibility == View.VISIBLE) return@Observer
             if (it) binding.setDefaultLauncher.visibility = View.GONE
@@ -158,6 +164,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             setHomeAlignment(it)
+        }
+        viewModel.homeTextStyle.observe(viewLifecycleOwner) {
+            setHomeTextStyle(it)
         }
         viewModel.toggleDateTime.observe(viewLifecycleOwner) {
             populateDateTime()
@@ -198,6 +207,20 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.gravity = horizontalGravity
         binding.homeApp7.gravity = horizontalGravity
         binding.homeApp8.gravity = horizontalGravity
+    }
+
+    private fun setHomeTextStyle(textStyle: Int = prefs.homeTextStyle) {
+        val textStyleWidget = if (prefs.homeTextStyleWidget) Typeface.BOLD else Typeface.NORMAL
+        binding.clock.setTypeface(null, textStyleWidget)
+        binding.date.setTypeface(null, textStyleWidget)
+        binding.homeApp1.setTypeface(null, textStyle)
+        binding.homeApp2.setTypeface(null, textStyle)
+        binding.homeApp3.setTypeface(null, textStyle)
+        binding.homeApp4.setTypeface(null, textStyle)
+        binding.homeApp5.setTypeface(null, textStyle)
+        binding.homeApp6.setTypeface(null, textStyle)
+        binding.homeApp7.setTypeface(null, textStyle)
+        binding.homeApp8.setTypeface(null, textStyle)
     }
 
     private fun populateDateTime() {

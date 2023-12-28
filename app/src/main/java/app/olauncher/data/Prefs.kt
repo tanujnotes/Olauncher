@@ -2,6 +2,7 @@ package app.olauncher.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatDelegate
 
@@ -34,6 +35,8 @@ class Prefs(context: Context) {
     private val RATE_CLICKED = "RATE_CLICKED"
     private val SWIPE_DOWN_ACTION = "SWIPE_DOWN_ACTION"
     private val TEXT_SIZE_SCALE = "TEXT_SIZE_SCALE"
+    private val HOME_TEXT_STYLE = "HOME_TEXT_STYLE"
+    private val HOME_TEXT_STYLE_WIDGET = "HOME_TEXT_STYLE_WIDGET"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -156,6 +159,14 @@ class Prefs(context: Context) {
     var textSizeScale: Float
         get() = prefs.getFloat(TEXT_SIZE_SCALE, 1.0f)
         set(value) = prefs.edit().putFloat(TEXT_SIZE_SCALE, value).apply()
+
+    var homeTextStyle: Int
+        get() = prefs.getInt(HOME_TEXT_STYLE, Typeface.NORMAL)
+        set(value) = prefs.edit().putInt(HOME_TEXT_STYLE, value).apply()
+
+    var homeTextStyleWidget: Boolean
+        get() = prefs.getBoolean(HOME_TEXT_STYLE_WIDGET, false)
+        set(value) = prefs.edit().putBoolean(HOME_TEXT_STYLE_WIDGET, value).apply()
 
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds
