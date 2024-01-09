@@ -122,4 +122,8 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Você está usando seu telefone, ou seu telefone está usando você?</string>
     <string name="about_olauncher">Sobre Olauncher</string>
     <string name="learn_more">Saber mais</string>
+    <string name="did_you_know">Você sabia?</string>
+    <string name="leave_a_review">Deixe um comentário</string>
+    <string name="review_message">Olauncher é e sempre será totalmente gratuito. Não tem anúncios. Não coleta dados. Mais importante ainda, ajuda você a reduzir o tempo de tela e a ter uma vida digital mais saudável.
+        \n\nAcreditamos que mudar para um launcher mínimo é uma excelente decisão. Embora sejamos obviamente tendenciosos, esperamos que você esteja gostando da experiência. Sinta-se à vontade para compartilhar suas idéias conosco!</string>
 </resources>

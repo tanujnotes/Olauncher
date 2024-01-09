@@ -122,4 +122,8 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ön használja a telefonját, vagy a telefona használja Önt?</string>
     <string name="about_olauncher">Az Olauncher-ről</string>
     <string name="learn_more">Tudj meg többet</string>
+    <string name="did_you_know">Tudtad?</string>
+    <string name="leave_a_review">Hagyjon véleményt</string>
+    <string name="review_message">Az Olauncher teljesen ingyenes és mindig is ingyenes lesz. Nincsenek hirdetései. Nem gyűjt adatokat. A legfontosabb, hogy segít csökkenteni a képernyő előtt töltött időt és egészségesebb digitális életet élni.
+        \n\nÚgy gondoljuk, hogy a minimális indítóra váltás kiváló döntés. Bár nyilvánvalóan elfogultak vagyunk, reméljük, hogy élvezni fogja az élményt. Nyugodtan oszd meg velünk gondolataidat!</string>
 </resources>

@@ -120,4 +120,8 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">あなたは電話を使っていますか、それともあなたの電話があなたを使っていますか？</string>
     <string name="about_olauncher">アバウト Olauncher</string>
     <string name="learn_more">もっと詳しく知る</string>
+    <string name="did_you_know">知っていましたか？</string>
+    <string name="leave_a_review">レビューを残す</string>
+    <string name="review_message">Olauncher は現在も、今後も完全に無料です。広告はありません。データは収集されません。最も重要なことは、スクリーンタイムを短縮し、より健康的なデジタル ライフを送るのに役立つことです。
+        \n\n私たちは、最小限のランチャーに切り替えるのは素晴らしい決断だと信じています。明らかに偏見がありますが、楽しんでいただければ幸いです。ぜひご意見をお聞かせください。</string>
 </resources>

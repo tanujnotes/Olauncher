@@ -120,4 +120,8 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Använder du din telefon, eller använder din telefon dig?</string>
     <string name="about_olauncher">Om Olauncher</string>
     <string name="learn_more">Läs mer</string>
+    <string name="did_you_know">Visste du?</string>
+    <string name="leave_a_review">Lämna en recension</string>
+    <string name="review_message">Olauncher är och kommer alltid att vara helt gratis. Den har inga annonser. Den samlar ingen data. Viktigast av allt, det hjälper dig att minska din skärmtid och leva ett hälsosammare digitalt liv.
+        \n\nVi tror att byte till en minimal launcher är ett utmärkt beslut. Även om vi uppenbarligen är partiska, hoppas vi att du gillar upplevelsen. Dela gärna dina tankar med oss!</string>
 </resources>
