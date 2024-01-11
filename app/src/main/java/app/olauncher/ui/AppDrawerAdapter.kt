@@ -80,7 +80,11 @@ class AppDrawerAdapter(
                 autoLaunch = charSearch?.startsWith(" ")?.not() ?: true
 
                 val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
-                else appsList.filter { app -> appLabelMatches(app.appLabel, charSearch) } as MutableList<AppModel>)
+                else appsList.filter { app ->
+                    appLabelMatches(app.appLabel, charSearch)
+                }.sortedByDescending {
+                    charSearch.contentEquals(it.appLabel, true)
+                } as MutableList<AppModel>)
 
                 val filterResults = FilterResults()
                 filterResults.values = appFilteredList
@@ -176,7 +180,7 @@ class AppDrawerAdapter(
                     }
                 }
                 etAppRename.setOnEditorActionListener { _, actionCode, _ ->
-                    if(actionCode == EditorInfo.IME_ACTION_DONE) {
+                    if (actionCode == EditorInfo.IME_ACTION_DONE) {
                         val renameLabel = etAppRename.text.toString().trim()
                         if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
                             appRenameListener(appModel, renameLabel)
