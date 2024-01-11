@@ -16,10 +16,9 @@ AF stands for Ad-Free :D
     alt="Get it on F-Droid"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
-## Feature request
-Olauncher is feature complete, which means, there won't be any major changes going forward. For better or worse, Olauncher will stay the same for a very long time, hopefully forever.
+To maintain the simplicity of the launcher, a few niche features are available but hidden.
 
-Note: To maintain the simplicity of the launcher, a few niche features are available but hidden. Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in Olauncher settings for the complete list and FAQs.
+Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in Olauncher settings for the complete list and FAQs.
 
 ##
 
