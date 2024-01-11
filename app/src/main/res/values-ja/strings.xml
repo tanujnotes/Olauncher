@@ -89,7 +89,8 @@
     <string name="light">ライト</string>
     <string name="welcome_to_olauncher_settings">下部にある当社の概要ページには、すべての質問への回答が記載されています。忘れないで。 :)\n\nありがとう。</string>
     <string name="rate_us_message">ねえ、Olauncher は役に立つと思いますか? 「はい」の場合、5 つ星の評価が私たちをサポートする最善の方法です。\n\nありがとう、もうこれを見ることはないだろう。</string>
-    <string name="share_message">こんにちは、あなたの友達もあなたと同じくらいオランチャーを好きだと思いますか?\n\nアプリを共有して、情報を広めてください。ありがとう！</string>
+    <string name="share_message">こんにちは、あなたの助けが必要です!昨年、ダウンロード数が 100 万件を突破しました。今年はさらに 100 万人を達成したいと考えていますが、私たちだけでは達成できません。
+        \n\nOlauncher をお友達と共有していただけますか?ありがとう、そして素晴らしい一日をお過ごしください!</string>
     <string name="keyboard_message">こんにちは、キーボードは Olauncher でアプリを見つけて起動する最も速い方法です。もう数日間これをオンにしてから判断していただくようお願いできますか?選択は常にあなた次第です。</string>
     <string name="digital_wellbeing_message">特定のアプリに時間制限を設定したい場合は、Android の Digital Wellbeing 機能を使用すると便利です。
         \n\n携帯電話の設定で Digital Wellbeing を検索し、有効にしてください。</string>

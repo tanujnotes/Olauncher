@@ -89,8 +89,8 @@
     <string name="welcome_to_olauncher_settings">Alt kısımdaki Hakkında sayfamızda tüm sorularınızın yanıtları bulunmaktadır. unutma :)\n\nTeşekkür ederim.</string>
     <string name="rate_us_message">Merhaba, bu mesajı bir daha görmeyeceksiniz.
         \n\nOlauncher\'ı beğendiyseniz, lütfen bize 5 yıldız verebilir misiniz? Sıralamamızı yükseltmemize yardımcı oluyor ve bizi mutlu ediyor. Teşekkür ederim!</string>
-    <string name="share_message">Merhaba, büyük bir isteğimiz var! 2023 bitmeden bir milyon indirmeye ulaşmak istiyoruz ve yardımınıza ihtiyacımız var.
-        \n\nOlauncher\'ı arkadaşlarınızla paylaşır mısınız lütfen? Bu gerçekten yardımcı olacaktır. Teşekkür ederim!</string>
+    <string name="share_message">Merhaba, yardımınıza ihtiyacımız var! Geçen yıl bir milyon indirmeyi geçtik. Bu yıl bir milyona daha ulaşmak istiyoruz ama bunu tek başımıza yapamayız.
+        \n\nOlauncher'ı arkadaşlarınızla paylaşma nezaketini gösterir misiniz lütfen? Teşekkür ederim ve harika bir gün geçirmenizi dilerim!</string>
     <string name="keyboard_message">Merhaba, klavye, Olauncher\'da uygulamaları bulmanın ve başlatmanın en hızlı yoludur. Bunu birkaç gün daha Açık tutmanızı ve sonra karar vermenizi rica edebilir miyiz?
         \n\nSeçim her zaman senindir.</string>
     <string name="digital_wellbeing_message">Belirli uygulamalar için zaman sınırları belirlemek istiyorsanız Android\'in Dijital Denge özelliği bunu yapmanıza yardımcı olabilir.
