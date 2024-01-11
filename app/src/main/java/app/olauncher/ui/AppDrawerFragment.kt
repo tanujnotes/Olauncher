@@ -219,20 +219,26 @@ class AppDrawerFragment : Fragment() {
                         onTop = !recyclerView.canScrollVertically(-1)
                         if (onTop) binding.search.hideKeyboard()
                         if (onTop && !recyclerView.canScrollVertically(1))
-                            findNavController().popBackStack()
+                            checkMessageAndExit()
                     }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
                         if (!recyclerView.canScrollVertically(1)) {
                             binding.search.hideKeyboard()
                         } else if (!recyclerView.canScrollVertically(-1)) {
-                            if (onTop) findNavController().popBackStack()
+                            if (onTop) checkMessageAndExit()
                             else binding.search.showKeyboard(prefs.autoShowKeyboard)
                         }
                     }
                 }
             }
         }
+    }
+
+    private fun checkMessageAndExit() {
+        findNavController().popBackStack()
+        if (flag == Constants.FLAG_LAUNCH_APP)
+            viewModel.checkForMessages.call()
     }
 
     override fun onStart() {

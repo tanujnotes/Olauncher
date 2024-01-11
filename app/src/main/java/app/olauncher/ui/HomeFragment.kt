@@ -6,7 +6,11 @@ import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -21,11 +25,22 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentHomeBinding
-import app.olauncher.helper.*
+import app.olauncher.helper.expandNotificationDrawer
+import app.olauncher.helper.getChangedAppTheme
+import app.olauncher.helper.getUserHandleFromString
+import app.olauncher.helper.isPackageInstalled
+import app.olauncher.helper.openAlarmApp
+import app.olauncher.helper.openCalendar
+import app.olauncher.helper.openCameraApp
+import app.olauncher.helper.openDialerApp
+import app.olauncher.helper.openSearch
+import app.olauncher.helper.setPlainWallpaperByTheme
+import app.olauncher.helper.showToast
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
@@ -351,6 +366,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
             else -> expandNotificationDrawer(requireContext())
         }
+        viewModel.checkForMessages.call()
     }
 
     private fun openSwipeRightApp() {
@@ -454,17 +470,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onLongClick() {
                 super.onLongClick()
                 try {
-                    if (prefs.toShowHintCounter == Constants.HINT_RATE_US && prefs.rateClicked.not()) {
-                        viewModel.showDialog.postValue(Constants.Dialog.RATE)
-                        prefs.toShowHintCounter = prefs.toShowHintCounter + 1
-                    } else if (prefs.toShowHintCounter % Constants.HINT_SHARE == 0) {
-                        viewModel.showDialog.postValue(Constants.Dialog.SHARE)
-                        prefs.toShowHintCounter = prefs.toShowHintCounter + 1
-                    } else {
-                        findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
-                        viewModel.firstOpen(false)
-                    }
-                } catch (e: java.lang.Exception) {
+                    findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                    viewModel.firstOpen(false)
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
