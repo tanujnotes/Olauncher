@@ -140,4 +140,5 @@
     <string name="leave_a_review">Leave a review</string>
     <string name="review_message">Olauncher is and will always be entirely free. It has no ads. It collects no data. Most importantly, it helps you in reducing your screen time and live a healthier digital life.
         \n\nWe believe that switching to a minimal launcher is an excellent decision. While we\'re obviously biased, we hope you\'re enjoying the experience. Feel free to share your thoughts with us!</string>
+    <string name="alignment_changed">Alignment changed ✅</string>
 </resources>

@@ -176,7 +176,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignment -> {
                 prefs.appLabelAlignment = prefs.homeAlignment
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
-                requireContext().showToast("Alignment changed ✅")
+                requireContext().showToast(getString(R.string.alignment_changed))
             }
 
             R.id.dailyWallpaper -> removeWallpaper()
