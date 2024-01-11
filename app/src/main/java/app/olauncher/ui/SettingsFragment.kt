@@ -168,9 +168,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
+            R.id.digitalWellbeing -> {
+                prefs.hideDigitalWellbeing = true
+                binding.digitalWellbeing.visibility = View.GONE
+            }
+
             R.id.alignment -> {
                 prefs.appLabelAlignment = prefs.homeAlignment
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
+                requireContext().showToast("Alignment changed ✅")
             }
 
             R.id.dailyWallpaper -> removeWallpaper()
@@ -247,6 +253,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.textSize6.setOnClickListener(this)
         binding.textSize7.setOnClickListener(this)
 
+        binding.digitalWellbeing.setOnLongClickListener(this)
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
         binding.appThemeText.setOnLongClickListener(this)
@@ -584,11 +591,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateDigitalWellbeing() {
-        binding.digitalWellbeing.isVisible = isPackageInstalled(
-            requireContext(),
-            Constants.DIGITAL_WELLBEING_PACKAGE_NAME,
-            Process.myUserHandle().toString()
-        ).not()
+        binding.digitalWellbeing.isVisible = requireContext().isPackageInstalled(Constants.DIGITAL_WELLBEING_PACKAGE_NAME).not()
+                && requireContext().isPackageInstalled(Constants.DIGITAL_WELLBEING_SAMSUNG_PACKAGE_NAME).not()
+                && prefs.hideDigitalWellbeing.not()
     }
 
     private fun showAppListIfEnabled(flag: Int) {
