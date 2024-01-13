@@ -45,6 +45,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
 //                doubleTapOn = false
 //                onTripleClick()
 //            }
+            onClick()
             return super.onSingleTapUp(e)
         }
 
@@ -104,7 +105,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
     open fun onLongClick() {}
     open fun onDoubleClick() {}
     open fun onTripleClick() {}
-    private fun onClick() {}
+    open fun onClick() {}
 
     init {
         gestureDetector = GestureDetector(c, GestureListener())

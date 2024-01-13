@@ -366,7 +366,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
             else -> expandNotificationDrawer(requireContext())
         }
-        viewModel.checkForMessages.call()
     }
 
     private fun openSwipeRightApp() {
@@ -483,6 +482,11 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     binding.lock.performClick()
                 else if (prefs.lockModeOn)
                     lockPhone()
+            }
+
+            override fun onClick() {
+                super.onClick()
+                viewModel.checkForMessages.call()
             }
         }
     }
