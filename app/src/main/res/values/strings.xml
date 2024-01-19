@@ -69,9 +69,9 @@
     <string name="welcome_to_olauncher_settings">Tip: Our About page has answers to all your questions. Don\'t forget. :)
         \n\nThank you.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
-        \n\nIf you like Olauncher, could you please give us a 5-star rating? It helps us improve our ranking and makes us very happy. Thank you!</string>
-    <string name="share_message">Hi, we need your help! We want to hit a million downloads before 2023 ends but we can\'t do it alone.
-        \n\nWould you be kind enough to share Olauncher with your friends, please? Thank you and have a wonderful day!</string>
+        \n\nIf you\'re finding Olauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
+    <string name="share_message">We need your help! Last year we crossed a million downloads. This year we want to reach a million more, but we can\'t do it alone.
+         \n\nCould you please share Olauncher with the world? Because Olauncher needs people, and people need Olauncher.</string>
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
     <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.
@@ -138,7 +138,7 @@
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
     <string name="leave_a_review">Leave a review</string>
-    <string name="review_message">Olauncher is and will always be entirely free. It has no ads. It collects no data. Most importantly, it helps you in reducing your screen time and live a healthier digital life.
+    <string name="review_message">Olauncher is free and always will be. It has no ads. It collects no data. Most importantly, it helps you in reducing your screen time and live a healthier digital life.
         \n\nWe believe that switching to a minimal launcher is an excellent decision. While we\'re obviously biased, we hope you\'re enjoying the experience. Feel free to share your thoughts with us!</string>
     <string name="alignment_changed">Alignment changed ✅</string>
 </resources>

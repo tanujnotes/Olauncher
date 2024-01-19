@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
 
         when (prefs.userState) {
             Constants.UserState.START -> {
-                if (prefs.firstOpenTime.hasBeenMinutes(20))
+                if (prefs.firstOpenTime.hasBeenDays(1))
                     prefs.userState = Constants.UserState.REVIEW
             }
 
