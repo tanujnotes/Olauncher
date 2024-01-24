@@ -52,15 +52,16 @@
     <string name="system_default">System</string>
     <string name="dark">Mörkt</string>
     <string name="light">Ljust</string>
-    <string name="welcome_to_olauncher_settings">Tips: Vår Om-sida har svar på alla dina frågor. Glöm inte det. :) \n\nTack.</string>
+    <string name="welcome_to_olauncher_settings">Tips: Vår Om-sida har svar på alla dina frågor. Glöm inte det. :)
+        \n\nTack.</string>
     <string name="rate_us_message">Hejsan, du kommer inte att se detta meddelande igen.
-        \n\nOm du gillar Olauncher, skulle du vänligen kunna ge oss ett 5-stjärnigt omdöme? Det hjälper oss att förbättra vår rankning och gör oss väldigt glada. Tack!</string>
-    <string name="share_message">Hej, vi behöver din hjälp! Förra året passerade vi en miljon nedladdningar. I år vill vi nå en miljon fler men vi kan inte göra det ensamma.
-        \n\nSkulle du vara snäll nog att dela Olauncher med dina vänner? Tack och ha en underbar dag!</string>
+        \n\nOm du tycker att Olauncher är användbar, skulle du vänligen kunna lämna en 5-stjärnig recension? Det skulle göra oss väldigt glada. Tack!</string>
+    <string name="share_message">Vi behöver din hjälp! Förra året passerade vi en miljon nedladdningar. I år vill vi nå en miljon till, men vi kan inte göra det på egen hand.
+        \n\nKan du dela Olauncher med dina vänner? Olauncher behöver människor, och människor behöver Olauncher.</string>
     <string name="keyboard_message">Hejsan, tangentbordet är det snabbaste sättet att hitta och starta appar i Olauncher. Får vi be dig att behålla denna På i några dagar till innan du bestämmer dig?
         \n\nValet är alltid ditt.</string>
-    <string name="digital_wellbeing_message">Om du vill ställa in tidsgränser för vissa appar kan Digital Wellbeing-funktionen i Android hjälpa dig att göra det.
-        \n\nSök efter Digital Wellbeing i dina telefoninställningar och aktivera det.</string>
+    <string name="digital_wellbeing_message">Om du vill ställa in tidsgränser för vissa appar, kan Digitalt välmående-funktionen i Android hjälpa dig att göra det.
+        \n\nVänligen sök efter Digitalt välmående i dina telefoninställningar och aktivera den.</string>
     <string name="accessibility_service_description">Tillgänglighetsbehörigheten krävs för att aktivera dubbeltryck för att låsa. Eventuella data förvärvade av Olauncher genom denna tjänst kommer inte att lämna din enhet.</string>
     <string name="support_olauncher_for_free">Stöd Olauncher utan kostnad genom att använda vår Amazon-affiliatelänk.</string>
     <string name="support_olauncher_message">Varje gång du köper något via vår länk får vi en liten provision. Vänligen spara länken och använd den när du handlar på nätet.\nTack!</string>
@@ -119,9 +120,11 @@
     <string name="adapter_hide">Dölj</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Använder du din telefon, eller använder din telefon dig?</string>
     <string name="about_olauncher">Om Olauncher</string>
+    <string name="digital_wellbeing">Digitalt välmående</string>
     <string name="learn_more">Läs mer</string>
     <string name="did_you_know">Visste du?</string>
     <string name="leave_a_review">Lämna en recension</string>
-    <string name="review_message">Olauncher är och kommer alltid att vara helt gratis. Den har inga annonser. Den samlar ingen data. Viktigast av allt, det hjälper dig att minska din skärmtid och leva ett hälsosammare digitalt liv.
-        \n\nVi tror att byte till en minimal launcher är ett utmärkt beslut. Även om vi uppenbarligen är partiska, hoppas vi att du gillar upplevelsen. Dela gärna dina tankar med oss!</string>
+    <string name="review_message">Olauncher är gratis och kommer alltid att vara det. Den har inga annonser. Den samlar inte in någon data. Viktigast av allt, det hjälper dig att minska din skärmtid och leva ett hälsosammare digitalt liv.
+          \n\nVi tycker att det är ett utmärkt beslut att byta till en minimalistisk startskärmsapp. Även om vi uppenbarligen är partiska, hoppas vi att du gillar upplevelsen. Vi vill gärna höra dina tankar!</string>
+    <string name="alignment_changed">Placering ändrad ✅</string>
 </resources>
