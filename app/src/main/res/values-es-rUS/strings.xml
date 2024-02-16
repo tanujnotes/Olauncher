@@ -61,7 +61,7 @@
     <string name="keyboard_message">Hola, el teclado es la forma más rápida de encontrar y abrir aplicaciones en Olauncher. ¿Podemos pedirte que mantengas esto encendido por unos días más y luego decidir? La elección siempre es tuya.</string>
     <string name="digital_wellbeing_message">Si desea establecer límites de tiempo para determinadas aplicaciones, la función Bienestar Digital de Android puede ayudarle a hacerlo.
         \n\nBusque Bienestar Digital en la configuración de su teléfono y habilítelo.</string>
-    <string name="accessibility_service_description">Se necesita el permiso de Accesibilidad para activar el bloqueo con doble-toque. Cualquier dato recolectado por Olauncher no saldrá de tu dispositivo.</string>
+    <string name="accessibility_service_description">Se necesita el permiso de Accesibilidad para activar el bloqueo con doble toque. Cualquier dato recolectado por Olauncher no saldrá de tu dispositivo.</string>
     <string name="support_olauncher_for_free">Apoye Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
     <string name="support_olauncher_message">Cada vez que compras algo usando nuestro enlace, obtenemos una pequeña comisión. Por favor, guarde el enlace y úselo cada vez que compre en línea. ¡Gracias!</string>
     <string name="open">Abrir enlace</string>
