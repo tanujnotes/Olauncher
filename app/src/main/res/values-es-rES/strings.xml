@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app">App</string>
-    <string name="set_as_default_launcher">Establecer como iniciador predeterminado</string>
-    <string name="set_as_default_launcher_first">Establecer como iniciador predeterminado</string>
+    <string name="set_as_default_launcher">Establecer como lanzador principal</string>
+    <string name="set_as_default_launcher_first">Establecer como lanzador principal</string>
     <string name="app_text_color">Color del texto</string>
     <string name="double_tap_to_lock_screen">Tocar dos veces para bloquear</string>
     <string name="admin_permission_message">Olauncher promete usar el permiso de la pantalla de bloqueo de manera responsable. Olauncher no recopila ni comparte ningún dato.</string>
@@ -11,25 +11,25 @@
     <string name="on">Sí</string>
     <string name="black">Negro</string>
     <string name="white">Blanco</string>
-    <string name="change_default_launcher">Cambiar iniciador predeterminado</string>
+    <string name="change_default_launcher">Cambiar lanzador principal</string>
     <string name="privacy">Privacidad</string>
     <string name="share">Compartir</string>
     <string name="share_now">Compartir</string>
-    <string name="rate">Valorar</string>
-    <string name="rate_now">Valorar</string>
+    <string name="rate">Calificar</string>
+    <string name="rate_now">Calificar</string>
     <string name="follow">Seguir</string>
     <string name="email">Correo electrónico</string>
 
     <string name="donate">Donar</string>
-    <string name="swipe_up_for_apps">1. Deslice hacia arriba para ver todas las aplicaciones\n2. Mantenga pulsado en cualquier lugar para abrir la configuración</string>
+    <string name="swipe_up_for_apps">1. Desliza hacia arriba para ver todas las aplicaciones\n2. Mantén pulsado en cualquier lugar para abrir la configuración</string>
     <string name="apps_on_home_screen">Aplicaciones en la pantalla de inicio</string>
     <string name="daily_wallpaper_update">Nuevo fondo de pantalla diario</string>
     <string name="left">Izquierda</string>
     <string name="right">Derecha</string>
     <string name="center">Centrado</string>
     <string name="home_layout_alignment">Posición de aplicaciones</string>
-    <string name="swipe_left_app">Deslizar hacia la izquierda para abrir</string>
-    <string name="swipe_right_app">Deslizar hacia la derecha para abrir</string>
+    <string name="swipe_left_app">Deslizar a la izquierda para abrir</string>
+    <string name="swipe_right_app">Deslizar a la derecha para abrir</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -39,7 +39,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Sugerencia: comience a escribir el nombre de una aplicación para iniciarla automáticamente</string>
+    <string name="app_drawer_tips">Sugerencia: Comienza a escribir el nombre de una aplicación para iniciarla automáticamente</string>
     <string name="okay">De acuerdo</string>
     <string name="cool">¡Guay!</string>
     <string name="auto_show_keyboard">Mostrar teclado automáticamente</string>
@@ -56,14 +56,14 @@
     <string name="welcome_to_olauncher_settings">Nuestra página \'Acerca de\' en la parte inferior tiene respuestas a todas sus preguntas. no lo olvides :)\n\nGracias.</string>
     <string name="rate_us_message">Hola, no volverás a ver este mensaje.
         \n\nSi te gusta Olauncher, ¿puedes darnos una calificación de 5 estrellas? Nos ayuda a mejorar nuestra clasificación y nos hace felices. ¡Gracias!</string>
-    <string name="share_message">Hola, necesitamos tu ayuda! El año pasado superamos el millón de descargas. Este año queremos llegar a un millón más pero no podemos hacerlo solos.
+    <string name="share_message">Hola, necesitamos tu ayuda! El año pasado superamos el millón de descargas. Este año queremos llegar a un millón más, pero no podemos hacerlo solos.
         \n\n¿Serías tan amable de compartir Olauncher con tus amigos, por favor? ¡Gracias y tenga un maravilloso día!</string>
-    <string name="keyboard_message">Hola, el teclado es la forma más rápida de encontrar y ejecutar aplicaciones en Olauncher. ¿Podemos pedirle que mantenga esto activado durante unos días más y luego decidir?
-        \n\nLa decisión siempre es suya.</string>
-    <string name="digital_wellbeing_message">Si desea establecer límites de tiempo para determinadas aplicaciones, la función Bienestar digital de Android puede ayudarle a hacerlo.
-        \n\nBusque Bienestar digital en la configuración de su teléfono y habilítelo.</string>
+    <string name="keyboard_message">Hola, el teclado es la forma más rápida de encontrar y ejecutar aplicaciones en Olauncher. ¿Podemos pedirte que mantenga esto activado durante unos días más y luego decidir?
+        \n\nLa decisión siempre es vuestra.</string>
+    <string name="digital_wellbeing_message">Si deseas establecer límites de tiempo para determinadas aplicaciones, la función Bienestar digital de Android puede ayudarte a hacerlo.
+        \n\nBusca Bienestar digital en la configuración de su teléfono y habilítelo.</string>
     <string name="accessibility_service_description">"Se requiere el permiso de accesibilidad para habilitar el doble toque para bloquear. Cualquier dato adquirido por Olauncher a través de este servicio no saldrá de su dispositivo."</string>
-    <string name="support_olauncher_for_free">Apoye a Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
+    <string name="support_olauncher_for_free">Apoya a Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
     <string name="support_olauncher_message">Cada vez que compre algo usando nuestro enlace, obtendremos una pequeña comisión. Guarde el enlace y utilícelo cada vez que compre en línea.\n¡Gracias!</string>
     <string name="open">Abrir enlace</string>
     <string name="copy">Copiar</string>
@@ -79,14 +79,14 @@
     <string name="bottom_off">Abajo: No</string>
     <string name="please_set_olauncher_as_default_first">Primero seleccione Olauncher como su iniciador predeterminado</string>
     <string name="affiliate">Afiliado</string>
-    <string name="tip_start_typing_for_rename">Sugerencia: Comience a escribir para RENOMBRAR la aplicación</string>
-    <string name="hidden_apps_message">Nota: pulse \'Olauncher\' en la parte superior de esta página de Configuración para encontrar sus aplicaciones ocultas.
+    <string name="tip_start_typing_for_rename">Sugerencia: Comienza a escribir para RENOMBRAR la aplicación</string>
+    <string name="hidden_apps_message">Nota: pulsa \'Olauncher\' en la parte superior de esta página de Configuración para encontrar las aplicaciones ocultas.
         \n\nMás detalles disponibles en nuestra página \'Acerca de\' más abajo.</string>
     <string name="swipe_down_for">Deslizar hacia abajo para</string>
     <string name="search">Búsqueda</string>
     <string name="notifications">Notificaciones</string>
-    <string name="accessibility_disclosure">Active o desactive el servicio de accesibilidad de Olauncher en la configuración de su dispositivo para activar o desactivar esta función.
-        \n\nTenga en cuenta que este servicio solo se utiliza para permitirle apagar la pantalla de su dispositivo con el gesto de doble toque. Nuestro servicio de accesibilidad no recopila ni comparte ningún dato.</string>
+    <string name="accessibility_disclosure">Activa o desactiva el servicio de accesibilidad de Olauncher en la configuración de su dispositivo para activar o desactivar esta función.
+        \n\nTen en cuenta que este servicio solo se utiliza para permitir apagar la pantalla de tu dispositivo con el gesto de doble toque. Nuestro servicio de accesibilidad no recopila ni comparte ningún dato.</string>
     <string name="accept">Aceptar</string>
     <string name="permission">Permiso</string>
     <string name="double_tap_lock">Tocar dos veces para bloquear</string>
@@ -104,16 +104,16 @@
     <string name="unable_to_open_app">No se ha podido abrir la información de la aplicación</string>
     <string name="copied">Copiado</string>
     <string name="system_app_cannot_delete">Aplicación del sistema, no se puede eliminar</string>
-    <string name="type_a_new_app_name_first">Primero escriba un nuevo nombre para la aplicación</string>
+    <string name="type_a_new_app_name_first">Primero escribe un nuevo nombre para la aplicación</string>
     <string name="app_not_found">Aplicación no encontrada</string>
     <string name="unable_to_launch_app">No se ha podido iniciar la aplicación</string>
-    <string name="search_for_Launcher_or_home_app">Busque la aplicación Lanzador, Iniciador o Inicio</string>
+    <string name="search_for_Launcher_or_home_app">Busca la aplicación Lanzador, Iniciador o Inicio</string>
     <string name="swipe_left_app_enabled">Deslizar hacia la izquierda para abrir aplicación: activado</string>
     <string name="swipe_right_app_enabled">Deslizar hacia la derecha para abrir aplicación: activado</string>
     <string name="swipe_left_app_disabled">Deslizar hacia la izquierda para abrir aplicación: desactivado</string>
     <string name="swipe_right_app_disabled">Deslizar hacia la derecha para abrir aplicación: desactivado</string>
-    <string name="your_wallpaper_will_update_shortly">Su fondo de pantalla se actualizará en breve</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher no es su lanzador predeterminado.\nLa actualización diaria del fondo de pantalla puede fallar.</string>
+    <string name="your_wallpaper_will_update_shortly">Tu fondo de pantalla se actualizará en breve</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher no es tu lanzador predeterminado.\nLa actualización diaria del fondo de pantalla puede fallar.</string>
     <string name="long_press_to_enable">Mantenga presionado para habilitar</string>
     <string name="no_hidden_apps">Sin aplicaciones ocultas</string>
     <string name="hidden_apps">Aplicaciones ocultas</string>
@@ -124,6 +124,6 @@
     <string name="learn_more">Aprende más</string>
     <string name="did_you_know">¿Sabías?</string>
     <string name="leave_a_review">Dejar un comentario</string>
-    <string name="review_message">Olauncher es y será siempre completamente gratuito. No tiene anuncios. No recopila datos. Lo más importante es que le ayuda a reducir el tiempo que pasa frente a la pantalla y a vivir una vida digital más saludable.
+    <string name="review_message">Olauncher es y será siempre completamente gratuito. No tiene anuncios. No recopila datos. Lo más importante es que te ayuda a reducir el tiempo que pasa frente a la pantalla y a vivir una vida digital más saludable.
         \n\nCreemos que cambiar a un lanzador mínimo es una excelente decisión. Aunque obviamente somos parciales, esperamos que disfrutes la experiencia. ¡No dudes en compartir tus pensamientos con nosotros!</string>
 </resources>
