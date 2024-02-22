@@ -175,7 +175,10 @@ class AppDrawerFragment : Fragment() {
             }
         else
             viewModel.appList.observe(viewLifecycleOwner) {
-                it?.let { adapter.setAppList(it.toMutableList()) }
+                it?.let {
+                    adapter.setAppList(it.toMutableList())
+                    adapter.filter.filter(binding.search.query)
+                }
             }
     }
 
