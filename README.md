@@ -18,7 +18,7 @@ AF stands for Ad-Free :D
 
 To maintain the simplicity of the launcher, a few niche features are available but hidden.
 
-Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in Olauncher settings for the complete list and FAQs.
+Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in Olauncher settings for the complete feature list and FAQs.
 
 ##
 
@@ -28,4 +28,4 @@ Developer: [@tanujnotes](https://twitter.com/tanujnotes)
 
 Thank you and have a great day!
 
-<a href="https://www.buymeacoffee.com/tanujnotes"><img src="https://img.buymeacoffee.com/button-api/?text=Buy Tanuj a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+<a href="https://www.buymeacoffee.com/tanujnotes"><img src="https://img.buymeacoffee.com/button-api/?text=Buy dev a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
