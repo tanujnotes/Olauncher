@@ -10,7 +10,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
@@ -26,6 +28,7 @@ import app.olauncher.helper.searchOnPlayStore
 import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
+
 
 class AppDrawerFragment : Fragment() {
 
@@ -154,6 +157,17 @@ class AppDrawerFragment : Fragment() {
                 viewModel.getAppList()
             }
         )
+
+        val linearLayoutManager: LinearLayoutManager = object : LinearLayoutManager(requireContext()) {
+            override fun scrollVerticallyBy(dx: Int, recycler: Recycler, state: RecyclerView.State): Int {
+                val scrollRange = super.scrollVerticallyBy(dx, recycler, state)
+                val overScroll = dx - scrollRange
+                if (overScroll < -10 && binding.recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING)
+                    checkMessageAndExit()
+                return scrollRange
+            }
+        }
+        binding.recyclerView.layoutManager = linearLayoutManager
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
         binding.recyclerView.itemAnimator = null
@@ -218,16 +232,17 @@ class AppDrawerFragment : Fragment() {
                     RecyclerView.SCROLL_STATE_DRAGGING -> {
                         onTop = !recyclerView.canScrollVertically(-1)
                         if (onTop) binding.search.hideKeyboard()
-                        if (onTop && !recyclerView.canScrollVertically(1))
-                            checkMessageAndExit()
+                        // if (onTop && !recyclerView.canScrollVertically(1))
+                        //     checkMessageAndExit()
                     }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
                         if (!recyclerView.canScrollVertically(1)) {
                             binding.search.hideKeyboard()
                         } else if (!recyclerView.canScrollVertically(-1)) {
-                            if (onTop) checkMessageAndExit()
-                            else binding.search.showKeyboard(prefs.autoShowKeyboard)
+                            if (!onTop) binding.search.showKeyboard(prefs.autoShowKeyboard)
+                            // if (onTop) checkMessageAndExit()
+                            // else binding.search.showKeyboard(prefs.autoShowKeyboard)
                         }
                     }
                 }
