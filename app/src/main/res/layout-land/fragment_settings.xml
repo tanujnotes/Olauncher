@@ -60,14 +60,34 @@
                 </FrameLayout>
 
                 <TextView
-                    android:id="@+id/aboutOlauncher"
+                    android:id="@+id/setLauncher"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="8dp"
+                    android:text="@string/set_as_default_launcher" />
+
+                <TextView
+                    android:id="@+id/aboutOlauncher"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/about_olauncher" />
+
+                <TextView
+                    android:id="@+id/olauncherPro"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/olauncher_pro" />
 
                 <TextView
                     android:id="@+id/digitalWellbeing"
@@ -80,16 +100,6 @@
                     android:text="@string/digital_wellbeing"
                     android:visibility="gone"
                     tools:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/setLauncher"
-                    style="@style/TextSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/set_as_default_launcher" />
 
             </LinearLayout>
 

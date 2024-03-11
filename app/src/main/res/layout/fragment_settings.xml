@@ -81,6 +81,16 @@
                     android:text="@string/about_olauncher" />
 
                 <TextView
+                    android:id="@+id/olauncherPro"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/olauncher_pro" />
+
+                <TextView
                     android:id="@+id/digitalWellbeing"
                     style="@style/TextSmall"
                     android:layout_width="wrap_content"
@@ -955,13 +965,13 @@
 
             <TextView
                 android:id="@+id/footer"
-                style="@style/TextSmallBold"
+                style="@style/TextSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:letterSpacing="0.03"
                 android:padding="12dp"
-                android:text="@string/olauncher_pro" />
+                android:text="@string/digital_minimalism" />
 
         </LinearLayout>
 
