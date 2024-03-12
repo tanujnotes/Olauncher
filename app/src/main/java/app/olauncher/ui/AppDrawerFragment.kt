@@ -78,7 +78,9 @@ class AppDrawerFragment : Fragment() {
         binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query?.startsWith("!") == true)
-                    requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
+                    requireContext().openUrl(Constants.URL_DUCK_SEARCH + query
+                        .removePrefix("!")
+                        .replace(" ", "%20"))
                 else if (adapter.itemCount == 0 && requireContext().searchOnPlayStore(query?.trim()).not())
                     requireContext().openSearch(query?.trim())
                 else
@@ -189,7 +191,10 @@ class AppDrawerFragment : Fragment() {
             }
         else
             viewModel.appList.observe(viewLifecycleOwner) {
-                it?.let { adapter.setAppList(it.toMutableList()) }
+                it?.let {
+                    adapter.setAppList(it.toMutableList())
+                    adapter.filter.filter(binding.search.query)
+                }
             }
     }
 
