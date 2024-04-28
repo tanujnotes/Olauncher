@@ -174,7 +174,7 @@ class MainActivity : AppCompatActivity() {
 
         when (prefs.userState) {
             Constants.UserState.START -> {
-                if (prefs.firstOpenTime.hasBeenDays(3))
+                if (prefs.firstOpenTime.hasBeenDays(1))
                     prefs.userState = Constants.UserState.REVIEW
             }
 
@@ -189,14 +189,14 @@ class MainActivity : AppCompatActivity() {
                 if (prefs.rateClicked)
                     prefs.userState = Constants.UserState.SHARE
                 else if (isOlauncherDefault(this)
-                    && prefs.firstOpenTime.hasBeenDays(14)
+                    && prefs.firstOpenTime.hasBeenDays(7)
                     && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 15
                 ) viewModel.showDialog.postValue(Constants.Dialog.RATE)
             }
 
             Constants.UserState.SHARE -> {
-                if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(21)
-                    && prefs.shareShownTime.hasBeenDays(42)
+                if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(14)
+                    && prefs.shareShownTime.hasBeenDays(35)
                     && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 15
                 ) viewModel.showDialog.postValue(Constants.Dialog.SHARE)
             }
