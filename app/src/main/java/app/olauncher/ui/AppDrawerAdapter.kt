@@ -1,6 +1,9 @@
 package app.olauncher.ui
 
+import android.content.Context
 import android.os.UserHandle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -172,13 +175,43 @@ class AppDrawerAdapter(
                 }
                 appRename.setOnClickListener {
                     if (appModel.appPackage.isNotEmpty()) {
-                        etAppRename.hint = appModel.appLabel
+                        etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage)
+                        etAppRename.setText(appModel.appLabel)
+                        etAppRename.setSelectAllOnFocus(true)
                         renameLayout.visibility = View.VISIBLE
                         appHideLayout.visibility = View.GONE
                         etAppRename.showKeyboard()
                         etAppRename.imeOptions = EditorInfo.IME_ACTION_DONE;
                     }
                 }
+                etAppRename.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+                    if (hasFocus)
+                        appTitle.visibility = View.INVISIBLE
+                    else
+                        appTitle.visibility = View.VISIBLE
+                }
+                etAppRename.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                        etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage)
+                    }
+
+                    override fun beforeTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        count: Int,
+                        after: Int,
+                    ) {
+                    }
+
+                    override fun onTextChanged(
+                        s: CharSequence?,
+                        start: Int,
+                        before: Int,
+                        count: Int,
+                    ) {
+                        etAppRename.hint = ""
+                    }
+                })
                 etAppRename.setOnEditorActionListener { _, actionCode, _ ->
                     if (actionCode == EditorInfo.IME_ACTION_DONE) {
                         val renameLabel = etAppRename.text.toString().trim()
@@ -196,6 +229,15 @@ class AppDrawerAdapter(
                     if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
                         appRenameListener(appModel, renameLabel)
                         renameLayout.visibility = View.GONE
+                    } else {
+                        val packageManager = etAppRename.context.packageManager
+                        appRenameListener(
+                            appModel,
+                            packageManager.getApplicationLabel(
+                                packageManager.getApplicationInfo(appModel.appPackage, 0)
+                            ).toString()
+                        )
+                        renameLayout.visibility = View.GONE
                     }
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
@@ -203,5 +245,12 @@ class AppDrawerAdapter(
                 appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
                 appHide.setOnClickListener { appHideListener(appModel, bindingAdapterPosition) }
             }
+
+        private fun getAppName(context: Context, appPackage: String): String {
+            val packageManager = context.packageManager
+            return packageManager.getApplicationLabel(
+                packageManager.getApplicationInfo(appPackage, 0)
+            ).toString()
+        }
     }
 }
