@@ -20,7 +20,6 @@ import app.olauncher.data.Prefs
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
 import app.olauncher.helper.getAppsList
-import app.olauncher.helper.getHiddenAppsList
 import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.showToast
 import kotlinx.coroutines.launch
@@ -198,13 +197,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getAppList(includeHiddenApps: Boolean = false) {
         viewModelScope.launch {
-            appList.value = getAppsList(appContext, prefs, includeHiddenApps)
+            appList.value = getAppsList(appContext, prefs, includeRegularApps = true, includeHiddenApps)
         }
     }
 
     fun getHiddenApps() {
         viewModelScope.launch {
-            hiddenApps.value = getHiddenAppsList(appContext, prefs)
+            hiddenApps.value = getAppsList(appContext, prefs, includeRegularApps = false, includeHiddenApps = true)
         }
     }
 
