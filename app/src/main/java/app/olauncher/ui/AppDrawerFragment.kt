@@ -109,7 +109,7 @@ class AppDrawerFragment : Fragment() {
                     return@AppDrawerAdapter
                 viewModel.selectedApp(it, flag)
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
-                    findNavController().popBackStack(R.id.mainFragment, false)
+                    findNavController().popBackStack(R.id.homeFragment, false)
                 else
                     findNavController().popBackStack()
             },
@@ -119,7 +119,7 @@ class AppDrawerFragment : Fragment() {
                     it.user,
                     it.appPackage
                 )
-                findNavController().popBackStack(R.id.mainFragment, false)
+                findNavController().popBackStack(R.id.homeFragment, false)
             },
             appDeleteListener = {
                 requireContext().apply {
@@ -149,7 +149,7 @@ class AppDrawerFragment : Fragment() {
                     binding.search.hideKeyboard()
                     prefs.firstHide = false
                     viewModel.showDialog.postValue(Constants.Dialog.HIDDEN)
-                    findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
+                    findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
                 }
             },
             appRenameListener = { appModel, renameLabel ->

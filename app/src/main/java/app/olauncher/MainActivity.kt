@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onBackPressed() {
-        if (navController.currentDestination?.id != R.id.mainFragment)
+        if (navController.currentDestination?.id != R.id.homeFragment)
             super.onBackPressed()
     }
 
@@ -213,8 +213,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun backToHomeScreen() {
         binding.messageLayout.visibility = View.GONE
-        if (navController.currentDestination?.id != R.id.mainFragment)
-            navController.popBackStack(R.id.mainFragment, false)
+        if (navController.currentDestination?.id != R.id.homeFragment)
+            navController.popBackStack(R.id.homeFragment, false)
     }
 
     private fun setPlainWallpaper() {

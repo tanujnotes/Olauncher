@@ -7,8 +7,23 @@
 
     <fragment
         android:id="@+id/mainFragment"
+        android:name="app.olauncher.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
         android:name="app.olauncher.ui.HomeFragment"
-        android:label="main_fragment"
+        android:label="home_fragment"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_mainFragment_to_appListFragment"
@@ -17,30 +32,14 @@
             app:exitAnim="@anim/slide_out_top"
             app:popEnterAnim="@anim/slide_in_top"
             app:popExitAnim="@anim/fade_exit" />
-        <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/fade_enter"
-            app:exitAnim="@anim/fade_exit"
-            app:popEnterAnim="@anim/fade_enter"
-            app:popExitAnim="@anim/fade_exit" />
     </fragment>
 
     <fragment
         android:id="@+id/appListFragment"
         android:name="app.olauncher.ui.AppDrawerFragment"
         android:label="app_list_fragment"
-        tools:layout="@layout/fragment_app_drawer">
-        <action
-            android:id="@+id/action_appListFragment_to_settingsFragment2"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/fade_enter"
-            app:exitAnim="@anim/fade_exit"
-            app:popEnterAnim="@anim/fade_enter"
-            app:popExitAnim="@anim/fade_exit"
-            app:popUpTo="@+id/appListFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_app_drawer" />
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="app.olauncher.ui.SettingsFragment"
@@ -54,5 +53,4 @@
             app:popEnterAnim="@anim/fade_enter"
             app:popExitAnim="@anim/fade_exit" />
     </fragment>
-
 </navigation>

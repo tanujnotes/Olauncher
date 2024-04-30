@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="?attr/primaryShadeDarkColor">
+    android:animateLayoutChanges="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,15 +60,20 @@
         android:text="@string/app_drawer_tips"
         android:visibility="gone" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <app.olauncher.helper.NestedScrollableHost
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="180dp"
-        android:layout_marginBottom="24dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:fadingEdgeLength="24dp"
-        android:requiresFadingEdge="vertical" />
+        android:layout_marginBottom="24dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:fadingEdgeLength="24dp"
+            android:requiresFadingEdge="vertical" />
+    </app.olauncher.helper.NestedScrollableHost>
 
 </FrameLayout>

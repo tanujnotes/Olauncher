@@ -458,7 +458,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeUp() {
                 super.onSwipeUp()
-                showAppList(Constants.FLAG_LAUNCH_APP)
+//                showAppList(Constants.FLAG_LAUNCH_APP)
             }
 
             override fun onSwipeDown() {
@@ -505,7 +505,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onSwipeUp() {
                 super.onSwipeUp()
-                showAppList(Constants.FLAG_LAUNCH_APP)
+//                showAppList(Constants.FLAG_LAUNCH_APP)
             }
 
             override fun onSwipeDown() {
