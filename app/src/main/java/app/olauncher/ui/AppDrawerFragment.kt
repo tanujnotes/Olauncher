@@ -161,9 +161,9 @@ class AppDrawerFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
         binding.recyclerView.itemAnimator = null
-        if (requireContext().isEinkDisplay().not())
-            binding.recyclerView.layoutAnimation =
-                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+//        if (requireContext().isEinkDisplay().not())
+//            binding.recyclerView.layoutAnimation =
+//                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
     }
 
     private fun initObservers() {
