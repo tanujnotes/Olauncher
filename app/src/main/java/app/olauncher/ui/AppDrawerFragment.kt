@@ -10,7 +10,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.olauncher.MainViewModel
 import app.olauncher.R
@@ -58,6 +57,7 @@ class AppDrawerFragment : Fragment() {
         initAdapter()
         initObservers()
         initClickListeners()
+        viewModel.getAppList()
     }
 
     private fun initViews() {
@@ -183,7 +183,9 @@ class AppDrawerFragment : Fragment() {
             }
 
         viewModel.viewPagerScreen.observe(viewLifecycleOwner) {
-            if (it == Constants.ViewPager.APP_DRAWER && binding.search.query.toString().isBlank())
+            if (it == Constants.ViewPager.HOME_SCREEN)
+                binding.search.setQuery("", false)
+            else if (it == Constants.ViewPager.APP_DRAWER && binding.search.query.toString().isBlank())
                 binding.search.showKeyboard(prefs.autoShowKeyboard)
         }
     }

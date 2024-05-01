@@ -20,8 +20,18 @@ import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
-import app.olauncher.helper.*
-import java.util.*
+import app.olauncher.helper.hasBeenDays
+import app.olauncher.helper.isDarkThemeOn
+import app.olauncher.helper.isEinkDisplay
+import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.isTablet
+import app.olauncher.helper.openUrl
+import app.olauncher.helper.rateApp
+import app.olauncher.helper.resetDefaultLauncher
+import app.olauncher.helper.setPlainWallpaper
+import app.olauncher.helper.shareApp
+import app.olauncher.helper.showToast
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onBackPressed() {
-        if (navController.currentDestination?.id != R.id.homeFragment)
+        if (navController.currentDestination?.id != R.id.mainFragment)
             super.onBackPressed()
     }
 
@@ -213,8 +223,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun backToHomeScreen() {
         binding.messageLayout.visibility = View.GONE
-        if (navController.currentDestination?.id != R.id.homeFragment)
-            navController.popBackStack(R.id.homeFragment, false)
+        if (navController.currentDestination?.id != R.id.mainFragment)
+            navController.popBackStack(R.id.mainFragment, false)
+        else
+            viewModel.setViewPagerCurrentItem.postValue(Constants.ViewPager.HOME_SCREEN)
     }
 
     private fun setPlainWallpaper() {
