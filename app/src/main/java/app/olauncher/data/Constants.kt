@@ -2,6 +2,11 @@ package app.olauncher.data
 
 object Constants {
 
+    object ViewPager {
+        const val HOME_SCREEN = 0
+        const val APP_DRAWER = 1
+    }
+
     object Key {
         const val FLAG = "flag"
         const val RENAME = "rename"

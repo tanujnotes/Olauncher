@@ -12,7 +12,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
@@ -108,7 +107,9 @@ class AppDrawerFragment : Fragment() {
                 if (it.appPackage.isEmpty())
                     return@AppDrawerAdapter
                 viewModel.selectedApp(it, flag)
-                if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
+                if (flag == Constants.FLAG_LAUNCH_APP)
+                    viewModel.setViewPagerCurrentItem.postValue(Constants.ViewPager.HOME_SCREEN)
+                else if (flag == Constants.FLAG_HIDDEN_APPS)
                     findNavController().popBackStack(R.id.homeFragment, false)
                 else
                     findNavController().popBackStack()
@@ -119,7 +120,6 @@ class AppDrawerFragment : Fragment() {
                     it.user,
                     it.appPackage
                 )
-                findNavController().popBackStack(R.id.homeFragment, false)
             },
             appDeleteListener = {
                 requireContext().apply {
@@ -158,16 +158,6 @@ class AppDrawerFragment : Fragment() {
             }
         )
 
-        val linearLayoutManager: LinearLayoutManager = object : LinearLayoutManager(requireContext()) {
-            override fun scrollVerticallyBy(dx: Int, recycler: Recycler, state: RecyclerView.State): Int {
-                val scrollRange = super.scrollVerticallyBy(dx, recycler, state)
-                val overScroll = dx - scrollRange
-                if (overScroll < -10 && binding.recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING)
-                    checkMessageAndExit()
-                return scrollRange
-            }
-        }
-        binding.recyclerView.layoutManager = linearLayoutManager
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
         binding.recyclerView.itemAnimator = null
@@ -191,6 +181,11 @@ class AppDrawerFragment : Fragment() {
             viewModel.appList.observe(viewLifecycleOwner) {
                 it?.let { adapter.setAppList(it.toMutableList()) }
             }
+
+        viewModel.viewPagerScreen.observe(viewLifecycleOwner) {
+            if (it == Constants.ViewPager.APP_DRAWER && binding.search.query.toString().isBlank())
+                binding.search.showKeyboard(prefs.autoShowKeyboard)
+        }
     }
 
     private fun initClickListeners() {
@@ -216,7 +211,7 @@ class AppDrawerFragment : Fragment() {
                 Constants.FLAG_SET_HOME_APP_7 -> prefs.appName7 = name
                 Constants.FLAG_SET_HOME_APP_8 -> prefs.appName8 = name
             }
-            findNavController().popBackStack()
+            viewModel.setViewPagerCurrentItem.postValue(Constants.ViewPager.HOME_SCREEN)
         }
     }
 
@@ -231,7 +226,8 @@ class AppDrawerFragment : Fragment() {
 
                     RecyclerView.SCROLL_STATE_DRAGGING -> {
                         onTop = !recyclerView.canScrollVertically(-1)
-                        if (onTop) binding.search.hideKeyboard()
+                        if (onTop)
+                            binding.search.hideKeyboard()
                         // if (onTop && !recyclerView.canScrollVertically(1))
                         //     checkMessageAndExit()
                     }
@@ -240,7 +236,8 @@ class AppDrawerFragment : Fragment() {
                         if (!recyclerView.canScrollVertically(1)) {
                             binding.search.hideKeyboard()
                         } else if (!recyclerView.canScrollVertically(-1)) {
-                            if (!onTop) binding.search.showKeyboard(prefs.autoShowKeyboard)
+                            if (!onTop)
+                                binding.search.showKeyboard(prefs.autoShowKeyboard)
                             // if (onTop) checkMessageAndExit()
                             // else binding.search.showKeyboard(prefs.autoShowKeyboard)
                         }
@@ -251,14 +248,9 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun checkMessageAndExit() {
-        findNavController().popBackStack()
+        viewModel.setViewPagerCurrentItem.postValue(Constants.ViewPager.HOME_SCREEN)
         if (flag == Constants.FLAG_LAUNCH_APP)
             viewModel.checkForMessages.call()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        binding.search.showKeyboard(prefs.autoShowKeyboard)
     }
 
     override fun onStop() {

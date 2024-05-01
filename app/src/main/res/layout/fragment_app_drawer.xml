@@ -73,7 +73,8 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             android:fadingEdgeLength="24dp"
-            android:requiresFadingEdge="vertical" />
+            android:requiresFadingEdge="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </app.olauncher.helper.NestedScrollableHost>
 
 </FrameLayout>
