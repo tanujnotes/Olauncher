@@ -60,6 +60,8 @@
     <string name="hide">Hide</string>
     <string name="status_bar">Status bar on top</string>
     <string name="rename">Rename</string>
+    <string name="delay_launch">Delay</string>
+    <string name="change">Change</string>
     <string name="show_date_time">Show date time</string>
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
@@ -144,4 +146,8 @@
     <string name="review_message">Olauncher is free and always will be. It has no ads. It collects no data. Most importantly, it helps you in reducing your screen time and live a healthier digital life.
         \n\nWe believe that switching to a minimal launcher is an excellent decision. While we\'re obviously biased, we hope you\'re enjoying the experience. Feel free to share your thoughts with us!</string>
     <string name="alignment_changed">Alignment changed ✅</string>
+    <string name="change_launch_delay_hint">Seconds</string>
+    <string name="launch_delay_question">Are you sure you want to use\n%1$s?</string>
+    <string name="launch_delay_launch_message">The app will open in\n%1$d\nseconds.</string>
+    <string name="cancel">Cancel</string>
 </resources>

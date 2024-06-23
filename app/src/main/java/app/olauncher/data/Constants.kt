@@ -5,6 +5,9 @@ object Constants {
     object Key {
         const val FLAG = "flag"
         const val RENAME = "rename"
+        const val LAUNCH = "launch"
+        const val APP_NAME = "app_name"
+        const val LAUNCH_DELAY = "launch_delay"
     }
 
     object Dialog {

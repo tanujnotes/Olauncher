@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate
 
 class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
+    private val LAUNCH_DELAYS_PREFS_FILENAME = "app.olauncher.launchdelays"
 
     private val FIRST_OPEN = "FIRST_OPEN"
     private val FIRST_OPEN_TIME = "FIRST_OPEN_TIME"
@@ -88,6 +89,8 @@ class Prefs(context: Context) {
     private val CALENDAR_APP_CLASS_NAME = "CALENDAR_APP_CLASS_NAME"
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0);
+    private val launchDelayPrefs: SharedPreferences =
+        context.getSharedPreferences(LAUNCH_DELAYS_PREFS_FILENAME, 0)
 
     var firstOpen: Boolean
         get() = prefs.getBoolean(FIRST_OPEN, true)
@@ -448,4 +451,8 @@ class Prefs(context: Context) {
     fun getAppRenameLabel(appPackage: String): String = prefs.getString(appPackage, "").toString()
 
     fun setAppRenameLabel(appPackage: String, renameLabel: String) = prefs.edit().putString(appPackage, renameLabel).apply()
+
+    fun getAppLaunchDelay(appPackage: String): Int = launchDelayPrefs.getInt(appPackage, 0)
+
+    fun setAppLaunchDelay(appPackage: String, time: Int) = launchDelayPrefs.edit().putInt(appPackage, time).apply()
 }

@@ -31,6 +31,7 @@ class AppDrawerAdapter(
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
+    private val appChangeLaunchDelayListener: (AppModel, Int) -> Unit,
 ) : ListAdapter<AppModel, AppDrawerAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
 
     companion object {
@@ -67,7 +68,8 @@ class AppDrawerAdapter(
                 appDeleteListener,
                 appInfoListener,
                 appHideListener,
-                appRenameListener
+                appRenameListener,
+                appChangeLaunchDelayListener
             )
         } catch (e: Exception) {
             e.printStackTrace()
@@ -152,10 +154,12 @@ class AppDrawerAdapter(
             appInfoListener: (AppModel) -> Unit,
             appHideListener: (AppModel, Int) -> Unit,
             appRenameListener: (AppModel, String) -> Unit,
+            appChangeLaunchDelayListener: (AppModel, Int) -> Unit,
         ) =
             with(binding) {
                 appHideLayout.visibility = View.GONE
                 renameLayout.visibility = View.GONE
+                changeLaunchDelayLayout.visibility = View.GONE
                 appTitle.text = appModel.appLabel
                 appTitle.gravity = appLabelGravity
                 otherProfileIndicator.isVisible = appModel.user != myUserHandle
@@ -184,12 +188,20 @@ class AppDrawerAdapter(
                         etAppRename.imeOptions = EditorInfo.IME_ACTION_DONE;
                     }
                 }
-                etAppRename.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-                    if (hasFocus)
-                        appTitle.visibility = View.INVISIBLE
-                    else
-                        appTitle.visibility = View.VISIBLE
+                appDelayLaunch.setOnClickListener {
+                    if (appModel.appPackage.isNotEmpty()) {
+                        etLaunchDelay.setText("")
+                        changeLaunchDelayLayout.visibility = View.VISIBLE
+                        renameLayout.visibility = View.GONE
+                        appHideLayout.visibility = View.GONE
+                        etLaunchDelay.showKeyboard()
+                    }
                 }
+                val onFocusChangeListener = View.OnFocusChangeListener {_, hasFocus ->
+                    appTitle.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
+                }
+                etAppRename.onFocusChangeListener = onFocusChangeListener
+                etLaunchDelay.onFocusChangeListener = onFocusChangeListener
                 etAppRename.addTextChangedListener(object : TextWatcher {
                     override fun afterTextChanged(s: Editable?) {
                         etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage)
@@ -239,6 +251,23 @@ class AppDrawerAdapter(
                         )
                         renameLayout.visibility = View.GONE
                     }
+                }
+                val stopLaunchDelayModification = {
+                    val input = etLaunchDelay.text.toString()
+                    val seconds = if (input.isEmpty()) 0 else input.toInt()
+                    appChangeLaunchDelayListener(appModel, seconds)
+                    changeLaunchDelayLayout.visibility = View.GONE
+                }
+                etLaunchDelay.setOnEditorActionListener { _, actionCode, _ ->
+                    if (actionCode == EditorInfo.IME_ACTION_DONE) {
+                        stopLaunchDelayModification()
+                        true
+                    }
+                    false
+                }
+                tvSaveLaunchDelay.setOnClickListener {
+                    etLaunchDelay.hideKeyboard()
+                    stopLaunchDelayModification()
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
                 appDelete.setOnClickListener { appDeleteListener(appModel) }
