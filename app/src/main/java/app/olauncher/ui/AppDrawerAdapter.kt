@@ -254,8 +254,8 @@ class AppDrawerAdapter(
                 }
                 val stopLaunchDelayModification = {
                     val input = etLaunchDelay.text.toString()
-                    val seconds = if (input.isEmpty()) 0 else input.toInt()
-                    appChangeLaunchDelayListener(appModel, seconds)
+                    if (input.isNotEmpty())
+                        appChangeLaunchDelayListener(appModel, input.toInt())
                     changeLaunchDelayLayout.visibility = View.GONE
                 }
                 etLaunchDelay.setOnEditorActionListener { _, actionCode, _ ->

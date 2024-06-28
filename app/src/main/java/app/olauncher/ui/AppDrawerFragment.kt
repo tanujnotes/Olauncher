@@ -108,12 +108,13 @@ class AppDrawerFragment : Fragment() {
             appClickListener = {
                 if (it.appPackage.isEmpty())
                     return@AppDrawerAdapter
+                val navigationController = findNavController()
                 val launch = {
                     viewModel.selectedApp(it, flag)
                     if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
-                        findNavController().popBackStack(R.id.mainFragment, false)
+                        navigationController.popBackStack(R.id.mainFragment, false)
                     else
-                        findNavController().popBackStack()
+                        navigationController.popBackStack()
                 }
                 val launchDelay = prefs.getAppLaunchDelay(it.appPackage)
                 if ((flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS) && launchDelay > 0)
