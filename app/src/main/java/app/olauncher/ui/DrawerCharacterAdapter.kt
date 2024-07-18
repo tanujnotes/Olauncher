@@ -2,14 +2,17 @@ package app.olauncher.ui
 
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import app.olauncher.R
 import app.olauncher.data.DrawerCharacterModel
 import app.olauncher.databinding.DrawerAlphabetBinding
+
 
 class DrawerCharacterAdapter :
     ListAdapter<DrawerCharacterModel, DrawerCharacterAdapter.ViewHolder>(diffObject) {
@@ -17,18 +20,15 @@ class DrawerCharacterAdapter :
         private val binding = DrawerAlphabetBinding.bind(view)
         fun bind(character: DrawerCharacterModel) {
 
-           if (character.inRange) {
+            if (character.inRange) {
                 binding.character.setTextColor(itemView.context.getColor(R.color.design_default_color_secondary))
-            }else{
-               val typedValue = TypedValue()
-               itemView.context.theme.resolveAttribute(R.attr.primaryColor, typedValue, true)
-               binding.character.setTextColor(itemView.context.getColor(typedValue.resourceId))
+            } else {
+                val typedValue = TypedValue()
+                itemView.context.theme.resolveAttribute(R.attr.primaryColor, typedValue, true)
+                binding.character.setTextColor(itemView.context.getColor(typedValue.resourceId))
             }
 
             binding.character.text = character.character
-            binding.root.setOnClickListener {
-                listener?.let { it(character.character) }
-            }
 
         }
     }
@@ -62,8 +62,35 @@ class DrawerCharacterAdapter :
         }
     }
 
-    private var listener: ((String) -> Unit)? = null
-    fun adapterClick(listener: (String) -> Unit) {
-        this.listener = listener
+
+    class CharacterTouchListener(
+        private val adapter: DrawerCharacterAdapter,
+        private val clickListener: ((String) -> Unit)?
+    ) :
+        OnItemTouchListener {
+
+        override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+            val child = rv.findChildViewUnder(e.x, e.y)
+            if (child != null) {
+                val itemPosition = rv.getChildAdapterPosition(child)
+                clickListener?.let { it(adapter.currentList[itemPosition].character) }
+            }
+
+            return true
+        }
+
+        override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+            val child = rv.findChildViewUnder(e.x, e.y)
+            if (child != null) {
+                val itemPosition = rv.getChildAdapterPosition(child)
+                clickListener?.let { it(adapter.currentList[itemPosition].character) }
+            }
+        }
+
+        override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+        }
+
     }
+
 }
+

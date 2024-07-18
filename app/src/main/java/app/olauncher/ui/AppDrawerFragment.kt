@@ -211,6 +211,21 @@ class AppDrawerFragment : Fragment() {
                 return scrollRange
             }
         }
+        binding.alphabetRecyclerView.addOnItemTouchListener(
+            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char ->
+                viewModel.updateRangeDrawerCharacterList(char)
+                val matchIndex = if (char == "#") {
+                    0
+                } else {
+                    val match = adapter.currentList.find {
+                        char.equals(it.appLabel.first().toString(), true)
+                    }
+                    adapter.currentList.indexOf(match)
+                }
+                linearLayoutManager.scrollToPositionWithOffset(matchIndex, 0)
+            })
+
+
         binding.recyclerView.layoutManager = linearLayoutManager
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
@@ -356,17 +371,6 @@ class AppDrawerFragment : Fragment() {
 
         viewModel.updateDrawerCharacterList(drawerCharacters)
 
-        drawerCharacterAdapter.adapterClick { char ->
-
-            val matchIndex = if (char == "#") {
-                0
-            } else {
-                val match = drawerItems.find { char.equals(it.appLabel.first().toString(),true) }
-                drawerItems.indexOf(match)
-            }
-            linearLayoutManager.scrollToPositionWithOffset(matchIndex, 0)
-
-        }
     }
 
 
