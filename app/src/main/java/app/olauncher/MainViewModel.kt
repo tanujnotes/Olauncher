@@ -16,6 +16,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
+import app.olauncher.data.Constants.CharacterIndicator
 import app.olauncher.data.DrawerCharacterModel
 import app.olauncher.data.Prefs
 import app.olauncher.helper.SingleLiveEvent
@@ -250,15 +251,39 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         drawerCharacterList.value = characters
     }
 
-    fun updateRangeDrawerCharacterList(char:String){
+    fun updateRangeDrawerCharacterList(char:String,mode:Int){
         val charRegex = Regex("[0-9\\\\$&+,:;=?@#|/'<>.^*()%!-]")
         val characters = drawerCharacterList.value ?: emptyList()
         if (characters.isNotEmpty()){
             val checkAndReplaceIfNum = if (charRegex.matches(char)) "#" else char
+
             val updatedCharacters =
-                characters.map { DrawerCharacterModel(it.character, it.character.equals(checkAndReplaceIfNum,true)) }
+                characters.map {
+                    val showIndicator =
+                        if (mode == CharacterIndicator.SHOW) it.character.equals(checkAndReplaceIfNum, true) else false
+                    DrawerCharacterModel(
+                        it.character,
+                        it.character.equals(checkAndReplaceIfNum, true),
+                        showIndicator
+                    )
+                }
 
             drawerCharacterList.value = updatedCharacters
+        }
+    }
+
+    fun updateRangeIndicator(){
+        val currentList = (drawerCharacterList.value?.toMutableList() ?: mutableListOf())
+
+        if (currentList.isNotEmpty()){
+            val currentRangeChar = currentList.find { it.inRange }
+            currentRangeChar?.let {
+                val index = currentList.indexOf(it)
+                val newValue = it.copy(showIndicator = false)
+                currentList[index] = newValue
+                drawerCharacterList.value = currentList
+            }
+
         }
     }
 }

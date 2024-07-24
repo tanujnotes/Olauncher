@@ -20,6 +20,7 @@ import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
+import app.olauncher.data.Constants.CharacterIndicator
 import app.olauncher.data.DrawerCharacterModel
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
@@ -212,17 +213,24 @@ class AppDrawerFragment : Fragment() {
             }
         }
         binding.alphabetRecyclerView.addOnItemTouchListener(
-            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char ->
-                viewModel.updateRangeDrawerCharacterList(char)
-                val matchIndex = if (char == "#") {
-                    0
-                } else {
-                    val match = adapter.currentList.find {
-                        char.equals(it.appLabel.first().toString(), true)
+            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char,mode ->
+                if (mode != CharacterIndicator.HIDE) {
+                    viewModel.updateRangeDrawerCharacterList(char,mode)
+                    val matchIndex = if (char == "#") {
+                        0
+                    } else {
+                        val match = adapter.currentList.find {
+                            char.equals(it.appLabel.first().toString(), true)
+                        }
+                        adapter.currentList.indexOf(match)
                     }
-                    adapter.currentList.indexOf(match)
+                    linearLayoutManager.scrollToPositionWithOffset(matchIndex, 0)
                 }
-                linearLayoutManager.scrollToPositionWithOffset(matchIndex, 0)
+
+                if (mode == CharacterIndicator.HIDE) {
+                    viewModel.updateRangeIndicator()
+                }
+
             })
 
 
@@ -325,7 +333,7 @@ class AppDrawerFragment : Fragment() {
                 val visiblePosition = linearLayoutManager.findFirstVisibleItemPosition()
                 val position = if (visiblePosition >= 0) visiblePosition else 0
                 val item = adapter.currentList[position]
-                viewModel.updateRangeDrawerCharacterList(item.appLabel.first().toString())
+                viewModel.updateRangeDrawerCharacterList(item.appLabel.first().toString(),101)
             }
         }
     }
