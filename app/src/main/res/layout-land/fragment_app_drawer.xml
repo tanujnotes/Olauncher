@@ -76,7 +76,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/alphabetRecyclerView"
+        android:id="@+id/character_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="80dp"

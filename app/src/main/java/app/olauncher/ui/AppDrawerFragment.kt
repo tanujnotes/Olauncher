@@ -80,19 +80,28 @@ class AppDrawerFragment : Fragment() {
         val rv = binding.recyclerView
         val params = rv.layoutParams as FrameLayout.LayoutParams
         val scale = resources.displayMetrics.density
-        val marginTop = (180 * scale).toInt()
+        val marginTop = (160 * scale).toInt()
         val marginBottom = (24 * scale).toInt()
         val marginRight = (centerValue * scale).toInt()
         params.setMargins(0, marginTop, marginRight, marginBottom)
         rv.layoutParams = params
     }
 
+    private fun setIndicatorMargins(x:Float,y:Float) {
+        val indicator = binding.characterIndicator
+        val params = indicator?.layoutParams as FrameLayout.LayoutParams
+        val scale = resources.displayMetrics.density
+        val marginTop = y.toInt() + (158 * scale).toInt()
+        val marginRight = (32 * scale).toInt()
+        params.setMargins(x.toInt(), marginTop, marginRight, 0)
+        indicator.layoutParams = params
+    }
+
 
     private fun initViews() {
-        binding.alphabetRecyclerView.isVisible = prefs.autoShowKeyboard.not()
+        binding.characterRecyclerView.isVisible = prefs.autoShowKeyboard.not()
 
         setAppDrawerMargins(prefs.appLabelAlignment == Gravity.CENTER)
-
 
         if (flag == Constants.FLAG_HIDDEN_APPS)
             binding.search.queryHint = getString(R.string.hidden_apps)
@@ -212,10 +221,16 @@ class AppDrawerFragment : Fragment() {
                 return scrollRange
             }
         }
-        binding.alphabetRecyclerView.addOnItemTouchListener(
-            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char,mode ->
+        binding.characterRecyclerView.addOnItemTouchListener(
+            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char,mode ,pos->
+
                 if (mode != CharacterIndicator.HIDE) {
-                    viewModel.updateRangeDrawerCharacterList(char,mode)
+                    binding.characterIndicator?.let{
+                        setIndicatorMargins(pos.first,pos.second)
+                        it.text = char
+                        it.isVisible = true
+                    }
+                    viewModel.updateRangeDrawerCharacterList(char)
                     val matchIndex = if (char == "#") {
                         0
                     } else {
@@ -228,7 +243,7 @@ class AppDrawerFragment : Fragment() {
                 }
 
                 if (mode == CharacterIndicator.HIDE) {
-                    viewModel.updateRangeIndicator()
+                    binding.characterIndicator?.isVisible = false
                 }
 
             })
@@ -241,7 +256,7 @@ class AppDrawerFragment : Fragment() {
         if (requireContext().isEinkDisplay().not())
             binding.recyclerView.layoutAnimation =
                 AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
-        binding.alphabetRecyclerView.adapter = drawerCharacterAdapter
+        binding.characterRecyclerView.adapter = drawerCharacterAdapter
     }
 
     private fun initObservers() {
@@ -333,7 +348,7 @@ class AppDrawerFragment : Fragment() {
                 val visiblePosition = linearLayoutManager.findFirstVisibleItemPosition()
                 val position = if (visiblePosition >= 0) visiblePosition else 0
                 val item = adapter.currentList[position]
-                viewModel.updateRangeDrawerCharacterList(item.appLabel.first().toString(),101)
+                viewModel.updateRangeDrawerCharacterList(item.appLabel.first().toString())
             }
         }
     }

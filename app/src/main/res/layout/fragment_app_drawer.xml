@@ -74,7 +74,7 @@
         android:requiresFadingEdge="vertical" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/alphabetRecyclerView"
+        android:id="@+id/character_recycler_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="160dp"
@@ -87,5 +87,23 @@
         tools:listitem="@layout/drawer_alphabet"
         tools:itemCount="26"
         android:requiresFadingEdge="vertical" />
+
+    <TextView
+        android:id="@+id/characterIndicator"
+        style="@style/TextSmallBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        tools:text="W"
+        android:visibility="gone"
+        android:layout_gravity="end"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="2dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:includeFontPadding="false"
+        android:background="@drawable/rounded_primary_gradient"
+        />
 
 </FrameLayout>

@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnItemTouchListener
 import app.olauncher.R
-import app.olauncher.data.Constants
 import app.olauncher.data.Constants.CharacterIndicator
 import app.olauncher.data.DrawerCharacterModel
 import app.olauncher.databinding.DrawerAlphabetBinding
@@ -31,14 +29,8 @@ class DrawerCharacterAdapter :
                 binding.character.setTextColor(itemView.context.getColor(typedValue.resourceId))
             }
 
-            if (character.showIndicator) {
-                binding.characterIndicator.visibility = View.VISIBLE
-            } else {
-                binding.characterIndicator.visibility = View.INVISIBLE
-            }
 
             binding.character.text = character.character
-            binding.characterIndicator.text = character.character
 
         }
     }
@@ -75,44 +67,41 @@ class DrawerCharacterAdapter :
 
     class CharacterTouchListener(
         private val adapter: DrawerCharacterAdapter,
-        private val clickListener: ((String,Int) -> Unit)?
+        private val clickListener: ((String,Int,Pair<Float,Float>) -> Unit)?
     ) :
         OnItemTouchListener {
 
         override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-            val child = rv.findChildViewUnder(e.x, e.y)
-
-            if (child != null) {
-                val itemPosition = rv.getChildAdapterPosition(child)
-                clickListener?.let { it(adapter.currentList[itemPosition].character,
-                    CharacterIndicator.SHOW) }
-                if (e.action == MotionEvent.ACTION_UP){
-                    child.postDelayed({clickListener?.let { it("", CharacterIndicator.HIDE) }},1000L)
-
-                }
-            }
-
-
-
-
+            updateIndicatorView(rv, e)
             return true
         }
 
         override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+            updateIndicatorView(rv, e)
+        }
+
+        override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+        }
+
+        private fun updateIndicatorView(rv: RecyclerView,e:MotionEvent){
             val child = rv.findChildViewUnder(e.x, e.y)
             if (child != null) {
+                val view =  rv.getChildViewHolder(child).itemView
                 val itemPosition = rv.getChildAdapterPosition(child)
-                clickListener?.let { it(adapter.currentList[itemPosition].character,102) }
+
+                clickListener?.let {
+                    it(
+                        adapter.currentList[itemPosition].character,
+                        CharacterIndicator.SHOW,
+                        Pair(view.x, view.y)
+                    )
+                }
                 if (e.action == MotionEvent.ACTION_UP){
-//                    clickListener?.let { it("",101) }
-                    child.postDelayed({clickListener?.let { it("", CharacterIndicator.HIDE) }},1000L)
+                    child.postDelayed({clickListener?.let { it("", CharacterIndicator.HIDE,Pair(e.x,e.y)) }},1000L)
                 }
 
             }
 
-        }
-
-        override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
         }
 
     }

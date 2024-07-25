@@ -251,7 +251,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         drawerCharacterList.value = characters
     }
 
-    fun updateRangeDrawerCharacterList(char:String,mode:Int){
+    fun updateRangeDrawerCharacterList(char:String){
         val charRegex = Regex("[0-9\\\\$&+,:;=?@#|/'<>.^*()%!-]")
         val characters = drawerCharacterList.value ?: emptyList()
         if (characters.isNotEmpty()){
@@ -259,31 +259,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             val updatedCharacters =
                 characters.map {
-                    val showIndicator =
-                        if (mode == CharacterIndicator.SHOW) it.character.equals(checkAndReplaceIfNum, true) else false
                     DrawerCharacterModel(
                         it.character,
-                        it.character.equals(checkAndReplaceIfNum, true),
-                        showIndicator
+                        it.character.equals(checkAndReplaceIfNum, true)
                     )
                 }
 
             drawerCharacterList.value = updatedCharacters
-        }
-    }
-
-    fun updateRangeIndicator(){
-        val currentList = (drawerCharacterList.value?.toMutableList() ?: mutableListOf())
-
-        if (currentList.isNotEmpty()){
-            val currentRangeChar = currentList.find { it.inRange }
-            currentRangeChar?.let {
-                val index = currentList.indexOf(it)
-                val newValue = it.copy(showIndicator = false)
-                currentList[index] = newValue
-                drawerCharacterList.value = currentList
-            }
-
         }
     }
 }
