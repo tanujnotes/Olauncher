@@ -12,6 +12,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +36,8 @@ import app.olauncher.helper.searchOnPlayStore
 import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class AppDrawerFragment : Fragment() {
@@ -243,7 +246,11 @@ class AppDrawerFragment : Fragment() {
                 }
 
                 if (mode == CharacterIndicator.HIDE) {
-                    binding.characterIndicator?.isVisible = false
+                    lifecycleScope.launch {
+                        delay(1000L)
+                        binding.characterIndicator?.isVisible = false
+                    }
+
                 }
 
             })

@@ -95,7 +95,7 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         tools:text="W"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:layout_gravity="end"
         android:paddingHorizontal="6dp"
         android:paddingVertical="2dp"

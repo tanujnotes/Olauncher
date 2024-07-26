@@ -83,10 +83,10 @@ class DrawerCharacterAdapter :
         override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
         }
 
-        private fun updateIndicatorView(rv: RecyclerView,e:MotionEvent){
+        private fun updateIndicatorView(rv: RecyclerView, e: MotionEvent) {
             val child = rv.findChildViewUnder(e.x, e.y)
-            if (child != null) {
-                val view =  rv.getChildViewHolder(child).itemView
+            child?.let {
+                val view = rv.getChildViewHolder(child).itemView
                 val itemPosition = rv.getChildAdapterPosition(child)
 
                 clickListener?.let {
@@ -96,11 +96,11 @@ class DrawerCharacterAdapter :
                         Pair(view.x, view.y)
                     )
                 }
-                if (e.action == MotionEvent.ACTION_UP){
-                    child.postDelayed({clickListener?.let { it("", CharacterIndicator.HIDE,Pair(e.x,e.y)) }},1000L)
+                if (e.action == MotionEvent.ACTION_UP) {
+                    clickListener?.let { it("", CharacterIndicator.HIDE, Pair(e.x, e.y)) }
                 }
+            } ?: clickListener?.let { it("", CharacterIndicator.HIDE, Pair(e.x, e.y)) }
 
-            }
 
         }
 
