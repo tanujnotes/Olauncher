@@ -18,6 +18,7 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
+import app.olauncher.helper.AppFilterHelper
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
@@ -25,6 +26,7 @@ import java.text.Normalizer
 
 class AppDrawerAdapter(
     private var flag: Int,
+    private val appFilterHelper: AppFilterHelper,
     private val appLabelGravity: Int,
     private val appClickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
@@ -97,7 +99,9 @@ class AppDrawerAdapter(
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 results?.values?.let {
-                    appFilteredList = it as MutableList<AppModel>
+                    val items = it as MutableList<AppModel>
+                    appFilteredList = items
+                    appFilterHelper.onAppFiltered(items.toList())
                     submitList(appFilteredList) {
                         autoLaunch()
                     }

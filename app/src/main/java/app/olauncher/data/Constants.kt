@@ -52,6 +52,11 @@ object Constants {
         const val SEVEN = 1.3f
     }
 
+    object CharacterIndicator{
+        const val SHOW = 102
+        const val HIDE = 101
+    }
+
     const val WALL_TYPE_LIGHT = "light"
     const val WALL_TYPE_DARK = "dark"
 
