@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
@@ -77,34 +79,67 @@ class AppDrawerFragment : Fragment() {
         initClickListeners()
     }
 
-    private fun setAppDrawerMargins(center: Boolean) {
+    private fun setAppDrawerPortraitMargins(center: Boolean) {
         val centerValue = if (center) 5 else 48
 
         val rv = binding.recyclerView
         val params = rv.layoutParams as FrameLayout.LayoutParams
         val scale = resources.displayMetrics.density
-        val marginTop = (160 * scale).toInt()
+        val marginTop = (180 * scale).toInt()
         val marginBottom = (24 * scale).toInt()
         val marginRight = (centerValue * scale).toInt()
         params.setMargins(0, marginTop, marginRight, marginBottom)
         rv.layoutParams = params
     }
 
-    private fun setIndicatorMargins(x:Float,y:Float) {
-        val indicator = binding.characterIndicator
-        val params = indicator?.layoutParams as FrameLayout.LayoutParams
+    private fun setAppDrawerLandMargins() {
+        val rv = binding.recyclerView
+        val params = rv.layoutParams as FrameLayout.LayoutParams
         val scale = resources.displayMetrics.density
-        val marginTop = y.toInt() + (158 * scale).toInt()
-        val marginRight = (32 * scale).toInt()
-        params.setMargins(x.toInt(), marginTop, marginRight, 0)
+        val marginTop = (80 * scale).toInt()
+        val marginBottom = 0
+        val marginRight = (56 * scale).toInt()
+        val marginLeft = (56 * scale).toInt()
+        params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
+        rv.layoutParams = params
+    }
+
+    private fun setIndicatorMargins(x:Float,y:Float,isLast:Boolean,isFirst:Boolean) {
+        val lastValue = if (isLast) 6 else 3
+        val indicator = binding.characterIndicator
+        val params = indicator.layoutParams as LinearLayout.LayoutParams
+        val scale = resources.displayMetrics.density
+        val marginTop =if (isFirst) (y + (1 * scale)).toInt() else (y - (lastValue * scale)).toInt()
+        val marginRight = (8 * scale).toInt()
+        val marginLeft = x.toInt()
+        val marginBottom = 0
+        params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
         indicator.layoutParams = params
+    }
+
+
+    private fun setIndicatorLayoutLandMargins() {
+        val indicatorLayout = binding.indicatorLayout
+        val params = indicatorLayout.layoutParams as FrameLayout.LayoutParams
+        val scale = resources.displayMetrics.density
+        val marginTop = (6 * scale).toInt()
+        val marginRight = 0
+        val marginLeft = 0
+        val marginBottom = (6 * scale).toInt()
+        params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
+        indicatorLayout.layoutParams = params
     }
 
 
     private fun initViews() {
         binding.characterRecyclerView.isVisible = prefs.autoShowKeyboard.not()
 
-        setAppDrawerMargins(prefs.appLabelAlignment == Gravity.CENTER)
+        if (requireContext().resources.configuration.orientation == ORIENTATION_PORTRAIT) {
+            setAppDrawerPortraitMargins(prefs.appLabelAlignment == Gravity.CENTER)
+        }else{
+            setAppDrawerLandMargins()
+            setIndicatorLayoutLandMargins()
+        }
 
         if (flag == Constants.FLAG_HIDDEN_APPS)
             binding.search.queryHint = getString(R.string.hidden_apps)
@@ -228,10 +263,15 @@ class AppDrawerFragment : Fragment() {
             DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char,mode ,pos->
 
                 if (mode != CharacterIndicator.HIDE) {
-                    binding.characterIndicator?.let{
-                        setIndicatorMargins(pos.first,pos.second)
-                        it.text = char
-                        it.isVisible = true
+                    binding.characterIndicator.apply{
+                        setIndicatorMargins(
+                            pos.first,
+                            pos.second,
+                            char.equals("Z", true),
+                            char.equals("A", true)
+                        )
+                        text = char
+                        isVisible = true
                     }
                     viewModel.updateRangeDrawerCharacterList(char)
                     val matchIndex = if (char == "#") {
@@ -248,7 +288,7 @@ class AppDrawerFragment : Fragment() {
                 if (mode == CharacterIndicator.HIDE) {
                     lifecycleScope.launch {
                         delay(1000L)
-                        binding.characterIndicator?.isVisible = false
+                        binding.characterIndicator.isVisible = false
                     }
 
                 }
