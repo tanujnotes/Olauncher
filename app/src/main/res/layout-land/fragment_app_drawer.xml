@@ -75,20 +75,41 @@
         android:requiresFadingEdge="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/character_recycler_view"
+    <LinearLayout
+        android:id="@+id/indicatorLayout"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_gravity="end"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:fadingEdgeLength="24dp"
-        tools:listitem="@layout/drawer_alphabet"
-        tools:itemCount="26"
-        android:requiresFadingEdge="vertical" />
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="6dp"
+        android:layout_gravity="center|end"
+        >
 
+        <TextView
+            android:id="@+id/characterIndicator"
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            tools:text="W"
+            android:visibility="invisible"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:includeFontPadding="false"
+            android:background="@drawable/rounded_primary_gradient"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/character_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:fadingEdgeLength="24dp"
+            tools:listitem="@layout/drawer_alphabet"
+            tools:itemCount="26"
+            android:requiresFadingEdge="vertical" />
+    </LinearLayout>
 </FrameLayout>
