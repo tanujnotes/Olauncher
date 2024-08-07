@@ -1,6 +1,6 @@
 <resources>
     <string name="app">Alkalmazás</string>
-    <string name="set_as_default_launcher">Beállítás alapértelmezett indítóként</string>
+    <string name="set_as_default_launcher">Beállítás alapért. indítóként</string>
     <string name="set_as_default_launcher_first">Beállítás alapértelmezett indítóként</string>
     <string name="app_text_color">Szövegszín</string>
     <string name="double_tap_to_lock_screen">Dupla koppintás a képernyő lezárásához</string>
@@ -37,10 +37,10 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Tipp: Kezdje el begépelni egy alkalmazás nevét az automatikus indításához</string>
+    <string name="app_drawer_tips">Tipp: Kezdje el begépelni egy alkalmazás nevét annak automatikus indításához</string>
     <string name="okay">Rendben</string>
     <string name="cool">Szuper!</string>
-    <string name="auto_show_keyboard">Billentyűzet automatikus megjelenítlse</string>
+    <string name="auto_show_keyboard">Billentyűzet auto. megjelenítése</string>
     <string name="hide">Elrejtés</string>
     <string name="status_bar">Állapotsor megjelenítése fent</string>
     <string name="rename">Átnevezés</string>
@@ -55,13 +55,15 @@
             \n\nKöszönjük!</string>
     <string name="rate_us_message">Üdv, ezt az üzenetet nem fogja újra látni.
             \n\nHa tetszik az Olauncher, kérjük, adjon nekünk 5 csillagos értékelést! Ez segít javítani a helyezésünket, és nagyon boldoggá tesz minket. Köszönjük!</string>
-    <string name="share_message">Sziasztok, segítségre van szükségünk! Tavaly átléptük az egymillió letöltést. Idén egy millióval többet szeretnénk elérni, de egyedül nem tudjuk megtenni.
-        \n\nLenne szíves megosztani az Olaunchert a barátaival, kérem? Köszönöm és további szép napot!</string>
-    <string name="keyboard_message">Üdv, a billentyűzet a leggyorsabb módja a alkalmazások megtalálásához és elindításához az Olauncherben. Kérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön.
+<!--    <string name="share_message">Sziasztok, segítségre van szükségünk! Tavaly átléptük az egymillió letöltést. Idén egy millióval többet szeretnénk elérni, de egyedül nem tudjuk megtenni.-->
+<!--        \n\nLenne szíves megosztani az Olaunchert a barátaival, kérem? Köszönöm és további szép napot!</string>-->
+    <string name="share_message">Az Ön havi emlékeztetője - használja Ön a telefonját, és ne a telefonja Önt! Csak így tovább! Nagyszerűen csinálja!
+        \n\nHa van egy kis ideje, kérjük, ossza meg másokkal is az Olauncher-t. Az Olauncher-nek szüksége van emberekre. De ami még fontosabb, az embereknek szüksége van az Olauncher-re..</string>
+    <string name="keyboard_message">Üdv, a billentyűzet a leggyorsabb módja az alkalmazások megtalálásához és elindításához az Olauncherben. Megkérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön?
             \n\nA választás mindig az Öné.</string>
     <string name="digital_wellbeing_message">Ha időkorlátokat szeretne beállítani bizonyos alkalmazásokhoz, az Android Digital Wellbeing funkciója segíthet ebben.
             \n\nKeresse meg a Digitális jólét elemet a telefon beállításai között, és engedélyezze.</string>
-    <string name="accessibility_service_description">A dupla koppintás zárolásához szükséges a hozzáférhetőségi engedély. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
+    <string name="accessibility_service_description">A hozzáférhetőségi engedély szükséges a dupla koppintás általi zároláshoz. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
     <string name="support_olauncher_for_free">Támogasson minket ingyenesen az Amazon affiliate linkünk használatával.</string>
     <string name="support_olauncher_message">Minden alkalommal, amikor vásárol valamit a linkünket használva, egy kis jutalékot kapunk. Kérjük, mentse el a linket, és használja fel, amikor csak online vásárol.
             \n\nKöszönjük!</string>
@@ -77,7 +79,7 @@
     <string name="date_only">Csak dátum</string>
     <string name="bottom_on">Alsó: Be</string>
     <string name="bottom_off">Alsó: Ki</string>
-    <string name="please_set_olauncher_as_default_first">Kérjük állítsa be az Olauncher alkalmazást alapértelmezett indítóként</string>
+    <string name="please_set_olauncher_as_default_first">Kérjük, állítsa be az Olauncher-t alapértelmezett indítóként</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tipp: Kezdjen el gépelni az alkalmazás ÁTNEVEZÉSE opcióhoz</string>
     <string name="hidden_apps_message">Megjegyzés: A rejtett alkalmazások megtalálásához érintse meg az "Olauncher" elemet ennek a beállítás oldalnak a tetején.
@@ -119,11 +121,13 @@
     <string name="hidden_apps">Rejtett alkalmazások</string>
     <string name="adapter_show">Mutasd!</string>
     <string name="adapter_hide">Rejtsd el!</string>
-    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ön használja a telefonját, vagy a telefona használja Önt?</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ön használja a telefonját, vagy a telefonja használja Önt?</string>
     <string name="about_olauncher">Az Olauncher-ről</string>
-    <string name="learn_more">Tudj meg többet</string>
-    <string name="did_you_know">Tudtad?</string>
+    <string name="digital_wellbeing">Digitális jóllét</string>
+    <string name="learn_more">Tudjon meg többet</string>
+    <string name="did_you_know">Tudta?</string>
     <string name="leave_a_review">Hagyjon véleményt</string>
     <string name="review_message">Az Olauncher teljesen ingyenes és mindig is ingyenes lesz. Nincsenek hirdetései. Nem gyűjt adatokat. A legfontosabb, hogy segít csökkenteni a képernyő előtt töltött időt és egészségesebb digitális életet élni.
-        \n\nÚgy gondoljuk, hogy a minimális indítóra váltás kiváló döntés. Bár nyilvánvalóan elfogultak vagyunk, reméljük, hogy élvezni fogja az élményt. Nyugodtan oszd meg velünk gondolataidat!</string>
+        \n\nÚgy gondoljuk, hogy a minimális indítóra váltás kiváló döntés. Bár nyilvánvalóan elfogultak vagyunk, reméljük, hogy élvezni fogja az élményt. Nyugodtan ossza meg velünk gondolatait!</string>
+    <string name="alignment_changed">Az igazítás megváltozott ✅</string>
 </resources>

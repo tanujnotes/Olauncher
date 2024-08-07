@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:animateLayoutChanges="true"
     android:background="?attr/primaryShadeDarkColor">
 
@@ -18,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginEnd="32dp"
             android:gravity="end"
             android:imeOptions="actionSearch"
             android:paddingHorizontal="3dp"
@@ -71,5 +73,43 @@
         android:clipToPadding="false"
         android:fadingEdgeLength="24dp"
         android:requiresFadingEdge="vertical" />
+
+
+    <LinearLayout
+        android:id="@+id/indicatorLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        >
+
+        <TextView
+            android:id="@+id/characterIndicator"
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:maxLines="1"
+            tools:text="W"
+            android:visibility="invisible"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:includeFontPadding="false"
+            android:background="@drawable/rounded_primary_gradient"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/character_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:fadingEdgeLength="24dp"
+            tools:listitem="@layout/drawer_alphabet"
+            tools:itemCount="26"
+            android:requiresFadingEdge="vertical" />
+    </LinearLayout>
 
 </FrameLayout>
