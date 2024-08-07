@@ -327,16 +327,30 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun launchApp(appName: String, packageName: String, activityClassName: String?, userString: String) {
-        viewModel.selectedApp(
-            AppModel(
+        val launch = {
+            viewModel.selectedApp(
+                AppModel(
                 appName,
                 null,
                 packageName,
                 activityClassName,
                 getUserHandleFromString(requireContext(), userString)
-            ),
-            Constants.FLAG_LAUNCH_APP
-        )
+                ),
+                Constants.FLAG_LAUNCH_APP
+            )
+        }
+        val launchDelay = prefs.getAppLaunchDelay(packageName)
+        if (launchDelay > 0)
+            findNavController().navigate(
+                R.id.action_mainFragment_to_timerFragment,
+                bundleOf(
+                    Constants.Key.LAUNCH to launch,
+                    Constants.Key.LAUNCH_DELAY to launchDelay,
+                    Constants.Key.APP_NAME to appName
+                )
+            )
+        else
+            launch()
     }
 
     private fun showAppList(flag: Int, rename: Boolean = false, includeHiddenApps: Boolean = false) {

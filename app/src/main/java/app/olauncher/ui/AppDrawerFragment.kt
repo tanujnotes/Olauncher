@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -195,11 +196,26 @@ class AppDrawerFragment : Fragment() {
             appClickListener = {
                 if (it.appPackage.isEmpty())
                     return@AppDrawerAdapter
-                viewModel.selectedApp(it, flag)
-                if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
-                    findNavController().popBackStack(R.id.mainFragment, false)
+                val navigationController = findNavController()
+                val launch = {
+                    viewModel.selectedApp(it, flag)
+                    if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
+                        navigationController.popBackStack(R.id.mainFragment, false)
+                    else
+                        navigationController.popBackStack()
+                }
+                val launchDelay = prefs.getAppLaunchDelay(it.appPackage)
+                if ((flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS) && launchDelay > 0)
+                    findNavController().navigate(
+                        R.id.action_appListFragment_to_timerFragment,
+                        bundleOf(
+                            Constants.Key.LAUNCH to launch,
+                            Constants.Key.LAUNCH_DELAY to launchDelay,
+                            Constants.Key.APP_NAME to it.appLabel
+                        )
+                    )
                 else
-                    findNavController().popBackStack()
+                    launch()
             },
             appInfoListener = {
                 openAppInfo(
@@ -243,6 +259,9 @@ class AppDrawerFragment : Fragment() {
             appRenameListener = { appModel, renameLabel ->
                 prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
                 viewModel.getAppList()
+            },
+            appChangeLaunchDelayListener = { appModel, startDelay ->
+                prefs.setAppLaunchDelay(appModel.appPackage, startDelay)
             }
         )
 

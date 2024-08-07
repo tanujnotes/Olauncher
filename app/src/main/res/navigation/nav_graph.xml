@@ -24,6 +24,13 @@
             app:exitAnim="@anim/fade_exit"
             app:popEnterAnim="@anim/fade_enter"
             app:popExitAnim="@anim/fade_exit" />
+        <action
+            android:id="@+id/action_mainFragment_to_timerFragment"
+            app:destination="@id/timerFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit" />
     </fragment>
 
     <fragment
@@ -37,8 +44,15 @@
             app:enterAnim="@anim/fade_enter"
             app:exitAnim="@anim/fade_exit"
             app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit" />
+        <action
+            android:id="@+id/action_appListFragment_to_timerFragment"
+            app:destination="@id/timerFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
             app:popExitAnim="@anim/fade_exit"
-            app:popUpTo="@+id/appListFragment"
+            app:popUpTo="@id/appListFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -54,5 +68,19 @@
             app:popEnterAnim="@anim/fade_enter"
             app:popExitAnim="@anim/fade_exit" />
     </fragment>
-
+    <fragment
+        android:id="@+id/timerFragment"
+        android:name="app.olauncher.ui.TimerFragment"
+        android:label="timer_fragment"
+        tools:layout="@layout/fragment_timer">
+        <action
+            android:id="@+id/action_timerFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit"
+            app:popUpTo="@id/timerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

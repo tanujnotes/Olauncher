@@ -79,6 +79,8 @@
     <string name="hide">Verstecken</string>
     <string name="status_bar">Zeige Statusleiste</string>
     <string name="rename">Umbenennen</string>
+    <string name="delay_launch">Verzögern</string>
+    <string name="change">Übernehemen</string>
     <string name="show_date_time">Datum und Uhrzeit anzeigen</string>
     <string name="appearance">Aussehen</string>
     <string name="gestures">Gesten</string>
@@ -121,9 +123,15 @@
     <string name="swipe_right_app_disabled">App nach rechts wischen deaktiviert</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Benutzen Sie Ihr Telefon, oder nutzt Ihr Telefon Sie?</string>
     <string name="about_olauncher">Über Olauncher</string>
+    <string name="digital_wellbeing">Digitales Wohlbefinden</string>
     <string name="learn_more">Erfahren Sie mehr</string>
     <string name="did_you_know">Wussten Sie?</string>
     <string name="leave_a_review">Rezension</string>
     <string name="review_message">Olauncher ist und bleibt völlig kostenlos. Es gibt keine Werbung. Es werden keine Daten erfasst. Am wichtigsten ist, dass es Ihnen dabei hilft, Ihre Bildschirmzeit zu verkürzen und ein gesünderes digitales Leben zu führen.
         \n\nWir glauben, dass der Wechsel zu einem Minimal Launcher eine ausgezeichnete Entscheidung ist. Obwohl wir offensichtlich voreingenommen sind, hoffen wir, dass Ihnen die Erfahrung gefällt. Teilen Sie uns gerne Ihre Gedanken mit!</string>
+    <string name="alignment_changed">Ausrichtung geändert</string>
+    <string name="change_launch_delay_hint">Sekunden</string>
+    <string name="launch_delay_question">Bist du sicher, dass du\n%1$s\nbenutzen möchtest?</string>
+    <string name="launch_delay_launch_message">Die app wird in\n%1$d\nSekunden geöffnet.</string>
+    <string name="cancel">Abbrechen</string>
 </resources>

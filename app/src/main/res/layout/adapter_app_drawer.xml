@@ -85,6 +85,21 @@
             app:drawableTopCompat="@drawable/ic_hide" />
 
         <TextView
+            android:id="@+id/appDelayLaunch"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="2dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
+            android:text="@string/delay_launch"
+            android:textSize="12sp"
+            app:drawableTopCompat="@drawable/ic_delay_launch" />
+
+        <TextView
             android:id="@+id/appInfo"
             style="@style/TextSmall"
             android:layout_width="0dp"
@@ -111,8 +126,7 @@
         android:focusable="true"
         android:gravity="end|center_vertical"
         android:orientation="horizontal"
-        android:visibility="gone"
-        tools:visibility="gone">
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/etAppRename"
@@ -140,5 +154,48 @@
             android:textAllCaps="true" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/changeLaunchDelayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="?attr/primaryColorInverseTrans80"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/etLaunchDelay"
+            style="@style/TextLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="@string/change_launch_delay_hint"
+            android:inputType="numberDecimal"
+            android:maxLength="5"
+            android:maxLines="1"
+            android:paddingVertical="@dimen/app_padding_vertical"
+            android:selectAllOnFocus="true"
+            android:textColorHint="?attr/primaryColorTrans50"
+            android:imeOptions="actionDone" />
+
+        <TextView
+            android:id="@+id/tvSaveLaunchDelay"
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:text="@string/change"
+            android:textAllCaps="true" />
+
+    </LinearLayout>
+
 
 </FrameLayout>
