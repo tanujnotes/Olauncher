@@ -59,7 +59,7 @@ class AppDrawerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentAppDrawerBinding.inflate(inflater, container, false)
         return binding.root
@@ -104,12 +104,11 @@ class AppDrawerFragment : Fragment() {
         rv.layoutParams = params
     }
 
-    private fun setIndicatorMargins(x:Float,y:Float,isLast:Boolean,isFirst:Boolean) {
-        val lastValue = if (isLast) 6 else 3
+    private fun setIndicatorMargins(x: Float, y: Float, isLast: Boolean, isFirst: Boolean) {
         val indicator = binding.characterIndicator
         val params = indicator.layoutParams as LinearLayout.LayoutParams
         val scale = resources.displayMetrics.density
-        val marginTop =if (isFirst) (y + (1 * scale)).toInt() else (y - (lastValue * scale)).toInt()
+        val marginTop = y.toInt() - 80
         val marginRight = (8 * scale).toInt()
         val marginLeft = x.toInt()
         val marginBottom = 0
@@ -136,7 +135,7 @@ class AppDrawerFragment : Fragment() {
 
         if (requireContext().resources.configuration.orientation == ORIENTATION_PORTRAIT) {
             setAppDrawerPortraitMargins(prefs.appLabelAlignment == Gravity.CENTER)
-        }else{
+        } else {
             setAppDrawerLandMargins()
             setIndicatorLayoutLandMargins()
         }
@@ -250,7 +249,7 @@ class AppDrawerFragment : Fragment() {
             override fun scrollVerticallyBy(
                 dx: Int,
                 recycler: Recycler,
-                state: RecyclerView.State
+                state: RecyclerView.State,
             ): Int {
                 val scrollRange = super.scrollVerticallyBy(dx, recycler, state)
                 val overScroll = dx - scrollRange
@@ -260,10 +259,10 @@ class AppDrawerFragment : Fragment() {
             }
         }
         binding.characterRecyclerView.addOnItemTouchListener(
-            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char,mode ,pos->
+            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char, mode, pos ->
 
                 if (mode != CharacterIndicator.HIDE) {
-                    binding.characterIndicator.apply{
+                    binding.characterIndicator.apply {
                         setIndicatorMargins(
                             pos.first,
                             pos.second,
@@ -287,14 +286,11 @@ class AppDrawerFragment : Fragment() {
 
                 if (mode == CharacterIndicator.HIDE) {
                     lifecycleScope.launch {
-                        delay(1000L)
+                        delay(300L)
                         binding.characterIndicator.isVisible = false
                     }
-
                 }
-
             })
-
 
         binding.recyclerView.layoutManager = linearLayoutManager
         binding.recyclerView.adapter = adapter
@@ -436,7 +432,7 @@ class AppDrawerFragment : Fragment() {
                 if (regexMatch) "#" else firstLetter.uppercase()
             }.toSet()
                 .map { str ->
-                    DrawerCharacterModel(str, str.equals(firstVisibleItem.appLabel.first().toString(),true))
+                    DrawerCharacterModel(str, str.equals(firstVisibleItem.appLabel.first().toString(), true))
                 }
 
         viewModel.updateDrawerCharacterList(drawerCharacters)

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:animateLayoutChanges="true"
     android:background="?attr/primaryShadeDarkColor">
 
@@ -79,37 +79,35 @@
         android:id="@+id/indicatorLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="6dp"
-        android:layout_gravity="center|end"
-        >
+        android:layout_gravity="center_vertical|end"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
         <TextView
             android:id="@+id/characterIndicator"
-            style="@style/TextSmallBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:maxLines="1"
-            tools:text="W"
-            android:visibility="invisible"
-            android:paddingHorizontal="6dp"
-            android:paddingVertical="2dp"
+            style="@style/TextLarge"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@drawable/bg_shade_circular"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textAlignment="center"
             android:includeFontPadding="false"
-            android:background="@drawable/rounded_primary_gradient"
-            />
+            android:maxLines="1"
+            android:textAlignment="center"
+            android:visibility="invisible"
+            tools:text="W"
+            tools:visibility="visible" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/character_recycler_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:fadingEdgeLength="24dp"
-            tools:listitem="@layout/drawer_alphabet"
+            android:paddingVertical="36dp"
+            android:requiresFadingEdge="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="26"
-            android:requiresFadingEdge="vertical" />
+            tools:listitem="@layout/drawer_alphabet" />
     </LinearLayout>
 </FrameLayout>
