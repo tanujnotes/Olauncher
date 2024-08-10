@@ -388,6 +388,8 @@ class AppDrawerFragment : Fragment() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+                if (linearLayoutManager.itemCount == 0)
+                    return
                 val visiblePosition = linearLayoutManager.findFirstVisibleItemPosition()
                 val position = if (visiblePosition >= 0) visiblePosition else 0
                 val item = adapter.currentList[position]
