@@ -87,7 +87,7 @@ class AppDrawerFragment : Fragment() {
         val scale = resources.displayMetrics.density
         val marginTop = (180 * scale).toInt()
         val marginBottom = (24 * scale).toInt()
-        val marginRight = (centerValue * scale).toInt()
+        val marginRight = if (prefs.autoShowKeyboard) 0 else (centerValue * scale).toInt()
         params.setMargins(0, marginTop, marginRight, marginBottom)
         rv.layoutParams = params
     }
@@ -273,13 +273,14 @@ class AppDrawerFragment : Fragment() {
                         isVisible = true
                     }
                     viewModel.updateRangeDrawerCharacterList(char)
-                    val matchIndex = if (char == "#") {
-                        0
-                    } else {
+                    val matchIndex = try {
                         val match = adapter.currentList.find {
                             char.equals(it.appLabel.first().toString(), true)
                         }
                         adapter.currentList.indexOf(match)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        0
                     }
                     linearLayoutManager.scrollToPositionWithOffset(matchIndex, 0)
                 }

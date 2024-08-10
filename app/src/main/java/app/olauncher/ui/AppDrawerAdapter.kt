@@ -160,6 +160,7 @@ class AppDrawerAdapter(
             with(binding) {
                 appHideLayout.visibility = View.GONE
                 renameLayout.visibility = View.GONE
+                appTitle.visibility = View.VISIBLE
                 appTitle.text = appModel.appLabel
                 appTitle.gravity = appLabelGravity
                 otherProfileIndicator.isVisible = appModel.user != myUserHandle
@@ -172,6 +173,7 @@ class AppDrawerAdapter(
                             root.context.getString(R.string.adapter_show)
                         else
                             root.context.getString(R.string.adapter_hide)
+                        appTitle.visibility = View.INVISIBLE
                         appHideLayout.visibility = View.VISIBLE
                         appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
                     }
@@ -246,7 +248,14 @@ class AppDrawerAdapter(
                 }
                 appInfo.setOnClickListener { appInfoListener(appModel) }
                 appDelete.setOnClickListener { appDeleteListener(appModel) }
-                appHideLayout.setOnClickListener { appHideLayout.visibility = View.GONE }
+                appMenuClose.setOnClickListener {
+                    appHideLayout.visibility = View.GONE
+                    appTitle.visibility = View.VISIBLE
+                }
+                appRenameClose.setOnClickListener {
+                    renameLayout.visibility = View.GONE
+                    appTitle.visibility = View.VISIBLE
+                }
                 appHide.setOnClickListener { appHideListener(appModel, bindingAdapterPosition) }
             }
 
