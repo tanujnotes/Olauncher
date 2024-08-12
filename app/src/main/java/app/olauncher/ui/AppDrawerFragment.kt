@@ -238,6 +238,8 @@ class AppDrawerFragment : Fragment() {
                     viewModel.showDialog.postValue(Constants.Dialog.HIDDEN)
                     findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
                 }
+                viewModel.getAppList()
+                viewModel.getHiddenApps()
             },
             appRenameListener = { appModel, renameLabel ->
                 prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
@@ -301,6 +303,7 @@ class AppDrawerFragment : Fragment() {
             binding.recyclerView.layoutAnimation =
                 AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
         binding.characterRecyclerView.adapter = drawerCharacterAdapter
+        binding.characterRecyclerView.itemAnimator = null
     }
 
     private fun initObservers() {
@@ -421,9 +424,7 @@ class AppDrawerFragment : Fragment() {
 
         val position =
             if (firstVisibleItemPosition >= 0) firstVisibleItemPosition else 0
-        val firstVisibleItem =
-            drawerItems[position]
-
+        val firstVisibleItem = if (position < drawerItems.size) drawerItems[position] else null
 
         val drawerCharacters =
             drawerItems.filter { it.appLabel.isNotEmpty() }.map { char ->
@@ -435,11 +436,10 @@ class AppDrawerFragment : Fragment() {
                 if (regexMatch) "#" else firstLetter.uppercase()
             }.toSet()
                 .map { str ->
-                    DrawerCharacterModel(str, str.equals(firstVisibleItem.appLabel.first().toString(), true))
+                    DrawerCharacterModel(str, str.equals(firstVisibleItem?.appLabel?.first().toString(), true))
                 }
 
         viewModel.updateDrawerCharacterList(drawerCharacters)
-
     }
 
 
