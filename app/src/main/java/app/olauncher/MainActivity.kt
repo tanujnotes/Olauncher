@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -20,8 +19,19 @@ import androidx.navigation.Navigation
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
-import app.olauncher.helper.*
-import java.util.*
+import app.olauncher.helper.hasBeenDays
+import app.olauncher.helper.isDarkThemeOn
+import app.olauncher.helper.isDefaultLauncher
+import app.olauncher.helper.isEinkDisplay
+import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.isTablet
+import app.olauncher.helper.openUrl
+import app.olauncher.helper.rateApp
+import app.olauncher.helper.resetLauncherViaFakeActivity
+import app.olauncher.helper.setPlainWallpaper
+import app.olauncher.helper.shareApp
+import app.olauncher.helper.showLauncherSelector
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -102,10 +112,10 @@ class MainActivity : AppCompatActivity() {
             openLauncherChooser(it)
         }
         viewModel.resetLauncherLiveData.observe(this) {
-//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
-            resetDefaultLauncher()
-//            else
-//                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
+            if (isDefaultLauncher() || Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
+                resetLauncherViaFakeActivity()
+            else
+                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
         }
         viewModel.checkForMessages.observe(this) {
             checkForMessages()
@@ -225,12 +235,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun openLauncherChooser(resetFailed: Boolean) {
         if (resetFailed) {
-            val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-            else {
-                showToast(getString(R.string.search_for_Launcher_or_home_app), Toast.LENGTH_LONG)
-                Intent(Settings.ACTION_SETTINGS)
-            }
+            val intent = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             startActivity(intent)
         }
     }
@@ -245,7 +250,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             Constants.REQUEST_CODE_LAUNCHER_SELECTOR -> {
-                resetDefaultLauncher()
+                if (resultCode == Activity.RESULT_OK)
+                    resetLauncherViaFakeActivity()
             }
         }
     }

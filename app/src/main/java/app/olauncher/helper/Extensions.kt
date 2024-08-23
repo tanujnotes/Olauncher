@@ -11,10 +11,12 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.UserHandle
+import android.provider.Settings
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
+import app.olauncher.BuildConfig
 import app.olauncher.data.Constants
 
 fun View.hideKeyboard() {
@@ -64,6 +66,16 @@ fun Context.resetDefaultLauncher() {
     }
 }
 
+fun Context.isDefaultLauncher(): Boolean {
+    val launcherPackageName = getDefaultLauncherPackage(this)
+    return BuildConfig.APPLICATION_ID == launcherPackageName
+}
+
+fun Context.resetLauncherViaFakeActivity() {
+    resetDefaultLauncher()
+    if (getDefaultLauncherPackage(this).contains("."))
+        startActivity(Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS))
+}
 
 fun Context.openSearch(query: String? = null) {
     val intent = Intent(Intent.ACTION_WEB_SEARCH)
