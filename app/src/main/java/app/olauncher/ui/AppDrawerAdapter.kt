@@ -26,7 +26,6 @@ import java.text.Normalizer
 
 class AppDrawerAdapter(
     private var flag: Int,
-    private val appFilterHelper: AppFilterHelper,
     private val appLabelGravity: Int,
     private val appClickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
@@ -101,7 +100,6 @@ class AppDrawerAdapter(
                 results?.values?.let {
                     val items = it as MutableList<AppModel>
                     appFilteredList = items
-                    appFilterHelper.onAppFiltered(items.toList())
                     submitList(appFilteredList) {
                         autoLaunch()
                     }

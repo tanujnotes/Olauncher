@@ -75,40 +75,4 @@
         android:requiresFadingEdge="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <LinearLayout
-        android:id="@+id/indicatorLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|end"
-        android:alpha="0.8"
-        android:clipChildren="false"
-        android:clipToPadding="false">
-
-        <TextView
-            android:id="@+id/characterIndicator"
-            style="@style/TextLarge"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:background="@drawable/bg_shade_circular"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:maxLines="1"
-            android:textAlignment="center"
-            android:visibility="invisible"
-            tools:text="W"
-            tools:visibility="visible" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/character_recycler_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:fadingEdgeLength="24dp"
-            android:paddingVertical="36dp"
-            android:requiresFadingEdge="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="26"
-            tools:listitem="@layout/drawer_alphabet" />
-    </LinearLayout>
 </FrameLayout>

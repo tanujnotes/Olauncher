@@ -16,8 +16,6 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
-import app.olauncher.data.Constants.CharacterIndicator
-import app.olauncher.data.DrawerCharacterModel
 import app.olauncher.data.Prefs
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
@@ -36,7 +34,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val toggleDateTime = MutableLiveData<Unit>()
     val updateSwipeApps = MutableLiveData<Any>()
     val appList = MutableLiveData<List<AppModel>?>()
-    val drawerCharacterList = MutableLiveData<List<DrawerCharacterModel>>()
     val hiddenApps = MutableLiveData<List<AppModel>?>()
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
@@ -245,27 +242,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateHomeAlignment(gravity: Int) {
         prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
-    }
-
-    fun updateDrawerCharacterList(characters:List<DrawerCharacterModel>){
-        drawerCharacterList.value = characters
-    }
-
-    fun updateRangeDrawerCharacterList(char:String){
-        val charRegex = Regex("[0-9\\\\$&+,:;=?@#|/'<>.^*()%!-]")
-        val characters = drawerCharacterList.value ?: emptyList()
-        if (characters.isNotEmpty()){
-            val checkAndReplaceIfNum = if (charRegex.matches(char)) "#" else char
-
-            val updatedCharacters =
-                characters.map {
-                    DrawerCharacterModel(
-                        it.character,
-                        it.character.equals(checkAndReplaceIfNum, true)
-                    )
-                }
-
-            drawerCharacterList.value = updatedCharacters
-        }
     }
 }

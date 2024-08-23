@@ -1,33 +1,23 @@
 package app.olauncher.ui
 
-import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import app.olauncher.MainViewModel
 import app.olauncher.R
-import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
-import app.olauncher.data.Constants.CharacterIndicator
-import app.olauncher.data.DrawerCharacterModel
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
-import app.olauncher.helper.AppFilterHelper
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isSystemApp
@@ -38,8 +28,6 @@ import app.olauncher.helper.searchOnPlayStore
 import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 class AppDrawerFragment : Fragment() {
@@ -47,7 +35,6 @@ class AppDrawerFragment : Fragment() {
     private lateinit var prefs: Prefs
     private lateinit var adapter: AppDrawerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var drawerCharacterAdapter: DrawerCharacterAdapter
 
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
@@ -79,67 +66,7 @@ class AppDrawerFragment : Fragment() {
         initClickListeners()
     }
 
-    private fun setAppDrawerPortraitMargins(center: Boolean) {
-        val centerValue = if (center) 5 else 48
-
-        val rv = binding.recyclerView
-        val params = rv.layoutParams as FrameLayout.LayoutParams
-        val scale = resources.displayMetrics.density
-        val marginTop = (180 * scale).toInt()
-        val marginBottom = (24 * scale).toInt()
-        val marginRight = if (prefs.autoShowKeyboard) 0 else (centerValue * scale).toInt()
-        params.setMargins(0, marginTop, marginRight, marginBottom)
-        rv.layoutParams = params
-    }
-
-    private fun setAppDrawerLandMargins() {
-        val rv = binding.recyclerView
-        val params = rv.layoutParams as FrameLayout.LayoutParams
-        val scale = resources.displayMetrics.density
-        val marginTop = (80 * scale).toInt()
-        val marginBottom = 0
-        val marginRight = (56 * scale).toInt()
-        val marginLeft = (56 * scale).toInt()
-        params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
-        rv.layoutParams = params
-    }
-
-    private fun setIndicatorMargins(x: Float, y: Float, isLast: Boolean, isFirst: Boolean) {
-        val indicator = binding.characterIndicator
-        val params = indicator.layoutParams as LinearLayout.LayoutParams
-        val scale = resources.displayMetrics.density
-        val marginTop = y.toInt() - 80
-        val marginRight = (8 * scale).toInt()
-        val marginLeft = x.toInt()
-        val marginBottom = 0
-        params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
-        indicator.layoutParams = params
-    }
-
-
-    private fun setIndicatorLayoutLandMargins() {
-        val indicatorLayout = binding.indicatorLayout
-        val params = indicatorLayout.layoutParams as FrameLayout.LayoutParams
-        val scale = resources.displayMetrics.density
-        val marginTop = (6 * scale).toInt()
-        val marginRight = 0
-        val marginLeft = 0
-        val marginBottom = (6 * scale).toInt()
-        params.setMargins(marginLeft, marginTop, marginRight, marginBottom)
-        indicatorLayout.layoutParams = params
-    }
-
-
     private fun initViews() {
-        binding.characterRecyclerView.isVisible = prefs.autoShowKeyboard.not()
-
-        if (requireContext().resources.configuration.orientation == ORIENTATION_PORTRAIT) {
-            setAppDrawerPortraitMargins(prefs.appLabelAlignment == Gravity.CENTER)
-        } else {
-            setAppDrawerLandMargins()
-            setIndicatorLayoutLandMargins()
-        }
-
         if (flag == Constants.FLAG_HIDDEN_APPS)
             binding.search.queryHint = getString(R.string.hidden_apps)
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
@@ -179,17 +106,8 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun initAdapter() {
-
-        val appFilterHelper = object : AppFilterHelper {
-            override fun onAppFiltered(items: List<AppModel>) {
-                submitDrawerCharacters(items)
-            }
-        }
-        drawerCharacterAdapter = DrawerCharacterAdapter()
-
         adapter = AppDrawerAdapter(
             flag,
-            appFilterHelper,
             prefs.appLabelAlignment,
             appClickListener = {
                 if (it.appPackage.isEmpty())
@@ -260,40 +178,6 @@ class AppDrawerFragment : Fragment() {
                 return scrollRange
             }
         }
-        binding.characterRecyclerView.addOnItemTouchListener(
-            DrawerCharacterAdapter.CharacterTouchListener(drawerCharacterAdapter) { char, mode, pos ->
-
-                if (mode != CharacterIndicator.HIDE) {
-                    binding.characterIndicator.apply {
-                        setIndicatorMargins(
-                            pos.first,
-                            pos.second,
-                            char.equals("Z", true),
-                            char.equals("A", true)
-                        )
-                        text = char
-                        isVisible = true
-                    }
-                    viewModel.updateRangeDrawerCharacterList(char)
-                    val matchIndex = try {
-                        val match = adapter.currentList.find {
-                            char.equals(it.appLabel.first().toString(), true)
-                        }
-                        adapter.currentList.indexOf(match)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        0
-                    }
-                    linearLayoutManager.scrollToPositionWithOffset(matchIndex, 0)
-                }
-
-                if (mode == CharacterIndicator.HIDE) {
-                    lifecycleScope.launch {
-                        delay(300L)
-                        binding.characterIndicator.isVisible = false
-                    }
-                }
-            })
 
         binding.recyclerView.layoutManager = linearLayoutManager
         binding.recyclerView.adapter = adapter
@@ -302,8 +186,6 @@ class AppDrawerFragment : Fragment() {
         if (requireContext().isEinkDisplay().not())
             binding.recyclerView.layoutAnimation =
                 AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
-        binding.characterRecyclerView.adapter = drawerCharacterAdapter
-        binding.characterRecyclerView.itemAnimator = null
     }
 
     private fun initObservers() {
@@ -317,7 +199,6 @@ class AppDrawerFragment : Fragment() {
             viewModel.hiddenApps.observe(viewLifecycleOwner) {
                 it?.let {
                     adapter.setAppList(it.toMutableList())
-                    submitDrawerCharacters(it)
                 }
             }
         } else {
@@ -325,13 +206,8 @@ class AppDrawerFragment : Fragment() {
                 it?.let { appModels ->
                     adapter.setAppList(appModels.toMutableList())
                     adapter.filter.filter(binding.search.query)
-                    submitDrawerCharacters(appModels)
                 }
             }
-        }
-
-        viewModel.drawerCharacterList.observe(viewLifecycleOwner) { characters ->
-            drawerCharacterAdapter.submitList(characters)
         }
     }
 
@@ -389,16 +265,6 @@ class AppDrawerFragment : Fragment() {
                     }
                 }
             }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (linearLayoutManager.itemCount == 0)
-                    return
-                val visiblePosition = linearLayoutManager.findFirstVisibleItemPosition()
-                val position = if (visiblePosition >= 0) visiblePosition else 0
-                val item = adapter.currentList[position]
-                viewModel.updateRangeDrawerCharacterList(item.appLabel.first().toString())
-            }
         }
     }
 
@@ -407,41 +273,6 @@ class AppDrawerFragment : Fragment() {
         if (flag == Constants.FLAG_LAUNCH_APP)
             viewModel.checkForMessages.call()
     }
-
-    private fun submitDrawerCharacters(drawerItems: List<AppModel>) {
-        if (drawerItems.isEmpty()) {
-            viewModel.updateDrawerCharacterList(emptyList())
-            return
-        }
-
-
-        val charRegex = Regex("[0-9\\\\$&+,:;=?@#|/'<>.^*()%!-]")
-        val emojiRegex = Regex("\\p{So}+")
-        val emojiRegex2 = Regex("[\uD800-\uDBFF\uDC00-\uDFFF]+")
-
-        val firstVisibleItemPosition =
-            linearLayoutManager.findFirstCompletelyVisibleItemPosition()
-
-        val position =
-            if (firstVisibleItemPosition >= 0) firstVisibleItemPosition else 0
-        val firstVisibleItem = if (position < drawerItems.size) drawerItems[position] else null
-
-        val drawerCharacters =
-            drawerItems.filter { it.appLabel.isNotEmpty() }.map { char ->
-                val firstLetter = char.appLabel.first().toString()
-                val regexMatch = charRegex.matches(firstLetter) || emojiRegex.matches(
-                    char.appLabel.first().toString()
-                ) || emojiRegex2.matches(char.appLabel.first().toString())
-
-                if (regexMatch) "#" else firstLetter.uppercase()
-            }.toSet()
-                .map { str ->
-                    DrawerCharacterModel(str, str.equals(firstVisibleItem?.appLabel?.first().toString(), true))
-                }
-
-        viewModel.updateDrawerCharacterList(drawerCharacters)
-    }
-
 
     override fun onStart() {
         super.onStart()
