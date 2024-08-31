@@ -43,8 +43,8 @@ object Constants {
     }
 
     object TextSize {
-        const val ONE = 0.7f
-        const val TWO = 0.8f
+        const val ONE = 0.6f
+        const val TWO = 0.75f
         const val THREE = 0.9f
         const val FOUR = 1f
         const val FIVE = 1.1f
