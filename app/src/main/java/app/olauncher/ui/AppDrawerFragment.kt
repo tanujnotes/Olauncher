@@ -248,19 +248,16 @@ class AppDrawerFragment : Fragment() {
 
                     RecyclerView.SCROLL_STATE_DRAGGING -> {
                         onTop = !recyclerView.canScrollVertically(-1)
-                        if (onTop) binding.search.hideKeyboard()
-                        // if (onTop && !recyclerView.canScrollVertically(1))
-                        //     checkMessageAndExit()
+                        if (onTop)
+                            binding.search.hideKeyboard()
                     }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
-                        if (!recyclerView.canScrollVertically(1)) {
+                        if (!recyclerView.canScrollVertically(1))
                             binding.search.hideKeyboard()
-                        } else if (!recyclerView.canScrollVertically(-1)) {
-                            if (!onTop) binding.search.showKeyboard(prefs.autoShowKeyboard)
-                            // if (onTop) checkMessageAndExit()
-                            // else binding.search.showKeyboard(prefs.autoShowKeyboard)
-                        }
+                        else if (!recyclerView.canScrollVertically(-1))
+                            if (!onTop && isRemoving.not())
+                                binding.search.showKeyboard(prefs.autoShowKeyboard)
                     }
                 }
             }
