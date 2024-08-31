@@ -5,12 +5,10 @@ import android.app.SearchManager
 import android.app.WallpaperManager
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherApps
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Bitmap
@@ -65,7 +63,12 @@ fun Context.showToast(stringResource: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, getString(stringResource), duration).show()
 }
 
-suspend fun getAppsList(context: Context, prefs: Prefs, includeRegularApps: Boolean = true, includeHiddenApps: Boolean = false): MutableList<AppModel> {
+suspend fun getAppsList(
+    context: Context,
+    prefs: Prefs,
+    includeRegularApps: Boolean = true,
+    includeHiddenApps: Boolean = false,
+): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
 
@@ -86,6 +89,7 @@ suspend fun getAppsList(context: Context, prefs: Prefs, includeRegularApps: Bool
                         collator.getCollationKey(app.label.toString()),
                         app.applicationInfo.packageName,
                         app.componentName.className,
+                        (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
                         profile
                     )
 

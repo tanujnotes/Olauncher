@@ -333,6 +333,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 null,
                 packageName,
                 activityClassName,
+                false,
                 getUserHandleFromString(requireContext(), userString)
             ),
             Constants.FLAG_LAUNCH_APP

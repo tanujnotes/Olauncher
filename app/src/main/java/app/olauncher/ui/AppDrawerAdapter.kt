@@ -18,7 +18,6 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
-import app.olauncher.helper.AppFilterHelper
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
@@ -131,7 +130,7 @@ class AppDrawerAdapter(
 
     fun setAppList(appsList: MutableList<AppModel>) {
         // Add empty app for bottom padding in recyclerview
-        appsList.add(AppModel("", null, "", "", android.os.Process.myUserHandle()))
+        appsList.add(AppModel("", null, "", "", false, android.os.Process.myUserHandle()))
         this.appsList = appsList
         this.appFilteredList = appsList
         submitList(appsList)
@@ -159,7 +158,7 @@ class AppDrawerAdapter(
                 appHideLayout.visibility = View.GONE
                 renameLayout.visibility = View.GONE
                 appTitle.visibility = View.VISIBLE
-                appTitle.text = appModel.appLabel
+                appTitle.text = appModel.appLabel + if (appModel.isNew == true) " ✨" else ""
                 appTitle.gravity = appLabelGravity
                 otherProfileIndicator.isVisible = appModel.user != myUserHandle
 
