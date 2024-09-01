@@ -32,6 +32,7 @@ import app.olauncher.helper.resetLauncherViaFakeActivity
 import app.olauncher.helper.setPlainWallpaper
 import app.olauncher.helper.shareApp
 import app.olauncher.helper.showLauncherSelector
+import app.olauncher.helper.showToast
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -128,6 +129,7 @@ class MainActivity : AppCompatActivity() {
                     showMessageDialog(getString(R.string.did_you_know), getString(R.string.review_message), getString(R.string.leave_a_review)) {
                         binding.messageLayout.visibility = View.GONE
                         prefs.rateClicked = true
+                        showToast("😇🙏❤️")
                         rateApp()
                     }
                 }
@@ -137,6 +139,7 @@ class MainActivity : AppCompatActivity() {
                     showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), getString(R.string.rate_now)) {
                         binding.messageLayout.visibility = View.GONE
                         prefs.rateClicked = true
+                        showToast("🤩🙏❤️")
                         rateApp()
                     }
                 }
@@ -145,6 +148,7 @@ class MainActivity : AppCompatActivity() {
                     prefs.shareShownTime = System.currentTimeMillis()
                     showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share_now)) {
                         binding.messageLayout.visibility = View.GONE
+                        showToast("😊🙏❤️")
                         shareApp()
                     }
                 }
