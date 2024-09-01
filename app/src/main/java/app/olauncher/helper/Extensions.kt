@@ -108,3 +108,6 @@ fun Context.isPackageInstalled(packageName: String, userHandle: UserHandle = and
 
 fun Long.hasBeenDays(days: Int): Boolean =
     ((System.currentTimeMillis() - this) / Constants.ONE_DAY_IN_MILLIS) >= days
+
+fun Long.hasBeenHours(hours: Int): Boolean =
+    ((System.currentTimeMillis() - this) / Constants.ONE_HOUR_IN_MILLIS) >= hours
