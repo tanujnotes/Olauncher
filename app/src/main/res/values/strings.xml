@@ -71,10 +71,10 @@
         \n\nThank you.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
         \n\nIf you\'re finding Olauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
-    <string name="share_message">We need your help! Last year we crossed a million downloads. This year we want to reach a million more. We can\'t do it alone.
-         \n\nCould you please share Olauncher with the world? Because Olauncher needs people, and people need Olauncher.</string>
-<!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
-<!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
+    <string name="share_message">We need your help! We crossed a million downloads last year. This year, we want to reach a million more, but we can\'t do it alone.
+         \n\nOlauncher needs people, and people need Olauncher. Could you please share Olauncher with others?</string>
+    <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
+    <!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
     <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.
@@ -141,7 +141,7 @@
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
     <string name="leave_a_review">Leave a review</string>
-    <string name="review_message">Olauncher is free and always will be. It has no ads. It collects no data. Most importantly, it helps you in reducing your screen time and live a healthier digital life.
-        \n\nWe believe that switching to a minimal launcher is an excellent decision. While we\'re obviously biased, we hope you\'re enjoying the experience. Feel free to share your thoughts with us!</string>
+    <string name="review_message">Olauncher is free and always will be. It has no ads, collects no data, and helps you reduce screen time for a healthier digital life.
+        \n\nWe believe a minimal launcher is a great choice, and we hope you enjoy it. Tell the world what you think!</string>
     <string name="alignment_changed">Alignment changed ✅</string>
 </resources>
