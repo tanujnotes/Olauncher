@@ -20,6 +20,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
 import app.olauncher.helper.hasBeenDays
+import app.olauncher.helper.hasBeenHours
 import app.olauncher.helper.isDarkThemeOn
 import app.olauncher.helper.isDefaultLauncher
 import app.olauncher.helper.isEinkDisplay
@@ -184,7 +185,7 @@ class MainActivity : AppCompatActivity() {
 
         when (prefs.userState) {
             Constants.UserState.START -> {
-                if (prefs.firstOpenTime.hasBeenDays(1))
+                if (prefs.firstOpenTime.hasBeenHours(1))
                     prefs.userState = Constants.UserState.REVIEW
             }
 
@@ -199,14 +200,14 @@ class MainActivity : AppCompatActivity() {
                 if (prefs.rateClicked)
                     prefs.userState = Constants.UserState.SHARE
                 else if (isOlauncherDefault(this)
-                    && prefs.firstOpenTime.hasBeenDays(7)
+                    && prefs.firstOpenTime.hasBeenDays(3)
                     && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 15
                 ) viewModel.showDialog.postValue(Constants.Dialog.RATE)
             }
 
             Constants.UserState.SHARE -> {
                 if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(14)
-                    && prefs.shareShownTime.hasBeenDays(35)
+                    && prefs.shareShownTime.hasBeenDays(45)
                     && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 15
                 ) viewModel.showDialog.postValue(Constants.Dialog.SHARE)
             }
