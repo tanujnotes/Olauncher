@@ -264,17 +264,16 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
 suspend fun setWallpaper(appContext: Context, url: String): Boolean {
     return withContext(Dispatchers.IO) {
         val originalImageBitmap = getBitmapFromURL(url) ?: return@withContext false
-        val wallpaperManager = WallpaperManager.getInstance(appContext)
+        if (appContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && isTablet(appContext).not())
+            return@withContext false
 
+        val wallpaperManager = WallpaperManager.getInstance(appContext)
         val (width, height) = getScreenDimensions(appContext)
         val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
 
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_SYSTEM)
-                wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_LOCK)
-            } else
-                wallpaperManager.setBitmap(scaledBitmap)
+            wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_SYSTEM)
+            wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_LOCK)
         } catch (e: Exception) {
             return@withContext false
         }
