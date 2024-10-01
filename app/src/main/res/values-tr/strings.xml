@@ -86,7 +86,8 @@
     <string name="system_default">sistem</string>
     <string name="dark">Karanlık</string>
     <string name="light">Işık</string>
-    <string name="welcome_to_olauncher_settings">Alt kısımdaki Hakkında sayfamızda tüm sorularınızın yanıtları bulunmaktadır. unutma :)\n\nTeşekkür ederim.</string>
+    <string name="welcome_to_olauncher_settings">Ayarlar sayfasına hoş geldiniz!
+        \n\nUnutmayın, herhangi bir sorunuz varsa, Hakkında sayfamızda cevap var.</string>
     <string name="rate_us_message">Merhaba, bu mesajı bir daha görmeyeceksiniz.
         \n\nOlauncher\'ı beğendiyseniz, lütfen bize 5 yıldız verebilir misiniz? Sıralamamızı yükseltmemize yardımcı oluyor ve bizi mutlu ediyor. Teşekkür ederim!</string>
     <string name="share_message">Merhaba, yardımınıza ihtiyacımız var! Geçen yıl bir milyon indirmeyi geçtik. Bu yıl bir milyona daha ulaşmak istiyoruz ama bunu tek başımıza yapamayız.

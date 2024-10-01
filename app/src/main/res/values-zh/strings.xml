@@ -86,7 +86,8 @@
     <string name="system_default">系统</string>
     <string name="dark">黑暗</string>
     <string name="light">光</string>
-    <string name="welcome_to_olauncher_settings">我们底部的“关于”页面可以解答您的所有问题。别忘了。 :)\n\n谢谢。</string>
+    <string name="welcome_to_olauncher_settings">欢迎来到设置！
+        \n\n请记住，如果您有任何问题，我们的“关于”页面有答案。</string>
     <string name="rate_us_message">您好，您不会再看到此消息。
         \n\n如果您喜欢 Olauncher，能给我们一个 5 星评价吗？ 它帮助我们提高排名并使我们高兴。 谢谢你！</string>
     <string name="share_message">你好，我们需要你的帮助！去年我们的下载量突破了一百万次。今年我们希望再增加一百万，但我们无法单独做到这一点。

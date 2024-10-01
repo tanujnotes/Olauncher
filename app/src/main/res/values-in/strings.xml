@@ -53,7 +53,8 @@
     <string name="system_default">Sistem</string>
     <string name="dark">Gelap</string>
     <string name="light">Terang</string>
-    <string name="welcome_to_olauncher_settings">Halaman Tentang kami di bagian bawah memiliki jawaban atas semua pertanyaan Anda. Jangan lupa. :)</string>
+    <string name="welcome_to_olauncher_settings">Selamat datang di pengaturan!
+        \n\nIngat, jika Anda memiliki pertanyaan, halaman Tentang kami memiliki jawabannya.</string>
     <string name="rate_us_message">Hai, Anda tidak akan melihat pesan ini lagi.
         \n\nJika Anda menyukai Olauncher, bisakah Anda memberi kami peringkat bintang 5? Ini membantu kami meningkatkan peringkat kami dan membuat kami bahagia. Terima kasih!</string>
     <string name="share_message">Hai, kami membutuhkan bantuan Anda! Tahun lalu kami melampaui satu juta unduhan. Tahun ini kami ingin menjangkau satu juta orang lagi tetapi kami tidak dapat melakukannya sendiri.

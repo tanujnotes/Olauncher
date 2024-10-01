@@ -52,8 +52,8 @@
     <string name="system_default">Sustav</string>
     <string name="dark">Tamna</string>
     <string name="light">Svijetla</string>
-    <string name="welcome_to_olauncher_settings">Naša stranica s informacijama na dnu zaslona ima odgovore na sva tvoja pitanja. Nemoj zaboraviti to. :)
-        \n\nHvala ti.</string>
+    <string name="welcome_to_olauncher_settings">Dobrodošli u postavke!
+        \n\nZapamtite, ako imate bilo kakvih pitanja, naša stranica O nama ima odgovor.</string>
     <string name="rate_us_message">Ovu poruku više nećeš vidjeti.
         \n\nBok, ako uživaš u korištenju Olaunchera, možeš li nam dati recenziju s 5 zvijezdica? To nam donosi više korisnika i usrećuje nas.\nHvala ti i sretan ostatak dana!</string>
     <string name="share_message">Bok, trebamo tvoju pomoć! Prošle godine prešli smo milijun preuzimanja. Ove godine želimo doseći milijun više, ali ne možemo sami.

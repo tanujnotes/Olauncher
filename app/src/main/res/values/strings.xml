@@ -67,8 +67,8 @@
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="welcome_to_olauncher_settings">Tip: Our About page has answers to all your questions. Don\'t forget. :)
-        \n\nThank you.</string>
+    <string name="welcome_to_olauncher_settings">Welcome to the settings!
+        \n\nRemember, if you have any questions, our About page has the answer.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
         \n\nIf you\'re finding Olauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
     <string name="share_message">We need your help! We crossed a million downloads last year. This year, we want to reach a million more, but we can\'t do it alone.

@@ -266,6 +266,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun initObservers() {
         if (prefs.firstSettingsOpen) {
+            viewModel.showDialog.postValue(Constants.Dialog.ABOUT)
             prefs.firstSettingsOpen = false
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner) {

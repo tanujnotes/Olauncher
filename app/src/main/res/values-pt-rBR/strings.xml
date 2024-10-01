@@ -53,7 +53,8 @@
     <string name="system_default">Sistema</string>
     <string name="dark">Escuro</string>
     <string name="light">Claro</string>
-    <string name="welcome_to_olauncher_settings">Nossa página Sobre, na parte inferior, tem respostas para todas as suas perguntas. Não se esqueça. :)</string>
+    <string name="welcome_to_olauncher_settings">Bem-vindo às configurações!
+        \n\nLembre-se, se você tiver alguma dúvida, nossa página Sobre tem a resposta.</string>
     <string name="rate_us_message">Ei, você acha Olauncher útil? Se sim, uma classificação de 5 estrelas é a melhor maneira de nos apoiar. Obrigado.</string>
     <string name="share_message">Olá, precisamos da sua ajuda! No ano passado ultrapassamos um milhão de downloads. Este ano queremos chegar a mais um milhão, mas não podemos fazê-lo sozinhos.
         \n\nVocê poderia fazer a gentileza de compartilhar o Olauncher com seus amigos, por favor? Obrigado e tenha um dia maravilhoso!</string>

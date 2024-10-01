@@ -51,8 +51,8 @@
     <string name="system_default">Rendszer</string>
     <string name="dark">Sötét</string>
     <string name="light">Világos</string>
-    <string name="welcome_to_olauncher_settings">A Névjegy oldalunk alján megtalálja a válaszokat minden kérdésére. Ne feledje el. :)
-            \n\nKöszönjük!</string>
+    <string name="welcome_to_olauncher_settings">Üdvözöljük a beállításokban!
+        \n\nNe feledje, ha bármilyen kérdése van, az „Rólunk” oldalunk tartalmazza a választ.</string>
     <string name="rate_us_message">Üdv, ezt az üzenetet nem fogja újra látni.
             \n\nHa tetszik az Olauncher, kérjük, adjon nekünk 5 csillagos értékelést! Ez segít javítani a helyezésünket, és nagyon boldoggá tesz minket. Köszönjük!</string>
     <!--    <string name="share_message">Sziasztok, segítségre van szükségünk! Tavaly átléptük az egymillió letöltést. Idén egy millióval többet szeretnénk elérni, de egyedül nem tudjuk megtenni.-->

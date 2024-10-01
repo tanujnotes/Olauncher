@@ -52,8 +52,8 @@
     <string name="system_default">System</string>
     <string name="dark">Mörkt</string>
     <string name="light">Ljust</string>
-    <string name="welcome_to_olauncher_settings">Tips: Vår Om-sida har svar på alla dina frågor. Glöm inte det. :)
-        \n\nTack.</string>
+    <string name="welcome_to_olauncher_settings">Välkommen till inställningarna!
+        \n\nKom ihåg, om du har några frågor har vår sida Om oss svaret.</string>
     <string name="rate_us_message">Hejsan, du kommer inte att se detta meddelande igen.
         \n\nOm du tycker att Olauncher är användbar, skulle du vänligen kunna lämna en 5-stjärnig recension? Det skulle göra oss väldigt glada. Tack!</string>
     <string name="share_message">Vi behöver din hjälp! Förra året passerade vi en miljon nedladdningar. I år vill vi nå en miljon till, men vi kan inte göra det på egen hand.
