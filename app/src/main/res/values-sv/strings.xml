@@ -126,5 +126,5 @@
     <string name="leave_a_review">Lämna en recension</string>
     <string name="review_message">Olauncher är gratis och kommer alltid att vara det. Den har inga annonser. Den samlar inte in någon data. Viktigast av allt, det hjälper dig att minska din skärmtid och leva ett hälsosammare digitalt liv.
           \n\nVi tycker att det är ett utmärkt beslut att byta till en minimalistisk startskärmsapp. Även om vi uppenbarligen är partiska, hoppas vi att du gillar upplevelsen. Vi vill gärna höra dina tankar!</string>
-    <string name="alignment_changed">Placering ändrad ✅</string>
+    <string name="alignment_changed">Justering ändrad ✅</string> <!-- Swedish -->
 </resources>

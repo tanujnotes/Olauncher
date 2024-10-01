@@ -127,4 +127,5 @@
     <string name="leave_a_review">İnceleme bırak</string>
     <string name="review_message">Olauncher tamamen ücretsizdir ve her zaman ücretsiz olacaktır. Hiçbir reklamı yok. Hiçbir veri toplamaz. En önemlisi ekran başında geçirdiğiniz süreyi azaltmanıza ve daha sağlıklı bir dijital yaşam sürmenize yardımcı olur.
         \n\nMinimal bir başlatıcıya geçmenin mükemmel bir karar olduğuna inanıyoruz. Açıkça ön yargılı olsak da, bu deneyimden keyif alacağınızı umuyoruz. Düşüncelerinizi bizimle paylaşmaktan çekinmeyin!</string>
+    <string name="alignment_changed">Hizalama değiştirildi ✅</string> <!-- Turkish -->
 </resources>

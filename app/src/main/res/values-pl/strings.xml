@@ -125,4 +125,5 @@
     <string name="leave_a_review">Ucz się więcej</string>
     <string name="review_message">Olauncher jest i zawsze będzie całkowicie darmowy. Nie zawiera reklam. Nie zbiera żadnych danych. Co najważniejsze, pomaga skrócić czas spędzany przed ekranem i prowadzić zdrowsze cyfrowe życie.
         \n\nWierzymy, że przejście na minimalny program uruchamiający to doskonała decyzja. Chociaż jesteśmy oczywiście stronniczy, mamy nadzieję, że spodoba ci się to doświadczenie. Podziel się z nami swoimi przemyśleniami!</string>
+    <string name="alignment_changed">Wyrównanie zmienione ✅</string> <!-- Polish -->
 </resources>

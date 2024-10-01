@@ -124,4 +124,5 @@
     <string name="leave_a_review">Tinggalkan ulasan</string>
     <string name="review_message">Olauncher sepenuhnya gratis dan akan selalu gratis. Tidak ada iklan. Tidak mengumpulkan data pribadi. Yang terpenting, ini membantu Anda mengurangi waktu pemakaian perangkat dan menjalani kehidupan digital yang lebih sehat.
         \n\nKami percaya bahwa beralih ke peluncur minimal adalah keputusan yang sangat baik. Meskipun kami jelas-jelas bias, kami harap Anda menikmati pengalaman ini. Jangan ragu untuk berbagi pemikiran Anda dengan kami!</string>
+    <string name="alignment_changed">Penyelarasan diubah ✅</string> <!-- Indonesian -->
 </resources>

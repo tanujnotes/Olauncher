@@ -55,8 +55,8 @@
             \n\nKöszönjük!</string>
     <string name="rate_us_message">Üdv, ezt az üzenetet nem fogja újra látni.
             \n\nHa tetszik az Olauncher, kérjük, adjon nekünk 5 csillagos értékelést! Ez segít javítani a helyezésünket, és nagyon boldoggá tesz minket. Köszönjük!</string>
-<!--    <string name="share_message">Sziasztok, segítségre van szükségünk! Tavaly átléptük az egymillió letöltést. Idén egy millióval többet szeretnénk elérni, de egyedül nem tudjuk megtenni.-->
-<!--        \n\nLenne szíves megosztani az Olaunchert a barátaival, kérem? Köszönöm és további szép napot!</string>-->
+    <!--    <string name="share_message">Sziasztok, segítségre van szükségünk! Tavaly átléptük az egymillió letöltést. Idén egy millióval többet szeretnénk elérni, de egyedül nem tudjuk megtenni.-->
+    <!--        \n\nLenne szíves megosztani az Olaunchert a barátaival, kérem? Köszönöm és további szép napot!</string>-->
     <string name="share_message">Az Ön havi emlékeztetője - használja Ön a telefonját, és ne a telefonja Önt! Csak így tovább! Nagyszerűen csinálja!
         \n\nHa van egy kis ideje, kérjük, ossza meg másokkal is az Olauncher-t. Az Olauncher-nek szüksége van emberekre. De ami még fontosabb, az embereknek szüksége van az Olauncher-re..</string>
     <string name="keyboard_message">Üdv, a billentyűzet a leggyorsabb módja az alkalmazások megtalálásához és elindításához az Olauncherben. Megkérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön?
@@ -129,5 +129,5 @@
     <string name="leave_a_review">Hagyjon véleményt</string>
     <string name="review_message">Az Olauncher teljesen ingyenes és mindig is ingyenes lesz. Nincsenek hirdetései. Nem gyűjt adatokat. A legfontosabb, hogy segít csökkenteni a képernyő előtt töltött időt és egészségesebb digitális életet élni.
         \n\nÚgy gondoljuk, hogy a minimális indítóra váltás kiváló döntés. Bár nyilvánvalóan elfogultak vagyunk, reméljük, hogy élvezni fogja az élményt. Nyugodtan ossza meg velünk gondolatait!</string>
-    <string name="alignment_changed">Az igazítás megváltozott ✅</string>
+    <string name="alignment_changed">Igazítás megváltozott ✅</string> <!-- Hungarian -->
 </resources>

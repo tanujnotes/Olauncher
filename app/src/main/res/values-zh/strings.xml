@@ -127,4 +127,5 @@
     <string name="leave_a_review">发表评论</string>
     <string name="review_message">Olauncher 现在并且永远是完全免费的。它没有广告。它不收集任何数据。最重要的是，它可以帮助您减少屏幕时间并过上更健康的数字生活。
         \n\n我们相信切换到最小启动器是一个很好的决定。虽然我们显然有偏见，但我们希望您喜欢这次体验。请随时与我们分享您的想法！</string>
+    <string name="alignment_changed">对齐已更改 ✅</string> <!-- Chinese -->
 </resources>

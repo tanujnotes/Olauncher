@@ -127,4 +127,5 @@
     <string name="leave_a_review">Lascia una recensione</string>
     <string name="review_message">Olauncher è e sarà sempre completamente gratuito. Non ha pubblicità. Non raccoglie dati. Ancora più importante, ti aiuta a ridurre il tempo trascorso davanti allo schermo e a vivere una vita digitale più sana.
         \n\nCrediamo che passare a un launcher minimale sia un\'ottima decisione. Anche se siamo ovviamente di parte, ci auguriamo che l\'esperienza ti piaccia. Sentitevi liberi di condividere i tuoi pensieri con noi!</string>
+    <string name="alignment_changed">Allineamento cambiato ✅</string> <!-- Italian -->
 </resources>
