@@ -123,7 +123,7 @@
     <string name="adapter_hide">Rejtsd el!</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ön használja a telefonját, vagy a telefonja használja Önt?</string>
     <string name="about_olauncher">Az Olauncher-ről</string>
-    <string name="digital_wellbeing">Digitális jóllét</string>
+    <string name="screen_time">Képernyőidő</string> <!-- Hungarian -->
     <string name="learn_more">Tudjon meg többet</string>
     <string name="did_you_know">Tudta?</string>
     <string name="leave_a_review">Hagyjon véleményt</string>

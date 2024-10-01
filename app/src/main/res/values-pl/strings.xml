@@ -119,6 +119,7 @@
     <string name="swipe_right_app_disabled">Gest Przesuń w prawo jest wyłączony</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Czy używasz telefonu, czy telefon używa ciebie?</string>
     <string name="about_olauncher">O Olauncher</string>
+    <string name="screen_time">Czas ekranowy</string> <!-- Polish -->
     <string name="learn_more">Ucz się więcej</string>
     <string name="did_you_know">Czy wiedziałeś?</string>
     <string name="leave_a_review">Ucz się więcej</string>

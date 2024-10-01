@@ -122,6 +122,7 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">是你在用手机，还是手机在用你？</string>
     <string name="about_olauncher">关于 Olauncher</string>
     <string name="learn_more">了解更多</string>
+    <string name="screen_time">屏幕时间</string> <!-- Chinese -->
     <string name="did_you_know">你可知道？</string>
     <string name="leave_a_review">发表评论</string>
     <string name="review_message">Olauncher 现在并且永远是完全免费的。它没有广告。它不收集任何数据。最重要的是，它可以帮助您减少屏幕时间并过上更健康的数字生活。

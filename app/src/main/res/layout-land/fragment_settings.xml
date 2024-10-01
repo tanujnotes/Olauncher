@@ -97,7 +97,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="8dp"
-                    android:text="@string/digital_wellbeing"
+                    android:text="@string/screen_time"
                     android:visibility="gone"
                     tools:visibility="visible" />
 

@@ -271,7 +271,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner) {
             if (it) {
                 binding.setLauncher.text = getString(R.string.change_default_launcher)
-                prefs.toShowHintCounter = prefs.toShowHintCounter + 1
+                prefs.toShowHintCounter += 1
             }
         }
         viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
