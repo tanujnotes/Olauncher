@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">تعيين كمشغل افتراضي</string>
+    <string name="set_as_default_launcher_u"><u>تعيين كمشغل افتراضي</u></string>
     <string name="set_as_default_launcher_first">تعيين كمشغل افتراضي</string>
     <string name="_0">صفر</string>
     <string name="_1">واحد</string>

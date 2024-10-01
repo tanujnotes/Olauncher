@@ -1,6 +1,7 @@
 <resources>
     <string name="app">Alkalmazás</string>
     <string name="set_as_default_launcher">Beállítás alapért. indítóként</string>
+    <string name="set_as_default_launcher_u"><u>Beállítás alapért. indítóként</u></string>
     <string name="set_as_default_launcher_first">Beállítás alapértelmezett indítóként</string>
     <string name="app_text_color">Szövegszín</string>
     <string name="double_tap_to_lock_screen">Dupla koppintás a képernyő lezárásához</string>
