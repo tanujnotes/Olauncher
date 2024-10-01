@@ -8,11 +8,13 @@
     android:background="?attr/primaryShadeDarkColor">
 
     <LinearLayout
+        android:id="@+id/searchBarLL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:animateLayoutChanges="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:visibility="gone">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search"
@@ -30,7 +32,7 @@
             app:queryBackground="@null"
             app:queryHint="___"
             app:searchIcon="@null"
-            app:theme="@style/AppSearchText" />
+            app:theme="@style/AppSearchText"/>
 
         <TextView
             android:id="@+id/appRename"
@@ -61,7 +63,8 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:text="@string/app_drawer_tips"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

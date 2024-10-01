@@ -38,6 +38,7 @@ class Prefs(context: Context) {
     private val SWIPE_DOWN_ACTION = "SWIPE_DOWN_ACTION"
     private val TEXT_SIZE_SCALE = "TEXT_SIZE_SCALE"
     private val HIDE_DIGITAL_WELLBEING = "HIDE_DIGITAL_WELLBEING"
+    private val SEARCH_BAR_STATE = "SEARCH_BAR_STATE"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -173,6 +174,9 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(HIDE_DIGITAL_WELLBEING, false)
         set(value) = prefs.edit().putBoolean(HIDE_DIGITAL_WELLBEING, value).apply()
 
+    var searchBarState: Boolean
+        get() = prefs.getBoolean(SEARCH_BAR_STATE, true)
+        set(value) = prefs.edit().putBoolean(SEARCH_BAR_STATE, value).apply()
     var screenTimeout: Int
         get() = prefs.getInt(SCREEN_TIMEOUT, 30000) // Default: 30 seconds
         set(value) = prefs.edit().putInt(SCREEN_TIMEOUT, value).apply()

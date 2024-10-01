@@ -1,10 +1,15 @@
 package app.olauncher.ui
 
+import android.R.attr.bottom
+import android.R.attr.left
+import android.R.attr.right
+import android.R.attr.top
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -79,29 +84,42 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun initSearch() {
-        binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query?.startsWith("!") == true)
-                    requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
-                else if (adapter.itemCount == 0) // && requireContext().searchOnPlayStore(query?.trim()).not())
-                    requireContext().openSearch(query?.trim())
-                else
-                    adapter.launchFirstInList()
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                try {
-                    adapter.filter.filter(newText)
-                    binding.appDrawerTip.visibility = View.GONE
-                    binding.appRename.visibility = if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+        if(prefs.searchBarState){
+            binding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (query?.startsWith("!") == true)
+                        requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
+                    else if (adapter.itemCount == 0) // && requireContext().searchOnPlayStore(query?.trim()).not())
+                        requireContext().openSearch(query?.trim())
+                    else
+                        adapter.launchFirstInList()
                     return true
-                } catch (e: Exception) {
-                    e.printStackTrace()
                 }
-                return false
-            }
-        })
+
+                override fun onQueryTextChange(newText: String): Boolean {
+                    try {
+                        adapter.filter.filter(newText)
+                        binding.appDrawerTip.visibility = View.GONE
+                        binding.appRename.visibility = if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+                        return true
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                    return false
+                }
+            })
+        } else {
+            binding.searchBarLL?.visibility = View.GONE
+            binding.appDrawerTip.visibility = View.GONE
+            val params = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            )
+            params.setMargins(0, 108, 0, 24)
+            binding.recyclerView.layoutParams = params
+
+//            binding.
+        }
     }
 
     private fun initAdapter() {

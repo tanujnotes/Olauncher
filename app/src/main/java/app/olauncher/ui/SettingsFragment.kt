@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.annotation.SuppressLint
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
@@ -82,6 +83,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateActionHints()
         initClickListeners()
         initObservers()
+        populateSearchBarState()
     }
 
     override fun onClick(view: View) {
@@ -90,6 +92,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
         binding.textSizesLayout.visibility = View.GONE
+        binding.searachBarOptions?.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
 
@@ -122,6 +125,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
+            R.id.searchBarStatus -> binding.searachBarOptions?.visibility = View.VISIBLE
 
             R.id.tvGestures -> binding.flSwipeDown.visibility = View.VISIBLE
 
@@ -142,6 +146,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.textSize5 -> updateTextSizeScale(Constants.TextSize.FIVE)
             R.id.textSize6 -> updateTextSizeScale(Constants.TextSize.SIX)
             R.id.textSize7 -> updateTextSizeScale(Constants.TextSize.SEVEN)
+
+            R.id.searchBarHide -> updateSearchBarState(false)
+            R.id.searchBarShow -> updateSearchBarState(true)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -229,6 +236,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
+        binding.searchBarStatus?.setOnClickListener(this)
 
         binding.share.setOnClickListener(this)
         binding.rate.setOnClickListener(this)
@@ -262,6 +270,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.swipeLeftApp.setOnLongClickListener(this)
         binding.swipeRightApp.setOnLongClickListener(this)
         binding.toggleLock.setOnLongClickListener(this)
+
+        binding.searchBarHide?.setOnClickListener(this)
+        binding.searchBarShow?.setOnClickListener(this)
     }
 
     private fun initObservers() {
@@ -466,6 +477,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         requireActivity().recreate()
     }
 
+    private fun updateSearchBarState(state: Boolean) {
+        if (prefs.searchBarState == state) return
+        prefs.searchBarState = state
+//        requireActivity().recreate()
+    }
+
     private fun toggleKeyboardText() {
         if (prefs.autoShowKeyboard && prefs.keyboardMessageShown.not()) {
             viewModel.showDialog.postValue(Constants.Dialog.KEYBOARD)
@@ -523,6 +540,18 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Constants.TextSize.SEVEN -> 7
             else -> "--"
         }.toString()
+    }
+
+    @SuppressLint("ResourceType")
+    private fun populateSearchBarState() {
+//        binding.searchBarStatus?.text = if (prefs.searchBarState) {
+//            getString(R.id.searchBarShow)
+//        } else  getString(R.id.searchBarHide)
+        if (prefs.searchBarState) {
+            binding.searchBarStatus?.setText(R.id.searchBarShow)
+        } else{
+            binding.searchBarStatus?.setText(R.id.searchBarHide)
+        }
     }
 
     private fun populateKeyboardText() {
