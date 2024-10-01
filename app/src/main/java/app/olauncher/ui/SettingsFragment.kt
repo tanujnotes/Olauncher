@@ -480,7 +480,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun updateSearchBarState(state: Boolean) {
         if (prefs.searchBarState == state) return
         prefs.searchBarState = state
-//        requireActivity().recreate()
+        prefs.autoShowKeyboard = state
+        populateKeyboardText()
+        populateSearchBarState()
+
     }
 
     private fun toggleKeyboardText() {
@@ -542,16 +545,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }.toString()
     }
 
-    @SuppressLint("ResourceType")
+
     private fun populateSearchBarState() {
-//        binding.searchBarStatus?.text = if (prefs.searchBarState) {
-//            getString(R.id.searchBarShow)
-//        } else  getString(R.id.searchBarHide)
-        if (prefs.searchBarState) {
-            binding.searchBarStatus?.setText(R.id.searchBarShow)
-        } else{
-            binding.searchBarStatus?.setText(R.id.searchBarHide)
-        }
+        binding.searchBarStatus?.text = if (prefs.searchBarState) {
+            getString(R.string.adapter_show)
+        } else  getString(R.string.adapter_hide)
     }
 
     private fun populateKeyboardText() {

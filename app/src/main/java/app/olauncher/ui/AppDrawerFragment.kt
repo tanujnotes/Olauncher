@@ -109,17 +109,18 @@ class AppDrawerFragment : Fragment() {
                 }
             })
         } else {
-            binding.searchBarLL?.visibility = View.GONE
-            binding.appDrawerTip.visibility = View.GONE
-            val params = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT
-            )
-            params.setMargins(0, 108, 0, 24)
-            binding.recyclerView.layoutParams = params
-
-//            binding.
+            hideSearchBar()
         }
+    }
+    private fun hideSearchBar(){
+        binding.searchBarLL?.visibility = View.GONE
+        binding.appDrawerTip.visibility = View.GONE
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        )
+        params.setMargins(0, 108, 0, 24)
+        binding.recyclerView.layoutParams = params
     }
 
     private fun initAdapter() {
