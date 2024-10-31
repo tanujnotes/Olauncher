@@ -447,5 +447,5 @@ class Prefs(context: Context) {
 
     fun getAppRenameLabel(componentName: String?): String = prefs.getString(componentName, "").toString()
 
-    fun setAppRenameLabel(componentName: String?, renameLabel: String) = prefs.edit().putString(componentName, renameLabel).apply()
+    fun setAppRenameLabel(componentName: String?, renameLabel: String?) = prefs.edit().putString(componentName, renameLabel).apply()
 }
