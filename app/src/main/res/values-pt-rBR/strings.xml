@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Aplicativo</string>
     <string name="set_as_default_launcher">Definir como launcher padrão</string>
+    <string name="set_as_default_launcher_u"><u>Definir como launcher padrão</u></string>
     <string name="set_as_default_launcher_first">Definir como launcher padrão</string>
     <string name="app_text_color">Cor do texto</string>
     <string name="double_tap_to_lock_screen">Toque duplo para bloquear</string>
@@ -53,7 +54,8 @@
     <string name="system_default">Sistema</string>
     <string name="dark">Escuro</string>
     <string name="light">Claro</string>
-    <string name="welcome_to_olauncher_settings">Nossa página Sobre, na parte inferior, tem respostas para todas as suas perguntas. Não se esqueça. :)</string>
+    <string name="welcome_to_olauncher_settings">Bem-vindo às configurações!
+        \n\nLembre-se, se você tiver alguma dúvida, nossa página Sobre tem a resposta.</string>
     <string name="rate_us_message">Ei, você acha Olauncher útil? Se sim, uma classificação de 5 estrelas é a melhor maneira de nos apoiar. Obrigado.</string>
     <string name="share_message">Olá, precisamos da sua ajuda! No ano passado ultrapassamos um milhão de downloads. Este ano queremos chegar a mais um milhão, mas não podemos fazê-lo sozinhos.
         \n\nVocê poderia fazer a gentileza de compartilhar o Olauncher com seus amigos, por favor? Obrigado e tenha um dia maravilhoso!</string>
@@ -122,8 +124,10 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Você está usando seu telefone, ou seu telefone está usando você?</string>
     <string name="about_olauncher">Sobre Olauncher</string>
     <string name="learn_more">Saber mais</string>
+    <string name="screen_time">Tempo de tela</string> <!-- Portuguese -->
     <string name="did_you_know">Você sabia?</string>
     <string name="leave_a_review">Deixe um comentário</string>
     <string name="review_message">Olauncher é e sempre será totalmente gratuito. Não tem anúncios. Não coleta dados. Mais importante ainda, ajuda você a reduzir o tempo de tela e a ter uma vida digital mais saudável.
         \n\nAcreditamos que mudar para um launcher mínimo é uma excelente decisão. Embora sejamos obviamente tendenciosos, esperamos que você esteja gostando da experiência. Sinta-se à vontade para compartilhar suas idéias conosco!</string>
+    <string name="alignment_changed">Alinhamento alterado ✅</string> <!-- Portuguese -->
 </resources>

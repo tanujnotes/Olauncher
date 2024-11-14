@@ -53,6 +53,7 @@
                     android:layout_gravity="end|center_vertical"
                     android:alpha="0.5"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/close"
                     android:padding="6dp"
                     android:src="@drawable/ic_close" />
 

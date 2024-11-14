@@ -1,6 +1,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
+    <string name="set_as_default_launcher_u"><u>Imposta come launcher predefinito</u></string>
     <string name="set_as_default_launcher_first">Imposta come launcher predefinito</string>
     <string name="app_text_color"> Colore del testo</string>
     <string name="double_tap_to_lock_screen">Tocca due volte per bloccare</string>
@@ -52,8 +53,8 @@
     <string name="system_default">di sistema</string>
     <string name="dark">Scuro</string>
     <string name="light">Chiaro</string>
-    <string name="welcome_to_olauncher_settings">La nostra pagina Informazioni in basso ha le risposto a tutte le tue domande. Non dimenticare. :)
-        \n\nGrazie.</string>
+    <string name="welcome_to_olauncher_settings">Benvenuto nelle impostazioni!
+        \n\nRicorda, se hai domande, la nostra pagina Informazioni ha la risposta.</string>
     <string name="rate_us_message">Ehi, trovi utile Olauncher? Se sì, una valutazione a 5 stelle è il modo migliore per sostenerci.
         \n\nGrazie e non lo vedrai più.</string>
     <string name="share_message">Ciao, abbiamo bisogno del tuo aiuto! L\'anno scorso abbiamo superato il milione di download. Quest’anno vogliamo raggiungere un milione in più ma non possiamo farcela da soli.
@@ -122,8 +123,10 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Stai usando il tuo telefono, o è il tuo telefono che sta usando te?</string>
     <string name="about_olauncher">Info Olauncher</string>
     <string name="learn_more">Saperne di più</string>
+    <string name="screen_time">Tempo di schermo</string> <!-- Italian -->
     <string name="did_you_know">Lo sapevate?</string>
     <string name="leave_a_review">Lascia una recensione</string>
     <string name="review_message">Olauncher è e sarà sempre completamente gratuito. Non ha pubblicità. Non raccoglie dati. Ancora più importante, ti aiuta a ridurre il tempo trascorso davanti allo schermo e a vivere una vita digitale più sana.
         \n\nCrediamo che passare a un launcher minimale sia un\'ottima decisione. Anche se siamo ovviamente di parte, ci auguriamo che l\'esperienza ti piaccia. Sentitevi liberi di condividere i tuoi pensieri con noi!</string>
+    <string name="alignment_changed">Allineamento cambiato ✅</string> <!-- Italian -->
 </resources>

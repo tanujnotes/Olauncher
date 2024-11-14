@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Establecer como lanzador principal</string>
+    <string name="set_as_default_launcher_u"><u>Establecer como lanzador principal</u></string>
     <string name="set_as_default_launcher_first">Establecer como lanzador principal</string>
     <string name="app_text_color">Color del texto</string>
     <string name="double_tap_to_lock_screen">Tocar dos veces para bloquear</string>
@@ -53,7 +54,8 @@
     <string name="system_default">Sistema</string>
     <string name="dark">Oscuro</string>
     <string name="light">Claro</string>
-    <string name="welcome_to_olauncher_settings">Nuestra página \'Acerca de\' en la parte inferior tiene respuestas a todas sus preguntas. no lo olvides :)\n\nGracias.</string>
+    <string name="welcome_to_olauncher_settings">¡Bienvenido a la configuración!
+        \n\nRecuerda, si tienes alguna pregunta, nuestra página Acerca de tiene la respuesta.</string>
     <string name="rate_us_message">Hola, no volverás a ver este mensaje.
         \n\nSi te gusta Olauncher, ¿puedes darnos una calificación de 5 estrellas? Nos ayuda a mejorar nuestra clasificación y nos hace felices. ¡Gracias!</string>
     <string name="share_message">Hola, necesitamos tu ayuda! El año pasado superamos el millón de descargas. Este año queremos llegar a un millón más, pero no podemos hacerlo solos.
@@ -123,7 +125,9 @@
     <string name="about_olauncher">Acerca de Olauncher</string>
     <string name="learn_more">Aprende más</string>
     <string name="did_you_know">¿Sabías?</string>
+    <string name="screen_time">Tiempo de pantalla</string> <!-- Spanish -->
     <string name="leave_a_review">Dejar un comentario</string>
     <string name="review_message">Olauncher es y será siempre completamente gratuito. No tiene anuncios. No recopila datos. Lo más importante es que te ayuda a reducir el tiempo que pasa frente a la pantalla y a vivir una vida digital más saludable.
         \n\nCreemos que cambiar a un lanzador mínimo es una excelente decisión. Aunque obviamente somos parciales, esperamos que disfrutes la experiencia. ¡No dudes en compartir tus pensamientos con nosotros!</string>
+    <string name="alignment_changed">Alineación cambiada ✅</string> <!-- Spanish -->
 </resources>

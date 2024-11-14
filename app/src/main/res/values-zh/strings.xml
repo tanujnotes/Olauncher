@@ -2,6 +2,7 @@
 <resources>
     <string name="app">应用程序</string>
     <string name="set_as_default_launcher">设置为默认启动器</string>
+    <string name="set_as_default_launcher_u"><u>设置为默认启动器</u></string>
     <string name="set_as_default_launcher_first">设置为默认启动器</string>
     <string name="app_drawer_tips">提示：输入应用程序名称以查找并启动它</string>
     <string name="okay">好的</string>
@@ -86,7 +87,8 @@
     <string name="system_default">系统</string>
     <string name="dark">黑暗</string>
     <string name="light">光</string>
-    <string name="welcome_to_olauncher_settings">我们底部的“关于”页面可以解答您的所有问题。别忘了。 :)\n\n谢谢。</string>
+    <string name="welcome_to_olauncher_settings">欢迎来到设置！
+        \n\n请记住，如果您有任何问题，我们的“关于”页面有答案。</string>
     <string name="rate_us_message">您好，您不会再看到此消息。
         \n\n如果您喜欢 Olauncher，能给我们一个 5 星评价吗？ 它帮助我们提高排名并使我们高兴。 谢谢你！</string>
     <string name="share_message">你好，我们需要你的帮助！去年我们的下载量突破了一百万次。今年我们希望再增加一百万，但我们无法单独做到这一点。
@@ -122,8 +124,10 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">是你在用手机，还是手机在用你？</string>
     <string name="about_olauncher">关于 Olauncher</string>
     <string name="learn_more">了解更多</string>
+    <string name="screen_time">屏幕时间</string> <!-- Chinese -->
     <string name="did_you_know">你可知道？</string>
     <string name="leave_a_review">发表评论</string>
     <string name="review_message">Olauncher 现在并且永远是完全免费的。它没有广告。它不收集任何数据。最重要的是，它可以帮助您减少屏幕时间并过上更健康的数字生活。
         \n\n我们相信切换到最小启动器是一个很好的决定。虽然我们显然有偏见，但我们希望您喜欢这次体验。请随时与我们分享您的想法！</string>
+    <string name="alignment_changed">对齐已更改 ✅</string> <!-- Chinese -->
 </resources>

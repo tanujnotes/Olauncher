@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Ange som förvald startskärmsapp</string>
+    <string name="set_as_default_launcher_u"><u>Ange som förvald startskärmsapp</u></string>
     <string name="set_as_default_launcher_first">Ange Olauncher som förvald först</string>
     <string name="app_text_color">Textfärg</string>
     <string name="double_tap_to_lock_screen">Dubbeltryck för att låsa</string>
@@ -52,8 +53,8 @@
     <string name="system_default">System</string>
     <string name="dark">Mörkt</string>
     <string name="light">Ljust</string>
-    <string name="welcome_to_olauncher_settings">Tips: Vår Om-sida har svar på alla dina frågor. Glöm inte det. :)
-        \n\nTack.</string>
+    <string name="welcome_to_olauncher_settings">Välkommen till inställningarna!
+        \n\nKom ihåg, om du har några frågor har vår sida Om oss svaret.</string>
     <string name="rate_us_message">Hejsan, du kommer inte att se detta meddelande igen.
         \n\nOm du tycker att Olauncher är användbar, skulle du vänligen kunna lämna en 5-stjärnig recension? Det skulle göra oss väldigt glada. Tack!</string>
     <string name="share_message">Vi behöver din hjälp! Förra året passerade vi en miljon nedladdningar. I år vill vi nå en miljon till, men vi kan inte göra det på egen hand.
@@ -120,11 +121,11 @@
     <string name="adapter_hide">Dölj</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Använder du din telefon, eller använder din telefon dig?</string>
     <string name="about_olauncher">Om Olauncher</string>
-    <string name="digital_wellbeing">Digitalt välmående</string>
+    <string name="screen_time">Skärmtid</string> <!-- Swedish -->
     <string name="learn_more">Läs mer</string>
     <string name="did_you_know">Visste du?</string>
     <string name="leave_a_review">Lämna en recension</string>
     <string name="review_message">Olauncher är gratis och kommer alltid att vara det. Den har inga annonser. Den samlar inte in någon data. Viktigast av allt, det hjälper dig att minska din skärmtid och leva ett hälsosammare digitalt liv.
           \n\nVi tycker att det är ett utmärkt beslut att byta till en minimalistisk startskärmsapp. Även om vi uppenbarligen är partiska, hoppas vi att du gillar upplevelsen. Vi vill gärna höra dina tankar!</string>
-    <string name="alignment_changed">Placering ändrad ✅</string>
+    <string name="alignment_changed">Justering ändrad ✅</string> <!-- Swedish -->
 </resources>

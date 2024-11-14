@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Приложение</string>
     <string name="set_as_default_launcher">Сделать лаунчером по умолчанию</string>
+    <string name="set_as_default_launcher_u"><u>Сделать лаунчером по умолчанию</u></string>
     <string name="set_as_default_launcher_first">Сделать лаунчером по умолчанию</string>
     <string name="app_text_color">Цвет текста</string>
     <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>
@@ -53,7 +54,8 @@
     <string name="system_default">Системная</string>
     <string name="dark">Темная</string>
     <string name="light">Светлая</string>
-    <string name="welcome_to_olauncher_settings">На странице «О нас» внизу есть ответы на все ваши вопросы. Не забывайте. :)</string>
+    <string name="welcome_to_olauncher_settings">Добро пожаловать в настройки!
+        \n\nПомните, если у вас есть вопросы, на нашей странице «О нас» есть ответ.</string>
     <string name="rate_us_message">Здравствуйте, вы больше не увидите это сообщение.
         \n\nЕсли вам нравится Olauncher, не могли бы вы поставить нам 5 звезд? Это поможет улучшить наш рейтинг и сделает нас счастливыми. Спасибо!</string>
     <string name="share_message">Привет, нам нужна ваша помощь! В прошлом году мы преодолели миллион загрузок. В этом году мы хотим достичь еще миллиона, но мы не можем сделать это в одиночку.
@@ -121,9 +123,11 @@
     <string name="adapter_hide">Скрыть</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Вы используете свой телефон, или ваш телефон использует вас?</string>
     <string name="about_olauncher">О нас Olauncher</string>
+    <string name="screen_time">Время на экране</string> <!-- Russian -->
     <string name="learn_more">Узнать больше</string>
     <string name="did_you_know">Вы знали?</string>
     <string name="leave_a_review">Оставить отзыв</string>
     <string name="review_message">Olauncher есть и всегда будет полностью бесплатным. В нем нет рекламы. Он не собирает никаких данных. Самое главное, это помогает вам сократить время, проводимое перед экраном, и вести более здоровую цифровую жизнь.
         \n\nМы считаем, что переход на минимальный лаунчер — отличное решение. Хотя мы явно предвзяты, мы надеемся, что вам понравится этот опыт. Не стесняйтесь поделиться с нами своим мнением!</string>
+    <string name="alignment_changed">Выравнивание изменено ✅</string> <!-- Russian -->
 </resources>

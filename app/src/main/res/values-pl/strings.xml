@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Aplikacja</string>
     <string name="set_as_default_launcher">Ustaw jako domyślny program uruchamiający</string>
+    <string name="set_as_default_launcher_u"><u>Ustaw jako domyślny program uruchamiający</u></string>
     <string name="set_as_default_launcher_first">Ustaw jako domyślny program uruchamiający</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
@@ -86,7 +87,8 @@
     <string name="system_default">System</string>
     <string name="dark">Ciemny</string>
     <string name="light">Jasny</string>
-    <string name="welcome_to_olauncher_settings">Nasza strona Informacje na dole zawiera odpowiedzi na wszystkie Twoje pytania. Nie zapomnij. :)\n\nDziękuję.</string>
+    <string name="welcome_to_olauncher_settings">Witamy w ustawieniach!
+        \n\nPamiętaj, jeśli masz jakiekolwiek pytania, nasza strona „O nas” ma odpowiedź.</string>
     <string name="rate_us_message">Hej, czy uważasz, że Olauncher jest przydatny? Jeśli tak, ocena 5 gwiazdek to najlepszy sposób, aby nas wesprzeć.\n\nDziękuję i więcej tego nie zobaczysz.</string>
     <string name="share_message">Cześć, potrzebujemy Twojej pomocy! W zeszłym roku przekroczyliśmy milion pobrań. W tym roku chcemy dotrzeć do kolejnego miliona, ale sami nie możemy tego zrobić.
         \n\nCzy byłbyś tak miły i udostępnił Olauncher swoim znajomym? Dziękuję i życzę cudownego dnia!</string>
@@ -119,9 +121,11 @@
     <string name="swipe_right_app_disabled">Gest Przesuń w prawo jest wyłączony</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Czy używasz telefonu, czy telefon używa ciebie?</string>
     <string name="about_olauncher">O Olauncher</string>
+    <string name="screen_time">Czas ekranowy</string> <!-- Polish -->
     <string name="learn_more">Ucz się więcej</string>
     <string name="did_you_know">Czy wiedziałeś?</string>
     <string name="leave_a_review">Ucz się więcej</string>
     <string name="review_message">Olauncher jest i zawsze będzie całkowicie darmowy. Nie zawiera reklam. Nie zbiera żadnych danych. Co najważniejsze, pomaga skrócić czas spędzany przed ekranem i prowadzić zdrowsze cyfrowe życie.
         \n\nWierzymy, że przejście na minimalny program uruchamiający to doskonała decyzja. Chociaż jesteśmy oczywiście stronniczy, mamy nadzieję, że spodoba ci się to doświadczenie. Podziel się z nami swoimi przemyśleniami!</string>
+    <string name="alignment_changed">Wyrównanie zmienione ✅</string> <!-- Polish -->
 </resources>

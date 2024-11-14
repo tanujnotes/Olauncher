@@ -17,6 +17,7 @@
 
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
+    <string name="set_as_default_launcher_u"><u>Set as default launcher</u></string>
     <string name="set_as_default_launcher_first">Set Olauncher default first</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
@@ -67,8 +68,8 @@
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="welcome_to_olauncher_settings">Tip: Our About page has answers to all your questions. Don\'t forget. :)
-        \n\nThank you.</string>
+    <string name="welcome_to_olauncher_settings">Welcome to the settings!
+        \n\nRemember, if you have any questions, our About page has the answer.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
         \n\nIf you\'re finding Olauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
     <string name="share_message">We need your help! We crossed a million downloads last year. This year, we want to reach a million more, but we can\'t do it alone.
@@ -137,7 +138,7 @@
     <string name="adapter_hide">Hide</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
     <string name="about_olauncher">About and FAQs</string>
-    <string name="digital_wellbeing">Digital Wellbeing</string>
+    <string name="screen_time">Screen time</string>
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
     <string name="leave_a_review">Leave a review</string>

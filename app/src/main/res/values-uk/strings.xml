@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Додаток</string>
     <string name="set_as_default_launcher">Зробити лаунчером за замовчування</string>
+    <string name="set_as_default_launcher_u"><u>Зробити лаунчером за замовчування</u></string>
     <string name="set_as_default_launcher_first">Зробити лаунчером за замовчування</string>
     <string name="app_text_color">Кольор тексту</string>
     <string name="double_tap_to_lock_screen">Блокування подвійним тапом</string>
@@ -53,7 +54,8 @@
     <string name="system_default">Системна</string>
     <string name="dark">Темна</string>
     <string name="light">Світла</string>
-    <string name="welcome_to_olauncher_settings">На сторінці «Про нас» є відповіді на всі ваші запитання. Не забувайте. :)</string>
+    <string name="welcome_to_olauncher_settings">Ласкаво просимо до налаштувань!
+        \n\nПам\'ятайте, якщо у вас є питання, на нашій сторінці «Про нас» є відповідь.</string>
     <string name="rate_us_message">Привіт, ти більше не побачиш це повідомлення.
         \n\nЯкщо вам подобається Olauncher, чи можете ви поставити нам 5 зірок? Це допомагає нам покращити наш рейтинг і робить нас щасливими. Дякую тобі!</string>
     <string name="share_message">Привіт, нам потрібна ваша допомога! Минулого року ми перевищили мільйон завантажень. Цього року ми хочемо досягти мільйона більше, але ми не можемо зробити це поодинці.
@@ -122,8 +124,10 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ви користуєтеся своїм телефоном, чи ваш телефон використовує вас?</string>
     <string name="about_olauncher">Про нас Olauncher</string>
     <string name="learn_more">Вивчайте більше</string>
+    <string name="screen_time">Час екрану</string> <!-- Ukrainian -->
     <string name="did_you_know">Ти знав?</string>
     <string name="leave_a_review">Залиште відгук</string>
     <string name="review_message">Olauncher є і завжди буде абсолютно безкоштовним. У ньому немає реклами. Він не збирає дані. Найважливіше те, що це допомагає вам скоротити час використання екрана та жити здоровішим цифровим життям.
         \n\nМи вважаємо, що перехід на мінімальний лаунчер є відмінним рішенням. Хоча ми явно упереджені, ми сподіваємося, що вам сподобається. Не соромтеся поділитися з нами своїми думками!</string>
+    <string name="alignment_changed">Вирівнювання змінено ✅</string> <!-- Ukrainian -->
 </resources>

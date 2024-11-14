@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Définir comme lanceur par défaut</string>
+    <string name="set_as_default_launcher_u"><u>Définir comme lanceur par défaut</u></string>
     <string name="set_as_default_launcher_first">Définir comme lanceur par défaut</string>
     <string name="app_text_color">Couleur du texte</string>
     <string name="double_tap_to_lock_screen">Double appui pour verrouiller</string>
@@ -53,7 +54,8 @@
     <string name="system_default">Système</string>
     <string name="dark">Sombre</string>
     <string name="light">Clair</string>
-    <string name="welcome_to_olauncher_settings">Notre page \"À propos\" en bas a des réponses à toutes vos questions. :)\n\nMerci!</string>
+    <string name="welcome_to_olauncher_settings">Bienvenue dans les paramètres !
+        \n\nN\'oubliez pas, si vous avez des questions, notre page À propos a la réponse.</string>
     <string name="rate_us_message">Hé, trouvez-vous Olauncher utile? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
         \n\nMerci, vous ne verrez plus ce message.</string>
     <string name="share_message">Bonjour, nous avons besoin de votre aide ! L\'année dernière, nous avons franchi le million de téléchargements. Cette année, nous voulons atteindre un million de plus, mais nous ne pouvons pas le faire seuls.
@@ -124,8 +126,10 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Utilisez-vous votre téléphone, ou votre téléphone vous utilise-t-il?</string>
     <string name="about_olauncher">À propos Olauncher</string>
     <string name="learn_more">Apprendre encore plus</string>
+    <string name="screen_time">Temps d\'écran</string> <!-- French -->
     <string name="did_you_know">Saviez-vous?</string>
     <string name="leave_a_review">Laisser un commentaire</string>
     <string name="review_message">Olauncher est et sera toujours entièrement gratuit. Il n\'y a pas de publicité. Il ne collecte aucune donnée. Plus important encore, cela vous aide à réduire votre temps d’écran et à vivre une vie numérique plus saine.
         \n\nNous pensons que passer à un lanceur minimal est une excellente décision. Même si nous sommes évidemment partiaux, nous espérons que vous appréciez l\'expérience. N\'hésitez pas à partager vos idées avec nous!</string>
+    <string name="alignment_changed">Alignement changé ✅</string> <!-- French -->
 </resources>

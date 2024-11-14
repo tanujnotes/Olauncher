@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Als Standard-Launcher festlegen</string>
+    <string name="set_as_default_launcher_u"><u>Als Standard-Launcher festlegen</u></string>
     <string name="set_as_default_launcher_first">Als Standard-Launcher festlegen</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
@@ -86,7 +87,8 @@
     <string name="system_default">System</string>
     <string name="dark">Dunkel</string>
     <string name="light">Hell</string>
-    <string name="welcome_to_olauncher_settings">Auf unserer About-Seite unten finden Sie Antworten auf alle Ihre Fragen. Vergiss es nicht. :)\n\nDan­ke­schön.</string>
+    <string name="welcome_to_olauncher_settings">Willkommen in den Einstellungen!
+        \n\nDenken Sie daran, wenn Sie Fragen haben, unsere Seite „Über“ hat die Antwort.</string>
     <string name="rate_us_message">Hallo, diese Nachricht wird Ihnen nicht mehr angezeigt.
         \n\nWenn Ihnen Olauncher gefällt, können Sie uns bitte eine 5-Sterne-Bewertung geben? Es hilft uns, unser Ranking zu verbessern und macht uns glücklich. Dan­ke­schön!</string>
     <string name="share_message">Hallo, wir brauchen deine Hilfe! Letztes Jahr haben wir die Marke von einer Million Downloads überschritten. Dieses Jahr wollen wir eine Million mehr erreichen, aber alleine schaffen wir das nicht.
@@ -120,10 +122,12 @@
     <string name="swipe_left_app_disabled">App nach links wischen deaktiviert</string>
     <string name="swipe_right_app_disabled">App nach rechts wischen deaktiviert</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Benutzen Sie Ihr Telefon, oder nutzt Ihr Telefon Sie?</string>
+    <string name="screen_time">Bildschirmzeit</string> <!-- German -->
     <string name="about_olauncher">Über Olauncher</string>
     <string name="learn_more">Erfahren Sie mehr</string>
     <string name="did_you_know">Wussten Sie?</string>
     <string name="leave_a_review">Rezension</string>
     <string name="review_message">Olauncher ist und bleibt völlig kostenlos. Es gibt keine Werbung. Es werden keine Daten erfasst. Am wichtigsten ist, dass es Ihnen dabei hilft, Ihre Bildschirmzeit zu verkürzen und ein gesünderes digitales Leben zu führen.
         \n\nWir glauben, dass der Wechsel zu einem Minimal Launcher eine ausgezeichnete Entscheidung ist. Obwohl wir offensichtlich voreingenommen sind, hoffen wir, dass Ihnen die Erfahrung gefällt. Teilen Sie uns gerne Ihre Gedanken mit!</string>
+    <string name="alignment_changed">Ausrichtung geändert ✅</string> <!-- German -->
 </resources>

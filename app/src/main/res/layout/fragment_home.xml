@@ -173,6 +173,6 @@
         android:layout_marginBottom="56dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/set_as_default_launcher"
+        android:text="@string/set_as_default_launcher_u"
         android:visibility="gone" />
 </FrameLayout>

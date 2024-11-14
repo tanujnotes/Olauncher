@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Aplikasi</string>
     <string name="set_as_default_launcher">Tetapkan sebagai peluncur default</string>
+    <string name="set_as_default_launcher_u"><u>Tetapkan sebagai peluncur default</u></string>
     <string name="set_as_default_launcher_first">Tetapkan sebagai peluncur default</string>
     <string name="app_text_color">Warna teks</string>
     <string name="double_tap_to_lock_screen">Ketuk dua kali untuk mengunci</string>
@@ -53,7 +54,8 @@
     <string name="system_default">Sistem</string>
     <string name="dark">Gelap</string>
     <string name="light">Terang</string>
-    <string name="welcome_to_olauncher_settings">Halaman Tentang kami di bagian bawah memiliki jawaban atas semua pertanyaan Anda. Jangan lupa. :)</string>
+    <string name="welcome_to_olauncher_settings">Selamat datang di pengaturan!
+        \n\nIngat, jika Anda memiliki pertanyaan, halaman Tentang kami memiliki jawabannya.</string>
     <string name="rate_us_message">Hai, Anda tidak akan melihat pesan ini lagi.
         \n\nJika Anda menyukai Olauncher, bisakah Anda memberi kami peringkat bintang 5? Ini membantu kami meningkatkan peringkat kami dan membuat kami bahagia. Terima kasih!</string>
     <string name="share_message">Hai, kami membutuhkan bantuan Anda! Tahun lalu kami melampaui satu juta unduhan. Tahun ini kami ingin menjangkau satu juta orang lagi tetapi kami tidak dapat melakukannya sendiri.
@@ -119,8 +121,10 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Apakah Anda menggunakan ponsel Anda, atau ponsel Anda menggunakan Anda?</string>
     <string name="about_olauncher">Tentang Olauncher</string>
     <string name="learn_more">Pelajari lebih lanjut</string>
+    <string name="screen_time">Waktu layar</string> <!-- Indonesian -->
     <string name="did_you_know">Tahukah kamu?</string>
     <string name="leave_a_review">Tinggalkan ulasan</string>
     <string name="review_message">Olauncher sepenuhnya gratis dan akan selalu gratis. Tidak ada iklan. Tidak mengumpulkan data pribadi. Yang terpenting, ini membantu Anda mengurangi waktu pemakaian perangkat dan menjalani kehidupan digital yang lebih sehat.
         \n\nKami percaya bahwa beralih ke peluncur minimal adalah keputusan yang sangat baik. Meskipun kami jelas-jelas bias, kami harap Anda menikmati pengalaman ini. Jangan ragu untuk berbagi pemikiran Anda dengan kami!</string>
+    <string name="alignment_changed">Penyelarasan diubah ✅</string> <!-- Indonesian -->
 </resources>

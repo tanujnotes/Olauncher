@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">تعيين كمشغل افتراضي</string>
+    <string name="set_as_default_launcher_u"><u>تعيين كمشغل افتراضي</u></string>
     <string name="set_as_default_launcher_first">تعيين كمشغل افتراضي</string>
     <string name="_0">صفر</string>
     <string name="_1">واحد</string>
@@ -85,7 +86,7 @@
     <string name="system_default">نظام</string>
     <string name="dark">مظلم</string>
     <string name="light">ضوء</string>
-    <string name="welcome_to_olauncher_settings">تحتوي صفحة \"حول\" في الأسفل على إجابات لجميع أسئلتك. لا تنسى. شكرًا لك.</string>
+    <string name="welcome_to_olauncher_settings">مرحبًا بك في الإعدادات!\n\nتذكر، إذا كان لديك أي سؤال، فإن صفحة "حول" لدينا تحتوي على الإجابة.</string>
     <string name="rate_us_message">مرحبًا ، لن ترى هذه الرسالة مرة أخرى.
         \n\nإذا كنت تحب Olauncher ، فهل يمكنك أن تعطينا تصنيف 5 نجوم؟ يساعدنا ذلك على تحسين تصنيفنا ويجعلنا سعداء. شكرًا لك!</string>
     <string name="share_message">مرحبا، نحن بحاجة لمساعدتكم! في العام الماضي تجاوزنا مليون عملية تنزيل. نريد هذا العام أن نصل إلى مليون آخرين ولكن لا يمكننا القيام بذلك بمفردنا.
@@ -122,4 +123,7 @@
     <string name="leave_a_review">ترك التعليق</string>
     <string name="review_message">Olauncher هو وسيظل دائمًا مجانيًا تمامًا. ليس لديها إعلانات. لا يجمع أي بيانات. والأهم من ذلك أنه يساعدك على تقليل وقت الشاشة والعيش حياة رقمية أكثر صحة.
         \n\nنحن نعتقد أن التحول إلى الحد الأدنى من المشغل هو قرار ممتاز. على الرغم من أننا متحيزون بشكل واضح، إلا أننا نأمل أن تستمتع بالتجربة. لا تتردد في مشاركة أفكارك معنا!</string>
+
+    <string name="screen_time">وقت الشاشة</string> <!-- Arabic -->
+    <string name="alignment_changed">تم تغيير المحاذاة ✅</string> <!-- Arabic -->
 </resources>
