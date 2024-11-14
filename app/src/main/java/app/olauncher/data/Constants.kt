@@ -109,6 +109,8 @@ object Constants {
     const val URL_DIGITAL_WELLBEING_LEARN_MORE = "https://tanujnotes.substack.com/p/digital-wellbeing-app-on-android?utm_source=olauncher"
 
     const val DIGITAL_WELLBEING_PACKAGE_NAME = "com.google.android.apps.wellbeing"
+    const val DIGITAL_WELLBEING_ACTIVITY = "com.google.android.apps.wellbeing.settings.TopLevelSettingsActivity"
     const val DIGITAL_WELLBEING_SAMSUNG_PACKAGE_NAME = "com.samsung.android.forest"
+    const val DIGITAL_WELLBEING_SAMSUNG_ACTIVITY = "com.samsung.android.forest.launcher.LauncherActivity"
     const val WALLPAPER_WORKER_NAME = "WALLPAPER_WORKER_NAME"
 }

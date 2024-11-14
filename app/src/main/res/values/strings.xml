@@ -14,6 +14,8 @@
     <string name="tag_6" translatable="false">6</string>
     <string name="tag_7" translatable="false">7</string>
     <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
 
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
@@ -80,6 +82,8 @@
         \n\nThe choice is always yours.</string>
     <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.
         \n\nPlease search for Digital Wellbeing in your phone settings and enable it.</string>
+    <string name="app_usage_message">To see your screen time on the home screen, please allow the app usage permission.
+        \n\nNote: No app usage data is collected by us. All the data is processed on your device.</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>

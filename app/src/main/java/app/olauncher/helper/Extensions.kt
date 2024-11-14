@@ -1,6 +1,7 @@
 package app.olauncher.helper
 
 import android.app.Activity
+import android.app.AppOpsManager
 import android.app.SearchManager
 import android.app.role.RoleManager
 import android.content.ComponentName
@@ -8,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Build
 import android.os.UserHandle
@@ -17,6 +19,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import app.olauncher.BuildConfig
+import app.olauncher.R
 import app.olauncher.data.Constants
 
 fun View.hideKeyboard() {
@@ -118,8 +121,44 @@ fun Context.isPackageInstalled(packageName: String, userHandle: UserHandle = and
     return activityInfo.size > 0
 }
 
+@RequiresApi(Build.VERSION_CODES.Q)
+fun Context.appUsagePermissionGranted(): Boolean {
+    val appOpsManager = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+    return appOpsManager.unsafeCheckOpNoThrow(
+        "android:get_usage_stats",
+        android.os.Process.myUid(),
+        packageName
+    ) == AppOpsManager.MODE_ALLOWED
+}
+
+fun Context.formattedTimeSpent(timeSpent: Long): String {
+    val seconds = timeSpent / 1000
+    val minutes = seconds / 60
+    val hours = minutes / 60
+    val remainingMinutes = minutes % 60
+    return when {
+        timeSpent == 0L -> "0m"
+
+        hours > 0 -> getString(
+            R.string.time_spent_hour,
+            hours.toString(),
+            remainingMinutes.toString()
+        )
+
+        minutes > 0 -> {
+            getString(R.string.time_spent_min, minutes.toString())
+        }
+
+        else -> "<1m"
+    }
+}
+
 fun Long.hasBeenDays(days: Int): Boolean =
     ((System.currentTimeMillis() - this) / Constants.ONE_DAY_IN_MILLIS) >= days
 
 fun Long.hasBeenHours(hours: Int): Boolean =
     ((System.currentTimeMillis() - this) / Constants.ONE_HOUR_IN_MILLIS) >= hours
+
+fun Int.dpToPx(): Int {
+    return (this * Resources.getSystem().displayMetrics.density).toInt()
+}

@@ -68,7 +68,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         checkAdminPermission()
 
         binding.homeAppsNum.text = prefs.homeAppsNum.toString()
-        populateDigitalWellbeing()
         populateKeyboardText()
         populateLockSettings()
         populateWallpaperText()
@@ -593,11 +592,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             binding.swipeRightApp.setTextColor(requireContext().getColorFromAttr(R.attr.primaryColorTrans50))
     }
 
-    private fun populateDigitalWellbeing() {
-        binding.digitalWellbeing.isVisible = requireContext().isPackageInstalled(Constants.DIGITAL_WELLBEING_PACKAGE_NAME).not()
-                && requireContext().isPackageInstalled(Constants.DIGITAL_WELLBEING_SAMSUNG_PACKAGE_NAME).not()
-                && prefs.hideDigitalWellbeing.not()
-    }
+//    private fun populateDigitalWellbeing() {
+//        binding.digitalWellbeing.isVisible = requireContext().isPackageInstalled(Constants.DIGITAL_WELLBEING_PACKAGE_NAME).not()
+//                && requireContext().isPackageInstalled(Constants.DIGITAL_WELLBEING_SAMSUNG_PACKAGE_NAME).not()
+//                && prefs.hideDigitalWellbeing.not()
+//    }
 
     private fun showAppListIfEnabled(flag: Int) {
         if ((flag == Constants.FLAG_SET_SWIPE_LEFT_APP) and !prefs.swipeLeftEnabled) {

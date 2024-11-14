@@ -1,10 +1,13 @@
 package app.olauncher
 
 import android.app.Application
+import android.app.Service.USAGE_STATS_SERVICE
+import android.app.usage.UsageStatsManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.LauncherApps
 import android.os.UserHandle
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,14 +19,18 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
+import app.olauncher.data.Constants.ONE_DAY_IN_MILLIS
 import app.olauncher.data.Prefs
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
+import app.olauncher.helper.formattedTimeSpent
 import app.olauncher.helper.getAppsList
 import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.showToast
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import java.util.concurrent.TimeUnit
+
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val appContext by lazy { application.applicationContext }
@@ -38,6 +45,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
+    val screenTimeValue = MutableLiveData<String>()
 
     val showDialog = SingleLiveEvent<String>()
     val checkForMessages = SingleLiveEvent<Unit?>()
@@ -242,5 +250,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateHomeAlignment(gravity: Int) {
         prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
+    }
+
+    fun getTodaysScreenTime() {
+        viewModelScope.launch {
+            val usageStatsManager = appContext.getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager
+
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 0)
+
+            val usageStats = usageStatsManager.queryUsageStats(
+                UsageStatsManager.INTERVAL_DAILY,
+                calendar.timeInMillis,
+                calendar.timeInMillis + ONE_DAY_IN_MILLIS
+            )
+            val totalTimeInMillis = usageStats.sumOf { it.totalTimeInForeground }
+            val viewTimeSpent = appContext.formattedTimeSpent(totalTimeInMillis)
+            screenTimeValue.postValue(viewTimeSpent)
+        }
     }
 }

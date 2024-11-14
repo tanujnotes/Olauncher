@@ -48,6 +48,21 @@
             tools:text="Thu, 30 Dec" />
     </LinearLayout>
 
+    <!-- Screen time-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvScreenTime"
+        style="@style/TextSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="72dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:visibility="gone"
+        tools:text="2h 11m"
+        tools:visibility="visible" />
+
     <!-- Home apps-->
     <LinearLayout
         android:id="@+id/homeAppsLayout"

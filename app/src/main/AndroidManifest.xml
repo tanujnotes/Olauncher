@@ -13,6 +13,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!--Used only for opening alarm app-->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
