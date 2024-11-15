@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Vibrator
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +52,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
-    private lateinit var vibrator: Vibrator
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -71,7 +69,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         } ?: throw Exception("Invalid Activity")
 
         deviceManager = context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-        vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
