@@ -60,6 +60,7 @@
         android:layout_marginTop="72dp"
         android:gravity="center"
         android:padding="10dp"
+        android:textSize="@dimen/date_size"
         android:visibility="gone"
         tools:text="2h 11m"
         tools:visibility="visible" />
