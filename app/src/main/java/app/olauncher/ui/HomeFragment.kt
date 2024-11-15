@@ -3,6 +3,7 @@ package app.olauncher.ui
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
@@ -247,15 +248,17 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (requireContext().appUsagePermissionGranted().not()) return
 
         viewModel.getTodaysScreenTime()
-
         binding.tvScreenTime.visibility = View.VISIBLE
+
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        val horizontalMargin = if (isLandscape) 64.dpToPx() else 10.dpToPx()
         val params = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            topMargin = 72.dpToPx()
-            marginStart = 10.dpToPx()
-            marginEnd = 10.dpToPx()
+            topMargin = if (isLandscape) 56.dpToPx() else 72.dpToPx()
+            marginStart = horizontalMargin
+            marginEnd = horizontalMargin
             gravity = if (prefs.homeAlignment == Gravity.END) Gravity.START else Gravity.END
         }
         binding.tvScreenTime.layoutParams = params
