@@ -63,6 +63,8 @@
         \n\nA escolha é sempre sua!</string>
     <string name="digital_wellbeing_message">Se você deseja definir limites de tempo para determinados aplicativos, o recurso Bem-estar digital do Android pode ajudá-lo a fazer isso.
         \n\nProcure Bem-estar Digital nas configurações do seu telefone e ative-o.</string>
+    <string name="app_usage_message">Para exibir/ocultar o tempo de tela na tela inicial, permita ou negue a permissão de uso do aplicativo.
+        \n\nNota: Não são coletados dados de uso do aplicativo. Tudo é processado no seu dispositivo.</string>
     <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear. Quaisquer dados adquiridos pelo Olauncher através deste serviço não sairão do seu dispositivo.</string>
     <string name="support_olauncher_for_free">Apoie o Olauncher gratuitamente usando nosso link de afiliado da Amazon.</string>
     <string name="support_olauncher_message">Sempre que você comprar algo usando nosso link, receberemos uma pequena comissão. Salve o link e use-o sempre que fizer compras online. Obrigado!</string>
@@ -124,10 +126,11 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Você está usando seu telefone, ou seu telefone está usando você?</string>
     <string name="about_olauncher">Sobre Olauncher</string>
     <string name="learn_more">Saber mais</string>
-    <string name="screen_time">Tempo de tela</string> <!-- Portuguese -->
+    <string name="screen_time">Tempo de tela</string>
     <string name="did_you_know">Você sabia?</string>
     <string name="leave_a_review">Deixe um comentário</string>
     <string name="review_message">Olauncher é e sempre será totalmente gratuito. Não tem anúncios. Não coleta dados. Mais importante ainda, ajuda você a reduzir o tempo de tela e a ter uma vida digital mais saudável.
         \n\nAcreditamos que mudar para um launcher mínimo é uma excelente decisão. Embora sejamos obviamente tendenciosos, esperamos que você esteja gostando da experiência. Sinta-se à vontade para compartilhar suas idéias conosco!</string>
-    <string name="alignment_changed">Alinhamento alterado ✅</string> <!-- Portuguese -->
+    <string name="alignment_changed">Alinhamento alterado ✅</string>
+    <string name="home_screen">Tela inicial</string>
 </resources>

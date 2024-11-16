@@ -97,6 +97,8 @@
         \n\nDie Wahl liegt immer bei Ihnen.</string>
     <string name="digital_wellbeing_message">Wenn Sie Zeitlimits für bestimmte Apps festlegen möchten, kann Ihnen die Digital Wellbeing-Funktion von Android dabei helfen.
         \n\nBitte suchen Sie in Ihren Telefoneinstellungen nach Digital Wellbeing und aktivieren Sie es.</string>
+    <string name="app_usage_message">Um die Bildschirmzeit auf dem Startbildschirm anzuzeigen oder zu verbergen, erteilen Sie bitte die Erlaubnis für die App-Nutzung oder verweigern Sie sie.
+        \n\nHinweis: Es werden keine Daten zur App-Nutzung gesammelt. Alles wird auf Ihrem Gerät verarbeitet.</string>
     <string name="accessibility_service_description">Die Zugriffsberechtigung ist erforderlich, um das Sperren durch Doppeltippen zu ermöglichen. Die von Olauncher über diesen Dienst erfassten Daten verlassen Ihr Gerät nicht.</string>
     <string name="support_olauncher_for_free">Unterstützen Sie Olauncher kostenlos, indem Sie unseren Amazon-Partnerlink verwenden.</string>
     <string name="support_olauncher_message">Jedes Mal, wenn Sie über unseren Link etwas kaufen, erhalten wir eine kleine Provision. Bitte speichern Sie den Link und verwenden Sie ihn bei jedem Online-Einkauf. Dan­ke­schön!</string>
@@ -122,12 +124,13 @@
     <string name="swipe_left_app_disabled">App nach links wischen deaktiviert</string>
     <string name="swipe_right_app_disabled">App nach rechts wischen deaktiviert</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Benutzen Sie Ihr Telefon, oder nutzt Ihr Telefon Sie?</string>
-    <string name="screen_time">Bildschirmzeit</string> <!-- German -->
+    <string name="screen_time">Bildschirmzeit</string>
     <string name="about_olauncher">Über Olauncher</string>
     <string name="learn_more">Erfahren Sie mehr</string>
     <string name="did_you_know">Wussten Sie?</string>
     <string name="leave_a_review">Rezension</string>
     <string name="review_message">Olauncher ist und bleibt völlig kostenlos. Es gibt keine Werbung. Es werden keine Daten erfasst. Am wichtigsten ist, dass es Ihnen dabei hilft, Ihre Bildschirmzeit zu verkürzen und ein gesünderes digitales Leben zu führen.
         \n\nWir glauben, dass der Wechsel zu einem Minimal Launcher eine ausgezeichnete Entscheidung ist. Obwohl wir offensichtlich voreingenommen sind, hoffen wir, dass Ihnen die Erfahrung gefällt. Teilen Sie uns gerne Ihre Gedanken mit!</string>
-    <string name="alignment_changed">Ausrichtung geändert ✅</string> <!-- German -->
+    <string name="alignment_changed">Ausrichtung geändert ✅</string>
+    <string name="home_screen">Startbildschirm</string>
 </resources>

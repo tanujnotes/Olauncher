@@ -94,6 +94,8 @@
     <string name="keyboard_message">مرحبًا ، لوحة المفاتيح هي أسرع طريقة للعثور على التطبيقات وتشغيلها في Olauncher. هل يمكننا أن نطلب منك الاحتفاظ بهذا الأمر لبضعة أيام أخرى ثم اتخاذ القرار؟ الاختيار دائما لك.</string>
     <string name="digital_wellbeing_message">إذا كنت تريد تعيين حدود زمنية لتطبيقات معينة، فيمكن أن تساعدك ميزة الرفاهية الرقمية في Android على القيام بذلك.
         \n\nيرجى البحث عن الرفاهية الرقمية في إعدادات هاتفك وتمكينها.</string>
+    <string name="app_usage_message">لعرض/إخفاء وقت استخدام الشاشة على الشاشة الرئيسية، يرجى السماح أو منع إذن استخدام التطبيق.
+        \n\nملاحظة: لا يتم جمع أي بيانات حول استخدام التطبيقات. يتم معالجة كل شيء على جهازك.</string>
     <string name="accessibility_service_description">إذن الوصول مطلوب لتمكين النقر المزدوج للقفل. أي بيانات حصل عليها Olauncher عبر هذه الخدمة لن تترك جهازك.</string>
     <string name="support_olauncher_for_free">ادعم Olauncher مجانًا باستخدام رابط الشراكة التابع لشركة Amazon.</string>
     <string name="support_olauncher_message">في كل مرة تشتري شيئًا باستخدام الرابط الخاص بنا ، نحصل على عمولة صغيرة. يرجى حفظ الرابط واستخدامه في أي وقت تتسوق فيه عبر الإنترنت. شكرًا لك!</string>
@@ -123,7 +125,7 @@
     <string name="leave_a_review">ترك التعليق</string>
     <string name="review_message">Olauncher هو وسيظل دائمًا مجانيًا تمامًا. ليس لديها إعلانات. لا يجمع أي بيانات. والأهم من ذلك أنه يساعدك على تقليل وقت الشاشة والعيش حياة رقمية أكثر صحة.
         \n\nنحن نعتقد أن التحول إلى الحد الأدنى من المشغل هو قرار ممتاز. على الرغم من أننا متحيزون بشكل واضح، إلا أننا نأمل أن تستمتع بالتجربة. لا تتردد في مشاركة أفكارك معنا!</string>
-
-    <string name="screen_time">وقت الشاشة</string> <!-- Arabic -->
-    <string name="alignment_changed">تم تغيير المحاذاة ✅</string> <!-- Arabic -->
+    <string name="screen_time">وقت الشاشة</string>
+    <string name="alignment_changed">تم تغيير المحاذاة ✅</string>
+    <string name="home_screen">شاشة الرئيسية</string>
 </resources>

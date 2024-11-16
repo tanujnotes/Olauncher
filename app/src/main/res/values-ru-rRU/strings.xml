@@ -64,6 +64,8 @@
         \n\nВыбор всегда за вами.</string>
     <string name="digital_wellbeing_message">Если вы хотите установить ограничения по времени для определенных приложений, функция «Цифровое благополучие» Android может помочь вам в этом.
         \n\nНайдите параметр «Цифровое благополучие» в настройках телефона и включите его.</string>
+    <string name="app_usage_message">Чтобы показать/скрыть время экрана на домашнем экране, разрешите или запретите разрешение на использование приложения.
+        \n\nПримечание: Не собираются данные об использовании приложения. Все обрабатывается на вашем устройстве.</string>
     <string name="accessibility_service_description">" Разрешение на доступ требуется, чтобы включить двойное касание для блокировки. Любые данные, полученные Olauncher через этот сервис, не покинут ваше устройство."</string>
     <string name="support_olauncher_for_free">Поддержите Olauncher бесплатно, используя нашу партнерскую ссылку Amazon.</string>
     <string name="support_olauncher_message">Каждый раз, когда вы покупаете что-то по нашей ссылке, мы получаем небольшую комиссию. Пожалуйста, сохраните ссылку и используйте ее при совершении покупок в Интернете.\nСпасибо!</string>
@@ -123,11 +125,12 @@
     <string name="adapter_hide">Скрыть</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Вы используете свой телефон, или ваш телефон использует вас?</string>
     <string name="about_olauncher">О нас Olauncher</string>
-    <string name="screen_time">Время на экране</string> <!-- Russian -->
+    <string name="screen_time">Время на экране</string>
     <string name="learn_more">Узнать больше</string>
     <string name="did_you_know">Вы знали?</string>
     <string name="leave_a_review">Оставить отзыв</string>
     <string name="review_message">Olauncher есть и всегда будет полностью бесплатным. В нем нет рекламы. Он не собирает никаких данных. Самое главное, это помогает вам сократить время, проводимое перед экраном, и вести более здоровую цифровую жизнь.
         \n\nМы считаем, что переход на минимальный лаунчер — отличное решение. Хотя мы явно предвзяты, мы надеемся, что вам понравится этот опыт. Не стесняйтесь поделиться с нами своим мнением!</string>
-    <string name="alignment_changed">Выравнивание изменено ✅</string> <!-- Russian -->
+    <string name="alignment_changed">Выравнивание изменено ✅</string>
+    <string name="home_screen">Главный экран</string>
 </resources>

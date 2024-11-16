@@ -63,6 +63,8 @@
         \n\nSei sempre tu a scegliere.</string>
     <string name="digital_wellbeing_message">Se desideri impostare limiti di tempo per determinate app, la funzionalità Benessere digitale di Android può aiutarti a farlo.
         \n\nCerca Benessere digitale nelle impostazioni del telefono e attivalo.</string>
+    <string name="app_usage_message">Per visualizzare/nascondere il tempo di utilizzo dello schermo sulla schermata iniziale, conceda o neghi il permesso di utilizzo dell\'app.
+        \n\nNota: Non vengono raccolti dati sull\'utilizzo dell\'app. Tutto viene elaborato sul tuo dispositivo.</string>
     <string name="accessibility_service_description">L\'autorizzazione di accessibilità è necessaria per abilitare il doppio tocco per il blocco schermo. Qualsiasi dato acquisito da Olauncher tramite questo servizio rimarrà all’interno del telefono</string>
     <string name="support_olauncher_for_free">Supporta Olauncher gratuitamente utilizzando il nostro link di affiliazione su Amazon.</string>
     <string name="support_olauncher_message">Ogni volta che acquisti qualcosa utilizzando il nostro link, riceviamo una piccola commissione. Salva il link e usalo ogni volta che fai acquisti online.\n Grazie!</string>
@@ -123,10 +125,11 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Stai usando il tuo telefono, o è il tuo telefono che sta usando te?</string>
     <string name="about_olauncher">Info Olauncher</string>
     <string name="learn_more">Saperne di più</string>
-    <string name="screen_time">Tempo di schermo</string> <!-- Italian -->
+    <string name="screen_time">Tempo di schermo</string>
     <string name="did_you_know">Lo sapevate?</string>
     <string name="leave_a_review">Lascia una recensione</string>
     <string name="review_message">Olauncher è e sarà sempre completamente gratuito. Non ha pubblicità. Non raccoglie dati. Ancora più importante, ti aiuta a ridurre il tempo trascorso davanti allo schermo e a vivere una vita digitale più sana.
         \n\nCrediamo che passare a un launcher minimale sia un\'ottima decisione. Anche se siamo ovviamente di parte, ci auguriamo che l\'esperienza ti piaccia. Sentitevi liberi di condividere i tuoi pensieri con noi!</string>
-    <string name="alignment_changed">Allineamento cambiato ✅</string> <!-- Italian -->
+    <string name="alignment_changed">Allineamento cambiato ✅</string>
+    <string name="home_screen">Schermata principale</string>
 </resources>

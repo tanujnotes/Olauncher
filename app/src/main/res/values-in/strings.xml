@@ -63,6 +63,8 @@
     <string name="keyboard_message">Hai, keyboard adalah cara tercepat untuk menemukan dan meluncurkan aplikasi di Olauncher. Bisakah kami meminta Anda untuk mengaktifkannya selama beberapa hari lagi dan kemudian memutuskan?           Pilihan selalu menjadi milik Anda.</string>
     <string name="digital_wellbeing_message">Jika Anda ingin menetapkan batas waktu untuk aplikasi tertentu, fitur Digital Wellbeing Android dapat membantu Anda melakukannya.
         \n\nSilakan cari Digital Wellbeing di pengaturan ponsel Anda dan aktifkan.</string>
+    <string name="app_usage_message">Untuk menampilkan/menyembunyikan waktu layar di layar utama, izinkan atau tolak izin penggunaan aplikasi.
+        \n\nCatatan: Tidak ada data penggunaan aplikasi yang dikumpulkan. Semua diproses di perangkat Anda.</string>
     <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan ketuk dua kali untuk mengunci. Data apa pun yang diperoleh Olauncher melalui layanan ini tidak akan meninggalkan perangkat Anda.</string>
     <string name="support_olauncher_for_free">Dukung Olauncher secara gratis dengan menggunakan tautan afiliasi Amazon kami.</string>
     <string name="support_olauncher_message">Setiap kali Anda membeli sesuatu menggunakan tautan kami, kami mendapat komisi kecil. Harap simpan tautan dan gunakan setiap kali Anda berbelanja online.\nTerima kasih!</string>
@@ -121,10 +123,11 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Apakah Anda menggunakan ponsel Anda, atau ponsel Anda menggunakan Anda?</string>
     <string name="about_olauncher">Tentang Olauncher</string>
     <string name="learn_more">Pelajari lebih lanjut</string>
-    <string name="screen_time">Waktu layar</string> <!-- Indonesian -->
+    <string name="screen_time">Waktu layar</string>
     <string name="did_you_know">Tahukah kamu?</string>
     <string name="leave_a_review">Tinggalkan ulasan</string>
     <string name="review_message">Olauncher sepenuhnya gratis dan akan selalu gratis. Tidak ada iklan. Tidak mengumpulkan data pribadi. Yang terpenting, ini membantu Anda mengurangi waktu pemakaian perangkat dan menjalani kehidupan digital yang lebih sehat.
         \n\nKami percaya bahwa beralih ke peluncur minimal adalah keputusan yang sangat baik. Meskipun kami jelas-jelas bias, kami harap Anda menikmati pengalaman ini. Jangan ragu untuk berbagi pemikiran Anda dengan kami!</string>
-    <string name="alignment_changed">Penyelarasan diubah ✅</string> <!-- Indonesian -->
+    <string name="alignment_changed">Penyelarasan diubah ✅</string>
+    <string name="home_screen">Layar beranda</string>
 </resources>

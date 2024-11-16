@@ -63,6 +63,8 @@
     <string name="keyboard_message">Hola, el teclado es la forma más rápida de encontrar y abrir aplicaciones en Olauncher. ¿Podemos pedirle que mantenga esto activado por unos días más y luego decidir? La decisión siempre es suya.</string>
     <string name="digital_wellbeing_message">Si desea establecer límites de tiempo para determinadas aplicaciones, la función Bienestar Digital de Android puede ayudarle a hacerlo.
         \n\nBusque Bienestar Digital en la configuración de su teléfono y habilítelo.</string>
+    <string name="app_usage_message">Para mostrar/ocultar el tiempo de pantalla en la pantalla de inicio, permita o deniegue el permiso de uso de la aplicación.
+        \n\nNota: No se recopilan datos de uso de la aplicación. Todo se procesa en su dispositivo.</string>
     <string name="accessibility_service_description">Se necesita el permiso de Accesibilidad para activar el bloqueo con doble toque. Cualquier dato recolectado por Olauncher no saldrá de su dispositivo.</string>
     <string name="support_olauncher_for_free">Apoye Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
     <string name="support_olauncher_message">Cada vez que compre algo usando nuestro enlace, obtenemos una pequeña comisión. Por favor, guarde el enlace y úselo cada vez que compre en línea. ¡Gracias!</string>
@@ -121,10 +123,11 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">¿Está usando su teléfono, o el teléfono lo usa a usted?</string>
     <string name="about_olauncher">Acerca de Olauncher</string>
     <string name="learn_more">Aprenda más</string>
-    <string name="screen_time">Tiempo de pantalla</string> <!-- Spanish -->
+    <string name="screen_time">Tiempo de pantalla</string>
     <string name="did_you_know">¿Sabía qué?</string>
     <string name="leave_a_review">Dejar un comentario</string>
     <string name="review_message">Olauncher es y será siempre completamente gratuito. No tiene anuncios. No recopila datos. Lo más importante es que le ayuda a reducir el tiempo que pasa frente a la pantalla y a vivir una vida digital más saludable.
         \n\nCreemos que cambiar a un lanzador mínimo es una excelente decisión. Aunque obviamente somos parciales, esperamos que disfrutes la experiencia. ¡No dude en compartir sus pensamientos con nosotros!</string>
-    <string name="alignment_changed">Alineación cambiada ✅</string> <!-- Spanish -->
+    <string name="alignment_changed">Alineación cambiada ✅</string>
+    <string name="home_screen">Pantalla de inicio</string>
 </resources>

@@ -42,6 +42,7 @@
     <string name="_8">8</string>
     <string name="app_drawer_tips">Savjet: Povuci prema dolje za zatvaranje. Pomakni zaslon za zatvaranje tipkovnice.</string>
     <string name="okay">U redu</string>
+    <string name="cool">Cool!</string>
     <string name="auto_show_keyboard">Automatski prikaži tipkovnicu</string>
     <string name="hide">Sakrij</string>
     <string name="status_bar">Prikaži statusnu traku</string>
@@ -63,6 +64,8 @@
         \n\nIzbor je uvijek vaš.</string>
     <string name="digital_wellbeing_message">Ako želite postaviti vremenska ograničenja za određene aplikacije, značajka Digital Wellbeing na Androidu može vam pomoći u tome.
         \n\nPotražite Digital Wellbeing u postavkama telefona i omogućite ga.</string>
+    <string name="app_usage_message">Da biste prikazali/sakrili vrijeme korištenja ekrana na početnom zaslonu, molimo dozvolite ili onemogućite dopuštenje korištenja aplikacije.
+        \n\nNapomena: Ne prikupljaju se podaci o korištenju aplikacije. Sve se obrađuje na vašem uređaju.</string>
     <string name="accessibility_service_description">Dozvola za pristupačnost potrebna je za omogućavanje zaključavanja dvostrukim dodirom. Bilo koji podatci prikupljeni ovim servisom neće napustiti tvoj uređaj.</string>
     <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Besplatno podrži Olauncher korištenjem naše sponzorske poveznice za Amazon.</string>
@@ -88,7 +91,7 @@
     <string name="notifications">Obavijesti</string>
     <string name="learn_more">Saznajte više</string>
     <string name="did_you_know">Dali si znao?</string>
-    <string name="screen_time">Vrijeme na ekranu</string> <!-- Croatian -->
+    <string name="screen_time">Vrijeme na ekranu</string>
     <string name="leave_a_review">Ostavite recenziju</string>
     <string name="review_message">Olauncher jest i uvijek će biti potpuno besplatan. Nema reklama. Ne prikuplja podatke. Što je najvažnije, pomaže vam u smanjenju vremena koje provodite pred ekranom i živite zdravijim digitalnim životom.
         \n\nVjerujemo da je prelazak na minimalni launcher izvrsna odluka. Iako smo očito pristrani, nadamo se da uživate u iskustvu. Slobodno podijelite svoje misli s nama!</string>
@@ -128,5 +131,6 @@
     <string name="adapter_hide">Sakrij</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Koristite li svoj telefon ili vaš telefon koristi vas?</string>
     <string name="about_olauncher">O Olauncher-u i ČPP</string>
-    <string name="alignment_changed">Poravnanje promijenjeno ✅</string> <!-- Croatian -->
+    <string name="alignment_changed">Poravnanje promijenjeno ✅</string>
+    <string name="home_screen">Početni ekran</string>
 </resources>

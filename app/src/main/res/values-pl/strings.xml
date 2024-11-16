@@ -95,6 +95,8 @@
     <string name="keyboard_message">Cześć, klawiatura to najszybszy sposób znajdowania i uruchamiania aplikacji w Olauncher. Czy możemy poprosić o pozostawienie tego włączonego jeszcze przez kilka dni, a następnie podjęcie decyzji?\n\nWybór zawsze należy do Ciebie.</string>
     <string name="digital_wellbeing_message">Jeśli chcesz ustawić limity czasowe dla niektórych aplikacji, funkcja Cyfrowa równowaga w systemie Android może Ci w tym pomóc.
         \n\nWyszukaj opcję Cyfrowa równowaga w ustawieniach telefonu i włącz ją.</string>
+    <string name="app_usage_message">Aby wyświetlić/ukryć czas ekranu na ekranie głównym, pozwól lub zabroń aplikacji na dostęp do danych o użyciu.
+        \n\nUwaga: Nie są gromadzone żadne dane o użyciu aplikacji. Wszystko jest przetwarzane na Twoim urządzeniu.</string>
     <string name="accessibility_service_description">Uprawnienia dostępu są wymagane, aby włączyć podwójne dotknięcie, aby zablokować. Wszelkie dane pozyskane przez Olauncher za pośrednictwem tej usługi nie opuszczą Twojego urządzenia.</string>
     <string name="support_olauncher_for_free">Wesprzyj Olauncher za darmo, korzystając z naszego linku afiliacyjnego Amazon.</string>
     <string name="support_olauncher_message">Za każdym razem, gdy kupujesz coś za pomocą naszego linku, otrzymujemy niewielką prowizję. Zapisz link i używaj go podczas zakupów online. Dziękuję!</string>
@@ -121,11 +123,12 @@
     <string name="swipe_right_app_disabled">Gest Przesuń w prawo jest wyłączony</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Czy używasz telefonu, czy telefon używa ciebie?</string>
     <string name="about_olauncher">O Olauncher</string>
-    <string name="screen_time">Czas ekranowy</string> <!-- Polish -->
+    <string name="screen_time">Czas ekranowy</string>
     <string name="learn_more">Ucz się więcej</string>
     <string name="did_you_know">Czy wiedziałeś?</string>
     <string name="leave_a_review">Ucz się więcej</string>
     <string name="review_message">Olauncher jest i zawsze będzie całkowicie darmowy. Nie zawiera reklam. Nie zbiera żadnych danych. Co najważniejsze, pomaga skrócić czas spędzany przed ekranem i prowadzić zdrowsze cyfrowe życie.
         \n\nWierzymy, że przejście na minimalny program uruchamiający to doskonała decyzja. Chociaż jesteśmy oczywiście stronniczy, mamy nadzieję, że spodoba ci się to doświadczenie. Podziel się z nami swoimi przemyśleniami!</string>
-    <string name="alignment_changed">Wyrównanie zmienione ✅</string> <!-- Polish -->
+    <string name="alignment_changed">Wyrównanie zmienione ✅</string>
+    <string name="home_screen">Ekran główny</string>
 </resources>

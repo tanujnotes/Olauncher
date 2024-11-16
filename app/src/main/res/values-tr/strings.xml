@@ -97,6 +97,8 @@
         \n\nSeçim her zaman senindir.</string>
     <string name="digital_wellbeing_message">Belirli uygulamalar için zaman sınırları belirlemek istiyorsanız Android\'in Dijital Denge özelliği bunu yapmanıza yardımcı olabilir.
         \n\nLütfen telefon ayarlarınızda Dijital Refah\'ı arayın ve etkinleştirin.</string>
+    <string name="app_usage_message">Ana ekranınızda ekran sürenizi göstermek/gizlemek için lütfen uygulama kullanım iznini onaylayın veya reddedin.
+        \n\nNot: Uygulama kullanım verileri toplanmaz. Her şey cihazınızda işlenir.</string>
     <string name="accessibility_service_description">Kilitlemek için çift dokunmayı etkinleştirmek için erişilebilirlik izni gereklidir. Olauncher tarafından bu hizmet aracılığıyla elde edilen hiçbir veri cihazınızdan ayrılmayacaktır.</string>
     <string name="support_olauncher_for_free">Amazon ortaklık bağlantımızı kullanarak Olauncher\'ı ücretsiz olarak destekleyin.</string>
     <string name="support_olauncher_message">Bağlantımızı kullanarak her bir şey satın aldığınızda, küçük bir komisyon alırız. Lütfen bağlantıyı kaydedin ve çevrimiçi alışveriş yaptığınızda kullanın. Teşekkür ederim!</string>
@@ -124,10 +126,11 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Sen mi telefonunu, kullanıyorsun yoksa telefon mu seni kullanıyor?</string>
     <string name="about_olauncher">Hakkında Olauncher</string>
     <string name="learn_more">Daha fazla bilgi edin</string>
-    <string name="screen_time">Ekran süresi</string> <!-- Turkish -->
+    <string name="screen_time">Ekran süresi</string>
     <string name="did_you_know">Biliyor musun?</string>
     <string name="leave_a_review">İnceleme bırak</string>
     <string name="review_message">Olauncher tamamen ücretsizdir ve her zaman ücretsiz olacaktır. Hiçbir reklamı yok. Hiçbir veri toplamaz. En önemlisi ekran başında geçirdiğiniz süreyi azaltmanıza ve daha sağlıklı bir dijital yaşam sürmenize yardımcı olur.
         \n\nMinimal bir başlatıcıya geçmenin mükemmel bir karar olduğuna inanıyoruz. Açıkça ön yargılı olsak da, bu deneyimden keyif alacağınızı umuyoruz. Düşüncelerinizi bizimle paylaşmaktan çekinmeyin!</string>
-    <string name="alignment_changed">Hizalama değiştirildi ✅</string> <!-- Turkish -->
+    <string name="alignment_changed">Hizalama değiştirildi ✅</string>
+    <string name="home_screen">Ana ekran</string>
 </resources>

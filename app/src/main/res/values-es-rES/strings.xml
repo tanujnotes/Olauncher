@@ -64,6 +64,8 @@
         \n\nLa decisión siempre es vuestra.</string>
     <string name="digital_wellbeing_message">Si deseas establecer límites de tiempo para determinadas aplicaciones, la función Bienestar digital de Android puede ayudarte a hacerlo.
         \n\nBusca Bienestar digital en la configuración de su teléfono y habilítelo.</string>
+    <string name="app_usage_message">Para mostrar/ocultar el tiempo de pantalla en la pantalla de inicio, permita o deniegue el permiso de uso de la aplicación.
+        \n\nNota: No se recopilan datos de uso de la aplicación. Todo se procesa en su dispositivo.</string>
     <string name="accessibility_service_description">"Se requiere el permiso de accesibilidad para habilitar el doble toque para bloquear. Cualquier dato adquirido por Olauncher a través de este servicio no saldrá de su dispositivo."</string>
     <string name="support_olauncher_for_free">Apoya a Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
     <string name="support_olauncher_message">Cada vez que compre algo usando nuestro enlace, obtendremos una pequeña comisión. Guarde el enlace y utilícelo cada vez que compre en línea.\n¡Gracias!</string>
@@ -125,9 +127,10 @@
     <string name="about_olauncher">Acerca de Olauncher</string>
     <string name="learn_more">Aprende más</string>
     <string name="did_you_know">¿Sabías?</string>
-    <string name="screen_time">Tiempo de pantalla</string> <!-- Spanish -->
+    <string name="screen_time">Tiempo de pantalla</string>
     <string name="leave_a_review">Dejar un comentario</string>
     <string name="review_message">Olauncher es y será siempre completamente gratuito. No tiene anuncios. No recopila datos. Lo más importante es que te ayuda a reducir el tiempo que pasa frente a la pantalla y a vivir una vida digital más saludable.
         \n\nCreemos que cambiar a un lanzador mínimo es una excelente decisión. Aunque obviamente somos parciales, esperamos que disfrutes la experiencia. ¡No dudes en compartir tus pensamientos con nosotros!</string>
-    <string name="alignment_changed">Alineación cambiada ✅</string> <!-- Spanish -->
+    <string name="alignment_changed">Alineación cambiada ✅</string>
+    <string name="home_screen">Pantalla de inicio</string>
 </resources>
