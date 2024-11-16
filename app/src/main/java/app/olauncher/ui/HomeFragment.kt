@@ -252,11 +252,16 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val horizontalMargin = if (isLandscape) 64.dpToPx() else 10.dpToPx()
+        val marginTop = if (isLandscape) {
+            if (prefs.dateTimeVisibility == Constants.DateTime.DATE_ONLY) 36.dpToPx() else 56.dpToPx()
+        } else {
+            if (prefs.dateTimeVisibility == Constants.DateTime.DATE_ONLY) 45.dpToPx() else 72.dpToPx()
+        }
         val params = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
         ).apply {
-            topMargin = if (isLandscape) 56.dpToPx() else 72.dpToPx()
+            topMargin = marginTop
             marginStart = horizontalMargin
             marginEnd = horizontalMargin
             gravity = if (prefs.homeAlignment == Gravity.END) Gravity.START else Gravity.END
