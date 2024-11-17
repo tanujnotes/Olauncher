@@ -133,4 +133,5 @@
         \n\nAcreditamos que mudar para um launcher mínimo é uma excelente decisão. Embora sejamos obviamente tendenciosos, esperamos que você esteja gostando da experiência. Sinta-se à vontade para compartilhar suas idéias conosco!</string>
     <string name="alignment_changed">Alinhamento alterado ✅</string>
     <string name="home_screen">Tela inicial</string>
+    <string name="hey">Oi</string> <!-- Portuguese -->
 </resources>

@@ -133,4 +133,5 @@
         \n\nMinimal bir başlatıcıya geçmenin mükemmel bir karar olduğuna inanıyoruz. Açıkça ön yargılı olsak da, bu deneyimden keyif alacağınızı umuyoruz. Düşüncelerinizi bizimle paylaşmaktan çekinmeyin!</string>
     <string name="alignment_changed">Hizalama değiştirildi ✅</string>
     <string name="home_screen">Ana ekran</string>
+    <string name="hey">Merhaba</string> <!-- Turkish -->
 </resources>

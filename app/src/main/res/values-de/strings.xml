@@ -133,4 +133,5 @@
         \n\nWir glauben, dass der Wechsel zu einem Minimal Launcher eine ausgezeichnete Entscheidung ist. Obwohl wir offensichtlich voreingenommen sind, hoffen wir, dass Ihnen die Erfahrung gefällt. Teilen Sie uns gerne Ihre Gedanken mit!</string>
     <string name="alignment_changed">Ausrichtung geändert ✅</string>
     <string name="home_screen">Startbildschirm</string>
+    <string name="hey">Hey</string> <!-- German -->
 </resources>

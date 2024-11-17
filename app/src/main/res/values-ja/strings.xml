@@ -132,4 +132,5 @@
         \n\n私たちは、最小限のランチャーに切り替えるのは素晴らしい決断だと信じています。明らかに偏見がありますが、楽しんでいただければ幸いです。ぜひご意見をお聞かせください。</string>
     <string name="alignment_changed">アライメントが変更されました ✅</string>
     <string name="home_screen">ホーム画面</string>
+    <string name="hey">やあ</string> <!-- Japanese -->
 </resources>

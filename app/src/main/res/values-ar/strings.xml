@@ -128,4 +128,5 @@
     <string name="screen_time">وقت الشاشة</string>
     <string name="alignment_changed">تم تغيير المحاذاة ✅</string>
     <string name="home_screen">شاشة الرئيسية</string>
+    <string name="hey">مرحبا</string> <!-- Arabic -->
 </resources>

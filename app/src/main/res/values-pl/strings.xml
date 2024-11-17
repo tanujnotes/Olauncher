@@ -131,4 +131,5 @@
         \n\nWierzymy, że przejście na minimalny program uruchamiający to doskonała decyzja. Chociaż jesteśmy oczywiście stronniczy, mamy nadzieję, że spodoba ci się to doświadczenie. Podziel się z nami swoimi przemyśleniami!</string>
     <string name="alignment_changed">Wyrównanie zmienione ✅</string>
     <string name="home_screen">Ekran główny</string>
+    <string name="hey">Hej</string> <!-- Polish -->
 </resources>

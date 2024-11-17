@@ -151,7 +151,7 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.SHARE -> {
                     prefs.shareShownTime = System.currentTimeMillis()
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share_now)) {
+                    showMessageDialog(getString(R.string.hey), getString(R.string.share_message), getString(R.string.share_now)) {
                         binding.messageLayout.visibility = View.GONE
                         showToast("😊❤️")
                         shareApp()
@@ -209,15 +209,15 @@ class MainActivity : AppCompatActivity() {
                 if (prefs.rateClicked)
                     prefs.userState = Constants.UserState.SHARE
                 else if (isOlauncherDefault(this)
-                    && prefs.firstOpenTime.hasBeenDays(3)
-                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 15
+                    && prefs.firstOpenTime.hasBeenDays(7)
+                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 18
                 ) viewModel.showDialog.postValue(Constants.Dialog.RATE)
             }
 
             Constants.UserState.SHARE -> {
                 if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(14)
-                    && prefs.shareShownTime.hasBeenDays(45)
-                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 15
+                    && prefs.shareShownTime.hasBeenDays(42)
+                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 18
                 ) viewModel.showDialog.postValue(Constants.Dialog.SHARE)
             }
         }

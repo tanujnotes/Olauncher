@@ -134,4 +134,5 @@
         \n\nÚgy gondoljuk, hogy egy minimális indítóra váltás kiváló döntés, és reméljük, hogy élvezni fogja. Ossza meg másokkal is tapasztalatait!</string>
     <string name="alignment_changed">Az igazítás megváltozott ✅</string>
     <string name="home_screen">Kezdőképernyő</string>
+    <string name="hey">Szia</string> <!-- Hungarian -->
 </resources>
