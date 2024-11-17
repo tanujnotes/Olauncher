@@ -18,12 +18,12 @@ AF stands for Ad-Free :D
 
 To maintain the simplicity of the launcher, a few niche features are available but hidden.
 
-Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in Olauncher settings for the complete feature list and FAQs.
+Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in the Olauncher settings for a complete list of features and FAQs.
 
 ##
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-Developer: [@tanujnotes](https://twitter.com/tanujnotes)
+Follow: [@tanujnotes](https://twitter.com/tanujnotes)
 
-Thank you and have a wonderful day!
+[See my other apps](https://play.google.com/store/apps/dev?id=7198807840081074933)
