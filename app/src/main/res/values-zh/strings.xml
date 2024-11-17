@@ -99,6 +99,8 @@
         \n\n请在手机设置中搜索数字健康并启用它。</string>
     <string name="app_usage_message">要在主屏幕上显示/隐藏您的屏幕时间，请允许或拒绝应用程序使用权限。
         \n\n注意：不收集应用程序使用数据。所有数据都在您的设备上处理。</string>
+    <string name="pro_message">Olauncher 还有一个名为 Pro Launcher 的专业版。它具有额外的功能，如天气、部件、字体、文件夹、AMOLED 壁纸等。
+        \n\n这也是支持 Olauncher 开发者的最佳方式。快来看看吧！</string>
     <string name="accessibility_service_description">请在手机设置中搜索数字健康并启用它。</string>
     <string name="support_olauncher_for_free">使用我们的亚马逊附属链接免费支持 Olauncher。</string>
     <string name="support_olauncher_message">每次您使用我们的链接购买商品时，我们都会获得少量佣金。请保存链接并在网上购物时使用它。 谢谢！</string>

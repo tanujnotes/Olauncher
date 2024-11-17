@@ -26,6 +26,7 @@ import app.olauncher.helper.isDefaultLauncher
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.isTablet
+import app.olauncher.helper.openUrl
 import app.olauncher.helper.rateApp
 import app.olauncher.helper.resetLauncherViaFakeActivity
 import app.olauncher.helper.setPlainWallpaper
@@ -173,7 +174,12 @@ class MainActivity : AppCompatActivity() {
                 Constants.Dialog.DIGITAL_WELLBEING -> {
                     showMessageDialog(getString(R.string.screen_time), getString(R.string.app_usage_message), getString(R.string.permission)) {
                         startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
-                        // openUrl(Constants.URL_DIGITAL_WELLBEING_LEARN_MORE)
+                    }
+                }
+
+                Constants.Dialog.PRO_MESSAGE -> {
+                    showMessageDialog(getString(R.string.hey), getString(R.string.pro_message), getString(R.string.olauncher_pro)) {
+                        openUrl(Constants.URL_OLAUNCHER_PRO)
                     }
                 }
             }
@@ -215,7 +221,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             Constants.UserState.SHARE -> {
-                if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(14)
+                if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(21)
                     && prefs.shareShownTime.hasBeenDays(42)
                     && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 18
                 ) viewModel.showDialog.postValue(Constants.Dialog.SHARE)
