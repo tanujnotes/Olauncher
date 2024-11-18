@@ -26,4 +26,4 @@ License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 @tanujnotes | [X/Twitter](https://twitter.com/tanujnotes) | [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
 
-[See my other apps](https://play.google.com/store/apps/dev?id=7198807840081074933)
+**[See my other apps](https://play.google.com/store/apps/dev?id=7198807840081074933)** =>
