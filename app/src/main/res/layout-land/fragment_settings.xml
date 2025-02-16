@@ -77,6 +77,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="8dp"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
                     android:text="@string/about_olauncher" />
 
                 <TextView
