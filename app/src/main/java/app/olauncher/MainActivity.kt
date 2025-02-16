@@ -21,6 +21,7 @@ import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
 import app.olauncher.helper.hasBeenDays
 import app.olauncher.helper.hasBeenHours
+import app.olauncher.helper.hasBeenMinutes
 import app.olauncher.helper.isDarkThemeOn
 import app.olauncher.helper.isDaySince
 import app.olauncher.helper.isDefaultLauncher
@@ -132,6 +133,17 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
+                Constants.Dialog.WALLPAPER -> {
+                    prefs.wallpaperMsgShown = true
+                    prefs.userState = Constants.UserState.REVIEW
+                    showMessageDialog(getString(R.string.did_you_know), getString(R.string.wallpaper_message), getString(R.string.enable)) {
+                        binding.messageLayout.visibility = View.GONE
+                        prefs.dailyWallpaper = true
+                        viewModel.setWallpaperWorker()
+                        showToast(getString(R.string.your_wallpaper_will_update_shortly))
+                    }
+                }
+
                 Constants.Dialog.REVIEW -> {
                     prefs.userState = Constants.UserState.RATE
                     showMessageDialog(getString(R.string.did_you_know), getString(R.string.review_message), getString(R.string.leave_a_review)) {
@@ -202,14 +214,21 @@ class MainActivity : AppCompatActivity() {
 
         when (prefs.userState) {
             Constants.UserState.START -> {
-                if (prefs.firstOpenTime.hasBeenHours(1))
+                if (prefs.firstOpenTime.hasBeenMinutes(10))
+                    prefs.userState = Constants.UserState.WALLPAPER
+            }
+
+            Constants.UserState.WALLPAPER -> {
+                if (prefs.wallpaperMsgShown || prefs.dailyWallpaper)
                     prefs.userState = Constants.UserState.REVIEW
+                else if (isOlauncherDefault(this))
+                    viewModel.showDialog.postValue(Constants.Dialog.WALLPAPER)
             }
 
             Constants.UserState.REVIEW -> {
                 if (prefs.rateClicked)
                     prefs.userState = Constants.UserState.SHARE
-                else if (isOlauncherDefault(this))
+                else if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenHours(1))
                     viewModel.showDialog.postValue(Constants.Dialog.REVIEW)
             }
 

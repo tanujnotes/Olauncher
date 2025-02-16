@@ -100,6 +100,8 @@
         \n\n注意: アプリの使用データは収集されません。すべての処理はあなたのデバイスで行われます。</string>
     <string name="pro_message">OlauncherにはPro Launcherというプロ版もあります。天気、ウィジェット、フォント、フォルダー、AMOLED壁紙などの追加機能があります。
         \n\nOlauncherの開発者をサポートするための最良の方法でもあります。チェックしてみてください！</string>
+    <string name="wallpaper_message">Olauncherは毎日美しい新しい壁紙を提供します。毎日ホーム画面に新しい外観を無料で提供！
+        \n\n試してみますか？</string>
     <string name="accessibility_service_description">ダブルタップしてロックを有効にするには、アクセシビリティ許可が必要です。このサービスを通じて Olauncher が取得したデータは、デバイスから流出することはありません。</string>
     <string name="support_olauncher_for_free">Amazon アフィリエイト リンクを使用して、Olauncher を無料でサポートしてください。</string>
     <string name="support_olauncher_message">あなたが私たちのリンクを使用して何かを購入するたびに、私たちは少額の手数料を受け取ります。リンクを保存し、オンライン ショッピングの際には必ずご利用ください。 ありがとう！</string>
