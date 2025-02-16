@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.Constants
+import java.util.Calendar
 
 fun View.hideKeyboard() {
     this.clearFocus()
@@ -152,6 +153,19 @@ fun Context.formattedTimeSpent(timeSpent: Long): String {
         else -> "<1m"
     }
 }
+
+fun Long.convertEpochToMidnight(): Long {
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = this
+    calendar.set(Calendar.HOUR_OF_DAY, 0)
+    calendar.set(Calendar.MINUTE, 0)
+    calendar.set(Calendar.SECOND, 0)
+    calendar.set(Calendar.MILLISECOND, 0)
+    return calendar.timeInMillis
+}
+
+fun Long.isDaySince(): Int = ((System.currentTimeMillis().convertEpochToMidnight() - this.convertEpochToMidnight())
+        / Constants.ONE_DAY_IN_MILLIS).toInt()
 
 fun Long.hasBeenDays(days: Int): Boolean =
     ((System.currentTimeMillis() - this) / Constants.ONE_DAY_IN_MILLIS) >= days
