@@ -151,6 +151,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 prefs.calendarAppClassName = ""
                 prefs.calendarAppUser = ""
             }
+
+            R.id.setDefaultLauncher -> {
+                prefs.hideSetDefaultLauncher = true
+                binding.setDefaultLauncher.visibility = View.GONE
+                if (viewModel.isOlauncherDefault.value != true) {
+                    requireContext().showToast(R.string.set_as_default_launcher)
+                    findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                }
+            }
         }
         return true
     }
@@ -174,8 +183,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 setHomeAlignment()
             }
             if (binding.firstRunTips.visibility == View.VISIBLE) return@Observer
-            if (it) binding.setDefaultLauncher.visibility = View.GONE
-            else binding.setDefaultLauncher.visibility = View.VISIBLE
+            binding.setDefaultLauncher.isVisible = it.not() && prefs.hideSetDefaultLauncher.not()
+//            if (it) binding.setDefaultLauncher.visibility = View.GONE
+//            else binding.setDefaultLauncher.visibility = View.VISIBLE
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             setHomeAlignment(it)
@@ -208,6 +218,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.clock.setOnLongClickListener(this)
         binding.date.setOnLongClickListener(this)
         binding.setDefaultLauncher.setOnClickListener(this)
+        binding.setDefaultLauncher.setOnLongClickListener(this)
         binding.tvScreenTime.setOnClickListener(this)
     }
 
