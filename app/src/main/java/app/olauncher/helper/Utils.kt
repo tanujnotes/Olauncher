@@ -295,13 +295,17 @@ fun getScreenDimensions(context: Context): Pair<Int, Int> {
     return Pair(point.x, point.y)
 }
 
-suspend fun getTodaysWallpaper(wallType: String): String {
+suspend fun getTodaysWallpaper(wallType: String, firstOpenTime: Long): String {
     return withContext(Dispatchers.IO) {
         var wallpaperUrl: String
         try {
-            val month = SimpleDateFormat("M", Locale.ENGLISH).format(Date()) ?: ""
-            val day = SimpleDateFormat("d", Locale.ENGLISH).format(Date()) ?: ""
-            val key = String.format("%s_%s", month, day)
+            val key = if (firstOpenTime.isDaySince() < 10)
+                String.format("0_%s", firstOpenTime.isDaySince().toString())
+            else {
+                val month = SimpleDateFormat("M", Locale.ENGLISH).format(Date()) ?: "0"
+                val day = SimpleDateFormat("d", Locale.ENGLISH).format(Date()) ?: "0"
+                String.format("%s_%s", month, day)
+            }
 
             val url = URL(Constants.URL_WALLPAPERS)
             val connection: HttpURLConnection = url.openConnection() as HttpURLConnection

@@ -18,7 +18,7 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
                 true
             else if (prefs.dailyWallpaper) {
                 val wallType = checkWallpaperType()
-                val wallpaperUrl = getTodaysWallpaper(wallType)
+                val wallpaperUrl = getTodaysWallpaper(wallType, prefs.firstOpenTime)
                 if (prefs.dailyWallpaperUrl == wallpaperUrl)
                     true
                 else {
