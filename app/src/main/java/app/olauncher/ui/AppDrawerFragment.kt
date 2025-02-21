@@ -159,7 +159,7 @@ class AppDrawerFragment : Fragment() {
                 viewModel.getHiddenApps()
             },
             appRenameListener = { appModel, renameLabel ->
-                prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
+                prefs.setAppRenameLabel(appModel.activityClassName, renameLabel)
                 viewModel.getAppList()
             }
         )
