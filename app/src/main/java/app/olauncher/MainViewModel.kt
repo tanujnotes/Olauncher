@@ -5,6 +5,7 @@ import android.app.Service.USAGE_STATS_SERVICE
 import android.app.usage.UsageStatsManager
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.LauncherApps
 import android.os.Process
 import android.os.UserHandle
@@ -249,6 +250,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             val currentTime = System.currentTimeMillis()
             val usageStatsManager = appContext.getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager
+            val packageManager = appContext.packageManager
+
+            // Get launcher apps
+            val launcherIntent = Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME)
+            val launcherApps = packageManager.queryIntentActivities(launcherIntent, 0)
+                .map { it.activityInfo.packageName }
+                .toSet()
 
             val stats = usageStatsManager.queryUsageStats(
                 UsageStatsManager.INTERVAL_DAILY,
@@ -262,13 +270,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             val totalTimeInMillis = stats
                 .filter { stat ->
-                    val statCalendar = Calendar.getInstance().apply {
-                        timeInMillis = stat.firstTimeStamp
-                    }
-                    val statYear = statCalendar.get(Calendar.YEAR)
-                    val statDayOfYear = statCalendar.get(Calendar.DAY_OF_YEAR)
-
-                    statYear == todayYear && statDayOfYear == todayDayOfYear
+                    // Filter for launcher apps
+                    launcherApps.contains(stat.packageName) &&
+                            // Filter for today's stats
+                            Calendar.getInstance().apply {
+                                timeInMillis = stat.firstTimeStamp
+                            }.let { statCalendar ->
+                                val statYear = statCalendar.get(Calendar.YEAR)
+                                val statDayOfYear = statCalendar.get(Calendar.DAY_OF_YEAR)
+                                statYear == todayYear && statDayOfYear == todayDayOfYear
+                            }
                 }
                 .sumOf { it.totalTimeInForeground }
 
@@ -276,6 +287,5 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             screenTimeValue.postValue(formattedTime)
         }
     }
-
 
 }
