@@ -270,8 +270,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             val totalTimeInMillis = stats
                 .filter { stat ->
-                    // Filter for launcher apps
-                    launcherApps.contains(stat.packageName) &&
+                    // Exclude launcher apps
+                    !launcherApps.contains(stat.packageName) &&
                             // Filter for today's stats
                             Calendar.getInstance().apply {
                                 timeInMillis = stat.firstTimeStamp
