@@ -256,11 +256,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getTodaysScreenTime() {
-        if (prefs.screenTimeLastUpdated.hasBeenMinutes(1).not()) {
-            appContext.showToast("return")
-            return
-        }
-        appContext.showToast("screen time")
+        if (prefs.screenTimeLastUpdated.hasBeenMinutes(1).not()) return
+
         val usageStatsManager = appContext.getSystemService(USAGE_STATS_SERVICE) as UsageStatsManager
         val appUsageStatsHashMap: MutableMap<String, AppUsageStats> = HashMap()
         val beginTime = System.currentTimeMillis().convertEpochToMidnight()
