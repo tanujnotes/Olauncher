@@ -39,6 +39,7 @@ class Prefs(context: Context) {
     private val TEXT_SIZE_SCALE = "TEXT_SIZE_SCALE"
     private val PRO_MESSAGE_SHOWN = "PRO_MESSAGE_SHOWN"
     private val HIDE_SET_DEFAULT_LAUNCHER = "HIDE_SET_DEFAULT_LAUNCHER"
+    private val SCREEN_TIME_LAST_UPDATED = "SCREEN_TIME_LAST_UPDATED"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -177,6 +178,10 @@ class Prefs(context: Context) {
     var hideSetDefaultLauncher: Boolean
         get() = prefs.getBoolean(HIDE_SET_DEFAULT_LAUNCHER, false)
         set(value) = prefs.edit().putBoolean(HIDE_SET_DEFAULT_LAUNCHER, value).apply()
+
+    var screenTimeLastUpdated: Long
+        get() = prefs.getLong(SCREEN_TIME_LAST_UPDATED, 0L)
+        set(value) = prefs.edit().putLong(SCREEN_TIME_LAST_UPDATED, value).apply()
 
     var hiddenApps: MutableSet<String>
         get() = prefs.getStringSet(HIDDEN_APPS, mutableSetOf()) as MutableSet<String>
