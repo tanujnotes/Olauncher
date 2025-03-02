@@ -347,7 +347,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         val totalTimeInMillis = appUsageStatsHashMap.values.sumOf { it.totalTimeInForegroundMillis }
-        val viewTimeSpent = appContext.formattedTimeSpent(totalTimeInMillis)
+        val viewTimeSpent = appContext.formattedTimeSpent((totalTimeInMillis * 1.1).toLong())
         screenTimeValue.postValue(viewTimeSpent)
         prefs.screenTimeLastUpdated = endTime
     }
