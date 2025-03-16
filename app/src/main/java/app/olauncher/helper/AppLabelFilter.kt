@@ -27,10 +27,12 @@ class AppLabelFilter(private val appsList: List<AppModel>, private val matcher: 
         return filteredApps.map(AppScore::app)
     }
 
-    private fun appLabelMatches(charSearch: String, appLabel: String): Boolean {
-        if (longestCommonSubsequence(charSearch, appLabel) == charSearch.length) return true
-        return false
-    }
+    private fun appLabelMatches(charSearch: String, appLabel: String): Boolean =
+        when (matchAcronym(charSearch, appLabel)) {
+            AcronymMatch.FULL -> true
+            AcronymMatch.PARTIAL -> longestCommonSubsequence(charSearch, appLabel) == charSearch.length
+            else -> appLabel.contains(charSearch)
+        }
 
     private fun criteria(searchString: String, label: String): Float {
         val rawScore = matcher.compare(searchString, label)

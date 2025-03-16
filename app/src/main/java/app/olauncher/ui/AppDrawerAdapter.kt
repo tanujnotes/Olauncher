@@ -111,7 +111,7 @@ class AppDrawerAdapter(
 
     private fun getSortedMatches(charSearch: CharSequence, appsList: List<AppModel>): List<AppModel> {
         val searchString = charSearch.toString().normalizeNfd().lowercase()
-        val matcher = JaroWinkler()
+        val matcher = JaroWinkler.createWithBoostThreshold()
         val results = AppLabelFilter(appsList, matcher).filterApps(searchString)
         return results
     }
