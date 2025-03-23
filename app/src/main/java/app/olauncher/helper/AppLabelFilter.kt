@@ -4,13 +4,12 @@ import android.util.Log
 import app.olauncher.data.AppModel
 import app.olauncher.helper.StringUtils.longestCommonSubsequence
 import org.simmetrics.StringMetric
-import java.util.TreeSet
 
 private const val TAG = "AppFilter"
 
 class AppLabelFilter(private val appsList: List<AppModel>, private val matcher: StringMetric) {
 
-    private val filteredApps = TreeSet<AppScore>()
+    private val filteredApps = mutableListOf<AppScore>()
 
     fun filterApps(query: String): List<AppModel> {
         val searchString = query.normalizeNfd().lowercase()
@@ -24,7 +23,7 @@ class AppLabelFilter(private val appsList: List<AppModel>, private val matcher: 
             } else null
         }
 
-        return filteredApps.map(AppScore::app)
+        return filteredApps.sorted().map(AppScore::app)
     }
 
     private fun appLabelMatches(charSearch: String, appLabel: String): Boolean =
