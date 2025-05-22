@@ -83,12 +83,13 @@ suspend fun getAppsList(
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
 
-                    val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName).ifBlank { app.label.toString() }
+                    val appLabelShown = prefs.getAppRenameLabel(app.componentName.className).ifBlank { app.label.toString() }
                     val appModel = AppModel(
                         appLabelShown,
                         collator.getCollationKey(app.label.toString()),
                         app.applicationInfo.packageName,
                         app.componentName.className,
+                        app.label.toString(),
                         (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
                         profile
                     )
