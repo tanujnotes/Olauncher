@@ -84,9 +84,10 @@ suspend fun getAppsList(
                 for (app in launcherApps.getActivityList(null, profile)) {
 
                     val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName).ifBlank { app.label.toString() }
+                    val appLabelCollationKey = collator.getCollationKey(app.label.toString().lowercase())
                     val appModel = AppModel(
                         appLabelShown,
-                        collator.getCollationKey(app.label.toString()),
+                        appLabelCollationKey,
                         app.applicationInfo.packageName,
                         app.componentName.className,
                         (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
@@ -109,7 +110,7 @@ suspend fun getAppsList(
                     }
                 }
             }
-            appList.sortBy { it.appLabel.lowercase() }
+            appList.sort()
 
         } catch (e: Exception) {
             e.printStackTrace()
