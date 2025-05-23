@@ -60,16 +60,16 @@
         \n\nAz Olauncher-nek emberekre van szüksége, az embereknek pedig az Olauncher-re. Köszönettel vennénk, ha megosztaná másokkal is az Olaunchert!</string>
     <!--    <string name="share_message">Az Ön havi emlékeztetője - használja Ön a telefonját, és ne a telefonja Önt! Csak így tovább! Nagyszerűen csinálja!-->
     <!--        \n\nHa van egy kis ideje, kérjük, ossza meg másokkal is az Olauncher-t. Az Olauncher-nek szüksége van emberekre. De ami még fontosabb, az embereknek szüksége van az Olauncher-re..</string>-->
-    <string name="keyboard_message">Üdv, a billentyűzet a leggyorsabb módja az alkalmazások megtalálásához és elindításához az Olauncherben. Megkérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön?
+    <string name="keyboard_message">Üdvözöljük! A billentyűzet a leggyorsabb módja az alkalmazások megtalálásához és elindításához az Olauncherben. Megkérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön?
         \n\nA választás mindig az Öné.</string>
     <string name="digital_wellbeing_message">Ha időkorlátokat szeretne beállítani bizonyos alkalmazásokhoz, az Android Digital Wellbeing funkciója segíthet ebben.
         \n\nKeresse meg a Digitális jólét elemet a telefon beállításai között, és engedélyezze.</string>
     <string name="app_usage_message">A képernyőidő megjelenítéséhez/elrejtéséhez a kezdőképernyőn engedélyezze vagy tagadja meg az alkalmazás használati engedélyét.
         \n\nMegjegyzés: Nem gyűjtünk alkalmazás-használati adatokat. Minden az Ön eszközén kerül feldolgozásra.</string>
     <string name="pro_message">Az Olauncher-nek van egy pro verziója is, amely Pro Launcher néven ismert. További funkciókat kínál, mint például időjárás, widgetek, betűtípusok, mappák, AMOLED háttérképek stb.
-        \n\nEz a legjobb módja annak, hogy támogassa az Olauncher fejlesztőit. Nézd meg!</string>
-    <string name="wallpaper_message">Az Olauncher naponta gyönyörű új háttérképeket kínál. Minden nap frissítheted a kezdőképernyődet, ingyen!
-        \n\nSzeretnéd kipróbálni?</string>
+        \n\nEz a legjobb módja annak, hogy támogassa az Olauncher fejlesztőit. Tekintse meg őket!</string>
+    <string name="wallpaper_message">Az Olauncher minden nap gyönyörű, új háttérképeket kínál, amelyekkel frissen tarthatja kezdőképernyőjét, ingyen!
+        \n\nSzeretné kipróbálni?</string>
     <string name="accessibility_service_description">A hozzáférhetőségi engedély szükséges a dupla koppintás általi zároláshoz. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
     <string name="support_olauncher_for_free">Támogasson minket ingyenesen az Amazon affiliate linkünk használatával.</string>
     <string name="support_olauncher_message">Minden alkalommal, amikor vásárol valamit a linkünket használva, egy kis jutalékot kapunk. Kérjük, mentse el a linket, és használja fel, amikor csak online vásárol.
@@ -138,5 +138,5 @@
         \n\nÚgy gondoljuk, hogy egy minimális indítóra váltás kiváló döntés, és reméljük, hogy élvezni fogja. Ossza meg másokkal is tapasztalatait!</string>
     <string name="alignment_changed">Az igazítás megváltozott ✅</string>
     <string name="home_screen">Kezdőképernyő</string>
-    <string name="hey">Szia</string> <!-- Hungarian -->
+    <string name="hey">Üdvözöljük!</string> <!-- Hungarian -->
 </resources>
