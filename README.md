@@ -13,7 +13,7 @@ AF stands for Ad-Free :D
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olauncher)
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-    alt="Get it on F-Droid"
+    alt="Get it on Play Store"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
 To maintain the simplicity of the launcher, a few niche features are available but hidden.
@@ -26,4 +26,8 @@ License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 @tanujnotes | [X/Twitter](https://twitter.com/tanujnotes) | [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
 
-**[See my other apps](https://play.google.com/store/apps/dev?id=7198807840081074933)** =>
+**[See my other apps](https://play.google.com/store/apps/dev?id=7198807840081074933)**
+
+##
+
+*New: We're working on an open source notes app called Note Safe (previously Note to Self). What's cool about it - it has a chat like interface and end-to-end encryption. [Take a look!](https://github.com/jeerovan/ntsapp)*
