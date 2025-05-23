@@ -11,12 +11,13 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
@@ -50,10 +51,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var timerJob: Job? = null
 
-    override fun onBackPressed() {
-        if (navController.currentDestination?.id != R.id.mainFragment)
-            super.onBackPressed()
-    }
+//    override fun onBackPressed() {
+//        if (navController.currentDestination?.id != R.id.mainFragment)
+//            super.onBackPressed()
+//    }
 
     override fun attachBaseContext(context: Context) {
         val newConfig = Configuration(context.resources.configuration)
@@ -70,8 +71,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        navController = this.findNavController(R.id.nav_host_fragment)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (navController.currentDestination?.id != R.id.mainFragment) {
+                    // then we might want to finish the activity or disable this callback.
+                    if (navController.popBackStack()) {
+                        // Successfully popped back
+                    } else {
+                        // if you want other system/activity level handling
+                    }
+                } else {
+                    binding.messageLayout.visibility = View.GONE
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
         if (prefs.firstOpen) {
             viewModel.firstOpen(true)
             prefs.firstOpen = false
