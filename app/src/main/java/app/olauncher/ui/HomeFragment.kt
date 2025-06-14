@@ -426,7 +426,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             launchApp(
                 prefs.appNameSwipeRight,
                 prefs.appPackageSwipeRight,
-                prefs.appActivityClassNameRight,
+                prefs.appActivityClassNameSwipeRight,
                 prefs.appUserSwipeRight
             )
         else openDialerApp(requireContext())

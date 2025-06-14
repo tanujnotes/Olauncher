@@ -140,7 +140,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 prefs.appNameSwipeRight = appModel.appLabel
                 prefs.appPackageSwipeRight = appModel.appPackage
                 prefs.appUserSwipeRight = appModel.user.toString()
-                prefs.appActivityClassNameRight = appModel.activityClassName
+                prefs.appActivityClassNameSwipeRight = appModel.activityClassName
                 updateSwipeApps()
             }
 
