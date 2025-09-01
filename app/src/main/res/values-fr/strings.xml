@@ -40,6 +40,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="app_drawer_tips">Conseil : Commencez à saisir le nom d\'une application pour la lancer automatiquement.</string>
     <string name="okay">D\'accord</string>
     <string name="cool">Cool !</string>
@@ -104,6 +105,7 @@
     <string name="delete">Supprimer</string>
     <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Taille du texte</string>
+    <string name="wallpaper_dim">Assombrir le fond d'écran</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
     <string name="please_turn_on_double_tap_to_unlock">Veuillez appuyer deux fois pour verrouiller.</string>

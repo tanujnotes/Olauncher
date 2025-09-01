@@ -40,6 +40,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="app_drawer_tips">Sugerencia: Comienze a escribir el nombre de una aplicación para abrirla automáticamente</string>
     <string name="okay">Bueno</string>
     <string name="cool">¡Fresco!</string>
@@ -101,6 +102,7 @@
     <string name="info">Información</string>
     <string name="delete">Borrar</string>
     <string name="text_size">Tamaño del texto</string>
+    <string name="wallpaper_dim">Oscurecer fondo de pantalla</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
     <string name="please_turn_on_double_tap_to_unlock">Active el doble toque para bloquear</string>

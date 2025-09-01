@@ -73,6 +73,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
+        setWallpaperDim()
         initSwipeTouchListener()
         initClickListeners()
     }
@@ -597,6 +598,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 textOnClick(view)
             }
         }
+    }
+
+    private fun setWallpaperDim() {
+        binding.dimOverlay.alpha = prefs.wallpaperDim
     }
 
     override fun onDestroyView() {

@@ -38,6 +38,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="app_drawer_tips">Tipp: Kezdje el begépelni egy alkalmazás nevét annak automatikus indításához</string>
     <string name="okay">Rendben</string>
     <string name="cool">Szuper!</string>
@@ -105,6 +106,7 @@
     <string name="info">Információ</string>
     <string name="delete">Törlés</string>
     <string name="text_size">Szövegméret</string>
+    <string name="wallpaper_dim">Háttérkép elsötétítése</string>
     <string name="enabled">Engedélyezve</string>
     <string name="disabled">Letiltva</string>
     <string name="please_turn_on_double_tap_to_unlock">Kérjük, kapcsolja be a dupla koppintást a lezáráshoz</string>

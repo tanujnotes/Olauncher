@@ -56,6 +56,19 @@ object Constants {
         const val SEVEN = 1.3f
     }
 
+    object WallpaperDim {
+        const val ZERO = 0.0f
+        const val ONE = 0.1f
+        const val TWO = 0.2f
+        const val THREE = 0.3f
+        const val FOUR = 0.4f
+        const val FIVE = 0.5f
+        const val SIX = 0.6f
+        const val SEVEN = 0.7f
+        const val EIGHT = 0.8f
+        const val NINE = 0.9f
+    }
+
     object CharacterIndicator{
         const val SHOW = 102
         const val HIDE = 101

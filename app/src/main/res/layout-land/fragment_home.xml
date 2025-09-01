@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".ui.HomeFragment">
 
+    <!-- Overlay View for 'Dimming' wallpaper -->
+    <View
+        android:id="@+id/dim_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:alpha="0"/>
+
     <!-- Placeholder layout for locking screen-->
     <FrameLayout
         android:id="@+id/lock"

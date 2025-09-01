@@ -40,6 +40,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="app_drawer_tips">Совет: начните вводить название приложения, чтобы запустить его автоматически.</string>
     <string name="okay">Хорошо</string>
     <string name="cool">Круто!</string>
@@ -104,6 +105,7 @@
     <string name="info">Информация</string>
     <string name="delete">Удалить</string>
     <string name="text_size">Размер текста</string>
+    <string name="wallpaper_dim">Затемнить обои</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Выключено</string>
     <string name="please_turn_on_double_tap_to_unlock">Пожалуйста, включите двойное касание для блокировки</string>

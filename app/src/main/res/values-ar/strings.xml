@@ -13,6 +13,7 @@
     <string name="_6">ستة</string>
     <string name="_7">سبعة</string>
     <string name="_8">ثمانية</string>
+    <string name="_9">تسعة</string>
     <string name="app_drawer_tips">نصيحة: ابدأ في كتابة اسم التطبيق لتشغيله تلقائيًا</string>
     <string name="okay">حسنًا</string>
     <string name="cool">رائع!</string>
@@ -38,6 +39,7 @@
     <string name="info">معلومات</string>
     <string name="delete">يمسح</string>
     <string name="text_size">حجم الخط</string>
+    <string name="wallpaper_dim">إعتام الخلفية</string>
     <string name="enabled">ممكّن</string>
     <string name="disabled">مُطفأ</string>
     <string name="please_turn_on_double_tap_to_unlock">يرجى تشغيل النقر المزدوج لفتح القفل</string>

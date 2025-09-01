@@ -13,6 +13,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="app_drawer_tips">Wskazówka: zacznij wpisywać nazwę aplikacji, aby uruchomić ją automatycznie</string>
     <string name="okay">OK</string>
     <string name="cool">Fajny!</string>
@@ -38,6 +39,7 @@
     <string name="info">Informacje</string>
     <string name="delete">Usuń</string>
     <string name="text_size">Rozmiar czcionki</string>
+    <string name="wallpaper_dim">Przygaszenie tapety</string>
     <string name="enabled">Włączony</string>
     <string name="disabled">Wyłączony</string>
     <string name="please_turn_on_double_tap_to_unlock">Włącz podwójne dotknięcie, aby zablokować</string>

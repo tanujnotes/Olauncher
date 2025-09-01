@@ -13,6 +13,7 @@
     <string name="_6">六</string>
     <string name="_7">七</string>
     <string name="_8">八</string>
+    <string name="_9">九</string>
     <string name="app_drawer_tips">ヒント: アプリ名の入力を開始すると、アプリが自動的に起動します</string>
     <string name="okay">わかった</string>
     <string name="cool">いいね！</string>
@@ -39,6 +40,7 @@
     <string name="info">情報</string>
     <string name="delete">消去</string>
     <string name="text_size">文字サイズ</string>
+    <string name="wallpaper_dim">壁紙を暗くする</string>
     <string name="enabled">有効</string>
     <string name="disabled">無効</string>
     <string name="please_turn_on_double_tap_to_unlock">ダブルタップしてロックをオンにしてください</string>

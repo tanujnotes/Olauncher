@@ -29,6 +29,8 @@
     <string name="info">信息</string>
     <string name="delete">删除</string>
     <string name="text_size">字体大小</string>
+    <string name="_9">9</string>
+    <string name="wallpaper_dim">调暗壁纸</string>
     <string name="enabled">启用</string>
     <string name="disabled">禁用</string>
     <string name="please_turn_on_double_tap_to_unlock">请打开双击以锁定</string>

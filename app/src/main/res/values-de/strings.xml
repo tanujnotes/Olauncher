@@ -13,6 +13,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="app_drawer_tips">Tipp: Beginnen Sie mit der Eingabe eines App-Namens, um sie automatisch zu starten</string>
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
@@ -38,6 +39,7 @@
     <string name="info">Die Info</string>
     <string name="delete">Löschen</string>
     <string name="text_size">Textgröße</string>
+    <string name="wallpaper_dim">Hintergrundbild abdunkeln</string>
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>
     <string name="please_turn_on_double_tap_to_unlock">Zum Sperren bitte Doppeltippen aktivieren</string>

@@ -67,6 +67,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
+        setWallpaperDim()
+
         binding.homeAppsNum.text = prefs.homeAppsNum.toString()
         populateProMessage()
         populateKeyboardText()
@@ -75,6 +77,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateWallpaperText()
         populateAppThemeText()
         populateTextSize()
+        populateWallpaperDim()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -91,6 +94,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
         binding.textSizesLayout.visibility = View.GONE
+        binding.wallpaperDimSizesLayout.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
 
@@ -120,6 +124,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.textSizeValue -> binding.textSizesLayout.visibility = View.VISIBLE
+            R.id.wallpaperDimValue -> binding.wallpaperDimSizesLayout.visibility = View.VISIBLE
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
@@ -143,6 +148,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.textSize5 -> updateTextSizeScale(Constants.TextSize.FIVE)
             R.id.textSize6 -> updateTextSizeScale(Constants.TextSize.SIX)
             R.id.textSize7 -> updateTextSizeScale(Constants.TextSize.SEVEN)
+
+            R.id.wallpaperDimZero -> updateWallpaperDim(Constants.WallpaperDim.ZERO)
+            R.id.wallpaperDim1 -> updateWallpaperDim(Constants.WallpaperDim.ONE)
+            R.id.wallpaperDim2 -> updateWallpaperDim(Constants.WallpaperDim.TWO)
+            R.id.wallpaperDim3 -> updateWallpaperDim(Constants.WallpaperDim.THREE)
+            R.id.wallpaperDim4 -> updateWallpaperDim(Constants.WallpaperDim.FOUR)
+            R.id.wallpaperDim5 -> updateWallpaperDim(Constants.WallpaperDim.FIVE)
+            R.id.wallpaperDim6 -> updateWallpaperDim(Constants.WallpaperDim.SIX)
+            R.id.wallpaperDim7 -> updateWallpaperDim(Constants.WallpaperDim.SEVEN)
+            R.id.wallpaperDim8 -> updateWallpaperDim(Constants.WallpaperDim.EIGHT)
+            R.id.wallpaperDim9 -> updateWallpaperDim(Constants.WallpaperDim.NINE)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -222,6 +238,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.themeDark.setOnClickListener(this)
         binding.themeSystem.setOnClickListener(this)
         binding.textSizeValue.setOnClickListener(this)
+        binding.wallpaperDimValue.setOnClickListener(this)
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
@@ -250,6 +267,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.textSize5.setOnClickListener(this)
         binding.textSize6.setOnClickListener(this)
         binding.textSize7.setOnClickListener(this)
+
+        binding.wallpaperDimZero.setOnClickListener(this)
+        binding.wallpaperDim1.setOnClickListener(this)
+        binding.wallpaperDim2.setOnClickListener(this)
+        binding.wallpaperDim3.setOnClickListener(this)
+        binding.wallpaperDim4.setOnClickListener(this)
+        binding.wallpaperDim5.setOnClickListener(this)
+        binding.wallpaperDim6.setOnClickListener(this)
+        binding.wallpaperDim7.setOnClickListener(this)
+        binding.wallpaperDim8.setOnClickListener(this)
+        binding.wallpaperDim9.setOnClickListener(this)
 
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
@@ -462,6 +490,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         requireActivity().recreate()
     }
 
+    private fun updateWallpaperDim(dim: Float) {
+        if (prefs.wallpaperDim == dim) return
+        prefs.wallpaperDim = dim
+        requireActivity().recreate()
+    }
+
     private fun toggleKeyboardText() {
         if (prefs.autoShowKeyboard && prefs.keyboardMessageShown.not()) {
             viewModel.showDialog.postValue(Constants.Dialog.KEYBOARD)
@@ -518,6 +552,22 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Constants.TextSize.SIX -> 6
             Constants.TextSize.SEVEN -> 7
             else -> "--"
+        }.toString()
+    }
+
+    private fun populateWallpaperDim() {
+        binding.wallpaperDimValue.text = when (prefs.wallpaperDim) {
+            Constants.WallpaperDim.ZERO -> 0
+            Constants.WallpaperDim.ONE -> 1
+            Constants.WallpaperDim.TWO -> 2
+            Constants.WallpaperDim.THREE -> 3
+            Constants.WallpaperDim.FOUR -> 4
+            Constants.WallpaperDim.FIVE -> 5
+            Constants.WallpaperDim.SIX -> 6
+            Constants.WallpaperDim.SEVEN -> 7
+            Constants.WallpaperDim.EIGHT -> 8
+            Constants.WallpaperDim.NINE -> 9
+            else -> "0"
         }.toString()
     }
 
@@ -630,6 +680,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             prefs.proMessageShown = true
             viewModel.showDialog.postValue(Constants.Dialog.PRO_MESSAGE)
         }
+    }
+
+    private fun setWallpaperDim() {
+        binding.dimOverlay.alpha = prefs.wallpaperDim
     }
 
     override fun onDestroyView() {

@@ -40,6 +40,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
+    <string name="_9">9</string>
     <string name="app_drawer_tips">Порада. Почніть вводити назву програми, щоб вона запустилася автоматично.</string>
     <string name="okay">Добре</string>
     <string name="cool">Круто!</string>
@@ -104,6 +105,7 @@
     <string name="info">Інформація</string>
     <string name="delete">Видалити</string>
     <string name="text_size">Розмір тексту</string>
+    <string name="wallpaper_dim">Затінити шпалери</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Виключено</string>
     <string name="please_turn_on_double_tap_to_unlock">Будь ласка, увімкніть подвійний дотик для блокування</string>
