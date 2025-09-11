@@ -44,7 +44,7 @@
     <string name="launcher_failed_to_lock_device">Olauncher cihazı kilitleyemedi. Lütfen uygulama ayarlarınızı kontrol edin.</string>
     <string name="long_press_to_select_app">Uygulamayı seçmek için uzun basın</string>
     <string name="unable_to_open_app">Uygulama bilgisi açılamıyor</string>
-    <string name="copied">kopyalandı</string>
+    <string name="copied">Kopyalandı</string>
     <string name="system_app_cannot_delete">Sistem uygulaması, silinemez</string>
     <string name="type_a_new_app_name_first">Önce yeni bir uygulama adı yazın</string>
     <string name="adapter_show">Göster</string>
