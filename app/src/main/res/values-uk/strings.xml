@@ -44,6 +44,7 @@
     <string name="okay">Добре</string>
     <string name="cool">Круто!</string>
     <string name="auto_show_keyboard">Автопоказ клавіатури</string>
+    <string name="auto_launch_enabled">Автоматичний запуск програми</string>
     <string name="hide">Приховати</string>
     <string name="status_bar">Показувати рядок стану</string>
     <string name="rename">Перенайменувати</string>

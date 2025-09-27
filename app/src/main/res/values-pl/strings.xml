@@ -77,6 +77,7 @@
     <string name="swipe_left_app">Przesuń w lewo aplikację</string>
     <string name="swipe_right_app">Przesuń w prawo aplikację</string>
     <string name="auto_show_keyboard">Automatyczne wyświetlanie klawiatury</string>
+    <string name="auto_launch_enabled">Automatyczne uruchamianie aplikacji</string>
     <string name="hide">Ukryj</string>
     <string name="status_bar">Pokaż pasek stanu</string>
     <string name="rename">Zmień nazwę</string>

@@ -44,6 +44,7 @@
     <string name="okay">Oke</string>
     <string name="cool">Keren!</string>
     <string name="auto_show_keyboard">Tampilkan keyboard secara otomatis</string>
+    <string name="auto_launch_enabled">Aplikasi peluncuran otomatis</string>
     <string name="hide">Sembunyikan</string>
     <string name="status_bar">Tampilkan bilah status</string>
     <string name="rename">Ganti nama</string>

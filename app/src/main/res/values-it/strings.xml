@@ -43,6 +43,7 @@
     <string name="okay">OK</string>
     <string name="cool">Freddo</string>
     <string name="auto_show_keyboard">Tastiera di visualizzazione automatica</string>
+    <string name="auto_launch_enabled">Avvio automatico dell\'app</string>
     <string name="hide">Nascondi</string>
     <string name="status_bar">Mostra la barra di stato</string>
     <string name="rename">Rinomina</string>

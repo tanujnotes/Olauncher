@@ -76,6 +76,7 @@
     <string name="swipe_left_app">افتح عند التمرير لليسار</string>
     <string name="swipe_right_app">افتح عند التمرير لليمين</string>
     <string name="auto_show_keyboard">العرض التلقائي للوحة المفاتيح</string>
+    <string name="auto_launch_enabled">تشغيل التطبيق تلقائيًا</string>
     <string name="hide">يخفي</string>
     <string name="status_bar">أظهر شريط الحالة</string>
     <string name="rename">إعادة تسمية</string>

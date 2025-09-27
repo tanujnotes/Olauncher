@@ -77,6 +77,7 @@
     <string name="swipe_left_app">Wischen Sie nach links über die App</string>
     <string name="swipe_right_app">Wischen Sie nach rechts über die App</string>
     <string name="auto_show_keyboard">Tastatur automatisch anzeigen</string>
+    <string name="auto_launch_enabled">App automatisch starten</string>
     <string name="hide">Verstecken</string>
     <string name="status_bar">Zeige Statusleiste</string>
     <string name="rename">Umbenennen</string>

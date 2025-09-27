@@ -44,6 +44,7 @@
     <string name="okay">Ok</string>
     <string name="cool">Boa!</string>
     <string name="auto_show_keyboard">Exibição automática do teclado</string>
+    <string name="auto_launch_enabled">Aplicativo de inicialização automática</string>
     <string name="hide">Esconder</string>
     <string name="status_bar">Mostrar barra de status</string>
     <string name="rename">Alterar nome</string>

@@ -77,6 +77,7 @@
     <string name="_7">7</string>
     <string name="_8">8</string>
     <string name="auto_show_keyboard">自动显示键盘</string>
+    <string name="auto_launch_enabled">自动启动应用程序</string>
     <string name="hide">隐藏</string>
     <string name="status_bar">显示状态栏</string>
     <string name="rename">改名</string>
