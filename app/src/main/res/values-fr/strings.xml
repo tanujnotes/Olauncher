@@ -44,6 +44,7 @@
     <string name="okay">D\'accord</string>
     <string name="cool">Cool !</string>
     <string name="auto_show_keyboard">Afficher automatiquement le clavier</string>
+    <string name="auto_launch_enabled">Lancement automatique de l\'application</string>
     <string name="hide">Cacher</string>
     <string name="status_bar">Afficher la barre d\'état</string>
     <string name="rename">Renommer</string>

@@ -44,6 +44,7 @@
     <string name="okay">U redu</string>
     <string name="cool">Cool!</string>
     <string name="auto_show_keyboard">Automatski prikaži tipkovnicu</string>
+    <string name="auto_launch_enabled">Automatsko pokretanje aplikacije</string>
     <string name="hide">Sakrij</string>
     <string name="status_bar">Prikaži statusnu traku</string>
     <string name="rename">Preimenuj</string>

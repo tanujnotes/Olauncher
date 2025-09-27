@@ -44,6 +44,7 @@
     <string name="okay">Хорошо</string>
     <string name="cool">Круто!</string>
     <string name="auto_show_keyboard">Автопоказ клавиатуры</string>
+    <string name="auto_launch_enabled">Автоматический запуск приложения</string>
     <string name="hide">Скрыть</string>
     <string name="status_bar">Показывать строку состояния</string>
     <string name="rename">Переименовать</string>

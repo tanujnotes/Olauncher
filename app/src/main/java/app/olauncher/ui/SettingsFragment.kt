@@ -73,6 +73,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateScreenTimeOnOff()
         populateLockSettings()
         populateWallpaperText()
+        populateAutoLaunchEnabled()
         populateAppThemeText()
         populateTextSize()
         populateAlignment()
@@ -103,6 +104,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.toggleLock -> toggleLockMode()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
+            R.id.autoLaunchEnabled -> toggleAutoLaunchEnabled()
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> binding.alignmentSelectLayout.visibility = View.VISIBLE
@@ -202,6 +204,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.screenTimeOnOff.setOnClickListener(this)
         binding.dailyWallpaperUrl.setOnClickListener(this)
         binding.dailyWallpaper.setOnClickListener(this)
+        binding.autoLaunchEnabled.setOnClickListener(this)
         binding.alignment.setOnClickListener(this)
         binding.alignmentLeft.setOnClickListener(this)
         binding.alignmentCenter.setOnClickListener(this)
@@ -312,6 +315,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         } else {
             hideStatusBar()
             binding.statusBar.text = getString(R.string.off)
+        }
+    }
+
+    private fun populateAutoLaunchEnabled() {
+        if (prefs.autoLaunchEnabled) {
+            binding.autoLaunchEnabled.text = getString(R.string.on)
+        } else {
+            binding.autoLaunchEnabled.text = getString(R.string.off)
         }
     }
 
@@ -447,6 +458,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             requireContext().showToast(getString(R.string.your_wallpaper_will_update_shortly))
         else
             requireContext().showToast(getString(R.string.olauncher_is_not_default_launcher), Toast.LENGTH_LONG)
+    }
+
+    private fun toggleAutoLaunchEnabled() {
+        prefs.autoLaunchEnabled = !prefs.autoLaunchEnabled
+        populateAutoLaunchEnabled()
     }
 
     private fun updateHomeAppsNum(num: Int) {

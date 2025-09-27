@@ -78,6 +78,7 @@
     <string name="swipe_left_app">アプリを左にスワイプ</string>
     <string name="swipe_right_app">アプリを右にスワイプ</string>
     <string name="auto_show_keyboard">キーボードの自動表示</string>
+    <string name="auto_launch_enabled">アプリの自動起動</string>
     <string name="hide">隠れる</string>
     <string name="status_bar">ステータスバーを表示する</string>
     <string name="rename">名前の変更</string>

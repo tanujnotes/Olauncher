@@ -43,6 +43,7 @@
     <string name="okay">Okej</string>
     <string name="cool">Coolt!</string>
     <string name="auto_show_keyboard">Visa tangentbord automatiskt</string>
+    <string name="auto_launch_enabled">Starta appen automatiskt</string>
     <string name="hide">Dölj</string>
     <string name="status_bar">Statusfält överst</string>
     <string name="rename">Byt namn</string>

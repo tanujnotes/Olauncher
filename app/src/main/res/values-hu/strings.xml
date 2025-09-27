@@ -42,6 +42,7 @@
     <string name="okay">Rendben</string>
     <string name="cool">Szuper!</string>
     <string name="auto_show_keyboard">Billentyűzet auto. megjelenítése</string>
+    <string name="auto_launch_enabled">Alkalmazás automatikus indítása</string>
     <string name="hide">Elrejtés</string>
     <string name="status_bar">Állapotsor megjelenítése fent</string>
     <string name="rename">Átnevezés</string>
