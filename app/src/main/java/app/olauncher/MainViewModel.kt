@@ -18,9 +18,11 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import app.olauncher.data.AppModel
+import app.olauncher.data.CalendarEvent
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.AppUsageStats
+import app.olauncher.helper.CalendarHelper
 import app.olauncher.helper.AppUsageStatsBucket
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
@@ -48,6 +50,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
+    val nextCalendarEvent = MutableLiveData<CalendarEvent?>()
     val screenTimeValue = MutableLiveData<String>()
 
     val showDialog = SingleLiveEvent<String>()
@@ -253,6 +256,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateHomeAlignment(gravity: Int) {
         prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
+    }
+
+    fun refreshCalendarEvent() {
+        viewModelScope.launch {
+            val event = CalendarHelper.getNextCalendarEvent(appContext)
+            android.util.Log.d("MainViewModel", "Calendar event fetched: ${event?.title}")
+            nextCalendarEvent.value = event
+        }
     }
 
     fun getTodaysScreenTime() {

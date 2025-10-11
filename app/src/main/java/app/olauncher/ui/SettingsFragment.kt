@@ -78,6 +78,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateAlignment()
         populateStatusBar()
         populateDateTime()
+        populateCalendarEvents()
         populateSwipeApps()
         populateSwipeDownAction()
         populateActionHints()
@@ -112,6 +113,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignmentBottom -> updateHomeBottomAlignment()
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> binding.dateTimeSelectLayout.visibility = View.VISIBLE
+            R.id.calendarEvents -> toggleCalendarEvents()
             R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
             R.id.dateTimeOff -> toggleDateTime(Constants.DateTime.OFF)
             R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
@@ -209,6 +211,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.alignmentBottom.setOnClickListener(this)
         binding.statusBar.setOnClickListener(this)
         binding.dateTime.setOnClickListener(this)
+        binding.calendarEvents?.setOnClickListener(this)
         binding.dateTimeOn.setOnClickListener(this)
         binding.dateTimeOff.setOnClickListener(this)
         binding.dateOnly.setOnClickListener(this)
@@ -329,6 +332,17 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 else -> R.string.off
             }
         )
+    }
+
+    private fun toggleCalendarEvents() {
+        prefs.showCalendarEvents = !prefs.showCalendarEvents
+        populateCalendarEvents()
+        viewModel.refreshHome(false)
+    }
+
+    private fun populateCalendarEvents() {
+        if (prefs.showCalendarEvents) binding.calendarEvents?.text = getString(R.string.on)
+        else binding.calendarEvents?.text = getString(R.string.off)
     }
 
     private fun showStatusBar() {

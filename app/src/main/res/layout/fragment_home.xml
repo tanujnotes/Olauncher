@@ -46,6 +46,21 @@
             android:paddingHorizontal="3dp"
             android:textSize="@dimen/date_size"
             tools:text="Thu, 30 Dec" />
+
+        <TextView
+            android:id="@+id/nextMeeting"
+            style="@style/TextDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingHorizontal="3dp"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:maxWidth="280dp"
+            android:visibility="gone"
+            tools:text="Meeting at 2:30 PM"
+            tools:visibility="visible" />
     </LinearLayout>
 
     <!-- Screen time-->
