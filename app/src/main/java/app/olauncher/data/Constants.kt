@@ -46,6 +46,14 @@ object Constants {
         const val NOTIFICATIONS = 2
     }
 
+    object CalendarSync {
+        const val OFF = 0
+        const val EVERY_MINUTE = 1
+        const val EVERY_5_MINUTES = 5
+        const val EVERY_15_MINUTES = 15
+        const val EVERY_30_MINUTES = 30
+    }
+
     object TextSize {
         const val ONE = 0.6f
         const val TWO = 0.75f
