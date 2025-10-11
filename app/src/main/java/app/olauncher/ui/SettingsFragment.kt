@@ -359,7 +359,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 Constants.CalendarSync.EVERY_5_MINUTES -> R.string.every_5_minutes
                 Constants.CalendarSync.EVERY_15_MINUTES -> R.string.every_15_minutes
                 Constants.CalendarSync.EVERY_30_MINUTES -> R.string.every_30_minutes
-                else -> R.string.off
+                Constants.CalendarSync.OFF -> R.string.off
+                else -> R.string.every_5_minutes
             }
         )
     }

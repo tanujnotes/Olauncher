@@ -222,7 +222,7 @@ class Prefs(context: Context) {
         set(value) = prefs.edit().putBoolean(SHOW_CALENDAR_EVENTS, value).apply()
 
     var calendarSyncInterval: Int
-        get() = prefs.getInt(CALENDAR_SYNC_INTERVAL, Constants.CalendarSync.OFF)
+        get() = prefs.getInt(CALENDAR_SYNC_INTERVAL, Constants.CalendarSync.EVERY_5_MINUTES)
         set(value) = prefs.edit().putInt(CALENDAR_SYNC_INTERVAL, value).apply()
 
     var appName1: String

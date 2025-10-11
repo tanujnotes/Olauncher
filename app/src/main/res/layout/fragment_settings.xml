@@ -357,7 +357,7 @@
                         android:layout_gravity="end|bottom"
                         android:layout_marginEnd="4dp"
                         android:padding="8dp"
-                        android:text="@string/off" />
+                        android:text="@string/every_5_minutes" />
 
                     <!-- calendar sync interval layout-->
                     <LinearLayout
