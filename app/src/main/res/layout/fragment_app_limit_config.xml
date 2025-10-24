@@ -55,7 +55,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    tools:text="22:00" />
+                    tools:text="11:00 PM" />
 
                 <TextView
                     style="@style/TextSmall"
@@ -73,7 +73,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    tools:text="06:00" />
+                    tools:text="7:00 AM" />
 
                 <TextView
                     android:id="@+id/tvLockDuringLimit"

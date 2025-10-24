@@ -38,11 +38,17 @@ data class AppLimitModel(
   }
 
   fun getStartTimeString(): String {
-    return String.format("%02d:%02d", startHour, startMinute)
+    return formatTime12Hour(startHour, startMinute)
   }
 
   fun getEndTimeString(): String {
-    return String.format("%02d:%02d", endHour, endMinute)
+    return formatTime12Hour(endHour, endMinute)
+  }
+
+  private fun formatTime12Hour(hour: Int, minute: Int): String {
+    val hour12 = if (hour == 0) 12 else if (hour > 12) hour - 12 else hour
+    val amPm = if (hour < 12) "AM" else "PM"
+    return String.format("%d:%02d %s", hour12, minute, amPm)
   }
 
   fun isCurrentlyBlocked(): Boolean {

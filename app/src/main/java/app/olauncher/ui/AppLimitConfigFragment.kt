@@ -20,9 +20,9 @@ class AppLimitConfigFragment : Fragment() {
   private lateinit var prefs: Prefs
   private var appPackage: String = ""
   private var appName: String = ""
-  private var startHour: Int = 22
+  private var startHour: Int = 23 // 11 PM
   private var startMinute: Int = 0
-  private var endHour: Int = 6
+  private var endHour: Int = 7 // 7 AM
   private var endMinute: Int = 0
   private var lockDuringLimit: Boolean = false
   private var existingLimit: AppLimitModel? = null
@@ -132,14 +132,20 @@ class AppLimitConfigFragment : Fragment() {
                     { _, selectedHour, selectedMinute -> onTimeSet(selectedHour, selectedMinute) },
                     hour,
                     minute,
-                    true // 24-hour format
+                    false // 12-hour format
             )
             .show()
   }
 
   private fun updateTimeDisplays() {
-    binding.tvStartTime.text = String.format("%02d:%02d", startHour, startMinute)
-    binding.tvEndTime.text = String.format("%02d:%02d", endHour, endMinute)
+    binding.tvStartTime.text = formatTime12Hour(startHour, startMinute)
+    binding.tvEndTime.text = formatTime12Hour(endHour, endMinute)
+  }
+
+  private fun formatTime12Hour(hour: Int, minute: Int): String {
+    val hour12 = if (hour == 0) 12 else if (hour > 12) hour - 12 else hour
+    val amPm = if (hour < 12) "AM" else "PM"
+    return String.format("%d:%02d %s", hour12, minute, amPm)
   }
 
   private fun updateLockDisplay() {
