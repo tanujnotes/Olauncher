@@ -155,4 +155,19 @@
     <string name="alignment_changed">Alignment changed ✅</string>
     <string name="home_screen">Home screen</string>
     <string name="hey">Hey</string>
+    
+    <!-- App Limits -->
+    <string name="app_limits">App Limits</string>
+    <string name="app_limits_description">Block apps during specific times to reduce distractions</string>
+    <string name="add_app_limit">Add app limit</string>
+    <string name="no_app_limits">No app limits set</string>
+    <string name="block_from">Block from</string>
+    <string name="block_until">Block until</string>
+    <string name="lock_during_limit_on">Self-control mode: On (prevents changes when active)</string>
+    <string name="lock_during_limit_off">Self-control mode: Off (allows changes anytime)</string>
+    <string name="save">Save</string>
+    <string name="remove_limit">Remove limit</string>
+    <string name="app_blocked_until">This app is blocked until %s</string>
+    <string name="select_app_for_limit">Select app to limit</string>
+    <string name="limit_is_locked">This limit is currently active and locked</string>
 </resources>
