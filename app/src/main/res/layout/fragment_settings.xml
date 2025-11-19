@@ -548,7 +548,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="16dp"
                     android:animateLayoutChanges="true">
 
                     <TextView
@@ -954,7 +954,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -1017,7 +1017,7 @@
                 android:gravity="center"
                 android:letterSpacing="0.03"
                 android:padding="12dp"
-                android:text="@string/digital_minimalism" />
+                android:text="@string/new_app_note_to_self" />
 
         </LinearLayout>
 
