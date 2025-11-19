@@ -78,6 +78,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateAlignment()
         populateStatusBar()
         populateDateTime()
+        populateCalendarSyncInterval()
         populateSwipeApps()
         populateSwipeDownAction()
         populateActionHints()
@@ -88,6 +89,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     override fun onClick(view: View) {
         binding.appsNumSelectLayout.visibility = View.GONE
         binding.dateTimeSelectLayout.visibility = View.GONE
+        binding.calendarSyncSelectLayout?.visibility = View.GONE
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
         binding.textSizesLayout.visibility = View.GONE
@@ -112,6 +114,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.alignmentBottom -> updateHomeBottomAlignment()
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> binding.dateTimeSelectLayout.visibility = View.VISIBLE
+            R.id.calendarSyncInterval -> binding.calendarSyncSelectLayout?.visibility = View.VISIBLE
+            R.id.calendarSyncOff -> updateCalendarSyncInterval(Constants.CalendarSync.OFF)
+            R.id.calendarSync1Min -> updateCalendarSyncInterval(Constants.CalendarSync.EVERY_MINUTE)
+            R.id.calendarSync5Min -> updateCalendarSyncInterval(Constants.CalendarSync.EVERY_5_MINUTES)
+            R.id.calendarSync15Min -> updateCalendarSyncInterval(Constants.CalendarSync.EVERY_15_MINUTES)
+            R.id.calendarSync30Min -> updateCalendarSyncInterval(Constants.CalendarSync.EVERY_30_MINUTES)
             R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
             R.id.dateTimeOff -> toggleDateTime(Constants.DateTime.OFF)
             R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
@@ -209,6 +217,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.alignmentBottom.setOnClickListener(this)
         binding.statusBar.setOnClickListener(this)
         binding.dateTime.setOnClickListener(this)
+        binding.calendarSyncInterval?.setOnClickListener(this)
+        binding.calendarSyncOff?.setOnClickListener(this)
+        binding.calendarSync1Min?.setOnClickListener(this)
+        binding.calendarSync5Min?.setOnClickListener(this)
+        binding.calendarSync15Min?.setOnClickListener(this)
+        binding.calendarSync30Min?.setOnClickListener(this)
         binding.dateTimeOn.setOnClickListener(this)
         binding.dateTimeOff.setOnClickListener(this)
         binding.dateOnly.setOnClickListener(this)
@@ -327,6 +341,26 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
                 Constants.DateTime.DATE_ONLY -> R.string.date
                 Constants.DateTime.ON -> R.string.on
                 else -> R.string.off
+            }
+        )
+    }
+
+    private fun updateCalendarSyncInterval(interval: Int) {
+        if (prefs.calendarSyncInterval == interval) return
+        prefs.calendarSyncInterval = interval
+        populateCalendarSyncInterval()
+        viewModel.refreshHome(false)
+    }
+
+    private fun populateCalendarSyncInterval() {
+        binding.calendarSyncInterval?.text = getString(
+            when (prefs.calendarSyncInterval) {
+                Constants.CalendarSync.EVERY_MINUTE -> R.string.every_1_minute
+                Constants.CalendarSync.EVERY_5_MINUTES -> R.string.every_5_minutes
+                Constants.CalendarSync.EVERY_15_MINUTES -> R.string.every_15_minutes
+                Constants.CalendarSync.EVERY_30_MINUTES -> R.string.every_30_minutes
+                Constants.CalendarSync.OFF -> R.string.off
+                else -> R.string.every_5_minutes
             }
         )
     }

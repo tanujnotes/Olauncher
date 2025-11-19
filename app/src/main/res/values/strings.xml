@@ -65,6 +65,12 @@
     <string name="status_bar">Status bar on top</string>
     <string name="rename">Rename</string>
     <string name="show_date_time">Show date time</string>
+    <string name="show_calendar_events">Show calendar events</string>
+    <string name="calendar_sync_interval">Calendar sync interval</string>
+    <string name="every_1_minute">1 min</string>
+    <string name="every_5_minutes">5 min</string>
+    <string name="every_15_minutes">15 min</string>
+    <string name="every_30_minutes">30 min</string>
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
     <string name="theme_mode">Theme mode</string>

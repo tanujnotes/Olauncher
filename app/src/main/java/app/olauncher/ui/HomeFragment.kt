@@ -1,12 +1,16 @@
 package app.olauncher.ui
 
+import android.Manifest
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +19,9 @@ import android.view.WindowInsets
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
@@ -26,9 +32,11 @@ import androidx.navigation.fragment.findNavController
 import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
+import app.olauncher.data.CalendarEvent
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentHomeBinding
+import app.olauncher.helper.CalendarHelper
 import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.dpToPx
 import app.olauncher.helper.expandNotificationDrawer
@@ -57,6 +65,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private val calendarPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            viewModel.refreshCalendarEvent()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -81,8 +97,53 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         super.onResume()
         populateHomeScreen(false)
         viewModel.isOlauncherDefault()
+        checkAndRequestCalendarPermission()
         if (prefs.showStatusBar) showStatusBar()
         else hideStatusBar()
+    }
+
+    private val calendarRefreshHandler = Handler(Looper.getMainLooper())
+    private val calendarRefreshRunnable = object : Runnable {
+        override fun run() {
+            if (prefs.calendarSyncInterval != Constants.CalendarSync.OFF) {
+                viewModel.refreshCalendarEvent()
+                val intervalMs = when (prefs.calendarSyncInterval) {
+                    Constants.CalendarSync.EVERY_MINUTE -> 60 * 1000L
+                    Constants.CalendarSync.EVERY_5_MINUTES -> 5 * 60 * 1000L
+                    Constants.CalendarSync.EVERY_15_MINUTES -> 15 * 60 * 1000L
+                    Constants.CalendarSync.EVERY_30_MINUTES -> 30 * 60 * 1000L
+                    else -> 5 * 60 * 1000L // Default to 5 minutes
+                }
+                calendarRefreshHandler.postDelayed(this, intervalMs)
+            }
+        }
+    }
+
+    private fun checkAndRequestCalendarPermission() {
+        // Hide calendar events if sync interval is off (disabled)
+        if (prefs.calendarSyncInterval == Constants.CalendarSync.OFF) {
+            binding.nextMeeting?.visibility = View.GONE
+            stopCalendarTimer()
+            return
+        }
+        
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_CALENDAR
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                viewModel.refreshCalendarEvent()
+                startCalendarTimer()
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.READ_CALENDAR) -> {
+                // User has previously denied permission, optionally show explanation
+                viewModel.refreshCalendarEvent() // Still try to refresh (will return null if no permission)
+            }
+            else -> {
+                // Request permission for the first time
+                calendarPermissionLauncher.launch(Manifest.permission.READ_CALENDAR)
+            }
+        }
     }
 
     override fun onClick(view: View) {
@@ -90,6 +151,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             R.id.lock -> {}
             R.id.clock -> openClockApp()
             R.id.date -> openCalendarApp()
+            R.id.nextMeeting -> openCalendarApp()
             R.id.setDefaultLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.tvScreenTime -> openScreenTimeDigitalWellbeing()
 
@@ -196,6 +258,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.screenTimeValue.observe(viewLifecycleOwner) {
             it?.let { binding.tvScreenTime.text = it }
         }
+        viewModel.nextCalendarEvent.observe(viewLifecycleOwner) {
+            updateCalendarEventDisplay(it)
+        }
     }
 
     private fun initSwipeTouchListener() {
@@ -215,6 +280,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.lock.setOnClickListener(this)
         binding.clock.setOnClickListener(this)
         binding.date.setOnClickListener(this)
+        binding.nextMeeting?.setOnClickListener(this)
         binding.clock.setOnLongClickListener(this)
         binding.date.setOnLongClickListener(this)
         binding.setDefaultLauncher.setOnClickListener(this)
@@ -234,6 +300,43 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.gravity = horizontalGravity
         binding.homeApp7.gravity = horizontalGravity
         binding.homeApp8.gravity = horizontalGravity
+        binding.nextMeeting?.gravity = horizontalGravity
+    }
+
+    private fun updateCalendarEventDisplay(event: CalendarEvent?) {
+        if (event == null) {
+            binding.nextMeeting?.visibility = View.GONE
+            return
+        }
+
+        val eventTime = CalendarHelper.formatEventTime(event.startTime, event.endTime)
+        val truncatedTitle = CalendarHelper.truncateTitle(event.title)
+        val eventText = "$truncatedTitle • $eventTime"
+        binding.nextMeeting?.text = eventText
+        binding.nextMeeting?.visibility = View.VISIBLE
+    }
+
+    private fun startCalendarTimer() {
+        stopCalendarTimer() // Stop any existing timer
+        if (prefs.calendarSyncInterval != Constants.CalendarSync.OFF) {
+            val intervalMs = when (prefs.calendarSyncInterval) {
+                Constants.CalendarSync.EVERY_MINUTE -> 60 * 1000L
+                Constants.CalendarSync.EVERY_5_MINUTES -> 5 * 60 * 1000L
+                Constants.CalendarSync.EVERY_15_MINUTES -> 15 * 60 * 1000L
+                Constants.CalendarSync.EVERY_30_MINUTES -> 30 * 60 * 1000L
+                else -> 5 * 60 * 1000L // Default to 5 minutes
+            }
+            calendarRefreshHandler.postDelayed(calendarRefreshRunnable, intervalMs)
+        }
+    }
+
+    private fun stopCalendarTimer() {
+        calendarRefreshHandler.removeCallbacks(calendarRefreshRunnable)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopCalendarTimer() // Stop timer when leaving home screen to save battery
     }
 
     private fun populateDateTime() {

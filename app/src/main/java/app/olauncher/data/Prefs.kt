@@ -40,6 +40,8 @@ class Prefs(context: Context) {
     private val PRO_MESSAGE_SHOWN = "PRO_MESSAGE_SHOWN"
     private val HIDE_SET_DEFAULT_LAUNCHER = "HIDE_SET_DEFAULT_LAUNCHER"
     private val SCREEN_TIME_LAST_UPDATED = "SCREEN_TIME_LAST_UPDATED"
+    private val SHOW_CALENDAR_EVENTS = "SHOW_CALENDAR_EVENTS"
+    private val CALENDAR_SYNC_INTERVAL = "CALENDAR_SYNC_INTERVAL"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -214,6 +216,14 @@ class Prefs(context: Context) {
     var swipeDownAction: Int
         get() = prefs.getInt(SWIPE_DOWN_ACTION, Constants.SwipeDownAction.NOTIFICATIONS)
         set(value) = prefs.edit().putInt(SWIPE_DOWN_ACTION, value).apply()
+
+    var showCalendarEvents: Boolean
+        get() = prefs.getBoolean(SHOW_CALENDAR_EVENTS, true)
+        set(value) = prefs.edit().putBoolean(SHOW_CALENDAR_EVENTS, value).apply()
+
+    var calendarSyncInterval: Int
+        get() = prefs.getInt(CALENDAR_SYNC_INTERVAL, Constants.CalendarSync.EVERY_5_MINUTES)
+        set(value) = prefs.edit().putInt(CALENDAR_SYNC_INTERVAL, value).apply()
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()
