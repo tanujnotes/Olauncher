@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Croatian -->
 <resources>
     <string name="app_name">Olauncher</string>
     <string name="app">Aplikacija</string>
@@ -137,5 +138,6 @@
     <string name="about_olauncher">O Olauncher-u i ČPP</string>
     <string name="alignment_changed">Poravnanje promijenjeno ✅</string>
     <string name="home_screen">Početni ekran</string>
-    <string name="hey">Bok</string> <!-- Croatian -->
-</resources>
+    <string name="hey">Bok</string>
+    <string name="more_features">Više značajki…</string>
+</resources><!-- Croatian -->

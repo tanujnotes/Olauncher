@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Italian -->
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
@@ -136,5 +137,6 @@
         \n\nCrediamo che passare a un launcher minimale sia un\'ottima decisione. Anche se siamo ovviamente di parte, ci auguriamo che l\'esperienza ti piaccia. Sentitevi liberi di condividere i tuoi pensieri con noi!</string>
     <string name="alignment_changed">Allineamento cambiato ✅</string>
     <string name="home_screen">Schermata principale</string>
-    <string name="hey">Ciao</string> <!-- Italian -->
-</resources>
+    <string name="hey">Ciao</string>
+    <string name="more_features">Altre funzionalità…</string>
+</resources><!-- Italian -->

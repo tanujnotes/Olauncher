@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Russian -->
 <resources>
     <string name="app">Приложение</string>
     <string name="set_as_default_launcher">Сделать лаунчером по умолчанию</string>
@@ -137,5 +137,6 @@
         \n\nМы считаем, что переход на минимальный лаунчер — отличное решение. Хотя мы явно предвзяты, мы надеемся, что вам понравится этот опыт. Не стесняйтесь поделиться с нами своим мнением!</string>
     <string name="alignment_changed">Выравнивание изменено ✅</string>
     <string name="home_screen">Главный экран</string>
-    <string name="hey">Привет</string> <!-- Russian -->
-</resources>
+    <string name="hey">Привет</string>
+    <string name="more_features">Больше функций…</string>
+</resources><!-- Russian -->

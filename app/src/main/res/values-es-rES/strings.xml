@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Spanish -->
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Establecer como lanzador principal</string>
@@ -137,5 +137,6 @@
         \n\nCreemos que cambiar a un lanzador mínimo es una excelente decisión. Aunque obviamente somos parciales, esperamos que disfrutes la experiencia. ¡No dudes en compartir tus pensamientos con nosotros!</string>
     <string name="alignment_changed">Alineación cambiada ✅</string>
     <string name="home_screen">Pantalla de inicio</string>
-    <string name="hey">Hola</string> <!-- Spanish -->
-</resources>
+    <string name="hey">Hola</string>
+    <string name="more_features">Más funciones…</string>
+</resources><!-- Spanish -->

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- French -->
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Définir comme lanceur par défaut</string>
@@ -139,5 +139,6 @@
         \n\nNous pensons que passer à un lanceur minimal est une excellente décision. Même si nous sommes évidemment partiaux, nous espérons que vous appréciez l\'expérience. N\'hésitez pas à partager vos idées avec nous!</string>
     <string name="alignment_changed">Alignement changé ✅</string>
     <string name="home_screen">Écran d\'accueil</string>
-    <string name="hey">Salut</string> <!-- French -->
-</resources>
+    <string name="hey">Salut</string>
+    <string name="more_features">Plus de fonctionnalités…</string>
+</resources><!-- French -->

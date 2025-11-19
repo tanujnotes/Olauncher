@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Arabic -->
 <resources>
     <string name="app">تطبيق</string>
     <string name="set_as_default_launcher">تعيين كمشغل افتراضي</string>
@@ -132,5 +132,6 @@
     <string name="screen_time">وقت الشاشة</string>
     <string name="alignment_changed">تم تغيير المحاذاة ✅</string>
     <string name="home_screen">الشاشة الرئيسية</string>
-    <string name="hey">مرحبا</string> <!-- Arabic -->
+    <string name="hey">مرحبا</string>
+    <string name="more_features">مزايا إضافية…</string>
 </resources>

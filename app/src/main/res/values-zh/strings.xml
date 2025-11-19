@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Chinese -->
 <resources>
     <string name="app">应用程序</string>
     <string name="set_as_default_launcher">设置为默认启动器</string>
@@ -137,5 +137,6 @@
         \n\n我们相信切换到最小启动器是一个很好的决定。虽然我们显然有偏见，但我们希望您喜欢这次体验。请随时与我们分享您的想法！</string>
     <string name="alignment_changed">对齐已更改 ✅</string>
     <string name="home_screen">主屏幕</string>
-    <string name="hey">嘿</string> <!-- Chinese -->
-</resources>
+    <string name="hey">嘿</string>
+    <string name="more_features">更多功能…</string>
+</resources><!-- Chinese -->

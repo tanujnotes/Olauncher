@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Polish -->
 <resources>
     <string name="app">Aplikacja</string>
     <string name="set_as_default_launcher">Ustaw jako domyślny program uruchamiający</string>
@@ -135,5 +135,6 @@
         \n\nWierzymy, że przejście na minimalny program uruchamiający to doskonała decyzja. Chociaż jesteśmy oczywiście stronniczy, mamy nadzieję, że spodoba ci się to doświadczenie. Podziel się z nami swoimi przemyśleniami!</string>
     <string name="alignment_changed">Wyrównanie zmienione ✅</string>
     <string name="home_screen">Ekran główny</string>
-    <string name="hey">Hej</string> <!-- Polish -->
-</resources>
+    <string name="hey">Hej</string>
+    <string name="more_features">Więcej funkcji…</string>
+</resources><!-- Polish -->

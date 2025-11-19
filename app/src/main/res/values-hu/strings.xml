@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Hungarian -->
 <resources>
     <string name="app">Alkalmazás</string>
     <string name="set_as_default_launcher">Beállítás alapért. indítóként</string>
@@ -138,5 +139,6 @@
         \n\nÚgy gondoljuk, hogy egy minimális indítóra váltás kiváló döntés, és reméljük, hogy élvezni fogja. Ossza meg másokkal is tapasztalatait!</string>
     <string name="alignment_changed">Az igazítás megváltozott ✅</string>
     <string name="home_screen">Kezdőképernyő</string>
-    <string name="hey">Üdvözöljük!</string> <!-- Hungarian -->
-</resources>
+    <string name="hey">Üdvözöljük!</string>
+    <string name="more_features">További funkciók…</string>
+</resources><!-- Hungarian -->

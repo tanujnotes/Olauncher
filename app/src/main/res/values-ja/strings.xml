@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!-- Japanese -->
 <resources>
     <string name="app">アプリ</string>
     <string name="set_as_default_launcher">デフォルトのランチャーとして設定</string>
@@ -136,5 +136,6 @@
         \n\n私たちは、最小限のランチャーに切り替えるのは素晴らしい決断だと信じています。明らかに偏見がありますが、楽しんでいただければ幸いです。ぜひご意見をお聞かせください。</string>
     <string name="alignment_changed">アライメントが変更されました ✅</string>
     <string name="home_screen">ホーム画面</string>
-    <string name="hey">やあ</string> <!-- Japanese -->
-</resources>
+    <string name="hey">やあ</string>
+    <string name="more_features">その他の機能…</string>
+</resources> <!-- Japanese -->
