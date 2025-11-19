@@ -40,6 +40,15 @@
             app:popExitAnim="@anim/fade_exit"
             app:popUpTo="@+id/appListFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_appListFragment_to_appLimitConfigFragment"
+            app:destination="@id/appLimitConfigFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit"
+            app:popUpTo="@+id/appLimitsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -53,6 +62,40 @@
             app:exitAnim="@anim/fade_exit"
             app:popEnterAnim="@anim/fade_enter"
             app:popExitAnim="@anim/fade_exit" />
+        <action
+            android:id="@+id/action_settingsFragment_to_appLimitsFragment"
+            app:destination="@id/appLimitsFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit" />
     </fragment>
+
+    <fragment
+        android:id="@+id/appLimitsFragment"
+        android:name="app.olauncher.ui.AppLimitsFragment"
+        android:label="AppLimitsFragment"
+        android:layout="@layout/fragment_app_limits">
+        <action
+            android:id="@+id/action_appLimitsFragment_to_appListFragment"
+            app:destination="@id/appListFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit" />
+        <action
+            android:id="@+id/action_appLimitsFragment_to_appLimitConfigFragment"
+            app:destination="@id/appLimitConfigFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/appLimitConfigFragment"
+        android:name="app.olauncher.ui.AppLimitConfigFragment"
+        android:label="AppLimitConfigFragment"
+        android:layout="@layout/fragment_app_limit_config" />
 
 </navigation>
