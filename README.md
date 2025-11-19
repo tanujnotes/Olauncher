@@ -13,20 +13,21 @@ AF stands for Ad-Free :D
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olauncher)
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-    alt="Get it on F-Droid"
+    alt="Get it on Play Store"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
+To maintain the simplicity of the launcher, a few niche features are available but hidden.
 
-Note: To maintain the simplicity of the launcher, a few niche features are available but hidden.
-
-Please check out the [About](https://www.notion.so/tanujnotes/Olauncher-Minimal-AF-4843e398b05a455bb521b0665b26fbcd) page in Olauncher settings for the complete list and FAQs.
+Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in the Olauncher settings for a complete list of features and FAQs.
 
 ##
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-Developer: [@tanujnotes](https://twitter.com/tanujnotes)
+@tanujnotes | [X/Twitter](https://twitter.com/tanujnotes) | [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
 
-Thank you and have a great day!
+**[See my other apps](https://play.google.com/store/apps/dev?id=7198807840081074933)**
 
-<a href="https://www.buymeacoffee.com/tanujnotes"><img src="https://img.buymeacoffee.com/button-api/?text=Buy Tanuj a coffee&emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+##
+
+*New: We're working on an open source notes app called Note Safe (previously Note to Self). What's cool about it - it has a chat like interface and end-to-end encryption. [Take a look!](https://github.com/jeerovan/ntsapp)*

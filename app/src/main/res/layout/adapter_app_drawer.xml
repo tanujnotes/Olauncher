@@ -31,8 +31,9 @@
         android:id="@+id/appHideLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginVertical="1dp"
         android:animateLayoutChanges="true"
-        android:background="?attr/primaryColorInverseTrans80"
+        android:background="?attr/primaryShadeDarkColor"
         android:clickable="true"
         android:focusable="true"
         android:gravity="end|center_vertical"
@@ -99,6 +100,21 @@
             android:textSize="12sp"
             app:drawableTopCompat="@drawable/ic_info" />
 
+        <TextView
+            android:id="@+id/appMenuClose"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="2dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
+            android:text="@string/close"
+            android:textSize="12sp"
+            app:drawableTopCompat="@drawable/ic_close" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -106,7 +122,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:background="?attr/primaryColorInverseTrans80"
         android:clickable="true"
         android:focusable="true"
         android:gravity="end|center_vertical"
@@ -114,12 +129,13 @@
         android:visibility="gone"
         tools:visibility="gone">
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etAppRename"
             style="@style/TextLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@null"
             android:gravity="center_vertical"
@@ -131,14 +147,32 @@
 
         <TextView
             android:id="@+id/tvSaveRename"
-            style="@style/TextSmallBold"
+            style="@style/TextSmall"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawablePadding="2dp"
+            android:ellipsize="end"
             android:gravity="center"
-            android:paddingHorizontal="20dp"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
             android:text="@string/rename"
-            android:textAllCaps="true" />
+            android:textSize="12sp"
+            app:drawableTopCompat="@drawable/ic_check" />
 
+        <TextView
+            android:id="@+id/appRenameClose"
+            style="@style/TextSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="2dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
+            android:text="@string/close"
+            android:textSize="12sp"
+            app:drawableTopCompat="@drawable/ic_close" />
     </LinearLayout>
 
 </FrameLayout>

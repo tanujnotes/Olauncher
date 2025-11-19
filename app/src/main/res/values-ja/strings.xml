@@ -2,6 +2,7 @@
 <resources>
     <string name="app">アプリ</string>
     <string name="set_as_default_launcher">デフォルトのランチャーとして設定</string>
+    <string name="set_as_default_launcher_u"><u>デフォルトのランチャーとして設定</u></string>
     <string name="set_as_default_launcher_first">デフォルトのランチャーとして設定</string>
     <string name="_0">〇</string>
     <string name="_1">一</string>
@@ -87,10 +88,20 @@
     <string name="system_default">システム</string>
     <string name="dark">ダーク</string>
     <string name="light">ライト</string>
-    <string name="welcome_to_olauncher_settings">下部にある当社の概要ページには、すべての質問への回答が記載されています。忘れないで。 :)\n\nありがとう。</string>
+    <string name="welcome_to_olauncher_settings">設定へようこそ！
+        \n\n質問がある場合は、私たちの「About」ページに答えがありますので、覚えておいてください。</string>
     <string name="rate_us_message">ねえ、Olauncher は役に立つと思いますか? 「はい」の場合、5 つ星の評価が私たちをサポートする最善の方法です。\n\nありがとう、もうこれを見ることはないだろう。</string>
-    <string name="share_message">こんにちは、あなたの友達もあなたと同じくらいオランチャーを好きだと思いますか?\n\nアプリを共有して、情報を広めてください。ありがとう！</string>
+    <string name="share_message">こんにちは、あなたの助けが必要です!昨年、ダウンロード数が 100 万件を突破しました。今年はさらに 100 万人を達成したいと考えていますが、私たちだけでは達成できません。
+        \n\nOlauncher をお友達と共有していただけますか?ありがとう、そして素晴らしい一日をお過ごしください!</string>
     <string name="keyboard_message">こんにちは、キーボードは Olauncher でアプリを見つけて起動する最も速い方法です。もう数日間これをオンにしてから判断していただくようお願いできますか?選択は常にあなた次第です。</string>
+    <string name="digital_wellbeing_message">特定のアプリに時間制限を設定したい場合は、Android の Digital Wellbeing 機能を使用すると便利です。
+        \n\n携帯電話の設定で Digital Wellbeing を検索し、有効にしてください。</string>
+    <string name="app_usage_message">ホーム画面で画面時間を表示/非表示するには、アプリの使用権限を許可または拒否してください。
+        \n\n注意: アプリの使用データは収集されません。すべての処理はあなたのデバイスで行われます。</string>
+    <string name="pro_message">OlauncherにはPro Launcherというプロ版もあります。天気、ウィジェット、フォント、フォルダー、AMOLED壁紙などの追加機能があります。
+        \n\nOlauncherの開発者をサポートするための最良の方法でもあります。チェックしてみてください！</string>
+    <string name="wallpaper_message">Olauncherは毎日美しい新しい壁紙を提供します。毎日ホーム画面に新しい外観を無料で提供！
+        \n\n試してみますか？</string>
     <string name="accessibility_service_description">ダブルタップしてロックを有効にするには、アクセシビリティ許可が必要です。このサービスを通じて Olauncher が取得したデータは、デバイスから流出することはありません。</string>
     <string name="support_olauncher_for_free">Amazon アフィリエイト リンクを使用して、Olauncher を無料でサポートしてください。</string>
     <string name="support_olauncher_message">あなたが私たちのリンクを使用して何かを購入するたびに、私たちは少額の手数料を受け取ります。リンクを保存し、オンライン ショッピングの際には必ずご利用ください。 ありがとう！</string>
@@ -114,7 +125,16 @@
     <string name="swipe_left_app_enabled">アプリを左にスワイプ有効化</string>
     <string name="swipe_right_app_enabled">アプリを右にスワイプ有効</string>
     <string name="swipe_left_app_disabled">左にスワイプするとアプリが無効になります</string>
+    <string name="screen_time">スクリーンタイム</string>
     <string name="swipe_right_app_disabled">アプリを右にスワイプすると無効になります</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">あなたは電話を使っていますか、それともあなたの電話があなたを使っていますか？</string>
     <string name="about_olauncher">アバウト Olauncher</string>
+    <string name="learn_more">もっと詳しく知る</string>
+    <string name="did_you_know">知っていましたか？</string>
+    <string name="leave_a_review">レビューを残す</string>
+    <string name="review_message">Olauncher は現在も、今後も完全に無料です。広告はありません。データは収集されません。最も重要なことは、スクリーンタイムを短縮し、より健康的なデジタル ライフを送るのに役立つことです。
+        \n\n私たちは、最小限のランチャーに切り替えるのは素晴らしい決断だと信じています。明らかに偏見がありますが、楽しんでいただければ幸いです。ぜひご意見をお聞かせください。</string>
+    <string name="alignment_changed">アライメントが変更されました ✅</string>
+    <string name="home_screen">ホーム画面</string>
+    <string name="hey">やあ</string> <!-- Japanese -->
 </resources>

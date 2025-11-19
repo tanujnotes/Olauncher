@@ -2,7 +2,8 @@
     <string name="app_name" translatable="false">Olauncher</string>
     <string name="github" translatable="false">Github</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false"><u>Olauncher Pro</u></string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
     <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
     <string name="tag_0" translatable="false">0</string>
     <string name="tag_1" translatable="false">1</string>
@@ -13,9 +14,12 @@
     <string name="tag_6" translatable="false">6</string>
     <string name="tag_7" translatable="false">7</string>
     <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
 
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
+    <string name="set_as_default_launcher_u"><u>Set as default launcher</u></string>
     <string name="set_as_default_launcher_first">Set Olauncher default first</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
@@ -66,14 +70,24 @@
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="welcome_to_olauncher_settings">Tip: Our About page has answers to all your questions. Don\'t forget. :)
-        \n\nThank you.</string>
+    <string name="welcome_to_olauncher_settings">Welcome to the settings!
+        \n\nRemember, if you have any questions, our About page has the answer.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
-        \n\nIf you like Olauncher, could you please give us a 5-star rating? It helps us improve our ranking and makes us very happy. Thank you!</string>
-    <string name="share_message">Hi, we need your help! We want to hit a million downloads before 2023 ends but we can\'t do it alone.
-        \n\nWould you be kind enough to share Olauncher with your friends, please? Thank you and have a wonderful day!</string>
+        \n\nIf you\'re finding Olauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
+    <string name="share_message">We need your help! We want to tell every Android user about the benefits of Olauncher but we can\'t do it alone.
+         \n\nCould you please share Olauncher with your friends, family and followers? That\'d be very helpful. Thanks!</string>
+    <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
+    <!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
+    <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.
+        \n\nPlease search for Digital Wellbeing in your phone settings and enable it.</string>
+    <string name="app_usage_message">To show/hide your screen time on the home screen, please allow or disallow the app usage permission.
+        \n\nNote: No app usage data is collected. Everything is processed on your device.</string>
+    <string name="pro_message">Olauncher also has a pro version called Pro Launcher. It has extra features like weather, widgets, fonts, folders, AMOLED wallpapers, and so on.
+        \n\nIt\'s also the best way to support the developers of Olauncher. Check it out!</string>
+    <string name="wallpaper_message">Olauncher offers beautiful new wallpapers daily. Give your homescreen a fresh new look every day, for free!
+        \n\nWant to try it?</string>
     <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
@@ -92,7 +106,7 @@
     <string name="please_set_olauncher_as_default_first">Please set Olauncher as default first</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
-    <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page below.</string>
+    <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page.</string>
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
@@ -131,5 +145,14 @@
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
-    <string name="about_olauncher">About Olauncher</string>
+    <string name="about_olauncher">About and FAQs</string>
+    <string name="screen_time">Screen time</string>
+    <string name="learn_more">Learn more</string>
+    <string name="did_you_know">Did you know?</string>
+    <string name="leave_a_review">Leave a review</string>
+    <string name="review_message">Olauncher is free and always will be. It has no ads, collects no data, and reduces your screen time, resulting in a healthier life.
+        \n\nWe hope you enjoy it. Tell us what you think.</string>
+    <string name="alignment_changed">Alignment changed ✅</string>
+    <string name="home_screen">Home screen</string>
+    <string name="hey">Hey</string>
 </resources>

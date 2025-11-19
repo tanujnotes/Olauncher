@@ -2,6 +2,7 @@
 <resources>
     <string name="app">应用程序</string>
     <string name="set_as_default_launcher">设置为默认启动器</string>
+    <string name="set_as_default_launcher_u"><u>设置为默认启动器</u></string>
     <string name="set_as_default_launcher_first">设置为默认启动器</string>
     <string name="app_drawer_tips">提示：输入应用程序名称以查找并启动它</string>
     <string name="okay">好的</string>
@@ -86,14 +87,23 @@
     <string name="system_default">系统</string>
     <string name="dark">黑暗</string>
     <string name="light">光</string>
-    <string name="welcome_to_olauncher_settings">我们底部的“关于”页面可以解答您的所有问题。别忘了。 :)\n\n谢谢。</string>
+    <string name="welcome_to_olauncher_settings">欢迎来到设置！
+        \n\n请记住，如果您有任何问题，我们的“关于”页面有答案。</string>
     <string name="rate_us_message">您好，您不会再看到此消息。
         \n\n如果您喜欢 Olauncher，能给我们一个 5 星评价吗？ 它帮助我们提高排名并使我们高兴。 谢谢你！</string>
-    <string name="share_message">你好，我们有一个很大的要求！ 我们希望在 2023 年底之前达到 100 万下载量，我们需要您的帮助。
-        \n\n您能与您的朋友分享 Olauncher 吗？ 这真的很有帮助。 谢谢你！</string>
+    <string name="share_message">你好，我们需要你的帮助！去年我们的下载量突破了一百万次。今年我们希望再增加一百万，但我们无法单独做到这一点。
+        \n\n您能与您的朋友分享 Olauncher 吗？谢谢您，祝您有美好的一天！</string>
     <string name="keyboard_message">您好，键盘是在 Olauncher 中查找和启动应用程序的最快方式。我们可以要求您再保留几天?
         \n\n然后再决定吗？选择权永远在你手中。</string>
-    <string name="accessibility_service_description">需要辅助功能权限才能启用双击锁定。 Olauncher 通过此服务获取的任何数据都不会离开您的设备。</string>
+    <string name="digital_wellbeing_message">如果您想为某些应用程序设置时间限制，Android 的数字健康功能可以帮助您做到这一点。
+        \n\n请在手机设置中搜索数字健康并启用它。</string>
+    <string name="app_usage_message">要在主屏幕上显示/隐藏您的屏幕时间，请允许或拒绝应用程序使用权限。
+        \n\n注意：不收集应用程序使用数据。所有数据都在您的设备上处理。</string>
+    <string name="pro_message">Olauncher 还有一个名为 Pro Launcher 的专业版。它具有额外的功能，如天气、部件、字体、文件夹、AMOLED 壁纸等。
+        \n\n这也是支持 Olauncher 开发者的最佳方式。快来看看吧！</string>
+    <string name="wallpaper_message">Olauncher每天提供美丽的新壁纸。让你的主屏幕每天焕然一新，免费！
+        \n\n想试试吗？</string>
+    <string name="accessibility_service_description">请在手机设置中搜索数字健康并启用它。</string>
     <string name="support_olauncher_for_free">使用我们的亚马逊附属链接免费支持 Olauncher。</string>
     <string name="support_olauncher_message">每次您使用我们的链接购买商品时，我们都会获得少量佣金。请保存链接并在网上购物时使用它。 谢谢！</string>
     <string name="open">打开链接</string>
@@ -119,4 +129,13 @@
     <string name="swipe_right_app_disabled">向右滑动应用程序已禁用</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">是你在用手机，还是手机在用你？</string>
     <string name="about_olauncher">关于 Olauncher</string>
+    <string name="learn_more">了解更多</string>
+    <string name="screen_time">屏幕时间</string>
+    <string name="did_you_know">你可知道？</string>
+    <string name="leave_a_review">发表评论</string>
+    <string name="review_message">Olauncher 现在并且永远是完全免费的。它没有广告。它不收集任何数据。最重要的是，它可以帮助您减少屏幕时间并过上更健康的数字生活。
+        \n\n我们相信切换到最小启动器是一个很好的决定。虽然我们显然有偏见，但我们希望您喜欢这次体验。请随时与我们分享您的想法！</string>
+    <string name="alignment_changed">对齐已更改 ✅</string>
+    <string name="home_screen">主屏幕</string>
+    <string name="hey">嘿</string> <!-- Chinese -->
 </resources>

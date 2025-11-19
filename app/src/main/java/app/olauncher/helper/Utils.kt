@@ -5,12 +5,10 @@ import android.app.SearchManager
 import android.app.WallpaperManager
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherApps
-import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.graphics.Bitmap
@@ -65,7 +63,12 @@ fun Context.showToast(stringResource: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, getString(stringResource), duration).show()
 }
 
-suspend fun getAppsList(context: Context, prefs: Prefs, includeHiddenApps: Boolean = false): MutableList<AppModel> {
+suspend fun getAppsList(
+    context: Context,
+    prefs: Prefs,
+    includeRegularApps: Boolean = true,
+    includeHiddenApps: Boolean = false,
+): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
 
@@ -81,29 +84,29 @@ suspend fun getAppsList(context: Context, prefs: Prefs, includeHiddenApps: Boole
                 for (app in launcherApps.getActivityList(null, profile)) {
 
                     val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName).ifBlank { app.label.toString() }
-
-                    if (includeHiddenApps && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID)
-                        appList.add(
-                            AppModel(
-                                appLabelShown,
-                                collator.getCollationKey(app.label.toString()),
-                                app.applicationInfo.packageName,
-                                app.componentName.className,
-                                profile
-                            )
-                        )
-                    else if (!hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())
-                        && app.applicationInfo.packageName != BuildConfig.APPLICATION_ID
+                    val appModel = AppModel(
+                        appLabelShown,
+                        collator.getCollationKey(app.label.toString()),
+                        app.applicationInfo.packageName,
+                        app.componentName.className,
+                        (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
+                        profile
                     )
-                        appList.add(
-                            AppModel(
-                                appLabelShown,
-                                collator.getCollationKey(app.label.toString()),
-                                app.applicationInfo.packageName,
-                                app.componentName.className,
-                                profile
-                            )
-                        )
+
+                    // if the current app is not OLauncher
+                    if (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID) {
+                        // is this a hidden app?
+                        if (hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())) {
+                            if (includeHiddenApps) {
+                                appList.add(appModel)
+                            }
+                        } else {
+                            // this is a regular app
+                            if (includeRegularApps) {
+                                appList.add(appModel)
+                            }
+                        }
+                    }
                 }
             }
             appList.sortBy { it.appLabel.lowercase() }
@@ -111,39 +114,6 @@ suspend fun getAppsList(context: Context, prefs: Prefs, includeHiddenApps: Boole
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        appList
-    }
-}
-
-suspend fun getHiddenAppsList(context: Context, prefs: Prefs): MutableList<AppModel> {
-    return withContext(Dispatchers.IO) {
-        val pm = context.packageManager
-        if (!prefs.hiddenAppsUpdated) upgradeHiddenApps(prefs)
-
-        val hiddenAppsSet = prefs.hiddenApps
-        val appList: MutableList<AppModel> = mutableListOf()
-        if (hiddenAppsSet.isEmpty()) return@withContext appList
-
-        val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-        val collator = Collator.getInstance()
-        for (hiddenPackage in hiddenAppsSet) {
-            try {
-                val appPackage = hiddenPackage.split("|")[0]
-                val userString = hiddenPackage.split("|")[1]
-                var userHandle = android.os.Process.myUserHandle()
-                for (user in userManager.userProfiles) {
-                    if (user.toString() == userString) userHandle = user
-                }
-
-                val appInfo = pm.getApplicationInfo(appPackage, 0)
-                val appLabelShown = prefs.getAppRenameLabel(appPackage).ifBlank { pm.getApplicationLabel(appInfo).toString() }
-                val appKey = collator.getCollationKey(appLabelShown)
-                appList.add(AppModel(appLabelShown, appKey, appPackage, null, userHandle))
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        appList.sortBy { it.appLabel.lowercase() }
         appList
     }
 }
@@ -294,17 +264,16 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
 suspend fun setWallpaper(appContext: Context, url: String): Boolean {
     return withContext(Dispatchers.IO) {
         val originalImageBitmap = getBitmapFromURL(url) ?: return@withContext false
-        val wallpaperManager = WallpaperManager.getInstance(appContext)
+        if (appContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && isTablet(appContext).not())
+            return@withContext false
 
+        val wallpaperManager = WallpaperManager.getInstance(appContext)
         val (width, height) = getScreenDimensions(appContext)
         val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
 
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_SYSTEM)
-                wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_LOCK)
-            } else
-                wallpaperManager.setBitmap(scaledBitmap)
+            wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_SYSTEM)
+            wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_LOCK)
         } catch (e: Exception) {
             return@withContext false
         }
@@ -326,13 +295,17 @@ fun getScreenDimensions(context: Context): Pair<Int, Int> {
     return Pair(point.x, point.y)
 }
 
-suspend fun getTodaysWallpaper(wallType: String): String {
+suspend fun getTodaysWallpaper(wallType: String, firstOpenTime: Long): String {
     return withContext(Dispatchers.IO) {
         var wallpaperUrl: String
         try {
-            val month = SimpleDateFormat("M", Locale.ENGLISH).format(Date()) ?: ""
-            val day = SimpleDateFormat("d", Locale.ENGLISH).format(Date()) ?: ""
-            val key = String.format("%s_%s", month, day)
+            val key = if (firstOpenTime.isDaySince() < 10)
+                String.format("0_%s", firstOpenTime.isDaySince().toString())
+            else {
+                val month = SimpleDateFormat("M", Locale.ENGLISH).format(Date()) ?: "0"
+                val day = SimpleDateFormat("d", Locale.ENGLISH).format(Date()) ?: "0"
+                String.format("%s_%s", month, day)
+            }
 
             val url = URL(Constants.URL_WALLPAPERS)
             val connection: HttpURLConnection = url.openConnection() as HttpURLConnection

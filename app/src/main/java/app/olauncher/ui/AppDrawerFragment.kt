@@ -10,7 +10,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
@@ -26,10 +28,12 @@ import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
 
+
 class AppDrawerFragment : Fragment() {
 
     private lateinit var prefs: Prefs
     private lateinit var adapter: AppDrawerAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
@@ -38,7 +42,11 @@ class AppDrawerFragment : Fragment() {
     private var _binding: FragmentAppDrawerBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = FragmentAppDrawerBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -75,7 +83,7 @@ class AppDrawerFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query?.startsWith("!") == true)
                     requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
-                else if (adapter.itemCount == 0)
+                else if (adapter.itemCount == 0) // && requireContext().searchOnPlayStore(query?.trim()).not())
                     requireContext().openSearch(query?.trim())
                 else
                     adapter.launchFirstInList()
@@ -147,12 +155,30 @@ class AppDrawerFragment : Fragment() {
                     viewModel.showDialog.postValue(Constants.Dialog.HIDDEN)
                     findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
                 }
+                viewModel.getAppList()
+                viewModel.getHiddenApps()
             },
             appRenameListener = { appModel, renameLabel ->
                 prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
                 viewModel.getAppList()
             }
         )
+
+        linearLayoutManager = object : LinearLayoutManager(requireContext()) {
+            override fun scrollVerticallyBy(
+                dx: Int,
+                recycler: Recycler,
+                state: RecyclerView.State,
+            ): Int {
+                val scrollRange = super.scrollVerticallyBy(dx, recycler, state)
+                val overScroll = dx - scrollRange
+                if (overScroll < -10 && binding.recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING)
+                    checkMessageAndExit()
+                return scrollRange
+            }
+        }
+
+        binding.recyclerView.layoutManager = linearLayoutManager
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
         binding.recyclerView.itemAnimator = null
@@ -168,14 +194,20 @@ class AppDrawerFragment : Fragment() {
                 binding.appDrawerTip.isSelected = true
             }
         }
-        if (flag == Constants.FLAG_HIDDEN_APPS)
+        if (flag == Constants.FLAG_HIDDEN_APPS) {
             viewModel.hiddenApps.observe(viewLifecycleOwner) {
-                it?.let { adapter.setAppList(it.toMutableList()) }
+                it?.let {
+                    adapter.setAppList(it.toMutableList())
+                }
             }
-        else
+        } else {
             viewModel.appList.observe(viewLifecycleOwner) {
-                it?.let { adapter.setAppList(it.toMutableList()) }
+                it?.let { appModels ->
+                    adapter.setAppList(appModels.toMutableList())
+                    adapter.filter.filter(binding.search.query)
+                }
             }
+        }
     }
 
     private fun initClickListeners() {
@@ -216,22 +248,26 @@ class AppDrawerFragment : Fragment() {
 
                     RecyclerView.SCROLL_STATE_DRAGGING -> {
                         onTop = !recyclerView.canScrollVertically(-1)
-                        if (onTop) binding.search.hideKeyboard()
-                        if (onTop && !recyclerView.canScrollVertically(1))
-                            findNavController().popBackStack()
+                        if (onTop)
+                            binding.search.hideKeyboard()
                     }
 
                     RecyclerView.SCROLL_STATE_IDLE -> {
-                        if (!recyclerView.canScrollVertically(1)) {
+                        if (!recyclerView.canScrollVertically(1))
                             binding.search.hideKeyboard()
-                        } else if (!recyclerView.canScrollVertically(-1)) {
-                            if (onTop) findNavController().popBackStack()
-                            else binding.search.showKeyboard(prefs.autoShowKeyboard)
-                        }
+                        else if (!recyclerView.canScrollVertically(-1))
+                            if (!onTop && isRemoving.not())
+                                binding.search.showKeyboard(prefs.autoShowKeyboard)
                     }
                 }
             }
         }
+    }
+
+    private fun checkMessageAndExit() {
+        findNavController().popBackStack()
+        if (flag == Constants.FLAG_LAUNCH_APP)
+            viewModel.checkForMessages.call()
     }
 
     override fun onStart() {

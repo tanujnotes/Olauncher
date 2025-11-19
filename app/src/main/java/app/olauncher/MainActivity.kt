@@ -11,17 +11,37 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
-import app.olauncher.helper.*
-import java.util.*
+import app.olauncher.helper.getColorFromAttr
+import app.olauncher.helper.hasBeenDays
+import app.olauncher.helper.hasBeenHours
+import app.olauncher.helper.hasBeenMinutes
+import app.olauncher.helper.isDarkThemeOn
+import app.olauncher.helper.isDaySince
+import app.olauncher.helper.isDefaultLauncher
+import app.olauncher.helper.isEinkDisplay
+import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.isTablet
+import app.olauncher.helper.openUrl
+import app.olauncher.helper.rateApp
+import app.olauncher.helper.resetLauncherViaFakeActivity
+import app.olauncher.helper.setPlainWallpaper
+import app.olauncher.helper.shareApp
+import app.olauncher.helper.showLauncherSelector
+import app.olauncher.helper.showToast
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,11 +49,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+    private var timerJob: Job? = null
 
-    override fun onBackPressed() {
-        if (navController.currentDestination?.id != R.id.mainFragment)
-            super.onBackPressed()
-    }
+//    override fun onBackPressed() {
+//        if (navController.currentDestination?.id != R.id.mainFragment)
+//            super.onBackPressed()
+//    }
 
     override fun attachBaseContext(context: Context) {
         val newConfig = Configuration(context.resources.configuration)
@@ -44,16 +65,36 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         prefs = Prefs(this)
+        if (isEinkDisplay()) prefs.appTheme = AppCompatDelegate.MODE_NIGHT_NO
         AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        navController = this.findNavController(R.id.nav_host_fragment)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (navController.currentDestination?.id != R.id.mainFragment) {
+                    // then we might want to finish the activity or disable this callback.
+                    if (navController.popBackStack()) {
+                        // Successfully popped back
+                    } else {
+                        // if you want other system/activity level handling
+                    }
+                } else {
+                    binding.messageLayout.visibility = View.GONE
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
         if (prefs.firstOpen) {
             viewModel.firstOpen(true)
             prefs.firstOpen = false
+            prefs.firstOpenTime = System.currentTimeMillis()
+            viewModel.resetLauncherLiveData.call()
         }
 
         initClickListeners()
@@ -62,6 +103,11 @@ class MainActivity : AppCompatActivity() {
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkTheme()
     }
 
     override fun onStop() {
@@ -81,13 +127,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        if (prefs.dailyWallpaper &&
-            AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        ) {
+        AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
+        if (prefs.dailyWallpaper && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) {
             setPlainWallpaper()
             viewModel.setWallpaperWorker()
+            recreate()
         }
-        recreate()
     }
 
     private fun initClickListeners() {
@@ -101,24 +146,58 @@ class MainActivity : AppCompatActivity() {
             openLauncherChooser(it)
         }
         viewModel.resetLauncherLiveData.observe(this) {
-//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
-            resetDefaultLauncher()
-//            else
-//                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
+            if (isDefaultLauncher() || Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
+                resetLauncherViaFakeActivity()
+            else
+                showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
+        }
+        viewModel.checkForMessages.observe(this) {
+            checkForMessages()
         }
         viewModel.showDialog.observe(this) {
             when (it) {
+                Constants.Dialog.ABOUT -> {
+                    showMessageDialog(getString(R.string.app_name), getString(R.string.welcome_to_olauncher_settings), getString(R.string.okay)) {
+                        binding.messageLayout.visibility = View.GONE
+                    }
+                }
+
+                Constants.Dialog.WALLPAPER -> {
+                    prefs.wallpaperMsgShown = true
+                    prefs.userState = Constants.UserState.REVIEW
+                    showMessageDialog(getString(R.string.did_you_know), getString(R.string.wallpaper_message), getString(R.string.enable)) {
+                        binding.messageLayout.visibility = View.GONE
+                        prefs.dailyWallpaper = true
+                        viewModel.setWallpaperWorker()
+                        showToast(getString(R.string.your_wallpaper_will_update_shortly))
+                    }
+                }
+
+                Constants.Dialog.REVIEW -> {
+                    prefs.userState = Constants.UserState.RATE
+                    showMessageDialog(getString(R.string.hey), getString(R.string.review_message), getString(R.string.leave_a_review)) {
+                        binding.messageLayout.visibility = View.GONE
+                        prefs.rateClicked = true
+                        showToast("😇❤️")
+                        rateApp()
+                    }
+                }
+
                 Constants.Dialog.RATE -> {
+                    prefs.userState = Constants.UserState.SHARE
                     showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), getString(R.string.rate_now)) {
                         binding.messageLayout.visibility = View.GONE
                         prefs.rateClicked = true
+                        showToast("🤩❤️")
                         rateApp()
                     }
                 }
 
                 Constants.Dialog.SHARE -> {
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.share_message), getString(R.string.share_now)) {
+                    prefs.shareShownTime = System.currentTimeMillis()
+                    showMessageDialog(getString(R.string.hey), getString(R.string.share_message), getString(R.string.share_now)) {
                         binding.messageLayout.visibility = View.GONE
+                        showToast("😊❤️")
                         shareApp()
                     }
                 }
@@ -134,6 +213,18 @@ class MainActivity : AppCompatActivity() {
                         binding.messageLayout.visibility = View.GONE
                     }
                 }
+
+                Constants.Dialog.DIGITAL_WELLBEING -> {
+                    showMessageDialog(getString(R.string.screen_time), getString(R.string.app_usage_message), getString(R.string.permission)) {
+                        startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+                    }
+                }
+
+                Constants.Dialog.PRO_MESSAGE -> {
+                    showMessageDialog(getString(R.string.hey), getString(R.string.pro_message), getString(R.string.olauncher_pro)) {
+                        openUrl(Constants.URL_OLAUNCHER_PRO)
+                    }
+                }
             }
         }
     }
@@ -146,12 +237,54 @@ class MainActivity : AppCompatActivity() {
         binding.messageLayout.visibility = View.VISIBLE
     }
 
+    private fun checkForMessages() {
+        if (prefs.firstOpenTime == 0L)
+            prefs.firstOpenTime = System.currentTimeMillis()
+
+        when (prefs.userState) {
+            Constants.UserState.START -> {
+                if (prefs.firstOpenTime.hasBeenMinutes(10))
+                    prefs.userState = Constants.UserState.WALLPAPER
+            }
+
+            Constants.UserState.WALLPAPER -> {
+                if (prefs.wallpaperMsgShown || prefs.dailyWallpaper)
+                    prefs.userState = Constants.UserState.REVIEW
+                else if (isOlauncherDefault(this))
+                    viewModel.showDialog.postValue(Constants.Dialog.WALLPAPER)
+            }
+
+            Constants.UserState.REVIEW -> {
+                if (prefs.rateClicked)
+                    prefs.userState = Constants.UserState.SHARE
+                else if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenHours(1))
+                    viewModel.showDialog.postValue(Constants.Dialog.REVIEW)
+            }
+
+            Constants.UserState.RATE -> {
+                if (prefs.rateClicked)
+                    prefs.userState = Constants.UserState.SHARE
+                else if (isOlauncherDefault(this)
+                    && prefs.firstOpenTime.isDaySince() >= 7
+                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 16
+                ) viewModel.showDialog.postValue(Constants.Dialog.RATE)
+            }
+
+            Constants.UserState.SHARE -> {
+                if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(14)
+                    && prefs.shareShownTime.isDaySince() >= 70
+                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 16
+                ) viewModel.showDialog.postValue(Constants.Dialog.SHARE)
+            }
+        }
+    }
+
     @SuppressLint("SourceLockedOrientationActivity")
     private fun setupOrientation() {
-        if (isTablet(this)) return
+        if (isTablet(this) || Build.VERSION.SDK_INT == Build.VERSION_CODES.O)
+            return
         // In Android 8.0, windowIsTranslucent cannot be used with screenOrientation=portrait
-        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O)
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     private fun backToHomeScreen() {
@@ -168,13 +301,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun openLauncherChooser(resetFailed: Boolean) {
         if (resetFailed) {
-            val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-                Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-            else {
-                showToast(getString(R.string.search_for_Launcher_or_home_app), Toast.LENGTH_LONG)
-                Intent(Settings.ACTION_SETTINGS)
-            }
+            val intent = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             startActivity(intent)
+        }
+    }
+
+    private fun checkTheme() {
+        timerJob?.cancel()
+        timerJob = lifecycleScope.launch {
+            delay(200)
+            if ((prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.white))
+                || (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_NO && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.black))
+            ) recreate()
         }
     }
 
@@ -188,7 +326,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             Constants.REQUEST_CODE_LAUNCHER_SELECTOR -> {
-                resetDefaultLauncher()
+                if (resultCode == Activity.RESULT_OK)
+                    resetLauncherViaFakeActivity()
             }
         }
     }

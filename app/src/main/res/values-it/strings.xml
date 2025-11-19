@@ -1,6 +1,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Imposta come launcher predefinito</string>
+    <string name="set_as_default_launcher_u"><u>Imposta come launcher predefinito</u></string>
     <string name="set_as_default_launcher_first">Imposta come launcher predefinito</string>
     <string name="app_text_color"> Colore del testo</string>
     <string name="double_tap_to_lock_screen">Tocca due volte per bloccare</string>
@@ -52,14 +53,22 @@
     <string name="system_default">di sistema</string>
     <string name="dark">Scuro</string>
     <string name="light">Chiaro</string>
-    <string name="welcome_to_olauncher_settings">La nostra pagina Informazioni in basso ha le risposto a tutte le tue domande. Non dimenticare. :)
-        \n\nGrazie.</string>
+    <string name="welcome_to_olauncher_settings">Benvenuto nelle impostazioni!
+        \n\nRicorda, se hai domande, la nostra pagina Informazioni ha la risposta.</string>
     <string name="rate_us_message">Ehi, trovi utile Olauncher? Se sì, una valutazione a 5 stelle è il modo migliore per sostenerci.
         \n\nGrazie e non lo vedrai più.</string>
-    <string name="share_message">Ciao, pensi che ai tuoi amici potrebbe piacere  Olauncher tanto quanto piace a te?
-        \n\nCondividi l\'app e aiutaci a spargere la voce. Grazie!</string>
+    <string name="share_message">Ciao, abbiamo bisogno del tuo aiuto! L\'anno scorso abbiamo superato il milione di download. Quest’anno vogliamo raggiungere un milione in più ma non possiamo farcela da soli.
+        \n\nSaresti così gentile da condividere Olauncher con i tuoi amici, per favore? Grazie e buona giornata!</string>
     <string name="keyboard_message">Ciao, la tastiera è il modo più veloce per trovare e avviare le app in Olauncher. Possiamo chiederti di metterlo alla prova ancora per qualche giorno e poi decidere?
         \n\nSei sempre tu a scegliere.</string>
+    <string name="digital_wellbeing_message">Se desideri impostare limiti di tempo per determinate app, la funzionalità Benessere digitale di Android può aiutarti a farlo.
+        \n\nCerca Benessere digitale nelle impostazioni del telefono e attivalo.</string>
+    <string name="app_usage_message">Per visualizzare/nascondere il tempo di utilizzo dello schermo sulla schermata iniziale, conceda o neghi il permesso di utilizzo dell\'app.
+        \n\nNota: Non vengono raccolti dati sull\'utilizzo dell\'app. Tutto viene elaborato sul tuo dispositivo.</string>
+    <string name="pro_message">Olauncher ha anche una versione pro chiamata Pro Launcher. Ha funzionalità extra come meteo, widget, font, cartelle, sfondi AMOLED, e così via.
+        \n\nÈ anche il modo migliore per supportare gli sviluppatori di Olauncher. Dai un\'occhiata!</string>
+    <string name="wallpaper_message">Olauncher offre bellissimi sfondi nuovi ogni giorno. Dai un aspetto fresco alla tua schermata principale ogni giorno, gratuitamente!
+        \n\nVuoi provarlo?</string>
     <string name="accessibility_service_description">L\'autorizzazione di accessibilità è necessaria per abilitare il doppio tocco per il blocco schermo. Qualsiasi dato acquisito da Olauncher tramite questo servizio rimarrà all’interno del telefono</string>
     <string name="support_olauncher_for_free">Supporta Olauncher gratuitamente utilizzando il nostro link di affiliazione su Amazon.</string>
     <string name="support_olauncher_message">Ogni volta che acquisti qualcosa utilizzando il nostro link, riceviamo una piccola commissione. Salva il link e usalo ogni volta che fai acquisti online.\n Grazie!</string>
@@ -119,4 +128,13 @@
     <string name="adapter_hide">nascondi</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Stai usando il tuo telefono, o è il tuo telefono che sta usando te?</string>
     <string name="about_olauncher">Info Olauncher</string>
+    <string name="learn_more">Saperne di più</string>
+    <string name="screen_time">Tempo di schermo</string>
+    <string name="did_you_know">Lo sapevate?</string>
+    <string name="leave_a_review">Lascia una recensione</string>
+    <string name="review_message">Olauncher è e sarà sempre completamente gratuito. Non ha pubblicità. Non raccoglie dati. Ancora più importante, ti aiuta a ridurre il tempo trascorso davanti allo schermo e a vivere una vita digitale più sana.
+        \n\nCrediamo che passare a un launcher minimale sia un\'ottima decisione. Anche se siamo ovviamente di parte, ci auguriamo che l\'esperienza ti piaccia. Sentitevi liberi di condividere i tuoi pensieri con noi!</string>
+    <string name="alignment_changed">Allineamento cambiato ✅</string>
+    <string name="home_screen">Schermata principale</string>
+    <string name="hey">Ciao</string> <!-- Italian -->
 </resources>

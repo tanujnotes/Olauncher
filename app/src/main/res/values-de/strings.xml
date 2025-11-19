@@ -2,6 +2,7 @@
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Als Standard-Launcher festlegen</string>
+    <string name="set_as_default_launcher_u"><u>Als Standard-Launcher festlegen</u></string>
     <string name="set_as_default_launcher_first">Als Standard-Launcher festlegen</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
@@ -86,13 +87,22 @@
     <string name="system_default">System</string>
     <string name="dark">Dunkel</string>
     <string name="light">Hell</string>
-    <string name="welcome_to_olauncher_settings">Auf unserer About-Seite unten finden Sie Antworten auf alle Ihre Fragen. Vergiss es nicht. :)\n\nDan­ke­schön.</string>
+    <string name="welcome_to_olauncher_settings">Willkommen in den Einstellungen!
+        \n\nDenken Sie daran, wenn Sie Fragen haben, unsere Seite „Über“ hat die Antwort.</string>
     <string name="rate_us_message">Hallo, diese Nachricht wird Ihnen nicht mehr angezeigt.
         \n\nWenn Ihnen Olauncher gefällt, können Sie uns bitte eine 5-Sterne-Bewertung geben? Es hilft uns, unser Ranking zu verbessern und macht uns glücklich. Dan­ke­schön!</string>
-    <string name="share_message">Hallo, wir haben eine große Bitte! Wir wollen bis zum Ende des Jahres 2023 eine Million Downloads erreichen und brauchen dazu Ihre Hilfe.
-        \n\nKönnten Sie Olauncher bitte mit Ihren Freunden teilen? Das wäre wirklich hilfreich. Dan­ke­schön!</string>
+    <string name="share_message">Hallo, wir brauchen deine Hilfe! Letztes Jahr haben wir die Marke von einer Million Downloads überschritten. Dieses Jahr wollen wir eine Million mehr erreichen, aber alleine schaffen wir das nicht.
+        \n\nWären Sie bitte so freundlich, Olauncher mit Ihren Freunden zu teilen? Vielen Dank und einen wunderschönen Tag!</string>
     <string name="keyboard_message">Hallo, die Tastatur ist der schnellste Weg, Apps in Olauncher zu finden und zu starten. Können wir Sie bitten, die Funktion noch ein paar Tage eingeschaltet zu lassen und dann zu entscheiden?
         \n\nDie Wahl liegt immer bei Ihnen.</string>
+    <string name="digital_wellbeing_message">Wenn Sie Zeitlimits für bestimmte Apps festlegen möchten, kann Ihnen die Digital Wellbeing-Funktion von Android dabei helfen.
+        \n\nBitte suchen Sie in Ihren Telefoneinstellungen nach Digital Wellbeing und aktivieren Sie es.</string>
+    <string name="app_usage_message">Um die Bildschirmzeit auf dem Startbildschirm anzuzeigen oder zu verbergen, erteilen Sie bitte die Erlaubnis für die App-Nutzung oder verweigern Sie sie.
+        \n\nHinweis: Es werden keine Daten zur App-Nutzung gesammelt. Alles wird auf Ihrem Gerät verarbeitet.</string>
+    <string name="pro_message">Olauncher hat auch eine Pro-Version namens Pro Launcher. Sie bietet zusätzliche Funktionen wie Wetter, Widgets, Schriftarten, Ordner, AMOLED-Hintergründe usw.
+        \n\nEs ist auch der beste Weg, die Entwickler von Olauncher zu unterstützen. Schau es dir an!</string>
+    <string name="wallpaper_message">Olauncher bietet täglich wunderschöne neue Wallpapers. Verleihe deinem Homescreen jeden Tag ein frisches Aussehen – kostenlos!
+        \n\nMöchtest du es ausprobieren?</string>
     <string name="accessibility_service_description">Die Zugriffsberechtigung ist erforderlich, um das Sperren durch Doppeltippen zu ermöglichen. Die von Olauncher über diesen Dienst erfassten Daten verlassen Ihr Gerät nicht.</string>
     <string name="support_olauncher_for_free">Unterstützen Sie Olauncher kostenlos, indem Sie unseren Amazon-Partnerlink verwenden.</string>
     <string name="support_olauncher_message">Jedes Mal, wenn Sie über unseren Link etwas kaufen, erhalten wir eine kleine Provision. Bitte speichern Sie den Link und verwenden Sie ihn bei jedem Online-Einkauf. Dan­ke­schön!</string>
@@ -118,5 +128,14 @@
     <string name="swipe_left_app_disabled">App nach links wischen deaktiviert</string>
     <string name="swipe_right_app_disabled">App nach rechts wischen deaktiviert</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Benutzen Sie Ihr Telefon, oder nutzt Ihr Telefon Sie?</string>
+    <string name="screen_time">Bildschirmzeit</string>
     <string name="about_olauncher">Über Olauncher</string>
+    <string name="learn_more">Erfahren Sie mehr</string>
+    <string name="did_you_know">Wussten Sie?</string>
+    <string name="leave_a_review">Rezension</string>
+    <string name="review_message">Olauncher ist und bleibt völlig kostenlos. Es gibt keine Werbung. Es werden keine Daten erfasst. Am wichtigsten ist, dass es Ihnen dabei hilft, Ihre Bildschirmzeit zu verkürzen und ein gesünderes digitales Leben zu führen.
+        \n\nWir glauben, dass der Wechsel zu einem Minimal Launcher eine ausgezeichnete Entscheidung ist. Obwohl wir offensichtlich voreingenommen sind, hoffen wir, dass Ihnen die Erfahrung gefällt. Teilen Sie uns gerne Ihre Gedanken mit!</string>
+    <string name="alignment_changed">Ausrichtung geändert ✅</string>
+    <string name="home_screen">Startbildschirm</string>
+    <string name="hey">Hey</string> <!-- German -->
 </resources>

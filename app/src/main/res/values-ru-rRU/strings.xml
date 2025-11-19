@@ -2,6 +2,7 @@
 <resources>
     <string name="app">Приложение</string>
     <string name="set_as_default_launcher">Сделать лаунчером по умолчанию</string>
+    <string name="set_as_default_launcher_u"><u>Сделать лаунчером по умолчанию</u></string>
     <string name="set_as_default_launcher_first">Сделать лаунчером по умолчанию</string>
     <string name="app_text_color">Цвет текста</string>
     <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>
@@ -26,10 +27,10 @@
     <string name="daily_wallpaper_update">Ежедневно новые обои</string>
     <string name="left">Слева</string>
     <string name="right">Справа</string>
-    <string name="center">По центру</string>
-    <string name="home_layout_alignment">Выравнивание приложений</string>
-    <string name="swipe_left_app">Проведите влево для</string>
-    <string name="swipe_right_app">Проведите вправо для</string>
+    <string name="center">Центр</string>
+    <string name="home_layout_alignment">Расположение приложений</string>
+    <string name="swipe_left_app">Свайп влево</string>
+    <string name="swipe_right_app">Свайп вправо</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -39,7 +40,7 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Совет. Начните вводить название приложения, чтобы оно запустилось автоматически.</string>
+    <string name="app_drawer_tips">Совет: начните вводить название приложения, чтобы запустить его автоматически.</string>
     <string name="okay">Хорошо</string>
     <string name="cool">Круто!</string>
     <string name="auto_show_keyboard">Автопоказ клавиатуры</string>
@@ -47,19 +48,28 @@
     <string name="status_bar">Показывать строку состояния</string>
     <string name="rename">Переименовать</string>
     <string name="show_date_time">Показывать дату и время</string>
-    <string name="appearance">Появление</string>
+    <string name="appearance">Оформление</string>
     <string name="gestures">Жесты</string>
     <string name="theme_mode">Тема</string>
     <string name="system_default">Системная</string>
     <string name="dark">Темная</string>
     <string name="light">Светлая</string>
-    <string name="welcome_to_olauncher_settings">На странице «О нас» внизу есть ответы на все ваши вопросы. Не забывайте. :)</string>
+    <string name="welcome_to_olauncher_settings">Добро пожаловать в настройки!
+        \n\nПомните, если у вас есть вопросы, на нашей странице «О нас» есть ответ.</string>
     <string name="rate_us_message">Здравствуйте, вы больше не увидите это сообщение.
-        \n\nЕсли вам нравится Olauncher, не могли бы вы дать нам 5-звездочный рейтинг? Это помогает нам улучшить наш рейтинг и делает нас счастливыми. Спасибо!</string>
-    <string name="share_message">Привет, у нас большая просьба! Мы хотим достичь миллиона загрузок до конца 2023 года, и нам нужна ваша помощь.
-        \n\nНе могли бы вы поделиться Olauncher со своими друзьями, пожалуйста? Это было бы очень полезно. Спасибо!</string>
-    <string name="keyboard_message">Привет, клавиатура — это самый быстрый способ найти и запустить приложения в Olauncher. Можем ли мы попросить вас оставить это включенным еще на несколько дней, а затем принять решение?
+        \n\nЕсли вам нравится Olauncher, не могли бы вы поставить нам 5 звезд? Это поможет улучшить наш рейтинг и сделает нас счастливыми. Спасибо!</string>
+    <string name="share_message">Привет, нам нужна ваша помощь! В прошлом году мы преодолели миллион загрузок. В этом году мы хотим достичь еще миллиона, но мы не можем сделать это в одиночку.
+        \n\nНе могли бы вы поделиться Olauncher со своими друзьями, пожалуйста? Спасибо, хорошего дня!</string>
+    <string name="keyboard_message">Привет, клавиатура — это самый быстрый способ найти и запустить приложения в Olauncher. Могли бы вы продолжить использовать Автопоказ клавиатуры еще несколько дней, прежде чем принять окончательное решение?
         \n\nВыбор всегда за вами.</string>
+    <string name="digital_wellbeing_message">Если вы хотите установить ограничения по времени для определенных приложений, функция «Цифровое благополучие» Android может помочь вам в этом.
+        \n\nНайдите параметр «Цифровое благополучие» в настройках телефона и включите его.</string>
+    <string name="app_usage_message">Чтобы показать/скрыть время экрана на домашнем экране, разрешите или запретите разрешение на использование приложения.
+        \n\nПримечание: Не собираются данные об использовании приложения. Все обрабатывается на вашем устройстве.</string>
+    <string name="pro_message">У Olauncher также есть профессиональная версия под названием Pro Launcher. Она имеет дополнительные функции, такие как погода, виджеты, шрифты, папки, обои AMOLED и так далее.
+        \n\nЭто также лучший способ поддержать разработчиков Olauncher. Ознакомьтесь!</string>
+    <string name="wallpaper_message">Olauncher предлагает красивые новые обои каждый день. Обновите свой главный экран каждый день, бесплатно!
+        \n\nХотите попробовать?</string>
     <string name="accessibility_service_description">" Разрешение на доступ требуется, чтобы включить двойное касание для блокировки. Любые данные, полученные Olauncher через этот сервис, не покинут ваше устройство."</string>
     <string name="support_olauncher_for_free">Поддержите Olauncher бесплатно, используя нашу партнерскую ссылку Amazon.</string>
     <string name="support_olauncher_message">Каждый раз, когда вы покупаете что-то по нашей ссылке, мы получаем небольшую комиссию. Пожалуйста, сохраните ссылку и используйте ее при совершении покупок в Интернете.\nСпасибо!</string>
@@ -78,7 +88,7 @@
     <string name="please_set_olauncher_as_default_first">Сначала установите Olauncher в качестве лаунчера по умолчанию.</string>
     <string name="affiliate">Партнер</string>
     <string name="tip_start_typing_for_rename">Совет: начните вводить текст чтобы ПЕРЕИМЕНОВАТЬ приложение.</string>
-    <string name="hidden_apps_message">Примечание. Нажмите «Olauncher» в верхней части страницы настроек, чтобы найти скрытые приложения.
+    <string name="hidden_apps_message">Примечание: для доступа к скрытым приложениям, нажмите «Olauncher» в верхней части страницы настроек.
         \n\nБолее подробная информация доступна на нашей странице «О нас» ниже.</string>
     <string name="swipe_down_for">Проведите вниз для</string>
     <string name="search">Поиск</string>
@@ -101,7 +111,7 @@
     <string name="long_press_to_select_app">Длительное нажатие для выбора приложения</string>
     <string name="unable_to_open_app">Не удалось открыть информацию о приложении</string>
     <string name="copied">Скопировано</string>
-    <string name="system_app_cannot_delete">Не могу удалить системное приложение</string>
+    <string name="system_app_cannot_delete">Невозможно удалить системное приложение</string>
     <string name="type_a_new_app_name_first">Сначала введите новое имя приложения</string>
     <string name="app_not_found">Приложение не найдено</string>
     <string name="unable_to_launch_app">Не удается запустить приложение</string>
@@ -114,9 +124,18 @@
     <string name="olauncher_is_not_default_launcher">Olauncher не является лаунчером по умолчанию.\nЕжедневное обновление обоев может завершиться ошибкой.</string>
     <string name="long_press_to_enable">Нажмите и удерживайте, чтобы включить</string>
     <string name="no_hidden_apps">Нет скрытых приложений</string>
-    <string name="hidden_apps">Скрытых приложений</string>
+    <string name="hidden_apps">Скрытые приложения</string>
     <string name="adapter_show">Показать</string>
     <string name="adapter_hide">Скрыть</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Вы используете свой телефон, или ваш телефон использует вас?</string>
     <string name="about_olauncher">О нас Olauncher</string>
+    <string name="screen_time">Время на экране</string>
+    <string name="learn_more">Узнать больше</string>
+    <string name="did_you_know">Вы знали?</string>
+    <string name="leave_a_review">Оставить отзыв</string>
+    <string name="review_message">Olauncher есть и всегда будет полностью бесплатным. В нем нет рекламы. Он не собирает никаких данных. Самое главное, это помогает вам сократить время, проводимое перед экраном, и вести более здоровую цифровую жизнь.
+        \n\nМы считаем, что переход на минимальный лаунчер — отличное решение. Хотя мы явно предвзяты, мы надеемся, что вам понравится этот опыт. Не стесняйтесь поделиться с нами своим мнением!</string>
+    <string name="alignment_changed">Выравнивание изменено ✅</string>
+    <string name="home_screen">Главный экран</string>
+    <string name="hey">Привет</string> <!-- Russian -->
 </resources>

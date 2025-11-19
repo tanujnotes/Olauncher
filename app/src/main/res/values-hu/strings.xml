@@ -1,21 +1,7 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
-    <string name="github" translatable="false">Github</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false"><u>Olauncher Pro</u></string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
-    <string name="tag_0" translatable="false">0</string>
-    <string name="tag_1" translatable="false">1</string>
-    <string name="tag_2" translatable="false">2</string>
-    <string name="tag_3" translatable="false">3</string>
-    <string name="tag_4" translatable="false">4</string>
-    <string name="tag_5" translatable="false">5</string>
-    <string name="tag_6" translatable="false">6</string>
-    <string name="tag_7" translatable="false">7</string>
-    <string name="tag_8" translatable="false">8</string>
-
     <string name="app">Alkalmazás</string>
-    <string name="set_as_default_launcher">Beállítás alapértelmezett indítóként</string>
+    <string name="set_as_default_launcher">Beállítás alapért. indítóként</string>
+    <string name="set_as_default_launcher_u"><u>Beállítás alapért. indítóként</u></string>
     <string name="set_as_default_launcher_first">Beállítás alapértelmezett indítóként</string>
     <string name="app_text_color">Szövegszín</string>
     <string name="double_tap_to_lock_screen">Dupla koppintás a képernyő lezárásához</string>
@@ -52,10 +38,10 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Tipp: Kezdje el begépelni egy alkalmazás nevét az automatikus indításához</string>
+    <string name="app_drawer_tips">Tipp: Kezdje el begépelni egy alkalmazás nevét annak automatikus indításához</string>
     <string name="okay">Rendben</string>
     <string name="cool">Szuper!</string>
-    <string name="auto_show_keyboard">Billentyűzet automatikus megjelenítlse</string>
+    <string name="auto_show_keyboard">Billentyűzet auto. megjelenítése</string>
     <string name="hide">Elrejtés</string>
     <string name="status_bar">Állapotsor megjelenítése fent</string>
     <string name="rename">Átnevezés</string>
@@ -66,18 +52,28 @@
     <string name="system_default">Rendszer</string>
     <string name="dark">Sötét</string>
     <string name="light">Világos</string>
-    <string name="welcome_to_olauncher_settings">A Névjegy oldalunk alján megtalálja a válaszokat minden kérdésére. Ne feledje el. :)
-            \n\nKöszönjük!</string>
+    <string name="welcome_to_olauncher_settings">Üdvözöljük a beállításokban!
+        \n\nNe feledje, ha bármilyen kérdése van, az „Rólunk” oldalunk tartalmazza a választ.</string>
     <string name="rate_us_message">Üdv, ezt az üzenetet nem fogja újra látni.
-            \n\nHa tetszik az Olauncher, kérjük, adjon nekünk 5 csillagos értékelést! Ez segít javítani a helyezésünket, és nagyon boldoggá tesz minket. Köszönjük!</string>
-    <string name="share_message">Az embereknek nem kell ragaszkodniuk figyelemelterelő indítóikhoz. Segítsen elterjeszteni, hogy egy jobb opció is létezik.
-            \n\nOssza meg az Olauncher-t az Önnek fontos emberekkel.</string>
-    <string name="keyboard_message">Üdv, a billentyűzet a leggyorsabb módja a alkalmazások megtalálásához és elindításához az Olauncherben. Kérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön.
-            \n\nA választás mindig az Öné.</string>
-    <string name="accessibility_service_description">A dupla koppintás zárolásához szükséges a hozzáférhetőségi engedély. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
+        \n\nHa tetszik az Olauncher, kérjük, adjon nekünk 5 csillagos értékelést! Ez segít javítani a helyezésünket, és nagyon boldoggá tesz minket. Köszönjük!</string>
+    <string name="share_message">A segítségére van szükségünk! Tavaly átléptük az egymillió letöltést. Idén egy millióval többet szeretnénk elérni, de egyedül nem tudjuk megtenni.
+        \n\nAz Olauncher-nek emberekre van szüksége, az embereknek pedig az Olauncher-re. Köszönettel vennénk, ha megosztaná másokkal is az Olaunchert!</string>
+    <!--    <string name="share_message">Az Ön havi emlékeztetője - használja Ön a telefonját, és ne a telefonja Önt! Csak így tovább! Nagyszerűen csinálja!-->
+    <!--        \n\nHa van egy kis ideje, kérjük, ossza meg másokkal is az Olauncher-t. Az Olauncher-nek szüksége van emberekre. De ami még fontosabb, az embereknek szüksége van az Olauncher-re..</string>-->
+    <string name="keyboard_message">Üdvözöljük! A billentyűzet a leggyorsabb módja az alkalmazások megtalálásához és elindításához az Olauncherben. Megkérhetjük, hogy hagyja bekapcsolva még néhány napig, és utána döntsön?
+        \n\nA választás mindig az Öné.</string>
+    <string name="digital_wellbeing_message">Ha időkorlátokat szeretne beállítani bizonyos alkalmazásokhoz, az Android Digital Wellbeing funkciója segíthet ebben.
+        \n\nKeresse meg a Digitális jólét elemet a telefon beállításai között, és engedélyezze.</string>
+    <string name="app_usage_message">A képernyőidő megjelenítéséhez/elrejtéséhez a kezdőképernyőn engedélyezze vagy tagadja meg az alkalmazás használati engedélyét.
+        \n\nMegjegyzés: Nem gyűjtünk alkalmazás-használati adatokat. Minden az Ön eszközén kerül feldolgozásra.</string>
+    <string name="pro_message">Az Olauncher-nek van egy pro verziója is, amely Pro Launcher néven ismert. További funkciókat kínál, mint például időjárás, widgetek, betűtípusok, mappák, AMOLED háttérképek stb.
+        \n\nEz a legjobb módja annak, hogy támogassa az Olauncher fejlesztőit. Tekintse meg őket!</string>
+    <string name="wallpaper_message">Az Olauncher minden nap gyönyörű, új háttérképeket kínál, amelyekkel frissen tarthatja kezdőképernyőjét, ingyen!
+        \n\nSzeretné kipróbálni?</string>
+    <string name="accessibility_service_description">A hozzáférhetőségi engedély szükséges a dupla koppintás általi zároláshoz. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
     <string name="support_olauncher_for_free">Támogasson minket ingyenesen az Amazon affiliate linkünk használatával.</string>
     <string name="support_olauncher_message">Minden alkalommal, amikor vásárol valamit a linkünket használva, egy kis jutalékot kapunk. Kérjük, mentse el a linket, és használja fel, amikor csak online vásárol.
-            \n\nKöszönjük!</string>
+        \n\nKöszönjük!</string>
     <string name="open">Link megnyitása</string>
     <string name="copy">Másolás</string>
     <string name="close">Bezárás</string>
@@ -90,7 +86,7 @@
     <string name="date_only">Csak dátum</string>
     <string name="bottom_on">Alsó: Be</string>
     <string name="bottom_off">Alsó: Ki</string>
-    <string name="please_set_olauncher_as_default_first">Kérjük állítsa be az Olauncher alkalmazást alapértelmezett indítóként</string>
+    <string name="please_set_olauncher_as_default_first">Kérjük, állítsa be az Olauncher-t alapértelmezett indítóként</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tipp: Kezdjen el gépelni az alkalmazás ÁTNEVEZÉSE opcióhoz</string>
     <string name="hidden_apps_message">Megjegyzés: A rejtett alkalmazások megtalálásához érintse meg az "Olauncher" elemet ennek a beállítás oldalnak a tetején.
@@ -132,6 +128,15 @@
     <string name="hidden_apps">Rejtett alkalmazások</string>
     <string name="adapter_show">Mutasd!</string>
     <string name="adapter_hide">Rejtsd el!</string>
-    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ön használja a telefonját, vagy a telefona használja Önt?</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Ön használja a telefonját, vagy a telefonja használja Önt?</string>
     <string name="about_olauncher">Az Olauncher-ről</string>
+    <string name="screen_time">Képernyőidő</string>
+    <string name="learn_more">Tudjon meg többet</string>
+    <string name="did_you_know">Tudta?</string>
+    <string name="leave_a_review">Hagyjon véleményt</string>
+    <string name="review_message">Az Olauncher teljesen ingyenes és mindig is az lesz. Nincsenek hirdetései, nem gyűjt adatokat, és segít csökkenteni a képernyő előtt töltött időt egy egészségesebb digitális élet végett.
+        \n\nÚgy gondoljuk, hogy egy minimális indítóra váltás kiváló döntés, és reméljük, hogy élvezni fogja. Ossza meg másokkal is tapasztalatait!</string>
+    <string name="alignment_changed">Az igazítás megváltozott ✅</string>
+    <string name="home_screen">Kezdőképernyő</string>
+    <string name="hey">Üdvözöljük!</string> <!-- Hungarian -->
 </resources>
