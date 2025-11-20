@@ -207,9 +207,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    // com.sec.android.app.clockpackage
-    // com.sec.android.app.clockpackage.ClockPackageApplication
-
     fun getAppList(includeHiddenApps: Boolean = false) {
         viewModelScope.launch {
             appList.value = getAppsList(appContext, prefs, includeRegularApps = true, includeHiddenApps)
@@ -225,11 +222,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun isOlauncherDefault() {
         isOlauncherDefault.value = isOlauncherDefault(appContext)
     }
-
-//    fun resetDefaultLauncherApp(context: Context) {
-//        resetDefaultLauncher(context)
-//        launcherResetFailed.value = getDefaultLauncherPackage(appContext).contains(".")
-//    }
 
     fun setWallpaperWorker() {
         val constraints = Constraints.Builder()
