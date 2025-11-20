@@ -61,6 +61,13 @@ object Constants {
         const val HIDE = 101
     }
 
+    val CLOCK_APP_PACKAGES = arrayOf(
+        "com.google.android.deskclock", //Google Clock
+        "com.sec.android.app.clockpackage", //Samsung Clock
+        "com.oneplus.deskclock", //OnePlus Clock
+        "com.miui.clock", //Xiaomi Clock
+    )
+
     const val WALL_TYPE_LIGHT = "light"
     const val WALL_TYPE_DARK = "dark"
 

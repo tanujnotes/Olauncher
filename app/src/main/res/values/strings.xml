@@ -127,7 +127,7 @@
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
     <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.\nPlease check your app settings.</string>
     <string name="long_press_to_select_app">Long press to select app</string>
-    <string name="unable_to_open_app">Unable  to open app info</string>
+    <string name="unable_to_open_app">Unable to open app</string>
     <string name="copied">Copied</string>
     <string name="system_app_cannot_delete">System app, cannot delete</string>
     <string name="type_a_new_app_name_first">Type a new app name first</string>

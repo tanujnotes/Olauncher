@@ -29,6 +29,7 @@ import app.olauncher.helper.formattedTimeSpent
 import app.olauncher.helper.getAppsList
 import app.olauncher.helper.hasBeenMinutes
 import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.showToast
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
@@ -206,6 +207,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // com.sec.android.app.clockpackage
+    // com.sec.android.app.clockpackage.ClockPackageApplication
+
     fun getAppList(includeHiddenApps: Boolean = false) {
         viewModelScope.launch {
             appList.value = getAppsList(appContext, prefs, includeRegularApps = true, includeHiddenApps)
@@ -350,5 +354,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val viewTimeSpent = appContext.formattedTimeSpent((totalTimeInMillis * 1.1).toLong())
         screenTimeValue.postValue(viewTimeSpent)
         prefs.screenTimeLastUpdated = endTime
+    }
+
+    fun setDefaultClockApp() {
+        viewModelScope.launch {
+            try {
+                Constants.CLOCK_APP_PACKAGES.firstOrNull { appContext.isPackageInstalled(it) }?.let { packageName ->
+                    appContext.packageManager.getLaunchIntentForPackage(packageName)?.component?.className?.let {
+                        prefs.clockAppPackage = packageName
+                        prefs.clockAppClassName = it
+                        prefs.clockAppUser = android.os.Process.myUserHandle().toString()
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }

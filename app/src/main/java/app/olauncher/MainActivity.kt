@@ -94,6 +94,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.firstOpen(true)
             prefs.firstOpen = false
             prefs.firstOpenTime = System.currentTimeMillis()
+            viewModel.setDefaultClockApp()
             viewModel.resetLauncherLiveData.call()
         }
 
