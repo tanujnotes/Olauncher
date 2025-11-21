@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        checkTheme()
+        restartLauncherOrCheckTheme()
     }
 
     override fun onStop() {
@@ -313,8 +314,19 @@ class MainActivity : AppCompatActivity() {
             delay(200)
             if ((prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.white))
                 || (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_NO && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.black))
-            ) recreate()
+            )
+                restartLauncherOrCheckTheme(true)
         }
+    }
+
+    private fun restartLauncherOrCheckTheme(forceRestart: Boolean = false) {
+        if (forceRestart || prefs.launcherRestartTimestamp.hasBeenHours(1)) {
+            showToast("restarted")
+            prefs.launcherRestartTimestamp = System.currentTimeMillis()
+            cacheDir.deleteRecursively()
+            recreate()
+        } else
+            checkTheme()
     }
 
     @Deprecated("Deprecated in Java")
