@@ -138,4 +138,7 @@
     <string name="home_screen">ホーム画面</string>
     <string name="hey">やあ</string>
     <string name="more_features">その他の機能…</string>
+    <string name="new_year_wish">これまでのどの年よりも良い一年になりますように。明けましておめでとうございます！</string>
+    <string name="new_year_wish_1">1月がどうだったかは関係ありません。これまで以上に良い結果を出すために、まだ今年の残りの期間があります。</string>
+    <string name="cheers">乾杯!</string>
 </resources> <!-- Japanese -->

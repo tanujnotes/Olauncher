@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -159,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.showDialog.observe(this) {
             when (it) {
                 Constants.Dialog.ABOUT -> {
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.welcome_to_olauncher_settings), getString(R.string.okay)) {
+                    showMessageDialog(R.string.app_name, R.string.welcome_to_olauncher_settings, R.string.okay) {
                         binding.messageLayout.visibility = View.GONE
                     }
                 }
@@ -167,8 +166,7 @@ class MainActivity : AppCompatActivity() {
                 Constants.Dialog.WALLPAPER -> {
                     prefs.wallpaperMsgShown = true
                     prefs.userState = Constants.UserState.REVIEW
-                    showMessageDialog(getString(R.string.did_you_know), getString(R.string.wallpaper_message), getString(R.string.enable)) {
-                        binding.messageLayout.visibility = View.GONE
+                    showMessageDialog(R.string.did_you_know, R.string.wallpaper_message, R.string.enable) {
                         prefs.dailyWallpaper = true
                         viewModel.setWallpaperWorker()
                         showToast(getString(R.string.your_wallpaper_will_update_shortly))
@@ -177,8 +175,7 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.REVIEW -> {
                     prefs.userState = Constants.UserState.RATE
-                    showMessageDialog(getString(R.string.hey), getString(R.string.review_message), getString(R.string.leave_a_review)) {
-                        binding.messageLayout.visibility = View.GONE
+                    showMessageDialog(R.string.hey, R.string.review_message, R.string.leave_a_review) {
                         prefs.rateClicked = true
                         showToast("😇❤️")
                         rateApp()
@@ -187,8 +184,7 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.RATE -> {
                     prefs.userState = Constants.UserState.SHARE
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.rate_us_message), getString(R.string.rate_now)) {
-                        binding.messageLayout.visibility = View.GONE
+                    showMessageDialog(R.string.app_name, R.string.rate_us_message, R.string.rate_now) {
                         prefs.rateClicked = true
                         showToast("🤩❤️")
                         rateApp()
@@ -197,33 +193,30 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.SHARE -> {
                     prefs.shareShownTime = System.currentTimeMillis()
-                    showMessageDialog(getString(R.string.hey), getString(R.string.share_message), getString(R.string.share_now)) {
-                        binding.messageLayout.visibility = View.GONE
+                    showMessageDialog(R.string.hey, R.string.share_message, R.string.share_now) {
                         showToast("😊❤️")
                         shareApp()
                     }
                 }
 
                 Constants.Dialog.HIDDEN -> {
-                    showMessageDialog(getString(R.string.hidden_apps), getString(R.string.hidden_apps_message), getString(R.string.okay)) {
-                        binding.messageLayout.visibility = View.GONE
+                    showMessageDialog(R.string.hidden_apps, R.string.hidden_apps_message, R.string.okay) {
                     }
                 }
 
                 Constants.Dialog.KEYBOARD -> {
-                    showMessageDialog(getString(R.string.app_name), getString(R.string.keyboard_message), getString(R.string.okay)) {
-                        binding.messageLayout.visibility = View.GONE
+                    showMessageDialog(R.string.app_name, R.string.keyboard_message, R.string.okay) {
                     }
                 }
 
                 Constants.Dialog.DIGITAL_WELLBEING -> {
-                    showMessageDialog(getString(R.string.screen_time), getString(R.string.app_usage_message), getString(R.string.permission)) {
+                    showMessageDialog(R.string.screen_time, R.string.app_usage_message, R.string.permission) {
                         startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
                     }
                 }
 
                 Constants.Dialog.PRO_MESSAGE -> {
-                    showMessageDialog(getString(R.string.hey), getString(R.string.pro_message), getString(R.string.olauncher_pro)) {
+                    showMessageDialog(R.string.hey, R.string.pro_message, R.string.olauncher_pro) {
                         openUrl(Constants.URL_OLAUNCHER_PRO)
                     }
                 }
@@ -231,17 +224,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showMessageDialog(title: String, message: String, action: String, clickListener: () -> Unit) {
-        binding.tvTitle.text = title
-        binding.tvMessage.text = message
-        binding.tvAction.text = action
-        binding.tvAction.setOnClickListener { clickListener() }
+    private fun showMessageDialog(title: Int, message: Int, action: Int, clickListener: () -> Unit) {
+        binding.tvTitle.text = getString(title)
+        binding.tvMessage.text = getString(message)
+        binding.tvAction.text = getString(action)
+        binding.tvAction.setOnClickListener {
+            clickListener()
+            binding.messageLayout.visibility = View.GONE
+        }
         binding.messageLayout.visibility = View.VISIBLE
     }
 
     private fun checkForMessages() {
         if (prefs.firstOpenTime == 0L)
             prefs.firstOpenTime = System.currentTimeMillis()
+
+        val calendar = Calendar.getInstance()
+        val dayOfYear = calendar.get(Calendar.DAY_OF_YEAR)
+        if (dayOfYear == 1 && dayOfYear != prefs.shownOnDayOfYear) {
+            prefs.shownOnDayOfYear = dayOfYear
+            showMessageDialog(R.string.hey, R.string.new_year_wish, R.string.cheers) {}
+            return
+        } else if (dayOfYear == 32 && dayOfYear != prefs.shownOnDayOfYear) {
+            prefs.shownOnDayOfYear = dayOfYear
+            showMessageDialog(R.string.hey, R.string.new_year_wish_1, R.string.cheers) {}
+            return
+        }
 
         when (prefs.userState) {
             Constants.UserState.START -> {
@@ -268,14 +276,14 @@ class MainActivity : AppCompatActivity() {
                     prefs.userState = Constants.UserState.SHARE
                 else if (isOlauncherDefault(this)
                     && prefs.firstOpenTime.isDaySince() >= 7
-                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 16
+                    && calendar.get(Calendar.HOUR_OF_DAY) >= 16
                 ) viewModel.showDialog.postValue(Constants.Dialog.RATE)
             }
 
             Constants.UserState.SHARE -> {
                 if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(14)
                     && prefs.shareShownTime.isDaySince() >= 70
-                    && Calendar.getInstance().get(Calendar.HOUR_OF_DAY) >= 16
+                    && calendar.get(Calendar.HOUR_OF_DAY) >= 16
                 ) viewModel.showDialog.postValue(Constants.Dialog.SHARE)
             }
         }
@@ -308,6 +316,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun restartLauncherOrCheckTheme(forceRestart: Boolean = false) {
+        if (forceRestart || prefs.launcherRestartTimestamp.hasBeenHours(4)) {
+            prefs.launcherRestartTimestamp = System.currentTimeMillis()
+            cacheDir.deleteRecursively()
+            recreate()
+        } else
+            checkTheme()
+    }
+
     private fun checkTheme() {
         timerJob?.cancel()
         timerJob = lifecycleScope.launch {
@@ -317,16 +334,6 @@ class MainActivity : AppCompatActivity() {
             )
                 restartLauncherOrCheckTheme(true)
         }
-    }
-
-    private fun restartLauncherOrCheckTheme(forceRestart: Boolean = false) {
-        if (forceRestart || prefs.launcherRestartTimestamp.hasBeenHours(1)) {
-            showToast("restarted")
-            prefs.launcherRestartTimestamp = System.currentTimeMillis()
-            cacheDir.deleteRecursively()
-            recreate()
-        } else
-            checkTheme()
     }
 
     @Deprecated("Deprecated in Java")

@@ -81,8 +81,7 @@
     <!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
-    <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.
-        \n\nPlease search for Digital Wellbeing in your phone settings and enable it.</string>
+    <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.           Please search for Digital Wellbeing in your phone settings and enable it.</string>
     <string name="app_usage_message">To show/hide your screen time on the home screen, please allow or disallow the app usage permission.
         \n\nNote: No app usage data is collected. Everything is processed on your device.</string>
     <string name="pro_message">Olauncher also has a pro version called Pro Launcher. It has extra features like weather, widgets, fonts, folders, AMOLED wallpapers, and so on.
@@ -151,10 +150,12 @@
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
     <string name="leave_a_review">Leave a review</string>
-    <string name="review_message">Olauncher is free and always will be. It has no ads, collects no data, and reduces your screen time, resulting in a healthier life.
-        \n\nWe hope you enjoy it. Tell us what you think.</string>
+    <string name="review_message">Olauncher הוא חינמי ותמיד יהיה. הוא ללא פרסומות, אינו אוסף נתונים ומפחית את זמן המסך שלך, וכתוצאה מכך חיים בריאים יותר. אנו מקווים שתיהנו ממנו. ספרו לנו מה דעתכם.</string>
     <string name="alignment_changed">Alignment changed ✅</string>
     <string name="home_screen">Home screen</string>
     <string name="hey">Hey</string>
     <string name="more_features">More features…</string>
+    <string name="new_year_wish">Here\'s to a year better than any before. Happy new year!</string>
+    <string name="new_year_wish_1">It doesn\'t matter how January went. You still have the rest of the year to do better than ever.</string>
+    <string name="cheers">Cheers!</string>
 </resources>

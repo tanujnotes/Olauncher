@@ -102,7 +102,6 @@
     <string name="not_working"><u>Ne fonctionne pas?</u></string>
     <string name="info">Info</string>
     <string name="delete">Supprimer</string>
-    <string name="day_battery" formatted="false">%s, %d%%</string>
     <string name="text_size">Taille du texte</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
@@ -141,4 +140,7 @@
     <string name="home_screen">Écran d\'accueil</string>
     <string name="hey">Salut</string>
     <string name="more_features">Plus de fonctionnalités…</string>
+    <string name="new_year_wish">À une année meilleure que toutes les précédentes. Bonne année !</string>
+    <string name="new_year_wish_1">" Peu importe comment s'est passé le mois de janvier. Tu as encore le reste de l'année pour faire mieux que jamais."</string>
+    <string name="cheers">Santé!</string>
 </resources><!-- French -->

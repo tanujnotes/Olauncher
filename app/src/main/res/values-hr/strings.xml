@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!-- Croatian -->
 <resources>
-    <string name="app_name">Olauncher</string>
     <string name="app">Aplikacija</string>
     <string name="set_as_default_launcher">Postavi kao zadani pokretač</string>
     <string name="set_as_default_launcher_u"><u>Postavi kao zadani pokretač</u></string>
@@ -21,7 +20,6 @@
     <string name="rate_now">Ocijeni</string>
     <string name="follow">Prati</string>
     <string name="email">E-pošta</string>
-    <string name="github">Github</string>
     <string name="donate">Doniraj</string>
     <string name="swipe_up_for_apps">1. Povuci prema gore za aplikacije\n2. Dugo pritisnite bilo gdje za postavke</string>
     <string name="apps_on_home_screen">Aplikacije na početnoj stranici</string>
@@ -72,7 +70,6 @@
     <string name="wallpaper_message">Olauncher nudi predivne nove pozadine svaki dan. Daj svom početnom ekranu svjež izgled svaki dan, besplatno!
         \n\nŽeliš li isprobati?</string>
     <string name="accessibility_service_description">Dozvola za pristupačnost potrebna je za omogućavanje zaključavanja dvostrukim dodirom. Bilo koji podatci prikupljeni ovim servisom neće napustiti tvoj uređaj.</string>
-    <string name="lock_layout_description">lock layout description to be used a unique id to lock screen</string>
     <string name="support_olauncher_for_free">Besplatno podrži Olauncher korištenjem naše sponzorske poveznice za Amazon.</string>
     <string name="support_olauncher_message">Svaki puta kada kupiš nešto pomoću naše poveznice, mi primimo malu naknadu. Molimo spremi poveznicu i koristi ju svaki puta kada kupuješ online.\nHvala ti!</string>
     <string name="open">Otvori poveznicu</string>
@@ -140,4 +137,7 @@
     <string name="home_screen">Početni ekran</string>
     <string name="hey">Bok</string>
     <string name="more_features">Više značajki…</string>
+    <string name="new_year_wish">Neka je ova godina bolja od svih prije. Sretna nova godina!</string>
+    <string name="new_year_wish_1">Nije važno kako je prošao siječanj. Još uvijek imate ostatak godine da budete bolji nego ikad.</string>
+    <string name="cheers">Živjeli!</string>
 </resources><!-- Croatian -->

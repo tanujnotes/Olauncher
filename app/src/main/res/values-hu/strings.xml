@@ -141,4 +141,7 @@
     <string name="home_screen">Kezdőképernyő</string>
     <string name="hey">Üdvözöljük!</string>
     <string name="more_features">További funkciók…</string>
+    <string name="new_year_wish">Egy évre, amely jobb lesz minden eddiginél. Boldog új évet!</string>
+    <string name="new_year_wish_1">Nem számít, hogyan telt a január. Még mindig van hátra az évből, hogy minden eddiginél jobban teljesíts.</string>
+    <string name="cheers">Egészségére!</string>
 </resources><!-- Hungarian -->

@@ -1,6 +1,8 @@
 <resources>
     <string name="app">יישום</string>
     <string name="set_as_default_launcher">הגדרה בתור משגר ברירת המחדל</string>
+    <string name="set_as_default_launcher_u">הגדר תחילה את Olauncher כברירת מחדל</string>
+    <string name="set_as_default_launcher_first"><u>הגדר תחילה את Olauncher כברירת מחדל</u></string>
     <string name="app_text_color">צבע הטקסט</string>
     <string name="double_tap_to_lock_screen">נעילת המסך בהקשה כפולה</string>
     <string name="admin_permission_message">יישום Olauncher ישתמש בהרשאה של נעילת המסך באופן מתון. יישום Olauncher אינו אוסף או משתף נתונים כלל.</string>
@@ -12,7 +14,9 @@
     <string name="change_default_launcher">שינוי משגר ברירת המחדל</string>
     <string name="privacy">פרטיות</string>
     <string name="share">שיתוף</string>
+    <string name="share_now">שתף עכשיו</string>
     <string name="rate">דירוג</string>
+    <string name="rate_now">דרג עכשיו</string>
     <string name="follow">עקבו אחריי</string>
     <string name="email">דואר אלקטרוני</string>
     <string name="donate">תרומה</string>
@@ -56,6 +60,7 @@
         \n\nהיית רוצה אולי לספר לחברים שלך על Olauncher? זה יכול לסייע לנו מאוד. תודה רבה!</string>
     <string name="keyboard_message">היי, יותר מהיר למצוא ולפתוח יישומים ב־Olauncher בעזרת ההקלדה. אולי בכל זאת היית רוצה להשאיר את ההגדרה הזאת ולתת לה עוד הזדמנות?
         \n\nThe choice is always yours.</string>
+    <string name="wallpaper_message">Olauncher מציע טפטים חדשים ויפים מדי יום. תנו למסך הבית שלכם מראה חדש ורענן בכל יום, בחינם! רוצים לנסות?</string>
     <string name="accessibility_service_description">הרשאת הנגישות נחוצה להפעלת הנעילה בהקשה כפולה. כל הנתונים שייאספו על ידי Olauncher דרך השירות הזה לא יועברו הלאה ממכשירך.</string>
     <string name="support_olauncher_for_free">אפשר לתמוך ב־Olauncher מבלי לשלם שקל, בעזרת שימוש בקישור ה־Amazon affiliate שלנו.</string>
     <string name="support_olauncher_message">על כל רכישה שתבוצע דרך הקישור שלנו אנחנו נקבל עמלה קטנה. נשמח אם תשמרו את הקישור ותשתמשו בו בקניות מהאינטרנט.\nתודה רבה!</string>
@@ -109,7 +114,24 @@
     <string name="olauncher_is_not_default_launcher">יישום Olauncher לא מוגדר בתור ברירת מחדל.\nייתכן שעדכון הרקע היומי לא יצליח.</string>
     <string name="long_press_to_enable">לחיצה ארוכה להפעלה</string>
     <string name="no_hidden_apps">אין יישומים מוסתרים</string>
+    <string name="hidden_apps">אפליקציות מוסתרות</string>
     <string name="adapter_show">הצגה</string>
     <string name="adapter_hide">הסתרה</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">האם אתם משתמשים בטלפון, או שהוא משתמש בכם?</string>
+    <string name="hey">היי</string>
+    <string name="more_features">עוד תכונות…</string>
+    <string name="new_year_wish">לעבר שנה טובה יותר מכל מה שקדם. שנה טובה!</string>
+    <string name="new_year_wish_1">לא משנה איך עבר ינואר. עדיין יש לך את שאר השנה להצליח יותר מתמיד</string>
+    <string name="cheers">לחיים!</string>
+    <string name="about_olauncher">אודות ושאלות נפוצות</string>
+    <string name="screen_time">זמן מסך</string>
+    <string name="learn_more">למדו עוד</string>
+    <string name="did_you_know">האם ידעת?</string>
+    <string name="leave_a_review">השאירו ביקורת</string>
+    <string name="review_message">‏Olauncher חינמית ותמיד תהיה. אין בה פרסומות, היא אינה אוספת נתונים, והיא מפחיתה את זמן המסך שלכם – מה שמוביל לחיים בריאים יותר.</string>
+    <string name="alignment_changed">היישור השתנה ✅</string>
+    <string name="home_screen">מסך הבית</string>
+    <string name="digital_wellbeing_message">אם ברצונך להגדיר מגבלות זמן עבור אפליקציות מסוימות, תכונת Digital Wellbeing של אנדרואיד יכולה לעזור לך לעשות זאת. חפש את Digital Wellbeing בהגדרות הטלפון שלך והפעל אותה.</string>
+    <string name="app_usage_message">כדי להציג/להסתיר את זמן המסך שלך במסך הבית, אנא אפשר או בטל את הרשאת השימוש באפליקציה. הערה: לא נאספים נתוני שימוש באפליקציה. הכל מעובד במכשיר שלך.</string>
+    <string name="pro_message">ל-Olauncher יש גם גרסת Pro בשם Pro Launcher. יש לה תכונות נוספות כמו מזג אוויר, ווידג\'טים, גופנים, תיקיות, טפטים של AMOLED וכן הלאה. זוהי גם הדרך הטובה ביותר לתמוך במפתחי Olauncher. תבדקו!</string>
 </resources>

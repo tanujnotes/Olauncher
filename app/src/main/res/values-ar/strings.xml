@@ -134,4 +134,7 @@
     <string name="home_screen">الشاشة الرئيسية</string>
     <string name="hey">مرحبا</string>
     <string name="more_features">مزايا إضافية…</string>
+    <string name="new_year_wish">إليك عامًا أفضل من كل ما سبقه. سنة جديدة سعيدة!</string>
+    <string name="new_year_wish_1">لا يهم كيف مضى شهر يناير. لا يزال لديك بقية العام لتقدم أداءً أفضل من أي وقت مضى.</string>
+    <string name="cheers">هتافات!</string>
 </resources>
