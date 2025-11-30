@@ -1,6 +1,7 @@
 package app.olauncher.ui
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,7 @@ class AppDrawerFragment : Fragment() {
             flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
             canRename = it.getBoolean(Constants.Key.RENAME, false)
         }
+        setAppAlignment(prefs.appLabelAlignment)
         initViews()
         initSearch()
         initAdapter()
@@ -283,5 +285,9 @@ class AppDrawerFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setAppAlignment(horizontalGravity: Int = prefs.appLabelAlignment) {
+        viewModel.updateAppAlignment(horizontalGravity)
     }
 }
