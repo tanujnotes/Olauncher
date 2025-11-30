@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Polish -->
+<resources>
+    <string name="app">App</string>
+    <string name="set_as_default_launcher">Stel in als standaard launcher</string>
+    <string name="set_as_default_launcher_u"><u>Stel in als standaard launcher</u></string>
+    <string name="set_as_default_launcher_first">Stel Olauncher eerst in als standaard</string>
+    <string name="app_text_color">Tekstkleur</string>
+    <string name="double_tap_to_lock_screen">Dubbel tik om te vergrendelen</string>
+    <string name="admin_permission_message">Olauncher belooft de toestemming voor vergrendelingsscherm verantwoord te gebruiken. Olauncher verzamelt of deelt geen gegevens.</string>
+    <string name="about">Over</string>
+    <string name="off">Uit</string>
+    <string name="on">Aan</string>
+    <string name="black">Zwart</string>
+    <string name="white">Wit</string>
+    <string name="change_default_launcher">Wijzig standaard launcher</string>
+    <string name="privacy">Privacy</string>
+    <string name="share">Delen</string>
+    <string name="share_now">Nu delen</string>
+    <string name="rate">Beoordeel</string>
+    <string name="rate_now">Nu beoordelen</string>
+    <string name="follow">Volgen</string>
+    <string name="email">E-mail</string>
+    <string name="donate">Doneren</string>
+    <string name="swipe_up_for_apps">1. Veeg omhoog voor alle apps\n2. Ergens lang indrukken voor instellingen</string>
+    <string name="apps_on_home_screen">Apps op startscherm</string>
+    <string name="daily_wallpaper_update">Dagelijks nieuwe achtergrond</string>
+    <string name="left">Links</string>
+    <string name="right">Rechts</string>
+    <string name="center">Midden</string>
+    <string name="home_layout_alignment">App uitlijning</string>
+    <string name="swipe_left_app">Veeg naar links app</string>
+    <string name="swipe_right_app">Veeg naar rechts app</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Tip: Begin met het typen van een app-naam om deze automatisch te starten</string>
+    <string name="okay">Oke</string>
+    <string name="cool">Cool!</string>
+    <string name="auto_show_keyboard">Auto tonen toetsenbord</string>
+    <string name="hide">Verbergen</string>
+    <string name="status_bar">Statusbalk bovenaan</string>
+    <string name="rename">Hernoemen</string>
+    <string name="show_date_time">Datum en tijd weergeven</string>
+    <string name="appearance">Uiterlijk</string>
+    <string name="gestures">Gebaren</string>
+    <string name="theme_mode">Thema modus</string>
+    <string name="system_default">Systeem</string>
+    <string name="dark">Donker</string>
+    <string name="light">Licht</string>
+    <string name="welcome_to_olauncher_settings">Welkom bij de instellingen!
+        \n\nOnthoud, als je vragen hebt, heeft onze Over-pagina het antwoord.</string>
+    <string name="rate_us_message">Hoi, je zult dit bericht niet meer zien.
+        \n\nAls je Olauncher nuttig vindt, zou je dan een 5-sterren beoordeling willen achterlaten? Het zou veel voor ons betekenen. Dank je!</string>
+    <string name="share_message">We hebben je hulp nodig! We willen elke Android-gebruiker vertellen over de voordelen van Olauncher, maar we kunnen het niet alleen.
+         \n\nZou je Olauncher willen delen met je vrienden, familie en volgers? Dat zou heel behulpzaam zijn. Bedankt!</string>
+    <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
+    <!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
+    <string name="keyboard_message">Hoi, het toetsenbord is de snelste manier om apps te vinden en te starten in Olauncher. Mag ik je vragen dit nog een paar dagen ingeschakeld te laten en daarna te beslissen?
+        \n\nDe keuze is altijd aan jou.</string>
+    <string name="digital_wellbeing_message">Als je tijdslimieten voor bepaalde apps wilt instellen, kan de Digital Wellbeing-functie van Android je daarbij helpen.
+        \n\nZoek in de instellingen van je telefoon naar Digital Wellbeing en schakel het in.</string>
+    <string name="app_usage_message">Om je schermtijd op het startscherm te tonen of te verbergen, geef of weiger de toestemming voor app-gebruik.
+        \n\nOpmerking: er worden geen app-gebruiksgegevens verzameld. Alles wordt op je apparaat verwerkt.</string>
+    <string name="pro_message">Olauncher heeft ook een pro-versie genaamd Pro Launcher. Deze heeft extra functies zoals weer, widgets, lettertypen, mappen, AMOLED-achtergronden enz.
+        \n\nHet is ook de beste manier om de ontwikkelaars van Olauncher te steunen. Bekijk het eens!</string>
+    <string name="wallpaper_message">Olauncher biedt dagelijks mooie nieuwe achtergronden. Geef je startscherm iedere dag een frisse nieuwe look, gratis!
+        \n\nWil je het proberen?</string>
+    <string name="accessibility_service_description">De toegankelijkheidstoestemming is vereist om dubbel tikken om te vergrendelen mogelijk te maken. Alle gegevens die Olauncher via deze service verkrijgt, verlaten je apparaat niet.</string>
+    <string name="support_olauncher_for_free">Steun Olauncher gratis door onze Amazon-affiliatelink te gebruiken.</string>
+    <string name="support_olauncher_message">Elke keer dat je iets koopt via onze link, ontvangen wij een kleine commissie. Bewaar de link en gebruik deze wanneer je online winkelt.\nDank je!</string>
+    <string name="open">Link openen</string>
+    <string name="copy">Kopiëren</string>
+    <string name="close">Sluiten</string>
+    <string name="not_now">Niet nu</string>
+    <string name="public_roadmap">Openbare roadmap van Olauncher</string>
+    <string name="instagram">Instagram</string>
+    <string name="twitter">Ontwikkelaar</string>
+    <string name="roadmap">Routekaart</string>
+    <string name="date">Datum</string>
+    <string name="date_only">Alleen datum</string>
+    <string name="bottom_on">Onder: Aan</string>
+    <string name="bottom_off">Onder: Uit</string>
+    <string name="please_set_olauncher_as_default_first">Stel Olauncher eerst in als standaard</string>
+    <string name="affiliate">Affiliate</string>
+    <string name="tip_start_typing_for_rename">Tip: Begin met typen om een app te hernoemen</string>
+    <string name="hidden_apps_message">Opmerking: Tik bovenaan deze instellingenpagina op 'Olauncher' om je verborgen apps te vinden.\n\nMeer informatie is beschikbaar op onze Over-pagina.</string>
+    <string name="swipe_down_for">Veeg omlaag voor</string>
+    <string name="search">Zoeken</string>
+    <string name="notifications">Meldingen</string>
+    <string name="accessibility_disclosure">Schakel de toegankelijkheidsdienst van Olauncher in of uit in de instellingen van je apparaat om deze functie te activeren of te deactiveren.
+    \n\nLet op: deze dienst wordt alleen gebruikt om je scherm uit te schakelen met het dubbel-tikgebaar. Onze toegankelijkheidsdienst verzamelt of deelt geen gegevens.</string>
+    <string name="accept">Accepteren</string>
+    <string name="permission">Toestemming</string>
+    <string name="double_tap_lock">Dubbel tik om te vergrendelen</string>
+    <string name="enable">Inschakelen</string>
+    <string name="disable">Uitschakelen</string>
+    <string name="not_working"><u>Werkt niet?</u></string>
+    <string name="info">Info</string>
+    <string name="delete">Verwijderen</string>
+    <string name="text_size">Tekstgrootte</string>
+    <string name="enabled">Ingeschakeld</string>
+    <string name="disabled">Uitgeschakeld</string>
+    <string name="please_turn_on_double_tap_to_unlock">Schakel dubbel tik om te vergrendelen in</string>
+    <string name="launcher_failed_to_lock_device">Olauncher kon het apparaat niet vergrendelen.\nControleer je app-instellingen.</string>
+    <string name="long_press_to_select_app">Lang indrukken om app te selecteren</string>
+    <string name="unable_to_open_app">Kan app-info niet openen</string>
+    <string name="copied">Gekopieerd</string>
+    <string name="system_app_cannot_delete">Systeem-app, kan niet worden verwijderd</string>
+    <string name="type_a_new_app_name_first">Typ eerst een nieuwe app-naam</string>
+    <string name="app_not_found">App niet gevonden</string>
+    <string name="unable_to_launch_app">Kan app niet starten</string>
+    <string name="search_for_Launcher_or_home_app">Zoek naar Launcher of start-app</string>
+    <string name="swipe_left_app_enabled">Veeg links-app ingeschakeld</string>
+    <string name="swipe_right_app_enabled">Veeg rechts-app ingeschakeld</string>
+    <string name="swipe_left_app_disabled">Veeg links-app uitgeschakeld</string>
+    <string name="swipe_right_app_disabled">Veeg rechts-app uitgeschakeld</string>
+    <string name="your_wallpaper_will_update_shortly">Je achtergrond wordt binnenkort bijgewerkt</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher is niet de standaard launcher. Achtergrondupdate zal mislukken.</string>
+    <string name="long_press_to_enable">Lang indrukken om in te schakelen</string>
+    <string name="no_hidden_apps">Geen verborgen apps</string>
+    <string name="hidden_apps">Verborgen apps</string>
+    <string name="adapter_show">Toon</string>
+    <string name="adapter_hide">Verbergen</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Gebruik je je telefoon, of gebruikt je telefoon jou?</string>
+    <string name="about_olauncher">Over en veelgestelde vragen</string>
+    <string name="screen_time">Schermtijd</string>
+    <string name="learn_more">Meer informatie</string>
+    <string name="did_you_know">Wist je dat?</string>
+    <string name="leave_a_review">Laat een recensie achter</string>
+    <string name="review_message">Olauncher is gratis en zal dat altijd blijven. Het heeft geen advertenties, verzamelt geen gegevens en vermindert je schermtijd, wat leidt tot een gezonder leven.\n\nWe hopen dat je ervan geniet. Vertel ons wat je ervan vindt.</string>
+    <string name="alignment_changed">Uitlijning gewijzigd ✅</string>
+    <string name="home_screen">Startscherm</string>
+    <string name="hey">Hoi</string>
+    <string name="more_features">Meer functies…</string>
+</resources><!-- Dutch -->
