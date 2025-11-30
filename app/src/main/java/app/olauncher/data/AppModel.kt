@@ -8,6 +8,7 @@ data class AppModel(
     val key: CollationKey?,
     val appPackage: String,
     val activityClassName: String?,
+    val originalLabel: String,
     val isNew: Boolean? = false,
     val user: UserHandle,
 ) : Comparable<AppModel> {
