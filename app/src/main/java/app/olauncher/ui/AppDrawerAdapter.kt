@@ -18,10 +18,12 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
+import app.olauncher.helper.AppLabelFilter
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
+import app.olauncher.helper.normalizeNfd
 import app.olauncher.helper.showKeyboard
-import java.text.Normalizer
+import org.simmetrics.metrics.JaroWinkler
 
 class AppDrawerAdapter(
     private var flag: Int,
@@ -31,6 +33,7 @@ class AppDrawerAdapter(
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
+    private val filterListSubmitListener: () -> Unit
 ) : ListAdapter<AppModel, AppDrawerAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
 
     companion object {
@@ -82,12 +85,10 @@ class AppDrawerAdapter(
                 isBangSearch = charSearch?.startsWith("!") ?: false
                 autoLaunch = charSearch?.startsWith(" ")?.not() ?: true
 
-                val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
-                else appsList.filter { app ->
-                    appLabelMatches(app.appLabel, charSearch)
-//                }.sortedByDescending {
-//                    charSearch.contentEquals(it.appLabel, true)
-                } as MutableList<AppModel>)
+                val appFilteredList = if (charSearch.isNullOrBlank())
+                    appsList
+                else
+                    getSortedMatches(charSearch, appsList)
 
                 val filterResults = FilterResults()
                 filterResults.values = appFilteredList
@@ -100,12 +101,21 @@ class AppDrawerAdapter(
                     val items = it as MutableList<AppModel>
                     appFilteredList = items
                     submitList(appFilteredList) {
+                        filterListSubmitListener()
                         autoLaunch()
                     }
                 }
             }
         }
     }
+
+    private fun getSortedMatches(charSearch: CharSequence, appsList: List<AppModel>): List<AppModel> {
+        val searchString = charSearch.toString().normalizeNfd().lowercase()
+        val matcher = JaroWinkler.createWithBoostThreshold()
+        val results = AppLabelFilter(appsList, matcher).filterApps(searchString)
+        return results
+    }
+
 
     private fun autoLaunch() {
         try {
@@ -118,14 +128,6 @@ class AppDrawerAdapter(
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-    private fun appLabelMatches(appLabel: String, charSearch: CharSequence): Boolean {
-        return (appLabel.contains(charSearch.trim(), true) or
-                Normalizer.normalize(appLabel, Normalizer.Form.NFD)
-                    .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
-                    .replace(Regex("[-_+,. ]"), "")
-                    .contains(charSearch, true))
     }
 
     fun setAppList(appsList: MutableList<AppModel>) {
