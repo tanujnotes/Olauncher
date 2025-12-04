@@ -143,4 +143,5 @@
     <string name="new_year_wish">À une année meilleure que toutes les précédentes. Bonne année !</string>
     <string name="new_year_wish_1">" Peu importe comment s'est passé le mois de janvier. Tu as encore le reste de l'année pour faire mieux que jamais."</string>
     <string name="cheers">Santé!</string>
+    <string name="notification_bar">Barre de notifications</string>
 </resources><!-- French -->

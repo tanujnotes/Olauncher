@@ -137,4 +137,5 @@
     <string name="new_year_wish">إليك عامًا أفضل من كل ما سبقه. سنة جديدة سعيدة!</string>
     <string name="new_year_wish_1">لا يهم كيف مضى شهر يناير. لا يزال لديك بقية العام لتقدم أداءً أفضل من أي وقت مضى.</string>
     <string name="cheers">هتافات!</string>
+    <string name="notification_bar">شريط الإشعارات</string>
 </resources>

@@ -159,4 +159,5 @@
     <string name="new_year_wish">Here\'s to a year better than any before. Happy new year!</string>
     <string name="new_year_wish_1">It doesn\'t matter how January went. You still have the rest of the year to do better than ever.</string>
     <string name="cheers">Cheers!</string>
+    <string name="notification_bar">Notification bar</string>
 </resources>

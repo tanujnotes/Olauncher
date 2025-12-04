@@ -557,7 +557,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:paddingVertical="8dp"
-                        android:text="@string/status_bar"
+                        android:text="@string/notification_bar"
                         android:textColor="?attr/primaryColor" />
 
                     <TextView

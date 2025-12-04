@@ -142,4 +142,5 @@
     <string name="new_year_wish">Auf ein Jahr, das besser ist als alle zuvor. Frohes neues Jahr!</string>
     <string name="new_year_wish_1">Egal, wie der Januar gelaufen ist. Du hast noch den Rest des Jahres Zeit, um besser zu sein als je zuvor.</string>
     <string name="cheers">Prost!</string>
+    <string name="notification_bar">Benachrichtigungsleiste</string>
 </resources>

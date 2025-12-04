@@ -134,4 +134,5 @@
     <string name="digital_wellbeing_message">אם ברצונך להגדיר מגבלות זמן עבור אפליקציות מסוימות, תכונת Digital Wellbeing של אנדרואיד יכולה לעזור לך לעשות זאת. חפש את Digital Wellbeing בהגדרות הטלפון שלך והפעל אותה.</string>
     <string name="app_usage_message">כדי להציג/להסתיר את זמן המסך שלך במסך הבית, אנא אפשר או בטל את הרשאת השימוש באפליקציה. הערה: לא נאספים נתוני שימוש באפליקציה. הכל מעובד במכשיר שלך.</string>
     <string name="pro_message">ל-Olauncher יש גם גרסת Pro בשם Pro Launcher. יש לה תכונות נוספות כמו מזג אוויר, ווידג\'טים, גופנים, תיקיות, טפטים של AMOLED וכן הלאה. זוהי גם הדרך הטובה ביותר לתמוך במפתחי Olauncher. תבדקו!</string>
+    <string name="notification_bar">שורת ההתראות</string>
 </resources>
