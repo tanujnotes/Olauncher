@@ -1,0 +1,43 @@
+# Font Licenses
+
+All custom fonts included in this directory are licensed under the
+SIL Open Font License, Version 1.1 (OFL-1.1).
+
+## Fonts Included
+
+### Quicksand
+- Designer: Andrew Paglinawan
+- Source: https://fonts.google.com/specimen/Quicksand
+- License: SIL Open Font License 1.1
+
+### Comfortaa
+- Designer: Johan Aakerlund
+- Source: https://fonts.google.com/specimen/Comfortaa
+- License: SIL Open Font License 1.1
+
+### Poppins
+- Designer: Indian Type Foundry
+- Source: https://fonts.google.com/specimen/Poppins
+- License: SIL Open Font License 1.1
+
+### Space Mono
+- Designer: Colophon Foundry
+- Source: https://fonts.google.com/specimen/Space+Mono
+- License: SIL Open Font License 1.1
+
+### Josefin Sans
+- Designer: Santiago Orozco
+- Source: https://fonts.google.com/specimen/Josefin+Sans
+- License: SIL Open Font License 1.1
+
+## SIL Open Font License 1.1
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+
+This license is available with a FAQ at: https://scripts.sil.org/OFL
+
+The fonts can be used freely in products & projects - print or digital,
+commercial or otherwise. You can also modify them for your own needs.
+
+The fonts may not be sold by themselves.
+
