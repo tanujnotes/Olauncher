@@ -291,7 +291,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -301,7 +301,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage1 = ""
         }
         if (homeAppsNum == 1) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -311,7 +311,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage2 = ""
         }
         if (homeAppsNum == 2) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -321,7 +321,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage3 = ""
         }
         if (homeAppsNum == 3) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -331,7 +331,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage4 = ""
         }
         if (homeAppsNum == 4) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -341,7 +341,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage5 = ""
         }
         if (homeAppsNum == 5) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -351,7 +351,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage6 = ""
         }
         if (homeAppsNum == 6) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -361,7 +361,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage7 = ""
         }
         if (homeAppsNum == 7) {
-            applyFontToAppNames()
+            applyHomeFont()
             return
         }
 
@@ -371,11 +371,12 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             prefs.appPackage8 = ""
         }
 
-        applyFontToAppNames()
+        applyHomeFont()
     }
 
-    private fun applyFontToAppNames() {
+    private fun applyHomeFont() {
         val typeface = getTypeface(requireContext(), prefs.homeFont)
+        // Apply to app names
         binding.homeApp1.typeface = typeface
         binding.homeApp2.typeface = typeface
         binding.homeApp3.typeface = typeface
@@ -384,6 +385,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp6.typeface = typeface
         binding.homeApp7.typeface = typeface
         binding.homeApp8.typeface = typeface
+        // Apply to clock, date, and screen time
+        binding.clock.typeface = typeface
+        binding.date.typeface = typeface
+        binding.tvScreenTime.typeface = typeface
     }
 
     private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String): Boolean {
