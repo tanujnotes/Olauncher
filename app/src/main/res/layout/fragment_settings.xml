@@ -770,6 +770,113 @@
 
                 </FrameLayout>
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:animateLayoutChanges="true"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/font"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/fontValue"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginEnd="4dp"
+                        android:paddingVertical="8dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="8dp"
+                        tools:text="Sans Serif Light" />
+
+                    <!-- Font select layout-->
+                    <HorizontalScrollView
+                        android:id="@+id/fontSelectLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:fadingEdgeLength="8dp"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="2dp"
+                        android:requiresFadingEdge="horizontal"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/fontSansSerifLight"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:fontFamily="sans-serif-light"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_sans_serif_light" />
+
+                            <TextView
+                                android:id="@+id/fontSansSerif"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:fontFamily="sans-serif"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_sans_serif" />
+
+                            <TextView
+                                android:id="@+id/fontSansSerifMedium"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_sans_serif_medium" />
+
+                            <TextView
+                                android:id="@+id/fontSerif"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:fontFamily="serif"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_serif" />
+
+                            <TextView
+                                android:id="@+id/fontMonospace"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_monospace" />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </FrameLayout>
+
             </LinearLayout>
 
             <LinearLayout

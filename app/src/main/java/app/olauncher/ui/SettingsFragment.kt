@@ -75,6 +75,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateWallpaperText()
         populateAppThemeText()
         populateTextSize()
+        populateFont()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -91,6 +92,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
         binding.textSizesLayout.visibility = View.GONE
+        binding.fontSelectLayout?.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
 
@@ -143,6 +145,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.textSize5 -> updateTextSizeScale(Constants.TextSize.FIVE)
             R.id.textSize6 -> updateTextSizeScale(Constants.TextSize.SIX)
             R.id.textSize7 -> updateTextSizeScale(Constants.TextSize.SEVEN)
+
+            R.id.fontValue -> binding.fontSelectLayout?.visibility = View.VISIBLE
+            R.id.fontSansSerif -> updateFont(Constants.Font.SANS_SERIF)
+            R.id.fontSansSerifLight -> updateFont(Constants.Font.SANS_SERIF_LIGHT)
+            R.id.fontSansSerifMedium -> updateFont(Constants.Font.SANS_SERIF_MEDIUM)
+            R.id.fontSerif -> updateFont(Constants.Font.SERIF)
+            R.id.fontMonospace -> updateFont(Constants.Font.MONOSPACE)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -250,6 +259,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.textSize5.setOnClickListener(this)
         binding.textSize6.setOnClickListener(this)
         binding.textSize7.setOnClickListener(this)
+
+        binding.fontValue?.setOnClickListener(this)
+        binding.fontSansSerif?.setOnClickListener(this)
+        binding.fontSansSerifLight?.setOnClickListener(this)
+        binding.fontSansSerifMedium?.setOnClickListener(this)
+        binding.fontSerif?.setOnClickListener(this)
+        binding.fontMonospace?.setOnClickListener(this)
 
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
@@ -519,6 +535,24 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Constants.TextSize.SEVEN -> 7
             else -> "--"
         }.toString()
+    }
+
+    private fun populateFont() {
+        binding.fontValue?.text = when (prefs.homeFont) {
+            Constants.Font.SANS_SERIF -> getString(R.string.font_sans_serif)
+            Constants.Font.SANS_SERIF_LIGHT -> getString(R.string.font_sans_serif_light)
+            Constants.Font.SANS_SERIF_MEDIUM -> getString(R.string.font_sans_serif_medium)
+            Constants.Font.SERIF -> getString(R.string.font_serif)
+            Constants.Font.MONOSPACE -> getString(R.string.font_monospace)
+            else -> getString(R.string.font_sans_serif_light)
+        }
+    }
+
+    private fun updateFont(fontName: String) {
+        if (prefs.homeFont == fontName) return
+        prefs.homeFont = fontName
+        populateFont()
+        viewModel.refreshHome(false)
     }
 
     private fun populateScreenTimeOnOff() {

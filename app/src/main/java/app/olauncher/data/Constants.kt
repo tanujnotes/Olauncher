@@ -56,6 +56,15 @@ object Constants {
         const val SEVEN = 1.3f
     }
 
+    object Font {
+        const val SANS_SERIF = "sans-serif"
+        const val SANS_SERIF_LIGHT = "sans-serif-light"
+        const val SANS_SERIF_MEDIUM = "sans-serif-medium"
+        const val SERIF = "serif"
+        const val MONOSPACE = "monospace"
+        const val DEFAULT = SANS_SERIF_LIGHT
+    }
+
     object CharacterIndicator {
         const val SHOW = 102
         const val HIDE = 101

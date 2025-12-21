@@ -17,6 +17,7 @@ import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Point
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.UserHandle
@@ -504,4 +505,23 @@ fun Context.rateApp() {
     flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
     intent.addFlags(flags)
     startActivity(intent)
+}
+
+private val typefaceCache = mutableMapOf<String, Typeface>()
+
+fun getTypeface(context: Context, fontName: String): Typeface {
+    return typefaceCache.getOrPut(fontName) {
+        try {
+            // Check if it's a custom font in assets/fonts/
+            if (fontName.endsWith(".ttf") || fontName.endsWith(".otf")) {
+                Typeface.createFromAsset(context.assets, "fonts/$fontName")
+            } else {
+                // System font
+                Typeface.create(fontName, Typeface.NORMAL)
+            }
+        } catch (e: Exception) {
+            // Fallback to default font
+            Typeface.create(Constants.Font.DEFAULT, Typeface.NORMAL)
+        }
+    }
 }

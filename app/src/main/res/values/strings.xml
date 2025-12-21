@@ -121,6 +121,12 @@
     <string name="info">Info</string>
     <string name="delete">Delete</string>
     <string name="text_size">Text size</string>
+    <string name="font">Font</string>
+    <string name="font_sans_serif">Sans Serif</string>
+    <string name="font_sans_serif_light">Sans Serif Light</string>
+    <string name="font_sans_serif_medium">Sans Serif Medium</string>
+    <string name="font_serif">Serif</string>
+    <string name="font_monospace">Monospace</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
