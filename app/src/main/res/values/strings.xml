@@ -127,6 +127,11 @@
     <string name="font_sans_serif_medium">Sans Serif Medium</string>
     <string name="font_serif">Serif</string>
     <string name="font_monospace">Monospace</string>
+    <string name="font_quicksand">Quicksand</string>
+    <string name="font_comfortaa">Comfortaa</string>
+    <string name="font_poppins">Poppins</string>
+    <string name="font_space_mono">Space Mono</string>
+    <string name="font_josefin_sans">Josefin Sans</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>

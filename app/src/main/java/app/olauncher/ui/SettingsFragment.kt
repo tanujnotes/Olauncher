@@ -152,6 +152,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.fontSansSerifMedium -> updateFont(Constants.Font.SANS_SERIF_MEDIUM)
             R.id.fontSerif -> updateFont(Constants.Font.SERIF)
             R.id.fontMonospace -> updateFont(Constants.Font.MONOSPACE)
+            R.id.fontQuicksand -> updateFont(Constants.Font.QUICKSAND)
+            R.id.fontComfortaa -> updateFont(Constants.Font.COMFORTAA)
+            R.id.fontPoppins -> updateFont(Constants.Font.POPPINS)
+            R.id.fontSpaceMono -> updateFont(Constants.Font.SPACE_MONO)
+            R.id.fontJosefinSans -> updateFont(Constants.Font.JOSEFIN_SANS)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -266,6 +271,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.fontSansSerifMedium?.setOnClickListener(this)
         binding.fontSerif?.setOnClickListener(this)
         binding.fontMonospace?.setOnClickListener(this)
+        binding.fontQuicksand?.setOnClickListener(this)
+        binding.fontComfortaa?.setOnClickListener(this)
+        binding.fontPoppins?.setOnClickListener(this)
+        binding.fontSpaceMono?.setOnClickListener(this)
+        binding.fontJosefinSans?.setOnClickListener(this)
 
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
@@ -544,6 +554,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Constants.Font.SANS_SERIF_MEDIUM -> getString(R.string.font_sans_serif_medium)
             Constants.Font.SERIF -> getString(R.string.font_serif)
             Constants.Font.MONOSPACE -> getString(R.string.font_monospace)
+            Constants.Font.QUICKSAND -> getString(R.string.font_quicksand)
+            Constants.Font.COMFORTAA -> getString(R.string.font_comfortaa)
+            Constants.Font.POPPINS -> getString(R.string.font_poppins)
+            Constants.Font.SPACE_MONO -> getString(R.string.font_space_mono)
+            Constants.Font.JOSEFIN_SANS -> getString(R.string.font_josefin_sans)
             else -> getString(R.string.font_sans_serif_light)
         }
     }

@@ -62,6 +62,12 @@ object Constants {
         const val SANS_SERIF_MEDIUM = "sans-serif-medium"
         const val SERIF = "serif"
         const val MONOSPACE = "monospace"
+        // Custom fonts (from assets/fonts/)
+        const val QUICKSAND = "Quicksand-Regular.ttf"
+        const val COMFORTAA = "Comfortaa-Regular.ttf"
+        const val POPPINS = "Poppins-Regular.ttf"
+        const val SPACE_MONO = "SpaceMono-Regular.ttf"
+        const val JOSEFIN_SANS = "JosefinSans-Regular.ttf"
         const val DEFAULT = SANS_SERIF_LIGHT
     }
 

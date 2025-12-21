@@ -868,9 +868,54 @@
                                 style="@style/TextSmallBold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
                                 android:fontFamily="monospace"
                                 android:paddingVertical="6dp"
                                 android:text="@string/font_monospace" />
+
+                            <TextView
+                                android:id="@+id/fontQuicksand"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_quicksand" />
+
+                            <TextView
+                                android:id="@+id/fontComfortaa"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_comfortaa" />
+
+                            <TextView
+                                android:id="@+id/fontPoppins"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_poppins" />
+
+                            <TextView
+                                android:id="@+id/fontSpaceMono"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_space_mono" />
+
+                            <TextView
+                                android:id="@+id/fontJosefinSans"
+                                style="@style/TextSmallBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="6dp"
+                                android:text="@string/font_josefin_sans" />
 
                         </LinearLayout>
                     </HorizontalScrollView>
