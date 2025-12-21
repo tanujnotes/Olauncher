@@ -123,7 +123,7 @@
     <string name="text_size">Text size</string>
     <string name="font">Font</string>
     <string name="font_sans_serif">Sans Serif</string>
-    <string name="font_sans_serif_light">Sans Serif Light</string>
+    <string name="font_sans_serif_light">Default</string>
     <string name="font_sans_serif_medium">Sans Serif Medium</string>
     <string name="font_serif">Serif</string>
     <string name="font_monospace">Monospace</string>
