@@ -71,7 +71,7 @@ class AppDrawerFragment : Fragment() {
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
             binding.search.queryHint = "Please select an app"
         try {
-            val searchTextView = binding.search.findViewById<TextView>(R.id.search_src_text)
+            val searchTextView = binding.search.findViewById<TextView>(androidx.appcompat.R.id.search_src_text)
             if (searchTextView != null) searchTextView.gravity = prefs.appLabelAlignment
         } catch (e: Exception) {
             e.printStackTrace()
