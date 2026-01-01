@@ -42,8 +42,9 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
     }
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        if (motionEvent.action == MotionEvent.ACTION_UP)
+        if (motionEvent.action == MotionEvent.ACTION_UP) {
             longPressOn = false
+        }
         return gestureDetector.onTouchEvent(motionEvent)
     }
 
@@ -55,6 +56,9 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
             return true
         }
 
+        // Wir nutzen onSingleTapUp für jeden Tap. 
+        // Um den GestureDetector daran zu hindern, onDoubleTap zu priorisieren, 
+        // verarbeiten wir die Taps manuell.
         override fun onSingleTapUp(e: MotionEvent): Boolean {
             tapCount++
             lastEvent?.recycle()
@@ -68,8 +72,10 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
             return true
         }
 
+        // Wir überschreiben onDoubleTap und geben false zurück, 
+        // damit onSingleTapUp weiterhin für jeden Klick aufgerufen wird.
         override fun onDoubleTap(e: MotionEvent): Boolean {
-            return true
+            return false 
         }
 
         override fun onLongPress(e: MotionEvent) {
@@ -120,5 +126,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
 
     init {
         gestureDetector = GestureDetector(c, GestureListener())
+        // Deaktiviert die interne DoubleTap-Logik, damit wir sie manuell im tapRunnable steuern können
+        gestureDetector.setOnDoubleTapListener(null)
     }
 }
