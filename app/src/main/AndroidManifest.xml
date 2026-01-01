@@ -48,7 +48,7 @@
         <activity
             android:name=".helper.FakeHomeActivity"
             android:enabled="false"
-            android:exported="false"
+            android:exported="true"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
