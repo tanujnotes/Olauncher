@@ -30,4 +30,4 @@ License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 ##
 
-*New: We're working on an open source notes app called Note Safe (previously Note to Self). What's cool about it - it has a chat like interface and end-to-end encryption. [Take a look!](https://github.com/jeerovan/ntsapp)*
+*New: We're working on an open source notes app called Note Safe (previously Note to Self). What's cool about it - it has a chat-like interface and end-to-end encryption. [Take a look!](https://github.com/jeerovan/ntsapp)*
