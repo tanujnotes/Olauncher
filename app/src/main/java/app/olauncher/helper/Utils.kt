@@ -332,6 +332,43 @@ suspend fun getTodaysWallpaper(wallType: String, firstOpenTime: Long): String {
     }
 }
 
+suspend fun setRandomWallpaper(appContext: Context): Boolean {
+    return withContext(Dispatchers.IO) {
+        try {
+            val url = URL(Constants.URL_WALLPAPERS)
+            val connection: HttpURLConnection = url.openConnection() as HttpURLConnection
+            connection.doInput = true
+            connection.connect()
+
+            val inputStream = connection.inputStream
+            val scanner = Scanner(inputStream)
+            val stringBuffer = StringBuffer()
+            while (scanner.hasNext()) {
+                stringBuffer.append(scanner.nextLine())
+            }
+
+            val json = JSONObject(stringBuffer.toString())
+            val keys = json.keys()
+            val keyList = mutableListOf<String>()
+            while (keys.hasNext()) {
+                keyList.add(keys.next())
+            }
+
+            if (keyList.isEmpty()) return@withContext false
+
+            val randomKey = keyList.random()
+            val wallpaperObj = json.getJSONObject(randomKey)
+            val wallType = if (appContext.isDarkThemeOn()) Constants.WALL_TYPE_DARK else Constants.WALL_TYPE_LIGHT
+            val wallpaperUrl = wallpaperObj.getString(wallType)
+
+            setWallpaper(appContext, wallpaperUrl)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+    }
+}
+
 fun getBackupWallpaper(wallType: String): String {
     return if (wallType == Constants.WALL_TYPE_LIGHT)
         Constants.URL_DEFAULT_LIGHT_WALLPAPER

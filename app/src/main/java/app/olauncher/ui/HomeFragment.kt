@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
@@ -22,6 +23,7 @@ import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import app.olauncher.MainViewModel
 import app.olauncher.R
@@ -33,6 +35,7 @@ import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.dpToPx
 import app.olauncher.helper.expandNotificationDrawer
 import app.olauncher.helper.getChangedAppTheme
+import app.olauncher.helper.getScreenDimensions
 import app.olauncher.helper.getUserHandleFromString
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.openAlarmApp
@@ -41,9 +44,11 @@ import app.olauncher.helper.openCameraApp
 import app.olauncher.helper.openDialerApp
 import app.olauncher.helper.openSearch
 import app.olauncher.helper.setPlainWallpaperByTheme
+import app.olauncher.helper.setRandomWallpaper
 import app.olauncher.helper.showToast
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -556,6 +561,19 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                     binding.lock.performClick()
                 else if (prefs.lockModeOn)
                     lockPhone()
+            }
+
+            override fun onTripleClick(e: MotionEvent) {
+                super.onTripleClick(e)
+                val (width, height) = getScreenDimensions(requireContext())
+                if (e.x > width * 0.8 && e.y > height * 0.8) {
+                    if (prefs.dailyWallpaper) {
+                        requireContext().showToast("Loading new wallpaper...")
+                        lifecycleScope.launch {
+                            setRandomWallpaper(requireContext())
+                        }
+                    }
+                }
             }
 
             override fun onClick() {
