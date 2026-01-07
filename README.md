@@ -2,12 +2,9 @@
 
 
 # Olauncher | Minimal AF Launcher
-AF stands for Ad-Free :D
+AF stands for Ad-Free
 
-
-## Install
-
-#### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from the [latest release](https://github.com/tanujnotes/Olauncher/releases/).
+### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from the [latest release](https://github.com/tanujnotes/Olauncher/releases/).
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
@@ -24,10 +21,14 @@ Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-@tanujnotes | [X/Twitter](https://twitter.com/tanujnotes) | [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
-
-**[See my other apps](https://play.google.com/store/apps/dev?id=7198807840081074933)**
+Dev: [X/twitter](https://x.com/tanujnotes) • [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
 
 ##
 
-*New: We're working on an open source notes app called Note Safe (previously Note to Self). What's cool about it - it has a chat like interface and end-to-end encryption. [Take a look!](https://github.com/jeerovan/ntsapp)*
+### My other apps:
+
+[Pro Launcher](https://play.google.com/store/apps/details?id=app.prolauncher) - pro version of Olauncher with extra features like widgets, weather, folders, etc.
+
+[Note to Self](https://play.google.com/store/apps/details?id=com.makenotetoself) - free and [open source](https://github.com/jeerovan/ntsapp) notes app with chat like interface and end-to-end encryption.
+
+[Pentastic](https://play.google.com/store/apps/details?id=app.pentastic) - minimal todo lists. Free and [open source](https://github.com/tanujnotes/Pentastic).
