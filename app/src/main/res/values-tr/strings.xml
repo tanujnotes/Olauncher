@@ -38,6 +38,7 @@
     <string name="info">Bilgi</string>
     <string name="delete">Sil</string>
     <string name="text_size">Yazı Boyutu</string>
+    <string name="clock_size">Saat Boyutu</string>
     <string name="enabled">Etkin</string>
     <string name="disabled">Devre Dışı</string>
     <string name="please_turn_on_double_tap_to_unlock">Lütfen kilitlemek için çift dokunmayı açın</string>

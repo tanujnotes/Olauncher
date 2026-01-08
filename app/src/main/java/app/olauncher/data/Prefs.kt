@@ -37,6 +37,7 @@ class Prefs(context: Context) {
     private val SHARE_SHOWN_TIME = "SHARE_SHOWN_TIME"
     private val SWIPE_DOWN_ACTION = "SWIPE_DOWN_ACTION"
     private val TEXT_SIZE_SCALE = "TEXT_SIZE_SCALE"
+    private val CLOCK_SIZE_SCALE = "CLOCK_SIZE_SCALE"
     private val PRO_MESSAGE_SHOWN = "PRO_MESSAGE_SHOWN"
     private val HIDE_SET_DEFAULT_LAUNCHER = "HIDE_SET_DEFAULT_LAUNCHER"
     private val SCREEN_TIME_LAST_UPDATED = "SCREEN_TIME_LAST_UPDATED"
@@ -172,6 +173,10 @@ class Prefs(context: Context) {
     var textSizeScale: Float
         get() = prefs.getFloat(TEXT_SIZE_SCALE, 1.0f)
         set(value) = prefs.edit { putFloat(TEXT_SIZE_SCALE, value).apply() }
+
+    var clockSizeScale: Float
+        get() = prefs.getFloat(CLOCK_SIZE_SCALE, 1.0f)
+        set(value) = prefs.edit { putFloat(CLOCK_SIZE_SCALE, value).apply() }
 
     var proMessageShown: Boolean
         get() = prefs.getBoolean(PRO_MESSAGE_SHOWN, false)

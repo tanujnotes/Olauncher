@@ -241,6 +241,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
         binding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
 
+        // Apply independent clock size
+        val clockScale = prefs.clockSizeScale / prefs.textSizeScale
+        val timeSize = resources.getDimension(R.dimen.time_size) * clockScale
+        val dateSize = resources.getDimension(R.dimen.date_size) * clockScale
+        binding.clock.textSize = timeSize / resources.displayMetrics.scaledDensity
+        binding.date.textSize = dateSize / resources.displayMetrics.scaledDensity
+
 //        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
         val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
         var dateText = dateFormat.format(Date())

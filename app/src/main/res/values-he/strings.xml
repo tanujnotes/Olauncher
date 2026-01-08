@@ -94,6 +94,7 @@
     <string name="info">מידע</string>
     <string name="delete">מחיקה</string>
     <string name="text_size">גודל הטקסט</string>
+    <string name="clock_size">גודל השעון</string>
     <string name="enabled">מופעל</string>
     <string name="disabled">מושבת</string>
     <string name="please_turn_on_double_tap_to_unlock">נא להפעיל את מחוות ההקשה הכפולה בשביל לצורך הנעילה</string>

@@ -103,6 +103,7 @@
     <string name="info">Informação</string>
     <string name="delete">Desinstalar</string>
     <string name="text_size">Tamanho do texto</string>
+    <string name="clock_size">Tamanho do relógio</string>
     <string name="enabled">Habilitado</string>
     <string name="disabled">Desactivado</string>
     <string name="please_turn_on_double_tap_to_unlock">Ative o toque duplo para bloquear</string>

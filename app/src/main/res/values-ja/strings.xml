@@ -39,6 +39,7 @@
     <string name="info">情報</string>
     <string name="delete">消去</string>
     <string name="text_size">文字サイズ</string>
+    <string name="clock_size">時計サイズ</string>
     <string name="enabled">有効</string>
     <string name="disabled">無効</string>
     <string name="please_turn_on_double_tap_to_unlock">ダブルタップしてロックをオンにしてください</string>

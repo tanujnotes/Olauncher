@@ -104,6 +104,7 @@
     <string name="info" formatted="false">Informazioni</string>
     <string name="delete">Elimina</string>
     <string name="text_size">Dimensione del testo</string>
+    <string name="clock_size">Dimensione orologio</string>
     <string name="enabled">Abilitato</string>
     <string name="disabled">Disabilitato</string>
     <string name="please_turn_on_double_tap_to_unlock">Attiva il doppio tocco per sbloccare</string>

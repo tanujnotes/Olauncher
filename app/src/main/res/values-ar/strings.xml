@@ -38,6 +38,7 @@
     <string name="info">معلومات</string>
     <string name="delete">يمسح</string>
     <string name="text_size">حجم الخط</string>
+    <string name="clock_size">حجم الساعة</string>
     <string name="enabled">ممكّن</string>
     <string name="disabled">مُطفأ</string>
     <string name="please_turn_on_double_tap_to_unlock">يرجى تشغيل النقر المزدوج لفتح القفل</string>

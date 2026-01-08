@@ -104,6 +104,7 @@
     <string name="info">Інформація</string>
     <string name="delete">Видалити</string>
     <string name="text_size">Розмір тексту</string>
+    <string name="clock_size">Розмір годинника</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Виключено</string>
     <string name="please_turn_on_double_tap_to_unlock">Будь ласка, увімкніть подвійний дотик для блокування</string>

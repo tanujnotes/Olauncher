@@ -108,6 +108,7 @@
     <string name="info">Informacije</string>
     <string name="delete">Izbriši</string>
     <string name="text_size">Veličina teksta</string>
+    <string name="clock_size">Veličina sata</string>
     <string name="enabled">Omogućeno</string>
     <string name="disabled">Onemogućeno</string>
     <string name="please_turn_on_double_tap_to_unlock">Molimo vas da uključite dvostruki dodir za otključavanje</string>

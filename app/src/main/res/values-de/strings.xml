@@ -38,6 +38,7 @@
     <string name="info">Die Info</string>
     <string name="delete">Löschen</string>
     <string name="text_size">Textgröße</string>
+    <string name="clock_size">Uhrgröße</string>
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>
     <string name="please_turn_on_double_tap_to_unlock">Zum Sperren bitte Doppeltippen aktivieren</string>

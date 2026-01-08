@@ -106,6 +106,7 @@
     <string name="info">Információ</string>
     <string name="delete">Törlés</string>
     <string name="text_size">Szövegméret</string>
+    <string name="clock_size">Óra mérete</string>
     <string name="enabled">Engedélyezve</string>
     <string name="disabled">Letiltva</string>
     <string name="please_turn_on_double_tap_to_unlock">Kérjük, kapcsolja be a dupla koppintást a lezáráshoz</string>

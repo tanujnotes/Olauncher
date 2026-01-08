@@ -38,6 +38,7 @@
     <string name="info">Informacje</string>
     <string name="delete">Usuń</string>
     <string name="text_size">Rozmiar czcionki</string>
+    <string name="clock_size">Rozmiar zegara</string>
     <string name="enabled">Włączony</string>
     <string name="disabled">Wyłączony</string>
     <string name="please_turn_on_double_tap_to_unlock">Włącz podwójne dotknięcie, aby zablokować</string>

@@ -75,6 +75,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateWallpaperText()
         populateAppThemeText()
         populateTextSize()
+        populateClockSize()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -91,6 +92,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
         binding.textSizesLayout.visibility = View.GONE
+        binding.clockSizesLayout.visibility = View.GONE
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
 
@@ -143,6 +145,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.textSize5 -> updateTextSizeScale(Constants.TextSize.FIVE)
             R.id.textSize6 -> updateTextSizeScale(Constants.TextSize.SIX)
             R.id.textSize7 -> updateTextSizeScale(Constants.TextSize.SEVEN)
+
+            R.id.clockSizeValue -> binding.clockSizesLayout.visibility = View.VISIBLE
+            R.id.clockSize1 -> updateClockSizeScale(Constants.ClockSize.ONE)
+            R.id.clockSize2 -> updateClockSizeScale(Constants.ClockSize.TWO)
+            R.id.clockSize3 -> updateClockSizeScale(Constants.ClockSize.THREE)
+            R.id.clockSize4 -> updateClockSizeScale(Constants.ClockSize.FOUR)
+            R.id.clockSize5 -> updateClockSizeScale(Constants.ClockSize.FIVE)
+            R.id.clockSize6 -> updateClockSizeScale(Constants.ClockSize.SIX)
+            R.id.clockSize7 -> updateClockSizeScale(Constants.ClockSize.SEVEN)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -250,6 +261,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.textSize5.setOnClickListener(this)
         binding.textSize6.setOnClickListener(this)
         binding.textSize7.setOnClickListener(this)
+
+        binding.clockSizeValue.setOnClickListener(this)
+        binding.clockSize1.setOnClickListener(this)
+        binding.clockSize2.setOnClickListener(this)
+        binding.clockSize3.setOnClickListener(this)
+        binding.clockSize4.setOnClickListener(this)
+        binding.clockSize5.setOnClickListener(this)
+        binding.clockSize6.setOnClickListener(this)
+        binding.clockSize7.setOnClickListener(this)
 
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
@@ -517,6 +537,26 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             Constants.TextSize.FIVE -> 5
             Constants.TextSize.SIX -> 6
             Constants.TextSize.SEVEN -> 7
+            else -> "--"
+        }.toString()
+    }
+
+    private fun updateClockSizeScale(sizeScale: Float) {
+        if (prefs.clockSizeScale == sizeScale) return
+        prefs.clockSizeScale = sizeScale
+        populateClockSize()
+        viewModel.toggleDateTime()
+    }
+
+    private fun populateClockSize() {
+        binding.clockSizeValue.text = when (prefs.clockSizeScale) {
+            Constants.ClockSize.ONE -> 1
+            Constants.ClockSize.TWO -> 2
+            Constants.ClockSize.THREE -> 3
+            Constants.ClockSize.FOUR -> 4
+            Constants.ClockSize.FIVE -> 5
+            Constants.ClockSize.SIX -> 6
+            Constants.ClockSize.SEVEN -> 7
             else -> "--"
         }.toString()
     }

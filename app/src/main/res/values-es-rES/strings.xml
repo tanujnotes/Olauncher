@@ -104,6 +104,7 @@
     <string name="info">Información</string>
     <string name="delete">Desinstalar</string>
     <string name="text_size">Tamaño del texto</string>
+    <string name="clock_size">Tamaño del reloj</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
     <string name="please_turn_on_double_tap_to_unlock">Active el bloqueo con doble toque</string>

@@ -102,6 +102,7 @@
     <string name="info">Info</string>
     <string name="delete">Radera</string>
     <string name="text_size">Textstorlek</string>
+    <string name="clock_size">Klockstorlek</string>
     <string name="enabled">Aktiverad</string>
     <string name="disabled">Inaktiverad</string>
     <string name="please_turn_on_double_tap_to_unlock">Vänligen sätt på dubbeltryck för att låsa</string>

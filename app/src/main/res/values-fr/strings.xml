@@ -103,6 +103,7 @@
     <string name="info">Info</string>
     <string name="delete">Supprimer</string>
     <string name="text_size">Taille du texte</string>
+    <string name="clock_size">Taille de l\'horloge</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
     <string name="please_turn_on_double_tap_to_unlock">Veuillez appuyer deux fois pour verrouiller.</string>

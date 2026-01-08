@@ -101,6 +101,7 @@
     <string name="info">Info</string>
     <string name="delete">Hapus</string>
     <string name="text_size">Ukuran teks</string>
+    <string name="clock_size">Ukuran jam</string>
     <string name="enabled">Diaktifkan</string>
     <string name="disabled">Dinonaktifkan</string>
     <string name="please_turn_on_double_tap_to_unlock">Harap aktifkan ketuk dua kali untuk mengunci</string>

@@ -56,6 +56,16 @@ object Constants {
         const val SEVEN = 1.3f
     }
 
+    object ClockSize {
+        const val ONE = 0.6f
+        const val TWO = 0.75f
+        const val THREE = 0.9f
+        const val FOUR = 1f
+        const val FIVE = 1.1f
+        const val SIX = 1.2f
+        const val SEVEN = 1.3f
+    }
+
     object CharacterIndicator {
         const val SHOW = 102
         const val HIDE = 101
