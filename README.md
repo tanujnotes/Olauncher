@@ -4,8 +4,6 @@
 # Olauncher | Minimal AF Launcher
 AF stands for Ad-Free
 
-### Install from [F-Droid](https://f-droid.org/packages/app.olauncher) or [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or download the APK from the [latest release](https://github.com/tanujnotes/Olauncher/releases/).
-
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/app.olauncher)
@@ -13,9 +11,11 @@ AF stands for Ad-Free
     alt="Get it on Play Store"
     height="80">](https://play.google.com/store/apps/details?id=app.olauncher)
 
-To maintain the simplicity of the launcher, a few niche features are available but hidden.
+### Install using [F-Droid](https://f-droid.org/packages/app.olauncher), [Play Store](https://play.google.com/store/apps/details?id=app.olauncher) or the [latest APK](https://github.com/tanujnotes/Olauncher/releases/).
 
-Please check out the [About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github) page in the Olauncher settings for a complete list of features and FAQs.
+- To maintain the simplicity of the launcher, a few niche features are available but hidden.
+
+- Please check out the **[About](https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=github)** page in the Olauncher settings for a complete list of features and **FAQs**.
 
 ##
 
@@ -27,8 +27,8 @@ Dev: [X/twitter](https://x.com/tanujnotes) • [Bluesky](https://bsky.app/profil
 
 ### My other apps:
 
-[Pro Launcher](https://play.google.com/store/apps/details?id=app.prolauncher) - pro version of Olauncher with extra features like widgets, weather, folders, etc.
+- [Pro Launcher](https://play.google.com/store/apps/details?id=app.prolauncher) - Pro version of Olauncher with extra features like widgets, weather, folders, etc.
 
-[Note to Self](https://play.google.com/store/apps/details?id=com.makenotetoself) - free and [open source](https://github.com/jeerovan/ntsapp) notes app with chat like interface and end-to-end encryption.
+- [Note to Self](https://play.google.com/store/apps/details?id=com.makenotetoself) - Free and [open source](https://github.com/jeerovan/ntsapp) notes app with chat like interface and end-to-end encryption.
 
-[Pentastic](https://play.google.com/store/apps/details?id=app.pentastic) - minimal todo lists. Free and [open source](https://github.com/tanujnotes/Pentastic).
+- [Pentastic](https://play.google.com/store/apps/details?id=app.pentastic) - Minimal todo lists. Free and [open source](https://github.com/tanujnotes/Pentastic).
