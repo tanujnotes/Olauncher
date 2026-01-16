@@ -21,3 +21,4 @@ material = { module = "com.google.android.material:material", version.ref = "mat
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
+simmetrics-core = { module = "com.github.mpkorstanje:simmetrics-core", version = "4.1.1" }

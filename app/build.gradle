@@ -64,4 +64,9 @@ dependencies {
     //Material dependency
     implementation libs.material
 
+    // String similarity algrorithms
+    implementation libs.simmetrics.core
+    
+    // workaround. See https://stackoverflow.com/a/60492942
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 }
