@@ -4,6 +4,12 @@ import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraManager
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
@@ -47,15 +53,24 @@ import app.olauncher.listener.ViewSwipeTouchListener
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.math.sqrt
 
 class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener {
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
+    private lateinit var sensorManager: SensorManager
+    private lateinit var cameraManager: CameraManager
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var accelerometer: Sensor? = null
+    private var flashlightCameraId: String? = null
+    private var isFlashlightOn: Boolean = false
+    private var lastShakeTime: Long = 0L
+    private var shakeCounter: UInt = 0U
+    private val shakeThreshold: Float = 20f // sensitivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -64,6 +79,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         prefs = Prefs(requireContext())
         viewModel = activity?.run {
             ViewModelProvider(this)[MainViewModel::class.java]
@@ -75,6 +91,17 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         setHomeAlignment(prefs.homeAlignment)
         initSwipeTouchListener()
         initClickListeners()
+
+        // Fetch the sensor used to detect the flashlight gesture
+        sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+
+        // Fetch the flashlight camera id to listen to the toggle events
+        cameraManager = requireContext().getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        flashlightCameraId = cameraManager.cameraIdList.firstOrNull { id ->
+            cameraManager.getCameraCharacteristics(id)
+                .get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+        }
     }
 
     override fun onResume() {
@@ -83,6 +110,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.isOlauncherDefault()
         if (prefs.showStatusBar) showStatusBar()
         else hideStatusBar()
+        if (prefs.useFlashlightGesture) enableFlashlightGesture()
+        else disableFlashlightGesture()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (prefs.useFlashlightGesture) disableFlashlightGesture()
     }
 
     override fun onClick(view: View) {
@@ -477,6 +511,85 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN
             }
         }
+    }
+
+    private fun toggleFlashlight(context: Context, enable: Boolean) {
+        val cameraManager = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+
+        try {
+            val cameraId = cameraManager.cameraIdList.first {
+                cameraManager.getCameraCharacteristics(it)
+                    .get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+            }
+
+            cameraManager.setTorchMode(cameraId, enable)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private val flashlightStateCallback = object : CameraManager.TorchCallback() {
+
+        override fun onTorchModeChanged(cameraId: String, enabled: Boolean) {
+            if (cameraId == flashlightCameraId) {
+                isFlashlightOn = enabled
+            }
+        }
+
+        override fun onTorchModeUnavailable(cameraId: String) {
+            if (cameraId == flashlightCameraId) {
+                isFlashlightOn = false
+            }
+        }
+    }
+
+    private val flashlightGestureSensorListener = object : SensorEventListener {
+
+        override fun onSensorChanged(event: SensorEvent) {
+            val x = event.values[0]
+            val y = event.values[1]
+            val z = event.values[2]
+
+            val acceleration =
+                sqrt((x * x + y * y + z * z).toFloat()) - SensorManager.GRAVITY_EARTH
+
+            val currentTime = System.currentTimeMillis()
+
+            // Prevent distant shakes to be interpreted as the gesture that we implement
+            if (shakeCounter > 0U && currentTime - lastShakeTime > 500) {
+                shakeCounter = 0U
+            }
+
+            // Probably a valid shake, lets check the distance between shakes
+            if (acceleration > shakeThreshold && currentTime - lastShakeTime > 250) {
+                lastShakeTime = currentTime
+                shakeCounter++
+
+                if (shakeCounter == 2U) {
+                    toggleFlashlight(requireContext(), !isFlashlightOn)
+                    shakeCounter = 0U
+                }
+            }
+        }
+
+        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+    }
+
+    private fun enableFlashlightGesture() {
+        accelerometer?.let {
+            sensorManager.registerListener(
+                flashlightGestureSensorListener,
+                it,
+                SensorManager.SENSOR_DELAY_UI
+            )
+        }
+        cameraManager.registerTorchCallback(flashlightStateCallback, null)
+    }
+
+    private fun disableFlashlightGesture() {
+        sensorManager.unregisterListener(flashlightGestureSensorListener)
+        cameraManager.unregisterTorchCallback(flashlightStateCallback)
     }
 
     private fun changeAppTheme() {
