@@ -160,4 +160,5 @@
     <string name="new_year_wish_1">It doesn\'t matter how January went. You still have the rest of the year to do better than ever.</string>
     <string name="cheers">Cheers!</string>
     <string name="notification_bar">Notification bar</string>
+    <string name="toggle_flashlight_gesture" translatable="false">Shake to toggle flashlight</string>
 </resources>

@@ -72,6 +72,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
         populateScreenTimeOnOff()
         populateLockSettings()
+        populateFlashlightGesture()
         populateWallpaperText()
         populateAppThemeText()
         populateTextSize()
@@ -101,6 +102,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appInfo -> openAppInfo(requireContext(), Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.toggleLock -> toggleLockMode()
+            R.id.toggleFlashlightGesture -> toggleFlashlightGesture()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
@@ -257,6 +259,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.swipeLeftApp.setOnLongClickListener(this)
         binding.swipeRightApp.setOnLongClickListener(this)
         binding.toggleLock.setOnLongClickListener(this)
+        binding.toggleFlashlightGesture.setOnClickListener(this)
     }
 
     private fun initObservers() {
@@ -300,6 +303,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
     }
 
+    private fun toggleFlashlightGesture() {
+        prefs.useFlashlightGesture = !prefs.useFlashlightGesture
+        populateFlashlightGesture()
+    }
+
     private fun toggleStatusBar() {
         prefs.showStatusBar = !prefs.showStatusBar
         populateStatusBar()
@@ -313,6 +321,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             hideStatusBar()
             binding.statusBar.text = getString(R.string.off)
         }
+    }
+
+    private fun populateFlashlightGesture() {
+        binding.toggleFlashlightGesture.text =
+            getString(if (prefs.useFlashlightGesture) R.string.on else R.string.off)
     }
 
     private fun toggleDateTime(selected: Int) {

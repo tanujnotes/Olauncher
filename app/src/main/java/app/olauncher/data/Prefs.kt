@@ -24,6 +24,7 @@ class Prefs(context: Context) {
     private val HOME_BOTTOM_ALIGNMENT = "HOME_BOTTOM_ALIGNMENT"
     private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
     private val STATUS_BAR = "STATUS_BAR"
+    private val FLASHLIGHT_GESTURE = "FLASHLIGHT_GESTURE"
     private val DATE_TIME_VISIBILITY = "DATE_TIME_VISIBILITY"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
@@ -152,6 +153,10 @@ class Prefs(context: Context) {
     var showStatusBar: Boolean
         get() = prefs.getBoolean(STATUS_BAR, false)
         set(value) = prefs.edit { putBoolean(STATUS_BAR, value).apply() }
+
+    var useFlashlightGesture: Boolean
+        get() = prefs.getBoolean(FLASHLIGHT_GESTURE, false)
+        set(value) = prefs.edit { putBoolean(FLASHLIGHT_GESTURE, value).apply() }
 
     var dateTimeVisibility: Int
         get() = prefs.getInt(DATE_TIME_VISIBILITY, Constants.DateTime.ON)
