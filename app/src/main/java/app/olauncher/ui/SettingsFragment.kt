@@ -106,9 +106,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> binding.alignmentSelectLayout.visibility = View.VISIBLE
-            R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
-            R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
-            R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
+            // TODO separate setting for app drawer alignment?
+            R.id.alignmentLeft -> viewModel.updateAllAlignment(Gravity.START)
+            R.id.alignmentCenter -> viewModel.updateAllAlignment(Gravity.CENTER)
+            R.id.alignmentRight -> viewModel.updateAllAlignment(Gravity.END)
             R.id.alignmentBottom -> updateHomeBottomAlignment()
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> binding.dateTimeSelectLayout.visibility = View.VISIBLE
@@ -546,6 +547,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         prefs.homeBottomAlignment = !prefs.homeBottomAlignment
         populateAlignment()
         viewModel.updateHomeAlignment(prefs.homeAlignment)
+        viewModel.updateAppAlignment(prefs.homeAlignment)
     }
 
     private fun populateAlignment() {

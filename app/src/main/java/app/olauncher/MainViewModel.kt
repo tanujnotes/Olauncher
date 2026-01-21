@@ -44,6 +44,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
+    val appLabelAlignment = MutableLiveData<Int>()
     val screenTimeValue = MutableLiveData<String>()
 
     val showDialog = SingleLiveEvent<String>()
@@ -244,6 +245,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun updateHomeAlignment(gravity: Int) {
         prefs.homeAlignment = gravity
         homeAppAlignment.value = prefs.homeAlignment
+    }
+
+    fun updateAppAlignment(gravity: Int) {
+        prefs.appLabelAlignment = gravity
+        appLabelAlignment.value = prefs.appLabelAlignment
+    }
+
+    fun updateAllAlignment(gravity: Int) {
+        updateHomeAlignment(gravity)
+        updateAppAlignment(gravity)
     }
 
     fun getTodaysScreenTime() {
