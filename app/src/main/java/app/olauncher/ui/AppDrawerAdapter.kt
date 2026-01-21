@@ -1,7 +1,9 @@
 package app.olauncher.ui
 
+import android.accounts.AccountManager
 import android.content.Context
 import android.os.UserHandle
+import android.os.UserManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -22,6 +24,7 @@ import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
 import java.text.Normalizer
+
 
 class AppDrawerAdapter(
     private var flag: Int,
@@ -160,7 +163,12 @@ class AppDrawerAdapter(
                 appTitle.visibility = View.VISIBLE
                 appTitle.text = appModel.appLabel + if (appModel.isNew == true) " ✦" else ""
                 appTitle.gravity = appLabelGravity
-                otherProfileIndicator.isVisible = appModel.user != myUserHandle
+                var otherProfile = appModel.user != myUserHandle
+                otherProfileIndicator.isVisible = otherProfile
+                // if app belongs to paused user, lower opacity
+                if (otherProfile && appPaused(binding.root.context, appModel)) {
+                    appTitle.alpha = 0.5f
+                }
 
                 appTitle.setOnClickListener { clickListener(appModel) }
                 appTitle.setOnLongClickListener {
@@ -261,6 +269,12 @@ class AppDrawerAdapter(
             return packageManager.getApplicationLabel(
                 packageManager.getApplicationInfo(appPackage, 0)
             ).toString()
+        }
+
+        private fun appPaused(context: Context, appModel: AppModel): Boolean {
+            // check if this app is currently paused
+            val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+            return !userManager.isUserUnlocked(appModel.user)
         }
     }
 }
