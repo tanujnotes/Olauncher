@@ -465,7 +465,7 @@ class Prefs(context: Context) {
         }
     }
 
-    fun getAppRenameLabel(appPackage: String): String = prefs.getString(appPackage, "").toString()
+    fun getAppRenameLabel(componentName: String?): String = prefs.getString(componentName, "").toString()
 
-    fun setAppRenameLabel(appPackage: String, renameLabel: String) = prefs.edit().putString(appPackage, renameLabel).apply()
+    fun setAppRenameLabel(componentName: String?, renameLabel: String?) = prefs.edit().putString(componentName, renameLabel).apply()
 }
