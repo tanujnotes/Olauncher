@@ -46,6 +46,20 @@
         </activity>
 
         <activity
+            android:name=".helper.PinItemActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.content.pm.action.CONFIRM_PIN_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.content.pm.action.CONFIRM_PIN_APPWIDGET" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".helper.FakeHomeActivity"
             android:enabled="false"
             android:exported="false"

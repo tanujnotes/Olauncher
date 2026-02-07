@@ -3,6 +3,7 @@ package app.olauncher.ui
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.LauncherApps
 import android.content.res.Configuration
 import android.os.BatteryManager
 import android.os.Build
@@ -292,62 +293,92 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         if (homeAppsNum == 0) return
 
         binding.homeApp1.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp1, prefs.appName1, prefs.appPackage1, prefs.appUser1)) {
+        if (!setHomeAppText(binding.homeApp1, prefs.appName1, prefs.appPackage1, prefs.appUser1, prefs.isShortcut1, prefs.shortcutId1)) {
             prefs.appName1 = ""
             prefs.appPackage1 = ""
         }
         if (homeAppsNum == 1) return
 
         binding.homeApp2.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp2, prefs.appName2, prefs.appPackage2, prefs.appUser2)) {
+        if (!setHomeAppText(binding.homeApp2, prefs.appName2, prefs.appPackage2, prefs.appUser2, prefs.isShortcut2, prefs.shortcutId2)) {
             prefs.appName2 = ""
             prefs.appPackage2 = ""
         }
         if (homeAppsNum == 2) return
 
         binding.homeApp3.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp3, prefs.appName3, prefs.appPackage3, prefs.appUser3)) {
+        if (!setHomeAppText(binding.homeApp3, prefs.appName3, prefs.appPackage3, prefs.appUser3, prefs.isShortcut3, prefs.shortcutId3)) {
             prefs.appName3 = ""
             prefs.appPackage3 = ""
         }
         if (homeAppsNum == 3) return
 
         binding.homeApp4.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp4, prefs.appName4, prefs.appPackage4, prefs.appUser4)) {
+        if (!setHomeAppText(binding.homeApp4, prefs.appName4, prefs.appPackage4, prefs.appUser4, prefs.isShortcut4, prefs.shortcutId4)) {
             prefs.appName4 = ""
             prefs.appPackage4 = ""
         }
         if (homeAppsNum == 4) return
 
         binding.homeApp5.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp5, prefs.appName5, prefs.appPackage5, prefs.appUser5)) {
+        if (!setHomeAppText(binding.homeApp5, prefs.appName5, prefs.appPackage5, prefs.appUser5, prefs.isShortcut5, prefs.shortcutId5)) {
             prefs.appName5 = ""
             prefs.appPackage5 = ""
         }
         if (homeAppsNum == 5) return
 
         binding.homeApp6.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp6, prefs.appName6, prefs.appPackage6, prefs.appUser6)) {
+        if (!setHomeAppText(binding.homeApp6, prefs.appName6, prefs.appPackage6, prefs.appUser6, prefs.isShortcut6, prefs.shortcutId6)) {
             prefs.appName6 = ""
             prefs.appPackage6 = ""
         }
         if (homeAppsNum == 6) return
 
         binding.homeApp7.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp7, prefs.appName7, prefs.appPackage7, prefs.appUser7)) {
+        if (!setHomeAppText(binding.homeApp7, prefs.appName7, prefs.appPackage7, prefs.appUser7, prefs.isShortcut7, prefs.shortcutId7)) {
             prefs.appName7 = ""
             prefs.appPackage7 = ""
         }
         if (homeAppsNum == 7) return
 
         binding.homeApp8.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp8, prefs.appName8, prefs.appPackage8, prefs.appUser8)) {
+        if (!setHomeAppText(binding.homeApp8, prefs.appName8, prefs.appPackage8, prefs.appUser8, prefs.isShortcut8, prefs.shortcutId8)) {
             prefs.appName8 = ""
             prefs.appPackage8 = ""
         }
     }
 
-    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String): Boolean {
+    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String, isShortcut: Boolean, shortcutId: String?): Boolean {
+        // Get user handle for the app/shortcut
+        val userHandle = getUserHandleFromString(requireContext(), userString)
+        
+        // If it's a shortcut, verify it still exists
+        if (isShortcut) {
+            val launcherApps = requireContext().getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+            
+            // Query for the specific shortcut
+            val query = LauncherApps.ShortcutQuery().apply {
+                setPackage(packageName)
+                setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
+            }
+            
+            try {
+                val shortcuts = launcherApps.getShortcuts(query, userHandle)
+                // Check if our shortcut still exists
+                if (shortcuts?.any { it.id == shortcutId } == true) {
+                    textView.text = appName
+                    return true
+                }
+                textView.text = ""
+                return false
+            } catch (e: Exception) {
+                e.printStackTrace()
+                textView.text = ""
+                return false
+            }
+        }
+        
+        // Regular app check
         if (isPackageInstalled(requireContext(), packageName, userString)) {
             textView.text = appName
             return true
@@ -367,27 +398,100 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp8.visibility = View.GONE
     }
 
-    private fun homeAppClicked(location: Int) {
-        if (prefs.getAppName(location).isEmpty()) showLongPressToast()
-        else launchApp(
-            prefs.getAppName(location),
-            prefs.getAppPackage(location),
-            prefs.getAppActivityClassName(location),
-            prefs.getAppUser(location)
+    private fun launchAppOrShortcut(
+        appName: String,
+        packageName: String,
+        activityClassName: String?,
+        shortcutId: String?,
+        isShortcut: Boolean,
+        userString: String,
+        fallback: (() -> Unit)? = null
+    ) {
+        if (appName.isEmpty()) {
+            showLongPressToast()
+            return
+        }
+        if (isShortcut && !shortcutId.isNullOrEmpty()) {
+            launchShortcut(
+                packageName = packageName,
+                shortcutId = shortcutId,
+                shortcutLabel = appName,
+                userString = userString
+            )
+        } else if (packageName.isNotEmpty()) {
+            launchApp(
+                appName = appName,
+                packageName = packageName,
+                activityClassName = activityClassName,
+                userString = userString
+            )
+        } else {
+            fallback?.invoke()
+        }
+    }
+
+    private fun launchShortcut(shortcutId: String, packageName: String, shortcutLabel: String, userString: String) {
+        viewModel.selectedApp(
+            AppModel.PinnedShortcut(
+                shortcutId = shortcutId,
+                appLabel = shortcutLabel,
+                user = getUserHandleFromString(requireContext(), userString),
+                key = null,
+                appPackage = packageName,
+                isNew = false,
+            ),
+            Constants.FLAG_LAUNCH_APP
         )
     }
 
     private fun launchApp(appName: String, packageName: String, activityClassName: String?, userString: String) {
         viewModel.selectedApp(
-            AppModel(
-                appName,
-                null,
-                packageName,
-                activityClassName,
-                false,
-                getUserHandleFromString(requireContext(), userString)
+            AppModel.App(
+                appLabel = appName,
+                key = null,
+                appPackage = packageName,
+                activityClassName = activityClassName,
+                isNew = false,
+                user = getUserHandleFromString(requireContext(), userString)
             ),
             Constants.FLAG_LAUNCH_APP
+        )
+    }
+
+    private fun homeAppClicked(location: Int) {
+        launchAppOrShortcut(
+            appName = prefs.getAppName(location),
+            packageName = prefs.getAppPackage(location),
+            activityClassName = prefs.getAppActivityClassName(location),
+            shortcutId = prefs.getShortcutId(location),
+            isShortcut = prefs.getIsShortcut(location),
+            userString = prefs.getAppUser(location)
+        )
+    }
+
+    private fun openSwipeRightApp() {
+        if (!prefs.swipeRightEnabled) return
+        launchAppOrShortcut(
+            appName = prefs.appNameSwipeRight,
+            packageName = prefs.appPackageSwipeRight,
+            activityClassName = prefs.appActivityClassNameRight,
+            shortcutId = prefs.shortcutIdSwipeRight,
+            isShortcut = prefs.isShortcutSwipeRight,
+            userString = prefs.appUserSwipeRight,
+            fallback = { openDialerApp(requireContext()) }
+        )
+    }
+
+    private fun openSwipeLeftApp() {
+        if (!prefs.swipeLeftEnabled) return
+        launchAppOrShortcut(
+            appName = prefs.appNameSwipeLeft,
+            packageName = prefs.appPackageSwipeLeft,
+            activityClassName = prefs.appActivityClassNameSwipeLeft,
+            shortcutId = prefs.shortcutIdSwipeLeft,
+            isShortcut = prefs.isShortcutSwipeLeft,
+            userString = prefs.appUserSwipeLeft,
+            fallback = { openCameraApp(requireContext()) }
         )
     }
 
@@ -418,30 +522,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
             else -> expandNotificationDrawer(requireContext())
         }
-    }
-
-    private fun openSwipeRightApp() {
-        if (!prefs.swipeRightEnabled) return
-        if (prefs.appPackageSwipeRight.isNotEmpty())
-            launchApp(
-                prefs.appNameSwipeRight,
-                prefs.appPackageSwipeRight,
-                prefs.appActivityClassNameRight,
-                prefs.appUserSwipeRight
-            )
-        else openDialerApp(requireContext())
-    }
-
-    private fun openSwipeLeftApp() {
-        if (!prefs.swipeLeftEnabled) return
-        if (prefs.appPackageSwipeLeft.isNotEmpty())
-            launchApp(
-                prefs.appNameSwipeLeft,
-                prefs.appPackageSwipeLeft,
-                prefs.appActivityClassNameSwipeLeft,
-                prefs.appUserSwipeLeft
-            )
-        else openCameraApp(requireContext())
     }
 
     private fun lockPhone() {

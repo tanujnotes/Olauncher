@@ -91,6 +91,28 @@ class Prefs(context: Context) {
     private val CALENDAR_APP_USER = "CALENDAR_APP_USER"
     private val CALENDAR_APP_CLASS_NAME = "CALENDAR_APP_CLASS_NAME"
 
+    private val IS_SHORTCUT_1 = "IS_SHORTCUT_1"
+    private val SHORTCUT_ID_1 = "SHORTCUT_ID_1"
+    private val IS_SHORTCUT_2 = "IS_SHORTCUT_2"
+    private val SHORTCUT_ID_2 = "SHORTCUT_ID_2"
+    private val IS_SHORTCUT_3 = "IS_SHORTCUT_3"
+    private val SHORTCUT_ID_3 = "SHORTCUT_ID_3"
+    private val IS_SHORTCUT_4 = "IS_SHORTCUT_4"
+    private val SHORTCUT_ID_4 = "SHORTCUT_ID_4"
+    private val IS_SHORTCUT_5 = "IS_SHORTCUT_5"
+    private val SHORTCUT_ID_5 = "SHORTCUT_ID_5"
+    private val IS_SHORTCUT_6 = "IS_SHORTCUT_6"
+    private val SHORTCUT_ID_6 = "SHORTCUT_ID_6"
+    private val IS_SHORTCUT_7 = "IS_SHORTCUT_7"
+    private val SHORTCUT_ID_7 = "SHORTCUT_ID_7"
+    private val IS_SHORTCUT_8 = "IS_SHORTCUT_8"
+    private val SHORTCUT_ID_8 = "SHORTCUT_ID_8"
+
+    private val SHORTCUT_ID_SWIPE_LEFT = "SHORTCUT_ID_SWIPE_LEFT"
+    private val IS_SHORTCUT_SWIPE_LEFT = "IS_SHORTCUT_SWIPE_LEFT"
+    private val SHORTCUT_ID_SWIPE_RIGHT = "SHORTCUT_ID_SWIPE_RIGHT"
+    private val IS_SHORTCUT_SWIPE_RIGHT = "IS_SHORTCUT_SWIPE_RIGHT"
+
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
     var firstOpen: Boolean
@@ -409,6 +431,72 @@ class Prefs(context: Context) {
         get() = prefs.getString(CALENDAR_APP_CLASS_NAME, "").toString()
         set(value) = prefs.edit { putString(CALENDAR_APP_CLASS_NAME, value).apply() }
 
+    var isShortcut1: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_1, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_1, value).apply()
+    var shortcutId1: String
+        get() = prefs.getString(SHORTCUT_ID_1, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_1, value).apply()
+    var isShortcut2: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_2, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_2, value).apply()
+    var shortcutId2: String
+        get() = prefs.getString(SHORTCUT_ID_2, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_2, value).apply()
+    var isShortcut3: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_3, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_3, value).apply()
+    var shortcutId3: String
+        get() = prefs.getString(SHORTCUT_ID_3, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_3, value).apply()
+    var isShortcut4: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_4, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_4, value).apply()
+    var shortcutId4: String
+        get() = prefs.getString(SHORTCUT_ID_4, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_4, value).apply()
+    var isShortcut5: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_5, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_5, value).apply()
+    var shortcutId5: String
+        get() = prefs.getString(SHORTCUT_ID_5, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_5, value).apply()
+    var isShortcut6: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_6, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_6, value).apply()
+    var shortcutId6: String
+        get() = prefs.getString(SHORTCUT_ID_6, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_6, value).apply()
+    var isShortcut7: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_7, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_7, value).apply()
+    var shortcutId7: String
+        get() = prefs.getString(SHORTCUT_ID_7, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_7, value).apply()
+    var isShortcut8: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_8, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_8, value).apply()
+    var shortcutId8: String
+        get() = prefs.getString(SHORTCUT_ID_8, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_8, value).apply()
+
+    // Swipe left/right shortcut support
+    var shortcutIdSwipeLeft: String
+        get() = prefs.getString(SHORTCUT_ID_SWIPE_LEFT, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_SWIPE_LEFT, value).apply()
+
+    var isShortcutSwipeLeft: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_SWIPE_LEFT, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_SWIPE_LEFT, value).apply()
+
+    var shortcutIdSwipeRight: String
+        get() = prefs.getString(SHORTCUT_ID_SWIPE_RIGHT, "").toString()
+        set(value) = prefs.edit().putString(SHORTCUT_ID_SWIPE_RIGHT, value).apply()
+
+    var isShortcutSwipeRight: Boolean
+        get() = prefs.getBoolean(IS_SHORTCUT_SWIPE_RIGHT, false)
+        set(value) = prefs.edit().putBoolean(IS_SHORTCUT_SWIPE_RIGHT, value).apply()
+
     fun getAppName(location: Int): String {
         return when (location) {
             1 -> prefs.getString(APP_NAME_1, "").toString()
@@ -462,6 +550,34 @@ class Prefs(context: Context) {
             7 -> prefs.getString(APP_USER_7, "").toString()
             8 -> prefs.getString(APP_USER_8, "").toString()
             else -> ""
+        }
+    }
+
+    fun getShortcutId(location: Int): String {
+        return when (location) {
+            1 -> shortcutId1
+            2 -> shortcutId2
+            3 -> shortcutId3
+            4 -> shortcutId4
+            5 -> shortcutId5
+            6 -> shortcutId6
+            7 -> shortcutId7
+            8 -> shortcutId8
+            else -> ""
+        }
+    }
+
+    fun getIsShortcut(location: Int): Boolean {
+        return when (location) {
+            1 -> isShortcut1
+            2 -> isShortcut2
+            3 -> isShortcut3
+            4 -> isShortcut4
+            5 -> isShortcut5
+            6 -> isShortcut6
+            7 -> isShortcut7
+            8 -> isShortcut8
+            else -> false
         }
     }
 

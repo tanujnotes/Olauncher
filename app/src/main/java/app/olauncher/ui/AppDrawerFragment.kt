@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Recycler
 import app.olauncher.MainViewModel
 import app.olauncher.R
+import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
+import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isSystemApp
@@ -27,7 +29,6 @@ import app.olauncher.helper.openUrl
 import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
-
 
 class AppDrawerFragment : Fragment() {
 
@@ -58,6 +59,7 @@ class AppDrawerFragment : Fragment() {
             flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
             canRename = it.getBoolean(Constants.Key.RENAME, false)
         }
+
         initViews()
         initSearch()
         initAdapter()
@@ -83,7 +85,7 @@ class AppDrawerFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query?.startsWith("!") == true)
                     requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
-                else if (adapter.itemCount == 0) // && requireContext().searchOnPlayStore(query?.trim()).not())
+                else if (adapter.itemCount == 0)
                     requireContext().openSearch(query?.trim())
                 else
                     adapter.launchFirstInList()
@@ -94,7 +96,8 @@ class AppDrawerFragment : Fragment() {
                 try {
                     adapter.filter.filter(newText)
                     binding.appDrawerTip.visibility = View.GONE
-                    binding.appRename.visibility = if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+                    binding.appRename.visibility =
+                        if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
                     return true
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -108,10 +111,8 @@ class AppDrawerFragment : Fragment() {
         adapter = AppDrawerAdapter(
             flag,
             prefs.appLabelAlignment,
-            appClickListener = {
-                if (it.appPackage.isEmpty())
-                    return@AppDrawerAdapter
-                viewModel.selectedApp(it, flag)
+            appClickListener = { appModel ->
+                viewModel.selectedApp(appModel, flag)
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
                     findNavController().popBackStack(R.id.mainFragment, false)
                 else
@@ -125,15 +126,31 @@ class AppDrawerFragment : Fragment() {
                 )
                 findNavController().popBackStack(R.id.mainFragment, false)
             },
-            appDeleteListener = {
-                requireContext().apply {
-                    if (isSystemApp(it.appPackage))
-                        showToast(getString(R.string.system_app_cannot_delete))
-                    else
-                        uninstall(it.appPackage)
+            appDeleteListener = { appModel ->
+                when (appModel) {
+                    is AppModel.PinnedShortcut ->
+                        requireContext().deletePinnedShortcut(
+                            packageName = appModel.appPackage,
+                            shortcutIdToDelete = appModel.shortcutId,
+                            user = appModel.user,
+                        )
+
+                    is AppModel.App -> {
+                        requireContext().apply {
+                            if (isSystemApp(appModel.appPackage))
+                                showToast(getString(R.string.system_app_cannot_delete))
+                            else
+                                uninstall(appModel.appPackage)
+                        }
+                    }
                 }
+                viewModel.getAppList()
             },
             appHideListener = { appModel, position ->
+                if (appModel is AppModel.PinnedShortcut) {
+                    requireContext().showToast("Hiding pinned shortcuts is not supported")
+                    return@AppDrawerAdapter
+                }
                 adapter.appFilteredList.removeAt(position)
                 adapter.notifyItemRemoved(position)
                 adapter.appsList.remove(appModel)
@@ -159,7 +176,11 @@ class AppDrawerFragment : Fragment() {
                 viewModel.getHiddenApps()
             },
             appRenameListener = { appModel, renameLabel ->
-                prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
+                val identifier = when (appModel) {
+                    is AppModel.PinnedShortcut -> appModel.shortcutId
+                    is AppModel.App -> appModel.appPackage
+                }
+                prefs.setAppRenameLabel(identifier, renameLabel)
                 viewModel.getAppList()
             }
         )
