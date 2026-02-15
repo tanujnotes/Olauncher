@@ -31,6 +31,7 @@ import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.isAccessServiceEnabled
 import app.olauncher.helper.isDarkThemeOn
+import app.olauncher.helper.isTablet
 import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.openUrl
@@ -90,7 +91,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.dateTimeSelectLayout.visibility = View.GONE
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
-        binding.textSizesLayout.visibility = View.GONE
+        if (view.id != R.id.textSizeMinus && view.id != R.id.textSizePlus) {
+            if (binding.textSizesLayout.visibility == View.VISIBLE) {
+                binding.textSizesLayout.visibility = View.GONE
+                applyTextSizeScale()
+            }
+        }
         if (view.id != R.id.alignmentBottom)
             binding.alignmentSelectLayout.visibility = View.GONE
 
@@ -136,13 +142,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.maxApps7 -> updateHomeAppsNum(7)
             R.id.maxApps8 -> updateHomeAppsNum(8)
 
-            R.id.textSize1 -> updateTextSizeScale(Constants.TextSize.ONE)
-            R.id.textSize2 -> updateTextSizeScale(Constants.TextSize.TWO)
-            R.id.textSize3 -> updateTextSizeScale(Constants.TextSize.THREE)
-            R.id.textSize4 -> updateTextSizeScale(Constants.TextSize.FOUR)
-            R.id.textSize5 -> updateTextSizeScale(Constants.TextSize.FIVE)
-            R.id.textSize6 -> updateTextSizeScale(Constants.TextSize.SIX)
-            R.id.textSize7 -> updateTextSizeScale(Constants.TextSize.SEVEN)
+            R.id.textSizeMinus -> adjustTextSizePreview(-0.1f)
+            R.id.textSizePlus -> adjustTextSizePreview(0.1f)
 
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
@@ -243,13 +244,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.maxApps7.setOnClickListener(this)
         binding.maxApps8.setOnClickListener(this)
 
-        binding.textSize1.setOnClickListener(this)
-        binding.textSize2.setOnClickListener(this)
-        binding.textSize3.setOnClickListener(this)
-        binding.textSize4.setOnClickListener(this)
-        binding.textSize5.setOnClickListener(this)
-        binding.textSize6.setOnClickListener(this)
-        binding.textSize7.setOnClickListener(this)
+        binding.textSizeMinus.setOnClickListener(this)
+        binding.textSizePlus.setOnClickListener(this)
 
         binding.dailyWallpaper.setOnLongClickListener(this)
         binding.alignment.setOnLongClickListener(this)
@@ -456,9 +452,27 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.refreshHome(true)
     }
 
-    private fun updateTextSizeScale(sizeScale: Float) {
-        if (prefs.textSizeScale == sizeScale) return
-        prefs.textSizeScale = sizeScale
+    private var pendingTextSizeScale: Float = -1f
+
+    private fun adjustTextSizePreview(delta: Float) {
+        val maxScale = if (isTablet(requireContext())) 2.0f else 1.5f
+        val current = if (pendingTextSizeScale > 0) pendingTextSizeScale else prefs.textSizeScale
+        val newScale = Math.round((current + delta) * 10f) / 10f
+        val clamped = newScale.coerceIn(0.5f, maxScale)
+        if (clamped == current) return
+        pendingTextSizeScale = clamped
+        val formatted = String.format("%.1f", clamped)
+        binding.textSizeValue.text = formatted
+        binding.textSizeCurrent.text = formatted
+    }
+
+    private fun applyTextSizeScale() {
+        if (pendingTextSizeScale < 0 || prefs.textSizeScale == pendingTextSizeScale) {
+            pendingTextSizeScale = -1f
+            return
+        }
+        prefs.textSizeScale = pendingTextSizeScale
+        pendingTextSizeScale = -1f
         requireActivity().recreate()
     }
 
@@ -509,16 +523,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateTextSize() {
-        binding.textSizeValue.text = when (prefs.textSizeScale) {
-            Constants.TextSize.ONE -> 1
-            Constants.TextSize.TWO -> 2
-            Constants.TextSize.THREE -> 3
-            Constants.TextSize.FOUR -> 4
-            Constants.TextSize.FIVE -> 5
-            Constants.TextSize.SIX -> 6
-            Constants.TextSize.SEVEN -> 7
-            else -> "--"
-        }.toString()
+        val formatted = String.format("%.1f", prefs.textSizeScale)
+        binding.textSizeValue.text = formatted
+        binding.textSizeCurrent.text = formatted
     }
 
     private fun populateScreenTimeOnOff() {

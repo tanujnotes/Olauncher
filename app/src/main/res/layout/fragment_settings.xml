@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainActivityLayout"
     android:layout_width="match_parent"
@@ -679,9 +678,9 @@
                         android:paddingVertical="8dp"
                         android:paddingStart="24dp"
                         android:paddingEnd="8dp"
-                        tools:text="@string/_8" />
+                        tools:text="1.0" />
 
-                    <!-- Text sizes layout-->
+                    <!-- Text size +/- controls -->
                     <LinearLayout
                         android:id="@+id/textSizesLayout"
                         android:layout_width="match_parent"
@@ -689,6 +688,7 @@
                         android:animateLayoutChanges="true"
                         android:background="@drawable/rounded_primary_gradient"
                         android:elevation="8dp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:outlineAmbientShadowColor="@color/colorPrimaryDark"
                         android:outlineSpotShadowColor="@color/colorPrimaryDark"
@@ -697,74 +697,34 @@
                         tools:visibility="gone">
 
                         <TextView
-                            android:id="@+id/textSize1"
-                            style="@style/TextSmall"
+                            android:id="@+id/textSizeMinus"
+                            style="@style/TextSmallBold"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="@string/_1" />
+                            android:text="\u2212" />
 
                         <TextView
-                            android:id="@+id/textSize2"
-                            style="@style/TextSmall"
+                            android:id="@+id/textSizeCurrent"
+                            style="@style/TextSmallBold"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="@string/_2" />
+                            tools:text="1.0" />
 
                         <TextView
-                            android:id="@+id/textSize3"
-                            style="@style/TextSmall"
+                            android:id="@+id/textSizePlus"
+                            style="@style/TextSmallBold"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:paddingVertical="8dp"
-                            android:text="@string/_3" />
-
-                        <TextView
-                            android:id="@+id/textSize4"
-                            style="@style/TextSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:paddingVertical="8dp"
-                            android:text="@string/_4" />
-
-                        <TextView
-                            android:id="@+id/textSize5"
-                            style="@style/TextSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:paddingVertical="8dp"
-                            android:text="@string/_5" />
-
-                        <TextView
-                            android:id="@+id/textSize6"
-                            style="@style/TextSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:paddingVertical="8dp"
-                            android:text="@string/_6" />
-
-                        <TextView
-                            android:id="@+id/textSize7"
-                            style="@style/TextSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:paddingVertical="8dp"
-                            android:text="@string/_7" />
+                            android:text="+" />
 
                     </LinearLayout>
 
