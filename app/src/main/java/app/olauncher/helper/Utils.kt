@@ -35,6 +35,7 @@ import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.net.toUri
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.AppModel
@@ -53,6 +54,7 @@ import java.util.Locale
 import java.util.Scanner
 import kotlin.math.pow
 import kotlin.math.sqrt
+import androidx.core.graphics.createBitmap
 
 fun Context.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
     if (message.isNullOrBlank()) return
@@ -77,20 +79,21 @@ suspend fun getAppsList(
             val hiddenApps = Prefs(context).hiddenApps
 
             val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-            val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+            val launcherApps =
+                context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
             val collator = Collator.getInstance()
 
             for (profile in userManager.userProfiles) {
                 for (app in launcherApps.getActivityList(null, profile)) {
-
-                    val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName).ifBlank { app.label.toString() }
-                    val appModel = AppModel(
-                        appLabelShown,
-                        collator.getCollationKey(app.label.toString()),
-                        app.applicationInfo.packageName,
-                        app.componentName.className,
-                        (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
-                        profile
+                    val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
+                        .ifBlank { app.label.toString() }
+                    val appModel = AppModel.App(
+                        appLabel = appLabelShown,
+                        key = collator.getCollationKey(app.label.toString()),
+                        appPackage = app.applicationInfo.packageName,
+                        activityClassName = app.componentName.className,
+                        isNew = (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
+                        user = profile
                     )
 
                     // if the current app is not OLauncher
@@ -109,14 +112,57 @@ suspend fun getAppsList(
                     }
                 }
             }
-            appList.sortBy { it.appLabel.lowercase() }
 
+            // Add shortcuts if we're getting regular apps
+            if (includeRegularApps) {
+                appList.addAll(getPinnedShortcuts(context, prefs))
+            }
+
+            appList.sortBy { it.appLabel.lowercase() }
         } catch (e: Exception) {
             e.printStackTrace()
         }
         appList
     }
 }
+
+private suspend fun getPinnedShortcuts(
+    context: Context,
+    prefs: Prefs
+): List<AppModel.PinnedShortcut> =
+    withContext(Dispatchers.IO) {
+        val pinnedShortcuts = mutableListOf<AppModel.PinnedShortcut>()
+        val shortcuts = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as? LauncherApps
+        if (shortcuts?.hasShortcutHostPermission() == true) {
+            val query = LauncherApps.ShortcutQuery().apply {
+                setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
+            }
+            shortcuts.profiles.forEach { profile ->
+                try {
+                    shortcuts.getShortcuts(query, profile)?.forEach { shortcut ->
+                        if (shortcut.isPinned && pinnedShortcuts.none { it.shortcutId == shortcut.id }) {
+                            pinnedShortcuts.add(
+                                AppModel.PinnedShortcut(
+                                    appLabel = prefs.getAppRenameLabel(shortcut.id)
+                                        .takeIf { it.isNotBlank() }
+                                        ?: shortcut.shortLabel?.toString()
+                                        ?: shortcut.longLabel?.toString().orEmpty(),
+                                    key = null,
+                                    appPackage = shortcut.`package`,
+                                    shortcutId = shortcut.id,
+                                    isNew = false,
+                                    user = profile
+                                )
+                            )
+                        }
+                    }
+                } catch (e: SecurityException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        pinnedShortcuts
+    }
 
 // This is to ensure backward compatibility with older app versions
 // which did not support multiple user profiles
@@ -178,7 +224,7 @@ fun setPlainWallpaperByTheme(context: Context, appTheme: Int) {
 
 fun setPlainWallpaper(context: Context, color: Int) {
     try {
-        val bitmap = Bitmap.createBitmap(1000, 2000, Bitmap.Config.ARGB_8888)
+        val bitmap = createBitmap(1000, 2000)
         bitmap.eraseColor(context.getColor(color))
         val manager = WallpaperManager.getInstance(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -234,7 +280,7 @@ suspend fun getBitmapFromURL(src: String?): Bitmap? {
 suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): Bitmap {
     return withContext(Dispatchers.IO) {
 
-        val background = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val background = createBitmap(width, height)
 
         val originalWidth: Float = originalImage.width.toFloat()
         val originalHeight: Float = originalImage.height.toFloat()
@@ -498,10 +544,46 @@ fun Context.shareApp() {
 fun Context.rateApp() {
     val intent = Intent(
         Intent.ACTION_VIEW,
-        Uri.parse(Constants.URL_OLAUNCHER_PLAY_STORE)
+        Constants.URL_OLAUNCHER_PLAY_STORE.toUri()
     )
     var flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
     flags = flags or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
     intent.addFlags(flags)
     startActivity(intent)
+}
+
+fun Context.deletePinnedShortcut(packageName: String, shortcutIdToDelete: String, user: UserHandle) {
+    val launcherApps = getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+
+    // 1. Query for existing pinned shortcuts for the package
+    val query = LauncherApps.ShortcutQuery().apply {
+        setPackage(packageName)
+        // Query only for pinned shortcuts
+        setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
+    }
+
+    try {
+        val pinnedShortcuts = launcherApps.getShortcuts(query, user)
+
+        if (pinnedShortcuts != null) {
+            // 2. Filter out the shortcut to be deleted
+            val updatedPinnedIds = pinnedShortcuts
+                .filter { it.id != shortcutIdToDelete }
+                .map { it.id }
+
+            // 3. Re-pin the remaining shortcuts
+            // This replaces the existing set of pinned shortcuts for this package
+            launcherApps.pinShortcuts(packageName, updatedPinnedIds, user)
+        }
+    } catch (e: SecurityException) {
+        // Handle cases where the app doesn't have permission
+        // (e.g., not the default launcher or active voice interaction service)
+        Log.e("ShortcutHelper", "Permission denied to modify pinned shortcuts for $packageName", e)
+    } catch (e: IllegalStateException) {
+        // Handle cases where the user profile is locked or not running
+        Log.e("ShortcutHelper", "User profile unavailable for modifying pinned shortcuts for $packageName", e)
+    } catch (e: Exception) {
+        // Handle other potential exceptions (like RemoteException wrapped)
+        Log.e("ShortcutHelper", "Failed to modify pinned shortcuts for $packageName", e)
+    }
 }
