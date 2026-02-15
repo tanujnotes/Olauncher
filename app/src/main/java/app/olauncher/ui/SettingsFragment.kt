@@ -31,8 +31,9 @@ import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.isAccessServiceEnabled
 import app.olauncher.helper.isDarkThemeOn
-import app.olauncher.helper.isTablet
+import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.isTablet
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.openUrl
 import app.olauncher.helper.rateApp
@@ -418,7 +419,13 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun removeWallpaper() {
-        setPlainWallpaper(requireContext(), android.R.color.black)
+        if (requireContext().isEinkDisplay()) {
+            prefs.appTheme = AppCompatDelegate.MODE_NIGHT_NO
+            setPlainWallpaper(requireContext(), android.R.color.white)
+        } else {
+            prefs.appTheme = AppCompatDelegate.MODE_NIGHT_YES
+            setPlainWallpaper(requireContext(), android.R.color.black)
+        }
         if (!prefs.dailyWallpaper) return
         prefs.dailyWallpaper = false
         populateWallpaperText()
