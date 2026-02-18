@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -129,11 +130,13 @@ class AppDrawerFragment : Fragment() {
             appDeleteListener = { appModel ->
                 when (appModel) {
                     is AppModel.PinnedShortcut ->
-                        requireContext().deletePinnedShortcut(
-                            packageName = appModel.appPackage,
-                            shortcutIdToDelete = appModel.shortcutId,
-                            user = appModel.user,
-                        )
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                            requireContext().deletePinnedShortcut(
+                                packageName = appModel.appPackage,
+                                shortcutIdToDelete = appModel.shortcutId,
+                                user = appModel.user,
+                            )
+                        }
 
                     is AppModel.App -> {
                         requireContext().apply {

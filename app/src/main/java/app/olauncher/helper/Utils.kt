@@ -34,7 +34,9 @@ import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.createBitmap
 import androidx.core.net.toUri
 import app.olauncher.BuildConfig
 import app.olauncher.R
@@ -54,7 +56,6 @@ import java.util.Locale
 import java.util.Scanner
 import kotlin.math.pow
 import kotlin.math.sqrt
-import androidx.core.graphics.createBitmap
 
 fun Context.showToast(message: String?, duration: Int = Toast.LENGTH_SHORT) {
     if (message.isNullOrBlank()) return
@@ -114,11 +115,16 @@ suspend fun getAppsList(
             }
 
             // Add shortcuts if we're getting regular apps
-            if (includeRegularApps) {
-                appList.addAll(getPinnedShortcuts(context, prefs))
+            if (includeRegularApps && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val pinned = try {
+                    getPinnedShortcuts(context, prefs, collator)
+                } catch (e: Exception) {
+                    emptyList()
+                }
+                appList.addAll(pinned)
             }
 
-            appList.sortBy { it.appLabel.lowercase() }
+            appList.sortWith(compareBy(collator) { it.appLabel })
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -126,9 +132,11 @@ suspend fun getAppsList(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 private suspend fun getPinnedShortcuts(
     context: Context,
-    prefs: Prefs
+    prefs: Prefs,
+    collator: Collator,
 ): List<AppModel.PinnedShortcut> =
     withContext(Dispatchers.IO) {
         val pinnedShortcuts = mutableListOf<AppModel.PinnedShortcut>()
@@ -141,13 +149,14 @@ private suspend fun getPinnedShortcuts(
                 try {
                     shortcuts.getShortcuts(query, profile)?.forEach { shortcut ->
                         if (shortcut.isPinned && pinnedShortcuts.none { it.shortcutId == shortcut.id }) {
+                            val label = prefs.getAppRenameLabel(shortcut.id)
+                                .takeIf { it.isNotBlank() }
+                                ?: shortcut.shortLabel?.toString()
+                                ?: shortcut.longLabel?.toString().orEmpty()
                             pinnedShortcuts.add(
                                 AppModel.PinnedShortcut(
-                                    appLabel = prefs.getAppRenameLabel(shortcut.id)
-                                        .takeIf { it.isNotBlank() }
-                                        ?: shortcut.shortLabel?.toString()
-                                        ?: shortcut.longLabel?.toString().orEmpty(),
-                                    key = null,
+                                    appLabel = label,
+                                    key = collator.getCollationKey(label),
                                     appPackage = shortcut.`package`,
                                     shortcutId = shortcut.id,
                                     isNew = false,
@@ -552,6 +561,7 @@ fun Context.rateApp() {
     startActivity(intent)
 }
 
+@RequiresApi(Build.VERSION_CODES.N_MR1)
 fun Context.deletePinnedShortcut(packageName: String, shortcutIdToDelete: String, user: UserHandle) {
     val launcherApps = getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
