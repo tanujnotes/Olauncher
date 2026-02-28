@@ -140,7 +140,7 @@ class AppDrawerFragment : Fragment() {
 
                     is AppModel.App -> {
                         requireContext().apply {
-                            if (isSystemApp(appModel.appPackage))
+                            if (isSystemApp(appModel.appPackage, appModel.user))
                                 showToast(getString(R.string.system_app_cannot_delete))
                             else
                                 uninstall(appModel.appPackage)
