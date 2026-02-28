@@ -1,6 +1,7 @@
 package app.olauncher.ui
 
 import android.content.Context
+import android.content.pm.LauncherApps
 import android.os.UserHandle
 import android.text.Editable
 import android.text.TextWatcher
@@ -191,7 +192,7 @@ class AppDrawerAdapter(
             appTitle.setOnLongClickListener {
                 if (appModel.appPackage.isNotEmpty()) {
                     appDelete.alpha = when (
-                        appModel is AppModel.PinnedShortcut || !root.context.isSystemApp(appModel.appPackage)
+                        appModel is AppModel.PinnedShortcut || !root.context.isSystemApp(appModel.appPackage, appModel.user)
                     ) {
                         true -> 1.0f
                         false -> 0.5f
@@ -215,7 +216,7 @@ class AppDrawerAdapter(
             // Configure rename behavior
             appRename.setOnClickListener {
                 if (appModel.appPackage.isNotEmpty()) {
-                    etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage)
+                    etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage, appModel.user)
                     etAppRename.setText(appModel.appLabel)
                     etAppRename.setSelectAllOnFocus(true)
                     renameLayout.visibility = View.VISIBLE
@@ -229,7 +230,7 @@ class AppDrawerAdapter(
             }
             etAppRename.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage)
+                    etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage, appModel.user)
                 }
 
                 override fun beforeTextChanged(
@@ -262,12 +263,9 @@ class AppDrawerAdapter(
                     appRenameListener(appModel, renameLabel)
                     renameLayout.visibility = View.GONE
                 } else {
-                    val packageManager = etAppRename.context.packageManager
                     appRenameListener(
                         appModel,
-                        packageManager.getApplicationLabel(
-                            packageManager.getApplicationInfo(appModel.appPackage, 0)
-                        ).toString()
+                        getAppName(etAppRename.context, appModel.appPackage, appModel.user)
                     )
                     renameLayout.visibility = View.GONE
                 }
@@ -285,11 +283,21 @@ class AppDrawerAdapter(
             appHide.setOnClickListener { appHideListener(appModel, bindingAdapterPosition) }
         }
 
-        private fun getAppName(context: Context, appPackage: String): String {
-            val packageManager = context.packageManager
-            return packageManager.getApplicationLabel(
-                packageManager.getApplicationInfo(appPackage, 0)
-            ).toString()
+        private fun getAppName(context: Context, appPackage: String, user: UserHandle): String {
+            val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+            return try {
+                val activityList = launcherApps.getActivityList(appPackage, user)
+                if (activityList.isNotEmpty()) {
+                    activityList.first().label.toString()
+                } else {
+                    val packageManager = context.packageManager
+                    packageManager.getApplicationLabel(
+                        packageManager.getApplicationInfo(appPackage, 0)
+                    ).toString()
+                }
+            } catch (_: Exception) {
+                "" // As a fallback, display an empty string.
+            }
         }
     }
 }
