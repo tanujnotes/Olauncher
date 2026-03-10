@@ -96,7 +96,6 @@ class AppDrawerFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean {
                 try {
                     adapter.filter.filter(newText)
-                    binding.appDrawerTip.visibility = View.GONE
                     binding.appRename.visibility =
                         if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
                     return true
@@ -213,10 +212,6 @@ class AppDrawerFragment : Fragment() {
 
     private fun initObservers() {
         viewModel.firstOpen.observe(viewLifecycleOwner) {
-            if (it && flag == Constants.FLAG_LAUNCH_APP) {
-                binding.appDrawerTip.visibility = View.VISIBLE
-                binding.appDrawerTip.isSelected = true
-            }
         }
         if (flag == Constants.FLAG_HIDDEN_APPS) {
             viewModel.hiddenApps.observe(viewLifecycleOwner) {
@@ -235,10 +230,6 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun initClickListeners() {
-        binding.appDrawerTip.setOnClickListener {
-            binding.appDrawerTip.isSelected = false
-            binding.appDrawerTip.isSelected = true
-        }
         binding.appRename.setOnClickListener {
             val name = binding.search.query.toString().trim()
             if (name.isEmpty()) {
