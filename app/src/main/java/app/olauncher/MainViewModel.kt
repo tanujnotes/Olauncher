@@ -336,8 +336,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
         val activityInfo = launcher.getActivityList(packageName, userHandle)
 
-        val component = if (activityClassName.isNullOrBlank()) {
-            // activityClassName will be null for hidden apps.
+        val isActivityValid = activityClassName.isNullOrBlank().not()
+                && activityInfo.any { it.componentName.className == activityClassName }
+
+        val component = if (isActivityValid)
+            ComponentName(packageName, activityClassName)
+        else {
             when (activityInfo.size) {
                 0 -> {
                     appContext.showToast(appContext.getString(R.string.app_not_found))
@@ -346,9 +350,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
                 1 -> ComponentName(packageName, activityInfo[0].name)
                 else -> ComponentName(packageName, activityInfo[activityInfo.size - 1].name)
-            }
-        } else {
-            ComponentName(packageName, activityClassName)
+            }.also { prefs.updateAppActivityClassName(packageName, it.className) }
         }
 
         try {
@@ -414,7 +416,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         if (prefs.screenTimeLastUpdated.hasBeenMinutes(1).not()) return
 
         val eventLogWrapper = EventLogWrapper(
-            appContext)
+            appContext
+        )
         // Start of today in millis
         val calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 0)

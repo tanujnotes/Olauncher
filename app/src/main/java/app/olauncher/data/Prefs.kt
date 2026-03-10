@@ -610,6 +610,30 @@ class Prefs(context: Context) {
         }
     }
 
+    fun setAppActivityClassName(location: Int, activityClassName: String) {
+        when (location) {
+            1 -> appActivityClassName1 = activityClassName
+            2 -> appActivityClassName2 = activityClassName
+            3 -> appActivityClassName3 = activityClassName
+            4 -> appActivityClassName4 = activityClassName
+            5 -> appActivityClassName5 = activityClassName
+            6 -> appActivityClassName6 = activityClassName
+            7 -> appActivityClassName7 = activityClassName
+            8 -> appActivityClassName8 = activityClassName
+        }
+    }
+
+    fun updateAppActivityClassName(packageName: String, activityClassName: String) {
+        for (i in 1..8) {
+            if (getAppPackage(i) == packageName) setAppActivityClassName(i, activityClassName)
+        }
+        if (clockAppPackage == packageName) clockAppClassName = activityClassName
+        if (calendarAppPackage == packageName) calendarAppClassName = activityClassName
+        if (screenTimeAppPackage == packageName) screenTimeAppClassName = activityClassName
+        if (appPackageSwipeLeft == packageName) appActivityClassNameSwipeLeft = activityClassName
+        if (appPackageSwipeRight == packageName) appActivityClassNameRight = activityClassName
+    }
+
     fun getAppRenameLabel(appPackage: String): String = prefs.getString(appPackage, "").toString()
 
     fun setAppRenameLabel(appPackage: String, renameLabel: String) = prefs.edit { putString(appPackage, renameLabel) }
