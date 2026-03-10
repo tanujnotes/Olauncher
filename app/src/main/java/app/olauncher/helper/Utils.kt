@@ -500,12 +500,21 @@ fun Context.openUrl(url: String) {
     startActivity(intent)
 }
 
-fun Context.isSystemApp(packageName: String): Boolean {
+fun Context.isSystemApp(packageName: String, user: UserHandle? = null): Boolean {
     if (packageName.isBlank()) return true
     return try {
-        val applicationInfo = packageManager.getApplicationInfo(packageName, 0)
-        ((applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0)
-                || (applicationInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0))
+        val launcherApps = getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+        val targetUser = user ?: android.os.Process.myUserHandle()
+        val activityList = launcherApps.getActivityList(packageName, targetUser)
+        if (activityList.isNotEmpty()) {
+            val applicationInfo = activityList.first().applicationInfo
+            ((applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0)
+                    || (applicationInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0))
+        } else {
+            val applicationInfo = packageManager.getApplicationInfo(packageName, 0)
+            ((applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0)
+                    || (applicationInfo.flags and ApplicationInfo.FLAG_UPDATED_SYSTEM_APP != 0))
+        }
     } catch (e: Exception) {
         e.printStackTrace()
         false
