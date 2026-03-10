@@ -153,6 +153,13 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 prefs.calendarAppUser = ""
             }
 
+            R.id.tvScreenTime -> {
+                showAppList(Constants.FLAG_SET_SCREEN_TIME_APP)
+                prefs.screenTimeAppPackage = ""
+                prefs.screenTimeAppClassName = ""
+                prefs.screenTimeAppUser = ""
+            }
+
             R.id.setDefaultLauncher -> {
                 prefs.hideSetDefaultLauncher = true
                 binding.setDefaultLauncher.visibility = View.GONE
@@ -221,6 +228,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.setDefaultLauncher.setOnClickListener(this)
         binding.setDefaultLauncher.setOnLongClickListener(this)
         binding.tvScreenTime.setOnClickListener(this)
+        binding.tvScreenTime.setOnLongClickListener(this)
     }
 
     private fun setHomeAlignment(horizontalGravity: Int = prefs.homeAlignment) {
@@ -571,6 +579,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     }
 
     private fun openScreenTimeDigitalWellbeing() {
+        if (prefs.screenTimeAppPackage.isNotBlank()) {
+            launchApp(
+                "Screen Time",
+                prefs.screenTimeAppPackage,
+                prefs.screenTimeAppClassName,
+                prefs.screenTimeAppUser
+            )
+            return
+        }
         val intent = Intent()
         try {
             intent.setClassName(

@@ -90,6 +90,9 @@ class Prefs(context: Context) {
     private val CALENDAR_APP_PACKAGE = "CALENDAR_APP_PACKAGE"
     private val CALENDAR_APP_USER = "CALENDAR_APP_USER"
     private val CALENDAR_APP_CLASS_NAME = "CALENDAR_APP_CLASS_NAME"
+    private val SCREEN_TIME_APP_PACKAGE = "SCREEN_TIME_APP_PACKAGE"
+    private val SCREEN_TIME_APP_USER = "SCREEN_TIME_APP_USER"
+    private val SCREEN_TIME_APP_CLASS_NAME = "SCREEN_TIME_APP_CLASS_NAME"
 
     private val IS_SHORTCUT_1 = "IS_SHORTCUT_1"
     private val SHORTCUT_ID_1 = "SHORTCUT_ID_1"
@@ -430,6 +433,18 @@ class Prefs(context: Context) {
     var calendarAppClassName: String?
         get() = prefs.getString(CALENDAR_APP_CLASS_NAME, "").toString()
         set(value) = prefs.edit { putString(CALENDAR_APP_CLASS_NAME, value).apply() }
+
+    var screenTimeAppPackage: String
+        get() = prefs.getString(SCREEN_TIME_APP_PACKAGE, "").toString()
+        set(value) = prefs.edit { putString(SCREEN_TIME_APP_PACKAGE, value).apply() }
+
+    var screenTimeAppUser: String
+        get() = prefs.getString(SCREEN_TIME_APP_USER, "").toString()
+        set(value) = prefs.edit { putString(SCREEN_TIME_APP_USER, value).apply() }
+
+    var screenTimeAppClassName: String?
+        get() = prefs.getString(SCREEN_TIME_APP_CLASS_NAME, "").toString()
+        set(value) = prefs.edit { putString(SCREEN_TIME_APP_CLASS_NAME, value).apply() }
 
     var isShortcut1: Boolean
         get() = prefs.getBoolean(IS_SHORTCUT_1, false)

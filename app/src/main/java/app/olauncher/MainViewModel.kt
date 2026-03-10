@@ -79,6 +79,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             Constants.FLAG_SET_SWIPE_RIGHT_APP -> saveSwipeApp(appModel, isLeft = false)
             Constants.FLAG_SET_CLOCK_APP -> saveClockApp(appModel)
             Constants.FLAG_SET_CALENDAR_APP -> saveCalendarApp(appModel)
+            Constants.FLAG_SET_SCREEN_TIME_APP -> saveScreenTimeApp(appModel)
         }
     }
 
@@ -304,6 +305,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             prefs.calendarAppPackage = appModel.appPackage
             prefs.calendarAppUser = appModel.user.toString()
             prefs.calendarAppClassName = appModel.activityClassName
+        }
+    }
+
+    private fun saveScreenTimeApp(appModel: AppModel) {
+        if (appModel is AppModel.App) {
+            prefs.screenTimeAppPackage = appModel.appPackage
+            prefs.screenTimeAppUser = appModel.user.toString()
+            prefs.screenTimeAppClassName = appModel.activityClassName
         }
     }
 
