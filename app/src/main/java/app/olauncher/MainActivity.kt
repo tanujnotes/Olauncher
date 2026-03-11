@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
     private var timerJob: Job? = null
+    private var isResumed = false
 
 //    override fun onBackPressed() {
 //        if (navController.currentDestination?.id != R.id.mainFragment)
@@ -111,7 +112,13 @@ class MainActivity : AppCompatActivity() {
         restartLauncherOrCheckTheme()
     }
 
+    override fun onResume() {
+        super.onResume()
+        isResumed = true
+    }
+
     override fun onStop() {
+        isResumed = false
         backToHomeScreen()
         super.onStop()
     }
@@ -124,7 +131,7 @@ class MainActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent?) {
         val alreadyHome = navController.currentDestination?.id == R.id.mainFragment
         backToHomeScreen()
-        if (alreadyHome && prefs.homeButtonShowRecents)
+        if (alreadyHome && isResumed && prefs.homeButtonShowRecents)
             viewModel.showRecentApps.call()
         super.onNewIntent(intent)
     }
