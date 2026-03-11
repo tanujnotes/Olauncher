@@ -15,6 +15,13 @@
         android:layout_height="1dp"
         android:contentDescription="@string/lock_layout_description" />
 
+    <!-- Placeholder layout for showing recent apps-->
+    <FrameLayout
+        android:id="@+id/recents"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:contentDescription="@string/recents_layout_description" />
+
     <!-- Clock and calendar-->
     <LinearLayout
         android:id="@+id/dateTimeLayout"

@@ -61,7 +61,7 @@
     <string name="keyboard_message">היי, יותר מהיר למצוא ולפתוח יישומים ב־Olauncher בעזרת ההקלדה. אולי בכל זאת היית רוצה להשאיר את ההגדרה הזאת ולתת לה עוד הזדמנות?
         \n\nThe choice is always yours.</string>
     <string name="wallpaper_message">Olauncher מציע טפטים חדשים ויפים מדי יום. תנו למסך הבית שלכם מראה חדש ורענן בכל יום, בחינם! רוצים לנסות?</string>
-    <string name="accessibility_service_description">הרשאת הנגישות נחוצה להפעלת הנעילה בהקשה כפולה. כל הנתונים שייאספו על ידי Olauncher דרך השירות הזה לא יועברו הלאה ממכשירך.</string>
+    <string name="accessibility_service_description">הרשאת הנגישות נחוצה להפעלת הנעילה בהקשה כפולה ולחצן הבית להצגת אפליקציות אחרונות. כל הנתונים שייאספו על ידי Olauncher דרך השירות הזה לא יועברו הלאה ממכשירך.</string>
     <string name="support_olauncher_for_free">אפשר לתמוך ב־Olauncher מבלי לשלם שקל, בעזרת שימוש בקישור ה־Amazon affiliate שלנו.</string>
     <string name="support_olauncher_message">על כל רכישה שתבוצע דרך הקישור שלנו אנחנו נקבל עמלה קטנה. נשמח אם תשמרו את הקישור ותשתמשו בו בקניות מהאינטרנט.\nתודה רבה!</string>
     <string name="open">פתיחת קישור</string>
@@ -83,11 +83,11 @@
     <string name="swipe_down_for">פעולה בעת החלקה למטה</string>
     <string name="search">חיפוש</string>
     <string name="notifications">התראות</string>
-    <string name="accessibility_disclosure">נא להפעיל או לכבות את שירות הנגישות של Olauncher בהגדרות המכשיר שלך בשביל להפעיל או לנטרל אפשרות זו.
-    \n\nלתשומת ליבך, נעשה שימוש בשירות זה אך ורק בשביל לאפשר לך לכבות את המסך בעזרת הקשה לחיצה כפולה. שירות הנגישות שלנו אינו אוסף או משתף נתונים כלל.</string>
+    <string name="accessibility_disclosure">נא להפעיל את שירות הנגישות של Olauncher בהגדרות המכשיר שלך כדי להפעיל את מחוות הנעילה בהקשה כפולה או לחצן הבית לאפליקציות אחרונות.\n\nשימו לב ששירות זה משמש רק למחוות אלה. שירות הנגישות שלנו אינו אוסף או משתף נתונים כלשהם.</string>
     <string name="accept">הסכמה</string>
     <string name="permission">הרשאה</string>
     <string name="double_tap_lock">לחיצה כפולה לנעילת המסך</string>
+    <string name="home_button_show_recents">כפתור הבית לאחרונים</string>
     <string name="enable">הפעלה</string>
     <string name="disable">השבתהe</string>
     <string name="not_working"><u>לא עובד?</u></string>

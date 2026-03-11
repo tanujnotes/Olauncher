@@ -69,7 +69,7 @@
         \n\nTambién es la mejor manera de apoyar a los desarrolladores de Olauncher. ¡Échale un vistazo!</string>
     <string name="wallpaper_message">Olauncher ofrece hermosos fondos de pantalla nuevos a diario. ¡Dale un nuevo look a tu pantalla de inicio cada día, gratis!
         \n\n¿Quieres probarlo?</string>
-    <string name="accessibility_service_description">Se necesita el permiso de Accesibilidad para activar el bloqueo con doble toque. Cualquier dato recolectado por Olauncher no saldrá de su dispositivo.</string>
+    <string name="accessibility_service_description">Se necesita el permiso de Accesibilidad para activar el bloqueo con doble toque y el botón de inicio para mostrar aplicaciones recientes. Cualquier dato recolectado por Olauncher no saldrá de su dispositivo.</string>
     <string name="support_olauncher_for_free">Apoye Olauncher de forma gratuita utilizando nuestro enlace de afiliado de Amazon.</string>
     <string name="support_olauncher_message">Cada vez que compre algo usando nuestro enlace, obtenemos una pequeña comisión. Por favor, guarde el enlace y úselo cada vez que compre en línea. ¡Gracias!</string>
     <string name="open">Abrir enlace</string>
@@ -91,10 +91,11 @@
     <string name="swipe_down_for">Deslize el dedo hacia abajo para</string>
     <string name="search">Buscar</string>
     <string name="notifications">Notificaciones</string>
-    <string name="accessibility_disclosure">Active o desactive el servicio de accesibilidad de Olauncher en la configuración de su dispositivo para habilitar o deshabilitar esta función. Tenga en cuenta que este servicio solo se utiliza para permitirle apagar el dispositivo</string>
+    <string name="accessibility_disclosure">Active el servicio de accesibilidad de Olauncher en la configuración de su dispositivo para habilitar los gestos de doble toque para bloquear o botón de inicio para aplicaciones recientes.\n\nTenga en cuenta que este servicio solo se utiliza para estos gestos. Nuestro servicio de accesibilidad no recopila ni comparte ningún dato.</string>
     <string name="accept">Aceptar</string>
     <string name="permission">Permiso</string>
     <string name="double_tap_lock">Tocar dos veces para bloquear</string>
+    <string name="home_button_show_recents">Botón de inicio para recientes</string>
     <string name="enable">Habilitar</string>
     <string name="disable">Inutilizar</string>
     <string name="not_working"><u>¿No funciona?</u></string>

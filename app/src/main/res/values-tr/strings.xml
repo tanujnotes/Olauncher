@@ -27,11 +27,11 @@
     <string name="swipe_down_for">Aşağı kaydır:</string>
     <string name="search">Ara</string>
     <string name="notifications">Bildirimler</string>
-    <string name="accessibility_disclosure">Bu özelliği etkinleştirmek veya devre dışı bırakmak için lütfen cihazınızın ayarlarında Olauncher\'ın erişilebilirlik hizmetini açın veya kapatın.
-        \n\nLütfen bu hizmetin yalnızca ekranı çift dokunma hareketini kullanarak kapatmanıza izin vermek için kullanıldığını unutmayın. Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
+    <string name="accessibility_disclosure">Kilitlemek için çift dokunma veya son uygulamalar için ana ekran düğmesi hareketlerini etkinleştirmek için lütfen cihazınızın ayarlarında Olauncher\'ın erişilebilirlik hizmetini açın.\n\nBu hizmetin yalnızca bu hareketler için kullanıldığını lütfen unutmayın. Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
     <string name="accept">Kabul et</string>
     <string name="permission">İzin</string>
     <string name="double_tap_lock">Kilitlemek için iki kez dokunun</string>
+    <string name="home_button_show_recents">Ana ekran düğmesi son uygulamalar için</string>
     <string name="enable">Etkinleştir</string>
     <string name="disable">Devre dışı bırak</string>
     <string name="not_working"><u>Çalışmıyor mu?</u></string>
@@ -103,7 +103,7 @@
         \n\nAyrıca Olauncher geliştiricilerini desteklemenin en iyi yoludur. Mutlaka inceleyin!</string>
     <string name="wallpaper_message">Olauncher, ana ekranınıza taze bir görünüm kazandırmak için her gün yeni duvar kağıtları sunuyor. Hem de ücretsiz!
         \n\nDenemek ister misiniz?</string>
-    <string name="accessibility_service_description">Kilitlemek için çift dokunmayı etkinleştirmek için erişilebilirlik izni gereklidir. Olauncher tarafından bu hizmet aracılığıyla elde edilen hiçbir veri cihazınızdan ayrılmayacaktır.</string>
+    <string name="accessibility_service_description">Kilitlemek için çift dokunmayı ve son uygulamaları göstermek için ana ekran düğmesini etkinleştirmek için erişilebilirlik izni gereklidir. Olauncher tarafından bu hizmet aracılığıyla elde edilen hiçbir veri cihazınızdan ayrılmayacaktır.</string>
     <string name="support_olauncher_for_free">Amazon ortaklık bağlantımızı kullanarak Olauncher\'ı ücretsiz olarak destekleyin.</string>
     <string name="support_olauncher_message">Bağlantımızı kullanarak her bir şey satın aldığınızda, küçük bir komisyon alırız. Lütfen bağlantıyı kaydedin ve çevrimiçi alışveriş yaptığınızda kullanın. Teşekkür ederiz!</string>
     <string name="open">Linki aç</string>

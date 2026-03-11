@@ -69,7 +69,7 @@
         \n\nC\'est aussi le meilleur moyen de soutenir les développeurs d\'Olauncher. Jetez-y un œil !</string>
     <string name="wallpaper_message">Olauncher propose de superbes fonds d\'écran nouveaux chaque jour. Donne un nouveau look à ton écran d\'accueil chaque jour, gratuitement!
         \n\nTu veux essayer?</string>
-    <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller. Toutes les données acquises par Olauncher via ce service ne quitteront pas votre appareil.</string>
+    <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller et le bouton d\'accueil pour afficher les applications récentes. Toutes les données acquises par Olauncher via ce service ne quitteront pas votre appareil.</string>
     <string name="support_olauncher_for_free">Soutenez Olauncher gratuitement en utilisant notre lien d\'affiliation Amazon.</string>
     <string name="support_olauncher_message">Chaque fois que vous achetez quelque chose en utilisant notre lien, nous recevons une petite commission. Enregistrez le lien et utilisez le chaque fois que vous commandez en ligne. Merci!</string>
     <string name="open">Ouvrir le lien</string>
@@ -91,12 +91,11 @@
     <string name="swipe_down_for">Balayer vers le bas pour</string>
     <string name="search">Rechercher</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">Veuillez activer ou désactiver le service d\'accessibilité d\'Olauncher dans les paramètres de votre téléphone pour utiliser ou non cette fonctionnalité.
-        \n\nVeuillez noter que ce service n\'est utilisé que pour vous permettre d\'éteindre l\'écran de votre téléphone avec le geste du double appui.
-        Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
+    <string name="accessibility_disclosure">Veuillez activer le service d\'accessibilité d\'Olauncher dans les paramètres de votre appareil pour utiliser les gestes Double appui pour verrouiller ou Bouton d\'accueil pour les applications récentes.\n\nVeuillez noter que ce service est utilisé uniquement pour ces gestes. Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
     <string name="accept">Accepter</string>
     <string name="permission">Autorisation</string>
     <string name="double_tap_lock">Appuyer deux fois pour verrouiller</string>
+    <string name="home_button_show_recents">Bouton d\'accueil pour les récents</string>
     <string name="enable">Activer</string>
     <string name="disable">Désactiver</string>
     <string name="not_working"><u>Ne fonctionne pas?</u></string>

@@ -69,7 +69,7 @@
         \n\nTo je također najbolji način da podržite programere Olauncher-a. Pogledajte!</string>
     <string name="wallpaper_message">Olauncher nudi predivne nove pozadine svaki dan. Daj svom početnom ekranu svjež izgled svaki dan, besplatno!
         \n\nŽeliš li isprobati?</string>
-    <string name="accessibility_service_description">Dozvola za pristupačnost potrebna je za omogućavanje zaključavanja dvostrukim dodirom. Bilo koji podatci prikupljeni ovim servisom neće napustiti tvoj uređaj.</string>
+    <string name="accessibility_service_description">Dozvola za pristupačnost potrebna je za omogućavanje zaključavanja dvostrukim dodirom i tipke Početna za prikaz nedavnih aplikacija. Bilo koji podatci prikupljeni ovim servisom neće napustiti tvoj uređaj.</string>
     <string name="support_olauncher_for_free">Besplatno podrži Olauncher korištenjem naše sponzorske poveznice za Amazon.</string>
     <string name="support_olauncher_message">Svaki puta kada kupiš nešto pomoću naše poveznice, mi primimo malu naknadu. Molimo spremi poveznicu i koristi ju svaki puta kada kupuješ online.\nHvala ti!</string>
     <string name="open">Otvori poveznicu</string>
@@ -98,10 +98,11 @@
     <string name="review_message">Olauncher jest i uvijek će biti potpuno besplatan. Nema reklama. Ne prikuplja podatke. Što je najvažnije, pomaže vam u smanjenju vremena koje provodite pred ekranom i živite zdravijim digitalnim životom.
         \n\nVjerujemo da je prelazak na minimalni launcher izvrsna odluka. Iako smo očito pristrani, nadamo se da uživate u iskustvu. Slobodno podijelite svoje misli s nama!</string>
 
-    <string name="accessibility_disclosure">Molimo vas da uključite ili isključite Olauncherovu uslugu pristupa u postavkama vašeg uređaja kako biste omogućili ili onemogućili ovu funkciju.\n\nImajte na umu da se ova usluga koristi samo za isključivanje ekrana vašeg uređaja pomoću geste dvostrukog dodira. Naša usluga pristupa ne prikuplja niti dijeli bilo kakve podatke.</string>
+    <string name="accessibility_disclosure">Molimo vas da uključite Olauncherovu uslugu pristupa u postavkama vašeg uređaja kako biste omogućili geste dvostrukog dodira za zaključavanje ili tipke Početna za prikaz nedavnih aplikacija.\n\nImajte na umu da se ova usluga koristi samo za te geste. Naša usluga pristupa ne prikuplja niti dijeli bilo kakve podatke.</string>
     <string name="accept">Prihvati</string>
     <string name="permission">Dozvola</string>
     <string name="double_tap_lock">Dvostruki dodir za zaključavanje</string>
+    <string name="home_button_show_recents">Tipka za početnu stranicu za nedavne</string>
     <string name="enable">Omogući</string>
     <string name="disable">Onemogući</string>
     <string name="not_working"><u>Ne radi?</u></string>

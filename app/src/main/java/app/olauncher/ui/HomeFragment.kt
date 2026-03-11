@@ -89,6 +89,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     override fun onClick(view: View) {
         when (view.id) {
             R.id.lock -> {}
+            R.id.recents -> {}
             R.id.clock -> openClockApp()
             R.id.date -> openCalendarApp()
             R.id.setDefaultLauncher -> viewModel.resetLauncherLiveData.call()
@@ -204,6 +205,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.screenTimeValue.observe(viewLifecycleOwner) {
             it?.let { binding.tvScreenTime.text = it }
         }
+        viewModel.showRecentApps.observe(viewLifecycleOwner) {
+            binding.recents.performClick()
+        }
     }
 
     private fun initSwipeTouchListener() {
@@ -221,6 +225,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun initClickListeners() {
         binding.lock.setOnClickListener(this)
+        binding.recents.setOnClickListener(this)
         binding.clock.setOnClickListener(this)
         binding.date.setOnClickListener(this)
         binding.clock.setOnLongClickListener(this)
@@ -649,9 +654,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
             override fun onDoubleClick() {
                 super.onDoubleClick()
+                if (!prefs.lockModeOn) return
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
                     binding.lock.performClick()
-                else if (prefs.lockModeOn)
+                else
                     lockPhone()
             }
 

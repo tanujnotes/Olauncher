@@ -69,7 +69,7 @@
         \n\nDet är också det bästa sättet att stödja utvecklarna av Olauncher. Kolla in det!</string>
     <string name="wallpaper_message">Olauncher erbjuder vackra nya bakgrundsbilder varje dag. Ge din hemskärm ett fräscht utseende varje dag, gratis!
         \n\nVill du prova?</string>
-    <string name="accessibility_service_description">Tillgänglighetsbehörigheten krävs för att aktivera dubbeltryck för att låsa. Eventuella data förvärvade av Olauncher genom denna tjänst kommer inte att lämna din enhet.</string>
+    <string name="accessibility_service_description">Tillgänglighetsbehörigheten krävs för att aktivera dubbeltryck för att låsa och hemknappen för att visa senaste appar. Eventuella data förvärvade av Olauncher genom denna tjänst kommer inte att lämna din enhet.</string>
     <string name="support_olauncher_for_free">Stöd Olauncher utan kostnad genom att använda vår Amazon-affiliatelänk.</string>
     <string name="support_olauncher_message">Varje gång du köper något via vår länk får vi en liten provision. Vänligen spara länken och använd den när du handlar på nätet.\nTack!</string>
     <string name="open">Öppna länk</string>
@@ -91,11 +91,11 @@
     <string name="swipe_down_for">Svep nedåt för</string>
     <string name="search">Sök</string>
     <string name="notifications">Aviseringar</string>
-    <string name="accessibility_disclosure">Vänligen sätt på eller stäng av Olaunchers tillgänglighetstjänst i din enhets inställningar för att aktivera eller inaktivera denna funktion.
-        \n\nVänligen observera att denna tjänst endast används för att låta dig stänga av skärmen på din enhet genom dubbeltrycksgesten. Vår tillgänglighetstjänst varken samlar in eller delar några data.</string>
+    <string name="accessibility_disclosure">Vänligen sätt på Olaunchers tillgänglighetstjänst i din enhets inställningar för att aktivera gesterna dubbeltryck för att låsa eller hemknappen för senaste appar.\n\nObservera att denna tjänst bara används för dessa gester. Vår tillgänglighetstjänst samlar inte in eller delar några data.</string>
     <string name="accept">Godkänn</string>
     <string name="permission">Behörighet</string>
     <string name="double_tap_lock">Dubbeltryck för att låsa</string>
+    <string name="home_button_show_recents">Hemknapp för senaste appar</string>
     <string name="enable">Aktivera</string>
     <string name="disable">Inaktivera</string>
     <string name="not_working"><u>Fungerar inte?</u></string>

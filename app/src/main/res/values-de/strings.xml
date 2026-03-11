@@ -27,11 +27,11 @@
     <string name="swipe_down_for">Wischen Sie nach unten für</string>
     <string name="search">Suchen</string>
     <string name="notifications">Benachrichtigungen</string>
-    <string name="accessibility_disclosure">Bitte schalten Sie den Barrierefreiheitsdienst von Olauncher in den Einstellungen Ihres Geräts ein oder aus, um diese Funktion zu aktivieren oder zu deaktivieren.
-        \n\nBitte beachten Sie, dass dieser Dienst nur dazu dient, den Bildschirm Ihres Geräts mit der Doppeltipp-Geste auszuschalten. Unser Barrierefreiheitsdienst erfasst oder gibt keine Daten weiter.</string>
+    <string name="accessibility_disclosure">Bitte schalten Sie den Barrierefreiheitsdienst von Olauncher in den Einstellungen Ihres Geräts ein, um die Gesten Doppeltippen zum Sperren oder Home-Taste für letzte Apps zu aktivieren.\n\nBitte beachten Sie, dass dieser Dienst nur für diese Gesten verwendet wird. Unser Barrierefreiheitsdienst sammelt oder teilt keine Daten.</string>
     <string name="accept">Akzeptieren</string>
     <string name="permission">Erlaubnis</string>
     <string name="double_tap_lock">Zum Sperren zweimal tippen</string>
+    <string name="home_button_show_recents">Home-Taste für letzte Apps</string>
     <string name="enable">Aktivieren</string>
     <string name="disable">Deaktivieren</string>
     <string name="not_working"><u>Funktioniert nicht?</u></string>
@@ -103,7 +103,7 @@
         \n\nEs ist auch der beste Weg, die Entwickler von Olauncher zu unterstützen. Schau es dir an!</string>
     <string name="wallpaper_message">Olauncher bietet täglich wunderschöne neue Wallpapers. Verleihe deinem Homescreen jeden Tag ein frisches Aussehen – kostenlos!
         \n\nMöchtest du es ausprobieren?</string>
-    <string name="accessibility_service_description">Die Zugriffsberechtigung ist erforderlich, um das Sperren durch Doppeltippen zu ermöglichen. Die von Olauncher über diesen Dienst erfassten Daten verlassen Ihr Gerät nicht.</string>
+    <string name="accessibility_service_description">Die Zugriffsberechtigung ist erforderlich, um das Sperren durch Doppeltippen und die Home-Taste zum Anzeigen der letzten Apps zu ermöglichen. Die von Olauncher über diesen Dienst erfassten Daten verlassen Ihr Gerät nicht.</string>
     <string name="support_olauncher_for_free">Unterstützen Sie Olauncher kostenlos, indem Sie unseren Amazon-Partnerlink verwenden.</string>
     <string name="support_olauncher_message">Jedes Mal, wenn Sie über unseren Link etwas kaufen, erhalten wir eine kleine Provision. Bitte speichern Sie den Link und verwenden Sie ihn bei jedem Online-Einkauf. Dan­ke­schön!</string>
     <string name="open">Verbindung öffnen</string>

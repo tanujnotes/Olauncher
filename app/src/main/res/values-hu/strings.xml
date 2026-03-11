@@ -71,7 +71,7 @@
         \n\nEz a legjobb módja annak, hogy támogassa az Olauncher fejlesztőit. Tekintse meg őket!</string>
     <string name="wallpaper_message">Az Olauncher minden nap gyönyörű, új háttérképeket kínál, amelyekkel frissen tarthatja kezdőképernyőjét, ingyen!
         \n\nSzeretné kipróbálni?</string>
-    <string name="accessibility_service_description">A hozzáférhetőségi engedély szükséges a dupla koppintás általi zároláshoz. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
+    <string name="accessibility_service_description">A hozzáférhetőségi engedély szükséges a dupla koppintás általi zároláshoz és a kezdőgomb megnyomásával a legutóbbi alkalmazások megjelenítéséhez. Az Olauncher által ezen a szolgáltatáson keresztül megszerzett adatok nem hagyják el a készüléket.</string>
     <string name="support_olauncher_for_free">Támogasson minket ingyenesen az Amazon affiliate linkünk használatával.</string>
     <string name="support_olauncher_message">Minden alkalommal, amikor vásárol valamit a linkünket használva, egy kis jutalékot kapunk. Kérjük, mentse el a linket, és használja fel, amikor csak online vásárol.
         \n\nKöszönjük!</string>
@@ -95,11 +95,11 @@
     <string name="swipe_down_for">Simítson lefelé a következőért</string>
     <string name="search">Keresés</string>
     <string name="notifications">Értesítések</string>
-    <string name="accessibility_disclosure">Kérjük, kapcsolja be vagy ki az Olauncher hozzáférhetőségi szolgáltatását az eszköz beállításaiban, hogy engedélyezze vagy letiltsa ezt a funkciót.
-    \n\nKérjük, vegye figyelembe, hogy ezt a szolgáltatást csak a dupla koppintással történő képernyőzárás engedélyezésére használjuk. A hozzáférhetőségi szolgáltatásunk nem gyűjt vagy oszt meg semmilyen adatot.</string>
+    <string name="accessibility_disclosure">Kérjük, kapcsolja be az Olauncher hozzáférhetőségi szolgáltatását az eszköz beállításaiban a dupla koppintás zároláshoz vagy a kezdőgomb a legutóbbi alkalmazásokhoz gesztusok engedélyezéséhez.\n\nKérjük, vegye figyelembe, hogy ez a szolgáltatás csak ezekhez a gesztusokhoz használatos. Hozzáférhetőségi szolgáltatásunk nem gyűjt és nem oszt meg semmilyen adatot.</string>
     <string name="accept">Elfogad</string>
     <string name="permission">Engedély</string>
     <string name="double_tap_lock">Dupla koppintás a lezáráshoz</string>
+    <string name="home_button_show_recents">Kezdőlap gomb a legutóbbiakhoz</string>
     <string name="enable">Engedélyezés</string>
     <string name="disable">Letiltás</string>
     <string name="not_working"><u>Nem működik?</u></string>

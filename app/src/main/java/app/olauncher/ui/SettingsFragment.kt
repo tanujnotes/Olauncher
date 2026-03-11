@@ -74,6 +74,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
         populateScreenTimeOnOff()
         populateLockSettings()
+        populateHomeButtonRecents()
         populateWallpaperText()
         populateAppThemeText()
         populateTextSize()
@@ -108,6 +109,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appInfo -> openAppInfo(requireContext(), Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.toggleLock -> toggleLockMode()
+            R.id.homeButtonRecents -> toggleHomeButtonRecents()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
@@ -200,6 +202,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.moreFeatures.setOnClickListener(this)
         binding.autoShowKeyboard.setOnClickListener(this)
         binding.toggleLock.setOnClickListener(this)
+        binding.homeButtonRecents.setOnClickListener(this)
         binding.homeAppsNum.setOnClickListener(this)
         binding.screenTimeOnOff.setOnClickListener(this)
         binding.dailyWallpaperUrl.setOnClickListener(this)
@@ -386,11 +389,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun toggleLockMode() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            toggleAccessibilityVisibility(true)
-            if (prefs.lockModeOn) {
-                prefs.lockModeOn = false
-                removeActiveAdmin()
+            if (!prefs.lockModeOn && !isAccessServiceEnabled(requireContext())) {
+                toggleAccessibilityVisibility(true)
+                return
             }
+            prefs.lockModeOn = !prefs.lockModeOn
         } else {
             val isAdmin: Boolean = deviceManager.isAdminActive(componentName)
             if (isAdmin) {
@@ -573,10 +576,26 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         else getString(R.string.bottom_off)
     }
 
+    private fun toggleHomeButtonRecents() {
+        if (!prefs.homeButtonShowRecents && !isAccessServiceEnabled(requireContext())) {
+            toggleAccessibilityVisibility(true)
+            return
+        }
+        prefs.homeButtonShowRecents = !prefs.homeButtonShowRecents
+        populateHomeButtonRecents()
+    }
+
+    private fun populateHomeButtonRecents() {
+        binding.homeButtonRecents.text = getString(
+            if (prefs.homeButtonShowRecents && isAccessServiceEnabled(requireContext())) R.string.on
+            else R.string.off
+        )
+    }
+
     private fun populateLockSettings() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             binding.toggleLock.text = getString(
-                if (isAccessServiceEnabled(requireContext())) R.string.on
+                if (prefs.lockModeOn && isAccessServiceEnabled(requireContext())) R.string.on
                 else R.string.off
             )
         } else {

@@ -71,7 +71,7 @@
         \n\nHet is ook de beste manier om de ontwikkelaars van Olauncher te steunen. Bekijk het eens!</string>
     <string name="wallpaper_message">Olauncher biedt dagelijks mooie nieuwe achtergronden. Geef je startscherm iedere dag een frisse nieuwe look, gratis!
         \n\nWil je het proberen?</string>
-    <string name="accessibility_service_description">De toegankelijkheidstoestemming is vereist om dubbel tikken om te vergrendelen mogelijk te maken. Alle gegevens die Olauncher via deze service verkrijgt, verlaten je apparaat niet.</string>
+    <string name="accessibility_service_description">De toegankelijkheidstoestemming is vereist om dubbel tikken om te vergrendelen en de startknop voor recente apps mogelijk te maken. Alle gegevens die Olauncher via deze service verkrijgt, verlaten je apparaat niet.</string>
     <string name="support_olauncher_for_free">Steun Olauncher gratis door onze Amazon-affiliatelink te gebruiken.</string>
     <string name="support_olauncher_message">Elke keer dat je iets koopt via onze link, ontvangen wij een kleine commissie. Bewaar de link en gebruik deze wanneer je online winkelt.\nDank je!</string>
     <string name="open">Link openen</string>
@@ -93,11 +93,11 @@
     <string name="swipe_down_for">Veeg omlaag voor</string>
     <string name="search">Zoeken</string>
     <string name="notifications">Meldingen</string>
-    <string name="accessibility_disclosure">Schakel de toegankelijkheidsdienst van Olauncher in of uit in de instellingen van je apparaat om deze functie te activeren of te deactiveren.
-    \n\nLet op: deze dienst wordt alleen gebruikt om je scherm uit te schakelen met het dubbel-tikgebaar. Onze toegankelijkheidsdienst verzamelt of deelt geen gegevens.</string>
+    <string name="accessibility_disclosure">Schakel de toegankelijkheidsdienst van Olauncher in via de instellingen van je apparaat om de gebaren dubbel tikken om te vergrendelen of startknop voor recente apps te activeren.\n\nHoud er rekening mee dat deze service alleen wordt gebruikt voor deze gebaren. Onze toegankelijkheidsdienst verzamelt of deelt geen gegevens.</string>
     <string name="accept">Accepteren</string>
     <string name="permission">Toestemming</string>
     <string name="double_tap_lock">Dubbel tik om te vergrendelen</string>
+    <string name="home_button_show_recents">Startknop voor recente apps</string>
     <string name="enable">Inschakelen</string>
     <string name="disable">Uitschakelen</string>
     <string name="not_working"><u>Werkt niet?</u></string>

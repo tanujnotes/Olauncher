@@ -502,6 +502,7 @@
                         style="@style/TextSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="80dp"
                         android:layout_marginStart="8dp"
                         android:paddingVertical="8dp"
                         android:text="@string/auto_show_keyboard"
@@ -909,6 +910,32 @@
                         android:padding="10dp"
                         android:text="@string/off" />
                 </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:layout_marginEnd="80dp"
+                        android:text="@string/home_button_show_recents"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/homeButtonRecents"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:padding="10dp"
+                        android:text="@string/off" />
+                </FrameLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -1011,7 +1038,7 @@
                 style="@style/TextLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/double_tap_lock"
+                android:text="@string/gestures"
                 android:textColor="?attr/primaryColor" />
 
             <TextView

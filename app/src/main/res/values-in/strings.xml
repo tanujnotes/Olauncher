@@ -69,7 +69,7 @@
         \n\nIni juga merupakan cara terbaik untuk mendukung pengembang Olauncher. Cek it out!</string>
     <string name="wallpaper_message">Olauncher menawarkan wallpaper baru yang indah setiap hari. Berikan tampilan baru pada layar utama Anda setiap hari, secara gratis!
         \n\nIngin mencobanya?</string>
-    <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan ketuk dua kali untuk mengunci. Data apa pun yang diperoleh Olauncher melalui layanan ini tidak akan meninggalkan perangkat Anda.</string>
+    <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan ketuk dua kali untuk mengunci dan tombol beranda untuk menampilkan aplikasi terbaru. Data apa pun yang diperoleh Olauncher melalui layanan ini tidak akan meninggalkan perangkat Anda.</string>
     <string name="support_olauncher_for_free">Dukung Olauncher secara gratis dengan menggunakan tautan afiliasi Amazon kami.</string>
     <string name="support_olauncher_message">Setiap kali Anda membeli sesuatu menggunakan tautan kami, kami mendapat komisi kecil. Harap simpan tautan dan gunakan setiap kali Anda berbelanja online.\nTerima kasih!</string>
     <string name="open">Buka tautan</string>
@@ -91,10 +91,11 @@
     <string name="swipe_down_for">Geser ke bawah untuk</string>
     <string name="search">Cari</string>
     <string name="notifications">Notifikasi</string>
-    <string name="accessibility_disclosure">Harap aktifkan atau nonaktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan atau menonaktifkan fitur ini.\n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk memungkinkan Anda mematikan layar perangkat menggunakan gerakan ketuk dua kali. Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
+    <string name="accessibility_disclosure">Harap aktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan gerakan ketuk dua kali untuk mengunci atau tombol beranda untuk aplikasi terbaru.\n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk gerakan-gerakan ini. Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
     <string name="accept">Terima</string>
     <string name="permission">Izin</string>
     <string name="double_tap_lock">Ketuk dua kali untuk mengunci</string>
+    <string name="home_button_show_recents">Tombol beranda untuk terbaru</string>
     <string name="enable">Aktifkan</string>
     <string name="disable">Nonaktifkan</string>
     <string name="not_working"><u>Tidak bekerja?</u></string>

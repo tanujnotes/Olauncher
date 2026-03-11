@@ -122,7 +122,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent?) {
+        val alreadyHome = navController.currentDestination?.id == R.id.mainFragment
         backToHomeScreen()
+        if (alreadyHome && prefs.homeButtonShowRecents)
+            viewModel.showRecentApps.call()
         super.onNewIntent(intent)
     }
 

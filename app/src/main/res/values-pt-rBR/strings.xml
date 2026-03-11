@@ -69,7 +69,7 @@
         \n\nÉ também a melhor maneira de apoiar os desenvolvedores do Olauncher. Confira!</string>
     <string name="wallpaper_message">Olauncher oferece lindos papéis de parede novos todos os dias. Dê uma nova aparência à sua tela inicial todos os dias, gratuitamente!
         \n\nQuer tentar?</string>
-    <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear. Quaisquer dados adquiridos pelo Olauncher através deste serviço não sairão do seu dispositivo.</string>
+    <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear e o botão início para mostrar aplicativos recentes. Quaisquer dados adquiridos pelo Olauncher através deste serviço não sairão do seu dispositivo.</string>
     <string name="support_olauncher_for_free">Apoie o Olauncher gratuitamente usando nosso link de afiliado da Amazon.</string>
     <string name="support_olauncher_message">Sempre que você comprar algo usando nosso link, receberemos uma pequena comissão. Salve o link e use-o sempre que fizer compras online. Obrigado!</string>
     <string name="open">Abrir link</string>
@@ -92,11 +92,11 @@
     <string name="swipe_down_for">Deslize para baixo para</string>
     <string name="search">Procurar</string>
     <string name="notifications">Notificações</string>
-    <string name="accessibility_disclosure">Ative ou desative o serviço de acessibilidade do Olauncher nas configurações do seu dispositivo para ativar ou desativar esse recurso.
-        \n\nPor favor, note que este serviço é usado apenas para permitir que você desligue o scree do seu dispositivo</string>
+    <string name="accessibility_disclosure">Ative o serviço de acessibilidade do Olauncher nas configurações do seu dispositivo para ativar os gestos de toque duplo para bloquear ou botão início para aplicativos recentes.\n\nObserve que este serviço é usado apenas para esses gestos. Nosso serviço de acessibilidade não coleta nem compartilha nenhum dado.</string>
     <string name="accept">Aceitar</string>
     <string name="permission">Permissão</string>
     <string name="double_tap_lock">Toque duas vezes para bloquear</string>
+    <string name="home_button_show_recents">Botão início para recentes</string>
     <string name="enable">Permitir</string>
     <string name="disable">Não permitir</string>
     <string name="not_working"><u>Não está funcionando?</u></string>

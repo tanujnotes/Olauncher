@@ -28,11 +28,11 @@
     <string name="swipe_down_for">下にスワイプして</string>
     <string name="search">検索</string>
     <string name="notifications">通知</string>
-    <string name="accessibility_disclosure">この機能を有効または無効にするには、デバイスの設定で Olauncher のアクセシビリティ サービスをオンまたはオフにしてください。
-        \n\nこのサービスは、ダブルタップ ジェスチャを使用してデバイスの画面をオフにするためにのみ使用されることに注意してください。 当社のアクセシビリティ サービスは、いかなるデータも収集または共有しません。</string>
+    <string name="accessibility_disclosure">ダブルタップでロックまたはホームボタンで最近のアプリのジェスチャーを有効にするには、デバイスの設定で Olauncher のアクセシビリティ サービスをオンにしてください。\n\nこのサービスはこれらのジェスチャーにのみ使用されます。アクセシビリティ サービスはデータを収集したり共有したりすることはありません。</string>
     <string name="accept">受け入れる</string>
     <string name="permission">許可</string>
     <string name="double_tap_lock">ダブルタップしてロックします</string>
+    <string name="home_button_show_recents">ホームボタンで最近のアプリ</string>
     <string name="enable">有効</string>
     <string name="disable">無効にする</string>
     <string name="not_working"><u>機能しない場合</u></string>
@@ -102,7 +102,7 @@
         \n\nOlauncherの開発者をサポートするための最良の方法でもあります。チェックしてみてください！</string>
     <string name="wallpaper_message">Olauncherは毎日美しい新しい壁紙を提供します。毎日ホーム画面に新しい外観を無料で提供！
         \n\n試してみますか？</string>
-    <string name="accessibility_service_description">ダブルタップしてロックを有効にするには、アクセシビリティ許可が必要です。このサービスを通じて Olauncher が取得したデータは、デバイスから流出することはありません。</string>
+    <string name="accessibility_service_description">ダブルタップしてロックおよびホームボタンで最近のアプリを表示するには、アクセシビリティ許可が必要です。このサービスを通じて Olauncher が取得したデータは、デバイスから流出することはありません。</string>
     <string name="support_olauncher_for_free">Amazon アフィリエイト リンクを使用して、Olauncher を無料でサポートしてください。</string>
     <string name="support_olauncher_message">あなたが私たちのリンクを使用して何かを購入するたびに、私たちは少額の手数料を受け取ります。リンクを保存し、オンライン ショッピングの際には必ずご利用ください。 ありがとう！</string>
     <string name="open">リンクを開く</string>

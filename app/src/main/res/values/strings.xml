@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">Olauncher</string>
     <string name="github" translatable="false">Github</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="recents_layout_description" translatable="false">recents layout description to be used a unique id to show recent apps</string>
     <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
     <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
     <string name="new_app_note_to_self" translatable="false"><u>New app: Note to Self</u></string>
@@ -24,7 +25,8 @@
     <string name="set_as_default_launcher_first">Set Olauncher default first</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
-    <string name="admin_permission_message">Olauncher promises to use lock screen permission responsibly. Olauncher does not collect or share any data.</string>
+    <string name="home_button_show_recents">Home button for recents</string>
+    <string name="admin_permission_message">Olauncher promises to use the accessibility permission responsibly. Olauncher does not collect or share any data.</string>
     <string name="about">About</string>
     <string name="off">Off</string>
     <string name="on">On</string>
@@ -88,7 +90,7 @@
         \n\nIt\'s also the best way to support the developers of Olauncher. Check it out!</string>
     <string name="wallpaper_message">Olauncher offers beautiful new wallpapers daily. Give your homescreen a fresh new look every day, for free!
         \n\nWant to try it?</string>
-    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock. Any data acquired by Olauncher via this service will not leave your device.</string>
+    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock and home button to show recent apps. Any data acquired by Olauncher via this service will not leave your device.</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
     <string name="open">Open link</string>
@@ -110,8 +112,8 @@
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">Please turn on or off Olauncher\'s accessibility service in your device\'s settings to enable or disable this feature.
-    \n\nPlease note that this service is only used to let you turn off your device\'s screen using the double tap gesture. Our accessibility service does not collect or share any data.</string>
+    <string name="accessibility_disclosure">Please turn on Olauncher\'s accessibility service in your device\'s settings to enable Double tap to lock or Home button for recent apps gestures.
+    \n\nPlease note that this service is only used for these gestures. Our accessibility service does not collect or share any data.</string>
     <string name="accept">Accept</string>
     <string name="permission">Permission</string>
     <string name="double_tap_lock">Double tap to lock</string>
