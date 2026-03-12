@@ -17,6 +17,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
@@ -184,17 +185,15 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
         viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
             if (it != true) {
-                if (prefs.dailyWallpaper) {
+                if (prefs.dailyWallpaper && prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES) {
                     prefs.dailyWallpaper = false
                     viewModel.cancelWallpaperWorker()
                 }
                 prefs.homeBottomAlignment = false
                 setHomeAlignment()
             }
-            if (binding.firstRunTips.visibility == View.VISIBLE) return@Observer
+            if (binding.firstRunTips.isVisible) return@Observer
             binding.setDefaultLauncher.isVisible = it.not() && prefs.hideSetDefaultLauncher.not()
-//            if (it) binding.setDefaultLauncher.visibility = View.GONE
-//            else binding.setDefaultLauncher.visibility = View.VISIBLE
         })
         viewModel.homeAppAlignment.observe(viewLifecycleOwner) {
             setHomeAlignment(it)
@@ -361,20 +360,27 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    private fun setHomeAppText(textView: TextView, appName: String, packageName: String, userString: String, isShortcut: Boolean, shortcutId: String?): Boolean {
+    private fun setHomeAppText(
+        textView: TextView,
+        appName: String,
+        packageName: String,
+        userString: String,
+        isShortcut: Boolean,
+        shortcutId: String?,
+    ): Boolean {
         // Get user handle for the app/shortcut
         val userHandle = getUserHandleFromString(requireContext(), userString)
-        
+
         // If it's a shortcut, verify it still exists
         if (isShortcut) {
             val launcherApps = requireContext().getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-            
+
             // Query for the specific shortcut
             val query = LauncherApps.ShortcutQuery().apply {
                 setPackage(packageName)
                 setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
             }
-            
+
             try {
                 val shortcuts = launcherApps.getShortcuts(query, userHandle)
                 // Check if our shortcut still exists
@@ -390,7 +396,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 return false
             }
         }
-        
+
         // Regular app check
         if (isPackageInstalled(requireContext(), packageName, userString)) {
             textView.text = appName
@@ -418,7 +424,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         shortcutId: String?,
         isShortcut: Boolean,
         userString: String,
-        fallback: (() -> Unit)? = null
+        fallback: (() -> Unit)? = null,
     ) {
         if (appName.isEmpty()) {
             showLongPressToast()
