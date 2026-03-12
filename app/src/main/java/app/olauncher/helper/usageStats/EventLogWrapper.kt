@@ -272,10 +272,12 @@ class EventLogWrapper(private val context: Context) {
     ): List<SimpleUsageStat> {
         if (foregroundStats.isEmpty()) return emptyList()
 
-        // Group by package name and sum the duration for each
+        // Group by package name, merge overlapping intervals, then sum durations
         val applicationTotalTime = foregroundStats
             .groupBy { it.packageName }
-            .mapValues { (_, stats) -> stats.sumOf { it.endTime - it.beginTime } }
+            .mapValues { (_, stats) ->
+                mergeOverlappingIntervals(stats).sumOf { it.endTime - it.beginTime }
+            }
 
         val firstBeginTime = foregroundStats.first().beginTime
         val timeZoneOffset = Calendar.getInstance().timeZone.getOffset(firstBeginTime)
@@ -352,6 +354,36 @@ class EventLogWrapper(private val context: Context) {
     fun aggregateSimpleUsageStats(usageStats: List<SimpleUsageStat>): Long {
         return usageStats.sumOf { it.timeUsed }
     }
+    /**
+     * Merges overlapping or adjacent time intervals to prevent double-counting
+     * when multiple components of the same package have overlapping foreground times.
+     */
+    private fun mergeOverlappingIntervals(
+        stats: List<ComponentForegroundStat>
+    ): List<ComponentForegroundStat> {
+        if (stats.size <= 1) return stats
+
+        val sorted = stats.sortedBy { it.beginTime }
+        val merged = mutableListOf<ComponentForegroundStat>()
+        var current = sorted[0]
+
+        for (i in 1 until sorted.size) {
+            val next = sorted[i]
+            if (next.beginTime <= current.endTime) {
+                current = ComponentForegroundStat(
+                    current.beginTime,
+                    max(current.endTime, next.endTime),
+                    current.packageName
+                )
+            } else {
+                merged.add(current)
+                current = next
+            }
+        }
+        merged.add(current)
+        return merged
+    }
+
     /**
      * Stores a class name and its corresponding package.
      */
