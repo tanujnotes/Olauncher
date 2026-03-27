@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             profileReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context?, intent: Intent?) {
+                    viewModel.isPrivateSpaceToggling = false
                     viewModel.getPrivateSpaceAppList()
                 }
             }
@@ -131,6 +132,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         isResumed = true
+        viewModel.isPrivateSpaceToggling = false
     }
 
     override fun onStop() {
@@ -324,6 +326,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun backToHomeScreen() {
+        if (viewModel.isPrivateSpaceToggling) return
         binding.messageLayout.visibility = View.GONE
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)

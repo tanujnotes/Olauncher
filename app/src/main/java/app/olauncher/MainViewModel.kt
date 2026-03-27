@@ -56,6 +56,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val privateSpaceLocked = MutableLiveData<Boolean>()
     val privateSpaceAvailable = MutableLiveData<Boolean>()
 
+    // Suppress backToHomeScreen during Private Space lock/unlock auth
+    var isPrivateSpaceToggling = false
+
     val showDialog = SingleLiveEvent<String>()
     val checkForMessages = SingleLiveEvent<Unit?>()
     val resetLauncherLiveData = SingleLiveEvent<Unit?>()
@@ -489,10 +492,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return
         val handle = getPrivateSpaceUserHandle(appContext) ?: return
         try {
+            isPrivateSpaceToggling = true
             val userManager = appContext.getSystemService(Context.USER_SERVICE) as UserManager
             val currentlyLocked = userManager.isQuietModeEnabled(handle)
             userManager.requestQuietModeEnabled(!currentlyLocked, handle)
         } catch (e: Exception) {
+            isPrivateSpaceToggling = false
             e.printStackTrace()
         }
     }
