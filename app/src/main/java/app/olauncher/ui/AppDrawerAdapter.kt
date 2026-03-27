@@ -19,6 +19,7 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
+import app.olauncher.databinding.AdapterPrivateSpaceHeaderBinding
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
@@ -32,9 +33,14 @@ class AppDrawerAdapter(
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
-) : ListAdapter<AppModel, AppDrawerAdapter.ViewHolder>(DIFF_CALLBACK), Filterable {
+    private val privateSpaceToggleListener: () -> Unit = {},
+    private val privateSpaceSettingsListener: () -> Unit = {},
+) : ListAdapter<AppModel, RecyclerView.ViewHolder>(DIFF_CALLBACK), Filterable {
 
     companion object {
+        const val VIEW_TYPE_APP = 0
+        const val VIEW_TYPE_PRIVATE_HEADER = 1
+
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
             override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean = when {
                 oldItem is AppModel.App && newItem is AppModel.App ->
@@ -42,6 +48,8 @@ class AppDrawerAdapter(
 
                 oldItem is AppModel.PinnedShortcut && newItem is AppModel.PinnedShortcut ->
                     oldItem.shortcutId == newItem.shortcutId && oldItem.user == newItem.user
+
+                oldItem is AppModel.PrivateSpaceHeader && newItem is AppModel.PrivateSpaceHeader -> true
 
                 else -> false
             }
@@ -59,30 +67,58 @@ class AppDrawerAdapter(
     var appsList: MutableList<AppModel> = mutableListOf()
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder(
-            AdapterAppDrawerBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+    override fun getItemViewType(position: Int): Int {
+        return when (appFilteredList.getOrNull(position)) {
+            is AppModel.PrivateSpaceHeader -> VIEW_TYPE_PRIVATE_HEADER
+            else -> VIEW_TYPE_APP
+        }
+    }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        try {
-            if (appFilteredList.size == 0 || position == RecyclerView.NO_POSITION) return
-            val appModel = appFilteredList[holder.bindingAdapterPosition]
-            holder.bind(
-                flag,
-                appLabelGravity,
-                myUserHandle,
-                appModel,
-                appClickListener,
-                appDeleteListener,
-                appInfoListener,
-                appHideListener,
-                appRenameListener
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            VIEW_TYPE_PRIVATE_HEADER -> PrivateSpaceHeaderViewHolder(
+                AdapterPrivateSpaceHeaderBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
             )
+
+            else -> ViewHolder(
+                AdapterAppDrawerBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+            )
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        try {
+            if (appFilteredList.isEmpty() || position == RecyclerView.NO_POSITION) return
+            val appModel = appFilteredList[holder.bindingAdapterPosition]
+            when (holder) {
+                is PrivateSpaceHeaderViewHolder -> {
+                    holder.bind(
+                        appLabelGravity,
+                        privateSpaceToggleListener,
+                        privateSpaceSettingsListener,
+                    )
+                }
+
+                is ViewHolder -> holder.bind(
+                    flag,
+                    appLabelGravity,
+                    myUserHandle,
+                    appModel,
+                    appClickListener,
+                    appDeleteListener,
+                    appInfoListener,
+                    appHideListener,
+                    appRenameListener
+                )
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -98,7 +134,7 @@ class AppDrawerAdapter(
 
                 val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
                 else appsList.filter { app ->
-                    appLabelMatches(app.appLabel, charSearch)
+                    app !is AppModel.PrivateSpaceHeader && appLabelMatches(app.appLabel, charSearch)
                 } as MutableList<AppModel>)
 
                 val filterResults = FilterResults()
@@ -125,7 +161,8 @@ class AppDrawerAdapter(
                 && autoLaunch
                 && isBangSearch.not()
                 && flag == Constants.FLAG_LAUNCH_APP
-                && appFilteredList.size > 0
+                && appFilteredList.isNotEmpty()
+                && appFilteredList[0] !is AppModel.PrivateSpaceHeader
             ) appClickListener(appFilteredList[0])
         } catch (e: Exception) {
             e.printStackTrace()
@@ -158,8 +195,24 @@ class AppDrawerAdapter(
     }
 
     fun launchFirstInList() {
-        if (appFilteredList.size > 0)
-            appClickListener(appFilteredList[0])
+        val first = appFilteredList.firstOrNull { it !is AppModel.PrivateSpaceHeader }
+        if (first != null) appClickListener(first)
+    }
+
+    class PrivateSpaceHeaderViewHolder(private val binding: AdapterPrivateSpaceHeaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(
+            appLabelGravity: Int,
+            toggleListener: () -> Unit,
+            settingsListener: () -> Unit,
+        ) = with(binding) {
+            privateSpaceTitle.gravity = appLabelGravity
+            privateSpaceTitle.setOnClickListener { toggleListener() }
+            privateSpaceTitle.setOnLongClickListener {
+                settingsListener()
+                true
+            }
+        }
     }
 
     class ViewHolder(private val binding: AdapterAppDrawerBinding) :
@@ -237,7 +290,7 @@ class AppDrawerAdapter(
                     s: CharSequence?,
                     start: Int,
                     count: Int,
-                    after: Int
+                    after: Int,
                 ) {
                 }
 

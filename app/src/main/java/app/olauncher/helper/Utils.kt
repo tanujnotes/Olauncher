@@ -85,6 +85,7 @@ suspend fun getAppsList(
             val collator = Collator.getInstance()
 
             for (profile in userManager.userProfiles) {
+                if (isPrivateSpaceProfile(context, profile)) continue
                 for (app in launcherApps.getActivityList(null, profile)) {
                     val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
                         .ifBlank { app.label.toString() }
@@ -189,8 +190,70 @@ private fun upgradeHiddenApps(prefs: Prefs) {
 fun isPackageInstalled(context: Context, packageName: String, userString: String): Boolean {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val activityInfo = launcher.getActivityList(packageName, getUserHandleFromString(context, userString))
-    if (activityInfo.size > 0) return true
+    if (activityInfo.isNotEmpty()) return true
     return false
+}
+
+fun isPrivateSpaceProfile(context: Context, userHandle: UserHandle): Boolean {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return false
+    return try {
+        val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+        launcherApps.getLauncherUserInfo(userHandle)?.userType == "android.os.usertype.profile.PRIVATE"
+    } catch (e: Exception) {
+        false
+    }
+}
+
+fun isPrivateSpaceLocked(context: Context, userHandle: UserHandle): Boolean {
+    return try {
+        val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+        userManager.isQuietModeEnabled(userHandle)
+    } catch (e: Exception) {
+        true
+    }
+}
+
+fun getPrivateSpaceUserHandle(context: Context): UserHandle? {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return null
+    val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
+    for (profile in userManager.userProfiles) {
+        if (isPrivateSpaceProfile(context, profile)) return profile
+    }
+    return null
+}
+
+suspend fun getPrivateSpaceApps(
+    context: Context,
+    prefs: Prefs,
+): MutableList<AppModel> {
+    return withContext(Dispatchers.IO) {
+        val appList: MutableList<AppModel> = mutableListOf()
+        try {
+            val privateSpaceHandle = getPrivateSpaceUserHandle(context) ?: return@withContext appList
+            val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+            val collator = Collator.getInstance()
+
+            for (app in launcherApps.getActivityList(null, privateSpaceHandle)) {
+                if (app.applicationInfo.packageName == BuildConfig.APPLICATION_ID) continue
+                val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
+                    .ifBlank { app.label.toString() }
+                appList.add(
+                    AppModel.App(
+                        appLabel = appLabelShown,
+                        key = collator.getCollationKey(app.label.toString()),
+                        appPackage = app.applicationInfo.packageName,
+                        activityClassName = app.componentName.className,
+                        isNew = false,
+                        user = privateSpaceHandle
+                    )
+                )
+            }
+            appList.sortWith(compareBy(collator) { it.appLabel })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        appList
+    }
 }
 
 fun getUserHandleFromString(context: Context, userHandleString: String): UserHandle {

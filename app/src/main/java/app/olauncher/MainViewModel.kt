@@ -3,8 +3,11 @@ package app.olauncher
 import android.app.Application
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.pm.LauncherApps
+import android.os.Build
 import android.os.UserHandle
+import android.os.UserManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -21,9 +24,12 @@ import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
 import app.olauncher.helper.formattedTimeSpent
 import app.olauncher.helper.getAppsList
+import app.olauncher.helper.getPrivateSpaceApps
+import app.olauncher.helper.getPrivateSpaceUserHandle
 import app.olauncher.helper.hasBeenMinutes
 import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.isPackageInstalled
+import app.olauncher.helper.isPrivateSpaceLocked
 import app.olauncher.helper.showToast
 import app.olauncher.helper.usageStats.EventLogWrapper
 import kotlinx.coroutines.launch
@@ -46,18 +52,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val homeAppAlignment = MutableLiveData<Int>()
     val screenTimeValue = MutableLiveData<String>()
 
+    val privateSpaceApps = MutableLiveData<List<AppModel>?>()
+    val privateSpaceLocked = MutableLiveData<Boolean>()
+    val privateSpaceAvailable = MutableLiveData<Boolean>()
+
     val showDialog = SingleLiveEvent<String>()
     val checkForMessages = SingleLiveEvent<Unit?>()
     val resetLauncherLiveData = SingleLiveEvent<Unit?>()
     val showRecentApps = SingleLiveEvent<Unit?>()
 
     fun selectedApp(appModel: AppModel, flag: Int) {
+        if (appModel is AppModel.PrivateSpaceHeader) return
         when (flag) {
             Constants.FLAG_LAUNCH_APP -> {
                 when (appModel) {
                     is AppModel.PinnedShortcut -> launchShortcut(appModel)
                     is AppModel.App ->
                         launchApp(appModel.appPackage, appModel.activityClassName, appModel.user)
+
+                    else -> {}
                 }
             }
 
@@ -97,6 +110,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun saveHomeApp(appModel: AppModel, position: Int) {
         when (appModel) {
+            is AppModel.PrivateSpaceHeader -> return
             is AppModel.App -> {
                 when (position) {
                     1 -> {
@@ -254,6 +268,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun saveSwipeApp(appModel: AppModel, isLeft: Boolean) {
         when (appModel) {
+            is AppModel.PrivateSpaceHeader -> return
             is AppModel.App -> {
                 if (isLeft) {
                     prefs.appNameSwipeLeft = appModel.appLabel
@@ -372,6 +387,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val apps = getAppsList(appContext, prefs, includeRegularApps = true, includeHiddenApps)
             appList.value = apps
         }
+        getPrivateSpaceAppList()
     }
 
     fun getHiddenApps() {
@@ -437,6 +453,48 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         val viewTimeSpent = appContext.formattedTimeSpent(timeSpent)
         screenTimeValue.postValue(viewTimeSpent)
         prefs.screenTimeLastUpdated = endTime
+    }
+
+    fun getPrivateSpaceAppList() {
+        viewModelScope.launch {
+            val handle = getPrivateSpaceUserHandle(appContext)
+            privateSpaceAvailable.value = handle != null
+            if (handle != null) {
+                privateSpaceLocked.value = isPrivateSpaceLocked(appContext, handle)
+                privateSpaceApps.value = getPrivateSpaceApps(appContext, prefs)
+            } else {
+                privateSpaceLocked.value = true
+                privateSpaceApps.value = emptyList()
+            }
+        }
+    }
+
+    fun openPrivateSpaceSettings() {
+        try {
+            val intent = Intent("android.settings.PRIVATE_SPACE_SETTINGS")
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            appContext.startActivity(intent)
+        } catch (_: Exception) {
+            try {
+                val intent = Intent(android.provider.Settings.ACTION_SECURITY_SETTINGS)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                appContext.startActivity(intent)
+            } catch (_: Exception) {
+                appContext.showToast(appContext.getString(R.string.unable_to_open_app))
+            }
+        }
+    }
+
+    fun togglePrivateSpaceLock() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return
+        val handle = getPrivateSpaceUserHandle(appContext) ?: return
+        try {
+            val userManager = appContext.getSystemService(Context.USER_SERVICE) as UserManager
+            val currentlyLocked = userManager.isQuietModeEnabled(handle)
+            userManager.requestQuietModeEnabled(!currentlyLocked, handle)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     fun setDefaultClockApp() {

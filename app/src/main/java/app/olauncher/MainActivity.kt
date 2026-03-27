@@ -2,8 +2,10 @@ package app.olauncher
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Build
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var timerJob: Job? = null
     private var isResumed = false
+    private var profileReceiver: BroadcastReceiver? = null
 
 //    override fun onBackPressed() {
 //        if (navController.currentDestination?.id != R.id.mainFragment)
@@ -105,6 +108,19 @@ class MainActivity : AppCompatActivity() {
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            profileReceiver = object : BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    viewModel.getPrivateSpaceAppList()
+                }
+            }
+            val filter = IntentFilter().apply {
+                addAction(Intent.ACTION_PROFILE_AVAILABLE)
+                addAction(Intent.ACTION_PROFILE_UNAVAILABLE)
+            }
+            registerReceiver(profileReceiver, filter)
+        }
     }
 
     override fun onStart() {
@@ -344,6 +360,16 @@ class MainActivity : AppCompatActivity() {
             )
                 restartLauncherOrCheckTheme(true)
         }
+    }
+
+    override fun onDestroy() {
+        profileReceiver?.let {
+            try {
+                unregisterReceiver(it)
+            } catch (_: Exception) {
+            }
+        }
+        super.onDestroy()
     }
 
     @Deprecated("Deprecated in Java")

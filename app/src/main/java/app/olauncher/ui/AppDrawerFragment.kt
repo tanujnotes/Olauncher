@@ -39,6 +39,10 @@ class AppDrawerFragment : Fragment() {
 
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
+    private var currentAppList: List<AppModel>? = null
+    private var currentPrivateSpaceApps: List<AppModel>? = null
+    private var currentPrivateSpaceLocked: Boolean = true
+    private var currentPrivateSpaceAvailable: Boolean = false
 
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentAppDrawerBinding? = null
@@ -128,6 +132,7 @@ class AppDrawerFragment : Fragment() {
             },
             appDeleteListener = { appModel ->
                 when (appModel) {
+                    is AppModel.PrivateSpaceHeader -> {}
                     is AppModel.PinnedShortcut ->
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                             requireContext().deletePinnedShortcut(
@@ -181,9 +186,17 @@ class AppDrawerFragment : Fragment() {
                 val identifier = when (appModel) {
                     is AppModel.PinnedShortcut -> appModel.shortcutId
                     is AppModel.App -> appModel.appPackage
+                    else -> return@AppDrawerAdapter
                 }
                 prefs.setAppRenameLabel(identifier, renameLabel)
                 viewModel.getAppList()
+            },
+            privateSpaceToggleListener = {
+                viewModel.togglePrivateSpaceLock()
+            },
+            privateSpaceSettingsListener = {
+                viewModel.openPrivateSpaceSettings()
+                findNavController().popBackStack(R.id.mainFragment, false)
             }
         )
 
@@ -221,12 +234,39 @@ class AppDrawerFragment : Fragment() {
             }
         } else {
             viewModel.appList.observe(viewLifecycleOwner) {
-                it?.let { appModels ->
-                    adapter.setAppList(appModels.toMutableList())
-                    adapter.filter.filter(binding.search.query)
+                currentAppList = it
+                updateCombinedAppList()
+            }
+            if (flag == Constants.FLAG_LAUNCH_APP) {
+                viewModel.privateSpaceAvailable.observe(viewLifecycleOwner) {
+                    currentPrivateSpaceAvailable = it
+                    updateCombinedAppList()
+                }
+                viewModel.privateSpaceLocked.observe(viewLifecycleOwner) {
+                    currentPrivateSpaceLocked = it
+                    updateCombinedAppList()
+                }
+                viewModel.privateSpaceApps.observe(viewLifecycleOwner) {
+                    currentPrivateSpaceApps = it
+                    updateCombinedAppList()
                 }
             }
         }
+    }
+
+    private fun updateCombinedAppList() {
+        val apps = currentAppList ?: return
+        val combined = apps.toMutableList()
+
+        if (flag == Constants.FLAG_LAUNCH_APP && currentPrivateSpaceAvailable) {
+            combined.add(AppModel.PrivateSpaceHeader(isLocked = currentPrivateSpaceLocked))
+            if (!currentPrivateSpaceLocked) {
+                currentPrivateSpaceApps?.let { combined.addAll(it) }
+            }
+        }
+
+        adapter.setAppList(combined)
+        adapter.filter.filter(binding.search.query)
     }
 
     private fun initClickListeners() {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/privateSpaceTitle"
+        style="@style/TextLarge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:alpha="0.8"
+        android:maxLines="1"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="@dimen/app_padding_vertical"
+        android:text="@string/private_space" />
+
+</LinearLayout>
+
