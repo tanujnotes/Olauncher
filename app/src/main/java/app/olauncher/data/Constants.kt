@@ -93,7 +93,7 @@ object Constants {
     const val ONE_HOUR_IN_MILLIS = 3600000L
     const val ONE_MINUTE_IN_MILLIS = 60000L
 
-    const val MIN_ANIM_REFRESH_RATE = 10f
+    const val MIN_ANIM_REFRESH_RATE = 30f
 
     const val URL_ABOUT_OLAUNCHER = "https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=olauncher"
     const val URL_OLAUNCHER_PRIVACY = "https://tanujnotes.notion.site/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
