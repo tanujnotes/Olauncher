@@ -23,6 +23,7 @@ import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
+import app.olauncher.helper.isPrivateSpaceProfile
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.openSearch
@@ -143,11 +144,13 @@ class AppDrawerFragment : Fragment() {
                         }
 
                     is AppModel.App -> {
-                        requireContext().apply {
-                            if (isSystemApp(appModel.appPackage, appModel.user))
-                                showToast(getString(R.string.system_app_cannot_delete))
-                            else
-                                uninstall(appModel.appPackage)
+                        if (isPrivateSpaceProfile(requireContext(), appModel.user)) {
+                            openAppInfo(requireContext(), appModel.user, appModel.appPackage)
+                        } else if (requireContext().isSystemApp(appModel.appPackage, appModel.user)) {
+                            requireContext().showToast(getString(R.string.system_app_cannot_delete))
+                            openAppInfo(requireContext(), appModel.user, appModel.appPackage)
+                        } else {
+                            requireContext().uninstall(appModel.appPackage)
                         }
                     }
                 }
