@@ -5,7 +5,7 @@
     <string name="recents_layout_description" translatable="false">recents layout description to be used a unique id to show recent apps</string>
     <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
     <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
-    <string name="new_app_note_safe" translatable="false"><u>Note Safe</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
     <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
     <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
     <string name="tag_0" translatable="false">0</string>

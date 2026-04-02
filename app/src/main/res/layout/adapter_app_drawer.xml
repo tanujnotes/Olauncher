@@ -12,16 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:paddingHorizontal="20dp"
+        android:paddingHorizontal="24dp"
         android:paddingVertical="@dimen/app_padding_vertical"
         android:text="@string/app" />
 
     <ImageView
         android:id="@+id/otherProfileIndicator"
-        android:layout_width="4dp"
-        android:layout_height="4dp"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
         android:gravity="center"
         android:src="@drawable/ic_rounded"

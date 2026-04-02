@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="74dp"
         android:layout_marginTop="72dp"
         android:gravity="center"
         android:padding="10dp"
@@ -180,7 +180,6 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginHorizontal="8dp"
         android:layout_marginBottom="56dp"
-        android:gravity="center"
         android:text="@string/swipe_up_for_apps" />
 
     <!-- Set default launcher -->

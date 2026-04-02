@@ -41,7 +41,8 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp">
 
                     <TextView
                         android:id="@+id/olauncherHiddenApps"
@@ -112,6 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
                     android:text="@string/home_screen"
                     android:textColor="?attr/primaryColor" />
 
@@ -489,6 +491,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
                     android:text="@string/appearance"
                     android:textColor="?attr/primaryColor" />
 
@@ -502,8 +505,8 @@
                         style="@style/TextSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="80dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginEnd="80dp"
                         android:paddingVertical="8dp"
                         android:text="@string/auto_show_keyboard"
                         android:textColor="?attr/primaryColor" />
@@ -750,6 +753,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
                     android:text="@string/gestures"
                     android:textColor="?attr/primaryColor" />
 
@@ -922,8 +926,8 @@
                         style="@style/TextSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="8dp"
                         android:layout_marginEnd="80dp"
+                        android:paddingVertical="8dp"
                         android:text="@string/home_button_show_recents"
                         android:textColor="?attr/primaryColor" />
 
