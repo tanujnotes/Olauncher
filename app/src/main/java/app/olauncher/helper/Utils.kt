@@ -147,6 +147,7 @@ private suspend fun getPinnedShortcuts(
                 setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
             }
             shortcuts.profiles.forEach { profile ->
+                if (isPrivateSpaceProfile(context, profile)) return@forEach
                 try {
                     shortcuts.getShortcuts(query, profile)?.forEach { shortcut ->
                         if (shortcut.isPinned && pinnedShortcuts.none { it.shortcutId == shortcut.id }) {
@@ -166,7 +167,7 @@ private suspend fun getPinnedShortcuts(
                             )
                         }
                     }
-                } catch (e: SecurityException) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
