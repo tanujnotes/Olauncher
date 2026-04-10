@@ -74,6 +74,7 @@ suspend fun getAppsList(
 ): MutableList<AppModel> {
     return withContext(Dispatchers.IO) {
         val appList: MutableList<AppModel> = mutableListOf()
+        val seenPackages: MutableSet<String> = mutableSetOf()
 
         try {
             if (!Prefs(context).hiddenAppsUpdated) upgradeHiddenApps(Prefs(context))
@@ -100,14 +101,15 @@ suspend fun getAppsList(
 
                     // if the current app is not OLauncher
                     if (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID) {
+                        val packageKey = app.applicationInfo.packageName + "|" + profile.toString()
                         // is this a hidden app?
-                        if (hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())) {
-                            if (includeHiddenApps) {
+                        if (hiddenApps.contains(packageKey)) {
+                            if (includeHiddenApps && seenPackages.add(packageKey)) {
                                 appList.add(appModel)
                             }
                         } else {
                             // this is a regular app
-                            if (includeRegularApps) {
+                            if (includeRegularApps && seenPackages.add(packageKey)) {
                                 appList.add(appModel)
                             }
                         }
