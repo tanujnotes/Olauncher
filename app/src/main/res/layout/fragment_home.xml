@@ -38,7 +38,8 @@
             style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="@font/poppins_bold"
+            android:textStyle="bold"
             android:format12Hour="h:mm"
             android:textSize="@dimen/time_size"
             tools:text="02:34" />
@@ -48,6 +49,7 @@
             style="@style/TextDefault"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
             android:format12Hour="EEE, dd MMM"
             android:format24Hour="EEE, dd MMM"
             android:paddingHorizontal="3dp"

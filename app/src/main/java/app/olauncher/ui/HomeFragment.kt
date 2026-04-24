@@ -46,7 +46,10 @@ import app.olauncher.helper.setPlainWallpaperByTheme
 import app.olauncher.helper.showToast
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
+import android.graphics.Typeface
+import androidx.core.content.res.ResourcesCompat
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -249,14 +252,36 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         binding.homeApp8.gravity = horizontalGravity
     }
 
+    private fun getOrdinalSuffix(day: Int): String {
+        return when {
+            day in 11..13 -> "th"
+            day % 10 == 1 -> "st"
+            day % 10 == 2 -> "nd"
+            day % 10 == 3 -> "rd"
+            else -> "th"
+        }
+    }
+
     private fun populateDateTime() {
         binding.dateTimeLayout.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF
         binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
         binding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
 
-//        var dateText = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date())
-        val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
-        var dateText = dateFormat.format(Date())
+        // Apply Poppins Regular font to date
+        try {
+            val poppinsTypeface = ResourcesCompat.getFont(requireContext(), R.font.poppins)
+            binding.date.typeface = poppinsTypeface
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        val calendar = Calendar.getInstance()
+        val dayOfWeek = SimpleDateFormat("EEEE", Locale.ENGLISH).format(calendar.time).lowercase()
+        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+        val month = SimpleDateFormat("MMMM", Locale.ENGLISH).format(calendar.time).lowercase()
+        val ordinal = getOrdinalSuffix(dayOfMonth)
+
+        var dateText = "today it's $dayOfWeek ${dayOfMonth}${ordinal} of $month"
 
         if (!prefs.showStatusBar) {
             val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
@@ -264,7 +289,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             if (battery > 0)
                 dateText = getString(R.string.day_battery, dateText, battery)
         }
-        binding.date.text = dateText.replace(".,", ",")
+        binding.date.text = dateText
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
