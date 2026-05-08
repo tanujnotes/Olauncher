@@ -2,6 +2,7 @@ package app.olauncher
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.KeyguardManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -109,6 +110,8 @@ class MainActivity : AppCompatActivity() {
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
 
+        handleIntentAction(intent)
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             profileReceiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context?, intent: Intent?) {
@@ -147,6 +150,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent?) {
+        if (handleIntentAction(intent)) {
+            super.onNewIntent(intent)
+            return
+        }
+
         val alreadyHome = navController.currentDestination?.id == R.id.mainFragment
         backToHomeScreen()
         if (alreadyHome && isResumed && prefs.homeButtonShowRecents)
@@ -330,6 +338,29 @@ class MainActivity : AppCompatActivity() {
         binding.messageLayout.visibility = View.GONE
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)
+    }
+
+    private fun dismissKeyguard() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+            keyguardManager.requestDismissKeyguard(this, null)
+        }
+    }
+
+    private fun handleIntentAction(intent: Intent?): Boolean {
+        return when (intent?.action) {
+            Constants.ACTION_OPEN_APP_DRAWER -> {
+                viewModel.showAppDrawer.call()
+                true
+            }
+
+            Constants.ACTION_DISMISS_KEYGUARD -> {
+                dismissKeyguard()
+                true
+            }
+
+            else -> false
+        }
     }
 
     private fun setPlainWallpaper() {

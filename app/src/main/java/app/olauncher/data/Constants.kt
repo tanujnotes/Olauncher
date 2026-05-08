@@ -111,6 +111,9 @@ object Constants {
     const val URL_DUCK_SEARCH = "https://duck.co/?q="
     const val URL_DIGITAL_WELLBEING_LEARN_MORE = "https://tanujnotes.substack.com/p/digital-wellbeing-app-on-android?utm_source=olauncher"
 
+    const val ACTION_OPEN_APP_DRAWER = "app.olauncher.ACTION_OPEN_APP_DRAWER"
+    const val ACTION_DISMISS_KEYGUARD = "app.olauncher.ACTION_DISMISS_KEYGUARD"
+
     const val DIGITAL_WELLBEING_PACKAGE_NAME = "com.google.android.apps.wellbeing"
     const val DIGITAL_WELLBEING_ACTIVITY = "com.google.android.apps.wellbeing.settings.TopLevelSettingsActivity"
     const val DIGITAL_WELLBEING_SAMSUNG_PACKAGE_NAME = "com.samsung.android.forest"
