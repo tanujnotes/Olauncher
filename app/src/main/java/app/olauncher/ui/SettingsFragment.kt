@@ -73,6 +73,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.homeAppsNum.text = prefs.homeAppsNum.toString()
         populateProMessage()
         populateKeyboardText()
+        populateAutoLaunchText()
         populateScreenTimeOnOff()
         populateLockSettings()
         populateHomeButtonRecents()
@@ -115,6 +116,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.toggleLock -> toggleLockMode()
             R.id.homeButtonRecents -> toggleHomeButtonRecents()
             R.id.autoShowKeyboard -> toggleKeyboardText()
+            R.id.autoLaunch -> toggleAutoLaunch()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
@@ -209,6 +211,7 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.aboutOlauncher.setOnClickListener(this)
         binding.moreFeatures.setOnClickListener(this)
         binding.autoShowKeyboard.setOnClickListener(this)
+        binding.autoLaunch.setOnClickListener(this)
         binding.toggleLock.setOnClickListener(this)
         binding.homeButtonRecents.setOnClickListener(this)
         binding.homeAppsNum.setOnClickListener(this)
@@ -504,6 +507,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         }
     }
 
+    private fun toggleAutoLaunch() {
+        prefs.autoLaunch = !prefs.autoLaunch
+        populateAutoLaunchText()
+    }
+
     private fun updateTheme(appTheme: Int) {
         if (AppCompatDelegate.getDefaultNightMode() == appTheme) return
         prefs.appTheme = appTheme
@@ -556,6 +564,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateKeyboardText() {
         if (prefs.autoShowKeyboard) binding.autoShowKeyboard.text = getString(R.string.on)
         else binding.autoShowKeyboard.text = getString(R.string.off)
+    }
+
+    private fun populateAutoLaunchText() {
+        if (prefs.autoLaunch) binding.autoLaunch.text = getString(R.string.on)
+        else binding.autoLaunch.text = getString(R.string.off)
     }
 
     private fun populateWallpaperText() {

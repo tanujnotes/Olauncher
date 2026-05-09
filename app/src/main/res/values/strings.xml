@@ -64,6 +64,7 @@
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
     <string name="auto_show_keyboard">Auto show keyboard</string>
+    <string name="auto_launch">Auto launch app when only one search result is available</string>
     <string name="hide">Hide</string>
     <string name="status_bar">Status bar on top</string>
     <string name="rename">Rename</string>

@@ -28,6 +28,7 @@ import java.text.Normalizer
 class AppDrawerAdapter(
     private var flag: Int,
     private val appLabelGravity: Int,
+    private val autoLaunchEnabled: Boolean = true,
     private val appClickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
     private val appDeleteListener: (AppModel) -> Unit,
@@ -59,7 +60,7 @@ class AppDrawerAdapter(
         }
     }
 
-    private var autoLaunch = true
+    private var autoLaunch = autoLaunchEnabled
     private var isBangSearch = false
     private val appFilter = createAppFilter()
     private val myUserHandle = android.os.Process.myUserHandle()
@@ -130,7 +131,7 @@ class AppDrawerAdapter(
         return object : Filter() {
             override fun performFiltering(charSearch: CharSequence?): FilterResults {
                 isBangSearch = charSearch?.startsWith("!") ?: false
-                autoLaunch = charSearch?.startsWith(" ")?.not() ?: true
+                autoLaunch = autoLaunchEnabled && charSearch?.startsWith(" ") != true
 
                 val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
                 else appsList.filter { app ->
