@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="?attr/primaryShadeDarkColor"
+    android:background="?attr/primaryShadeColor"
     android:orientation="vertical">
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:layout_weight="0.1" />
+        android:layout_marginTop="16dp"
+        android:layout_weight="0.08" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:imeOptions="actionSearch"
-            android:paddingHorizontal="8dp"
+            android:paddingHorizontal="4dp"
             android:paddingVertical="0dp"
             android:textCursorDrawable="@null"
             app:closeIcon="@null"
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="16dp"
             android:paddingVertical="@dimen/app_padding_vertical"
             android:text="@string/rename"
             android:textAllCaps="true"
@@ -54,18 +54,35 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.06" />
+        android:layout_weight="0.04" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="56dp"
-        android:layout_weight="1"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:fadingEdgeLength="24dp"
-        android:requiresFadingEdge="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_marginBottom="16dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:fadingEdgeLength="24dp"
+            android:paddingEnd="20dp"
+            android:requiresFadingEdge="vertical" />
+
+        <LinearLayout
+            android:id="@+id/appIndex"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="4dp"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="16dp"
+            android:visibility="gone" />
+    </FrameLayout>
 
 </LinearLayout>

@@ -295,6 +295,39 @@ fun setPlainWallpaperByTheme(context: Context, appTheme: Int) {
     }
 }
 
+fun setDefaultWallpaper(context: Context, drawableResId: Int) {
+    try {
+        val original = BitmapFactory.decodeResource(context.resources, drawableResId)
+        if (original == null) {
+            setPlainWallpaper(context, android.R.color.black)
+            return
+        }
+        val (width, height) = getScreenDimensions(context)
+        // Scale the bitmap to the screen size (center-crop, no stretch)
+        val originalWidth = original.width.toFloat()
+        val originalHeight = original.height.toFloat()
+        val scale = maxOf(height / originalHeight, width / originalWidth)
+        val scaledWidth = (originalWidth * scale).toInt()
+        val scaledHeight = (originalHeight * scale).toInt()
+        val scaled = Bitmap.createScaledBitmap(original, scaledWidth, scaledHeight, true)
+        // Crop to screen dimensions
+        val x = (scaledWidth - width) / 2
+        val y = (scaledHeight - height) / 2
+        val cropped = Bitmap.createBitmap(scaled, maxOf(0, x), maxOf(0, y), width, height)
+        val manager = WallpaperManager.getInstance(context)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            manager.setBitmap(cropped, null, false, WallpaperManager.FLAG_SYSTEM)
+            manager.setBitmap(cropped, null, false, WallpaperManager.FLAG_LOCK)
+        } else
+            manager.setBitmap(cropped)
+        original.recycle()
+        scaled.recycle()
+        cropped.recycle()
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+}
+
 fun setPlainWallpaper(context: Context, color: Int) {
     try {
         val bitmap = createBitmap(1000, 2000)

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- QALAUNCHERブランドのパープル→シアンのリニアグラデーション -->
+<!-- ブランドロゴや装飾ラインに使用する -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="135"
+        android:centerColor="@color/qa_indigo"
+        android:endColor="@color/qa_cyan"
+        android:startColor="@color/qa_purple"
+        android:type="linear" />
+    <corners android:radius="2dp" />
+</shape>

@@ -14,14 +14,17 @@ android {
     }
 
     defaultConfig {
-        applicationId "app.olauncher"
+        applicationId "app.qalauncher"
         minSdkVersion 24
         targetSdkVersion 35
-        versionCode 105
-        versionName "v6.4.2"
+        versionCode 2
+        versionName "v0.0.1"
 
         resourceConfigurations += ["en", "ar", "de", "es-rES", "es-rUS", "fr", "he", "hr", "hu", "in", "it", "ja", "nl", "pl", "pt-rBR", "ru-rRU", "sv", "tr", "uk", "zh"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi 31
+        renderscriptSupportModeEnabled true
     }
 
     buildTypes {
@@ -63,5 +66,8 @@ dependencies {
 
     //Material dependency
     implementation libs.material
+
+    // BlurView for Android 11 and below compatibility
+    implementation 'com.github.Dimezis:BlurView:version-2.0.3'
 
 }

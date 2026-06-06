@@ -61,18 +61,25 @@
         <item name="android:cursorVisible">false</item>
     </style>
 
+    <!-- テキストのデフォルトスタイル: 壁紙の上で読みやすいようにシャドウを付ける -->
     <style name="TextDefault" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">@drawable/text_colors_default</item>
         <item name="android:textColorHint">?attr/primaryColorTrans80</item>
+        <!-- グロウ感のある強めのシャドウ: 暗い壁紙でも明るい壁紙でも読める -->
         <item name="android:shadowColor">?attr/primaryTextShadowColor</item>
         <item name="android:shadowDx">0</item>
         <item name="android:shadowDy">2</item>
-        <item name="android:shadowRadius">4</item>
+        <item name="android:shadowRadius">6</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
+    <!-- ホーム画面のアプリ名テキスト: 極細フォントでエレガントに -->
     <style name="TextLarge" parent="TextDefault">
-        <item name="android:fontFamily">sans-serif-light</item>
+        <!-- sans-serif-thin: 一番細いウェイトで高級感あり -->
+        <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:textSize">@dimen/text_large</item>
+        <!-- 文字間隔を広げてよりエレガントな印象に -->
+        <item name="android:letterSpacing">0.08</item>
     </style>
 
     <style name="TextMedium" parent="TextDefault">

@@ -28,4 +28,31 @@
     <color name="blackInverseTrans80">#CCFFFFFF</color>
     <color name="blackInverseTrans90">#E6FFFFFF</color>
 
+    <!-- QALAUNCHER ブランドカラー -->
+    <!-- メインのパープルアクセント: 鮮やかで高級感ある紫 -->
+    <color name="qa_purple">#7C3AED</color>
+    <!-- シアンアクセント: クールな水色 -->
+    <color name="qa_cyan">#06B6D4</color>
+    <!-- ミッドグラデーション: 中間のインディゴ -->
+    <color name="qa_indigo">#4F46E5</color>
+    <!-- ローズ: ホットピンクのハイライト -->
+    <color name="qa_rose">#F43F5E</color>
+    <!-- ゴールド: プレミアム感を演出 -->
+    <color name="qa_gold">#F59E0B</color>
+
+    <!-- 半透明グロウ用: ホーム画面テキストのバックグロウ -->
+    <color name="qa_purple_glow_20">#337C3AED</color>
+    <color name="qa_purple_glow_10">#1A7C3AED</color>
+    <color name="qa_cyan_glow_20">#3306B6D4</color>
+
+    <!-- 深いダーク背景用 -->
+    <color name="qa_dark_bg">#0A0A0F</color>
+    <!-- カード/パネル用の半透明黒 -->
+    <color name="qa_dark_panel">#CC0D0D14</color>
+
+    <!-- 時計テキスト用のミルキーホワイト -->
+    <color name="qa_clock_color">#F8F8FF</color>
+    <!-- サブテキスト用のやや薄い白 -->
+    <color name="qa_subtitle_color">#B0C4DE</color>
+
 </resources>

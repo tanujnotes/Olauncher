@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="app_name" translatable="false">QALAUNCHER</string>
     <string name="github" translatable="false">Github</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
     <string name="recents_layout_description" translatable="false">recents layout description to be used a unique id to show recent apps</string>
-    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="olauncher_pro" translatable="false">QALAUNCHER Pro</string>
     <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
     <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
     <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
@@ -23,11 +23,11 @@
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="set_as_default_launcher_u"><u>Set as default launcher</u></string>
-    <string name="set_as_default_launcher_first">Set Olauncher default first</string>
+    <string name="set_as_default_launcher_first">Set QALAUNCHER as default first</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="home_button_show_recents">Home button for recents</string>
-    <string name="admin_permission_message">Olauncher promises to use the accessibility permission responsibly. Olauncher does not collect or share any data.</string>
+    <string name="admin_permission_message">QALAUNCHER promises to use the accessibility permission responsibly. QALAUNCHER does not collect or share any data.</string>
     <string name="about">About</string>
     <string name="off">Off</string>
     <string name="on">On</string>
@@ -74,12 +74,11 @@
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
-    <string name="welcome_to_olauncher_settings">Welcome to the settings!
-        \n\nRemember, if you have any questions, our About page has the answer.</string>
+    <string name="welcome_to_olauncher_settings">QALAUNCHER へようこそ!
+        \n\nご不明な点はAboutページをご確認ください。</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
-        \n\nIf you\'re finding Olauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
-    <string name="share_message">We need your help! We believe everyone should know about Olauncher and its benefits, but we can\'t do it alone.
-        \n\nCould you please share Olauncher with your friends, family, and followers? Thank you for your support! ❤</string>
+        \n\nIf you\'re finding QALAUNCHER useful, could you please leave a 5-star review? Thank you!</string>
+    <string name="share_message">QALAUNCHER を広めましょう！友人・家族・フォロワーとシェアしてください ❤</string>
     <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
     <!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
@@ -91,7 +90,7 @@
         \n\nIt\'s also the best way to support the developers of Olauncher. Check it out!</string>
     <string name="wallpaper_message">Olauncher offers beautiful new wallpapers daily. Give your homescreen a fresh new look every day, for free!
         \n\nWant to try it?</string>
-    <string name="accessibility_service_description">The accessibility permission is required to enable double tap to lock and home button to show recent apps. Any data acquired by Olauncher via this service will not leave your device.</string>
+    <string name="accessibility_service_description">このアクセシビリティ権限はダブルタップでロックとホームボタンで最近のアプリ表示のために必要です。QALAUNCHERはいかなるデータも収集・送信しません。</string>
     <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
     <string name="open">Open link</string>
@@ -106,15 +105,15 @@
     <string name="date_only">Date only</string>
     <string name="bottom_on">Bottom: On</string>
     <string name="bottom_off">Bottom: Off</string>
-    <string name="please_set_olauncher_as_default_first">Please set Olauncher as default first</string>
+    <string name="please_set_olauncher_as_default_first">Please set QALAUNCHER as default first</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
-    <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page.</string>
+    <string name="hidden_apps_message">Note: Tap on \'QALAUNCHER\' at the top of this Settings page to find your hidden apps.</string>
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">Please turn on Olauncher\'s accessibility service in your device\'s settings to enable Double tap to lock or Home button for recent apps gestures.
-    \n\nPlease note that this service is only used for these gestures. Our accessibility service does not collect or share any data.</string>
+    <string name="accessibility_disclosure">QALAUNCHERのアクセシビリティサービスを有効にしてください。ダブルタップロックとホームボタンの最近のアプリ表示に使用します。
+    \n\nこのサービスはこれらのジェスチャーのみに使用され、データの収集・共有は一切行いません。</string>
     <string name="accept">Accept</string>
     <string name="permission">Permission</string>
     <string name="double_tap_lock">Double tap to lock</string>
@@ -127,7 +126,7 @@
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
-    <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.\nPlease check your app settings.</string>
+    <string name="launcher_failed_to_lock_device">QALAUNCHER failed to lock device.\nPlease check your app settings.</string>
     <string name="long_press_to_select_app">Long press to select app</string>
     <string name="unable_to_open_app">Unable to open app</string>
     <string name="copied">Copied</string>
@@ -141,20 +140,20 @@
     <string name="swipe_left_app_disabled">Swipe left app disabled</string>
     <string name="swipe_right_app_disabled">Swipe right app disabled</string>
     <string name="your_wallpaper_will_update_shortly">Your wallpaper will update shortly</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher is not default. Wallpaper update will fail.</string>
+    <string name="olauncher_is_not_default_launcher">QALAUNCHER is not default. Wallpaper update will fail.</string>
     <string name="long_press_to_enable">Long press to enable</string>
     <string name="no_hidden_apps">No hidden apps</string>
     <string name="hidden_apps">Hidden apps</string>
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
-    <string name="about_olauncher">About and FAQs</string>
+    <string name="about_olauncher">About QALAUNCHER</string>
     <string name="screen_time">Screen time</string>
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
     <string name="leave_a_review">Leave a review</string>
-    <string name="review_message">Olauncher is free and always will be. It has no ads, collects no data, and reduces your screen time, resulting in a healthier life.
-        \n\nWe hope you enjoy it. Tell us what you think.</string>
+    <string name="review_message">QALAUNCHERは無料で、広告なし・データ収集なし。あなたのスクリーンタイムを減らし、より健全な生活をサポートします。
+        \n\nぜひ感想を聞かせてください。</string>
     <string name="alignment_changed">Alignment changed ✅</string>
     <string name="home_screen">Home screen</string>
     <string name="hey">Hey</string>

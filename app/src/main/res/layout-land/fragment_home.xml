@@ -22,154 +22,186 @@
         android:layout_height="1dp"
         android:contentDescription="@string/recents_layout_description" />
 
-    <!-- Clock and calendar-->
+    <!-- Minimal home surface -->
     <LinearLayout
-        android:id="@+id/dateTimeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <TextClock
-            android:id="@+id/clock"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:format12Hour="h:mm"
-            android:textSize="@dimen/time_size"
-            tools:text="02:34" />
-
-        <TextView
-            android:id="@+id/date"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:format12Hour="EEE, dd MMM"
-            android:format24Hour="EEE, dd MMM"
-            android:paddingHorizontal="3dp"
-            android:textSize="@dimen/date_size"
-            tools:text="Thu, 30 Dec" />
-    </LinearLayout>
-
-    <!-- Screen time-->
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvScreenTime"
-        style="@style/TextSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginHorizontal="74dp"
-        android:layout_marginTop="72dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textSize="@dimen/date_size"
-        android:visibility="gone"
-        tools:text="2h 11m"
-        tools:visibility="visible" />
-
-    <!-- Home apps-->
-    <LinearLayout
-        android:id="@+id/homeAppsLayout"
+        android:id="@+id/homeContentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="74dp"
-        android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingVertical="@dimen/home_app_padding_vertical">
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingHorizontal="72dp"
+        android:paddingVertical="32dp">
 
-        <TextView
-            android:id="@+id/homeApp1"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
+        <!-- Clock and calendar -->
+        <LinearLayout
+            android:id="@+id/dateTimeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:visibility="gone"
-            tools:visibility="visible" />
+            tools:visibility="visible">
 
-        <TextView
-            android:id="@+id/homeApp2"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
+            <!-- 巨大時計: 横向きでもエレガントなsans-serif-light -->
+            <TextClock
+                android:id="@+id/clock"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:format12Hour="h:mm"
+                android:format24Hour="H:mm"
+                android:includeFontPadding="false"
+                android:letterSpacing="-0.03"
+                android:textSize="@dimen/time_size"
+                tools:text="02:34" />
+
+            <!-- 日付テキスト: 横向きでも見やすいletterSpacing -->
+            <TextView
+                android:id="@+id/date"
+                style="@style/TextDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:format12Hour="EEE, dd MMM"
+                android:format24Hour="EEE, dd MMM"
+                android:includeFontPadding="false"
+                android:letterSpacing="0.05"
+                android:paddingHorizontal="3dp"
+                android:textSize="@dimen/date_size"
+                tools:text="Thu, 30 Dec" />
+
+            <!-- ブランドデコレーションライン: 横向きでも時計の下に飾り線 -->
+            <View
+                android:layout_width="48dp"
+                android:layout_height="1.5dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/brand_gradient" />
+
+        </LinearLayout>
+
+        <!-- Home apps -->
+        <LinearLayout
+            android:id="@+id/homeAppsLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_2"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp">
 
-        <TextView
-            android:id="@+id/homeApp3"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_3"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/homeApp1"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_1"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/homeApp4"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_4"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/homeApp2"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_2"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/homeApp5"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_5"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/homeApp3"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_3"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/homeApp6"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_6"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/homeApp4"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_4"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/homeApp7"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_7"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/homeApp5"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_5"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/homeApp8"
-            style="@style/TextLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/app"
-            android:paddingVertical="@dimen/home_app_padding_vertical"
-            android:tag="@string/tag_8"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/homeApp6"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_6"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
+            <TextView
+                android:id="@+id/homeApp7"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_7"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/homeApp8"
+                style="@style/TextLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="@string/app"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:paddingVertical="@dimen/home_app_padding_vertical"
+                android:tag="@string/tag_8"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
@@ -179,10 +211,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/swipe_up_for_apps" />
 
-    <!-- Set default launcher -->
+    <!-- デフォルトランチャー設定を促すボタン -->
     <TextView
         android:id="@+id/setDefaultLauncher"
         style="@style/TextMedium"
@@ -191,9 +223,37 @@
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="40dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="@string/set_as_default_launcher_u"
         android:visibility="gone" />
+
+    <!-- ブランド刻印: 横向きでも左下にQALAUNCHER 0.0.0 -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:alpha="0.45">
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="1.5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/brand_gradient" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:letterSpacing="0.15"
+            android:text="QALAUNCHER 0.0.0"
+            android:textAllCaps="false"
+            android:textColor="@color/qa_subtitle_color"
+            android:textSize="9sp" />
+    </LinearLayout>
+
 </FrameLayout>

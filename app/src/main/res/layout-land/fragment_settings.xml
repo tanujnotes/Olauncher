@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="?attr/primaryShadeDarkColor">
+    android:background="?attr/primaryShadeColor">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -16,7 +16,7 @@
         android:clipToPadding="false"
         android:fadingEdgeLength="24dp"
         android:overScrollMode="never"
-        android:paddingHorizontal="100dp"
+        android:paddingHorizontal="84dp"
         android:requiresFadingEdge="vertical"
         android:scrollbars="none">
 
@@ -27,16 +27,16 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:paddingVertical="56dp">
+            android:paddingVertical="48dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/rounded_rect_shade_color"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="10dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -96,12 +96,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_margin="8dp"
                 android:background="@drawable/rounded_rect_shade_color"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:orientation="vertical"
-                android:padding="12dp">
+                android:padding="10dp">
 
                 <TextView
                     style="@style/TextLarge"

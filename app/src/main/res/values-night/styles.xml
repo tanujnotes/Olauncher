@@ -61,18 +61,25 @@
         <item name="android:cursorVisible">false</item>
     </style>
 
+    <!-- ダークテーマ用テキストデフォルト: 暗い背景でもグロウ感で読みやすく -->
     <style name="TextDefault" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">@drawable/text_colors_default</item>
         <item name="android:textColorHint">?attr/primaryColorTrans80</item>
+        <!-- ダークテーマでは特にシャドウを強めてグロウ感を演出 -->
         <item name="android:shadowColor">?attr/primaryTextShadowColor</item>
         <item name="android:shadowDx">0</item>
         <item name="android:shadowDy">2</item>
-        <item name="android:shadowRadius">4</item>
+        <item name="android:shadowRadius">8</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
+    <!-- ダークテーマのアプリ名: sans-serif-thin で夜空に映える極細テキスト -->
     <style name="TextLarge" parent="TextDefault">
-        <item name="android:fontFamily">sans-serif-light</item>
+        <!-- ダークでも極細フォントで高級感 -->
+        <item name="android:fontFamily">sans-serif-thin</item>
         <item name="android:textSize">@dimen/text_large</item>
+        <!-- 文字間隔を広げてダーク背景で読みやすく -->
+        <item name="android:letterSpacing">0.08</item>
     </style>
 
     <style name="TextMedium" parent="TextDefault">

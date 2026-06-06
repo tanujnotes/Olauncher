@@ -6,6 +6,10 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true">
 
+    <!--
+      アプリ名テキスト: TextLarge スタイル (sans-serif-thin) で極細フォント表示
+      paddingHorizontal=24dp で左端に余裕を持たせる
+    -->
     <TextView
         android:id="@+id/appTitle"
         style="@style/TextLarge"
@@ -31,7 +35,7 @@
         android:id="@+id/appHideLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginVertical="1dp"
+        android:layout_marginVertical="0dp"
         android:animateLayoutChanges="true"
         android:background="?attr/primaryShadeDarkColor"
         android:clickable="true"
@@ -134,8 +138,8 @@
             style="@style/TextLarge"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:background="@null"
             android:gravity="center_vertical"

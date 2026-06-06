@@ -3,11 +3,17 @@ package app.olauncher.ui
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.view.WindowManager
+import eightbitlab.com.blurview.RenderScriptBlur
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
+import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -31,6 +37,7 @@ import app.olauncher.helper.openUrl
 import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
+import java.text.Normalizer
 
 class AppDrawerFragment : Fragment() {
 
@@ -44,6 +51,8 @@ class AppDrawerFragment : Fragment() {
     private var currentPrivateSpaceApps: List<AppModel>? = null
     private var currentPrivateSpaceLocked: Boolean = true
     private var currentPrivateSpaceAvailable: Boolean = false
+    private val indexLabels: MutableList<String> = mutableListOf()
+    private val indexPositions: MutableMap<String, Int> = mutableMapOf()
 
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentAppDrawerBinding? = null
@@ -71,6 +80,45 @@ class AppDrawerFragment : Fragment() {
         initAdapter()
         initObservers()
         initClickListeners()
+        initIndex()
+
+        // Apply Liquid Glass (Native Window Blur) for Android 12+
+        applyLiquidGlassEffect(true)
+    }
+
+    private fun applyLiquidGlassEffect(enable: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val window = requireActivity().window
+            if (enable) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+                val attributes = window.attributes
+                attributes.blurBehindRadius = 80
+                window.attributes = attributes
+                binding.blurView?.visibility = View.GONE
+            } else {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+                val attributes = window.attributes
+                attributes.blurBehindRadius = 0
+                window.attributes = attributes
+            }
+        } else {
+            if (enable) {
+                binding.blurView?.visibility = View.VISIBLE
+                try {
+                    val decorView = requireActivity().window.decorView
+                    val rootView = decorView.findViewById<ViewGroup>(android.R.id.content)
+                    val windowBackground = decorView.background
+                    binding.blurView?.setupWith(rootView, RenderScriptBlur(requireContext()))
+                        ?.setFrameClearDrawable(windowBackground)
+                        ?.setBlurRadius(20f)
+                } catch (e: Exception) {
+                    // BlurViewがサポートされていない端末では半透明背景のみでフォールバック
+                    binding.blurView?.visibility = View.GONE
+                }
+            } else {
+                binding.blurView?.visibility = View.GONE
+            }
+        }
     }
 
     private fun initViews() {
@@ -103,6 +151,7 @@ class AppDrawerFragment : Fragment() {
                     adapter.filter.filter(newText)
                     binding.appRename.visibility =
                         if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
+                    updateIndexVisibility(newText)
                     return true
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -233,6 +282,7 @@ class AppDrawerFragment : Fragment() {
             viewModel.hiddenApps.observe(viewLifecycleOwner) {
                 it?.let {
                     adapter.setAppList(it.toMutableList())
+                    updateAppIndex(it)
                 }
             }
         } else {
@@ -269,6 +319,7 @@ class AppDrawerFragment : Fragment() {
         }
 
         adapter.setAppList(combined)
+        updateAppIndex(combined)
         adapter.filter.filter(binding.search.query)
     }
 
@@ -322,6 +373,88 @@ class AppDrawerFragment : Fragment() {
         }
     }
 
+    private fun initIndex() {
+        val appIndex = binding.appIndex ?: return
+        appIndex.setOnTouchListener { _, event ->
+            handleIndexTouch(event)
+        }
+    }
+
+    private fun handleIndexTouch(event: MotionEvent): Boolean {
+        val appIndex = binding.appIndex ?: return false
+        if (indexLabels.isEmpty()) return false
+        if (event.actionMasked != MotionEvent.ACTION_DOWN &&
+            event.actionMasked != MotionEvent.ACTION_MOVE
+        ) {
+            return false
+        }
+        val viewHeight = appIndex.height - appIndex.paddingTop - appIndex.paddingBottom
+        if (viewHeight <= 0) return false
+        val y = (event.y - appIndex.paddingTop).coerceIn(0f, viewHeight.toFloat())
+        val index = ((y / viewHeight) * indexLabels.size).toInt()
+            .coerceIn(0, indexLabels.size - 1)
+        val label = indexLabels[index]
+        indexPositions[label]?.let { position ->
+            binding.recyclerView.stopScroll()
+            linearLayoutManager.scrollToPositionWithOffset(position, 0)
+        }
+        return true
+    }
+
+    private fun updateAppIndex(apps: List<AppModel>) {
+        val labels = LinkedHashMap<String, Int>()
+        apps.forEachIndexed { index, app ->
+            if (app is AppModel.PrivateSpaceHeader) return@forEachIndexed
+            val label = app.appLabel.trim()
+            if (label.isBlank()) return@forEachIndexed
+            val key = getIndexKey(label)
+            if (!labels.containsKey(key)) labels[key] = index
+        }
+        indexLabels.clear()
+        indexLabels.addAll(labels.keys)
+        indexPositions.clear()
+        indexPositions.putAll(labels)
+        renderIndexLabels()
+        updateIndexVisibility(binding.search.query)
+    }
+
+    private fun renderIndexLabels() {
+        val appIndex = binding.appIndex ?: return
+        appIndex.removeAllViews()
+        if (indexLabels.isEmpty()) return
+        val context = requireContext()
+        indexLabels.forEach { label ->
+            val textView = TextView(context).apply {
+                text = label
+                TextViewCompat.setTextAppearance(this, R.style.TextSmall)
+                setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 10f)
+                gravity = android.view.Gravity.CENTER
+                layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    0,
+                    1f
+                )
+            }
+            appIndex.addView(textView)
+        }
+    }
+
+    private fun updateIndexVisibility(query: CharSequence?) {
+        binding.appIndex?.isVisible = query.isNullOrBlank() && indexLabels.isNotEmpty()
+    }
+
+    private fun getIndexKey(label: String): String {
+        val normalized = Normalizer.normalize(label, Normalizer.Form.NFD)
+            .replace(Regex("\\p{InCombiningDiacriticalMarks}+"), "")
+            .trim()
+        val firstChar = normalized.firstOrNull()?.uppercaseChar() ?: return "#"
+        return when {
+            firstChar.isLetter() -> firstChar.toString()
+            firstChar.isDigit() -> "0-9"
+            else -> "#"
+        }
+    }
+
     private fun checkMessageAndExit() {
         findNavController().popBackStack()
         if (flag == Constants.FLAG_LAUNCH_APP)
@@ -340,6 +473,8 @@ class AppDrawerFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Remove Liquid Glass effect when leaving drawer
+        applyLiquidGlassEffect(false)
         _binding = null
     }
 }

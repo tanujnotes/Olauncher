@@ -1,70 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  QALAUNCHER 0.0.0 — アプリドロワーレイアウト
+  デザインコンセプト:
+    - 半透明の背景でフロスト（すりガラス）感
+    - 検索バーは極細フォントでスマートに
+    - アプリ一覧はフェーディングエッジで滑らかに
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="?attr/primaryShadeDarkColor"
-    android:orientation="vertical">
+    android:background="?attr/primaryShadeColor">
 
-    <Space
+    <!-- BlurView for Android 11 and below (Native RenderScript Blur) -->
+    <eightbitlab.com.blurview.BlurView
+        android:id="@+id/blurView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:layout_weight="0.1" />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search"
-            android:layout_width="0dp"
+        <!-- 上部のスペース: 画面上部との余白 -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0.08" />
+
+        <!--
+          検索エリア: SearchView + RENAMEボタン
+          水平配置で左に検索バー、右にRENAMEボタン (rename モード時のみ表示)
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:animateLayoutChanges="true"
+            android:orientation="horizontal">
+
+            <!--
+              検索バー本体
+              AppSearchText スタイルで QALAUNCHER のフォントに合わせる
+              queryBackground="@null" で枠線なし, searchIcon="@null" でアイコンなし
+            -->
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:imeOptions="actionSearch"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="0dp"
+                android:textCursorDrawable="@null"
+                app:closeIcon="@null"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@null"
+                app:queryHint=" ___"
+                app:searchIcon="@null"
+                app:theme="@style/AppSearchText" />
+
+            <!--
+              アプリ名変更ボタン: rename モード時のみ表示 (visibility="gone" がデフォルト)
+              AppDrawerFragment.kt で制御される
+            -->
+            <TextView
+                android:id="@+id/appRename"
+                style="@style/TextSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="20dp"
+                android:paddingVertical="@dimen/app_padding_vertical"
+                android:text="@string/rename"
+                android:textAllCaps="true"
+                android:letterSpacing="0.12"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- 検索エリアとリストの間のスペース -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.04" />
+
+        <!--
+          アプリリストとアルファベットインデックスを重ねる FrameLayout
+        -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="end"
-            android:imeOptions="actionSearch"
-            android:paddingHorizontal="7dp"
-            android:paddingVertical="0dp"
-            android:textCursorDrawable="@null"
-            app:closeIcon="@null"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@null"
-            app:queryHint=" ___"
-            app:searchIcon="@null"
-            app:theme="@style/AppSearchText" />
+            android:layout_marginBottom="16dp">
 
-        <TextView
-            android:id="@+id/appRename"
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="20dp"
-            android:paddingVertical="@dimen/app_padding_vertical"
-            android:text="@string/rename"
-            android:textAllCaps="true"
-            android:visibility="gone" />
+            <!--
+              アプリ一覧の RecyclerView
+              requiresFadingEdge="vertical" で上下がフェードアウトして滑らかな見た目に
+              paddingEnd はアルファベットインデックス分の余白
+            -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:fadingEdgeLength="32dp"
+                android:paddingEnd="20dp"
+                android:requiresFadingEdge="vertical" />
+
+            <!--
+              アルファベットインデックス列: 右端に縦に A-Z を表示
+              AppDrawerFragment.kt の populateCharacterIndicator() で動的に追加される
+              通常は gone で検索中に表示される
+            -->
+            <LinearLayout
+                android:id="@+id/appIndex"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="4dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="16dp"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.06" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="24dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:fadingEdgeLength="24dp"
-        android:requiresFadingEdge="vertical" />
-
-</LinearLayout>
+</FrameLayout>

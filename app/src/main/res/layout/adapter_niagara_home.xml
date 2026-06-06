@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Niagara Launcher 風 ホーム画面アプリアイテム
+  左にアイコン、右にアプリ名を横並びで表示
+  余白はシンプルに抑えてミニマルな印象に
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:paddingHorizontal="24dp">
+
+    <!-- ガラスカード背景 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/glass_card"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="4dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp">
+
+        <!-- アプリアイコン -->
+        <FrameLayout
+            android:id="@+id/iconFrame"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/appIcon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerInside"
+                android:importantForAccessibility="no"
+                tools:src="@mipmap/ic_launcher" />
+        </FrameLayout>
+
+        <!-- アプリ名 -->
+        <TextView
+            android:id="@+id/appName"
+            style="@style/TextLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:letterSpacing="0.04"
+            tools:text="Settings" />
+
+    </LinearLayout>
+
+</FrameLayout>

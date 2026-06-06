@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ガラスカード背景: 半透明ダーク + 角丸
+  ガラスエフェクトの「板」として各要素の背後に配置
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#CC0D0D14" />
+    <corners android:radius="16dp" />
+</shape>

@@ -13,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
+import eightbitlab.com.blurview.RenderScriptBlur
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -90,6 +92,43 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         if (showPentastic)
             binding.footer.text = getText(R.string.new_app_minimal_todo_lists)
+
+        // Apply Liquid Glass (Native Window Blur) for Android 12+
+        applyLiquidGlassEffect(true)
+    }
+
+    private fun applyLiquidGlassEffect(enable: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val window = requireActivity().window
+            if (enable) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+                val attributes = window.attributes
+                attributes.blurBehindRadius = 80
+                window.attributes = attributes
+                binding.blurView?.visibility = View.GONE
+            } else {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+                val attributes = window.attributes
+                attributes.blurBehindRadius = 0
+                window.attributes = attributes
+            }
+        } else {
+            if (enable) {
+                binding.blurView?.visibility = View.VISIBLE
+                try {
+                    val decorView = requireActivity().window.decorView
+                    val rootView = decorView.findViewById<ViewGroup>(android.R.id.content)
+                    val windowBackground = decorView.background
+                    binding.blurView?.setupWith(rootView, RenderScriptBlur(requireContext()))
+                        ?.setFrameClearDrawable(windowBackground)
+                        ?.setBlurRadius(20f)
+                } catch (e: Exception) {
+                    binding.blurView?.visibility = View.GONE
+                }
+            } else {
+                binding.blurView?.visibility = View.GONE
+            }
+        }
     }
 
     override fun onClick(view: View) {
@@ -675,6 +714,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Remove Liquid Glass effect when leaving settings
+        applyLiquidGlassEffect(false)
         _binding = null
     }
 
