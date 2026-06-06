@@ -531,7 +531,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 val windowBackground = decorView.background
                 binding.blurView?.setupWith(rootView, RenderScriptBlur(requireContext()))
                     ?.setFrameClearDrawable(windowBackground)
-                    ?.setBlurRadius(35f)
+                    ?.setBlurRadius(25f)
                 binding.blurView?.setBackgroundColor(0xCC0D0D14.toInt())
             } catch (e: Exception) {
                 binding.blurView?.setBackgroundColor(0xCC0D0D14.toInt())
