@@ -3,4 +3,15 @@
     <dimen name="alphabet_recycler_margin_bottom">16dp</dimen>
     <dimen name="alphabet_recycler_margin_end">10dp</dimen>
     <dimen name="alphabet_recycler_margin_start">320dp</dimen>
+
+    <!-- Time & Date sizes used in Niagara-style home screen -->
+    <dimen name="time_size">52sp</dimen>
+    <dimen name="date_size">16sp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="text_large">20sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+
+    <!-- App list -->
+    <dimen name="app_padding_vertical">14dp</dimen>
 </resources>

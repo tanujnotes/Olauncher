@@ -29,8 +29,10 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.animation.LinearInterpolator
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
@@ -640,6 +642,23 @@ fun View.animateAlpha(alpha: Float = 1.0f) {
         duration = 200
         alpha(alpha)
         start()
+    }
+}
+
+/**
+ * 指定されたViewツリーの全てのTextViewにフォントファミリーを適用
+ */
+fun ViewGroup.applyFontFamily(fontFamily: String) {
+    for (i in 0 until childCount) {
+        val child = getChildAt(i)
+        when (child) {
+            is TextView -> {
+                child.typeface = android.graphics.Typeface.create(fontFamily, child.typeface?.style ?: android.graphics.Typeface.NORMAL)
+            }
+            is ViewGroup -> {
+                child.applyFontFamily(fontFamily)
+            }
+        }
     }
 }
 

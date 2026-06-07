@@ -29,6 +29,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentSettingsBinding
 import app.olauncher.helper.animateAlpha
+import app.olauncher.helper.applyFontFamily
 import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.isAccessServiceEnabled
@@ -87,11 +88,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateSwipeApps()
         populateSwipeDownAction()
         populateActionHints()
+        populateFontText()
         initClickListeners()
         initObservers()
 
         if (showPentastic)
             binding.footer.text = getText(R.string.new_app_minimal_todo_lists)
+
+        // 選択されたフォントを適用
+        (binding.root as? ViewGroup)?.applyFontFamily(prefs.fontFamily)
 
         // Apply Liquid Glass (Native Window Blur) for Android 12+
         applyLiquidGlassEffect(true)
@@ -172,6 +177,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.textSizeValue -> binding.textSizesLayout.visibility = View.VISIBLE
+            R.id.fontText -> binding.fontSelectLayout.visibility = View.VISIBLE
+            R.id.fontSansThin -> updateFont("sans-serif-thin")
+            R.id.fontSans -> updateFont("sans-serif")
+            R.id.fontSerif -> updateFont("serif")
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
@@ -274,6 +283,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.themeDark.setOnClickListener(this)
         binding.themeSystem.setOnClickListener(this)
         binding.textSizeValue.setOnClickListener(this)
+        binding.fontText.setOnClickListener(this)
+        binding.fontSansThin.setOnClickListener(this)
+        binding.fontSans.setOnClickListener(this)
+        binding.fontSerif.setOnClickListener(this)
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
@@ -695,6 +708,22 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf(Constants.Key.FLAG to flag)
         )
+    }
+
+    private fun populateFontText() {
+        binding.fontText.text = when (prefs.fontFamily) {
+            "sans-serif-thin" -> getString(R.string.font_sans_thin)
+            "sans-serif" -> getString(R.string.font_sans)
+            "serif" -> getString(R.string.font_serif)
+            else -> getString(R.string.font_sans_thin)
+        }
+    }
+
+    private fun updateFont(fontFamily: String) {
+        if (prefs.fontFamily == fontFamily) return
+        prefs.fontFamily = fontFamily
+        populateFontText()
+        requireActivity().recreate()
     }
 
     private fun populateActionHints() {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Niagara Drop 風 カスケードアニメーション
+  各アイテムが上から順に、少しずつ遅れてフェードイン＆スライドダウン
+-->
+<layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animation="@anim/item_cascade_fade_in"
+    android:animationOrder="normal"
+    android:delay="0.05" />

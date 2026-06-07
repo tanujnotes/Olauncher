@@ -44,6 +44,7 @@ class Prefs(context: Context) {
     private val SHOWN_ON_DAY_OF_YEAR = "SHOWN_ON_DAY_OF_YEAR"
     private val HOME_BUTTON_SHOW_RECENTS = "HOME_BUTTON_SHOW_RECENTS"
     private val DEFAULT_WALLPAPER_SET = "DEFAULT_WALLPAPER_SET"
+    private val FONT_FAMILY = "FONT_FAMILY"
 
     private val APP_NAME_1 = "APP_NAME_1"
     private val APP_NAME_2 = "APP_NAME_2"
@@ -227,6 +228,10 @@ class Prefs(context: Context) {
     var defaultWallpaperSet: Boolean
         get() = prefs.getBoolean(DEFAULT_WALLPAPER_SET, false)
         set(value) = prefs.edit { putBoolean(DEFAULT_WALLPAPER_SET, value).apply() }
+
+    var fontFamily: String
+        get() = prefs.getString(FONT_FAMILY, "sans-serif-thin").toString()
+        set(value) = prefs.edit { putString(FONT_FAMILY, value).apply() }
 
     var hiddenApps: MutableSet<String>
         get() = prefs.getStringSet(HIDDEN_APPS, mutableSetOf()) as MutableSet<String>

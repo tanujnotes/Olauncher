@@ -1,15 +1,19 @@
 package app.olauncher.ui
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.view.WindowManager
 import eightbitlab.com.blurview.RenderScriptBlur
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
@@ -26,6 +30,7 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
+import app.olauncher.helper.applyFontFamily
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
@@ -47,12 +52,14 @@ class AppDrawerFragment : Fragment() {
 
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
+    private var scrollToLetter = ""
     private var currentAppList: List<AppModel>? = null
     private var currentPrivateSpaceApps: List<AppModel>? = null
     private var currentPrivateSpaceLocked: Boolean = true
     private var currentPrivateSpaceAvailable: Boolean = false
     private val indexLabels: MutableList<String> = mutableListOf()
     private val indexPositions: MutableMap<String, Int> = mutableMapOf()
+    private var isIndexDragging = false
 
     private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentAppDrawerBinding? = null
@@ -73,6 +80,7 @@ class AppDrawerFragment : Fragment() {
         arguments?.let {
             flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
             canRename = it.getBoolean(Constants.Key.RENAME, false)
+            scrollToLetter = it.getString(Constants.Key.SCROLL_TO_LETTER, "") ?: ""
         }
 
         initViews()
@@ -81,8 +89,9 @@ class AppDrawerFragment : Fragment() {
         initObservers()
         initClickListeners()
         initIndex()
+        // 選択されたフォントを適用
+        (binding.root as? ViewGroup)?.applyFontFamily(prefs.fontFamily)
 
-        // Apply Liquid Glass (Native Window Blur) for Android 12+
         applyLiquidGlassEffect(true)
     }
 
@@ -112,7 +121,6 @@ class AppDrawerFragment : Fragment() {
                         ?.setFrameClearDrawable(windowBackground)
                         ?.setBlurRadius(20f)
                 } catch (e: Exception) {
-                    // BlurViewがサポートされていない端末では半透明背景のみでフォールバック
                     binding.blurView?.visibility = View.GONE
                 }
             } else {
@@ -217,7 +225,7 @@ class AppDrawerFragment : Fragment() {
                 val newSet = mutableSetOf<String>()
                 newSet.addAll(prefs.hiddenApps)
                 if (flag == Constants.FLAG_HIDDEN_APPS) {
-                    newSet.remove(appModel.appPackage) // for backward compatibility
+                    newSet.remove(appModel.appPackage)
                     newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
                 } else
                     newSet.add(appModel.appPackage + "|" + appModel.user.toString())
@@ -272,7 +280,7 @@ class AppDrawerFragment : Fragment() {
         binding.recyclerView.itemAnimator = null
         if (requireContext().isEinkDisplay().not())
             binding.recyclerView.layoutAnimation =
-                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
+                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_cascade)
     }
 
     private fun initObservers() {
@@ -321,6 +329,13 @@ class AppDrawerFragment : Fragment() {
         adapter.setAppList(combined)
         updateAppIndex(combined)
         adapter.filter.filter(binding.search.query)
+
+        // Niagar風: scrollToLetterが指定されていたら該当の位置へスクロール
+        if (scrollToLetter.isNotBlank()) {
+            binding.recyclerView.post {
+                scrollToPositionForLetter(scrollToLetter)
+            }
+        }
     }
 
     private fun initClickListeners() {
@@ -373,6 +388,8 @@ class AppDrawerFragment : Fragment() {
         }
     }
 
+    // ── Niagara風 アルファベットインデックス（波アニメーション） ──
+
     private fun initIndex() {
         val appIndex = binding.appIndex ?: return
         appIndex.setOnTouchListener { _, event ->
@@ -383,23 +400,148 @@ class AppDrawerFragment : Fragment() {
     private fun handleIndexTouch(event: MotionEvent): Boolean {
         val appIndex = binding.appIndex ?: return false
         if (indexLabels.isEmpty()) return false
-        if (event.actionMasked != MotionEvent.ACTION_DOWN &&
-            event.actionMasked != MotionEvent.ACTION_MOVE
-        ) {
-            return false
+
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                isIndexDragging = true
+                showLetterPopup(getIndexLabelAt(event, appIndex))
+                applyWaveEffect(event, appIndex)
+                scrollToIndexLabel(event, appIndex)
+                return true
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (!isIndexDragging) return false
+                showLetterPopup(getIndexLabelAt(event, appIndex))
+                applyWaveEffect(event, appIndex)
+                scrollToIndexLabel(event, appIndex)
+                return true
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                if (!isIndexDragging) return false
+                isIndexDragging = false
+                hideLetterPopup()
+                resetWaveEffect(appIndex)
+                return true
+            }
         }
-        val viewHeight = appIndex.height - appIndex.paddingTop - appIndex.paddingBottom
-        if (viewHeight <= 0) return false
+        return false
+    }
+
+    private fun getIndexLabelAt(event: MotionEvent, appIndex: LinearLayout): String {
+        val viewHeight = (appIndex.height - appIndex.paddingTop - appIndex.paddingBottom).coerceAtLeast(1)
         val y = (event.y - appIndex.paddingTop).coerceIn(0f, viewHeight.toFloat())
-        val index = ((y / viewHeight) * indexLabels.size).toInt()
-            .coerceIn(0, indexLabels.size - 1)
+        val index = ((y / viewHeight) * indexLabels.size).toInt().coerceIn(0, indexLabels.size - 1)
+        return indexLabels[index]
+    }
+
+    /**
+     * Niagara式 波アニメーション: 指の近くの文字を拡大
+     */
+    private fun applyWaveEffect(event: MotionEvent, appIndex: LinearLayout) {
+        val viewHeight = (appIndex.height - appIndex.paddingTop - appIndex.paddingBottom).coerceAtLeast(1)
+        val touchY = (event.y - appIndex.paddingTop).coerceIn(0f, viewHeight.toFloat())
+        val touchProgress = touchY / viewHeight
+        val centerIndex = (touchProgress * indexLabels.size).toInt().coerceIn(0, indexLabels.size - 1)
+
+        for (i in 0 until appIndex.childCount) {
+            val child = appIndex.getChildAt(i) as? TextView ?: continue
+            val distance = Math.abs(i - centerIndex).toFloat()
+            val scale = when {
+                distance <= 1f -> 1.0f + (1f - distance / 1f) * 1.2f
+                distance <= 3f -> 1.0f + (1f - (distance - 1f) / 2f) * 0.4f
+                else -> 1.0f
+            }.coerceIn(0.8f, 2.5f)
+            val alpha = when {
+                distance <= 1f -> 1.0f
+                distance <= 3f -> 1.0f - (distance - 1f) * 0.2f
+                else -> 0.4f
+            }.coerceIn(0.3f, 1.0f)
+
+            child.scaleX = scale
+            child.scaleY = scale
+            child.alpha = alpha
+        }
+    }
+
+    private fun resetWaveEffect(appIndex: LinearLayout) {
+        for (i in 0 until appIndex.childCount) {
+            val child = appIndex.getChildAt(i) as? TextView ?: continue
+            child.animate()
+                .scaleX(1f)
+                .scaleY(1f)
+                .alpha(0.6f)
+                .setDuration(200)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .start()
+        }
+    }
+
+    private fun scrollToIndexLabel(event: MotionEvent, appIndex: LinearLayout) {
+        val viewHeight = (appIndex.height - appIndex.paddingTop - appIndex.paddingBottom).coerceAtLeast(1)
+        val y = (event.y - appIndex.paddingTop).coerceIn(0f, viewHeight.toFloat())
+        val index = ((y / viewHeight) * indexLabels.size).toInt().coerceIn(0, indexLabels.size - 1)
         val label = indexLabels[index]
         indexPositions[label]?.let { position ->
             binding.recyclerView.stopScroll()
             linearLayoutManager.scrollToPositionWithOffset(position, 0)
         }
-        return true
     }
+
+    /**
+     * scrollToLetterで指定された文字の位置へスクロール
+     */
+    private fun scrollToPositionForLetter(letter: String) {
+        val target = letter.uppercase()
+        // 完全一致を探す
+        var bestPosition = -1
+        for ((label, position) in indexPositions) {
+            if (label.equals(target, ignoreCase = true)) {
+                bestPosition = position
+                break
+            }
+        }
+        // 前方一致で探す
+        if (bestPosition < 0) {
+            for ((label, position) in indexPositions) {
+                if (label.startsWith(target.firstOrNull()?.toString() ?: "", ignoreCase = true)) {
+                    bestPosition = position
+                    break
+                }
+            }
+        }
+        if (bestPosition >= 0) {
+            linearLayoutManager.scrollToPositionWithOffset(bestPosition, 0)
+        }
+    }
+
+    // ── レターポップアップ ──
+
+    private fun showLetterPopup(letter: String) {
+        val popup = binding.letterPopup ?: return
+        popup.text = letter
+        popup.visibility = View.VISIBLE
+        popup.animate()
+            .alpha(1f)
+            .scaleX(1.1f)
+            .scaleY(1.1f)
+            .setDuration(150)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
+    }
+
+    private fun hideLetterPopup() {
+        val popup = binding.letterPopup ?: return
+        popup.animate()
+            .alpha(0f)
+            .scaleX(0.8f)
+            .scaleY(0.8f)
+            .setDuration(200)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .withEndAction { popup.visibility = View.GONE }
+            .start()
+    }
+
+    // ── インデックス管理 ──
 
     private fun updateAppIndex(apps: List<AppModel>) {
         val labels = LinkedHashMap<String, Int>()
@@ -427,13 +569,17 @@ class AppDrawerFragment : Fragment() {
             val textView = TextView(context).apply {
                 text = label
                 TextViewCompat.setTextAppearance(this, R.style.TextSmall)
-                setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 10f)
+                setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 9f)
+                pivotX = 0f
+                pivotY = 0f
                 gravity = android.view.Gravity.CENTER
                 layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
                     0,
                     1f
                 )
+                alpha = 0.6f
+                tag = label
             }
             appIndex.addView(textView)
         }
@@ -473,7 +619,6 @@ class AppDrawerFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Remove Liquid Glass effect when leaving drawer
         applyLiquidGlassEffect(false)
         _binding = null
     }

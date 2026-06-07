@@ -1,5 +1,8 @@
 package app.olauncher.ui
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.os.BatteryManager
@@ -11,10 +14,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.animation.doOnEnd
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
@@ -28,6 +34,7 @@ import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentHomeBinding
+import app.olauncher.helper.applyFontFamily
 import app.olauncher.helper.expandNotificationDrawer
 import app.olauncher.helper.getUserHandleFromString
 import app.olauncher.helper.openAlarmApp
@@ -52,6 +59,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private var currentHomeItems: List<NiagaraHomeAdapter.HomeAppItem> = emptyList()
 
+    // ── 波アニメーション用 ──
+    private val indexLabels = listOf(
+        "A","B","C","D","E","F","G","H","I","J","K","L","M",
+        "N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+        "#"
+    )
+    private var isIndexDragging = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -72,6 +87,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         initClickListeners()
         initAlphabetIndex()
         setupBlurView()
+        // 選択されたフォントを適用
+        (binding.root as? ViewGroup)?.applyFontFamily(prefs.fontFamily)
     }
 
     override fun onResume() {
@@ -88,12 +105,10 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         niagaraAdapter = NiagaraHomeAdapter(
             context = requireContext(),
             onAppClick = { index ->
-                // スロット番号は 1 始まり
                 val slot = index + 1
                 homeAppClicked(slot)
             },
             onAppLongClick = { index ->
-                // 長押しでアプリ選択画面へ
                 val slot = index + 1
                 showAppListForSlot(slot)
             }
@@ -106,7 +121,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun populateNiagaraHome() {
         populateDateTime()
 
-        // 全てのスロットを表示（空スロットはプレースホルダー）
         val homeAppsNum = prefs.homeAppsNum
         val items = mutableListOf<NiagaraHomeAdapter.HomeAppItem>()
 
@@ -114,7 +128,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             val appName = prefs.getAppName(i)
             val pkg = prefs.getAppPackage(i)
             if (appName.isBlank() || pkg.isBlank()) {
-                // 空スロット: プレースホルダーを追加
                 items.add(
                     NiagaraHomeAdapter.HomeAppItem(
                         displayName = "",
@@ -143,48 +156,180 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         niagaraAdapter.appItems = items
     }
 
-    // ── Niagara風 アルファベットインデックス ──
-    // 右端にA-Z + 0-9 + # を常時表示。タップで全アプリ一覧が開く
+    // ── Niagara風 アルファベットインデックス（波アニメーション＋ドラッグスクロール） ──
 
     private fun initAlphabetIndex() {
         val appIndex = binding.appIndex ?: return
         appIndex.removeAllViews()
         val context = requireContext()
 
-        val allLabels = mutableListOf<String>()
-        for (c in 'A'..'Z') allLabels.add(c.toString())
-        allLabels.add("0-9")
-        allLabels.add("#")
-
-        allLabels.forEach { label ->
+        indexLabels.forEach { label ->
             val textView = TextView(context).apply {
                 text = label
                 TextViewCompat.setTextAppearance(this, R.style.TextSmall)
                 setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 9f)
+                pivotX = 0f
+                pivotY = 0f
                 gravity = android.view.Gravity.CENTER
                 layoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
                     0,
                     1f
                 )
-                alpha = 0.85f
+                alpha = 0.6f
+                tag = label
             }
             appIndex.addView(textView)
         }
 
-        // TouchListener: ACTION_UPで発火（タップして離したときのみ開く - 自然な挙動）
+        // メインのタッチハンドリング
         appIndex.setOnTouchListener { _, event ->
-            when (event.actionMasked) {
-                MotionEvent.ACTION_DOWN -> true  // DOWNを消費してUPも受け取る
-                MotionEvent.ACTION_UP -> {
-                    showAllApps()
-                    true
-                }
-                else -> false
-            }
+            handleIndexTouch(event)
         }
 
         binding.appIndex?.visibility = View.VISIBLE
+    }
+
+    /**
+     * Niagara式 アルファベットインデックスのタッチ処理
+     * - ドラッグ中は波アニメーション＋レターポップアップ
+     * - タップアップでアプリドロワーを開く（選択中の文字へスクロール）
+     */
+    private fun handleIndexTouch(event: MotionEvent): Boolean {
+        val appIndex = binding.appIndex ?: return false
+        if (indexLabels.isEmpty()) return false
+
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                isIndexDragging = true
+                showLetterPopup(getIndexLabelAt(event, appIndex))
+                applyWaveEffect(event, appIndex)
+                return true
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (!isIndexDragging) return false
+                showLetterPopup(getIndexLabelAt(event, appIndex))
+                applyWaveEffect(event, appIndex)
+                return true
+            }
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                if (!isIndexDragging) return false
+                isIndexDragging = false
+                val label = getIndexLabelAt(event, appIndex)
+                hideLetterPopup()
+                resetWaveEffect(appIndex)
+                // 選択された文字でアプリドロワーを開く
+                openAppDrawerWithLetter(label)
+                return true
+            }
+        }
+        return false
+    }
+
+    /**
+     * タッチ位置のアルファベットを取得
+     */
+    private fun getIndexLabelAt(event: MotionEvent, appIndex: LinearLayout): String {
+        val viewHeight = (appIndex.height - appIndex.paddingTop - appIndex.paddingBottom).coerceAtLeast(1)
+        val y = (event.y - appIndex.paddingTop).coerceIn(0f, viewHeight.toFloat())
+        val index = ((y / viewHeight) * indexLabels.size).toInt().coerceIn(0, indexLabels.size - 1)
+        return indexLabels[index]
+    }
+
+    /**
+     * Niagara式 波アニメーション
+     * 指の近くの文字を拡大し、遠くの文字は小さく
+     */
+    private fun applyWaveEffect(event: MotionEvent, appIndex: LinearLayout) {
+        val viewHeight = (appIndex.height - appIndex.paddingTop - appIndex.paddingBottom).coerceAtLeast(1)
+        val touchY = (event.y - appIndex.paddingTop).coerceIn(0f, viewHeight.toFloat())
+        val touchProgress = touchY / viewHeight
+        val centerIndex = (touchProgress * indexLabels.size).toInt().coerceIn(0, indexLabels.size - 1)
+
+        for (i in 0 until appIndex.childCount) {
+            val child = appIndex.getChildAt(i) as? TextView ?: continue
+            val distance = Math.abs(i - centerIndex).toFloat()
+            val scale = when {
+                distance <= 1f -> 1.0f + (1f - distance / 1f) * 1.2f  // 最大2.2x
+                distance <= 3f -> 1.0f + (1f - (distance - 1f) / 2f) * 0.4f  // 1.0〜1.4x
+                else -> 1.0f
+            }.coerceIn(0.8f, 2.5f)
+            val alpha = when {
+                distance <= 1f -> 1.0f
+                distance <= 3f -> 1.0f - (distance - 1f) * 0.2f
+                else -> 0.4f
+            }.coerceIn(0.3f, 1.0f)
+
+            child.scaleX = scale
+            child.scaleY = scale
+            child.alpha = alpha
+        }
+    }
+
+    /**
+     * 波アニメーションをリセット
+     */
+    private fun resetWaveEffect(appIndex: LinearLayout) {
+        for (i in 0 until appIndex.childCount) {
+            val child = appIndex.getChildAt(i) as? TextView ?: continue
+            child.animate()
+                .scaleX(1f)
+                .scaleY(1f)
+                .alpha(0.6f)
+                .setDuration(200)
+                .setInterpolator(AccelerateDecelerateInterpolator())
+                .start()
+        }
+    }
+
+    /**
+     * レターポップアップを表示（Niagara: 中央に大きな文字）
+     */
+    private fun showLetterPopup(letter: String) {
+        val popup = binding.letterPopup ?: return
+        popup.text = letter
+        popup.visibility = View.VISIBLE
+        popup.animate()
+            .alpha(1f)
+            .scaleX(1.1f)
+            .scaleY(1.1f)
+            .setDuration(150)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
+    }
+
+    /**
+     * レターポップアップを非表示（フェードアウト）
+     */
+    private fun hideLetterPopup() {
+        val popup = binding.letterPopup ?: return
+        popup.animate()
+            .alpha(0f)
+            .scaleX(0.8f)
+            .scaleY(0.8f)
+            .setDuration(200)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .withEndAction { popup.visibility = View.GONE }
+            .start()
+    }
+
+    /**
+     * 選択された文字でアプリドロワーを開く
+     */
+    private fun openAppDrawerWithLetter(letter: String) {
+        viewModel.getAppList()
+        try {
+            findNavController().navigate(
+                R.id.action_mainFragment_to_appListFragment,
+                bundleOf(
+                    Constants.Key.FLAG to Constants.FLAG_LAUNCH_APP,
+                    Constants.Key.RENAME to false,
+                    "scrollToLetter" to letter
+                )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     // ── アプリ起動 ──────────────────────────────────────────
@@ -334,25 +479,21 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
         return object : OnSwipeTouchListener(context) {
-            // Niagara式: 右スワイプで全アプリ一覧を開く
             override fun onSwipeRight() {
                 super.onSwipeRight()
                 showAllApps()
             }
 
-            // Niagara式: 左スワイプもアプリ一覧
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
                 showAllApps()
             }
 
-            // 上スワイプもアプリ一覧（従来通り）
             override fun onSwipeUp() {
                 super.onSwipeUp()
                 showAllApps()
             }
 
-            // 下スワイプは通知 or 検索
             override fun onSwipeDown() {
                 super.onSwipeDown()
                 swipeDownAction()
@@ -410,9 +551,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         }
     }
 
-    /**
-     * 特定スロットのアプリを変更するためのアプリ選択画面を開く
-     */
     private fun showAppListForSlot(slot: Int) {
         val flag = when (slot) {
             1 -> Constants.FLAG_SET_HOME_APP_1
@@ -428,8 +566,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         val hasExisting = prefs.getAppName(slot).isNotEmpty()
         showAppList(flag, hasExisting, true)
     }
-
-
 
     // ── 補助機能 ──────────────────────────────────────────────
 
@@ -513,17 +649,14 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun setupBlurView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            // Android 12+ はネイティブWindow Blur（半径最大値）
             val window = requireActivity().window
             window.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
             val attributes = window.attributes
             attributes.blurBehindRadius = 120
             window.attributes = attributes
-            // BlurView非表示（代わりにネイティブブラー＋暗い背景）
-            binding.blurView?.setBackgroundColor(0xCC0D0D14.toInt())
+            binding.blurView?.setBackgroundColor(0x99000000.toInt())
             binding.blurView?.visibility = View.VISIBLE
         } else {
-            // BlurViewライブラリで強めのブラー
             binding.blurView?.visibility = View.VISIBLE
             try {
                 val decorView = requireActivity().window.decorView
@@ -532,9 +665,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 binding.blurView?.setupWith(rootView, RenderScriptBlur(requireContext()))
                     ?.setFrameClearDrawable(windowBackground)
                     ?.setBlurRadius(25f)
-                binding.blurView?.setBackgroundColor(0xCC0D0D14.toInt())
+                binding.blurView?.setBackgroundColor(0x99000000.toInt())
             } catch (e: Exception) {
-                binding.blurView?.setBackgroundColor(0xCC0D0D14.toInt())
+                binding.blurView?.setBackgroundColor(0x99000000.toInt())
             }
         }
     }
@@ -543,7 +676,6 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Android 12+ のネイティブブラーをクリア
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             try {
                 val window = requireActivity().window

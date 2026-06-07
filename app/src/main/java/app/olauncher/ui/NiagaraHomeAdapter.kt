@@ -37,6 +37,13 @@ class NiagaraHomeAdapter(
             notifyDataSetChanged()
         }
 
+    /** パッケージ名 → 通知数 のマップ */
+    var notificationCounts: Map<String, Int> = emptyMap()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = AdapterNiagaraHomeBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -77,6 +84,14 @@ class NiagaraHomeAdapter(
                 binding.appName.alpha = 1f
                 loadAppIcon(item.packageName, item.userString, binding.appIcon)
                 binding.appName.text = item.displayName
+                // 通知バッジ
+                val count = notificationCounts[item.packageName] ?: 0
+                if (count > 0) {
+                    binding.badgeCount.text = if (count > 99) "99+" else count.toString()
+                    binding.badgeCount.visibility = View.VISIBLE
+                } else {
+                    binding.badgeCount.visibility = View.GONE
+                }
                 binding.root.setOnClickListener { onAppClick(index) }
                 binding.root.setOnLongClickListener {
                     onAppLongClick(index)

@@ -163,4 +163,10 @@
     <string name="cheers">Cheers!</string>
     <string name="notification_bar">Notification bar</string>
     <string name="private_space">Private space</string>
+
+    <!-- Font -->
+    <string name="font">Font</string>
+    <string name="font_sans_thin">Noto Sans (Thin)</string>
+    <string name="font_sans">Noto Sans (Regular)</string>
+    <string name="font_serif">Noto Serif</string>
 </resources>

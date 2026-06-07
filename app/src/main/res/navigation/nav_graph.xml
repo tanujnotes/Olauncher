@@ -31,6 +31,10 @@
         android:name="app.olauncher.ui.AppDrawerFragment"
         android:label="app_list_fragment"
         tools:layout="@layout/fragment_app_drawer">
+        <argument
+            android:name="scrollToLetter"
+            android:defaultValue=""
+            app:argType="string" />
         <action
             android:id="@+id/action_appListFragment_to_settingsFragment2"
             app:destination="@id/settingsFragment"
