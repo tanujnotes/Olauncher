@@ -3,28 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
-
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="app.olauncher.ui.HomeFragment"
-        android:label="main_fragment"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_mainFragment_to_appListFragment"
-            app:destination="@id/appListFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/fade_enter"
-            app:exitAnim="@anim/fade_exit"
-            app:popEnterAnim="@anim/fade_enter"
-            app:popExitAnim="@anim/fade_exit" />
-    </fragment>
+    app:startDestination="@id/appListFragment">
 
     <fragment
         android:id="@+id/appListFragment"
@@ -36,7 +15,7 @@
             android:defaultValue=""
             app:argType="string" />
         <action
-            android:id="@+id/action_appListFragment_to_settingsFragment2"
+            android:id="@+id/action_appListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
             app:enterAnim="@anim/fade_enter"
             app:exitAnim="@anim/fade_exit"

@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private var profileReceiver: BroadcastReceiver? = null
 
 //    override fun onBackPressed() {
-//        if (navController.currentDestination?.id != R.id.mainFragment)
+//        if (navController.currentDestination?.id != R.id.appListFragment)
 //            super.onBackPressed()
 //    }
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (navController.currentDestination?.id != R.id.mainFragment) {
+                if (navController.currentDestination?.id != R.id.appListFragment) {
                     // then we might want to finish the activity or disable this callback.
                     if (navController.popBackStack()) {
                         // Successfully popped back
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent?) {
-        val alreadyHome = navController.currentDestination?.id == R.id.mainFragment
+        val alreadyHome = navController.currentDestination?.id == R.id.appListFragment
         backToHomeScreen()
         if (alreadyHome && isResumed && prefs.homeButtonShowRecents)
             viewModel.showRecentApps.call()
@@ -335,8 +335,8 @@ class MainActivity : AppCompatActivity() {
     private fun backToHomeScreen() {
         if (viewModel.isPrivateSpaceToggling) return
         binding.messageLayout.visibility = View.GONE
-        if (navController.currentDestination?.id != R.id.mainFragment)
-            navController.popBackStack(R.id.mainFragment, false)
+        if (navController.currentDestination?.id != R.id.appListFragment)
+            navController.popBackStack(R.id.appListFragment, false)
     }
 
     private fun setPlainWallpaper() {

@@ -169,4 +169,9 @@
     <string name="font_sans_thin">Noto Sans (Thin)</string>
     <string name="font_sans">Noto Sans (Regular)</string>
     <string name="font_serif">Noto Serif</string>
+
+    <!-- Index side -->
+    <string name="index_side">Index side</string>
+    <string name="index_side_right">Right</string>
+    <string name="index_side_left">Left</string>
 </resources>

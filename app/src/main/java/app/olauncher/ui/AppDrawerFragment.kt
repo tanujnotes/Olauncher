@@ -1,25 +1,27 @@
 package app.olauncher.ui
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
+import android.app.admin.DevicePolicyManager
+import android.content.Context
+import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AnimationUtils
-import android.view.animation.DecelerateInterpolator
+import android.view.WindowInsets
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
-import eightbitlab.com.blurview.RenderScriptBlur
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,25 +32,38 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
-import app.olauncher.helper.applyFontFamily
 import app.olauncher.helper.deletePinnedShortcut
+import app.olauncher.helper.expandNotificationDrawer
+import app.olauncher.helper.getUserHandleFromString
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isPrivateSpaceProfile
 import app.olauncher.helper.isSystemApp
+import app.olauncher.helper.openAlarmApp
 import app.olauncher.helper.openAppInfo
+import app.olauncher.helper.openCalendar
 import app.olauncher.helper.openSearch
 import app.olauncher.helper.openUrl
 import app.olauncher.helper.showKeyboard
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
+import app.olauncher.listener.OnSwipeTouchListener
 import java.text.Normalizer
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AppDrawerFragment : Fragment() {
 
     private lateinit var prefs: Prefs
+    private lateinit var viewModel: MainViewModel
+    private lateinit var deviceManager: DevicePolicyManager
     private lateinit var adapter: AppDrawerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
+
+    // お気に入りアダプター
+    private lateinit var niagaraAdapter: NiagaraHomeAdapter
+    private var currentHomeItems: List<NiagaraHomeAdapter.HomeAppItem> = emptyList()
 
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
@@ -60,8 +75,9 @@ class AppDrawerFragment : Fragment() {
     private val indexLabels: MutableList<String> = mutableListOf()
     private val indexPositions: MutableMap<String, Int> = mutableMapOf()
     private var isIndexDragging = false
+    private var lastWaveCenterIndex = -1
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel2: MainViewModel by activityViewModels()
     private var _binding: FragmentAppDrawerBinding? = null
     private val binding get() = _binding!!
 
@@ -77,6 +93,12 @@ class AppDrawerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
+        viewModel = activity?.run {
+            androidx.lifecycle.ViewModelProvider(this)[MainViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
+
+        deviceManager = context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+
         arguments?.let {
             flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
             canRename = it.getBoolean(Constants.Key.RENAME, false)
@@ -84,50 +106,260 @@ class AppDrawerFragment : Fragment() {
         }
 
         initViews()
+        initFavorites()
         initSearch()
         initAdapter()
         initObservers()
         initClickListeners()
         initIndex()
-        // 選択されたフォントを適用
-        (binding.root as? ViewGroup)?.applyFontFamily(prefs.fontFamily)
+        initSwipeTouchListener()
+        applyIndexSide()
+        populateDateTime()
 
-        applyLiquidGlassEffect(true)
+        if (prefs.firstSettingsOpen) {
+            // firstRunTips was removed; no tip shown
+        }
     }
 
-    private fun applyLiquidGlassEffect(enable: Boolean) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val window = requireActivity().window
-            if (enable) {
-                window.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-                val attributes = window.attributes
-                attributes.blurBehindRadius = 80
-                window.attributes = attributes
-                binding.blurView?.visibility = View.GONE
-            } else {
-                window.clearFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-                val attributes = window.attributes
-                attributes.blurBehindRadius = 0
-                window.attributes = attributes
+    override fun onResume() {
+        super.onResume()
+        populateDateTime()
+        populateFavorites()
+        viewModel.isOlauncherDefault()
+        if (prefs.showStatusBar) showStatusBar()
+        else hideStatusBar()
+    }
+
+    // ── 日時表示 ──
+
+    private fun populateDateTime() {
+        binding.dateTimeLayout?.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF
+        binding.clock?.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
+        binding.date?.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
+
+        val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
+        var dateText = dateFormat.format(Date())
+
+        if (!prefs.showStatusBar) {
+            val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
+                .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+            if (battery > 0)
+                dateText = getString(R.string.day_battery, dateText, battery)
+        }
+        binding.date?.text = dateText.replace(".,", ",")
+    }
+
+    // ── お気に入りアプリ ──
+
+    private fun initFavorites() {
+        niagaraAdapter = NiagaraHomeAdapter(
+            context = requireContext(),
+            onAppClick = { index ->
+                val slot = index + 1
+                favoriteAppClicked(slot)
+            },
+            onAppLongClick = { index ->
+                val slot = index + 1
+                showAppListForSlot(slot)
             }
-        } else {
-            if (enable) {
-                binding.blurView?.visibility = View.VISIBLE
-                try {
-                    val decorView = requireActivity().window.decorView
-                    val rootView = decorView.findViewById<ViewGroup>(android.R.id.content)
-                    val windowBackground = decorView.background
-                    binding.blurView?.setupWith(rootView, RenderScriptBlur(requireContext()))
-                        ?.setFrameClearDrawable(windowBackground)
-                        ?.setBlurRadius(20f)
-                } catch (e: Exception) {
-                    binding.blurView?.visibility = View.GONE
-                }
+        )
+        binding.favoriteRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
+        binding.favoriteRecyclerView?.adapter = niagaraAdapter
+        binding.favoriteRecyclerView?.setHasFixedSize(true)
+    }
+
+    private fun populateFavorites() {
+        val homeAppsNum = prefs.homeAppsNum
+        val items = mutableListOf<NiagaraHomeAdapter.HomeAppItem>()
+
+        for (i in 1..homeAppsNum) {
+            val appName = prefs.getAppName(i)
+            val pkg = prefs.getAppPackage(i)
+            if (appName.isBlank() || pkg.isBlank()) {
+                items.add(
+                    NiagaraHomeAdapter.HomeAppItem(
+                        displayName = "",
+                        packageName = "",
+                        userString = "",
+                        activityClassName = null,
+                        slotIndex = i,
+                    )
+                )
             } else {
-                binding.blurView?.visibility = View.GONE
+                items.add(
+                    NiagaraHomeAdapter.HomeAppItem(
+                        displayName = appName,
+                        packageName = pkg,
+                        userString = prefs.getAppUser(i),
+                        activityClassName = prefs.getAppActivityClassName(i),
+                        slotIndex = i,
+                        isShortcut = prefs.getIsShortcut(i),
+                        shortcutId = prefs.getShortcutId(i),
+                    )
+                )
+            }
+        }
+
+        currentHomeItems = items
+        niagaraAdapter.appItems = items
+    }
+
+    private fun favoriteAppClicked(slot: Int) {
+        val appName = prefs.getAppName(slot)
+        val packageName = prefs.getAppPackage(slot)
+        if (appName.isEmpty() || packageName.isEmpty()) {
+            requireContext().showToast(getString(R.string.long_press_to_select_app))
+            return
+        }
+
+        val isShortcut = prefs.getIsShortcut(slot)
+        val shortcutId = prefs.getShortcutId(slot)
+
+        if (isShortcut && !shortcutId.isNullOrEmpty()) {
+            viewModel.selectedApp(
+                app.olauncher.data.AppModel.PinnedShortcut(
+                    shortcutId = shortcutId,
+                    appLabel = appName,
+                    user = getUserHandleFromString(requireContext(), prefs.getAppUser(slot)),
+                    key = null,
+                    appPackage = packageName,
+                    isNew = false,
+                ),
+                Constants.FLAG_LAUNCH_APP
+            )
+        } else {
+            viewModel.selectedApp(
+                app.olauncher.data.AppModel.App(
+                    appLabel = appName,
+                    key = null,
+                    appPackage = packageName,
+                    activityClassName = prefs.getAppActivityClassName(slot),
+                    isNew = false,
+                    user = getUserHandleFromString(requireContext(), prefs.getAppUser(slot))
+                ),
+                Constants.FLAG_LAUNCH_APP
+            )
+        }
+    }
+
+    private fun showAppListForSlot(slot: Int) {
+        val flag = when (slot) {
+            1 -> Constants.FLAG_SET_HOME_APP_1
+            2 -> Constants.FLAG_SET_HOME_APP_2
+            3 -> Constants.FLAG_SET_HOME_APP_3
+            4 -> Constants.FLAG_SET_HOME_APP_4
+            5 -> Constants.FLAG_SET_HOME_APP_5
+            6 -> Constants.FLAG_SET_HOME_APP_6
+            7 -> Constants.FLAG_SET_HOME_APP_7
+            8 -> Constants.FLAG_SET_HOME_APP_8
+            else -> return
+        }
+        val hasExisting = prefs.getAppName(slot).isNotEmpty()
+        showAppList(flag, hasExisting, true)
+    }
+
+    // ── ジェスチャー ──
+
+    private fun initSwipeTouchListener() {
+        binding.scrollRoot?.setOnTouchListener(getSwipeGestureListener(requireContext()))
+    }
+
+    private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
+        return object : OnSwipeTouchListener(context) {
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                openSettings()
+            }
+
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                openSettings()
+            }
+
+            override fun onSwipeUp() {
+                super.onSwipeUp()
+                // 一番下までスクロール
+            }
+
+            override fun onSwipeDown() {
+                super.onSwipeDown()
+                swipeDownAction()
+            }
+
+            override fun onLongClick() {
+                super.onLongClick()
+                openSettings()
+            }
+
+            override fun onDoubleClick() {
+                super.onDoubleClick()
+                if (!prefs.lockModeOn) return
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+                    lockPhone()
+                else
+                    lockPhone()
+            }
+
+            override fun onClick() {
+                super.onClick()
+                viewModel.checkForMessages.call()
             }
         }
     }
+
+    private fun openSettings() {
+        try {
+            findNavController().navigate(R.id.action_appListFragment_to_settingsFragment)
+            viewModel.firstOpen(false)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun swipeDownAction() {
+        when (prefs.swipeDownAction) {
+            Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
+            else -> expandNotificationDrawer(requireContext())
+        }
+    }
+
+    private fun lockPhone() {
+        try {
+            deviceManager.lockNow()
+        } catch (e: SecurityException) {
+            requireContext().showToast(getString(R.string.please_turn_on_double_tap_to_unlock), Toast.LENGTH_LONG)
+            findNavController().navigate(R.id.action_appListFragment_to_settingsFragment)
+        } catch (e: Exception) {
+            requireContext().showToast(getString(R.string.launcher_failed_to_lock_device), Toast.LENGTH_LONG)
+            prefs.lockModeOn = false
+        }
+    }
+
+    // ── インデックス左右切替 ──
+
+    private fun applyIndexSide() {
+        val indexSide = prefs.indexSide
+        val appIndex = binding.appIndex ?: return
+        val recyclerView = binding.recyclerView
+
+        val lp = appIndex.layoutParams as? FrameLayout.LayoutParams ?: return
+        lp.gravity = if (indexSide == "left") {
+            android.view.Gravity.START or android.view.Gravity.CENTER_VERTICAL
+        } else {
+            android.view.Gravity.END or android.view.Gravity.CENTER_VERTICAL
+        }
+        lp.marginStart = 0
+        lp.marginEnd = 0
+        appIndex.layoutParams = lp
+
+        if (indexSide == "left") {
+            recyclerView.setPaddingRelative(24, 0, 0, 0)
+        } else {
+            recyclerView.setPaddingRelative(0, 0, 24, 0)
+        }
+    }
+
+    // ── 既存のドロワー機能 ──
 
     private fun initViews() {
         if (flag == Constants.FLAG_HIDDEN_APPS)
@@ -176,7 +408,7 @@ class AppDrawerFragment : Fragment() {
             appClickListener = { appModel ->
                 viewModel.selectedApp(appModel, flag)
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
-                    findNavController().popBackStack(R.id.mainFragment, false)
+                    findNavController().popBackStack(R.id.appListFragment, false)
                 else
                     findNavController().popBackStack()
             },
@@ -186,7 +418,7 @@ class AppDrawerFragment : Fragment() {
                     it.user,
                     it.appPackage
                 )
-                findNavController().popBackStack(R.id.mainFragment, false)
+                findNavController().popBackStack(R.id.appListFragment, false)
             },
             appDeleteListener = { appModel ->
                 when (appModel) {
@@ -237,7 +469,7 @@ class AppDrawerFragment : Fragment() {
                     binding.search.hideKeyboard()
                     prefs.firstHide = false
                     viewModel.showDialog.postValue(Constants.Dialog.HIDDEN)
-                    findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
+                    findNavController().navigate(R.id.action_appListFragment_to_settingsFragment)
                 }
                 viewModel.getAppList()
                 viewModel.getHiddenApps()
@@ -256,7 +488,7 @@ class AppDrawerFragment : Fragment() {
             },
             privateSpaceSettingsListener = {
                 viewModel.openPrivateSpaceSettings()
-                findNavController().popBackStack(R.id.mainFragment, false)
+                findNavController().popBackStack(R.id.appListFragment, false)
             }
         )
 
@@ -278,13 +510,17 @@ class AppDrawerFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
         binding.recyclerView.itemAnimator = null
-        if (requireContext().isEinkDisplay().not())
-            binding.recyclerView.layoutAnimation =
-                AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_cascade)
+        binding.recyclerView.setHasFixedSize(true)
     }
 
     private fun initObservers() {
         viewModel.firstOpen.observe(viewLifecycleOwner) {
+        }
+        viewModel.refreshHome.observe(viewLifecycleOwner) {
+            populateFavorites()
+        }
+        viewModel.toggleDateTime.observe(viewLifecycleOwner) {
+            populateDateTime()
         }
         if (flag == Constants.FLAG_HIDDEN_APPS) {
             viewModel.hiddenApps.observe(viewLifecycleOwner) {
@@ -313,6 +549,17 @@ class AppDrawerFragment : Fragment() {
                 }
             }
         }
+        viewModel.isOlauncherDefault.observe(viewLifecycleOwner, Observer {
+            if (it != true) {
+                if (prefs.dailyWallpaper && prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES) {
+                    prefs.dailyWallpaper = false
+                    viewModel.cancelWallpaperWorker()
+                }
+                prefs.homeBottomAlignment = false
+            }
+        })
+        viewModel.showRecentApps.observe(viewLifecycleOwner) {
+        }
     }
 
     private fun updateCombinedAppList() {
@@ -330,7 +577,6 @@ class AppDrawerFragment : Fragment() {
         updateAppIndex(combined)
         adapter.filter.filter(binding.search.query)
 
-        // Niagar風: scrollToLetterが指定されていたら該当の位置へスクロール
         if (scrollToLetter.isNotBlank()) {
             binding.recyclerView.post {
                 scrollToPositionForLetter(scrollToLetter)
@@ -359,6 +605,13 @@ class AppDrawerFragment : Fragment() {
             }
             findNavController().popBackStack()
         }
+
+        binding.date?.setOnClickListener {
+            openCalendarApp()
+        }
+        binding.clock?.setOnClickListener {
+            openClockApp()
+        }
     }
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
@@ -385,7 +638,7 @@ class AppDrawerFragment : Fragment() {
         }
     }
 
-    // ── Niagara風 アルファベットインデックス（波アニメーション） ──
+    // ── アルファベットインデックス ──
 
     private fun initIndex() {
         val appIndex = binding.appIndex ?: return
@@ -431,45 +684,49 @@ class AppDrawerFragment : Fragment() {
         return indexLabels[index]
     }
 
-    /**
-     * Niagara式 波アニメーション: 指の近くの文字を拡大
-     */
     private fun applyWaveEffect(event: MotionEvent, appIndex: LinearLayout) {
         val viewHeight = (appIndex.height - appIndex.paddingTop - appIndex.paddingBottom).coerceAtLeast(1)
         val touchY = (event.y - appIndex.paddingTop).coerceIn(0f, viewHeight.toFloat())
-        val touchProgress = touchY / viewHeight
-        val centerIndex = (touchProgress * indexLabels.size).toInt().coerceIn(0, indexLabels.size - 1)
+        val centerIndex = ((touchY / viewHeight) * indexLabels.size).toInt().coerceIn(0, indexLabels.size - 1)
+        if (centerIndex == lastWaveCenterIndex) return
+        lastWaveCenterIndex = centerIndex
 
-        for (i in 0 until appIndex.childCount) {
+        val count = appIndex.childCount.coerceAtMost(indexLabels.size)
+        for (i in 0 until count) {
             val child = appIndex.getChildAt(i) as? TextView ?: continue
-            val distance = Math.abs(i - centerIndex).toFloat()
+            val dist = Math.abs(i - centerIndex)
             val scale = when {
-                distance <= 1f -> 1.0f + (1f - distance / 1f) * 1.2f
-                distance <= 3f -> 1.0f + (1f - (distance - 1f) / 2f) * 0.4f
+                dist == 0 -> 2.2f
+                dist == 1 -> 1.6f
+                dist == 2 -> 1.3f
+                dist == 3 -> 1.1f
                 else -> 1.0f
-            }.coerceIn(0.8f, 2.5f)
+            }
             val alpha = when {
-                distance <= 1f -> 1.0f
-                distance <= 3f -> 1.0f - (distance - 1f) * 0.2f
-                else -> 0.4f
-            }.coerceIn(0.3f, 1.0f)
-
-            child.scaleX = scale
-            child.scaleY = scale
-            child.alpha = alpha
+                dist == 0 -> 1.0f
+                dist == 1 -> 0.85f
+                dist == 2 -> 0.65f
+                dist == 3 -> 0.50f
+                else -> 0.40f
+            }
+            if (child.scaleX != scale) {
+                child.scaleX = scale
+                child.scaleY = scale
+            }
+            if (child.alpha != alpha) {
+                child.alpha = alpha
+            }
         }
     }
 
     private fun resetWaveEffect(appIndex: LinearLayout) {
+        lastWaveCenterIndex = -1
         for (i in 0 until appIndex.childCount) {
             val child = appIndex.getChildAt(i) as? TextView ?: continue
-            child.animate()
-                .scaleX(1f)
-                .scaleY(1f)
-                .alpha(0.6f)
-                .setDuration(200)
-                .setInterpolator(AccelerateDecelerateInterpolator())
-                .start()
+            child.animate().cancel()
+            child.scaleX = 1f
+            child.scaleY = 1f
+            child.alpha = 0.6f
         }
     }
 
@@ -484,12 +741,8 @@ class AppDrawerFragment : Fragment() {
         }
     }
 
-    /**
-     * scrollToLetterで指定された文字の位置へスクロール
-     */
     private fun scrollToPositionForLetter(letter: String) {
         val target = letter.uppercase()
-        // 完全一致を探す
         var bestPosition = -1
         for ((label, position) in indexPositions) {
             if (label.equals(target, ignoreCase = true)) {
@@ -497,7 +750,6 @@ class AppDrawerFragment : Fragment() {
                 break
             }
         }
-        // 前方一致で探す
         if (bestPosition < 0) {
             for ((label, position) in indexPositions) {
                 if (label.startsWith(target.firstOrNull()?.toString() ?: "", ignoreCase = true)) {
@@ -521,8 +773,7 @@ class AppDrawerFragment : Fragment() {
             .alpha(1f)
             .scaleX(1.1f)
             .scaleY(1.1f)
-            .setDuration(150)
-            .setInterpolator(DecelerateInterpolator())
+            .setDuration(80)
             .start()
     }
 
@@ -532,8 +783,7 @@ class AppDrawerFragment : Fragment() {
             .alpha(0f)
             .scaleX(0.8f)
             .scaleY(0.8f)
-            .setDuration(200)
-            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setDuration(100)
             .withEndAction { popup.visibility = View.GONE }
             .start()
     }
@@ -583,7 +833,6 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun updateIndexVisibility(query: CharSequence?) {
-        // Niagara: インデックスは常に表示（検索中も消さない）
         binding.appIndex?.isVisible = indexLabels.isNotEmpty()
     }
 
@@ -605,10 +854,81 @@ class AppDrawerFragment : Fragment() {
             viewModel.checkForMessages.call()
     }
 
+    // ── 時計・カレンダー ──
+
+    private fun openClockApp() {
+        if (prefs.clockAppPackage.isBlank())
+            openAlarmApp(requireContext())
+        else
+            viewModel.selectedApp(
+                app.olauncher.data.AppModel.App(
+                    appLabel = "Clock",
+                    key = null,
+                    appPackage = prefs.clockAppPackage,
+                    activityClassName = prefs.clockAppClassName,
+                    isNew = false,
+                    user = getUserHandleFromString(requireContext(), prefs.clockAppUser)
+                ),
+                Constants.FLAG_LAUNCH_APP
+            )
+    }
+
+    private fun openCalendarApp() {
+        if (prefs.calendarAppPackage.isBlank())
+            openCalendar(requireContext())
+        else
+            viewModel.selectedApp(
+                app.olauncher.data.AppModel.App(
+                    appLabel = "Calendar",
+                    key = null,
+                    appPackage = prefs.calendarAppPackage,
+                    activityClassName = prefs.calendarAppClassName,
+                    isNew = false,
+                    user = getUserHandleFromString(requireContext(), prefs.calendarAppUser)
+                ),
+                Constants.FLAG_LAUNCH_APP
+            )
+    }
+
+    // ── ステータスバー ──
+
+    private fun showStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
+        else
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            }
+    }
+
+    private fun hideStatusBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+        else
+            requireActivity().window.decorView.apply {
+                systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN
+            }
+    }
+
+    // ── その他 ──
+
+    private fun showAppList(flag: Int, rename: Boolean = false, includeHiddenApps: Boolean = false) {
+        viewModel.getAppList(includeHiddenApps)
+        try {
+            findNavController().navigate(
+                R.id.action_appListFragment_to_settingsFragment,
+                bundleOf(
+                    Constants.Key.FLAG to flag,
+                    Constants.Key.RENAME to rename
+                )
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     override fun onStart() {
         super.onStart()
-        // Niagara: キーボードは自動表示しない。検索はあくまでオプション
-        // アルファベットインデックスがメインの操作手段
     }
 
     override fun onStop() {
@@ -618,7 +938,6 @@ class AppDrawerFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        applyLiquidGlassEffect(false)
         _binding = null
     }
 }

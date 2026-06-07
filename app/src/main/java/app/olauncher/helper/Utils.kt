@@ -653,7 +653,10 @@ fun ViewGroup.applyFontFamily(fontFamily: String) {
         val child = getChildAt(i)
         when (child) {
             is TextView -> {
-                child.typeface = android.graphics.Typeface.create(fontFamily, child.typeface?.style ?: android.graphics.Typeface.NORMAL)
+                // null安全: Typeface.create() が null を返した場合はスキップ
+                val typeface = android.graphics.Typeface.create(fontFamily, child.typeface?.style ?: android.graphics.Typeface.NORMAL)
+                if (typeface != null)
+                    child.typeface = typeface
             }
             is ViewGroup -> {
                 child.applyFontFamily(fontFamily)

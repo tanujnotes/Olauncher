@@ -13,9 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
-import android.view.WindowManager
 import android.widget.Toast
-import eightbitlab.com.blurview.RenderScriptBlur
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -29,7 +27,6 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentSettingsBinding
 import app.olauncher.helper.animateAlpha
-import app.olauncher.helper.applyFontFamily
 import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.isAccessServiceEnabled
@@ -89,51 +86,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateSwipeDownAction()
         populateActionHints()
         populateFontText()
+        populateIndexSideText()
         initClickListeners()
         initObservers()
 
         if (showPentastic)
             binding.footer.text = getText(R.string.new_app_minimal_todo_lists)
 
-        // 選択されたフォントを適用
-        (binding.root as? ViewGroup)?.applyFontFamily(prefs.fontFamily)
-
-        // Apply Liquid Glass (Native Window Blur) for Android 12+
-        applyLiquidGlassEffect(true)
-    }
-
-    private fun applyLiquidGlassEffect(enable: Boolean) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val window = requireActivity().window
-            if (enable) {
-                window.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-                val attributes = window.attributes
-                attributes.blurBehindRadius = 80
-                window.attributes = attributes
-                binding.blurView?.visibility = View.GONE
-            } else {
-                window.clearFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-                val attributes = window.attributes
-                attributes.blurBehindRadius = 0
-                window.attributes = attributes
-            }
-        } else {
-            if (enable) {
-                binding.blurView?.visibility = View.VISIBLE
-                try {
-                    val decorView = requireActivity().window.decorView
-                    val rootView = decorView.findViewById<ViewGroup>(android.R.id.content)
-                    val windowBackground = decorView.background
-                    binding.blurView?.setupWith(rootView, RenderScriptBlur(requireContext()))
-                        ?.setFrameClearDrawable(windowBackground)
-                        ?.setBlurRadius(20f)
-                } catch (e: Exception) {
-                    binding.blurView?.visibility = View.GONE
-                }
-            } else {
-                binding.blurView?.visibility = View.GONE
-            }
-        }
+        // setupOverlayとフォント適用は廃止（速度優先）
     }
 
     override fun onClick(view: View) {
@@ -181,6 +141,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.fontSansThin -> updateFont("sans-serif-thin")
             R.id.fontSans -> updateFont("sans-serif")
             R.id.fontSerif -> updateFont("serif")
+            R.id.indexSideText -> binding.indexSideSelectLayout.visibility = View.VISIBLE
+            R.id.indexSideLeft -> updateIndexSide("left")
+            R.id.indexSideRight -> updateIndexSide("right")
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
@@ -287,6 +250,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.fontSansThin.setOnClickListener(this)
         binding.fontSans.setOnClickListener(this)
         binding.fontSerif.setOnClickListener(this)
+        binding.indexSideText.setOnClickListener(this)
+        binding.indexSideLeft.setOnClickListener(this)
+        binding.indexSideRight.setOnClickListener(this)
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
@@ -726,6 +692,20 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         requireActivity().recreate()
     }
 
+    private fun populateIndexSideText() {
+        binding.indexSideText.text = when (prefs.indexSide) {
+            "left" -> getString(R.string.index_side_left)
+            else -> getString(R.string.index_side_right)
+        }
+    }
+
+    private fun updateIndexSide(side: String) {
+        if (prefs.indexSide == side) return
+        prefs.indexSide = side
+        populateIndexSideText()
+        requireActivity().recreate()
+    }
+
     private fun populateActionHints() {
         if (prefs.aboutClicked.not())
             binding.aboutOlauncher.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_info, 0)
@@ -743,8 +723,6 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     override fun onDestroyView() {
         super.onDestroyView()
-        // Remove Liquid Glass effect when leaving settings
-        applyLiquidGlassEffect(false)
         _binding = null
     }
 

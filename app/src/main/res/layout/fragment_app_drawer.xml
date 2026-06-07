@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  QALAUNCHER 0.0.0 — アプリドロワーレイアウト
-  デザインコンセプト:
-    - 半透明の背景でフロスト（すりガラス）感
-    - 検索バーは極細フォントでスマートに
-    - アプリ一覧はフェーディングエッジで滑らかに
+  QALAUNCHER — 統合ホーム画面レイアウト
+  アプリ一覧がそのままホーム画面になる
+  時計・日付・お気に入り → 検索 → 全アプリ一覧
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,132 +11,149 @@
     android:layout_height="match_parent"
     android:background="?attr/primaryShadeColor">
 
-    <!-- BlurView for Android 11 and below (Native RenderScript Blur) -->
-    <eightbitlab.com.blurview.BlurView
+    <View
         android:id="@+id/blurView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        android:orientation="vertical">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
-        <!-- 上部スペーサー（最小限） -->
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="0.04" />
-
-        <!--
-          Niagara風: 検索バーは控えめに。アルファベットインデックスが主役
-          キーボードは自動表示しない、ヒントも極小
-        -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:gravity="start"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:imeOptions="actionSearch"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="0dp"
-                android:textCursorDrawable="@null"
-                app:closeIcon="@null"
-                app:iconifiedByDefault="false"
-                app:queryBackground="@null"
-                app:queryHint="Search apps…"
-                app:searchIcon="@null"
-                app:theme="@style/AppSearchText" />
-
-            <TextView
-                android:id="@+id/appRename"
-                style="@style/TextSmall"
+            <!-- === 日時エリア === -->
+            <LinearLayout
+                android:id="@+id/dateTimeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="20dp"
-                android:paddingVertical="@dimen/app_padding_vertical"
-                android:text="@string/rename"
-                android:textAllCaps="true"
-                android:letterSpacing="0.12"
-                android:visibility="gone" />
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="48dp"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:paddingVertical="4dp"
+                android:visibility="visible"
+                tools:visibility="visible">
+
+                <TextClock
+                    android:id="@+id/clock"
+                    style="@style/TextDefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:format12Hour="h:mm"
+                    android:format24Hour="H:mm"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/time_size"
+                    tools:text="12:34" />
+
+                <TextView
+                    android:id="@+id/date"
+                    style="@style/TextDefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.7"
+                    android:format24Hour="EEE, dd MMM"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/date_size"
+                    tools:text="Thu, 6 Jun" />
+            </LinearLayout>
+
+            <!-- === お気に入りアプリ === -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favoriteRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:clipToPadding="false"
+                android:paddingStart="20dp"
+                android:paddingEnd="48dp"
+                android:visibility="visible" />
+
+            <!-- === 検索バー === -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:imeOptions="actionSearch"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="0dp"
+                    android:textCursorDrawable="@null"
+                    app:closeIcon="@null"
+                    app:iconifiedByDefault="false"
+                    app:queryBackground="@null"
+                    app:queryHint="Search apps…"
+                    app:searchIcon="@null"
+                    app:theme="@style/AppSearchText" />
+
+                <TextView
+                    android:id="@+id/appRename"
+                    style="@style/TextSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="20dp"
+                    android:paddingVertical="@dimen/app_padding_vertical"
+                    android:text="@string/rename"
+                    android:textAllCaps="true"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <!-- === 全アプリ一覧 + インデックス === -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingEnd="20dp" />
+
+                <LinearLayout
+                    android:id="@+id/appIndex"
+                    android:layout_width="24dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_margin="0dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingVertical="16dp"
+                    android:visibility="gone" />
+            </FrameLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-        <!-- 検索エリアとリストの間のスペース -->
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.04" />
-
-        <!--
-          アプリリストとアルファベットインデックスを重ねる FrameLayout
-        -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="16dp">
-
-            <!--
-              アプリ一覧の RecyclerView
-              requiresFadingEdge="vertical" で上下がフェードアウトして滑らかな見た目に
-              paddingEnd はアルファベットインデックス分の余白
-            -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:fadingEdgeLength="32dp"
-                android:paddingEnd="20dp"
-                android:requiresFadingEdge="vertical" />
-
-            <!--
-              アルファベットインデックス列: 右端に縦に A-Z を表示
-              AppDrawerFragment.kt の populateCharacterIndicator() で動的に追加される
-              通常は gone で検索中に表示される
-            -->
-            <LinearLayout
-                android:id="@+id/appIndex"
-                android:layout_width="24dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="4dp"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="16dp"
-                android:visibility="gone" />
-
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <!-- レターポップアップ（Niagara: ドラッグ時に現在の文字を大きく表示） -->
+    <!-- レターポップアップ -->
     <TextView
         android:id="@+id/letterPopup"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="center"
         android:alpha="0.0"
-        android:background="@drawable/letter_popup_bg"
-        android:elevation="12dp"
-        android:fontFamily="sans-serif-thin"
         android:gravity="center"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:visibility="gone"
         tools:text="A" />
 
