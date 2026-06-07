@@ -25,50 +25,42 @@
         android:animateLayoutChanges="true"
         android:orientation="vertical">
 
-        <!-- 上部のスペース: 画面上部との余白 -->
+        <!-- 上部スペーサー（最小限） -->
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_weight="0.08" />
+            android:layout_marginTop="8dp"
+            android:layout_weight="0.04" />
 
         <!--
-          検索エリア: SearchView + RENAMEボタン
-          水平配置で左に検索バー、右にRENAMEボタン (rename モード時のみ表示)
+          Niagara風: 検索バーは控えめに。アルファベットインデックスが主役
+          キーボードは自動表示しない、ヒントも極小
         -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
+            android:gravity="start"
             android:orientation="horizontal">
 
-            <!--
-              検索バー本体
-              AppSearchText スタイルで QALAUNCHER のフォントに合わせる
-              queryBackground="@null" で枠線なし, searchIcon="@null" でアイコンなし
-            -->
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:layout_weight="1"
-                android:gravity="end"
+                android:gravity="start"
                 android:imeOptions="actionSearch"
-                android:paddingHorizontal="4dp"
+                android:paddingHorizontal="24dp"
                 android:paddingVertical="0dp"
                 android:textCursorDrawable="@null"
                 app:closeIcon="@null"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@null"
-                app:queryHint=" ___"
+                app:queryHint="Search apps…"
                 app:searchIcon="@null"
                 app:theme="@style/AppSearchText" />
 
-            <!--
-              アプリ名変更ボタン: rename モード時のみ表示 (visibility="gone" がデフォルト)
-              AppDrawerFragment.kt で制御される
-            -->
             <TextView
                 android:id="@+id/appRename"
                 style="@style/TextSmall"

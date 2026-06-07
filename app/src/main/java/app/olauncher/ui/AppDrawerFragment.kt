@@ -379,9 +379,6 @@ class AppDrawerFragment : Fragment() {
                     RecyclerView.SCROLL_STATE_IDLE -> {
                         if (!recyclerView.canScrollVertically(1))
                             binding.search.hideKeyboard()
-                        else if (!recyclerView.canScrollVertically(-1))
-                            if (!onTop && isRemoving.not())
-                                binding.search.showKeyboard(prefs.autoShowKeyboard)
                     }
                 }
             }
@@ -586,7 +583,8 @@ class AppDrawerFragment : Fragment() {
     }
 
     private fun updateIndexVisibility(query: CharSequence?) {
-        binding.appIndex?.isVisible = query.isNullOrBlank() && indexLabels.isNotEmpty()
+        // Niagara: インデックスは常に表示（検索中も消さない）
+        binding.appIndex?.isVisible = indexLabels.isNotEmpty()
     }
 
     private fun getIndexKey(label: String): String {
@@ -609,7 +607,8 @@ class AppDrawerFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        binding.search.showKeyboard(prefs.autoShowKeyboard)
+        // Niagara: キーボードは自動表示しない。検索はあくまでオプション
+        // アルファベットインデックスがメインの操作手段
     }
 
     override fun onStop() {
