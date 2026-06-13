@@ -325,11 +325,11 @@ fun getChangedAppTheme(context: Context, currentAppTheme: Int): Int {
 
 fun openAppInfo(context: Context, userHandle: UserHandle, packageName: String) {
     val launcher = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-    val intent: Intent? = context.packageManager.getLaunchIntentForPackage(packageName)
-
-    intent?.let {
-        launcher.startAppDetailsActivity(intent.component, userHandle, null, null)
-    } ?: context.showToast(context.getString(R.string.unable_to_open_app))
+    val component = launcher.getActivityList(packageName, userHandle).firstOrNull()?.componentName
+    if (component != null)
+        launcher.startAppDetailsActivity(component, userHandle, null, null)
+    else
+        context.showToast(context.getString(R.string.unable_to_open_app_info))
 }
 
 suspend fun getBitmapFromURL(src: String?): Bitmap? {

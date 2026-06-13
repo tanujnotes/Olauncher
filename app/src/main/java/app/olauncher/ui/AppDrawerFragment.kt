@@ -2,6 +2,7 @@ package app.olauncher.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Process
 import android.text.Spannable
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,6 @@ import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
-import app.olauncher.helper.isPrivateSpaceProfile
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.openSearch
@@ -160,7 +160,7 @@ class AppDrawerFragment : Fragment() {
                         }
 
                     is AppModel.App -> {
-                        if (isPrivateSpaceProfile(requireContext(), appModel.user)) {
+                        if (appModel.user != Process.myUserHandle()) {
                             openAppInfo(requireContext(), appModel.user, appModel.appPackage)
                         } else if (requireContext().isSystemApp(appModel.appPackage, appModel.user)) {
                             requireContext().showToast(getString(R.string.system_app_cannot_delete))
