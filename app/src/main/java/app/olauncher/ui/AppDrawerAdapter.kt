@@ -61,6 +61,7 @@ class AppDrawerAdapter(
 
     private var autoLaunch = true
     private var isBangSearch = false
+    var allowAutoLaunch = true // set false by the fragment while an IME is composing (e.g. pinyin)
     private val appFilter = createAppFilter()
     private val myUserHandle = android.os.Process.myUserHandle()
 
@@ -130,7 +131,7 @@ class AppDrawerAdapter(
         return object : Filter() {
             override fun performFiltering(charSearch: CharSequence?): FilterResults {
                 isBangSearch = charSearch?.startsWith("!") ?: false
-                autoLaunch = charSearch?.startsWith(" ")?.not() ?: true
+                autoLaunch = allowAutoLaunch && (charSearch?.startsWith(" ")?.not() ?: true)
 
                 val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
                 else appsList.filter { app ->

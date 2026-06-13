@@ -2,10 +2,12 @@ package app.olauncher.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.text.Spannable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.BaseInputConnection
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -100,6 +102,7 @@ class AppDrawerFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 try {
+                    adapter.allowAutoLaunch = !isSearchComposing()
                     adapter.filter.filter(newText)
                     binding.appRename.visibility =
                         if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
@@ -110,6 +113,19 @@ class AppDrawerFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    // While an IME is composing (e.g. typing pinyin before selecting a Chinese character),
+    // the search field holds a composing region. Don't auto-launch a single match during
+    // composition — the typed letters are not a final query (issue #629).
+    private fun isSearchComposing(): Boolean {
+        val text = binding.search.findViewById<TextView>(R.id.search_src_text)?.text
+        if (text is Spannable) {
+            val start = BaseInputConnection.getComposingSpanStart(text)
+            val end = BaseInputConnection.getComposingSpanEnd(text)
+            return start in 0 until end
+        }
+        return false
     }
 
     private fun initAdapter() {
