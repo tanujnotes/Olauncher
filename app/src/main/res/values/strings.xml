@@ -20,6 +20,9 @@
     <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
     <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
 
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="set_as_default_launcher_u"><u>Set as default launcher</u></string>
@@ -99,8 +102,6 @@
     <string name="close">Close</string>
     <string name="not_now">Not now</string>
     <string name="public_roadmap">Olauncher public roadmap</string>
-    <string name="instagram">Instagram</string>
-    <string name="twitter">Developer</string>
     <string name="roadmap">Roadmap</string>
     <string name="date">Date</string>
     <string name="date_only">Date only</string>

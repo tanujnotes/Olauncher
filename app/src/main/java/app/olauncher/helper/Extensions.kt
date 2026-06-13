@@ -14,6 +14,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.UserHandle
 import android.provider.Settings
+import android.telephony.TelephonyManager
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -22,6 +23,7 @@ import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.Constants
 import java.util.Calendar
+import java.util.Locale
 
 fun View.hideKeyboard() {
     this.clearFocus()
@@ -120,6 +122,15 @@ fun Context.isPackageInstalled(packageName: String, userHandle: UserHandle = and
     val launcher = getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
     val activityInfo = launcher.getActivityList(packageName, userHandle)
     return activityInfo.isNotEmpty()
+}
+
+fun Context.isCountryIn(): Boolean {
+    val country = runCatching {
+        val telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as? TelephonyManager
+        telephonyManager?.simCountryIso?.takeIf { it.isNotBlank() }
+            ?: telephonyManager?.networkCountryIso?.takeIf { it.isNotBlank() }
+    }.getOrNull() ?: Locale.getDefault().country
+    return country.equals("IN", ignoreCase = true)
 }
 
 @RequiresApi(Build.VERSION_CODES.Q)

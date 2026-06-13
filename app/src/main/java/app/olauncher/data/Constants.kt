@@ -103,6 +103,7 @@ object Constants {
     const val URL_OLAUNCHER_PRO = "https://play.google.com/store/apps/details?id=app.prolauncher"
     const val URL_PLAY_STORE_DEV = "https://play.google.com/store/apps/dev?id=7198807840081074933"
     const val URL_TWITTER_TANUJ = "https://x.com/tanujnotes"
+    const val URL_INSTA_TANUJ = "https://instagram.com/tanuj_notes"
     const val URL_WALLPAPERS = "https://gist.githubusercontent.com/tanujnotes/85e2d0343ace71e76615ac346fbff82b/raw"
     const val URL_NTS = "https://play.google.com/store/apps/details?id=com.makenotetoself"
     const val URL_PENTASTIC = "https://play.google.com/store/apps/details?id=app.pentastic"
