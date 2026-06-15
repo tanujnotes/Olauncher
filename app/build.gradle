@@ -34,6 +34,7 @@ android {
             debuggable true
             minifyEnabled false
             applicationIdSuffix ".debug"
+            resValue "string", "app_name", "Olauncher (Debug)"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

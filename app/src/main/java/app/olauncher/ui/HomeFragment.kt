@@ -207,6 +207,9 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.showRecentApps.observe(viewLifecycleOwner) {
             binding.recents.performClick()
         }
+        viewModel.showAppDrawer.observe(viewLifecycleOwner) {
+            showAppList(Constants.FLAG_LAUNCH_APP)
+        }
     }
 
     private fun initSwipeTouchListener() {

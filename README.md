@@ -19,6 +19,30 @@ AF stands for Ad-Free
 
 ##
 
+### Accessibility Intents
+
+Olauncher exposes two intents that allow external apps (such as physical key mappers or accessibility services) to trigger launcher actions without touch input.
+
+| Intent Action | Description |
+|---|---|
+| `app.olauncher.ACTION_OPEN_APP_DRAWER` | Opens the app drawer from the home screen |
+| `app.olauncher.ACTION_DISMISS_KEYGUARD` | Shows the PIN/pattern/password entry to unlock the device (Android 8.0+) |
+
+**ADB example:**
+```bash
+adb shell am start -a app.olauncher.ACTION_OPEN_APP_DRAWER -n app.olauncher/.MainActivity
+adb shell am start -a app.olauncher.ACTION_DISMISS_KEYGUARD -n app.olauncher/.MainActivity
+```
+
+**Android example (Kotlin):**
+```kotlin
+val intent = Intent("app.olauncher.ACTION_OPEN_APP_DRAWER")
+intent.setPackage("app.olauncher")
+startActivity(intent)
+```
+
+##
+
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 Dev: [X/twitter](https://x.com/tanujnotes) • [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
