@@ -19,6 +19,7 @@ class Prefs(context: Context) {
     private val AUTO_SHOW_KEYBOARD = "AUTO_SHOW_KEYBOARD"
     private val KEYBOARD_MESSAGE = "KEYBOARD_MESSAGE"
     private val DAILY_WALLPAPER = "DAILY_WALLPAPER"
+    private val DAILY_WALLPAPER_TARGET = "DAILY_WALLPAPER_TARGET"
     private val DAILY_WALLPAPER_URL = "DAILY_WALLPAPER_URL"
     private val HOME_ALIGNMENT = "HOME_ALIGNMENT"
     private val HOME_BOTTOM_ALIGNMENT = "HOME_BOTTOM_ALIGNMENT"
@@ -151,9 +152,34 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(KEYBOARD_MESSAGE, false)
         set(value) = prefs.edit { putBoolean(KEYBOARD_MESSAGE, value).apply() }
 
+    var dailyWallpaperTarget: Int
+        get() {
+            if (prefs.contains(DAILY_WALLPAPER_TARGET)) {
+                return prefs.getInt(DAILY_WALLPAPER_TARGET, Constants.WallpaperTarget.NONE)
+            }
+
+            if (prefs.contains(DAILY_WALLPAPER)) {
+                val legacyEnabled = prefs.getBoolean(DAILY_WALLPAPER, false)
+                val migratedTarget = if (legacyEnabled) Constants.WallpaperTarget.BOTH else Constants.WallpaperTarget.NONE
+                prefs.edit {
+                    putInt(DAILY_WALLPAPER_TARGET, migratedTarget)
+                    remove(DAILY_WALLPAPER)
+                }
+                return migratedTarget
+            }
+
+            return Constants.WallpaperTarget.NONE
+        }
+        set(value) = prefs.edit {
+            putInt(DAILY_WALLPAPER_TARGET, value)
+            remove(DAILY_WALLPAPER)
+        }
+
     var dailyWallpaper: Boolean
-        get() = prefs.getBoolean(DAILY_WALLPAPER, false)
-        set(value) = prefs.edit { putBoolean(DAILY_WALLPAPER, value).apply() }
+        get() = dailyWallpaperTarget != Constants.WallpaperTarget.NONE
+        set(value) {
+            dailyWallpaperTarget = if (value) Constants.WallpaperTarget.BOTH else Constants.WallpaperTarget.NONE
+        }
 
     var dailyWallpaperUrl: String
         get() = prefs.getString(DAILY_WALLPAPER_URL, "").toString()

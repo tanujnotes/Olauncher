@@ -283,26 +283,35 @@ fun getDefaultLauncherPackage(context: Context): String {
     } else "android"
 }
 
-fun setPlainWallpaperByTheme(context: Context, appTheme: Int) {
+fun setPlainWallpaperByTheme(context: Context, appTheme: Int, wallpaperTarget: Int = Constants.WallpaperTarget.BOTH) {
+    if (wallpaperTarget == Constants.WallpaperTarget.NONE) return
     when (appTheme) {
-        AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(context, android.R.color.black)
-        AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(context, android.R.color.white)
+        AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(context, android.R.color.black, wallpaperTarget)
+        AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(context, android.R.color.white, wallpaperTarget)
         else -> {
             if (context.isDarkThemeOn())
-                setPlainWallpaper(context, android.R.color.black)
-            else setPlainWallpaper(context, android.R.color.white)
+                setPlainWallpaper(context, android.R.color.black, wallpaperTarget)
+            else setPlainWallpaper(context, android.R.color.white, wallpaperTarget)
         }
     }
 }
 
-fun setPlainWallpaper(context: Context, color: Int) {
+fun setPlainWallpaper(context: Context, color: Int, wallpaperTarget: Int = Constants.WallpaperTarget.BOTH) {
+    if (wallpaperTarget == Constants.WallpaperTarget.NONE) return
     try {
         val bitmap = createBitmap(1000, 2000)
         bitmap.eraseColor(context.getColor(color))
         val manager = WallpaperManager.getInstance(context)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_SYSTEM)
-            manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_LOCK)
+            when (wallpaperTarget) {
+                Constants.WallpaperTarget.HOME -> manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_SYSTEM)
+                Constants.WallpaperTarget.LOCK -> manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_LOCK)
+                Constants.WallpaperTarget.BOTH -> {
+                    manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_SYSTEM)
+                    manager.setBitmap(bitmap, null, false, WallpaperManager.FLAG_LOCK)
+                }
+                else -> return
+            }
         } else
             manager.setBitmap(bitmap)
         bitmap.recycle()
@@ -380,8 +389,9 @@ suspend fun getWallpaperBitmap(originalImage: Bitmap, width: Int, height: Int): 
     }
 }
 
-suspend fun setWallpaper(appContext: Context, url: String): Boolean {
+suspend fun setWallpaper(appContext: Context, url: String, wallpaperTarget: Int): Boolean {
     return withContext(Dispatchers.IO) {
+        if (wallpaperTarget == Constants.WallpaperTarget.NONE) return@withContext true
         val originalImageBitmap = getBitmapFromURL(url) ?: return@withContext false
         if (appContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && isTablet(appContext).not())
             return@withContext false
@@ -391,8 +401,33 @@ suspend fun setWallpaper(appContext: Context, url: String): Boolean {
         val scaledBitmap = getWallpaperBitmap(originalImageBitmap, width, height)
 
         try {
-            wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_SYSTEM)
-            wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_LOCK)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                when (wallpaperTarget) {
+                    Constants.WallpaperTarget.HOME -> wallpaperManager.setBitmap(
+                        scaledBitmap,
+                        null,
+                        false,
+                        WallpaperManager.FLAG_SYSTEM
+                    )
+
+                    Constants.WallpaperTarget.LOCK -> wallpaperManager.setBitmap(
+                        scaledBitmap,
+                        null,
+                        false,
+                        WallpaperManager.FLAG_LOCK
+                    )
+
+                    Constants.WallpaperTarget.BOTH -> {
+                        wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_SYSTEM)
+                        wallpaperManager.setBitmap(scaledBitmap, null, false, WallpaperManager.FLAG_LOCK)
+                    }
+
+                    else -> return@withContext false
+                }
+            } else {
+                if (wallpaperTarget == Constants.WallpaperTarget.NONE) return@withContext false
+                wallpaperManager.setBitmap(scaledBitmap)
+            }
         } catch (e: Exception) {
             return@withContext false
         }

@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity() {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
-        if (prefs.dailyWallpaper && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) {
+        if (prefs.dailyWallpaperTarget != Constants.WallpaperTarget.NONE && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) {
             setPlainWallpaper()
             viewModel.setWallpaperWorker()
             recreate()
@@ -195,7 +195,7 @@ class MainActivity : AppCompatActivity() {
                     prefs.wallpaperMsgShown = true
                     prefs.userState = Constants.UserState.REVIEW
                     showMessageDialog(R.string.did_you_know, R.string.wallpaper_message, R.string.enable) {
-                        prefs.dailyWallpaper = true
+                        prefs.dailyWallpaperTarget = Constants.WallpaperTarget.BOTH
                         viewModel.setWallpaperWorker()
                         showToast(getString(R.string.your_wallpaper_will_update_shortly))
                     }
@@ -286,7 +286,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             Constants.UserState.WALLPAPER -> {
-                if (prefs.wallpaperMsgShown || prefs.dailyWallpaper)
+                if (prefs.wallpaperMsgShown || prefs.dailyWallpaperTarget != Constants.WallpaperTarget.NONE)
                     prefs.userState = Constants.UserState.REVIEW
                 else if (isOlauncherDefault(this))
                     viewModel.showDialog.postValue(Constants.Dialog.WALLPAPER)
@@ -333,9 +333,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setPlainWallpaper() {
+        val wallpaperTarget = prefs.dailyWallpaperTarget
         if (this.isDarkThemeOn())
-            setPlainWallpaper(this, android.R.color.black)
-        else setPlainWallpaper(this, android.R.color.white)
+            setPlainWallpaper(this, android.R.color.black, wallpaperTarget)
+        else setPlainWallpaper(this, android.R.color.white, wallpaperTarget)
     }
 
     private fun openLauncherChooser(resetFailed: Boolean) {

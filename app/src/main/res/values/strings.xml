@@ -34,6 +34,7 @@
     <string name="about">About</string>
     <string name="off">Off</string>
     <string name="on">On</string>
+    <string name="none">None</string>
     <string name="black">Black</string>
     <string name="white">White</string>
     <string name="change_default_launcher">Change default launcher</string>
@@ -48,6 +49,9 @@
     <string name="swipe_up_for_apps">1. Swipe up for all apps\n2. Long press anywhere for settings</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
     <string name="daily_wallpaper_update">Daily new wallpaper</string>
+    <string name="wallpaper_home">Home</string>
+    <string name="wallpaper_lock">Lock</string>
+    <string name="wallpaper_both_screens">Both screens</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="center">Center</string>

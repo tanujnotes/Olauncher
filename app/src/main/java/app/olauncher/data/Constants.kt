@@ -46,6 +46,13 @@ object Constants {
         const val NOTIFICATIONS = 2
     }
 
+    object WallpaperTarget {
+        const val NONE = 0
+        const val HOME = 1
+        const val LOCK = 2
+        const val BOTH = 3
+    }
+
     object CharacterIndicator {
         const val SHOW = 102
         const val HIDE = 101

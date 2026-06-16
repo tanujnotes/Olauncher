@@ -524,7 +524,65 @@
                         android:layout_gravity="end|bottom"
                         android:layout_marginEnd="4dp"
                         android:padding="8dp"
-                        android:text="@string/off" />
+                        tools:text="@string/wallpaper_both_screens" />
+
+                    <!-- Daily wallpaper target select layout-->
+                    <LinearLayout
+                        android:id="@+id/dailyWallpaperSelectLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:elevation="8dp"
+                        android:orientation="horizontal"
+                        android:outlineAmbientShadowColor="@color/colorPrimaryDark"
+                        android:outlineSpotShadowColor="@color/colorPrimaryDark"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="2dp"
+                        android:visibility="gone"
+                        tools:ignore="UnusedAttribute">
+
+                        <TextView
+                            android:id="@+id/wallpaperNone"
+                            style="@style/TextSmallBold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/none" />
+
+                        <TextView
+                            android:id="@+id/wallpaperHome"
+                            style="@style/TextSmallBold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/wallpaper_home" />
+
+                        <TextView
+                            android:id="@+id/wallpaperLock"
+                            style="@style/TextSmallBold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/wallpaper_lock" />
+
+                        <TextView
+                            android:id="@+id/wallpaperBoth"
+                            style="@style/TextSmallBold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:paddingVertical="6dp"
+                            android:text="@string/wallpaper_both_screens" />
+
+                    </LinearLayout>
                 </FrameLayout>
 
                 <FrameLayout

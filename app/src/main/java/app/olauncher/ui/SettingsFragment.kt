@@ -101,6 +101,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.dateTimeSelectLayout.visibility = View.GONE
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
+        if (view.id != R.id.dailyWallpaper
+            && view.id != R.id.wallpaperNone
+            && view.id != R.id.wallpaperHome
+            && view.id != R.id.wallpaperLock
+            && view.id != R.id.wallpaperBoth
+        ) {
+            binding.dailyWallpaperSelectLayout.visibility = View.GONE
+        }
         if (view.id != R.id.textSizeMinus && view.id != R.id.textSizePlus) {
             if (binding.textSizesLayout.isVisible) {
                 binding.textSizesLayout.visibility = View.GONE
@@ -121,7 +129,11 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
-            R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
+            R.id.dailyWallpaper -> toggleWallpaperTargetSelector()
+            R.id.wallpaperNone -> updateWallpaperTarget(Constants.WallpaperTarget.NONE)
+            R.id.wallpaperHome -> updateWallpaperTarget(Constants.WallpaperTarget.HOME)
+            R.id.wallpaperLock -> updateWallpaperTarget(Constants.WallpaperTarget.LOCK)
+            R.id.wallpaperBoth -> updateWallpaperTarget(Constants.WallpaperTarget.BOTH)
             R.id.alignment -> binding.alignmentSelectLayout.visibility = View.VISIBLE
             R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
             R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
@@ -221,6 +233,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.screenTimeOnOff.setOnClickListener(this)
         binding.dailyWallpaperUrl.setOnClickListener(this)
         binding.dailyWallpaper.setOnClickListener(this)
+        binding.wallpaperNone.setOnClickListener(this)
+        binding.wallpaperHome.setOnClickListener(this)
+        binding.wallpaperLock.setOnClickListener(this)
+        binding.wallpaperBoth.setOnClickListener(this)
         binding.alignment.setOnClickListener(this)
         binding.alignmentLeft.setOnClickListener(this)
         binding.alignmentCenter.setOnClickListener(this)
@@ -443,20 +459,34 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             prefs.appTheme = AppCompatDelegate.MODE_NIGHT_YES
             setPlainWallpaper(requireContext(), android.R.color.black)
         }
-        if (!prefs.dailyWallpaper) return
-        prefs.dailyWallpaper = false
+        if (prefs.dailyWallpaperTarget == Constants.WallpaperTarget.NONE) return
+        prefs.dailyWallpaperTarget = Constants.WallpaperTarget.NONE
         populateWallpaperText()
         viewModel.cancelWallpaperWorker()
     }
 
-    private fun toggleDailyWallpaperUpdate() {
-        if (prefs.dailyWallpaper.not() && prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && viewModel.isOlauncherDefault.value == false) {
+    private fun toggleWallpaperTargetSelector() {
+        val wallpaperSelector = binding.dailyWallpaperSelectLayout
+        if (wallpaperSelector.isVisible) {
+            wallpaperSelector.visibility = View.GONE
+        } else {
+            wallpaperSelector.visibility = View.VISIBLE
+        }
+    }
+
+    private fun updateWallpaperTarget(target: Int) {
+        binding.dailyWallpaperSelectLayout.visibility = View.GONE
+        if (target != Constants.WallpaperTarget.NONE
+            && prefs.dailyWallpaperTarget == Constants.WallpaperTarget.NONE
+            && prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES
+            && viewModel.isOlauncherDefault.value == false
+        ) {
             requireContext().showToast(R.string.set_as_default_launcher_first)
             return
         }
-        prefs.dailyWallpaper = !prefs.dailyWallpaper
+        prefs.dailyWallpaperTarget = target
         populateWallpaperText()
-        if (prefs.dailyWallpaper) {
+        if (target != Constants.WallpaperTarget.NONE) {
             viewModel.setWallpaperWorker()
             showWallpaperToasts()
         } else viewModel.cancelWallpaperWorker()
@@ -519,21 +549,21 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun setAppTheme(theme: Int) {
         if (AppCompatDelegate.getDefaultNightMode() == theme) return
-        if (prefs.dailyWallpaper) {
-            setPlainWallpaper(theme)
+        if (prefs.dailyWallpaperTarget != Constants.WallpaperTarget.NONE) {
+            setPlainWallpaper(theme, prefs.dailyWallpaperTarget)
             viewModel.setWallpaperWorker()
         }
         requireActivity().recreate()
     }
 
-    private fun setPlainWallpaper(appTheme: Int) {
+    private fun setPlainWallpaper(appTheme: Int, wallpaperTarget: Int = Constants.WallpaperTarget.BOTH) {
         when (appTheme) {
-            AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(requireContext(), android.R.color.black)
-            AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(requireContext(), android.R.color.white)
+            AppCompatDelegate.MODE_NIGHT_YES -> setPlainWallpaper(requireContext(), android.R.color.black, wallpaperTarget)
+            AppCompatDelegate.MODE_NIGHT_NO -> setPlainWallpaper(requireContext(), android.R.color.white, wallpaperTarget)
             else -> {
                 if (requireContext().isDarkThemeOn())
-                    setPlainWallpaper(requireContext(), android.R.color.black)
-                else setPlainWallpaper(requireContext(), android.R.color.white)
+                    setPlainWallpaper(requireContext(), android.R.color.black, wallpaperTarget)
+                else setPlainWallpaper(requireContext(), android.R.color.white, wallpaperTarget)
             }
         }
     }
@@ -565,8 +595,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateWallpaperText() {
-        if (prefs.dailyWallpaper) binding.dailyWallpaper.text = getString(R.string.on)
-        else binding.dailyWallpaper.text = getString(R.string.off)
+        binding.dailyWallpaper.text = getString(
+            when (prefs.dailyWallpaperTarget) {
+                Constants.WallpaperTarget.HOME -> R.string.wallpaper_home
+                Constants.WallpaperTarget.LOCK -> R.string.wallpaper_lock
+                Constants.WallpaperTarget.BOTH -> R.string.wallpaper_both_screens
+                else -> R.string.none
+            }
+        )
     }
 
     private fun updateHomeBottomAlignment() {
