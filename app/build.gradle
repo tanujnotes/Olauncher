@@ -17,7 +17,7 @@ android {
         applicationId "app.olauncher"
         minSdkVersion 24
         targetSdkVersion 35
-        versionCode 107
+        versionCode 108
         versionName "v6.6.17"
 
         resourceConfigurations += ["en", "ar", "de", "es-rES", "es-rUS", "fr", "he", "hr", "hu", "in", "it", "ja", "nl", "pl", "pt-rBR", "ru-rRU", "sv", "tr", "uk", "zh"]
