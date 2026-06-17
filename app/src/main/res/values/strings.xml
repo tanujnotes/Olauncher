@@ -30,8 +30,7 @@
     <string name="set_as_default_launcher_first">Set Olauncher default first</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
-    <!-- Home button for recents feature disabled -->
-    <!-- <string name="home_button_show_recents">Home button for recents</string> -->
+    <string name="home_button_show_recents">Home button for recents</string>
     <string name="admin_permission_message">Olauncher promises to use the accessibility permission responsibly. Olauncher does not collect or share any data.</string>
     <string name="about">About</string>
     <string name="off">Off</string>
