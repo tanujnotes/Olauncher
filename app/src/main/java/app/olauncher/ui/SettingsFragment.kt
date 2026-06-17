@@ -77,7 +77,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         populateKeyboardText()
         populateScreenTimeOnOff()
         populateLockSettings()
-        populateHomeButtonRecents()
+        // Home button for recents feature disabled
+        // populateHomeButtonRecents()
         populateWallpaperText()
         populateAppThemeText()
         populateTextSize()
@@ -117,7 +118,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.appInfo -> openAppInfo(requireContext(), Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.toggleLock -> toggleLockMode()
-            R.id.homeButtonRecents -> toggleHomeButtonRecents()
+            // Home button for recents feature disabled
+            // R.id.homeButtonRecents -> toggleHomeButtonRecents()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
@@ -216,7 +218,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         binding.moreFeatures.setOnClickListener(this)
         binding.autoShowKeyboard.setOnClickListener(this)
         binding.toggleLock.setOnClickListener(this)
-        binding.homeButtonRecents.setOnClickListener(this)
+        // Home button for recents feature disabled
+        // binding.homeButtonRecents.setOnClickListener(this)
         binding.homeAppsNum.setOnClickListener(this)
         binding.screenTimeOnOff.setOnClickListener(this)
         binding.dailyWallpaperUrl.setOnClickListener(this)
@@ -590,21 +593,22 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         else getString(R.string.bottom_off)
     }
 
-    private fun toggleHomeButtonRecents() {
-        if (!prefs.homeButtonShowRecents && !isAccessServiceEnabled(requireContext())) {
-            toggleAccessibilityVisibility(true)
-            return
-        }
-        prefs.homeButtonShowRecents = !prefs.homeButtonShowRecents
-        populateHomeButtonRecents()
-    }
+    // Home button for recents feature disabled
+    // private fun toggleHomeButtonRecents() {
+    //     if (!prefs.homeButtonShowRecents && !isAccessServiceEnabled(requireContext())) {
+    //         toggleAccessibilityVisibility(true)
+    //         return
+    //     }
+    //     prefs.homeButtonShowRecents = !prefs.homeButtonShowRecents
+    //     populateHomeButtonRecents()
+    // }
 
-    private fun populateHomeButtonRecents() {
-        binding.homeButtonRecents.text = getString(
-            if (prefs.homeButtonShowRecents && isAccessServiceEnabled(requireContext())) R.string.on
-            else R.string.off
-        )
-    }
+    // private fun populateHomeButtonRecents() {
+    //     binding.homeButtonRecents.text = getString(
+    //         if (prefs.homeButtonShowRecents && isAccessServiceEnabled(requireContext())) R.string.on
+    //         else R.string.off
+    //     )
+    // }
 
     private fun populateLockSettings() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

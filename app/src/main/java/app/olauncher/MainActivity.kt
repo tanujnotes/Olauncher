@@ -147,10 +147,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onNewIntent(intent: Intent?) {
-        val alreadyHome = navController.currentDestination?.id == R.id.mainFragment
+        // Home button for recents feature disabled
+        // val alreadyHome = navController.currentDestination?.id == R.id.mainFragment
         backToHomeScreen()
-        if (alreadyHome && isResumed && prefs.homeButtonShowRecents)
-            viewModel.showRecentApps.call()
+        // if (alreadyHome && isResumed && prefs.homeButtonShowRecents)
+        //     viewModel.showRecentApps.call()
         super.onNewIntent(intent)
     }
 

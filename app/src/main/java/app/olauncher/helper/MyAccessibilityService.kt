@@ -29,9 +29,10 @@ class MyAccessibilityService : AccessibilityService() {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
                         performGlobalAction(GLOBAL_ACTION_LOCK_SCREEN)
                 }
-                getString(R.string.recents_layout_description) -> {
-                    performGlobalAction(GLOBAL_ACTION_RECENTS)
-                }
+                // Home button for recents feature disabled
+                // getString(R.string.recents_layout_description) -> {
+                //     performGlobalAction(GLOBAL_ACTION_RECENTS)
+                // }
             }
         } catch (e: Exception) {
             return
