@@ -32,11 +32,14 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentHomeBinding
 import app.olauncher.helper.appUsagePermissionGranted
+import app.olauncher.helper.applyEinkOptimizations
 import app.olauncher.helper.dpToPx
 import app.olauncher.helper.expandNotificationDrawer
 import app.olauncher.helper.getChangedAppTheme
 import app.olauncher.helper.getUserHandleFromString
+import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isPackageInstalled
+import app.olauncher.helper.navigateEink
 import app.olauncher.helper.openAlarmApp
 import app.olauncher.helper.openCalendar
 import app.olauncher.helper.openCameraApp
@@ -77,6 +80,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         setHomeAlignment(prefs.homeAlignment)
         initSwipeTouchListener()
         initClickListeners()
+
+        if (requireContext().isEinkDisplay()) binding.root.applyEinkOptimizations()
     }
 
     override fun onResume() {
@@ -168,7 +173,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 binding.setDefaultLauncher.visibility = View.GONE
                 if (viewModel.isOlauncherDefault.value != true) {
                     requireContext().showToast(R.string.set_as_default_launcher)
-                    findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                    findNavController().navigateEink(requireContext(), R.id.action_mainFragment_to_settingsFragment)
                 }
             }
         }
@@ -520,7 +525,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private fun showAppList(flag: Int, rename: Boolean = false, includeHiddenApps: Boolean = false) {
         viewModel.getAppList(includeHiddenApps)
         try {
-            findNavController().navigate(
+            findNavController().navigateEink(
+                requireContext(),
                 R.id.action_mainFragment_to_appListFragment,
                 bundleOf(
                     Constants.Key.FLAG to flag,
@@ -552,7 +558,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
                 deviceManager.lockNow()
             } catch (e: SecurityException) {
                 requireContext().showToast(getString(R.string.please_turn_on_double_tap_to_unlock), Toast.LENGTH_LONG)
-                findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                findNavController().navigateEink(requireContext(), R.id.action_mainFragment_to_settingsFragment)
             } catch (e: Exception) {
                 requireContext().showToast(getString(R.string.launcher_failed_to_lock_device), Toast.LENGTH_LONG)
                 prefs.lockModeOn = false
@@ -654,7 +660,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
             override fun onLongClick() {
                 super.onLongClick()
                 try {
-                    findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
+                    findNavController().navigateEink(requireContext(), R.id.action_mainFragment_to_settingsFragment)
                     viewModel.firstOpen(false)
                 } catch (e: Exception) {
                     e.printStackTrace()

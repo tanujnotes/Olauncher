@@ -28,10 +28,12 @@ import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentSettingsBinding
 import app.olauncher.helper.animateAlpha
 import app.olauncher.helper.appUsagePermissionGranted
+import app.olauncher.helper.applyEinkOptimizations
 import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.isAccessServiceEnabled
 import app.olauncher.helper.isDarkThemeOn
 import app.olauncher.helper.isEinkDisplay
+import app.olauncher.helper.navigateEink
 import app.olauncher.helper.isCountryIn
 import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.isTablet
@@ -95,6 +97,12 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
 
         if (showPentastic)
             binding.footer.text = getText(R.string.new_app_minimal_todo_lists)
+
+        if (requireContext().isEinkDisplay()) {
+            binding.root.applyEinkOptimizations()
+            binding.scrollView.isVerticalFadingEdgeEnabled = false
+            binding.themeDark.visibility = View.GONE // white-on-black ghosts badly on e-ink
+        }
     }
 
     override fun onClick(view: View) {
@@ -136,8 +144,14 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
             R.id.appThemeText -> binding.appThemeSelectLayout.visibility = View.VISIBLE
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
-            R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
-            R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            R.id.themeDark -> updateTheme(
+                if (requireContext().isEinkDisplay()) AppCompatDelegate.MODE_NIGHT_NO
+                else AppCompatDelegate.MODE_NIGHT_YES
+            )
+            R.id.themeSystem -> updateTheme(
+                if (requireContext().isEinkDisplay()) AppCompatDelegate.MODE_NIGHT_NO
+                else AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+            )
             R.id.textSizeValue -> binding.textSizesLayout.visibility = View.VISIBLE
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
@@ -192,14 +206,15 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         when (view.id) {
             R.id.alignment -> {
                 prefs.appLabelAlignment = prefs.homeAlignment
-                findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
+                findNavController().navigateEink(requireContext(), R.id.action_settingsFragment_to_appListFragment)
                 requireContext().showToast(getString(R.string.alignment_changed))
             }
 
             R.id.dailyWallpaper -> removeWallpaper()
             R.id.appThemeText -> {
                 binding.appThemeSelectLayout.visibility = View.VISIBLE
-                binding.themeSystem.visibility = View.VISIBLE
+                if (requireContext().isEinkDisplay().not())
+                    binding.themeSystem.visibility = View.VISIBLE
             }
 
             R.id.swipeLeftApp -> toggleSwipeLeft()
@@ -375,7 +390,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             return
         }
         viewModel.getHiddenApps()
-        findNavController().navigate(
+        findNavController().navigateEink(
+            requireContext(),
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf(Constants.Key.FLAG to Constants.FLAG_HIDDEN_APPS)
         )
@@ -393,7 +409,9 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         if (isAccessServiceEnabled(requireContext()))
             binding.actionAccessibility.text = getString(R.string.disable)
         binding.accessibilityLayout.isVisible = show
-        binding.scrollView.animateAlpha(if (show) 0.5f else 1f)
+        val targetAlpha = if (show) 0.5f else 1f
+        if (requireContext().isEinkDisplay()) binding.scrollView.alpha = targetAlpha
+        else binding.scrollView.animateAlpha(targetAlpha)
     }
 
     private fun openAccessibilityService() {
@@ -453,6 +471,10 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun toggleDailyWallpaperUpdate() {
+        if (prefs.dailyWallpaper.not() && requireContext().isEinkDisplay()) {
+            requireContext().showToast(R.string.daily_wallpaper_not_supported_eink)
+            return
+        }
         if (prefs.dailyWallpaper.not() && prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && viewModel.isOlauncherDefault.value == false) {
             requireContext().showToast(R.string.set_as_default_launcher_first)
             return
@@ -662,7 +684,8 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
             return
         }
         viewModel.getAppList(true)
-        findNavController().navigate(
+        findNavController().navigateEink(
+            requireContext(),
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf(Constants.Key.FLAG to flag)
         )

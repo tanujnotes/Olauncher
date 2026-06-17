@@ -13,6 +13,8 @@ class WallpaperWorker(appContext: Context, workerParams: WorkerParameters) : Cor
     private val prefs = Prefs(applicationContext)
 
     override suspend fun doWork(): Result = coroutineScope {
+        // Photo wallpapers ghost badly on e-ink; skip fetching/applying entirely.
+        if (applicationContext.isEinkDisplay()) return@coroutineScope Result.success()
         val success =
             if (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && isOlauncherDefault(applicationContext).not())
                 true

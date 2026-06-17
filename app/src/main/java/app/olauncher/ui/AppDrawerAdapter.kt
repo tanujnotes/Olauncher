@@ -20,7 +20,9 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
 import app.olauncher.databinding.AdapterPrivateSpaceHeaderBinding
+import app.olauncher.helper.applyEinkOptimizations
 import app.olauncher.helper.hideKeyboard
+import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
 import java.text.Normalizer
@@ -78,7 +80,7 @@ class AppDrawerAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
+        val holder = when (viewType) {
             VIEW_TYPE_PRIVATE_HEADER -> PrivateSpaceHeaderViewHolder(
                 AdapterPrivateSpaceHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -95,6 +97,8 @@ class AppDrawerAdapter(
                 )
             )
         }
+        if (parent.context.isEinkDisplay()) holder.itemView.applyEinkOptimizations()
+        return holder
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

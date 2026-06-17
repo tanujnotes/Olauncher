@@ -10,15 +10,23 @@ import android.content.Intent
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.Typeface
+import android.hardware.display.DisplayManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.UserHandle
 import android.provider.Settings
 import android.telephony.TelephonyManager
+import android.view.Display
 import android.view.View
-import android.view.WindowManager
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.NavController
+import androidx.navigation.navOptions
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.Constants
@@ -90,12 +98,54 @@ fun Context.openSearch(query: String? = null) {
 }
 
 fun Context.isEinkDisplay(): Boolean {
+//    return true
     return try {
-        val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.refreshRate <= Constants.MIN_ANIM_REFRESH_RATE
+        if (isEinkManufacturer()) true
+        else currentRefreshRate() <= Constants.MIN_ANIM_REFRESH_RATE
     } catch (e: Exception) {
         e.printStackTrace()
         false
+    }
+}
+
+private fun Context.currentRefreshRate(): Float {
+    val displayManager = getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+    return displayManager.getDisplay(Display.DEFAULT_DISPLAY)?.refreshRate ?: 60f
+}
+
+private fun isEinkManufacturer(): Boolean {
+    val deviceInfo = "${Build.MANUFACTURER} ${Build.BRAND} ${Build.MODEL}".lowercase(Locale.ROOT)
+    return Constants.EINK_DEVICE_KEYWORDS.any { deviceInfo.contains(it) }
+}
+
+fun View.applyEinkOptimizations() {
+    if (this is TextView) {
+        setShadowLayer(0f, 0f, 0f, 0)
+        setTypeface(Typeface.create("sans-serif", typeface?.style ?: Typeface.NORMAL))
+    }
+    if (this is ViewGroup) {
+        // FragmentContainerView throws UnsupportedOperationException if its
+        // LayoutTransition is touched at all, so leave it alone.
+        if (this !is FragmentContainerView) layoutTransition = null
+        for (i in 0 until childCount) getChildAt(i).applyEinkOptimizations()
+    }
+}
+
+fun NavController.navigateEink(
+    context: Context,
+    resId: Int,
+    args: Bundle? = null,
+    popUpToId: Int = 0,
+    popUpToInclusive: Boolean = false,
+) {
+    if (context.isEinkDisplay()) {
+        val options = navOptions {
+            anim { } // leave all anims at -1 => no transition animation
+            if (popUpToId != 0) popUpTo(popUpToId) { inclusive = popUpToInclusive }
+        }
+        navigate(resId, args, options)
+    } else {
+        navigate(resId, args)
     }
 }
 

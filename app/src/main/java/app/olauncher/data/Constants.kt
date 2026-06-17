@@ -95,6 +95,11 @@ object Constants {
 
     const val MIN_ANIM_REFRESH_RATE = 30f
 
+    val EINK_DEVICE_KEYWORDS = arrayOf(
+        "onyx", "boox", "remarkable", "dasung", "supernote",
+        "meebook", "boyue", "bigme", "tolino", "inkpalm", "inkbook", "pocketbook"
+    )
+
     const val URL_ABOUT_OLAUNCHER = "https://tanujnotes.substack.com/p/olauncher-minimal-af-launcher?utm_source=olauncher"
     const val URL_OLAUNCHER_PRIVACY = "https://tanujnotes.notion.site/Olauncher-Privacy-Policy-dd6ac5101ddd4b3da9d27057889d44ab"
     const val URL_DOUBLE_TAP = "https://tanujnotes.notion.site/Double-tap-to-lock-Olauncher-0f7fb103ec1f47d7a90cdfdcd7fb86ef"

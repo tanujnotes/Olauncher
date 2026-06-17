@@ -23,10 +23,12 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
+import app.olauncher.helper.applyEinkOptimizations
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isSystemApp
+import app.olauncher.helper.navigateEink
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.openSearch
 import app.olauncher.helper.openUrl
@@ -73,6 +75,11 @@ class AppDrawerFragment : Fragment() {
         initAdapter()
         initObservers()
         initClickListeners()
+
+        if (requireContext().isEinkDisplay()) {
+            binding.root.applyEinkOptimizations()
+            binding.recyclerView.isVerticalFadingEdgeEnabled = false
+        }
     }
 
     private fun initViews() {
@@ -196,7 +203,12 @@ class AppDrawerFragment : Fragment() {
                     binding.search.hideKeyboard()
                     prefs.firstHide = false
                     viewModel.showDialog.postValue(Constants.Dialog.HIDDEN)
-                    findNavController().navigate(R.id.action_appListFragment_to_settingsFragment2)
+                    findNavController().navigateEink(
+                        requireContext(),
+                        R.id.action_appListFragment_to_settingsFragment2,
+                        popUpToId = R.id.appListFragment,
+                        popUpToInclusive = true,
+                    )
                 }
                 viewModel.getAppList()
                 viewModel.getHiddenApps()
