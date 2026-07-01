@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.BaseInputConnection
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -39,6 +41,8 @@ class AppDrawerFragment : Fragment() {
     private lateinit var prefs: Prefs
     private lateinit var adapter: AppDrawerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private var searchTextView: TextView? = null
+    private var cachedIsCjkKeyboard: Boolean? = null
 
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
@@ -81,8 +85,8 @@ class AppDrawerFragment : Fragment() {
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
             binding.search.queryHint = "Please select an app"
         try {
-            val searchTextView = binding.search.findViewById<TextView>(R.id.search_src_text)
-            if (searchTextView != null) searchTextView.gravity = prefs.appLabelAlignment
+            searchTextView = binding.search.findViewById(R.id.search_src_text)
+            searchTextView?.gravity = prefs.appLabelAlignment
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -115,17 +119,31 @@ class AppDrawerFragment : Fragment() {
         })
     }
 
-    // While an IME is composing (e.g. typing pinyin before selecting a Chinese character),
-    // the search field holds a composing region. Don't auto-launch a single match during
-    // composition — the typed letters are not a final query (issue #629).
     private fun isSearchComposing(): Boolean {
-        val text = binding.search.findViewById<TextView>(R.id.search_src_text)?.text
-        if (text is Spannable) {
-            val start = BaseInputConnection.getComposingSpanStart(text)
-            val end = BaseInputConnection.getComposingSpanEnd(text)
-            return start in 0 until end
+        val text = searchTextView?.text
+        if (text !is Spannable) return false
+        val start = BaseInputConnection.getComposingSpanStart(text)
+        val end = BaseInputConnection.getComposingSpanEnd(text)
+        if (start !in 0 until end) return false
+        return isCjkKeyboard()
+    }
+
+    private fun isCjkKeyboard(): Boolean {
+        cachedIsCjkKeyboard?.let { return it }
+        val result = try {
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val subtype = imm.currentInputMethodSubtype
+            val language = when {
+                subtype == null -> ""
+                subtype.languageTag.isNotEmpty() -> subtype.languageTag // e.g. "zh-CN", "ja-JP", "en-US"
+                else -> subtype.locale // deprecated fallback, e.g. "zh_CN"
+            }
+            language.startsWith("zh") || language.startsWith("ja") || language.startsWith("ko")
+        } catch (e: Exception) {
+            false
         }
-        return false
+        cachedIsCjkKeyboard = result
+        return result
     }
 
     private fun initAdapter() {
@@ -183,10 +201,9 @@ class AppDrawerFragment : Fragment() {
 
                 val newSet = mutableSetOf<String>()
                 newSet.addAll(prefs.hiddenApps)
-                if (flag == Constants.FLAG_HIDDEN_APPS) {
-                    newSet.remove(appModel.appPackage) // for backward compatibility
+                if (flag == Constants.FLAG_HIDDEN_APPS)
                     newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
-                } else
+                else
                     newSet.add(appModel.appPackage + "|" + appModel.user.toString())
 
                 prefs.hiddenApps = newSet
@@ -346,6 +363,7 @@ class AppDrawerFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        cachedIsCjkKeyboard = null
         binding.search.showKeyboard(prefs.autoShowKeyboard)
     }
 
@@ -356,6 +374,7 @@ class AppDrawerFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        searchTextView = null
         _binding = null
     }
 }
