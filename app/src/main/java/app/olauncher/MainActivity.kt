@@ -11,6 +11,7 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.OnBackPressedCallback
@@ -122,6 +123,28 @@ class MainActivity : AppCompatActivity() {
             }
             registerReceiver(profileReceiver, filter)
         }
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        // Number keys and KEYCODE_CALL pass through untouched so native speed dial works.
+        // For D-pad keys, ensure they reach the focused view or the current fragment's root.
+        val dpadKey = when (event.keyCode) {
+            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN,
+            KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT,
+            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> true
+            else -> false
+        }
+        if (dpadKey) {
+            val focusedView = currentFocus
+            if (focusedView == null || focusedView == window.decorView) {
+                // No focused child — dispatch to the nav host fragment's root view
+                val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                val currentFragment = navHost?.childFragmentManager?.fragments?.firstOrNull()
+                val fragmentView = currentFragment?.view
+                if (fragmentView != null && fragmentView.dispatchKeyEvent(event)) return true
+            }
+        }
+        return super.dispatchKeyEvent(event)
     }
 
     override fun onStart() {

@@ -64,7 +64,9 @@
         android:layout_marginBottom="24dp"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:descendantFocusability="afterDescendants"
         android:fadingEdgeLength="24dp"
+        android:focusable="true"
         android:requiresFadingEdge="vertical" />
 
 </LinearLayout>

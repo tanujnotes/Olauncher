@@ -209,7 +209,29 @@ class SettingsFragment : Fragment(), View.OnClickListener, View.OnLongClickListe
         return true
     }
 
+    private fun makeSettingsFocusable() {
+        listOf(
+            binding.olauncherHiddenApps, binding.appInfo, binding.setLauncher,
+            binding.aboutOlauncher, binding.moreFeatures, binding.autoShowKeyboard,
+            binding.toggleLock, binding.homeAppsNum, binding.screenTimeOnOff,
+            binding.dailyWallpaperUrl, binding.dailyWallpaper, binding.alignment,
+            binding.alignmentLeft, binding.alignmentCenter, binding.alignmentRight,
+            binding.alignmentBottom, binding.statusBar, binding.dateTime,
+            binding.dateTimeOn, binding.dateTimeOff, binding.dateOnly,
+            binding.swipeLeftApp, binding.swipeRightApp, binding.swipeDownAction,
+            binding.notifications, binding.search, binding.appThemeText,
+            binding.themeLight, binding.themeDark, binding.themeSystem,
+            binding.textSizeValue, binding.textSizeMinus, binding.textSizePlus,
+            binding.share, binding.rate, binding.twitter, binding.github,
+            binding.privacy, binding.footer
+        ).forEach {
+            it.isFocusable = true
+            it.isFocusableInTouchMode = false
+        }
+    }
+
     private fun initClickListeners() {
+        makeSettingsFocusable()
         binding.olauncherHiddenApps.setOnClickListener(this)
         binding.scrollLayout.setOnClickListener(this)
         binding.appInfo.setOnClickListener(this)

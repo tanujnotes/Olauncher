@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import android.text.Spannable
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,6 +78,48 @@ class AppDrawerFragment : Fragment() {
         initAdapter()
         initObservers()
         initClickListeners()
+        initKeyNavigation()
+    }
+
+    private fun initKeyNavigation() {
+        binding.recyclerView.setOnKeyListener { _, keyCode, event ->
+            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+            when (keyCode) {
+                KeyEvent.KEYCODE_DPAD_UP -> {
+                    if (!binding.recyclerView.canScrollVertically(-1)) {
+                        val firstVisible = (binding.recyclerView.layoutManager
+                            as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: -1
+                        if (firstVisible <= 0) {
+                            binding.search.requestFocus()
+                            return@setOnKeyListener true
+                        }
+                    }
+                    false
+                }
+                KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                    val focused = binding.recyclerView.focusedChild?.findFocus()
+                    focused?.performClick()
+                    focused != null
+                }
+                KeyEvent.KEYCODE_DEL -> {
+                    val query = binding.search.query
+                    if (query.isNullOrEmpty()) {
+                        findNavController().popBackStack()
+                        true
+                    } else false
+                }
+                else -> false
+            }
+        }
+
+        binding.search.setOnKeyListener { _, keyCode, event ->
+            if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener false
+            if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+                binding.recyclerView.requestFocus()
+                binding.recyclerView.getChildAt(0)?.requestFocus()
+                true
+            } else false
+        }
     }
 
     private fun initViews() {

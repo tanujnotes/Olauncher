@@ -9,6 +9,7 @@ import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,6 +60,8 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private var dpadCenterDownTime = 0L
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -77,6 +80,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         setHomeAlignment(prefs.homeAlignment)
         initSwipeTouchListener()
         initClickListeners()
+        initKeyNavigation()
     }
 
     override fun onResume() {
@@ -85,6 +89,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         viewModel.isOlauncherDefault()
         if (prefs.showStatusBar) showStatusBar()
         else hideStatusBar()
+        requestInitialFocus()
     }
 
     override fun onClick(view: View) {
@@ -211,6 +216,105 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         // }
     }
 
+    private fun initKeyNavigation() {
+        binding.mainLayout.isFocusable = true
+        binding.mainLayout.setOnKeyListener { _, keyCode, event ->
+            handleHomeKeyEvent(keyCode, event)
+        }
+    }
+
+    private fun handleHomeKeyEvent(keyCode: Int, event: KeyEvent): Boolean {
+        val visibleApps = getVisibleHomeApps()
+        if (visibleApps.isEmpty()) return false
+
+        val focused = activity?.currentFocus
+        val focusedIndex = visibleApps.indexOf(focused)
+
+        when (event.action) {
+            KeyEvent.ACTION_DOWN -> {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        if (dpadCenterDownTime == 0L) dpadCenterDownTime = System.currentTimeMillis()
+                        // On first repeat count fire long-press
+                        if (event.repeatCount > 0 && focused != null && focusedIndex >= 0) {
+                            val elapsed = System.currentTimeMillis() - dpadCenterDownTime
+                            if (elapsed >= 500L) {
+                                dpadCenterDownTime = 0L
+                                onLongClick(focused)
+                                return true
+                            }
+                        }
+                        return true
+                    }
+
+                    KeyEvent.KEYCODE_DPAD_UP -> {
+                        if (event.repeatCount > 0) return true
+                        if (focusedIndex > 0) {
+                            visibleApps[focusedIndex - 1].requestFocus()
+                        } else {
+                            swipeDownAction()
+                        }
+                        return true
+                    }
+
+                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                        if (event.isLongPress || event.repeatCount > 2) {
+                            showAppList(Constants.FLAG_LAUNCH_APP)
+                            return true
+                        }
+                        if (event.repeatCount > 0) return true
+                        if (focusedIndex < visibleApps.size - 1) {
+                            visibleApps[focusedIndex + 1].requestFocus()
+                        } else if (focusedIndex == visibleApps.size - 1) {
+                            showAppList(Constants.FLAG_LAUNCH_APP)
+                        }
+                        return true
+                    }
+
+                    KeyEvent.KEYCODE_DPAD_LEFT -> {
+                        if (event.repeatCount > 0) return true
+                        openSwipeLeftApp()
+                        return true
+                    }
+
+                    KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                        if (event.repeatCount > 0) return true
+                        openSwipeRightApp()
+                        return true
+                    }
+                }
+            }
+
+            KeyEvent.ACTION_UP -> {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> {
+                        val downTime = dpadCenterDownTime
+                        dpadCenterDownTime = 0L
+                        if (downTime == 0L) return true // already handled as long-press
+                        if (focused != null && focusedIndex >= 0) {
+                            onClick(focused)
+                        }
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
+
+    private fun requestInitialFocus() {
+        if (binding.mainLayout.isInTouchMode) return
+        getVisibleHomeApps().firstOrNull()?.requestFocus()
+    }
+
+    private fun getVisibleHomeApps(): List<View> {
+        return listOf(
+            binding.homeApp1, binding.homeApp2, binding.homeApp3,
+            binding.homeApp4, binding.homeApp5, binding.homeApp6,
+            binding.homeApp7, binding.homeApp8
+        ).filter { it.visibility == View.VISIBLE }
+    }
+
     private fun initSwipeTouchListener() {
         val context = requireContext()
         binding.mainLayout.setOnTouchListener(getSwipeGestureListener(context))
@@ -299,6 +403,7 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
 
     private fun populateHomeScreen(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
+        restoreHomeAppFocusability()
         populateDateTime()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
@@ -409,15 +514,21 @@ class HomeFragment : Fragment(), View.OnClickListener, View.OnLongClickListener 
         return false
     }
 
+    private fun restoreHomeAppFocusability() {
+        listOf(
+            binding.homeApp1, binding.homeApp2, binding.homeApp3, binding.homeApp4,
+            binding.homeApp5, binding.homeApp6, binding.homeApp7, binding.homeApp8
+        ).forEach { it.isFocusable = true }
+    }
+
     private fun hideHomeApps() {
-        binding.homeApp1.visibility = View.GONE
-        binding.homeApp2.visibility = View.GONE
-        binding.homeApp3.visibility = View.GONE
-        binding.homeApp4.visibility = View.GONE
-        binding.homeApp5.visibility = View.GONE
-        binding.homeApp6.visibility = View.GONE
-        binding.homeApp7.visibility = View.GONE
-        binding.homeApp8.visibility = View.GONE
+        listOf(
+            binding.homeApp1, binding.homeApp2, binding.homeApp3, binding.homeApp4,
+            binding.homeApp5, binding.homeApp6, binding.homeApp7, binding.homeApp8
+        ).forEach {
+            it.visibility = View.GONE
+            it.isFocusable = false
+        }
     }
 
     private fun launchAppOrShortcut(
