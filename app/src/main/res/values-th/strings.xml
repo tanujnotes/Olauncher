@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">แอป</string>
+    <string name="set_as_default_launcher">ตั้งเป็นตัวเปิดใช้งานเริ่มต้น</string>
+    <string name="set_as_default_launcher_u"><u>ตั้งเป็นตัวเปิดใช้งานเริ่มต้น</u></string>
+    <string name="set_as_default_launcher_first">โปรดตั้งค่า Olauncher เป็นค่าเริ่มต้นก่อน</string>
+    <string name="app_text_color">สีข้อความ</string>
+    <string name="double_tap_to_lock_screen">แตะสองครั้งเพื่อล็อก</string>
+    <string name="home_button_show_recents">ปุ่มโฮมสำหรับแอปล่าสุด</string>
+    <string name="admin_permission_message">Olauncher สัญญาว่าจะใช้สิทธิ์การเข้าถึงอย่างรับผิดชอบ Olauncher ไม่เก็บรวบรวมหรือแชร์ข้อมูลใดๆ</string>
+    <string name="about">เกี่ยวกับ</string>
+    <string name="off">ปิด</string>
+    <string name="on">เปิด</string>
+    <string name="black">สีดำ</string>
+    <string name="white">สีขาว</string>
+    <string name="change_default_launcher">เปลี่ยนตัวเปิดใช้งานเริ่มต้น</string>
+    <string name="privacy">ความเป็นส่วนตัว</string>
+    <string name="share">แชร์</string>
+    <string name="share_now">แชร์ตอนนี้</string>
+    <string name="rate">ให้คะแนน</string>
+    <string name="rate_now">ให้คะแนนตอนนี้</string>
+    <string name="follow">ติดตาม</string>
+    <string name="email">อีเมล</string>
+    <string name="donate">บริจาค</string>
+    <string name="swipe_up_for_apps">1. ปัดขึ้นเพื่อดูแอปทั้งหมด\n2. กดค้างที่ใดก็ได้เพื่อเข้าสู่การตั้งค่า</string>
+    <string name="apps_on_home_screen">แอปบนหน้าจอหลัก</string>
+    <string name="daily_wallpaper_update">วอลเปเปอร์ใหม่ทุกวัน</string>
+    <string name="left">ซ้าย</string>
+    <string name="right">ขวา</string>
+    <string name="center">กึ่งกลาง</string>
+    <string name="home_layout_alignment">การจัดวางแอป</string>
+    <string name="swipe_left_app">แอปเมื่อปัดซ้าย</string>
+    <string name="swipe_right_app">แอปเมื่อปัดขวา</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">เคล็ดลับ: เริ่มพิมพ์ชื่อแอปเพื่อเปิดแอปโดยอัตโนมัติ</string>
+    <string name="okay">ตกลง</string>
+    <string name="cool">เยี่ยม!</string>
+    <string name="auto_show_keyboard">แสดงแป้นพิมพ์อัตโนมัติ</string>
+    <string name="hide">ซ่อน</string>
+    <string name="status_bar">แถบสถานะด้านบน</string>
+    <string name="rename">เปลี่ยนชื่อ</string>
+    <string name="show_date_time">แสดงวันที่และเวลา</string>
+    <string name="appearance">รูปลักษณ์</string>
+    <string name="gestures">ท่าทาง</string>
+    <string name="theme_mode">โหมดธีม</string>
+    <string name="system_default">ระบบ</string>
+    <string name="dark">มืด</string>
+    <string name="light">สว่าง</string>
+    <string name="welcome_to_olauncher_settings">ยินดีต้อนรับสู่การตั้งค่า!
+        \n\nโปรดจำไว้ว่าหากคุณมีคำถามใดๆ หน้าเกี่ยวกับเรามีคำตอบให้คุณ</string>
+    <string name="rate_us_message">สวัสดี คุณจะไม่เห็นข้อความนี้อีก
+        \n\nหากคุณพบว่า Olauncher มีประโยชน์ คุณช่วยให้คะแนนรีวิว 5 ดาวได้ไหม มันจะมีความหมายมากสำหรับเรา ขอบคุณ!</string>
+    <string name="share_message">เราต้องการความช่วยเหลือจากคุณ! เราเชื่อว่าทุกคนควรรู้จัก Olauncher และประโยชน์ของมัน แต่เราทำเพียงลำพังไม่ได้
+        \n\nคุณช่วยแชร์ Olauncher ให้เพื่อน ครอบครัว และผู้ติดตามของคุณได้ไหม ขอบคุณสำหรับการสนับสนุนของคุณ! ❤</string>
+    <string name="keyboard_message">สวัสดี แป้นพิมพ์เป็นวิธีที่เร็วที่สุดในการค้นหาและเปิดแอปใน Olauncher เราขอให้คุณเปิดฟีเจอร์นี้ไว้อีกสองสามวันแล้วค่อยตัดสินใจได้ไหม
+        \n\nทางเลือกเป็นของคุณเสมอ</string>
+    <string name="digital_wellbeing_message">หากคุณต้องการตั้งเวลาจำกัดสำหรับแอปบางตัว ฟีเจอร์ Digital Wellbeing ของ Android สามารถช่วยคุณได้ โปรดค้นหา Digital Wellbeing ในการตั้งค่าโทรศัพท์ของคุณและเปิดใช้งาน</string>
+    <string name="app_usage_message">หากต้องการแสดง/ซ่อนเวลาหน้าจอบนหน้าจอหลัก โปรดอนุญาตหรือปฏิเสธสิทธิ์การใช้งานแอป
+        \n\nหมายเหตุ: ไม่มีการเก็บรวบรวมข้อมูลการใช้งานแอป ทุกอย่างได้รับการประมวลผลบนอุปกรณ์ของคุณเอง</string>
+    <string name="pro_message">Olauncher ยังมีเวอร์ชันโปรที่ชื่อว่า Pro Launcher ซึ่งมีฟีเจอร์เพิ่มเติม เช่น สภาพอากาศ วิดเจ็ต แบบอักษร โฟลเดอร์ วอลเปเปอร์ AMOLED และอื่นๆ
+        \n\nนี่ยังเป็นวิธีที่ดีที่สุดในการสนับสนุนนักพัฒนา Olauncher ด้วย ลองดูสิ!</string>
+    <string name="wallpaper_message">Olauncher มอบวอลเปเปอร์ใหม่ที่สวยงามให้ทุกวัน ให้หน้าจอหลักของคุณมีลุคใหม่ทุกวันโดยไม่เสียค่าใช้จ่าย!
+        \n\nอยากลองไหม</string>
+    <string name="accessibility_service_description">จำเป็นต้องมีสิทธิ์การเข้าถึงเพื่อเปิดใช้งานท่าทาง - แตะสองครั้งเพื่อล็อก ข้อมูลใดๆ ที่ Olauncher ได้รับผ่านบริการนี้จะไม่ออกจากอุปกรณ์ของคุณ</string>
+    <string name="support_olauncher_for_free">สนับสนุน Olauncher ได้ฟรีโดยใช้ลิงก์พันธมิตร Amazon ของเรา</string>
+    <string name="support_olauncher_message">ทุกครั้งที่คุณซื้อสินค้าผ่านลิงก์ของเรา เราจะได้รับค่าคอมมิชชันเล็กน้อย โปรดบันทึกลิงก์นี้ไว้และใช้เมื่อคุณซื้อของออนไลน์\nขอบคุณ!</string>
+    <string name="open">เปิดลิงก์</string>
+    <string name="copy">คัดลอก</string>
+    <string name="close">ปิด</string>
+    <string name="not_now">ไว้ทีหลัง</string>
+    <string name="public_roadmap">แผนงานสาธารณะของ Olauncher</string>
+    <string name="roadmap">แผนงาน</string>
+    <string name="date">วันที่</string>
+    <string name="date_only">วันที่เท่านั้น</string>
+    <string name="bottom_on">ด้านล่าง: เปิด</string>
+    <string name="bottom_off">ด้านล่าง: ปิด</string>
+    <string name="please_set_olauncher_as_default_first">โปรดตั้งค่า Olauncher เป็นค่าเริ่มต้นก่อน</string>
+    <string name="affiliate">พันธมิตร</string>
+    <string name="tip_start_typing_for_rename">เคล็ดลับ: เริ่มพิมพ์เพื่อดูตัวเลือกเปลี่ยนชื่อแอป</string>
+    <string name="hidden_apps_message">หมายเหตุ: แตะที่ \'Olauncher\' ที่ด้านบนของหน้าการตั้งค่านี้เพื่อค้นหาแอปที่ซ่อนอยู่\n\nดูรายละเอียดเพิ่มเติมได้ที่หน้าเกี่ยวกับเรา</string>
+    <string name="swipe_down_for">ปัดลงเพื่อ</string>
+    <string name="search">ค้นหา</string>
+    <string name="notifications">การแจ้งเตือน</string>
+    <string name="accessibility_disclosure">โปรดเปิดบริการการเข้าถึงของ Olauncher ในการตั้งค่าอุปกรณ์ของคุณเพื่อเปิดใช้งานท่าทางแตะสองครั้งเพื่อล็อก
+    \n\nโปรดทราบว่าบริการนี้ใช้สำหรับฟีเจอร์นี้เท่านั้น บริการการเข้าถึงของเราไม่เก็บรวบรวมหรือแชร์ข้อมูลใดๆ</string>
+    <string name="accept">ยอมรับ</string>
+    <string name="permission">สิทธิ์การเข้าถึง</string>
+    <string name="double_tap_lock">แตะสองครั้งเพื่อล็อก</string>
+    <string name="enable">เปิดใช้งาน</string>
+    <string name="disable">ปิดใช้งาน</string>
+    <string name="not_working"><u>ใช้งานไม่ได้ใช่ไหม?</u></string>
+    <string name="info">ข้อมูล</string>
+    <string name="delete">ถอนการติดตั้ง</string>
+    <string name="text_size">ขนาดข้อความ</string>
+    <string name="enabled">เปิดใช้งานแล้ว</string>
+    <string name="disabled">ปิดใช้งานแล้ว</string>
+    <string name="please_turn_on_double_tap_to_unlock">โปรดเปิดใช้งานแตะสองครั้งเพื่อล็อก</string>
+    <string name="launcher_failed_to_lock_device">Olauncher ล็อกอุปกรณ์ไม่สำเร็จ\nโปรดตรวจสอบการตั้งค่าแอปของคุณ</string>
+    <string name="long_press_to_select_app">กดค้างเพื่อเลือกแอป</string>
+    <string name="unable_to_open_app">ไม่สามารถเปิดแอปได้</string>
+    <string name="unable_to_open_app_info">ไม่สามารถเปิดข้อมูลแอปได้</string>
+    <string name="copied">คัดลอกแล้ว</string>
+    <string name="system_app_cannot_delete">แอประบบ ไม่สามารถถอนการติดตั้งได้</string>
+    <string name="type_a_new_app_name_first">โปรดพิมพ์ชื่อแอปใหม่ก่อน</string>
+    <string name="app_not_found">ไม่พบแอป</string>
+    <string name="unable_to_launch_app">ไม่สามารถเปิดแอปได้</string>
+    <string name="search_for_Launcher_or_home_app">ค้นหาแอป Launcher หรือ Home</string>
+    <string name="swipe_left_app_enabled">เปิดใช้งานแอปเมื่อปัดซ้ายแล้ว</string>
+    <string name="swipe_right_app_enabled">เปิดใช้งานแอปเมื่อปัดขวาแล้ว</string>
+    <string name="swipe_left_app_disabled">ปิดใช้งานแอปเมื่อปัดซ้ายแล้ว</string>
+    <string name="swipe_right_app_disabled">ปิดใช้งานแอปเมื่อปัดขวาแล้ว</string>
+    <string name="your_wallpaper_will_update_shortly">วอลเปเปอร์ของคุณจะอัปเดตในไม่ช้า</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher ไม่ใช่ตัวเปิดใช้งานเริ่มต้น การอัปเดตวอลเปเปอร์จะล้มเหลว</string>
+    <string name="long_press_to_enable">กดค้างเพื่อเปิดใช้งาน</string>
+    <string name="no_hidden_apps">ไม่มีแอปที่ซ่อนอยู่</string>
+    <string name="hidden_apps">แอปที่ซ่อนอยู่</string>
+    <string name="adapter_show">แสดง</string>
+    <string name="adapter_hide">ซ่อน</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">คุณกำลังใช้โทรศัพท์ของคุณ หรือโทรศัพท์กำลังใช้คุณ?</string>
+    <string name="about_olauncher">เกี่ยวกับเราและคำถามที่พบบ่อย</string>
+    <string name="screen_time">เวลาหน้าจอ</string>
+    <string name="learn_more">เรียนรู้เพิ่มเติม</string>
+    <string name="did_you_know">คุณรู้หรือไม่?</string>
+    <string name="leave_a_review">เขียนรีวิว</string>
+    <string name="review_message">Olauncher ฟรีและจะฟรีตลอดไป ไม่มีโฆษณา ไม่เก็บรวบรวมข้อมูลใดๆ และช่วยลดเวลาหน้าจอของคุณ ส่งผลให้มีชีวิตที่มีสุขภาพดีขึ้น
+        \n\nเราหวังว่าคุณจะชอบมัน บอกเราว่าคุณคิดอย่างไร</string>
+    <string name="alignment_changed">เปลี่ยนการจัดวางแล้ว ✅</string>
+    <string name="home_screen">หน้าจอหลัก</string>
+    <string name="hey">สวัสดี</string>
+    <string name="more_features">ฟีเจอร์เพิ่มเติม…</string>
+    <string name="new_year_wish">ขอให้ปีนี้ดีกว่าปีที่ผ่านมา สวัสดีปีใหม่!</string>
+    <string name="new_year_wish_1">ไม่สำคัญว่าเดือนมกราคมจะเป็นอย่างไร คุณยังมีเวลาที่เหลือของปีเพื่อทำให้ดีกว่าที่เคย</string>
+    <string name="cheers">ชนแก้ว!</string>
+    <string name="notification_bar">แถบการแจ้งเตือน</string>
+    <string name="private_space">พื้นที่ส่วนตัว</string>
+</resources>

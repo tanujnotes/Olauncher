@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">Sovellus</string>
+    <string name="set_as_default_launcher">Aseta oletuskäynnistimeksi</string>
+    <string name="set_as_default_launcher_u"><u>Aseta oletuskäynnistimeksi</u></string>
+    <string name="set_as_default_launcher_first">Aseta ensin Olauncher oletukseksi</string>
+    <string name="app_text_color">Tekstin väri</string>
+    <string name="double_tap_to_lock_screen">Lukitse kaksoisnapautuksella</string>
+    <string name="home_button_show_recents">Koti-painike viimeisimmille sovelluksille</string>
+    <string name="admin_permission_message">Olauncher lupaa käyttää esteettömyysoikeutta vastuullisesti. Olauncher ei kerää tai jaa mitään tietoja.</string>
+    <string name="about">Tietoja</string>
+    <string name="off">Pois</string>
+    <string name="on">Päällä</string>
+    <string name="black">Musta</string>
+    <string name="white">Valkoinen</string>
+    <string name="change_default_launcher">Vaihda oletuskäynnistintä</string>
+    <string name="privacy">Yksityisyys</string>
+    <string name="share">Jaa</string>
+    <string name="share_now">Jaa nyt</string>
+    <string name="rate">Arvostele</string>
+    <string name="rate_now">Arvostele nyt</string>
+    <string name="follow">Seuraa</string>
+    <string name="email">Sähköposti</string>
+    <string name="donate">Lahjoita</string>
+    <string name="swipe_up_for_apps">1. Pyyhkäise ylös nähdäksesi kaikki sovellukset\n2. Pitkä painallus mistä tahansa avaa asetukset</string>
+    <string name="apps_on_home_screen">Sovellukset aloitusnäytöllä</string>
+    <string name="daily_wallpaper_update">Uusi taustakuva päivittäin</string>
+    <string name="left">Vasen</string>
+    <string name="right">Oikea</string>
+    <string name="center">Keskellä</string>
+    <string name="home_layout_alignment">Sovellusten tasaus</string>
+    <string name="swipe_left_app">Sovellus vasemmalle pyyhkäisyllä</string>
+    <string name="swipe_right_app">Sovellus oikealle pyyhkäisyllä</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Vinkki: Aloita sovelluksen nimen kirjoittaminen avataksesi sen automaattisesti</string>
+    <string name="okay">Selvä</string>
+    <string name="cool">Siistiä!</string>
+    <string name="auto_show_keyboard">Näytä näppäimistö automaattisesti</string>
+    <string name="hide">Piilota</string>
+    <string name="status_bar">Tilapalkki ylhäällä</string>
+    <string name="rename">Nimeä uudelleen</string>
+    <string name="show_date_time">Näytä päivämäärä ja kellonaika</string>
+    <string name="appearance">Ulkoasu</string>
+    <string name="gestures">Eleet</string>
+    <string name="theme_mode">Teematila</string>
+    <string name="system_default">Järjestelmä</string>
+    <string name="dark">Tumma</string>
+    <string name="light">Vaalea</string>
+    <string name="welcome_to_olauncher_settings">Tervetuloa asetuksiin!
+        \n\nMuista, että jos sinulla on kysyttävää, Tietoja-sivulta löytyy vastaus.</string>
+    <string name="rate_us_message">Hei, et näe tätä viestiä enää uudelleen.
+        \n\nJos Olauncher on ollut sinulle hyödyllinen, voisitko jättää 5 tähden arvostelun? Se merkitsisi meille paljon. Kiitos!</string>
+    <string name="share_message">Tarvitsemme apuasi! Uskomme, että kaikkien pitäisi tietää Olauncherista ja sen hyödyistä, mutta emme voi tehdä sitä yksin.
+        \n\nVoisitko jakaa Olauncherin ystävillesi, perheellesi ja seuraajillesi? Kiitos tuestasi! ❤</string>
+    <string name="keyboard_message">Hei, näppäimistö on nopein tapa löytää ja avata sovelluksia Olauncherissa. Voisitko pitää sen päällä vielä muutaman päivän ja päättää sitten?
+        \n\nValinta on aina sinun.</string>
+    <string name="digital_wellbeing_message">Jos haluat asettaa aikarajoja tietyille sovelluksille, Androidin Digitaalinen hyvinvointi -toiminto voi auttaa sinua siinä. Etsi Digitaalinen hyvinvointi puhelimesi asetuksista ja ota se käyttöön.</string>
+    <string name="app_usage_message">Näyttääksesi/piilottaaksesi ruutuajan aloitusnäytöllä, salli tai kiellä sovellusten käyttöoikeus.
+        \n\nHuomio: Sovellusten käyttötietoja ei kerätä. Kaikki käsitellään laitteellasi.</string>
+    <string name="pro_message">Olauncherista on olemassa myös pro-versio nimeltä Pro Launcher. Siinä on lisäominaisuuksia, kuten sää, widgetit, fontit, kansiot, AMOLED-taustakuvat ja muuta.
+        \n\nSe on myös paras tapa tukea Olauncherin kehittäjiä. Tutustu siihen!</string>
+    <string name="wallpaper_message">Olauncher tarjoaa kauniita uusia taustakuvia päivittäin. Anna aloitusnäytöllesi uusi ilme joka päivä, ilmaiseksi!
+        \n\nHaluatko kokeilla?</string>
+    <string name="accessibility_service_description">Esteettömyysoikeus vaaditaan eleen - kaksoisnapautus lukitakseen - käyttöönottamiseksi. Mitään Olauncherin tämän palvelun kautta hankkimaa tietoa ei lähetetä laitteestasi pois.</string>
+    <string name="support_olauncher_for_free">Tue Olauncheria ilmaiseksi käyttämällä Amazon-kumppanuuslinkkiämme.</string>
+    <string name="support_olauncher_message">Aina kun ostat jotain linkkimme kautta, saamme pienen palkkion. Tallenna linkki ja käytä sitä aina kun teet ostoksia verkossa.\nKiitos!</string>
+    <string name="open">Avaa linkki</string>
+    <string name="copy">Kopioi</string>
+    <string name="close">Sulje</string>
+    <string name="not_now">Ei nyt</string>
+    <string name="public_roadmap">Olauncherin julkinen etenemissuunnitelma</string>
+    <string name="roadmap">Etenemissuunnitelma</string>
+    <string name="date">Päivämäärä</string>
+    <string name="date_only">Vain päivämäärä</string>
+    <string name="bottom_on">Alaosa: Päällä</string>
+    <string name="bottom_off">Alaosa: Pois</string>
+    <string name="please_set_olauncher_as_default_first">Aseta ensin Olauncher oletukseksi</string>
+    <string name="affiliate">Kumppanuus</string>
+    <string name="tip_start_typing_for_rename">Vinkki: Aloita kirjoittaminen saadaksesi sovelluksen NIMEÄ UUDELLEEN -vaihtoehdon</string>
+    <string name="hidden_apps_message">Huomio: Napauta \'Olauncher\' tämän asetussivun yläreunassa löytääksesi piilotetut sovelluksesi.\n\nLisätietoja Tietoja-sivulla.</string>
+    <string name="swipe_down_for">Pyyhkäise alas saadaksesi</string>
+    <string name="search">Haku</string>
+    <string name="notifications">Ilmoitukset</string>
+    <string name="accessibility_disclosure">Ota Olauncherin esteettömyyspalvelu käyttöön laitteesi asetuksista, jotta voit ottaa käyttöön Kaksoisnapautus lukitakseen -eleen.
+    \n\nHuomaa, että tätä palvelua käytetään vain tähän tiettyyn ominaisuuteen. Esteettömyyspalvelumme ei kerää tai jaa mitään tietoja.</string>
+    <string name="accept">Hyväksy</string>
+    <string name="permission">Käyttöoikeus</string>
+    <string name="double_tap_lock">Lukitse kaksoisnapautuksella</string>
+    <string name="enable">Ota käyttöön</string>
+    <string name="disable">Poista käytöstä</string>
+    <string name="not_working"><u>Eikö toimi?</u></string>
+    <string name="info">Tiedot</string>
+    <string name="delete">Poista asennus</string>
+    <string name="text_size">Tekstin koko</string>
+    <string name="enabled">Käytössä</string>
+    <string name="disabled">Ei käytössä</string>
+    <string name="please_turn_on_double_tap_to_unlock">Ota käyttöön kaksoisnapautus lukitakseen</string>
+    <string name="launcher_failed_to_lock_device">Olauncher ei pystynyt lukitsemaan laitetta.\nTarkista sovelluksen asetukset.</string>
+    <string name="long_press_to_select_app">Pitkä painallus valitaksesi sovelluksen</string>
+    <string name="unable_to_open_app">Sovellusta ei voida avata</string>
+    <string name="unable_to_open_app_info">Sovelluksen tietoja ei voida avata</string>
+    <string name="copied">Kopioitu</string>
+    <string name="system_app_cannot_delete">Järjestelmäsovellus, ei voida poistaa</string>
+    <string name="type_a_new_app_name_first">Kirjoita ensin uusi sovelluksen nimi</string>
+    <string name="app_not_found">Sovellusta ei löytynyt</string>
+    <string name="unable_to_launch_app">Sovellusta ei voida avata</string>
+    <string name="search_for_Launcher_or_home_app">Etsi Käynnistin- tai Koti-sovellusta</string>
+    <string name="swipe_left_app_enabled">Sovellus vasemmalle pyyhkäisyllä otettu käyttöön</string>
+    <string name="swipe_right_app_enabled">Sovellus oikealle pyyhkäisyllä otettu käyttöön</string>
+    <string name="swipe_left_app_disabled">Sovellus vasemmalle pyyhkäisyllä poistettu käytöstä</string>
+    <string name="swipe_right_app_disabled">Sovellus oikealle pyyhkäisyllä poistettu käytöstä</string>
+    <string name="your_wallpaper_will_update_shortly">Taustakuvasi päivittyy pian</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher ei ole oletuksena. Taustakuvan päivitys epäonnistuu.</string>
+    <string name="long_press_to_enable">Pitkä painallus ottaaksesi käyttöön</string>
+    <string name="no_hidden_apps">Ei piilotettuja sovelluksia</string>
+    <string name="hidden_apps">Piilotetut sovellukset</string>
+    <string name="adapter_show">Näytä</string>
+    <string name="adapter_hide">Piilota</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Käytätkö puhelintasi vai käyttääkö puhelin sinua?</string>
+    <string name="about_olauncher">Tietoja ja usein kysytyt kysymykset</string>
+    <string name="screen_time">Ruutuaika</string>
+    <string name="learn_more">Lue lisää</string>
+    <string name="did_you_know">Tiesitkö?</string>
+    <string name="leave_a_review">Jätä arvostelu</string>
+    <string name="review_message">Olauncher on ilmainen ja tulee aina olemaan. Siinä ei ole mainoksia, se ei kerää tietoja ja se vähentää ruutuaikaa, mikä johtaa terveellisempään elämään.
+        \n\nToivottavasti pidät siitä. Kerro meille mielipiteesi.</string>
+    <string name="alignment_changed">Tasaus muutettu ✅</string>
+    <string name="home_screen">Aloitusnäyttö</string>
+    <string name="hey">Hei</string>
+    <string name="more_features">Lisää ominaisuuksia…</string>
+    <string name="new_year_wish">Tässä malja vuodelle, joka on parempi kuin mikään aiempi. Hyvää uutta vuotta!</string>
+    <string name="new_year_wish_1">Sillä ei ole väliä, miten tammikuu meni. Sinulla on vielä koko loppuvuosi tehdäksesi paremmin kuin koskaan.</string>
+    <string name="cheers">Kippis!</string>
+    <string name="notification_bar">Ilmoituspalkki</string>
+    <string name="private_space">Yksityinen tila</string>
+</resources>

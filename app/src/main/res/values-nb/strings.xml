@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">App</string>
+    <string name="set_as_default_launcher">Angi som standard launcher</string>
+    <string name="set_as_default_launcher_u"><u>Angi som standard launcher</u></string>
+    <string name="set_as_default_launcher_first">Angi først Olauncher som standard</string>
+    <string name="app_text_color">Tekstfarge</string>
+    <string name="double_tap_to_lock_screen">Dobbelttrykk for å låse</string>
+    <string name="home_button_show_recents">Hjem-knapp for nylige apper</string>
+    <string name="admin_permission_message">Olauncher lover å bruke tilgjengelighetstillatelsen ansvarlig. Olauncher samler ikke inn eller deler noen data.</string>
+    <string name="about">Om</string>
+    <string name="off">Av</string>
+    <string name="on">På</string>
+    <string name="black">Svart</string>
+    <string name="white">Hvit</string>
+    <string name="change_default_launcher">Endre standard launcher</string>
+    <string name="privacy">Personvern</string>
+    <string name="share">Del</string>
+    <string name="share_now">Del nå</string>
+    <string name="rate">Vurder</string>
+    <string name="rate_now">Vurder nå</string>
+    <string name="follow">Følg</string>
+    <string name="email">E-post</string>
+    <string name="donate">Doner</string>
+    <string name="swipe_up_for_apps">1. Sveip opp for alle apper\n2. Langt trykk hvor som helst for innstillinger</string>
+    <string name="apps_on_home_screen">Apper på startskjermen</string>
+    <string name="daily_wallpaper_update">Nytt bakgrunnsbilde daglig</string>
+    <string name="left">Venstre</string>
+    <string name="right">Høyre</string>
+    <string name="center">Midtstilt</string>
+    <string name="home_layout_alignment">Appjustering</string>
+    <string name="swipe_left_app">App ved sveip til venstre</string>
+    <string name="swipe_right_app">App ved sveip til høyre</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Tips: Begynn å skrive et appnavn for å åpne appen automatisk</string>
+    <string name="okay">Ok</string>
+    <string name="cool">Kult!</string>
+    <string name="auto_show_keyboard">Vis tastatur automatisk</string>
+    <string name="hide">Skjul</string>
+    <string name="status_bar">Statuslinje øverst</string>
+    <string name="rename">Endre navn</string>
+    <string name="show_date_time">Vis dato og klokkeslett</string>
+    <string name="appearance">Utseende</string>
+    <string name="gestures">Bevegelser</string>
+    <string name="theme_mode">Temamodus</string>
+    <string name="system_default">System</string>
+    <string name="dark">Mørk</string>
+    <string name="light">Lys</string>
+    <string name="welcome_to_olauncher_settings">Velkommen til innstillingene!
+        \n\nHusk at hvis du har spørsmål, finner du svar på vår Om-side.</string>
+    <string name="rate_us_message">Hei, du vil ikke se denne meldingen igjen.
+        \n\nHvis du synes Olauncher er nyttig, kan du legge igjen en 5-stjerners vurdering? Det vil bety mye for oss. Takk!</string>
+    <string name="share_message">Vi trenger din hjelp! Vi mener alle bør vite om Olauncher og fordelene ved det, men vi klarer det ikke alene.
+        \n\nKan du dele Olauncher med venner, familie og følgere? Takk for støtten din! ❤</string>
+    <string name="keyboard_message">Hei, tastaturet er den raskeste måten å finne og åpne apper på i Olauncher. Kan vi be deg la det stå på i noen dager til før du bestemmer deg?
+        \n\nValget er alltid ditt.</string>
+    <string name="digital_wellbeing_message">Hvis du vil angi tidsbegrensninger for bestemte apper, kan Androids Digital velvære-funksjon hjelpe deg med det. Søk etter Digital velvære i telefoninnstillingene og aktiver den.</string>
+    <string name="app_usage_message">For å vise/skjule skjermtiden din på startskjermen må du tillate eller avslå tillatelsen for appbruk.
+        \n\nMerk: Ingen data om appbruk samles inn. Alt behandles på enheten din.</string>
+    <string name="pro_message">Olauncher har også en pro-versjon som heter Pro Launcher. Den har ekstra funksjoner som vær, widgeter, skrifttyper, mapper, AMOLED-bakgrunner og mer.
+        \n\nDet er også den beste måten å støtte utviklerne av Olauncher på. Sjekk den ut!</string>
+    <string name="wallpaper_message">Olauncher tilbyr vakre nye bakgrunnsbilder daglig. Gi startskjermen din et nytt utseende hver dag, helt gratis!
+        \n\nVil du prøve det?</string>
+    <string name="accessibility_service_description">Tilgjengelighetstillatelsen kreves for å aktivere bevegelsen - dobbelttrykk for å låse. Ingen data hentet av Olauncher via denne tjenesten forlater enheten din.</string>
+    <string name="support_olauncher_for_free">Støtt Olauncher gratis ved å bruke vår Amazon-partnerlenke.</string>
+    <string name="support_olauncher_message">Hver gang du kjøper noe via lenken vår, får vi en liten provisjon. Lagre lenken og bruk den når du handler på nett.\nTakk!</string>
+    <string name="open">Åpne lenke</string>
+    <string name="copy">Kopier</string>
+    <string name="close">Lukk</string>
+    <string name="not_now">Ikke nå</string>
+    <string name="public_roadmap">Olauncher offentlig veikart</string>
+    <string name="roadmap">Veikart</string>
+    <string name="date">Dato</string>
+    <string name="date_only">Kun dato</string>
+    <string name="bottom_on">Nederst: På</string>
+    <string name="bottom_off">Nederst: Av</string>
+    <string name="please_set_olauncher_as_default_first">Angi først Olauncher som standard</string>
+    <string name="affiliate">Partner</string>
+    <string name="tip_start_typing_for_rename">Tips: Begynn å skrive for å få opp alternativet for å endre navn på appen</string>
+    <string name="hidden_apps_message">Merk: Trykk på \'Olauncher\' øverst på denne innstillingssiden for å finne de skjulte appene dine.\n\nFlere detaljer finnes på vår Om-side.</string>
+    <string name="swipe_down_for">Sveip ned for</string>
+    <string name="search">Søk</string>
+    <string name="notifications">Varsler</string>
+    <string name="accessibility_disclosure">Slå på Olauncher\'s tilgjengelighetstjeneste i enhetens innstillinger for å aktivere bevegelsen Dobbelttrykk for å låse.
+    \n\nMerk at denne tjenesten kun brukes til denne bestemte funksjonen. Tilgjengelighetstjenesten vår samler ikke inn eller deler noen data.</string>
+    <string name="accept">Godta</string>
+    <string name="permission">Tillatelse</string>
+    <string name="double_tap_lock">Dobbelttrykk for å låse</string>
+    <string name="enable">Aktiver</string>
+    <string name="disable">Deaktiver</string>
+    <string name="not_working"><u>Fungerer det ikke?</u></string>
+    <string name="info">Info</string>
+    <string name="delete">Avinstaller</string>
+    <string name="text_size">Tekststørrelse</string>
+    <string name="enabled">Aktivert</string>
+    <string name="disabled">Deaktivert</string>
+    <string name="please_turn_on_double_tap_to_unlock">Slå på dobbelttrykk for å låse</string>
+    <string name="launcher_failed_to_lock_device">Olauncher klarte ikke å låse enheten.\nSjekk appinnstillingene dine.</string>
+    <string name="long_press_to_select_app">Langt trykk for å velge app</string>
+    <string name="unable_to_open_app">Kan ikke åpne app</string>
+    <string name="unable_to_open_app_info">Kan ikke åpne appinformasjon</string>
+    <string name="copied">Kopiert</string>
+    <string name="system_app_cannot_delete">Systemapp, kan ikke avinstalleres</string>
+    <string name="type_a_new_app_name_first">Skriv først inn et nytt appnavn</string>
+    <string name="app_not_found">App ikke funnet</string>
+    <string name="unable_to_launch_app">Kan ikke starte app</string>
+    <string name="search_for_Launcher_or_home_app">Søk etter Launcher- eller Hjem-app</string>
+    <string name="swipe_left_app_enabled">App ved sveip til venstre aktivert</string>
+    <string name="swipe_right_app_enabled">App ved sveip til høyre aktivert</string>
+    <string name="swipe_left_app_disabled">App ved sveip til venstre deaktivert</string>
+    <string name="swipe_right_app_disabled">App ved sveip til høyre deaktivert</string>
+    <string name="your_wallpaper_will_update_shortly">Bakgrunnsbildet ditt oppdateres snart</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher er ikke standard. Oppdatering av bakgrunnsbilde vil mislykkes.</string>
+    <string name="long_press_to_enable">Langt trykk for å aktivere</string>
+    <string name="no_hidden_apps">Ingen skjulte apper</string>
+    <string name="hidden_apps">Skjulte apper</string>
+    <string name="adapter_show">Vis</string>
+    <string name="adapter_hide">Skjul</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Bruker du telefonen din, eller bruker telefonen deg?</string>
+    <string name="about_olauncher">Om og ofte stilte spørsmål</string>
+    <string name="screen_time">Skjermtid</string>
+    <string name="learn_more">Les mer</string>
+    <string name="did_you_know">Visste du det?</string>
+    <string name="leave_a_review">Legg igjen en vurdering</string>
+    <string name="review_message">Olauncher er gratis og vil alltid være det. Den har ingen reklame, samler ikke inn data og reduserer skjermtiden din, noe som gir et sunnere liv.
+        \n\nVi håper du liker den. Fortell oss hva du synes.</string>
+    <string name="alignment_changed">Justering endret ✅</string>
+    <string name="home_screen">Startskjerm</string>
+    <string name="hey">Hei</string>
+    <string name="more_features">Flere funksjoner…</string>
+    <string name="new_year_wish">Her er til et år bedre enn noe annet. Godt nytt år!</string>
+    <string name="new_year_wish_1">Det spiller ingen rolle hvordan januar gikk. Du har fortsatt resten av året til å gjøre det bedre enn noen gang.</string>
+    <string name="cheers">Skål!</string>
+    <string name="notification_bar">Varslingslinje</string>
+    <string name="private_space">Privat område</string>
+</resources>
