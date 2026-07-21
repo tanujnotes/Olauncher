@@ -298,6 +298,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         val verticalGravity = if (prefs.homeBottomAlignment) Gravity.BOTTOM else Gravity.CENTER_VERTICAL
         binding.homeAppsLayout.gravity = horizontalGravity or verticalGravity
         binding.dateTimeLayout.gravity = horizontalGravity
+        binding.musicWidget.gravity = horizontalGravity
         binding.homeApp1.gravity = horizontalGravity
         binding.homeApp2.gravity = horizontalGravity
         binding.homeApp3.gravity = horizontalGravity
@@ -530,7 +531,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         val baseBottomPadding = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             resources.getDimensionPixelSize(R.dimen.home_app_padding_vertical)
         } else {
-            48.dpToPx()
+            28.dpToPx()
         }
         if (widgetIds.isEmpty()) {
             widgetPagerAdapter.submitList(emptyList())
