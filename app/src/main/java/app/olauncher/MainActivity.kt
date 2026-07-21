@@ -2,6 +2,7 @@ package app.olauncher
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.appwidget.AppWidgetManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -40,6 +41,7 @@ import app.olauncher.helper.setPlainWallpaper
 import app.olauncher.helper.shareApp
 import app.olauncher.helper.showLauncherSelector
 import app.olauncher.helper.showToast
+import app.olauncher.helper.WidgetHostManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -126,6 +128,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        WidgetHostManager.get(this).startListening()
         restartLauncherOrCheckTheme()
     }
 
@@ -138,6 +141,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         isResumed = false
         backToHomeScreen()
+        WidgetHostManager.get(this).stopListening()
         super.onStop()
     }
 
@@ -328,6 +332,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun backToHomeScreen() {
         if (viewModel.isPrivateSpaceToggling) return
+        if (viewModel.pendingWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) return
         binding.messageLayout.visibility = View.GONE
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)
@@ -388,6 +393,18 @@ class MainActivity : AppCompatActivity() {
             Constants.REQUEST_CODE_LAUNCHER_SELECTOR -> {
                 if (resultCode == Activity.RESULT_OK)
                     resetLauncherViaFakeActivity()
+            }
+
+            Constants.REQUEST_CODE_BIND_WIDGET,
+            Constants.REQUEST_CODE_CONFIGURE_WIDGET -> {
+                val returnedId = data?.getIntExtra(
+                    AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    AppWidgetManager.INVALID_APPWIDGET_ID
+                ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
+                if (returnedId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+                    viewModel.pendingWidgetId = returnedId
+                }
+                viewModel.widgetActivityResult.value = requestCode to resultCode
             }
         }
     }

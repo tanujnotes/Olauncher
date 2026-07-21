@@ -25,6 +25,7 @@ import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentSettingsBinding
+import app.olauncher.helper.MediaPlaybackRepository
 import app.olauncher.helper.animateAlpha
 import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.getColorFromAttr
@@ -72,6 +73,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         checkAdminPermission()
 
         binding.homeAppsNum.text = prefs.homeAppsNum.toString()
+        populateWidgetSettings()
         populateProMessage()
         populateKeyboardText()
         populateScreenTimeOnOff()
@@ -101,6 +103,12 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.dateTimeSelectLayout.visibility = View.GONE
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
+        if (view.id != R.id.widgetHeightMinus && view.id != R.id.widgetHeightPlus) {
+            if (binding.widgetHeightLayout.isVisible) {
+                binding.widgetHeightLayout.visibility = View.GONE
+                applyWidgetHeight()
+            }
+        }
         if (view.id != R.id.textSizeMinus && view.id != R.id.textSizePlus) {
             if (binding.textSizesLayout.isVisible) {
                 binding.textSizesLayout.visibility = View.GONE
@@ -121,6 +129,11 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             // R.id.homeButtonRecents -> toggleHomeButtonRecents()
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.homeAppsNum -> binding.appsNumSelectLayout.visibility = View.VISIBLE
+            R.id.widgets -> findNavController().navigate(R.id.action_settingsFragment_to_widgetsFragment)
+            R.id.widgetHeightValue -> binding.widgetHeightLayout.visibility = View.VISIBLE
+            R.id.widgetHeightMinus -> adjustWidgetHeight(-Constants.Widget.HEIGHT_STEP_DP)
+            R.id.widgetHeightPlus -> adjustWidgetHeight(Constants.Widget.HEIGHT_STEP_DP)
+            R.id.musicWidgetToggle -> toggleMusicWidget()
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> binding.alignmentSelectLayout.visibility = View.VISIBLE
@@ -220,6 +233,11 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         // Home button for recents feature disabled
         // binding.homeButtonRecents.setOnClickListener(this)
         binding.homeAppsNum.setOnClickListener(this)
+        binding.widgets.setOnClickListener(this)
+        binding.widgetHeightValue.setOnClickListener(this)
+        binding.widgetHeightMinus.setOnClickListener(this)
+        binding.widgetHeightPlus.setOnClickListener(this)
+        binding.musicWidgetToggle.setOnClickListener(this)
         binding.screenTimeOnOff.setOnClickListener(this)
         binding.dailyWallpaperUrl.setOnClickListener(this)
         binding.dailyWallpaper.setOnClickListener(this)
@@ -291,6 +309,9 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         }
         viewModel.updateSwipeApps.observe(viewLifecycleOwner) {
             populateSwipeApps()
+        }
+        viewModel.refreshWidgets.observe(viewLifecycleOwner) {
+            populateWidgetSettings()
         }
     }
 
@@ -476,6 +497,52 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.appsNumSelectLayout.visibility = View.GONE
         prefs.homeAppsNum = num
         viewModel.refreshHome(true)
+    }
+
+    private var pendingWidgetHeight = -1
+
+    private fun populateWidgetSettings() {
+        binding.widgets.text = prefs.widgetIdList.size.toString()
+        val height = if (pendingWidgetHeight > 0) pendingWidgetHeight else prefs.widgetAreaHeight
+        val text = getString(R.string.dp_value, height)
+        binding.widgetHeightValue.text = text
+        binding.widgetHeightCurrent.text = text
+        binding.musicWidgetToggle.text = getString(if (prefs.showMusicWidget) R.string.on else R.string.off)
+    }
+
+    private fun toggleMusicWidget() {
+        prefs.showMusicWidget = !prefs.showMusicWidget
+        populateWidgetSettings()
+        viewModel.refreshHome(false)
+        if (prefs.showMusicWidget &&
+            !MediaPlaybackRepository.hasNotificationListenerPermission(requireContext())
+        ) {
+            requireContext().showToast(R.string.notification_access_message, Toast.LENGTH_LONG)
+            runCatching {
+                startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
+            }
+        }
+    }
+
+    private fun adjustWidgetHeight(delta: Int) {
+        val current = if (pendingWidgetHeight > 0) pendingWidgetHeight else prefs.widgetAreaHeight
+        val updated = (current + delta).coerceIn(
+            Constants.Widget.MIN_HEIGHT_DP,
+            Constants.Widget.MAX_HEIGHT_DP
+        )
+        if (updated == current) return
+        pendingWidgetHeight = updated
+        populateWidgetSettings()
+    }
+
+    private fun applyWidgetHeight() {
+        if (pendingWidgetHeight < 0 || pendingWidgetHeight == prefs.widgetAreaHeight) {
+            pendingWidgetHeight = -1
+            return
+        }
+        prefs.widgetAreaHeight = pendingWidgetHeight
+        pendingWidgetHeight = -1
+        viewModel.refreshWidgets()
     }
 
     private var pendingTextSizeScale: Float = -1f
@@ -680,6 +747,11 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             prefs.proMessageShown = true
             viewModel.showDialog.postValue(Constants.Dialog.PRO_MESSAGE)
         }
+    }
+
+    override fun onPause() {
+        applyWidgetHeight()
+        super.onPause()
     }
 
     override fun onDestroyView() {

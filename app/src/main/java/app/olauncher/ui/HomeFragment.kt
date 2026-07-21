@@ -5,13 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
 import android.content.res.Configuration
+import android.graphics.Outline
+import android.graphics.drawable.GradientDrawable
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import android.view.WindowInsets
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -21,19 +25,26 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentHomeBinding
+import app.olauncher.helper.MediaPlaybackRepository
+import app.olauncher.helper.MusicState
 import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.dpToPx
 import app.olauncher.helper.expandNotificationDrawer
 import app.olauncher.helper.getChangedAppTheme
+import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.getUserHandleFromString
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.openAlarmApp
@@ -43,8 +54,10 @@ import app.olauncher.helper.openDialerApp
 import app.olauncher.helper.openSearch
 import app.olauncher.helper.setPlainWallpaperByTheme
 import app.olauncher.helper.showToast
+import app.olauncher.helper.WidgetHostManager
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -54,6 +67,14 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
+    private lateinit var widgetHostManager: WidgetHostManager
+    private lateinit var widgetPagerAdapter: WidgetPagerAdapter
+    private var widgetPageCallback: ViewPager2.OnPageChangeCallback? = null
+    private var mediaRepository: MediaPlaybackRepository? = null
+    private var lastMusicTitle: String? = null
+    private var lastMusicArtist: String? = null
+    private var lastMusicPlaying: Boolean? = null
+    private var lastMusicArtworkHash: Int? = null
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -71,6 +92,10 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         } ?: throw Exception("Invalid Activity")
 
         deviceManager = context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        widgetHostManager = WidgetHostManager.get(requireContext())
+        mediaRepository = MediaPlaybackRepository(requireContext())
+        initWidgetPager()
+        initMusicWidget()
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
@@ -84,6 +109,17 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.isOlauncherDefault()
         if (prefs.showStatusBar) showStatusBar()
         else hideStatusBar()
+        mediaRepository?.refresh()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (prefs.showMusicWidget) mediaRepository?.start()
+    }
+
+    override fun onStop() {
+        mediaRepository?.stop()
+        super.onStop()
     }
 
     override fun onClick(view: View) {
@@ -204,6 +240,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.screenTimeValue.observe(viewLifecycleOwner) {
             it?.let { binding.tvScreenTime.text = it }
         }
+        viewModel.refreshWidgets.observe(viewLifecycleOwner) {
+            populateWidgets()
+        }
         // Home button for recents feature disabled
         // viewModel.showRecentApps.observe(viewLifecycleOwner) {
         //     binding.recents.performClick()
@@ -317,6 +356,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateHomeScreen(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
         populateDateTime()
+        populateWidgets()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             populateScreenTime()
@@ -377,6 +417,174 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         if (!setHomeAppText(binding.homeApp8, prefs.appName8, prefs.appPackage8, prefs.appUser8, prefs.isShortcut8, prefs.shortcutId8)) {
             prefs.appName8 = ""
             prefs.appPackage8 = ""
+        }
+    }
+
+    private fun initWidgetPager() {
+        widgetPagerAdapter = WidgetPagerAdapter(widgetHostManager) { hostView ->
+            val width = binding.widgetPager.width
+            val height = binding.widgetPager.height - 12.dpToPx()
+            if (width > 0 && height > 0) widgetHostManager.updateSize(hostView, width, height)
+        }
+        binding.widgetPager.apply {
+            adapter = widgetPagerAdapter
+            offscreenPageLimit = 1
+        }
+        widgetPageCallback = object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                prefs.widgetCurrentPage = position
+                updateWidgetPageIndicator(position, widgetPagerAdapter.itemCount)
+            }
+        }.also(binding.widgetPager::registerOnPageChangeCallback)
+    }
+
+    private fun initMusicWidget() {
+        val artRadius = 8.dpToPx().toFloat()
+        binding.musicArtwork.outlineProvider = object : ViewOutlineProvider() {
+            override fun getOutline(view: View, outline: Outline) {
+                outline.setRoundRect(0, 0, view.width, view.height, artRadius)
+            }
+        }
+        binding.musicArtwork.clipToOutline = true
+
+        binding.musicPermissionPrompt.setOnClickListener {
+            runCatching { startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)) }
+        }
+        binding.musicArtwork.setOnClickListener { mediaRepository?.openActiveMediaApp() }
+        binding.musicInfo.setOnClickListener { mediaRepository?.openActiveMediaApp() }
+        binding.musicPrevious.setOnClickListener { mediaRepository?.skipPrevious() }
+        binding.musicPlayPause.setOnClickListener { mediaRepository?.togglePlayPause() }
+        binding.musicNext.setOnClickListener { mediaRepository?.skipNext() }
+
+        val repository = mediaRepository ?: return
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                repository.state.collect(::bindMusicState)
+            }
+        }
+    }
+
+    private fun bindMusicState(state: MusicState) {
+        if (!prefs.showMusicWidget) {
+            binding.musicWidget.isVisible = false
+            return
+        }
+
+        if (!state.hasPermission) {
+            binding.musicWidget.isVisible = true
+            binding.musicPermissionPrompt.isVisible = true
+            binding.musicContent.isVisible = false
+            return
+        }
+
+        if (!state.hasSession) {
+            binding.musicWidget.isVisible = false
+            return
+        }
+
+        binding.musicWidget.isVisible = true
+        binding.musicPermissionPrompt.isVisible = false
+        binding.musicContent.isVisible = true
+
+        val title = state.title.ifBlank { getString(R.string.music_unknown_title) }
+        if (title != lastMusicTitle) {
+            binding.musicTitle.text = title
+            lastMusicTitle = title
+            binding.musicTitle.isSelected = true
+        }
+
+        val artist = state.artist.ifBlank { getString(R.string.music_unknown_artist) }
+        if (artist != lastMusicArtist) {
+            binding.musicArtist.text = artist
+            lastMusicArtist = artist
+            binding.musicArtist.isSelected = true
+        }
+
+        if (state.isPlaying != lastMusicPlaying) {
+            binding.musicPlayPause.setImageResource(
+                if (state.isPlaying) R.drawable.ic_pause else R.drawable.ic_play
+            )
+            binding.musicPlayPause.contentDescription = getString(
+                if (state.isPlaying) R.string.music_pause else R.string.music_play
+            )
+            lastMusicPlaying = state.isPlaying
+        }
+
+        val artworkHash = state.artwork?.let { System.identityHashCode(it) }
+        if (artworkHash != lastMusicArtworkHash) {
+            if (state.artwork != null) {
+                binding.musicArtwork.setImageBitmap(state.artwork)
+                binding.musicArtwork.setPadding(0)
+            } else {
+                binding.musicArtwork.setImageResource(R.drawable.ic_music_note)
+                binding.musicArtwork.setPadding(10.dpToPx())
+            }
+            lastMusicArtworkHash = artworkHash
+        }
+    }
+
+    private fun populateWidgets() {
+        if (!::widgetPagerAdapter.isInitialized) return
+        val widgetIds = widgetHostManager.pruneStaleWidgets(prefs)
+        binding.widgetArea.isVisible = widgetIds.isNotEmpty()
+        val baseBottomPadding = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            resources.getDimensionPixelSize(R.dimen.home_app_padding_vertical)
+        } else {
+            48.dpToPx()
+        }
+        if (widgetIds.isEmpty()) {
+            widgetPagerAdapter.submitList(emptyList())
+            binding.homeAppsLayout.setPadding(
+                binding.homeAppsLayout.paddingLeft,
+                binding.homeAppsLayout.paddingTop,
+                binding.homeAppsLayout.paddingRight,
+                baseBottomPadding
+            )
+            binding.widgetPageIndicator.removeAllViews()
+            return
+        }
+
+        val heightPx = prefs.widgetAreaHeight.dpToPx()
+        binding.widgetArea.layoutParams = binding.widgetArea.layoutParams.apply { height = heightPx }
+        binding.homeAppsLayout.setPadding(
+            binding.homeAppsLayout.paddingLeft,
+            binding.homeAppsLayout.paddingTop,
+            binding.homeAppsLayout.paddingRight,
+            baseBottomPadding + heightPx
+        )
+        widgetPagerAdapter.submitList(widgetIds)
+        val page = prefs.widgetCurrentPage.coerceIn(0, widgetIds.lastIndex)
+        binding.widgetPager.setCurrentItem(page, false)
+        updateWidgetPageIndicator(page, widgetIds.size)
+        binding.widgetPager.post {
+            widgetPagerAdapter.updateAllSizes(
+                binding.widgetPager.width,
+                (binding.widgetPager.height - 12.dpToPx()).coerceAtLeast(1)
+            )
+        }
+    }
+
+    private fun updateWidgetPageIndicator(selected: Int, count: Int) {
+        binding.widgetPageIndicator.removeAllViews()
+        if (count <= 1) return
+        repeat(count) { index ->
+            val dot = View(requireContext()).apply {
+                background = GradientDrawable().apply {
+                    shape = GradientDrawable.OVAL
+                    setColor(
+                        requireContext().getColorFromAttr(
+                            if (index == selected) R.attr.primaryColor else R.attr.primaryColorTrans50
+                        )
+                    )
+                }
+            }
+            binding.widgetPageIndicator.addView(
+                dot,
+                android.widget.LinearLayout.LayoutParams(5.dpToPx(), 5.dpToPx()).apply {
+                    marginStart = 3.dpToPx()
+                    marginEnd = 3.dpToPx()
+                }
+            )
         }
     }
 
@@ -729,6 +937,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     override fun onDestroyView() {
+        widgetPageCallback?.let(binding.widgetPager::unregisterOnPageChangeCallback)
+        widgetPageCallback = null
+        if (::widgetPagerAdapter.isInitialized) widgetPagerAdapter.clear()
+        mediaRepository?.stop()
+        mediaRepository = null
         super.onDestroyView()
         _binding = null
     }

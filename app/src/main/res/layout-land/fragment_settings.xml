@@ -461,6 +461,132 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:background="@drawable/rounded_rect_shade_color"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    style="@style/TextLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/widgets"
+                    android:textColor="?attr/primaryColor" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/widgets"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/widgets"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:padding="8dp"
+                        tools:text="2" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/widget_area_height"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/widgetHeightValue"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:padding="8dp"
+                        tools:text="160 dp" />
+
+                    <LinearLayout
+                        android:id="@+id/widgetHeightLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_primary_gradient"
+                        android:gravity="end|center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="12dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/widgetHeightMinus"
+                            style="@style/TextMedium"
+                            android:layout_width="48dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="6dp"
+                            android:text="@string/minus" />
+
+                        <TextView
+                            android:id="@+id/widgetHeightCurrent"
+                            style="@style/TextSmallBold"
+                            android:layout_width="72dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            tools:text="160 dp" />
+
+                        <TextView
+                            android:id="@+id/widgetHeightPlus"
+                            style="@style/TextMedium"
+                            android:layout_width="48dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="6dp"
+                            android:text="@string/plus" />
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        style="@style/TextSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:paddingVertical="8dp"
+                        android:text="@string/music_widget"
+                        android:textColor="?attr/primaryColor" />
+
+                    <TextView
+                        android:id="@+id/musicWidgetToggle"
+                        style="@style/TextSmallBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:padding="8dp"
+                        tools:text="@string/off" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:background="@drawable/rounded_rect_shade_color"
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:orientation="vertical"

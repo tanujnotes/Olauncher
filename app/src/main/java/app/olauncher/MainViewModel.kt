@@ -1,6 +1,7 @@
 package app.olauncher
 
 import android.app.Application
+import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.os.UserHandle
 import android.os.UserManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import androidx.work.BackoffPolicy
 import androidx.work.Constraints
@@ -37,7 +39,10 @@ import java.util.Calendar
 import java.util.concurrent.TimeUnit
 
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(
+    application: Application,
+    private val savedStateHandle: SavedStateHandle,
+) : AndroidViewModel(application) {
     private val appContext by lazy { application.applicationContext }
     private val prefs = Prefs(appContext)
 
@@ -51,6 +56,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
     val screenTimeValue = MutableLiveData<String>()
+    val refreshWidgets = MutableLiveData<Unit>()
+    val widgetActivityResult = SingleLiveEvent<Pair<Int, Int>>()
+    var pendingWidgetId: Int
+        get() = savedStateHandle["pendingWidgetId"] ?: AppWidgetManager.INVALID_APPWIDGET_ID
+        set(value) {
+            savedStateHandle["pendingWidgetId"] = value
+        }
 
     val privateSpaceApps = MutableLiveData<List<AppModel>?>()
     val privateSpaceLocked = MutableLiveData<Boolean>()
@@ -342,6 +354,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun refreshHome(appCountUpdated: Boolean) {
         refreshHome.value = appCountUpdated
+    }
+
+    fun refreshWidgets() {
+        refreshWidgets.value = Unit
     }
 
     fun toggleDateTime() {

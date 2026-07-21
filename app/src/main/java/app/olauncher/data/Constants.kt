@@ -85,6 +85,17 @@ object Constants {
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
     const val REQUEST_CODE_LAUNCHER_SELECTOR = 678
+    const val REQUEST_CODE_BIND_WIDGET = 679
+    const val REQUEST_CODE_CONFIGURE_WIDGET = 680
+    const val WIDGET_HOST_ID = 1024
+
+    object Widget {
+        const val MIN_HEIGHT_DP = 80
+        const val MAX_HEIGHT_DP = 400
+        const val DEFAULT_HEIGHT_DP = 160
+        const val HEIGHT_STEP_DP = 20
+        const val MAX_WIDGETS = 5
+    }
 
     const val HINT_RATE_US = 15
 

@@ -167,4 +167,28 @@
     <string name="cheers">Cheers!</string>
     <string name="notification_bar">Notification bar</string>
     <string name="private_space">Private space</string>
+    <string name="widgets" translatable="false">Widgets</string>
+    <string name="add_widget" translatable="false">+ Add widget</string>
+    <string name="choose_widget" translatable="false">Choose widget</string>
+    <string name="remove_widget" translatable="false">Remove widget?</string>
+    <string name="remove" translatable="false">Remove</string>
+    <string name="widget_limit_reached" translatable="false">You can add up to 5 widgets</string>
+    <string name="widget_area_height" translatable="false">Widget area height</string>
+    <string name="dp_value" translatable="false">%1$d dp</string>
+    <string name="widget_pinned" translatable="false">Widget added</string>
+    <string name="widget_pin_failed" translatable="false">Unable to add widget</string>
+    <string name="add_widget_confirmation" translatable="false">Add this widget?</string>
+    <string name="add_widget_action" translatable="false">Add</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus" translatable="false">−</string>
+    <string name="music_widget" translatable="false">Music widget</string>
+    <string name="allow_notification_access" translatable="false">Allow notification access</string>
+    <string name="notification_access_message" translatable="false">Notification access is needed to show currently playing music</string>
+    <string name="music_play" translatable="false">Play</string>
+    <string name="music_pause" translatable="false">Pause</string>
+    <string name="music_next" translatable="false">Next</string>
+    <string name="music_previous" translatable="false">Previous</string>
+    <string name="music_artwork" translatable="false">Album art</string>
+    <string name="music_unknown_title" translatable="false">Unknown</string>
+    <string name="music_unknown_artist" translatable="false">Unknown artist</string>
 </resources>

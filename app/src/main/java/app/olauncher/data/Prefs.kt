@@ -42,6 +42,10 @@ class Prefs(context: Context) {
     private val SCREEN_TIME_LAST_UPDATED = "SCREEN_TIME_LAST_UPDATED"
     private val LAUNCHER_RESTART_TIMESTAMP = "LAUNCHER_RECREATE_TIMESTAMP"
     private val SHOWN_ON_DAY_OF_YEAR = "SHOWN_ON_DAY_OF_YEAR"
+    private val HOME_WIDGET_IDS = "HOME_WIDGET_IDS"
+    private val WIDGET_AREA_HEIGHT = "WIDGET_AREA_HEIGHT"
+    private val WIDGET_CURRENT_PAGE = "WIDGET_CURRENT_PAGE"
+    private val SHOW_MUSIC_WIDGET = "SHOW_MUSIC_WIDGET"
     // Home button for recents feature disabled
     // private val HOME_BUTTON_SHOW_RECENTS = "HOME_BUTTON_SHOW_RECENTS"
 
@@ -219,6 +223,34 @@ class Prefs(context: Context) {
     var shownOnDayOfYear: Int
         get() = prefs.getInt(SHOWN_ON_DAY_OF_YEAR, 0)
         set(value) = prefs.edit { putInt(SHOWN_ON_DAY_OF_YEAR, value).apply() }
+
+    var homeWidgetIds: String
+        get() = prefs.getString(HOME_WIDGET_IDS, "").orEmpty()
+        set(value) = prefs.edit { putString(HOME_WIDGET_IDS, value) }
+
+    var widgetIdList: List<Int>
+        get() = homeWidgetIds.split(',').mapNotNull { it.toIntOrNull() }
+        set(value) {
+            homeWidgetIds = value.distinct().joinToString(",")
+        }
+
+    var widgetAreaHeight: Int
+        get() = prefs.getInt(WIDGET_AREA_HEIGHT, Constants.Widget.DEFAULT_HEIGHT_DP)
+            .coerceIn(Constants.Widget.MIN_HEIGHT_DP, Constants.Widget.MAX_HEIGHT_DP)
+        set(value) = prefs.edit {
+            putInt(
+                WIDGET_AREA_HEIGHT,
+                value.coerceIn(Constants.Widget.MIN_HEIGHT_DP, Constants.Widget.MAX_HEIGHT_DP)
+            )
+        }
+
+    var widgetCurrentPage: Int
+        get() = prefs.getInt(WIDGET_CURRENT_PAGE, 0).coerceAtLeast(0)
+        set(value) = prefs.edit { putInt(WIDGET_CURRENT_PAGE, value.coerceAtLeast(0)) }
+
+    var showMusicWidget: Boolean
+        get() = prefs.getBoolean(SHOW_MUSIC_WIDGET, false)
+        set(value) = prefs.edit { putBoolean(SHOW_MUSIC_WIDGET, value).apply() }
 
     // Home button for recents feature disabled
     // var homeButtonShowRecents: Boolean

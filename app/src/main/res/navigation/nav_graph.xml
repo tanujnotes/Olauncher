@@ -53,6 +53,19 @@
             app:exitAnim="@anim/fade_exit"
             app:popEnterAnim="@anim/fade_enter"
             app:popExitAnim="@anim/fade_exit" />
+        <action
+            android:id="@+id/action_settingsFragment_to_widgetsFragment"
+            app:destination="@id/widgetsFragment"
+            app:enterAnim="@anim/fade_enter"
+            app:exitAnim="@anim/fade_exit"
+            app:popEnterAnim="@anim/fade_enter"
+            app:popExitAnim="@anim/fade_exit" />
     </fragment>
+
+    <fragment
+        android:id="@+id/widgetsFragment"
+        android:name="app.olauncher.ui.WidgetsFragment"
+        android:label="WidgetsFragment"
+        tools:layout="@layout/fragment_widgets" />
 
 </navigation>
