@@ -46,6 +46,11 @@ object Constants {
         const val NOTIFICATIONS = 2
     }
 
+    object MusicPosition {
+        const val BELOW_CLOCK = 0
+        const val BESIDE_CLOCK = 1
+    }
+
     object CharacterIndicator {
         const val SHOW = 102
         const val HIDE = 101
@@ -95,6 +100,13 @@ object Constants {
         const val DEFAULT_HEIGHT_DP = 160
         const val HEIGHT_STEP_DP = 20
         const val MAX_WIDGETS = 5
+    }
+
+    object Header {
+        const val MIN_TOP_MARGIN_DP = 8
+        const val MAX_TOP_MARGIN_DP = 160
+        const val DEFAULT_TOP_MARGIN_DP = 56
+        const val TOP_MARGIN_STEP_DP = 8
     }
 
     const val HINT_RATE_US = 15

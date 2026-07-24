@@ -46,6 +46,8 @@ class Prefs(context: Context) {
     private val WIDGET_AREA_HEIGHT = "WIDGET_AREA_HEIGHT"
     private val WIDGET_CURRENT_PAGE = "WIDGET_CURRENT_PAGE"
     private val SHOW_MUSIC_WIDGET = "SHOW_MUSIC_WIDGET"
+    private val MUSIC_WIDGET_POSITION = "MUSIC_WIDGET_POSITION"
+    private val HEADER_TOP_MARGIN = "HEADER_TOP_MARGIN"
     // Home button for recents feature disabled
     // private val HOME_BUTTON_SHOW_RECENTS = "HOME_BUTTON_SHOW_RECENTS"
 
@@ -251,6 +253,20 @@ class Prefs(context: Context) {
     var showMusicWidget: Boolean
         get() = prefs.getBoolean(SHOW_MUSIC_WIDGET, false)
         set(value) = prefs.edit { putBoolean(SHOW_MUSIC_WIDGET, value).apply() }
+
+    var musicWidgetPosition: Int
+        get() = prefs.getInt(MUSIC_WIDGET_POSITION, Constants.MusicPosition.BELOW_CLOCK)
+        set(value) = prefs.edit { putInt(MUSIC_WIDGET_POSITION, value) }
+
+    var headerTopMargin: Int
+        get() = prefs.getInt(HEADER_TOP_MARGIN, Constants.Header.DEFAULT_TOP_MARGIN_DP)
+            .coerceIn(Constants.Header.MIN_TOP_MARGIN_DP, Constants.Header.MAX_TOP_MARGIN_DP)
+        set(value) = prefs.edit {
+            putInt(
+                HEADER_TOP_MARGIN,
+                value.coerceIn(Constants.Header.MIN_TOP_MARGIN_DP, Constants.Header.MAX_TOP_MARGIN_DP)
+            )
+        }
 
     // Home button for recents feature disabled
     // var homeButtonShowRecents: Boolean

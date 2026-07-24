@@ -174,6 +174,7 @@
     <string name="remove" translatable="false">Remove</string>
     <string name="widget_limit_reached" translatable="false">You can add up to 5 widgets</string>
     <string name="widget_area_height" translatable="false">Widget area height</string>
+    <string name="clock_position" translatable="false">Clock position</string>
     <string name="dp_value" translatable="false">%1$d dp</string>
     <string name="widget_pinned" translatable="false">Widget added</string>
     <string name="widget_pin_failed" translatable="false">Unable to add widget</string>
@@ -182,6 +183,10 @@
     <string name="plus" translatable="false">+</string>
     <string name="minus" translatable="false">−</string>
     <string name="music_widget" translatable="false">Music widget</string>
+    <string name="music_position" translatable="false">Music position</string>
+    <string name="music_position_below" translatable="false">Below clock</string>
+    <string name="music_position_beside" translatable="false">Beside clock</string>
+    <string name="music_position_center_rejected" translatable="false">Beside clock is not available with centered alignment</string>
     <string name="allow_notification_access" translatable="false">Allow notification access</string>
     <string name="notification_access_message" translatable="false">Notification access is needed to show currently playing music</string>
     <string name="music_play" translatable="false">Play</string>

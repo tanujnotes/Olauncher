@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.view.WindowInsets
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -25,6 +26,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -83,6 +85,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
     // Null whenever the music views are fresh and nothing has been drawn into them yet
     private var renderedMusic: RenderedMusic? = null
+    private var musicLayoutKey: Int? = null
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -322,6 +325,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         binding.homeApp6.gravity = horizontalGravity
         binding.homeApp7.gravity = horizontalGravity
         binding.homeApp8.gravity = horizontalGravity
+        applyMusicWidgetLayout()
     }
 
     private fun initHomeAppsBounds() {
@@ -408,11 +412,13 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         val horizontalMargin = if (isLandscape) 64.dpToPx() else 10.dpToPx()
-        val marginTop = if (isLandscape) {
-            if (prefs.dateTimeVisibility == Constants.DateTime.DATE_ONLY) 36.dpToPx() else 56.dpToPx()
-        } else {
-            if (prefs.dateTimeVisibility == Constants.DateTime.DATE_ONLY) 45.dpToPx() else 72.dpToPx()
-        }
+        val dateOnly = prefs.dateTimeVisibility == Constants.DateTime.DATE_ONLY
+        val marginTop = when {
+            isLandscape && dateOnly -> prefs.headerTopMargin - 12
+            isLandscape -> prefs.headerTopMargin + 8
+            dateOnly -> prefs.headerTopMargin - 11
+            else -> prefs.headerTopMargin + 16
+        }.coerceAtLeast(0).dpToPx()
         val params = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             FrameLayout.LayoutParams.WRAP_CONTENT
@@ -428,6 +434,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun populateHomeScreen(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
+        applyHeaderPosition()
+        applyMusicWidgetLayout()
         populateDateTime()
         populateWidgets()
 
@@ -436,6 +444,140 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
         populateHomeApps()
         updateHomeAppsBounds()
+    }
+
+    /**
+     * Puts the music widget under the clock, or beside it when home alignment is left or right.
+     * Centered homes always keep music below. Left alignment puts music to the right of the clock;
+     * right alignment mirrors that (music on the left). Beside mode stacks the controls under the
+     * title so the track text can use the full width; below mode keeps the classic single row.
+     */
+    private fun applyMusicWidgetLayout() {
+        val alignment = prefs.homeAlignment
+        val wantBeside = prefs.musicWidgetPosition == Constants.MusicPosition.BESIDE_CLOCK
+        val sideBySide = wantBeside && alignment != Gravity.CENTER
+        val musicOnStart = alignment == Gravity.END // mirrored: clock on the right → music on the left
+        val layoutKey = when {
+            !sideBySide -> LAYOUT_BELOW
+            musicOnStart -> LAYOUT_BESIDE_START
+            else -> LAYOUT_BESIDE_END
+        }
+        if (musicLayoutKey == layoutKey) return
+        musicLayoutKey = layoutKey
+        renderedMusic = null
+
+        binding.headerLayout.orientation =
+            if (sideBySide) LinearLayout.HORIZONTAL else LinearLayout.VERTICAL
+
+        // Child order decides which side of the clock the music sits on
+        orderHeaderChildren(musicFirst = sideBySide && musicOnStart)
+        arrangeMusicContent(sideBySide)
+
+        binding.dateTimeLayout.updateLayoutParams<LinearLayout.LayoutParams> {
+            width = if (sideBySide) {
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            } else {
+                LinearLayout.LayoutParams.MATCH_PARENT
+            }
+            weight = 0f
+            gravity = if (sideBySide) Gravity.CENTER_VERTICAL else Gravity.NO_GRAVITY
+            marginStart = 0
+            marginEnd = 0
+            topMargin = 0
+        }
+        binding.musicWidget.updateLayoutParams<LinearLayout.LayoutParams> {
+            width = if (sideBySide) 0 else LinearLayout.LayoutParams.MATCH_PARENT
+            weight = if (sideBySide) 1f else 0f
+            gravity = if (sideBySide) Gravity.CENTER_VERTICAL else Gravity.NO_GRAVITY
+            val sideGap = if (sideBySide) MUSIC_SIDE_MARGIN_DP.dpToPx() else 0
+            marginStart = if (sideBySide && !musicOnStart) sideGap else 0
+            marginEnd = if (sideBySide && musicOnStart) sideGap else 0
+            topMargin = if (sideBySide) 0 else MUSIC_BELOW_MARGIN_DP.dpToPx()
+        }
+
+        binding.musicArtwork.updateLayoutParams<LinearLayout.LayoutParams> {
+            if (sideBySide) {
+                // Tall strip matching the title+controls column; centerCrop keeps the middle of the art
+                width = BESIDE_ARTWORK_WIDTH_DP.dpToPx()
+                height = LinearLayout.LayoutParams.MATCH_PARENT
+            } else {
+                val size = FULL_ARTWORK_DP.dpToPx()
+                width = size
+                height = size
+            }
+        }
+        binding.musicContent.gravity =
+            if (sideBySide) Gravity.TOP or Gravity.START else Gravity.CENTER_VERTICAL
+        binding.musicWidget.gravity = if (sideBySide) Gravity.START else alignment
+    }
+
+    private fun arrangeMusicContent(sideBySide: Boolean) {
+        val content = binding.musicContent
+        val details = binding.musicDetails
+        val info = binding.musicInfo
+        val controls = binding.musicControls
+
+        // Detach so we can rebuild either a single row or a stacked column
+        (info.parent as? ViewGroup)?.removeView(info)
+        (controls.parent as? ViewGroup)?.removeView(controls)
+        (details.parent as? ViewGroup)?.removeView(details)
+
+        if (sideBySide) {
+            details.addView(
+                info,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+            )
+            details.addView(
+                controls,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { topMargin = 2.dpToPx() }
+            )
+            content.addView(
+                details,
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                    marginStart = 12.dpToPx()
+                }
+            )
+        } else {
+            content.addView(
+                info,
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+                    marginStart = 12.dpToPx()
+                }
+            )
+            content.addView(
+                controls,
+                LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+            )
+        }
+    }
+
+    private fun orderHeaderChildren(musicFirst: Boolean) {
+        val header = binding.headerLayout
+        val first = if (musicFirst) binding.musicWidget else binding.dateTimeLayout
+        val second = if (musicFirst) binding.dateTimeLayout else binding.musicWidget
+        if (header.indexOfChild(first) == 0 && header.indexOfChild(second) == 1) return
+        header.removeView(binding.dateTimeLayout)
+        header.removeView(binding.musicWidget)
+        header.addView(first)
+        header.addView(second)
+    }
+
+    private fun applyHeaderPosition() {
+        val topMargin = prefs.headerTopMargin.dpToPx()
+        val params = binding.headerLayout.layoutParams as FrameLayout.LayoutParams
+        if (params.topMargin != topMargin) {
+            params.topMargin = topMargin
+            binding.headerLayout.layoutParams = params
+        }
     }
 
     private fun populateHomeApps() {
@@ -519,6 +661,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     private fun initMusicWidget() {
         // The views are recreated on every navigation, so the diff cache has to start empty too
         renderedMusic = null
+        musicLayoutKey = null
 
         val artRadius = 8.dpToPx().toFloat()
         binding.musicArtwork.outlineProvider = object : ViewOutlineProvider() {
@@ -544,6 +687,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         binding.musicContent.setOnTouchListener(swipeToDismiss)
         binding.musicArtwork.setOnTouchListener(swipeToDismiss)
         binding.musicInfo.setOnTouchListener(swipeToDismiss)
+        binding.musicDetails.setOnTouchListener(swipeToDismiss)
+        binding.musicControls.setOnTouchListener(swipeToDismiss)
         binding.musicPrevious.setOnTouchListener(swipeToDismiss)
         binding.musicPlayPause.setOnTouchListener(swipeToDismiss)
         binding.musicNext.setOnTouchListener(swipeToDismiss)
@@ -1029,5 +1174,12 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         const val HOME_APPS_GAP_DP = -5
         const val MIN_APP_PADDING_DP = 2
         const val MAX_APP_PADDING_DP = 24
+        const val MUSIC_BELOW_MARGIN_DP = 12
+        const val MUSIC_SIDE_MARGIN_DP = 16
+        const val FULL_ARTWORK_DP = 48
+        const val BESIDE_ARTWORK_WIDTH_DP = 40
+        const val LAYOUT_BELOW = 0
+        const val LAYOUT_BESIDE_END = 1   // music to the right of the clock
+        const val LAYOUT_BESIDE_START = 2 // music to the left of the clock (mirrored)
     }
 }

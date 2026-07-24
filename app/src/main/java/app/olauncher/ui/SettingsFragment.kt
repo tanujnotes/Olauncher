@@ -109,6 +109,12 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
                 applyWidgetHeight()
             }
         }
+        if (view.id != R.id.clockPositionMinus && view.id != R.id.clockPositionPlus) {
+            if (binding.clockPositionLayout.isVisible) {
+                binding.clockPositionLayout.visibility = View.GONE
+                applyClockPosition()
+            }
+        }
         if (view.id != R.id.textSizeMinus && view.id != R.id.textSizePlus) {
             if (binding.textSizesLayout.isVisible) {
                 binding.textSizesLayout.visibility = View.GONE
@@ -134,11 +140,22 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.widgetHeightMinus -> adjustWidgetHeight(-Constants.Widget.HEIGHT_STEP_DP)
             R.id.widgetHeightPlus -> adjustWidgetHeight(Constants.Widget.HEIGHT_STEP_DP)
             R.id.musicWidgetToggle -> toggleMusicWidget()
+            R.id.musicPositionToggle -> toggleMusicPosition()
+            R.id.clockPositionValue -> binding.clockPositionLayout.visibility = View.VISIBLE
+            R.id.clockPositionMinus -> adjustClockPosition(-Constants.Header.TOP_MARGIN_STEP_DP)
+            R.id.clockPositionPlus -> adjustClockPosition(Constants.Header.TOP_MARGIN_STEP_DP)
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> binding.alignmentSelectLayout.visibility = View.VISIBLE
             R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
-            R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
+            R.id.alignmentCenter -> {
+                if (prefs.musicWidgetPosition == Constants.MusicPosition.BESIDE_CLOCK) {
+                    prefs.musicWidgetPosition = Constants.MusicPosition.BELOW_CLOCK
+                    populateWidgetSettings()
+                    requireContext().showToast(R.string.music_position_center_rejected, Toast.LENGTH_LONG)
+                }
+                viewModel.updateHomeAlignment(Gravity.CENTER)
+            }
             R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
             R.id.alignmentBottom -> updateHomeBottomAlignment()
             R.id.statusBar -> toggleStatusBar()
@@ -238,6 +255,10 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.widgetHeightMinus.setOnClickListener(this)
         binding.widgetHeightPlus.setOnClickListener(this)
         binding.musicWidgetToggle.setOnClickListener(this)
+        binding.musicPositionToggle.setOnClickListener(this)
+        binding.clockPositionValue.setOnClickListener(this)
+        binding.clockPositionMinus.setOnClickListener(this)
+        binding.clockPositionPlus.setOnClickListener(this)
         binding.screenTimeOnOff.setOnClickListener(this)
         binding.dailyWallpaperUrl.setOnClickListener(this)
         binding.dailyWallpaper.setOnClickListener(this)
@@ -500,6 +521,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     }
 
     private var pendingWidgetHeight = -1
+    private var pendingClockPosition = -1
 
     private fun populateWidgetSettings() {
         binding.widgets.text = prefs.widgetIdList.size.toString()
@@ -508,6 +530,16 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.widgetHeightValue.text = text
         binding.widgetHeightCurrent.text = text
         binding.musicWidgetToggle.text = getString(if (prefs.showMusicWidget) R.string.on else R.string.off)
+        binding.musicPositionToggle.text = getString(
+            if (prefs.musicWidgetPosition == Constants.MusicPosition.BESIDE_CLOCK) R.string.music_position_beside
+            else R.string.music_position_below
+        )
+
+        val clockPosition =
+            if (pendingClockPosition >= 0) pendingClockPosition else prefs.headerTopMargin
+        val clockText = getString(R.string.dp_value, clockPosition)
+        binding.clockPositionValue.text = clockText
+        binding.clockPositionCurrent.text = clockText
     }
 
     private fun toggleMusicWidget() {
@@ -522,6 +554,22 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
                 startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
             }
         }
+    }
+
+    private fun toggleMusicPosition() {
+        if (prefs.musicWidgetPosition == Constants.MusicPosition.BESIDE_CLOCK) {
+            prefs.musicWidgetPosition = Constants.MusicPosition.BELOW_CLOCK
+            populateWidgetSettings()
+            viewModel.refreshHome(false)
+            return
+        }
+        if (prefs.homeAlignment == Gravity.CENTER) {
+            requireContext().showToast(R.string.music_position_center_rejected, Toast.LENGTH_LONG)
+            return
+        }
+        prefs.musicWidgetPosition = Constants.MusicPosition.BESIDE_CLOCK
+        populateWidgetSettings()
+        viewModel.refreshHome(false)
     }
 
     private fun adjustWidgetHeight(delta: Int) {
@@ -543,6 +591,27 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         prefs.widgetAreaHeight = pendingWidgetHeight
         pendingWidgetHeight = -1
         viewModel.refreshWidgets()
+    }
+
+    private fun adjustClockPosition(delta: Int) {
+        val current = if (pendingClockPosition >= 0) pendingClockPosition else prefs.headerTopMargin
+        val updated = (current + delta).coerceIn(
+            Constants.Header.MIN_TOP_MARGIN_DP,
+            Constants.Header.MAX_TOP_MARGIN_DP
+        )
+        if (updated == current) return
+        pendingClockPosition = updated
+        populateWidgetSettings()
+    }
+
+    private fun applyClockPosition() {
+        if (pendingClockPosition < 0 || pendingClockPosition == prefs.headerTopMargin) {
+            pendingClockPosition = -1
+            return
+        }
+        prefs.headerTopMargin = pendingClockPosition
+        pendingClockPosition = -1
+        viewModel.refreshHome(false)
     }
 
     private var pendingTextSizeScale: Float = -1f
@@ -751,6 +820,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
 
     override fun onPause() {
         applyWidgetHeight()
+        applyClockPosition()
         super.onPause()
     }
 

@@ -101,63 +101,79 @@
                     android:src="@drawable/ic_music_note" />
 
                 <LinearLayout
-                    android:id="@+id/musicInfo"
+                    android:id="@+id/musicDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginStart="12dp"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/musicTitle"
-                        style="@style/TextMedium"
+                    <LinearLayout
+                        android:id="@+id/musicInfo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:focusable="true"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:singleLine="true"
-                        tools:text="Song title" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/musicArtist"
-                        style="@style/TextSmall"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/musicTitle"
+                            style="@style/TextMedium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:singleLine="true"
+                            tools:text="Song title" />
+
+                        <TextView
+                            android:id="@+id/musicArtist"
+                            style="@style/TextSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.6"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:singleLine="true"
+                            tools:text="Artist" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/musicControls"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:alpha="0.6"
-                        android:ellipsize="marquee"
-                        android:focusable="true"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:singleLine="true"
-                        tools:text="Artist" />
+                        android:layout_marginTop="2dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/musicPrevious"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="@string/music_previous"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_skip_previous" />
+
+                        <ImageView
+                            android:id="@+id/musicPlayPause"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="@string/music_play"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_play" />
+
+                        <ImageView
+                            android:id="@+id/musicNext"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:contentDescription="@string/music_next"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_skip_next" />
+                    </LinearLayout>
                 </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/musicPrevious"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/music_previous"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_skip_previous" />
-
-                <ImageView
-                    android:id="@+id/musicPlayPause"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/music_play"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_play" />
-
-                <ImageView
-                    android:id="@+id/musicNext"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/music_next"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_skip_next" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
