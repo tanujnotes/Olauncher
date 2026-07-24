@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "app.olauncher"
-        minSdkVersion 24
+        minSdkVersion 25
         targetSdkVersion 35
         versionCode 110
         versionName "v6.7.19"
