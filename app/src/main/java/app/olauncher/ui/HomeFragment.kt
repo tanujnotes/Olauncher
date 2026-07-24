@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
+import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -56,6 +57,7 @@ import app.olauncher.helper.setPlainWallpaperByTheme
 import app.olauncher.helper.showToast
 import app.olauncher.helper.WidgetHostManager
 import app.olauncher.listener.OnSwipeTouchListener
+import app.olauncher.listener.SwipeDismissTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -71,13 +73,22 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     private lateinit var widgetPagerAdapter: WidgetPagerAdapter
     private var widgetPageCallback: ViewPager2.OnPageChangeCallback? = null
     private var mediaRepository: MediaPlaybackRepository? = null
-    private var lastMusicTitle: String? = null
-    private var lastMusicArtist: String? = null
-    private var lastMusicPlaying: Boolean? = null
-    private var lastMusicArtworkHash: Int? = null
+
+    private data class RenderedMusic(
+        val title: String,
+        val artist: String,
+        val isPlaying: Boolean,
+        val artworkId: Int?,
+    )
+
+    // Null whenever the music views are fresh and nothing has been drawn into them yet
+    private var renderedMusic: RenderedMusic? = null
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private var homeAppViews: List<TextView> = emptyList()
+    private var headerBottom = UNMEASURED
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -94,8 +105,12 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         deviceManager = context?.getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
         widgetHostManager = WidgetHostManager.get(requireContext())
         mediaRepository = MediaPlaybackRepository(requireContext())
+        homeAppViews = with(binding) {
+            listOf(homeApp1, homeApp2, homeApp3, homeApp4, homeApp5, homeApp6, homeApp7, homeApp8)
+        }
         initWidgetPager()
         initMusicWidget()
+        initHomeAppsBounds()
 
         initObservers()
         setHomeAlignment(prefs.homeAlignment)
@@ -309,6 +324,63 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         binding.homeApp8.gravity = horizontalGravity
     }
 
+    private fun initHomeAppsBounds() {
+        headerBottom = UNMEASURED
+        // The header grows and shrinks with the date and music widget, so follow its size
+        binding.headerLayout.addOnLayoutChangeListener { _, _, _, _, bottom, _, _, _, _ ->
+            if (bottom == headerBottom) return@addOnLayoutChangeListener
+            headerBottom = bottom
+            updateHomeAppsBounds()
+        }
+        binding.homeAppsLayout.addOnLayoutChangeListener { _, _, top, _, bottom, _, oldTop, _, oldBottom ->
+            if (bottom - top != oldBottom - oldTop) updateHomeAppsBounds()
+        }
+    }
+
+    /**
+     * Keeps the home apps inside the space left between the header (clock, date and music widget)
+     * and the widget area, spreading them evenly so the gaps shrink as apps are added.
+     */
+    private fun updateHomeAppsBounds() {
+        val layout = binding.homeAppsLayout
+        val available = layout.height
+        if (available == 0 || headerBottom == UNMEASURED) return
+
+        val apps = homeAppViews.filter { it.isVisible }
+        val textHeight = apps.maxOfOrNull { app ->
+            (app.height - app.paddingTop - app.paddingBottom).coerceAtLeast(app.lineHeight)
+        } ?: 0
+
+        val bottomInset = homeAppsBottomInset()
+        val minAppsHeight = apps.size * (textHeight + 2 * MIN_APP_PADDING_DP.dpToPx())
+        val topInset = (headerBottom + HOME_APPS_GAP_DP.dpToPx())
+            .coerceAtMost((available - bottomInset - minAppsHeight).coerceAtLeast(0))
+
+        if (layout.paddingTop != topInset || layout.paddingBottom != bottomInset) {
+            layout.setPadding(layout.paddingLeft, topInset, layout.paddingRight, bottomInset)
+        }
+        if (apps.isEmpty()) return
+
+        val slot = (available - topInset - bottomInset) / apps.size
+        val padding = ((slot - textHeight) / 2).coerceIn(
+            MIN_APP_PADDING_DP.dpToPx(),
+            MAX_APP_PADDING_DP.dpToPx()
+        )
+        apps.forEach { app ->
+            if (app.paddingTop != padding) app.updatePadding(top = padding, bottom = padding)
+        }
+    }
+
+    private fun homeAppsBottomInset(): Int {
+        val base = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            resources.getDimensionPixelSize(R.dimen.home_app_padding_vertical)
+        } else {
+            28.dpToPx()
+        }
+        if (!binding.widgetArea.isVisible) return base
+        return base + prefs.widgetAreaHeight.dpToPx() + HOME_APPS_GAP_DP.dpToPx()
+    }
+
     private fun populateDateTime() {
         binding.dateTimeLayout.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF
         binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
@@ -362,6 +434,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
             populateScreenTime()
 
+        populateHomeApps()
+        updateHomeAppsBounds()
+    }
+
+    private fun populateHomeApps() {
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
 
@@ -440,6 +517,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initMusicWidget() {
+        // The views are recreated on every navigation, so the diff cache has to start empty too
+        renderedMusic = null
+
         val artRadius = 8.dpToPx().toFloat()
         binding.musicArtwork.outlineProvider = object : ViewOutlineProvider() {
             override fun getOutline(view: View, outline: Outline) {
@@ -456,6 +536,17 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         binding.musicPrevious.setOnClickListener { mediaRepository?.skipPrevious() }
         binding.musicPlayPause.setOnClickListener { mediaRepository?.togglePlayPause() }
         binding.musicNext.setOnClickListener { mediaRepository?.skipNext() }
+
+        val swipeToDismiss = SwipeDismissTouchListener(binding.musicContent) {
+            binding.musicWidget.isVisible = false
+            mediaRepository?.dismissCurrent()
+        }
+        binding.musicContent.setOnTouchListener(swipeToDismiss)
+        binding.musicArtwork.setOnTouchListener(swipeToDismiss)
+        binding.musicInfo.setOnTouchListener(swipeToDismiss)
+        binding.musicPrevious.setOnTouchListener(swipeToDismiss)
+        binding.musicPlayPause.setOnTouchListener(swipeToDismiss)
+        binding.musicNext.setOnTouchListener(swipeToDismiss)
 
         val repository = mediaRepository ?: return
         viewLifecycleOwner.lifecycleScope.launch {
@@ -488,31 +579,30 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         binding.musicContent.isVisible = true
 
         val title = state.title.ifBlank { getString(R.string.music_unknown_title) }
-        if (title != lastMusicTitle) {
+        val artist = state.artist.ifBlank { getString(R.string.music_unknown_artist) }
+        val artworkId = state.artwork?.let { System.identityHashCode(it) }
+        val rendered = renderedMusic
+
+        if (rendered == null || title != rendered.title) {
             binding.musicTitle.text = title
-            lastMusicTitle = title
             binding.musicTitle.isSelected = true
         }
 
-        val artist = state.artist.ifBlank { getString(R.string.music_unknown_artist) }
-        if (artist != lastMusicArtist) {
+        if (rendered == null || artist != rendered.artist) {
             binding.musicArtist.text = artist
-            lastMusicArtist = artist
             binding.musicArtist.isSelected = true
         }
 
-        if (state.isPlaying != lastMusicPlaying) {
+        if (rendered == null || state.isPlaying != rendered.isPlaying) {
             binding.musicPlayPause.setImageResource(
                 if (state.isPlaying) R.drawable.ic_pause else R.drawable.ic_play
             )
             binding.musicPlayPause.contentDescription = getString(
                 if (state.isPlaying) R.string.music_pause else R.string.music_play
             )
-            lastMusicPlaying = state.isPlaying
         }
 
-        val artworkHash = state.artwork?.let { System.identityHashCode(it) }
-        if (artworkHash != lastMusicArtworkHash) {
+        if (rendered == null || artworkId != rendered.artworkId) {
             if (state.artwork != null) {
                 binding.musicArtwork.setImageBitmap(state.artwork)
                 binding.musicArtwork.setPadding(0)
@@ -520,39 +610,25 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 binding.musicArtwork.setImageResource(R.drawable.ic_music_note)
                 binding.musicArtwork.setPadding(10.dpToPx())
             }
-            lastMusicArtworkHash = artworkHash
         }
+
+        renderedMusic = RenderedMusic(title, artist, state.isPlaying, artworkId)
     }
 
     private fun populateWidgets() {
         if (!::widgetPagerAdapter.isInitialized) return
         val widgetIds = widgetHostManager.pruneStaleWidgets(prefs)
         binding.widgetArea.isVisible = widgetIds.isNotEmpty()
-        val baseBottomPadding = if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            resources.getDimensionPixelSize(R.dimen.home_app_padding_vertical)
-        } else {
-            28.dpToPx()
-        }
         if (widgetIds.isEmpty()) {
             widgetPagerAdapter.submitList(emptyList())
-            binding.homeAppsLayout.setPadding(
-                binding.homeAppsLayout.paddingLeft,
-                binding.homeAppsLayout.paddingTop,
-                binding.homeAppsLayout.paddingRight,
-                baseBottomPadding
-            )
             binding.widgetPageIndicator.removeAllViews()
+            updateHomeAppsBounds()
             return
         }
 
         val heightPx = prefs.widgetAreaHeight.dpToPx()
         binding.widgetArea.layoutParams = binding.widgetArea.layoutParams.apply { height = heightPx }
-        binding.homeAppsLayout.setPadding(
-            binding.homeAppsLayout.paddingLeft,
-            binding.homeAppsLayout.paddingTop,
-            binding.homeAppsLayout.paddingRight,
-            baseBottomPadding + heightPx
-        )
+        updateHomeAppsBounds()
         widgetPagerAdapter.submitList(widgetIds)
         val page = prefs.widgetCurrentPage.coerceIn(0, widgetIds.lastIndex)
         binding.widgetPager.setCurrentItem(page, false)
@@ -943,7 +1019,15 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         if (::widgetPagerAdapter.isInitialized) widgetPagerAdapter.clear()
         mediaRepository?.stop()
         mediaRepository = null
+        homeAppViews = emptyList()
         super.onDestroyView()
         _binding = null
+    }
+
+    private companion object {
+        const val UNMEASURED = -1
+        const val HOME_APPS_GAP_DP = -5
+        const val MIN_APP_PADDING_DP = 2
+        const val MAX_APP_PADDING_DP = 24
     }
 }

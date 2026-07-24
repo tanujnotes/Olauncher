@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaMetadata
 import android.media.session.MediaController
+import android.media.session.MediaSession
 import android.media.session.MediaSessionManager
 import android.media.session.PlaybackState
 import androidx.core.app.NotificationManagerCompat
@@ -80,6 +81,19 @@ class MediaPlaybackRepository(context: Context) {
         updateFromControllers(controllers)
     }
 
+    /** Hides the currently shown track, mirroring a swipe away in the notification shade. */
+    fun dismissCurrent() {
+        val controller = activeController ?: return
+        val metadata = controller.metadata
+        dismissed = DismissedMedia(
+            token = controller.sessionToken,
+            title = titleOf(metadata),
+            artist = artistOf(metadata)
+        )
+        MusicListenerService.cancelMediaNotification(controller.packageName)
+        pushStateFromController(controller)
+    }
+
     fun togglePlayPause() {
         val controller = activeController ?: return
         val playbackState = controller.playbackState?.state
@@ -134,9 +148,15 @@ class MediaPlaybackRepository(context: Context) {
     }
 
     private fun updateFromControllers(controllers: List<MediaController>) {
-        val preferred = controllers.firstOrNull { controller ->
-            controller.playbackState?.state == PlaybackState.STATE_PLAYING
-        } ?: controllers.firstOrNull()
+        val dismissedToken = dismissed?.token
+        if (dismissedToken != null && controllers.none { it.sessionToken == dismissedToken }) {
+            dismissed = null
+        }
+
+        val wanted = controllers.filter { it.sessionToken != dismissedToken }
+        val preferred = wanted.firstOrNull { it.playbackState?.state == PlaybackState.STATE_PLAYING }
+            ?: wanted.firstOrNull()
+            ?: controllers.firstOrNull()
         setActiveController(preferred)
         pushStateFromController(preferred)
     }
@@ -160,13 +180,22 @@ class MediaPlaybackRepository(context: Context) {
         }
 
         val metadata = controller.metadata
-        val title = metadata?.getString(MediaMetadata.METADATA_KEY_TITLE)
-            ?: metadata?.getString(MediaMetadata.METADATA_KEY_DISPLAY_TITLE)
-            ?: ""
-        val artist = metadata?.getString(MediaMetadata.METADATA_KEY_ARTIST)
-            ?: metadata?.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST)
-            ?: metadata?.getString(MediaMetadata.METADATA_KEY_DISPLAY_SUBTITLE)
-            ?: ""
+        val title = titleOf(metadata)
+        val artist = artistOf(metadata)
+
+        // A dismissed track stays hidden until it is replaced or its session goes away
+        val dismissedMedia = dismissed
+        if (dismissedMedia != null) {
+            if (dismissedMedia.token == controller.sessionToken &&
+                dismissedMedia.title == title &&
+                dismissedMedia.artist == artist
+            ) {
+                _state.value = MusicState(hasPermission = true)
+                return
+            }
+            dismissed = null
+        }
+
         val artwork = metadata?.getBitmap(MediaMetadata.METADATA_KEY_ART)
             ?: metadata?.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART)
         val playbackState = controller.playbackState?.state
@@ -183,7 +212,28 @@ class MediaPlaybackRepository(context: Context) {
         )
     }
 
+    private fun titleOf(metadata: MediaMetadata?): String =
+        metadata?.getString(MediaMetadata.METADATA_KEY_TITLE)
+            ?: metadata?.getString(MediaMetadata.METADATA_KEY_DISPLAY_TITLE)
+            ?: ""
+
+    private fun artistOf(metadata: MediaMetadata?): String =
+        metadata?.getString(MediaMetadata.METADATA_KEY_ARTIST)
+            ?: metadata?.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST)
+            ?: metadata?.getString(MediaMetadata.METADATA_KEY_DISPLAY_SUBTITLE)
+            ?: ""
+
+    private data class DismissedMedia(
+        val token: MediaSession.Token,
+        val title: String,
+        val artist: String,
+    )
+
     companion object {
+        // Process wide so a dismissal survives the home screen view being recreated
+        @Volatile
+        private var dismissed: DismissedMedia? = null
+
         fun hasNotificationListenerPermission(context: Context): Boolean =
             NotificationManagerCompat.getEnabledListenerPackages(context)
                 .contains(context.packageName)
