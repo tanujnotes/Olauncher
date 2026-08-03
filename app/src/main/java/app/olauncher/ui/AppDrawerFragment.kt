@@ -220,7 +220,7 @@ class AppDrawerFragment : BaseFragment() {
             },
             appRenameListener = { appModel, renameLabel ->
                 val identifier = when (appModel) {
-                    is AppModel.PinnedShortcut -> appModel.shortcutId
+                    is AppModel.PinnedShortcut -> appModel.identity
                     is AppModel.App -> appModel.appPackage
                     else -> return@AppDrawerAdapter
                 }

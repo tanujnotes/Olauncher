@@ -167,4 +167,12 @@
     <string name="cheers">Cheers!</string>
     <string name="notification_bar">Notification bar</string>
     <string name="private_space">Private space</string>
+    <string name="invalid_pin_request">Invalid pin request</string>
+    <string name="widgets_not_supported">Widgets are not supported</string>
+    <string name="pin_action_not_supported">This pin action is not supported</string>
+    <string name="shortcut_pinned">Shortcut added</string>
+    <string name="shortcut_pin_failed">Could not add shortcut</string>
+    <string name="invalid_shortcut">Invalid shortcut</string>
+    <string name="shortcut_not_found">Shortcut not found</string>
+    <string name="unable_to_open_shortcut">Unable to open shortcut</string>
 </resources>
