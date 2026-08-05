@@ -2,7 +2,7 @@
 
 
 # Olauncher | Minimal AF Launcher
-AF stands for Ad-Free
+AF stands for Ad-Free! :D
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
@@ -21,7 +21,7 @@ AF stands for Ad-Free
 
 License: [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-Dev: [X/twitter](https://x.com/tanujnotes) • [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
+Contact: [X/Twitter](https://x.com/tanujnotes) • [Reddit](https://reddit.com/user/tanujnotes/) • [Bluesky](https://bsky.app/profile/tanujnotes.bsky.social)
 
 ##
 
@@ -32,3 +32,13 @@ Dev: [X/twitter](https://x.com/tanujnotes) • [Bluesky](https://bsky.app/profil
 - [Note to Self](https://play.google.com/store/apps/details?id=com.makenotetoself) - Free and [open source](https://github.com/jeerovan/ntsapp) notes app with chat like interface and end-to-end encryption.
 
 - [Pentastic](https://play.google.com/store/apps/details?id=app.pentastic) - Minimal todo lists. Free and [open source](https://github.com/tanujnotes/Pentastic).
+
+##
+
+### Help me get a new phone for testing:
+
+[<img src="https://img.buymeacoffee.com/button-api/?emoji=&slug=tanujnotes&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+    alt="Get it on Play Store"
+    height="80">](https://www.buymeacoffee.com/tanujnotes)
+
+Thank you!
