@@ -289,7 +289,10 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun populateScreenTime() {
-        if (requireContext().appUsagePermissionGranted().not()) return
+        if (requireContext().appUsagePermissionGranted().not()) {
+            binding.tvScreenTime.visibility = View.GONE
+            return
+        }
 
         viewModel.getTodaysScreenTime()
         binding.tvScreenTime.visibility = View.VISIBLE

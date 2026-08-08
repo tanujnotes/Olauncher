@@ -22,6 +22,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
+import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.formattedTimeSpent
 import app.olauncher.helper.getAppsList
 import app.olauncher.helper.getPrivateSpaceApps
@@ -434,6 +435,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getTodaysScreenTime() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
+            || appContext.appUsagePermissionGranted().not()
+        ) return
         if (prefs.screenTimeLastUpdated.hasBeenMinutes(1).not()) return
 
         val eventLogWrapper = EventLogWrapper(
