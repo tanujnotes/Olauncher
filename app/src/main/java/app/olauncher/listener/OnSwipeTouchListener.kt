@@ -1,23 +1,27 @@
 package app.olauncher.listener
 
 import android.content.Context
+import android.os.Build
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
+import android.view.WindowInsets
 import app.olauncher.data.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.abs
 
 /*
 Swipe, double tap and long press touch listener for a view
 Source: https://www.tutorialspoint.com/how-to-handle-swipe-gestures-in-kotlin
+
+Updated: Added system gesture exclusion zone to allow both app gestures and
+system gestures (back, home, recent) to coexist without conflict.
 */
 
 internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
@@ -26,10 +30,100 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
     //    private var doubleTapOn = false
     private val gestureDetector: GestureDetector
 
+    // Cache for gesture insets to avoid repeated calculations
+    private var cachedSystemGestureLeft: Int = 0
+    private var cachedSystemGestureRight: Int = 0
+    private var cachedMandatoryGestureBottom: Int = 0
+    private var cachedScreenWidth: Int = 0
+    private var cachedScreenHeight: Int = 0
+    private var hasCachedInsets: Boolean = false
+
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         if (motionEvent.action == MotionEvent.ACTION_UP)
             longPressOn = false
+
+        // Check if touch is in system gesture exclusion zone
+        // If so, don't intercept - let system handle it
+        if (isInSystemGestureZone(view, motionEvent)) {
+            return false
+        }
+
         return gestureDetector.onTouchEvent(motionEvent)
+    }
+
+    /**
+     * Determines if the touch event is in the system gesture zone.
+     * System gesture zones are:
+     * - Left edge: Back gesture (swipe from left to right)
+     * - Right edge: Back gesture (swipe from right to left)
+     * - Bottom edge: Home/Recent gesture (swipe up from bottom)
+     *
+     * We exclude these zones from app gesture handling so both can coexist:
+     * - System handles gestures from edges
+     * - App handles gestures from the center area
+     */
+    private fun isInSystemGestureZone(view: View, motionEvent: MotionEvent): Boolean {
+        // Only apply exclusion on Android 10+ (API 29) where gesture navigation exists
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            return false
+        }
+
+        val x = motionEvent.x
+        val y = motionEvent.y
+
+        // Cache the gesture insets for performance
+        if (!hasCachedInsets) {
+            cacheGestureInsets(view)
+        }
+
+        // Check left edge - system back gesture zone
+        if (x < cachedSystemGestureLeft) {
+            return true
+        }
+
+        // Check right edge - system back gesture zone
+        if (x > cachedScreenWidth - cachedSystemGestureRight) {
+            return true
+        }
+
+        // Check bottom edge - system home/recent gesture zone
+        // Only exclude if touch starts from bottom zone
+        if (y > cachedScreenHeight - cachedMandatoryGestureBottom) {
+            return true
+        }
+
+        return false
+    }
+
+    /**
+     * Cache the system gesture insets to avoid repeated calculations.
+     * This is called once when the first touch event is received.
+     */
+    private fun cacheGestureInsets(view: View) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val insets = view.rootWindowInsets
+            if (insets != null) {
+                // System gesture insets - area where system handles edge swipes (back gesture)
+                val systemGestureInsets = insets.getInsets(WindowInsets.Type.systemGestures())
+                cachedSystemGestureLeft = systemGestureInsets.left
+                cachedSystemGestureRight = systemGestureInsets.right
+
+                // Mandatory system gesture insets - area where system handles bottom swipes (home/recent)
+                val mandatoryGestureInsets = insets.getInsets(WindowInsets.Type.mandatorySystemGestures())
+                cachedMandatoryGestureBottom = mandatoryGestureInsets.bottom
+            }
+        } else {
+            // Fallback for Android 9-10: Use default edge size (typically 20-32dp)
+            val density = view.context.resources.displayMetrics.density
+            val defaultEdgeSize = (32 * density).toInt() // 32dp default
+            cachedSystemGestureLeft = defaultEdgeSize
+            cachedSystemGestureRight = defaultEdgeSize
+            cachedMandatoryGestureBottom = (48 * density).toInt() // 48dp for bottom
+        }
+
+        cachedScreenWidth = view.width
+        cachedScreenHeight = view.height
+        hasCachedInsets = true
     }
 
     private inner class GestureListener : SimpleOnGestureListener() {
