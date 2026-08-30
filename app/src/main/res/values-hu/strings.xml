@@ -143,4 +143,13 @@
     <string name="new_year_wish_1">Nem számít, hogyan telt a január. Még mindig van hátra az évből, hogy minden eddiginél jobban teljesíts.</string>
     <string name="cheers">Egészségére!</string>
     <string name="notification_bar">Értesítési sáv</string>
+    <string name="private_space">Privát tér</string>
+    <string name="invalid_pin_request">Érvénytelen rögzítési kérelem</string>
+    <string name="widgets_not_supported">A modulok nem támogatottak</string>
+    <string name="pin_action_not_supported">Ez a rögzítési művelet nem támogatott</string>
+    <string name="shortcut_pinned">Parancsikon hozzáadva</string>
+    <string name="shortcut_pin_failed">Nem sikerült hozzáadni a parancsikont</string>
+    <string name="invalid_shortcut">Érvénytelen parancsikon</string>
+    <string name="shortcut_not_found">A parancsikon nem található</string>
+    <string name="unable_to_open_shortcut">Nem lehet megnyitni a parancsikont</string>
 </resources><!-- Hungarian -->

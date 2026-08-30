@@ -141,4 +141,13 @@
     <string name="new_year_wish_1">" Peu importe comment s'est passé le mois de janvier. Tu as encore le reste de l'année pour faire mieux que jamais."</string>
     <string name="cheers">Santé!</string>
     <string name="notification_bar">Barre de notifications</string>
+    <string name="private_space">Espace privé</string>
+    <string name="invalid_pin_request">Demande d\'épinglage non valide</string>
+    <string name="widgets_not_supported">Les widgets ne sont pas pris en charge</string>
+    <string name="pin_action_not_supported">Cette action d\'épinglage n\'est pas prise en charge</string>
+    <string name="shortcut_pinned">Raccourci ajouté</string>
+    <string name="shortcut_pin_failed">Impossible d\'ajouter le raccourci</string>
+    <string name="invalid_shortcut">Raccourci non valide</string>
+    <string name="shortcut_not_found">Raccourci introuvable</string>
+    <string name="unable_to_open_shortcut">Impossible d\'ouvrir le raccourci</string>
 </resources><!-- French -->

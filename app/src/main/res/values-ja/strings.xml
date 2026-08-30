@@ -140,4 +140,13 @@
     <string name="new_year_wish_1">1月がどうだったかは関係ありません。これまで以上に良い結果を出すために、まだ今年の残りの期間があります。</string>
     <string name="cheers">乾杯!</string>
     <string name="notification_bar">通知バー</string>
+    <string name="private_space">プライベート スペース</string>
+    <string name="invalid_pin_request">無効な固定リクエストです</string>
+    <string name="widgets_not_supported">ウィジェットはサポートされていません</string>
+    <string name="pin_action_not_supported">この固定操作はサポートされていません</string>
+    <string name="shortcut_pinned">ショートカットを追加しました</string>
+    <string name="shortcut_pin_failed">ショートカットを追加できませんでした</string>
+    <string name="invalid_shortcut">無効なショートカットです</string>
+    <string name="shortcut_not_found">ショートカットが見つかりません</string>
+    <string name="unable_to_open_shortcut">ショートカットを開けません</string>
 </resources> <!-- Japanese -->

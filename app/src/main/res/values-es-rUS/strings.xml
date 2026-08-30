@@ -139,4 +139,13 @@
     <string name="new_year_wish_1">No importa cómo haya ido enero. Todavía tienes el resto del año para hacerlo mejor que nunca.</string>
     <string name="cheers">¡Salud!</string>
     <string name="notification_bar">Barra de notificaciones</string>
+    <string name="private_space">Espacio privado</string>
+    <string name="invalid_pin_request">Solicitud de anclaje no válida</string>
+    <string name="widgets_not_supported">Los widgets no son compatibles</string>
+    <string name="pin_action_not_supported">Esta acción de anclaje no es compatible</string>
+    <string name="shortcut_pinned">Acceso directo agregado</string>
+    <string name="shortcut_pin_failed">No se pudo agregar el acceso directo</string>
+    <string name="invalid_shortcut">Acceso directo no válido</string>
+    <string name="shortcut_not_found">No se encontró el acceso directo</string>
+    <string name="unable_to_open_shortcut">No se puede abrir el acceso directo</string>
 </resources><!-- Spanish -->

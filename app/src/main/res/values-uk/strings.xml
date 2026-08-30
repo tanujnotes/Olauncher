@@ -141,4 +141,13 @@
     <string name="new_year_wish_1">" Неважливо, як пройшов січень. У вас ще є решта року, щоб досягти успіху, як ніколи раніше."</string>
     <string name="cheers">будьмо!</string>
     <string name="notification_bar">Панель сповіщень</string>
+    <string name="private_space">Приватний простір</string>
+    <string name="invalid_pin_request">Недійсний запит на закріплення</string>
+    <string name="widgets_not_supported">Віджети не підтримуються</string>
+    <string name="pin_action_not_supported">Ця дія закріплення не підтримується</string>
+    <string name="shortcut_pinned">Ярлик додано</string>
+    <string name="shortcut_pin_failed">Не вдалося додати ярлик</string>
+    <string name="invalid_shortcut">Недійсний ярлик</string>
+    <string name="shortcut_not_found">Ярлик не знайдено</string>
+    <string name="unable_to_open_shortcut">Не вдалося відкрити ярлик</string>
 </resources><!-- Ukrainian -->

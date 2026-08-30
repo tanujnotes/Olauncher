@@ -139,4 +139,13 @@
     <string name="new_year_wish_1">Nie ma znaczenia, jak minął styczeń. Wciąż masz resztę roku, aby poradzić sobie lepiej niż kiedykolwiek.</string>
     <string name="cheers">Na zdrowie!</string>
     <string name="notification_bar">Pasek powiadomień</string>
+    <string name="private_space">Przestrzeń prywatna</string>
+    <string name="invalid_pin_request">Nieprawidłowe żądanie przypięcia</string>
+    <string name="widgets_not_supported">Widżety nie są obsługiwane</string>
+    <string name="pin_action_not_supported">Ta czynność przypinania nie jest obsługiwana</string>
+    <string name="shortcut_pinned">Dodano skrót</string>
+    <string name="shortcut_pin_failed">Nie można dodać skrótu</string>
+    <string name="invalid_shortcut">Nieprawidłowy skrót</string>
+    <string name="shortcut_not_found">Nie znaleziono skrótu</string>
+    <string name="unable_to_open_shortcut">Nie można otworzyć skrótu</string>
 </resources><!-- Polish -->

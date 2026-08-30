@@ -138,4 +138,13 @@
     <string name="new_year_wish_1">لا يهم كيف مضى شهر يناير. لا يزال لديك بقية العام لتقدم أداءً أفضل من أي وقت مضى.</string>
     <string name="cheers">هتافات!</string>
     <string name="notification_bar">شريط الإشعارات</string>
+    <string name="private_space">المساحة الخاصة</string>
+    <string name="invalid_pin_request">طلب تثبيت غير صالح</string>
+    <string name="widgets_not_supported">التطبيقات المصغرة غير مدعومة</string>
+    <string name="pin_action_not_supported">إجراء التثبيت هذا غير مدعوم</string>
+    <string name="shortcut_pinned">تمت إضافة الاختصار</string>
+    <string name="shortcut_pin_failed">تعذرت إضافة الاختصار</string>
+    <string name="invalid_shortcut">اختصار غير صالح</string>
+    <string name="shortcut_not_found">لم يتم العثور على الاختصار</string>
+    <string name="unable_to_open_shortcut">يتعذر فتح الاختصار</string>
 </resources>

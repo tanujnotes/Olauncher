@@ -141,4 +141,13 @@
     <string name="new_year_wish_1">Ocak ayının nasıl geçtiği önemli değil. Her zamankinden daha iyisini yapmak için hala yılın geri kalanı var.</string>
     <string name="cheers">Şerefe!</string>
     <string name="notification_bar">Bildirim çubuğu</string>
+    <string name="private_space">Özel alan</string>
+    <string name="invalid_pin_request">Geçersiz sabitleme isteği</string>
+    <string name="widgets_not_supported">Widget\'lar desteklenmiyor</string>
+    <string name="pin_action_not_supported">Bu sabitleme işlemi desteklenmiyor</string>
+    <string name="shortcut_pinned">Kısayol eklendi</string>
+    <string name="shortcut_pin_failed">Kısayol eklenemedi</string>
+    <string name="invalid_shortcut">Geçersiz kısayol</string>
+    <string name="shortcut_not_found">Kısayol bulunamadı</string>
+    <string name="unable_to_open_shortcut">Kısayol açılamıyor</string>
 </resources><!-- Turkish -->

@@ -141,4 +141,13 @@
     <string name="new_year_wish_1">Egal, wie der Januar gelaufen ist. Du hast noch den Rest des Jahres Zeit, um besser zu sein als je zuvor.</string>
     <string name="cheers">Prost!</string>
     <string name="notification_bar">Benachrichtigungsleiste</string>
+    <string name="private_space">Privater Bereich</string>
+    <string name="invalid_pin_request">Ungültige Anheftanfrage</string>
+    <string name="widgets_not_supported">Widgets werden nicht unterstützt</string>
+    <string name="pin_action_not_supported">Diese Anheftaktion wird nicht unterstützt</string>
+    <string name="shortcut_pinned">Verknüpfung hinzugefügt</string>
+    <string name="shortcut_pin_failed">Verknüpfung konnte nicht hinzugefügt werden</string>
+    <string name="invalid_shortcut">Ungültige Verknüpfung</string>
+    <string name="shortcut_not_found">Verknüpfung nicht gefunden</string>
+    <string name="unable_to_open_shortcut">Verknüpfung kann nicht geöffnet werden</string>
 </resources>

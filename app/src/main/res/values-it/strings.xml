@@ -141,4 +141,13 @@
     <string name="new_year_wish_1">" Non importa come sia andato gennaio. Hai ancora il resto dell'anno per fare meglio che mai."</string>
     <string name="cheers">Saluti!</string>
     <string name="notification_bar">Barra delle notifiche</string>
+    <string name="private_space">Spazio privato</string>
+    <string name="invalid_pin_request">Richiesta di aggiunta non valida</string>
+    <string name="widgets_not_supported">I widget non sono supportati</string>
+    <string name="pin_action_not_supported">Questa azione di aggiunta non è supportata</string>
+    <string name="shortcut_pinned">Scorciatoia aggiunta</string>
+    <string name="shortcut_pin_failed">Impossibile aggiungere la scorciatoia</string>
+    <string name="invalid_shortcut">Scorciatoia non valida</string>
+    <string name="shortcut_not_found">Scorciatoia non trovata</string>
+    <string name="unable_to_open_shortcut">Impossibile aprire la scorciatoia</string>
 </resources><!-- Italian -->

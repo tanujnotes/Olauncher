@@ -139,4 +139,13 @@
     <string name="new_year_wish_1">Det spelar ingen roll hur januari gick. Du har fortfarande resten av året på dig att göra bättre ifrån dig än någonsin.</string>
     <string name="cheers">Skål!</string>
     <string name="notification_bar">Aviseringsfält</string>
+    <string name="private_space">Privat rum</string>
+    <string name="invalid_pin_request">Ogiltig begäran om att fästa</string>
+    <string name="widgets_not_supported">Widgetar stöds inte</string>
+    <string name="pin_action_not_supported">Den här fäståtgärden stöds inte</string>
+    <string name="shortcut_pinned">Genväg har lagts till</string>
+    <string name="shortcut_pin_failed">Det gick inte att lägga till genvägen</string>
+    <string name="invalid_shortcut">Ogiltig genväg</string>
+    <string name="shortcut_not_found">Genvägen hittades inte</string>
+    <string name="unable_to_open_shortcut">Det går inte att öppna genvägen</string>
 </resources><!-- Swedish -->

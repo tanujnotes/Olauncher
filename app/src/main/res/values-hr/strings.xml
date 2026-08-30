@@ -140,4 +140,13 @@
     <string name="new_year_wish_1">Nije važno kako je prošao siječanj. Još uvijek imate ostatak godine da budete bolji nego ikad.</string>
     <string name="cheers">Živjeli!</string>
     <string name="notification_bar">Traka obavijesti</string>
+    <string name="private_space">Privatni prostor</string>
+    <string name="invalid_pin_request">Nevažeći zahtjev za prikvačivanje</string>
+    <string name="widgets_not_supported">Widgeti nisu podržani</string>
+    <string name="pin_action_not_supported">Ova radnja prikvačivanja nije podržana</string>
+    <string name="shortcut_pinned">Prečac je dodan</string>
+    <string name="shortcut_pin_failed">Prečac nije moguće dodati</string>
+    <string name="invalid_shortcut">Nevažeći prečac</string>
+    <string name="shortcut_not_found">Prečac nije pronađen</string>
+    <string name="unable_to_open_shortcut">Prečac nije moguće otvoriti</string>
 </resources><!-- Croatian -->

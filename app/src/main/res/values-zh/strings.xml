@@ -142,4 +142,13 @@
     <string name="new_year_wish_1">月过得如何并不重要。你还有一年的时间做到比以往任何时候都更好。</string>
     <string name="cheers">干杯!</string>
     <string name="notification_bar">通知栏</string>
+    <string name="private_space">私密空间</string>
+    <string name="invalid_pin_request">无效的固定请求</string>
+    <string name="widgets_not_supported">不支持小部件</string>
+    <string name="pin_action_not_supported">不支持此固定操作</string>
+    <string name="shortcut_pinned">已添加快捷方式</string>
+    <string name="shortcut_pin_failed">无法添加快捷方式</string>
+    <string name="invalid_shortcut">无效的快捷方式</string>
+    <string name="shortcut_not_found">未找到快捷方式</string>
+    <string name="unable_to_open_shortcut">无法打开快捷方式</string>
 </resources><!-- Chinese -->

@@ -133,4 +133,13 @@
     <string name="app_usage_message">כדי להציג/להסתיר את זמן המסך שלך במסך הבית, אנא אפשר או בטל את הרשאת השימוש באפליקציה. הערה: לא נאספים נתוני שימוש באפליקציה. הכל מעובד במכשיר שלך.</string>
     <string name="pro_message">ל-Olauncher יש גם גרסת Pro בשם Pro Launcher. יש לה תכונות נוספות כמו מזג אוויר, ווידג\'טים, גופנים, תיקיות, טפטים של AMOLED וכן הלאה. זוהי גם הדרך הטובה ביותר לתמוך במפתחי Olauncher. תבדקו!</string>
     <string name="notification_bar">שורת ההתראות</string>
+    <string name="private_space">מרחב פרטי</string>
+    <string name="invalid_pin_request">בקשת הצמדה לא חוקית</string>
+    <string name="widgets_not_supported">אין תמיכה בווידג\'טים</string>
+    <string name="pin_action_not_supported">פעולת הצמדה זו אינה נתמכת</string>
+    <string name="shortcut_pinned">קיצור הדרך נוסף</string>
+    <string name="shortcut_pin_failed">לא ניתן להוסיף את קיצור הדרך</string>
+    <string name="invalid_shortcut">קיצור דרך לא חוקי</string>
+    <string name="shortcut_not_found">קיצור הדרך לא נמצא</string>
+    <string name="unable_to_open_shortcut">לא ניתן לפתוח את קיצור הדרך</string>
 </resources>

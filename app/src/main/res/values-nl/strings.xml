@@ -136,4 +136,17 @@
     <string name="home_screen">Startscherm</string>
     <string name="hey">Hoi</string>
     <string name="more_features">Meer functies…</string>
+    <string name="new_year_wish">Op een jaar beter dan ooit tevoren. Gelukkig nieuwjaar!</string>
+    <string name="new_year_wish_1">Het maakt niet uit hoe januari is verlopen. Je hebt nog de rest van het jaar om het beter te doen dan ooit.</string>
+    <string name="cheers">Proost!</string>
+    <string name="notification_bar">Meldingenbalk</string>
+    <string name="private_space">Privéruimte</string>
+    <string name="invalid_pin_request">Ongeldig vastzetverzoek</string>
+    <string name="widgets_not_supported">Widgets worden niet ondersteund</string>
+    <string name="pin_action_not_supported">Deze vastzetactie wordt niet ondersteund</string>
+    <string name="shortcut_pinned">Snelkoppeling toegevoegd</string>
+    <string name="shortcut_pin_failed">Kan snelkoppeling niet toevoegen</string>
+    <string name="invalid_shortcut">Ongeldige snelkoppeling</string>
+    <string name="shortcut_not_found">Snelkoppeling niet gevonden</string>
+    <string name="unable_to_open_shortcut">Kan snelkoppeling niet openen</string>
 </resources><!-- Dutch -->

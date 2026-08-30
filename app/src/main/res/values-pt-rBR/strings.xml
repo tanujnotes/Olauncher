@@ -140,4 +140,13 @@
     <string name="new_year_wish_1">Não importa como foi janeiro. Você ainda tem o resto do ano para se sair melhor do que nunca.</string>
     <string name="cheers">Saúde!</string>
     <string name="notification_bar">Barra de notificações</string>
+    <string name="private_space">Espaço privado</string>
+    <string name="invalid_pin_request">Solicitação de fixação inválida</string>
+    <string name="widgets_not_supported">Widgets não são compatíveis</string>
+    <string name="pin_action_not_supported">Esta ação de fixação não é compatível</string>
+    <string name="shortcut_pinned">Atalho adicionado</string>
+    <string name="shortcut_pin_failed">Não foi possível adicionar o atalho</string>
+    <string name="invalid_shortcut">Atalho inválido</string>
+    <string name="shortcut_not_found">Atalho não encontrado</string>
+    <string name="unable_to_open_shortcut">Não é possível abrir o atalho</string>
 </resources><!-- Portuguese -->

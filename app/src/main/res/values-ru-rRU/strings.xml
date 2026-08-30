@@ -141,4 +141,13 @@
     <string name="new_year_wish_1">Неважно, как прошел январь. У тебя еще есть остаток года, чтобы добиться большего, чем когда-либо.</string>
     <string name="cheers">Ваше здоровье!</string>
     <string name="notification_bar">Панель уведомлений</string>
+    <string name="private_space">Личное пространство</string>
+    <string name="invalid_pin_request">Недопустимый запрос на закрепление</string>
+    <string name="widgets_not_supported">Виджеты не поддерживаются</string>
+    <string name="pin_action_not_supported">Это действие закрепления не поддерживается</string>
+    <string name="shortcut_pinned">Ярлык добавлен</string>
+    <string name="shortcut_pin_failed">Не удалось добавить ярлык</string>
+    <string name="invalid_shortcut">Недопустимый ярлык</string>
+    <string name="shortcut_not_found">Ярлык не найден</string>
+    <string name="unable_to_open_shortcut">Не удалось открыть ярлык</string>
 </resources><!-- Russian -->
