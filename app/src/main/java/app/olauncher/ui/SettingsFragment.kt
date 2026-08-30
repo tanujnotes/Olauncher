@@ -496,7 +496,9 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         }
         prefs.textSizeScale = pendingTextSizeScale
         pendingTextSizeScale = -1f
-        requireActivity().recreate()
+        val activity = activity ?: return
+        if (activity.isChangingConfigurations.not())
+            activity.recreate()
     }
 
     private fun toggleKeyboardText() {
@@ -690,6 +692,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     }
 
     override fun onDestroyView() {
+        applyTextSizeScale()
         super.onDestroyView()
         _binding = null
     }
