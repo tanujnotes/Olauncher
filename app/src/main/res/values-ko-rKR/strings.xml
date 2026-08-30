@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">앱</string>
+    <string name="set_as_default_launcher">기본 런처로 설정</string>
+    <string name="set_as_default_launcher_u"><u>기본 런처로 설정</u></string>
+    <string name="set_as_default_launcher_first">먼저 Olauncher를 기본으로 설정하세요</string>
+    <string name="app_text_color">텍스트 색상</string>
+    <string name="double_tap_to_lock_screen">두 번 탭하여 잠금</string>
+    <string name="home_button_show_recents">최근 앱을 위한 홈 버튼</string>
+    <string name="admin_permission_message">Olauncher는 접근성 권한을 책임감 있게 사용할 것을 약속합니다. Olauncher는 어떠한 데이터도 수집하거나 공유하지 않습니다.</string>
+    <string name="about">정보</string>
+    <string name="off">끄기</string>
+    <string name="on">켜기</string>
+    <string name="black">검정</string>
+    <string name="white">흰색</string>
+    <string name="change_default_launcher">기본 런처 변경</string>
+    <string name="privacy">개인정보 보호</string>
+    <string name="share">공유</string>
+    <string name="share_now">지금 공유</string>
+    <string name="rate">평가하기</string>
+    <string name="rate_now">지금 평가하기</string>
+    <string name="follow">팔로우</string>
+    <string name="email">이메일</string>
+    <string name="donate">후원하기</string>
+    <string name="swipe_up_for_apps">1. 위로 스와이프하면 모든 앱이 표시됩니다\n2. 아무 곳이나 길게 눌러 설정을 여세요</string>
+    <string name="apps_on_home_screen">홈 화면의 앱</string>
+    <string name="daily_wallpaper_update">매일 새로운 배경화면</string>
+    <string name="left">왼쪽</string>
+    <string name="right">오른쪽</string>
+    <string name="center">가운데</string>
+    <string name="home_layout_alignment">앱 정렬</string>
+    <string name="swipe_left_app">왼쪽 스와이프 앱</string>
+    <string name="swipe_right_app">오른쪽 스와이프 앱</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">팁: 앱 이름을 입력하기 시작하면 자동으로 실행됩니다</string>
+    <string name="okay">확인</string>
+    <string name="cool">좋아요!</string>
+    <string name="auto_show_keyboard">키보드 자동 표시</string>
+    <string name="hide">숨기기</string>
+    <string name="status_bar">상단 상태 표시줄</string>
+    <string name="rename">이름 바꾸기</string>
+    <string name="show_date_time">날짜 및 시간 표시</string>
+    <string name="appearance">화면 표시</string>
+    <string name="gestures">제스처</string>
+    <string name="theme_mode">테마 모드</string>
+    <string name="system_default">시스템 기본값</string>
+    <string name="dark">다크</string>
+    <string name="light">라이트</string>
+    <string name="welcome_to_olauncher_settings">설정에 오신 것을 환영합니다!
+        \n\n궁금한 점이 있으시면 정보 페이지에서 답을 확인하세요.</string>
+    <string name="rate_us_message">안녕하세요, 이 메시지는 다시 표시되지 않습니다.
+        \n\nOlauncher가 유용하다고 느끼셨다면 별점 5점 리뷰를 남겨 주시겠어요? 저희에게 큰 의미가 될 것입니다. 감사합니다!</string>
+    <string name="share_message">여러분의 도움이 필요합니다! 저희는 모두가 Olauncher와 그 장점을 알아야 한다고 생각하지만, 저희 힘만으로는 부족합니다.
+        \n\nOlauncher를 친구, 가족, 팔로워들과 공유해 주시겠어요? 응원해 주셔서 감사합니다! ❤</string>
+    <string name="keyboard_message">안녕하세요, 키보드는 Olauncher에서 앱을 찾고 실행하는 가장 빠른 방법입니다. 며칠만 더 켜두시고 나서 결정해 주시겠어요?
+        \n\n선택은 항상 여러분의 몫입니다.</string>
+    <string name="digital_wellbeing_message">특정 앱에 시간 제한을 설정하고 싶다면 Android의 디지털 웰빙 기능을 이용해 보세요. 휴대폰 설정에서 디지털 웰빙을 검색하여 활성화해 주세요.</string>
+    <string name="app_usage_message">홈 화면에서 스크린 타임을 표시하거나 숨기려면 앱 사용 권한을 허용하거나 거부해 주세요.
+        \n\n참고: 앱 사용 데이터는 수집되지 않습니다. 모든 처리는 기기 내에서 이루어집니다.</string>
+    <string name="pro_message">Olauncher에는 Pro Launcher라는 프로 버전도 있습니다. 날씨, 위젯, 글꼴, 폴더, AMOLED 배경화면 등 추가 기능을 제공합니다.
+        \n\nOlauncher 개발자를 후원하는 가장 좋은 방법이기도 합니다. 확인해 보세요!</string>
+    <string name="wallpaper_message">Olauncher는 매일 아름다운 새 배경화면을 무료로 제공합니다. 매일 홈 화면에 새로운 느낌을 무료로 더해 보세요!
+        \n\n한 번 시도해 보시겠어요?</string>
+    <string name="accessibility_service_description">두 번 탭하여 잠금 제스처를 사용하려면 접근성 권한이 필요합니다. 이 서비스를 통해 Olauncher가 얻는 어떠한 데이터도 기기 밖으로 전송되지 않습니다.</string>
+    <string name="support_olauncher_for_free">저희 아마존 제휴 링크를 이용해 무료로 Olauncher를 후원해 주세요.</string>
+    <string name="support_olauncher_message">저희 링크를 통해 무언가를 구매하실 때마다 저희는 소정의 수수료를 받습니다. 링크를 저장해 두었다가 온라인 쇼핑을 하실 때마다 이용해 주세요.\n감사합니다!</string>
+    <string name="open">링크 열기</string>
+    <string name="copy">복사</string>
+    <string name="close">닫기</string>
+    <string name="not_now">나중에</string>
+    <string name="public_roadmap">Olauncher 공개 로드맵</string>
+    <string name="roadmap">로드맵</string>
+    <string name="date">날짜</string>
+    <string name="date_only">날짜만</string>
+    <string name="bottom_on">하단: 켜기</string>
+    <string name="bottom_off">하단: 끄기</string>
+    <string name="please_set_olauncher_as_default_first">먼저 Olauncher를 기본값으로 설정해 주세요</string>
+    <string name="affiliate">제휴</string>
+    <string name="tip_start_typing_for_rename">팁: 앱 이름 변경 옵션을 사용하려면 입력을 시작하세요</string>
+    <string name="hidden_apps_message">참고: 숨겨진 앱을 찾으려면 이 설정 페이지 상단의 \'Olauncher\'를 탭하세요.\n\n자세한 내용은 정보 페이지에서 확인할 수 있습니다.</string>
+    <string name="swipe_down_for">아래로 스와이프하여</string>
+    <string name="search">검색</string>
+    <string name="notifications">알림</string>
+    <string name="accessibility_disclosure">두 번 탭하여 잠금 제스처를 사용하려면 기기 설정에서 Olauncher의 접근성 서비스를 켜주세요.
+    \n\n이 서비스는 이 특정 기능에만 사용됩니다. 저희 접근성 서비스는 어떠한 데이터도 수집하거나 공유하지 않습니다.</string>
+    <string name="accept">동의</string>
+    <string name="permission">권한</string>
+    <string name="double_tap_lock">두 번 탭하여 잠금</string>
+    <string name="enable">사용</string>
+    <string name="disable">사용 안 함</string>
+    <string name="not_working"><u>작동하지 않나요?</u></string>
+    <string name="info">정보</string>
+    <string name="delete">제거</string>
+    <string name="text_size">텍스트 크기</string>
+    <string name="enabled">사용함</string>
+    <string name="disabled">사용 안 함</string>
+    <string name="please_turn_on_double_tap_to_unlock">두 번 탭하여 잠금을 켜주세요</string>
+    <string name="launcher_failed_to_lock_device">Olauncher가 기기를 잠그지 못했습니다.\n앱 설정을 확인해 주세요.</string>
+    <string name="long_press_to_select_app">앱을 선택하려면 길게 누르세요</string>
+    <string name="unable_to_open_app">앱을 열 수 없습니다</string>
+    <string name="unable_to_open_app_info">앱 정보를 열 수 없습니다</string>
+    <string name="copied">복사됨</string>
+    <string name="system_app_cannot_delete">시스템 앱은 제거할 수 없습니다</string>
+    <string name="type_a_new_app_name_first">먼저 새 앱 이름을 입력하세요</string>
+    <string name="app_not_found">앱을 찾을 수 없습니다</string>
+    <string name="unable_to_launch_app">앱을 실행할 수 없습니다</string>
+    <string name="search_for_Launcher_or_home_app">런처 또는 홈 앱을 검색하세요</string>
+    <string name="swipe_left_app_enabled">왼쪽 스와이프 앱이 활성화되었습니다</string>
+    <string name="swipe_right_app_enabled">오른쪽 스와이프 앱이 활성화되었습니다</string>
+    <string name="swipe_left_app_disabled">왼쪽 스와이프 앱이 비활성화되었습니다</string>
+    <string name="swipe_right_app_disabled">오른쪽 스와이프 앱이 비활성화되었습니다</string>
+    <string name="your_wallpaper_will_update_shortly">배경화면이 곧 업데이트됩니다</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher가 기본값이 아닙니다. 배경화면 업데이트가 실패합니다.</string>
+    <string name="long_press_to_enable">사용하려면 길게 누르세요</string>
+    <string name="no_hidden_apps">숨겨진 앱이 없습니다</string>
+    <string name="hidden_apps">숨겨진 앱</string>
+    <string name="adapter_show">표시</string>
+    <string name="adapter_hide">숨기기</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">당신이 휴대폰을 사용하고 있나요, 아니면 휴대폰이 당신을 사용하고 있나요?</string>
+    <string name="about_olauncher">정보 및 자주 묻는 질문</string>
+    <string name="screen_time">스크린 타임</string>
+    <string name="learn_more">더 알아보기</string>
+    <string name="did_you_know">알고 계셨나요?</string>
+    <string name="leave_a_review">리뷰 남기기</string>
+    <string name="review_message">Olauncher는 무료이며 앞으로도 계속 무료일 것입니다. 광고가 없고, 데이터를 수집하지 않으며, 스크린 타임을 줄여 더 건강한 삶을 만들어 줍니다.
+        \n\n마음에 드셨길 바랍니다. 어떻게 생각하시는지 알려주세요.</string>
+    <string name="alignment_changed">정렬이 변경되었습니다 ✅</string>
+    <string name="home_screen">홈 화면</string>
+    <string name="hey">안녕하세요</string>
+    <string name="more_features">더 많은 기능…</string>
+    <string name="new_year_wish">그 어느 해보다 더 나은 한 해가 되기를. 새해 복 많이 받으세요!</string>
+    <string name="new_year_wish_1">1월이 어땠는지는 중요하지 않습니다. 그 어느 때보다 잘해낼 수 있는 남은 한 해가 아직 있으니까요.</string>
+    <string name="cheers">건배!</string>
+    <string name="notification_bar">알림 바</string>
+    <string name="private_space">비공개 공간</string>
+</resources>

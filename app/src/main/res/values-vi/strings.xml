@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">Ứng dụng</string>
+    <string name="set_as_default_launcher">Đặt làm trình khởi chạy mặc định</string>
+    <string name="set_as_default_launcher_u"><u>Đặt làm trình khởi chạy mặc định</u></string>
+    <string name="set_as_default_launcher_first">Vui lòng đặt Olauncher làm mặc định trước</string>
+    <string name="app_text_color">Màu chữ</string>
+    <string name="double_tap_to_lock_screen">Chạm hai lần để khóa</string>
+    <string name="home_button_show_recents">Nút Home cho ứng dụng gần đây</string>
+    <string name="admin_permission_message">Olauncher cam kết sử dụng quyền trợ năng một cách có trách nhiệm. Olauncher không thu thập hoặc chia sẻ bất kỳ dữ liệu nào.</string>
+    <string name="about">Giới thiệu</string>
+    <string name="off">Tắt</string>
+    <string name="on">Bật</string>
+    <string name="black">Đen</string>
+    <string name="white">Trắng</string>
+    <string name="change_default_launcher">Đổi trình khởi chạy mặc định</string>
+    <string name="privacy">Quyền riêng tư</string>
+    <string name="share">Chia sẻ</string>
+    <string name="share_now">Chia sẻ ngay</string>
+    <string name="rate">Đánh giá</string>
+    <string name="rate_now">Đánh giá ngay</string>
+    <string name="follow">Theo dõi</string>
+    <string name="email">Email</string>
+    <string name="donate">Ủng hộ</string>
+    <string name="swipe_up_for_apps">1. Vuốt lên để xem tất cả ứng dụng\n2. Nhấn giữ ở bất kỳ đâu để mở cài đặt</string>
+    <string name="apps_on_home_screen">Ứng dụng trên màn hình chính</string>
+    <string name="daily_wallpaper_update">Hình nền mới mỗi ngày</string>
+    <string name="left">Trái</string>
+    <string name="right">Phải</string>
+    <string name="center">Giữa</string>
+    <string name="home_layout_alignment">Căn chỉnh ứng dụng</string>
+    <string name="swipe_left_app">Ứng dụng khi vuốt trái</string>
+    <string name="swipe_right_app">Ứng dụng khi vuốt phải</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Mẹo: Bắt đầu gõ tên ứng dụng để tự động mở ứng dụng đó</string>
+    <string name="okay">Đồng ý</string>
+    <string name="cool">Tuyệt!</string>
+    <string name="auto_show_keyboard">Tự động hiện bàn phím</string>
+    <string name="hide">Ẩn</string>
+    <string name="status_bar">Thanh trạng thái ở trên</string>
+    <string name="rename">Đổi tên</string>
+    <string name="show_date_time">Hiện ngày giờ</string>
+    <string name="appearance">Giao diện</string>
+    <string name="gestures">Cử chỉ</string>
+    <string name="theme_mode">Chế độ giao diện</string>
+    <string name="system_default">Hệ thống</string>
+    <string name="dark">Tối</string>
+    <string name="light">Sáng</string>
+    <string name="welcome_to_olauncher_settings">Chào mừng bạn đến với phần cài đặt!
+        \n\nHãy nhớ rằng, nếu bạn có bất kỳ câu hỏi nào, trang Giới thiệu sẽ có câu trả lời.</string>
+    <string name="rate_us_message">Xin chào, bạn sẽ không thấy lại thông báo này nữa.
+        \n\nNếu bạn thấy Olauncher hữu ích, bạn có thể để lại đánh giá 5 sao không? Điều đó thực sự có ý nghĩa rất lớn với chúng tôi. Cảm ơn bạn!</string>
+    <string name="share_message">Chúng tôi cần sự giúp đỡ của bạn! Chúng tôi tin rằng mọi người nên biết về Olauncher và những lợi ích của nó, nhưng chúng tôi không thể tự làm một mình.
+        \n\nBạn có thể chia sẻ Olauncher với bạn bè, gia đình và người theo dõi của bạn không? Cảm ơn bạn đã ủng hộ! ❤</string>
+    <string name="keyboard_message">Xin chào, bàn phím là cách nhanh nhất để tìm và mở ứng dụng trong Olauncher. Chúng tôi có thể xin bạn giữ tính năng này bật thêm vài ngày rồi quyết định sau không?
+        \n\nLựa chọn luôn là của bạn.</string>
+    <string name="digital_wellbeing_message">Nếu bạn muốn đặt giới hạn thời gian cho một số ứng dụng nhất định, tính năng Digital Wellbeing của Android có thể giúp bạn. Vui lòng tìm Digital Wellbeing trong cài đặt điện thoại của bạn và bật tính năng này.</string>
+    <string name="app_usage_message">Để hiện/ẩn thời gian sử dụng màn hình trên màn hình chính, vui lòng cho phép hoặc từ chối quyền sử dụng ứng dụng.
+        \n\nLưu ý: Không có dữ liệu sử dụng ứng dụng nào được thu thập. Mọi thứ đều được xử lý trên thiết bị của bạn.</string>
+    <string name="pro_message">Olauncher cũng có phiên bản pro gọi là Pro Launcher. Nó có thêm các tính năng như thời tiết, widget, phông chữ, thư mục, hình nền AMOLED, v.v.
+        \n\nĐây cũng là cách tốt nhất để hỗ trợ các nhà phát triển của Olauncher. Hãy xem thử!</string>
+    <string name="wallpaper_message">Olauncher cung cấp những hình nền mới đẹp mắt mỗi ngày, hoàn toàn miễn phí. Hãy cho màn hình chính của bạn một diện mạo mới mỗi ngày, miễn phí!
+        \n\nBạn có muốn thử không?</string>
+    <string name="accessibility_service_description">Quyền trợ năng là bắt buộc để bật cử chỉ - chạm hai lần để khóa. Không có bất kỳ dữ liệu nào mà Olauncher thu được qua dịch vụ này rời khỏi thiết bị của bạn.</string>
+    <string name="support_olauncher_for_free">Hỗ trợ Olauncher miễn phí bằng cách sử dụng liên kết tiếp thị liên kết Amazon của chúng tôi.</string>
+    <string name="support_olauncher_message">Mỗi khi bạn mua thứ gì đó bằng liên kết của chúng tôi, chúng tôi sẽ nhận được một khoản hoa hồng nhỏ. Vui lòng lưu liên kết này và sử dụng bất cứ khi nào bạn mua sắm trực tuyến.\nCảm ơn bạn!</string>
+    <string name="open">Mở liên kết</string>
+    <string name="copy">Sao chép</string>
+    <string name="close">Đóng</string>
+    <string name="not_now">Để sau</string>
+    <string name="public_roadmap">Lộ trình công khai của Olauncher</string>
+    <string name="roadmap">Lộ trình</string>
+    <string name="date">Ngày</string>
+    <string name="date_only">Chỉ ngày</string>
+    <string name="bottom_on">Dưới cùng: Bật</string>
+    <string name="bottom_off">Dưới cùng: Tắt</string>
+    <string name="please_set_olauncher_as_default_first">Vui lòng đặt Olauncher làm mặc định trước</string>
+    <string name="affiliate">Tiếp thị liên kết</string>
+    <string name="tip_start_typing_for_rename">Mẹo: Bắt đầu gõ để có tùy chọn ĐỔI TÊN ứng dụng</string>
+    <string name="hidden_apps_message">Lưu ý: Nhấn vào \'Olauncher\' ở đầu trang Cài đặt này để tìm các ứng dụng ẩn của bạn.\n\nCó thêm chi tiết trên trang Giới thiệu của chúng tôi.</string>
+    <string name="swipe_down_for">Vuốt xuống để</string>
+    <string name="search">Tìm kiếm</string>
+    <string name="notifications">Thông báo</string>
+    <string name="accessibility_disclosure">Vui lòng bật dịch vụ trợ năng của Olauncher trong cài đặt thiết bị của bạn để bật cử chỉ Chạm hai lần để khóa.
+    \n\nXin lưu ý rằng dịch vụ này chỉ được sử dụng cho tính năng cụ thể này. Dịch vụ trợ năng của chúng tôi không thu thập hoặc chia sẻ bất kỳ dữ liệu nào.</string>
+    <string name="accept">Đồng ý</string>
+    <string name="permission">Quyền</string>
+    <string name="double_tap_lock">Chạm hai lần để khóa</string>
+    <string name="enable">Bật</string>
+    <string name="disable">Tắt</string>
+    <string name="not_working"><u>Không hoạt động?</u></string>
+    <string name="info">Thông tin</string>
+    <string name="delete">Gỡ cài đặt</string>
+    <string name="text_size">Cỡ chữ</string>
+    <string name="enabled">Đã bật</string>
+    <string name="disabled">Đã tắt</string>
+    <string name="please_turn_on_double_tap_to_unlock">Vui lòng bật chạm hai lần để khóa</string>
+    <string name="launcher_failed_to_lock_device">Olauncher không thể khóa thiết bị.\nVui lòng kiểm tra cài đặt ứng dụng của bạn.</string>
+    <string name="long_press_to_select_app">Nhấn giữ để chọn ứng dụng</string>
+    <string name="unable_to_open_app">Không thể mở ứng dụng</string>
+    <string name="unable_to_open_app_info">Không thể mở thông tin ứng dụng</string>
+    <string name="copied">Đã sao chép</string>
+    <string name="system_app_cannot_delete">Ứng dụng hệ thống, không thể gỡ cài đặt</string>
+    <string name="type_a_new_app_name_first">Vui lòng nhập tên ứng dụng mới trước</string>
+    <string name="app_not_found">Không tìm thấy ứng dụng</string>
+    <string name="unable_to_launch_app">Không thể mở ứng dụng</string>
+    <string name="search_for_Launcher_or_home_app">Tìm ứng dụng Launcher hoặc Home</string>
+    <string name="swipe_left_app_enabled">Đã bật ứng dụng khi vuốt trái</string>
+    <string name="swipe_right_app_enabled">Đã bật ứng dụng khi vuốt phải</string>
+    <string name="swipe_left_app_disabled">Đã tắt ứng dụng khi vuốt trái</string>
+    <string name="swipe_right_app_disabled">Đã tắt ứng dụng khi vuốt phải</string>
+    <string name="your_wallpaper_will_update_shortly">Hình nền của bạn sẽ sớm được cập nhật</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher không phải là mặc định. Việc cập nhật hình nền sẽ thất bại.</string>
+    <string name="long_press_to_enable">Nhấn giữ để bật</string>
+    <string name="no_hidden_apps">Không có ứng dụng ẩn</string>
+    <string name="hidden_apps">Ứng dụng ẩn</string>
+    <string name="adapter_show">Hiện</string>
+    <string name="adapter_hide">Ẩn</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Bạn đang sử dụng điện thoại của mình, hay điện thoại đang sử dụng bạn?</string>
+    <string name="about_olauncher">Giới thiệu và câu hỏi thường gặp</string>
+    <string name="screen_time">Thời gian sử dụng màn hình</string>
+    <string name="learn_more">Tìm hiểu thêm</string>
+    <string name="did_you_know">Bạn có biết?</string>
+    <string name="leave_a_review">Để lại đánh giá</string>
+    <string name="review_message">Olauncher miễn phí và sẽ luôn miễn phí. Ứng dụng không có quảng cáo, không thu thập dữ liệu và giúp giảm thời gian sử dụng màn hình, mang lại cuộc sống lành mạnh hơn.
+        \n\nChúng tôi hy vọng bạn thích nó. Hãy cho chúng tôi biết bạn nghĩ gì.</string>
+    <string name="alignment_changed">Đã thay đổi căn chỉnh ✅</string>
+    <string name="home_screen">Màn hình chính</string>
+    <string name="hey">Này</string>
+    <string name="more_features">Thêm tính năng…</string>
+    <string name="new_year_wish">Chúc một năm tốt đẹp hơn bất kỳ năm nào trước đây. Chúc mừng năm mới!</string>
+    <string name="new_year_wish_1">Tháng Một đã trôi qua như thế nào không quan trọng. Bạn vẫn còn cả năm phía trước để làm tốt hơn bao giờ hết.</string>
+    <string name="cheers">Cạn ly!</string>
+    <string name="notification_bar">Thanh thông báo</string>
+    <string name="private_space">Không gian riêng tư</string>
+</resources>
