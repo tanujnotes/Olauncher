@@ -3,13 +3,13 @@ package app.olauncher.helper
 import android.content.pm.LauncherApps
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import app.olauncher.R
 
 class PinItemActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Set window to be transparent
         window.setBackgroundDrawable(null)
 
         val launcherApps = getSystemService(LauncherApps::class.java)
@@ -17,7 +17,7 @@ class PinItemActivity : AppCompatActivity() {
 
         when (pinItemRequest != null) {
             true -> handleRequestType(pinItemRequest)
-            false -> showToast("Invalid pin request")
+            false -> showToast(R.string.invalid_pin_request)
         }
 
         finish()
@@ -29,23 +29,23 @@ class PinItemActivity : AppCompatActivity() {
                 handleShortcutRequest(pinItemRequest)
 
             LauncherApps.PinItemRequest.REQUEST_TYPE_APPWIDGET ->
-                showToast("Widgets are not supported")
+                showToast(R.string.widgets_not_supported)
 
-            else -> showToast("Unknown action not supported")
+            else -> showToast(R.string.pin_action_not_supported)
         }
     }
 
     private fun handleShortcutRequest(pinItemRequest: LauncherApps.PinItemRequest) {
         val shortcutInfo = pinItemRequest.shortcutInfo
         if (shortcutInfo != null) {
-            val success = pinItemRequest.accept()
+            val success = runCatching { pinItemRequest.accept() }.getOrDefault(false)
             val message = when (success) {
-                true -> "Shortcut pinned successfully"
-                false -> "Failed to pin shortcut"
+                true -> R.string.shortcut_pinned
+                false -> R.string.shortcut_pin_failed
             }
             showToast(message)
         } else {
-            showToast("Invalid shortcut info")
+            showToast(R.string.invalid_shortcut)
         }
     }
 }

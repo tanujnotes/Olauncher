@@ -47,7 +47,7 @@ class AppDrawerAdapter(
                     oldItem.appPackage == newItem.appPackage && oldItem.user == newItem.user
 
                 oldItem is AppModel.PinnedShortcut && newItem is AppModel.PinnedShortcut ->
-                    oldItem.shortcutId == newItem.shortcutId && oldItem.user == newItem.user
+                    oldItem.identity == newItem.identity
 
                 oldItem is AppModel.PrivateSpaceHeader && newItem is AppModel.PrivateSpaceHeader -> true
 

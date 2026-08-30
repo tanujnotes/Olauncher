@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
+import android.content.pm.LauncherApps
+import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -54,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     private var timerJob: Job? = null
     private var isResumed = false
     private var profileReceiver: BroadcastReceiver? = null
+    private var launcherAppsCallback: LauncherApps.Callback? = null
 
 //    override fun onBackPressed() {
 //        if (navController.currentDestination?.id != R.id.mainFragment)
@@ -105,6 +108,7 @@ class MainActivity : AppCompatActivity() {
         initClickListeners()
         initObservers(viewModel)
         viewModel.getAppList()
+        registerShortcutCallback()
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
@@ -133,6 +137,36 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         isResumed = true
         viewModel.isPrivateSpaceToggling = false
+        viewModel.getAppList()
+    }
+
+    private fun registerShortcutCallback() {
+        val launcherApps = getSystemService(LauncherApps::class.java)
+        launcherAppsCallback = object : LauncherApps.Callback() {
+            override fun onPackageRemoved(packageName: String, user: android.os.UserHandle) = Unit
+            override fun onPackageAdded(packageName: String, user: android.os.UserHandle) = Unit
+            override fun onPackageChanged(packageName: String, user: android.os.UserHandle) = Unit
+            override fun onPackagesAvailable(
+                packageNames: Array<out String>,
+                user: android.os.UserHandle,
+                replacing: Boolean,
+            ) = Unit
+
+            override fun onPackagesUnavailable(
+                packageNames: Array<out String>,
+                user: android.os.UserHandle,
+                replacing: Boolean,
+            ) = Unit
+
+            override fun onShortcutsChanged(
+                packageName: String,
+                shortcuts: MutableList<ShortcutInfo>,
+                user: android.os.UserHandle,
+            ) {
+                viewModel.getAppList()
+            }
+        }
+        launcherApps.registerCallback(launcherAppsCallback!!)
     }
 
     override fun onStop() {
@@ -367,6 +401,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        launcherAppsCallback?.let {
+            getSystemService(LauncherApps::class.java).unregisterCallback(it)
+        }
         profileReceiver?.let {
             try {
                 unregisterReceiver(it)

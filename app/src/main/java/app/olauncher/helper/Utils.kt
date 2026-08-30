@@ -43,6 +43,7 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.data.shortcutIdentity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -150,8 +151,14 @@ private suspend fun getPinnedShortcuts(
                 if (isPrivateSpaceProfile(context, profile)) return@forEach
                 try {
                     shortcuts.getShortcuts(query, profile)?.forEach { shortcut ->
-                        if (shortcut.isPinned && pinnedShortcuts.none { it.shortcutId == shortcut.id }) {
-                            val label = prefs.getAppRenameLabel(shortcut.id)
+                        val identity = shortcutIdentity(
+                            shortcut.`package`,
+                            shortcut.id,
+                            profile.toString()
+                        )
+                        if (shortcut.isPinned && pinnedShortcuts.none { it.identity == identity }) {
+                            val label = prefs.getAppRenameLabel(identity)
+                                .ifBlank { prefs.getAppRenameLabel(shortcut.id) }
                                 .takeIf { it.isNotBlank() }
                                 ?: shortcut.shortLabel?.toString()
                                 ?: shortcut.longLabel?.toString().orEmpty()

@@ -26,7 +26,10 @@ sealed class AppModel : Comparable<AppModel> {
         val shortcutId: String,
         override val isNew: Boolean = false,
         override val user: UserHandle,
-    ) : AppModel()
+    ) : AppModel() {
+        val identity: String
+            get() = shortcutIdentity(appPackage, shortcutId, user.toString())
+    }
 
     data class PrivateSpaceHeader(
         val isLocked: Boolean = true,

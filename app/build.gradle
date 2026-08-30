@@ -64,4 +64,5 @@ dependencies {
     //Material dependency
     implementation libs.material
 
+    testImplementation libs.junit
 }
