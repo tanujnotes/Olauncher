@@ -79,6 +79,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         populateWallpaperText()
         populateAppThemeText()
         populateTextSize()
+        populateBoldFont()
         populateAlignment()
         populateStatusBar()
         populateDateTime()
@@ -134,6 +135,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.textSizeValue -> binding.textSizesLayout.visibility = View.VISIBLE
+            R.id.boldFont -> toggleBoldFont()
             R.id.actionAccessibility -> openAccessibilityService()
             R.id.closeAccessibility -> toggleAccessibilityVisibility(false)
             R.id.notWorking -> requireContext().openUrl(Constants.URL_DOUBLE_TAP)
@@ -237,6 +239,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.themeDark.setOnClickListener(this)
         binding.themeSystem.setOnClickListener(this)
         binding.textSizeValue.setOnClickListener(this)
+        binding.boldFont.setOnClickListener(this)
         binding.actionAccessibility.setOnClickListener(this)
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
@@ -546,6 +549,16 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         val formatted = String.format("%.1f", prefs.textSizeScale)
         binding.textSizeValue.text = formatted
         binding.textSizeCurrent.text = formatted
+    }
+
+    private fun toggleBoldFont() {
+        prefs.boldFont = !prefs.boldFont
+        populateBoldFont()
+        requireActivity().recreate()
+    }
+
+    private fun populateBoldFont() {
+        binding.boldFont.text = getString(if (prefs.boldFont) R.string.on else R.string.off)
     }
 
     private fun populateScreenTimeOnOff() {

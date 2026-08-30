@@ -43,6 +43,13 @@
         <item name="primaryShadeDarkColor">@color/blackInverseTrans25</item>
         <item name="dialogShadeColor">@color/blackInverseTrans50</item>
 
+        <item name="mainFontFamily">sans-serif-light</item>
+
+    </style>
+
+    <!-- Applied over AppTheme when bold font is enabled -->
+    <style name="BoldFontOverlay">
+        <item name="mainFontFamily">sans-serif</item>
     </style>
 
     <style name="WindowAnimationTransition">
@@ -56,7 +63,7 @@
         <item name="android:textColor">?attr/primaryColor</item>
         <item name="android:editTextColor">?attr/primaryColor</item>
         <item name="android:textColorHint">?attr/primaryColor</item>
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">?attr/mainFontFamily</item>
         <item name="android:inputType">textCapSentences|textNoSuggestions</item>
         <item name="android:cursorVisible">false</item>
     </style>
@@ -71,7 +78,7 @@
     </style>
 
     <style name="TextLarge" parent="TextDefault">
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">?attr/mainFontFamily</item>
         <item name="android:textSize">@dimen/text_large</item>
     </style>
 

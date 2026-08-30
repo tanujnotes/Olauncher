@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         if (isEinkDisplay()) prefs.appTheme = AppCompatDelegate.MODE_NIGHT_NO
         AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
         super.onCreate(savedInstanceState)
+        if (prefs.boldFont) theme.applyStyle(R.style.BoldFontOverlay, true)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
