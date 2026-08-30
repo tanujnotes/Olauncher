@@ -92,7 +92,9 @@ fun Context.openSearch(query: String? = null) {
 fun Context.isEinkDisplay(): Boolean {
     return try {
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.refreshRate <= Constants.MIN_ANIM_REFRESH_RATE
+        // Check max supported refresh rate, not the current one, because adaptive
+        // refresh rate displays can drop to 30Hz or lower without being e-ink
+        windowManager.defaultDisplay.supportedModes.maxOf { it.refreshRate } <= Constants.MIN_ANIM_REFRESH_RATE
     } catch (e: Exception) {
         e.printStackTrace()
         false
