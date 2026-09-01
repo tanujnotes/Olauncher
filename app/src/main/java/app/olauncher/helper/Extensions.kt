@@ -89,7 +89,15 @@ fun Context.openSearch(query: String? = null) {
     startActivity(intent)
 }
 
+private var isEinkDevice: Boolean? = null
+
 fun Context.isEinkDisplay(): Boolean {
+    isEinkDevice?.let { return it }
+    return (hasEinkRefreshRate() || isOnyxDevice() || isKnownEinkModel())
+        .also { isEinkDevice = it }
+}
+
+private fun Context.hasEinkRefreshRate(): Boolean {
     return try {
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         // Check max supported refresh rate, not the current one, because adaptive
@@ -99,6 +107,29 @@ fun Context.isEinkDisplay(): Boolean {
         e.printStackTrace()
         false
     }
+}
+
+// Boox devices report 60Hz+ refresh rates, so the refresh rate check misses them
+private fun isOnyxDevice(): Boolean {
+    if (Build.MANUFACTURER.equals("ONYX", ignoreCase = true)) return true
+    return try {
+        // Onyx firmware ships its e-ink SDK classes in the boot classpath
+        Class.forName("android.onyx.ViewUpdateHelper")
+        true
+    } catch (ignored: Throwable) {
+        false
+    }
+}
+
+private fun isKnownEinkModel(): Boolean {
+    val brand = Build.BRAND.lowercase()
+    val manufacturer = Build.MANUFACTURER.lowercase()
+    val einkOnlyBrands = listOf("onyx", "boox", "dasung", "bigme", "boyue", "meebook", "mudita")
+    if (einkOnlyBrands.any { brand.contains(it) || manufacturer.contains(it) }) return true
+    // Hisense also sells LCD phones, so match only their e-ink line
+    if (brand.contains("hisense") || manufacturer.contains("hisense"))
+        return Regex("\\bA[579]\\b|TOUCH|HI READER").containsMatchIn(Build.MODEL.uppercase())
+    return false
 }
 
 fun Context.isSystemAnimationsDisabled(): Boolean {

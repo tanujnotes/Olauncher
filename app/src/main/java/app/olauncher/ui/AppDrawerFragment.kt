@@ -254,7 +254,9 @@ class AppDrawerFragment : BaseFragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
         binding.recyclerView.itemAnimator = null
-        if (requireContext().isEinkDisplay().not() && requireContext().isSystemAnimationsDisabled().not())
+        if (requireContext().isEinkDisplay())
+            binding.recyclerView.overScrollMode = View.OVER_SCROLL_NEVER
+        else if (requireContext().isSystemAnimationsDisabled().not())
             binding.recyclerView.layoutAnimation =
                 AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_anim_from_bottom)
     }
