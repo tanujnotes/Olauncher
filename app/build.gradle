@@ -17,8 +17,8 @@ android {
         applicationId "app.olauncher"
         minSdkVersion 24
         targetSdkVersion 36
-        versionCode 111
-        versionName "v6.8.30"
+        versionCode 112
+        versionName "v6.9.1"
 
         resourceConfigurations += ["en", "ar", "de", "es-rES", "es-rUS", "fr", "he", "hr", "hu", "in", "it", "ja", "ko", "nl", "pl", "pt-rBR", "ru-rRU", "sv", "tr", "uk", "zh"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
