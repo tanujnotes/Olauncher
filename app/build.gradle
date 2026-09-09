@@ -14,7 +14,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "app.olauncher"
+        applicationId "app.elauncher"
         minSdkVersion 24
         targetSdkVersion 36
         versionCode 112
@@ -41,7 +41,7 @@ android {
         viewBinding = true
         buildConfig = true
     }
-    namespace 'app.olauncher'
+    namespace 'app.elauncher'
 }
 
 dependencies {
@@ -50,6 +50,7 @@ dependencies {
     implementation libs.core.ktx
     implementation libs.appcompat
     implementation libs.recyclerview
+    implementation libs.viewpager2
 
     // Android lifecycle
     implementation libs.lifecycle.extensions
@@ -58,11 +59,13 @@ dependencies {
     // Navigation
     implementation libs.navigation.fragment.ktx
 
-    // Work Manager
-    implementation libs.work.runtime.ktx
-
     //Material dependency
     implementation libs.material
 
     testImplementation libs.junit
+    testImplementation libs.mockito.core
+    // The AGP unit-test classpath otherwise resolves org.json.* to android.jar's stub
+    // implementation (every method throws "not mocked"); this real implementation takes
+    // precedence on the test runtime classpath so Page.kt's JSON (de)serialization works.
+    testImplementation libs.org.json
 }

@@ -6,7 +6,7 @@
     <string name="set_as_default_launcher_first">Сделать лаунчером по умолчанию</string>
     <string name="app_text_color">Цвет текста</string>
     <string name="double_tap_to_lock_screen">Блокировка двойным тапом</string>
-    <string name="admin_permission_message">Olauncher обещает ответственно использовать разрешение экрана блокировки. Olauncher не собирает и не передает какие-либо данные.</string>
+    <string name="admin_permission_message">Elauncher обещает ответственно использовать разрешение экрана блокировки. Elauncher не собирает и не передает какие-либо данные.</string>
     <string name="about">О нас</string>
     <string name="off">Выкл</string>
     <string name="on">Вкл</string>
@@ -24,7 +24,6 @@
     <string name="donate">Пожертвовать</string>
     <string name="swipe_up_for_apps">1. Проведите вверх чтобы открыть все приложения.\n2. Длительным нажатием в любом месте открываются настройки</string>
     <string name="apps_on_home_screen">Количество приложений на главном экране</string>
-    <string name="daily_wallpaper_update">Ежедневно новые обои</string>
     <string name="left">Слева</string>
     <string name="right">Справа</string>
     <string name="center">Центр</string>
@@ -57,41 +56,37 @@
     <string name="welcome_to_olauncher_settings">Добро пожаловать в настройки!
         \n\nПомните, если у вас есть вопросы, на нашей странице «О нас» есть ответ.</string>
     <string name="rate_us_message">Здравствуйте, вы больше не увидите это сообщение.
-        \n\nЕсли вам нравится Olauncher, не могли бы вы поставить нам 5 звезд? Это поможет улучшить наш рейтинг и сделает нас счастливыми. Спасибо!</string>
+        \n\nЕсли вам нравится Elauncher, не могли бы вы поставить нам 5 звезд? Это поможет улучшить наш рейтинг и сделает нас счастливыми. Спасибо!</string>
     <string name="share_message">Привет, нам нужна ваша помощь! В прошлом году мы преодолели миллион загрузок. В этом году мы хотим достичь еще миллиона, но мы не можем сделать это в одиночку.
-        \n\nНе могли бы вы поделиться Olauncher со своими друзьями, пожалуйста? Спасибо, хорошего дня!</string>
-    <string name="keyboard_message">Привет, клавиатура — это самый быстрый способ найти и запустить приложения в Olauncher. Могли бы вы продолжить использовать Автопоказ клавиатуры еще несколько дней, прежде чем принять окончательное решение?
+        \n\nНе могли бы вы поделиться Elauncher со своими друзьями, пожалуйста? Спасибо, хорошего дня!</string>
+    <string name="keyboard_message">Привет, клавиатура — это самый быстрый способ найти и запустить приложения в Elauncher. Могли бы вы продолжить использовать Автопоказ клавиатуры еще несколько дней, прежде чем принять окончательное решение?
         \n\nВыбор всегда за вами.</string>
     <string name="digital_wellbeing_message">Если вы хотите установить ограничения по времени для определенных приложений, функция «Цифровое благополучие» Android может помочь вам в этом.
         \n\nНайдите параметр «Цифровое благополучие» в настройках телефона и включите его.</string>
     <string name="app_usage_message">Чтобы показать/скрыть время экрана на домашнем экране, разрешите или запретите разрешение на использование приложения.
         \n\nПримечание: Не собираются данные об использовании приложения. Все обрабатывается на вашем устройстве.</string>
-    <string name="pro_message">У Olauncher также есть профессиональная версия под названием Pro Launcher. Она имеет дополнительные функции, такие как погода, виджеты, шрифты, папки, обои AMOLED и так далее.
-        \n\nЭто также лучший способ поддержать разработчиков Olauncher. Ознакомьтесь!</string>
-    <string name="wallpaper_message">Olauncher предлагает красивые новые обои каждый день. Обновите свой главный экран каждый день, бесплатно!
-        \n\nХотите попробовать?</string>
-    <string name="accessibility_service_description">Разрешение на доступ требуется, чтобы включить двойное касание для блокировки и кнопку «Домой» для показа недавних приложений. Любые данные, полученные Olauncher через этот сервис, не покинут ваше устройство.</string>
-    <string name="support_olauncher_for_free">Поддержите Olauncher бесплатно, используя нашу партнерскую ссылку Amazon.</string>
+    <string name="accessibility_service_description">Разрешение на доступ требуется, чтобы включить двойное касание для блокировки и кнопку «Домой» для показа недавних приложений. Любые данные, полученные Elauncher через этот сервис, не покинут ваше устройство.</string>
+    <string name="support_olauncher_for_free">Поддержите Elauncher бесплатно, используя нашу партнерскую ссылку Amazon.</string>
     <string name="support_olauncher_message">Каждый раз, когда вы покупаете что-то по нашей ссылке, мы получаем небольшую комиссию. Пожалуйста, сохраните ссылку и используйте ее при совершении покупок в Интернете.\nСпасибо!</string>
     <string name="open">Открыть ссылку</string>
     <string name="copy">Копировать</string>
     <string name="close">Закрыть</string>
     <string name="not_now">Не сейчас</string>
-    <string name="public_roadmap">Публичная дорожная карта Olauncher</string>
+    <string name="public_roadmap">Публичная дорожная карта Elauncher</string>
     <string name="roadmap">Дорожная карта</string>
     <string name="date">Дата</string>
     <string name="date_only">Только дата</string>
     <string name="bottom_on">Внизу: Вкл</string>
     <string name="bottom_off">Внизу: Выкл</string>
-    <string name="please_set_olauncher_as_default_first">Сначала установите Olauncher в качестве лаунчера по умолчанию.</string>
+    <string name="please_set_olauncher_as_default_first">Сначала установите Elauncher в качестве лаунчера по умолчанию.</string>
     <string name="affiliate">Партнер</string>
     <string name="tip_start_typing_for_rename">Совет: начните вводить текст чтобы ПЕРЕИМЕНОВАТЬ приложение.</string>
-    <string name="hidden_apps_message">Примечание: для доступа к скрытым приложениям, нажмите «Olauncher» в верхней части страницы настроек.
+    <string name="hidden_apps_message">Примечание: для доступа к скрытым приложениям, нажмите «Elauncher» в верхней части страницы настроек.
         \n\nБолее подробная информация доступна на нашей странице «О нас» ниже.</string>
     <string name="swipe_down_for">Проведите вниз для</string>
     <string name="search">Поиск</string>
     <string name="notifications">Уведомления</string>
-    <string name="accessibility_disclosure">Включите службу специальных возможностей Olauncher в настройках вашего устройства, чтобы включить жесты двойного касания для блокировки или кнопки «Домой» для недавних приложений.\n\nОбратите внимание, что эта служба используется только для этих жестов. Наша служба специальных возможностей не собирает и не передаёт никакие данные.</string>
+    <string name="accessibility_disclosure">Включите службу специальных возможностей Elauncher в настройках вашего устройства, чтобы включить жесты двойного касания для блокировки или кнопки «Домой» для недавних приложений.\n\nОбратите внимание, что эта служба используется только для этих жестов. Наша служба специальных возможностей не собирает и не передаёт никакие данные.</string>
     <string name="accept">Принять</string>
     <string name="permission">Разрешение</string>
     <string name="double_tap_lock">Блокировка двойным касанием</string>
@@ -105,7 +100,7 @@
     <string name="enabled">Включено</string>
     <string name="disabled">Выключено</string>
     <string name="please_turn_on_double_tap_to_unlock">Пожалуйста, включите двойное касание для блокировки</string>
-    <string name="launcher_failed_to_lock_device">Olauncher не удалось заблокировать устройство.\nПожалуйста, проверьте настройки вашего приложения.</string>
+    <string name="launcher_failed_to_lock_device">Elauncher не удалось заблокировать устройство.\nПожалуйста, проверьте настройки вашего приложения.</string>
     <string name="long_press_to_select_app">Длительное нажатие для выбора приложения</string>
     <string name="unable_to_open_app">Не удалось открыть информацию о приложении</string>
     <string name="copied">Скопировано</string>
@@ -118,32 +113,28 @@
     <string name="swipe_right_app_enabled">Приложение для правого свайпа включено</string>
     <string name="swipe_left_app_disabled">Приложение для левого свайпа отключено</string>
     <string name="swipe_right_app_disabled">Приложение для правого свайпа отключено</string>
-    <string name="your_wallpaper_will_update_shortly">Ваши обои скоро обновятся</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher не является лаунчером по умолчанию.\nЕжедневное обновление обоев может завершиться ошибкой.</string>
     <string name="long_press_to_enable">Нажмите и удерживайте, чтобы включить</string>
     <string name="no_hidden_apps">Нет скрытых приложений</string>
     <string name="hidden_apps">Скрытые приложения</string>
     <string name="adapter_show">Показать</string>
     <string name="adapter_hide">Скрыть</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Вы используете свой телефон, или ваш телефон использует вас?</string>
-    <string name="about_olauncher">О нас Olauncher</string>
+    <string name="about_olauncher">О нас Elauncher</string>
     <string name="screen_time">Время на экране</string>
     <string name="learn_more">Узнать больше</string>
     <string name="did_you_know">Вы знали?</string>
     <string name="leave_a_review">Оставить отзыв</string>
-    <string name="review_message">Olauncher есть и всегда будет полностью бесплатным. В нем нет рекламы. Он не собирает никаких данных. Самое главное, это помогает вам сократить время, проводимое перед экраном, и вести более здоровую цифровую жизнь.
+    <string name="review_message">Elauncher есть и всегда будет полностью бесплатным. В нем нет рекламы. Он не собирает никаких данных. Самое главное, это помогает вам сократить время, проводимое перед экраном, и вести более здоровую цифровую жизнь.
         \n\nМы считаем, что переход на минимальный лаунчер — отличное решение. Хотя мы явно предвзяты, мы надеемся, что вам понравится этот опыт. Не стесняйтесь поделиться с нами своим мнением!</string>
     <string name="alignment_changed">Выравнивание изменено ✅</string>
     <string name="home_screen">Главный экран</string>
     <string name="hey">Привет</string>
-    <string name="more_features">Больше функций…</string>
     <string name="new_year_wish">За год, который будет лучше всех предыдущих. С Новым годом!</string>
     <string name="new_year_wish_1">Неважно, как прошел январь. У тебя еще есть остаток года, чтобы добиться большего, чем когда-либо.</string>
     <string name="cheers">Ваше здоровье!</string>
     <string name="notification_bar">Панель уведомлений</string>
     <string name="private_space">Личное пространство</string>
     <string name="invalid_pin_request">Недопустимый запрос на закрепление</string>
-    <string name="widgets_not_supported">Виджеты не поддерживаются</string>
     <string name="pin_action_not_supported">Это действие закрепления не поддерживается</string>
     <string name="shortcut_pinned">Ярлык добавлен</string>
     <string name="shortcut_pin_failed">Не удалось добавить ярлык</string>

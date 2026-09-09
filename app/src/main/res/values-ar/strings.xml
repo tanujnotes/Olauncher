@@ -17,18 +17,16 @@
     <string name="okay">حسنًا</string>
     <string name="cool">رائع!</string>
     <string name="tip_start_typing_for_rename">نصيحة: ابدأ الكتابة بتغيير اسم التطبيق</string>
-    <string name="your_wallpaper_will_update_shortly">سيتم تحديث الخلفية الخاصة بك قريبًا</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher ليس المشغل الافتراضي. قد يفشل التحديث اليومي للخلفية.</string>
     <string name="long_press_to_enable">اضغط مطولًا للتمكين</string>
     <string name="no_hidden_apps">لا توجد تطبيقات مخفية</string>
     <string name="hidden_apps">تطبيقات مخفية</string>
     <string name="swipe_left_app_disabled">التمرير لليسار معطّل</string>
     <string name="swipe_right_app_disabled">التمرير لليمين معطّل</string>
-    <string name="hidden_apps_message">ملاحظة: اضغط على \"Olauncher\" أعلى الصفحة للعثور على تطبيقاتك المخفية.  المزيد من التفاصيل متوفرة في صفحة \"حول\" أدناه.</string>
+    <string name="hidden_apps_message">ملاحظة: اضغط على \"Elauncher\" أعلى الصفحة للعثور على تطبيقاتك المخفية.  المزيد من التفاصيل متوفرة في صفحة \"حول\" أدناه.</string>
     <string name="swipe_down_for">اسحب لأسفل من أجل</string>
     <string name="search">يبحث</string>
     <string name="notifications">إشعارات</string>
-    <string name="accessibility_disclosure">يرجى تشغيل خدمة الوصول في Olauncher في إعدادات جهازك لتمكين إيماءة النقر المزدوج للقفل أو زر الشاشة الرئيسية لعرض التطبيقات الأخيرة.
+    <string name="accessibility_disclosure">يرجى تشغيل خدمة الوصول في Elauncher في إعدادات جهازك لتمكين إيماءة النقر المزدوج للقفل أو زر الشاشة الرئيسية لعرض التطبيقات الأخيرة.
     \n\nيرجى ملاحظة أن هذه الخدمة تُستخدم فقط لهذه الإيماءات. خدمة الوصول لدينا لا تجمع أو تشارك أي بيانات.</string>
     <string name="accept">يقبل</string>
     <string name="permission">إذن</string>
@@ -43,7 +41,7 @@
     <string name="enabled">ممكّن</string>
     <string name="disabled">مُطفأ</string>
     <string name="please_turn_on_double_tap_to_unlock">يرجى تشغيل النقر المزدوج لفتح القفل</string>
-    <string name="launcher_failed_to_lock_device">فشل Olauncher في قفل الجهاز. يرجى التحقق من إعدادات التطبيق الخاص بك.</string>
+    <string name="launcher_failed_to_lock_device">فشل Elauncher في قفل الجهاز. يرجى التحقق من إعدادات التطبيق الخاص بك.</string>
     <string name="long_press_to_select_app">اضغط مطوّلًا لاختيار التطبيق</string>
     <string name="unable_to_open_app">تعذر فتح التطبيق</string>
     <string name="copied">نُسخ</string>
@@ -53,7 +51,7 @@
     <string name="adapter_hide">يخفي</string>
     <string name="app_text_color">لون الخط</string>
     <string name="double_tap_to_lock_screen">انقر مرتين لقفل الشاشة</string>
-    <string name="admin_permission_message">يعد Olauncher باستخدام إذن قفل الشاشة بشكل مسؤول. لا يقوم Olauncher بجمع أو مشاركة أي بيانات.</string>
+    <string name="admin_permission_message">يعد Elauncher باستخدام إذن قفل الشاشة بشكل مسؤول. لا يقوم Elauncher بجمع أو مشاركة أي بيانات.</string>
     <string name="about">حول</string>
     <string name="off">ﻻ</string>
     <string name="on">نعم</string>
@@ -70,7 +68,6 @@
     <string name="donate">تبرّع</string>
     <string name="swipe_up_for_apps">1. مرر لأعلى لجميع التطبيقات\n2. اضغط مطوّلًا في أي مكان للإعدادات</string>
     <string name="apps_on_home_screen">التطبيقات على الشاشة الرئيسية</string>
-    <string name="daily_wallpaper_update">تحديث الخلفية يوميّا</string>
     <string name="left">يسار</string>
     <string name="right">يمين</string>
     <string name="center">مركز</string>
@@ -90,32 +87,28 @@
     <string name="light">مضيء</string>
     <string name="welcome_to_olauncher_settings">مرحبًا بك في الإعدادات!\n\nتذكر، إذا كان لديك أي سؤال، فإن صفحة "حول" لدينا تحتوي على الإجابة.</string>
     <string name="rate_us_message">مرحبًا ، لن ترى هذه الرسالة مرة أخرى.
-        \n\nإذا كنت تحب Olauncher ، فهل يمكنك أن تعطينا تصنيف 5 نجوم؟ يساعدنا ذلك على تحسين تصنيفنا ويجعلنا سعداء. شكرًا لك!</string>
+        \n\nإذا كنت تحب Elauncher ، فهل يمكنك أن تعطينا تصنيف 5 نجوم؟ يساعدنا ذلك على تحسين تصنيفنا ويجعلنا سعداء. شكرًا لك!</string>
     <string name="share_message">مرحبا، نحن بحاجة لمساعدتكم! في العام الماضي تجاوزنا مليون عملية تنزيل. نريد هذا العام أن نصل إلى مليون آخرين ولكن لا يمكننا القيام بذلك بمفردنا.
-        \n\nهل تتفضل بمشاركة Olauncher مع أصدقائك، من فضلك؟ شكرا لك، ويوم رائع!</string>
-    <string name="keyboard_message">مرحبًا ، لوحة المفاتيح هي أسرع طريقة للعثور على التطبيقات وتشغيلها في Olauncher. هل يمكننا أن نطلب منك الاحتفاظ بهذا الأمر لبضعة أيام أخرى ثم اتخاذ القرار؟ الاختيار دائما لك.</string>
+        \n\nهل تتفضل بمشاركة Elauncher مع أصدقائك، من فضلك؟ شكرا لك، ويوم رائع!</string>
+    <string name="keyboard_message">مرحبًا ، لوحة المفاتيح هي أسرع طريقة للعثور على التطبيقات وتشغيلها في Elauncher. هل يمكننا أن نطلب منك الاحتفاظ بهذا الأمر لبضعة أيام أخرى ثم اتخاذ القرار؟ الاختيار دائما لك.</string>
     <string name="digital_wellbeing_message">إذا كنت تريد تعيين حدود زمنية لتطبيقات معينة، فيمكن أن تساعدك ميزة الرفاهية الرقمية في Android على القيام بذلك.
         \n\nيرجى البحث عن الرفاهية الرقمية في إعدادات هاتفك وتمكينها.</string>
     <string name="app_usage_message">لعرض/إخفاء وقت استخدام الشاشة على الشاشة الرئيسية، يرجى السماح أو منع إذن استخدام التطبيق.
         \n\nملاحظة: لا يتم جمع أي بيانات حول استخدام التطبيقات. يتم معالجة كل شيء على جهازك.</string>
-    <string name="pro_message">يحتوي Olauncher أيضًا على إصدار احترافي يسمى Pro Launcher. يحتوي على ميزات إضافية مثل الطقس، والأدوات، والخطوط، والمجلدات، وخلفيات AMOLED، وما إلى ذلك.
-        \n\nإنه أيضًا أفضل طريقة لدعم مطوري Olauncher. تحقق من ذلك!</string>
-    <string name="wallpaper_message">يقدم Olauncher خلفيات جميلة جديدة يوميًا. امنح شاشتك الرئيسية مظهرًا جديدًا كل يوم، مجانًا!
-        \n\nهل ترغب في تجربته؟</string>
-    <string name="accessibility_service_description">إذن الوصول مطلوب لتمكين النقر المزدوج للقفل وزر الشاشة الرئيسية لعرض التطبيقات الأخيرة. أي بيانات حصل عليها Olauncher عبر هذه الخدمة لن تترك جهازك.</string>
-    <string name="support_olauncher_for_free">ادعم Olauncher مجانًا باستخدام رابط الشراكة التابع لشركة Amazon.</string>
+    <string name="accessibility_service_description">إذن الوصول مطلوب لتمكين النقر المزدوج للقفل وزر الشاشة الرئيسية لعرض التطبيقات الأخيرة. أي بيانات حصل عليها Elauncher عبر هذه الخدمة لن تترك جهازك.</string>
+    <string name="support_olauncher_for_free">ادعم Elauncher مجانًا باستخدام رابط الشراكة التابع لشركة Amazon.</string>
     <string name="support_olauncher_message">في كل مرة تشتري شيئًا باستخدام الرابط الخاص بنا ، نحصل على عمولة صغيرة. يرجى حفظ الرابط واستخدامه في أي وقت تتسوق فيه عبر الإنترنت. شكرًا لك!</string>
     <string name="open">افتح الرابط</string>
     <string name="copy">ينسخ</string>
     <string name="close">يغلق</string>
     <string name="not_now">ليس الآن</string>
-    <string name="public_roadmap">خارطة طريق Olauncher العامة</string>
+    <string name="public_roadmap">خارطة طريق Elauncher العامة</string>
     <string name="roadmap">خريطة الطريق</string>
     <string name="date">تاريخ</string>
     <string name="date_only">التاريخ فقط</string>
     <string name="bottom_on">المحاذاة ﻷسفل</string>
     <string name="bottom_off">المحاذاة ﻷعلى</string>
-    <string name="please_set_olauncher_as_default_first">يرجى تعيين Olauncher كمشغل افتراضي أولاً</string>
+    <string name="please_set_olauncher_as_default_first">يرجى تعيين Elauncher كمشغل افتراضي أولاً</string>
     <string name="affiliate">شركة تابعة</string>
     <string name="app_not_found">التطبيق غير موجود</string>
     <string name="unable_to_launch_app">تعذر تشغيل التطبيق</string>
@@ -123,24 +116,22 @@
     <string name="swipe_left_app_enabled">التمرير لليسار مفعّل</string>
     <string name="swipe_right_app_enabled">التمرير لليمين مفعّل</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">هل تستخدم هاتفك أم أن هاتفك يستخدمك؟</string>
-    <string name="about_olauncher">عن Olauncher</string>
+    <string name="about_olauncher">عن Elauncher</string>
     <string name="learn_more">تعلم أكثر</string>
     <string name="did_you_know">هل كنت تعلم؟</string>
     <string name="leave_a_review">أخبرنا رأيك</string>
-    <string name="review_message">Olauncher هو وسيظل دائمًا مجانيًا تمامًا. ليس لديها إعلانات. لا يجمع أي بيانات. والأهم من ذلك أنه يساعدك على تقليل وقت الشاشة والعيش حياة رقمية أكثر صحة.
+    <string name="review_message">Elauncher هو وسيظل دائمًا مجانيًا تمامًا. ليس لديها إعلانات. لا يجمع أي بيانات. والأهم من ذلك أنه يساعدك على تقليل وقت الشاشة والعيش حياة رقمية أكثر صحة.
         \n\nنحن نعتقد أن التحول إلى الحد الأدنى من المشغل هو قرار ممتاز. على الرغم من أننا متحيزون بشكل واضح، إلا أننا نأمل أن تستمتع بالتجربة. لا تتردد في مشاركة أفكارك معنا!</string>
     <string name="screen_time">وقت الشاشة</string>
     <string name="alignment_changed">تم تغيير المحاذاة ✅</string>
     <string name="home_screen">الشاشة الرئيسية</string>
     <string name="hey">مرحبا</string>
-    <string name="more_features">مزايا إضافية…</string>
     <string name="new_year_wish">إليك عامًا أفضل من كل ما سبقه. سنة جديدة سعيدة!</string>
     <string name="new_year_wish_1">لا يهم كيف مضى شهر يناير. لا يزال لديك بقية العام لتقدم أداءً أفضل من أي وقت مضى.</string>
     <string name="cheers">هتافات!</string>
     <string name="notification_bar">شريط الإشعارات</string>
     <string name="private_space">المساحة الخاصة</string>
     <string name="invalid_pin_request">طلب تثبيت غير صالح</string>
-    <string name="widgets_not_supported">التطبيقات المصغرة غير مدعومة</string>
     <string name="pin_action_not_supported">إجراء التثبيت هذا غير مدعوم</string>
     <string name="shortcut_pinned">تمت إضافة الاختصار</string>
     <string name="shortcut_pin_failed">تعذرت إضافة الاختصار</string>

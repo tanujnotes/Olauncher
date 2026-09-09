@@ -6,7 +6,7 @@
     <string name="set_as_default_launcher_first">Tetapkan sebagai peluncur default</string>
     <string name="app_text_color">Warna teks</string>
     <string name="double_tap_to_lock_screen">Ketuk dua kali untuk mengunci</string>
-    <string name="admin_permission_message">Olauncher berjanji untuk menggunakan izin layar kunci secara bertanggung jawab. Olauncher tidak mengumpulkan atau membagikan data apa pun.</string>
+    <string name="admin_permission_message">Elauncher berjanji untuk menggunakan izin layar kunci secara bertanggung jawab. Elauncher tidak mengumpulkan atau membagikan data apa pun.</string>
     <string name="about">Tentang</string>
     <string name="off">Mati</string>
     <string name="on">Nyala</string>
@@ -24,7 +24,6 @@
     <string name="donate">Donasi</string>
     <string name="swipe_up_for_apps">1. Geser ke atas untuk semua aplikasi\n2. Tekan lama di mana saja untuk pengaturan</string>
     <string name="apps_on_home_screen">Aplikasi di layar awal</string>
-    <string name="daily_wallpaper_update">Wallpaper baru setiap hari</string>
     <string name="left">Kiri</string>
     <string name="right">kanan</string>
     <string name="center">Tengah</string>
@@ -57,39 +56,35 @@
     <string name="welcome_to_olauncher_settings">Selamat datang di pengaturan!
         \n\nIngat, jika Anda memiliki pertanyaan, halaman Tentang kami memiliki jawabannya.</string>
     <string name="rate_us_message">Hai, Anda tidak akan melihat pesan ini lagi.
-        \n\nJika Anda menyukai Olauncher, bisakah Anda memberi kami peringkat bintang 5? Ini membantu kami meningkatkan peringkat kami dan membuat kami bahagia. Terima kasih!</string>
+        \n\nJika Anda menyukai Elauncher, bisakah Anda memberi kami peringkat bintang 5? Ini membantu kami meningkatkan peringkat kami dan membuat kami bahagia. Terima kasih!</string>
     <string name="share_message">Hai, kami membutuhkan bantuan Anda! Tahun lalu kami melampaui satu juta unduhan. Tahun ini kami ingin menjangkau satu juta orang lagi tetapi kami tidak dapat melakukannya sendiri.
-        \n\nMaukah Anda berbaik hati membagikan Olauncher kepada teman-teman Anda? Terima kasih dan semoga harimu menyenangkan!</string>
-    <string name="keyboard_message">Hai, keyboard adalah cara tercepat untuk menemukan dan meluncurkan aplikasi di Olauncher. Bisakah kami meminta Anda untuk mengaktifkannya selama beberapa hari lagi dan kemudian memutuskan?           Pilihan selalu menjadi milik Anda.</string>
+        \n\nMaukah Anda berbaik hati membagikan Elauncher kepada teman-teman Anda? Terima kasih dan semoga harimu menyenangkan!</string>
+    <string name="keyboard_message">Hai, keyboard adalah cara tercepat untuk menemukan dan meluncurkan aplikasi di Elauncher. Bisakah kami meminta Anda untuk mengaktifkannya selama beberapa hari lagi dan kemudian memutuskan?           Pilihan selalu menjadi milik Anda.</string>
     <string name="digital_wellbeing_message">Jika Anda ingin menetapkan batas waktu untuk aplikasi tertentu, fitur Digital Wellbeing Android dapat membantu Anda melakukannya.
         \n\nSilakan cari Digital Wellbeing di pengaturan ponsel Anda dan aktifkan.</string>
     <string name="app_usage_message">Untuk menampilkan/menyembunyikan waktu layar di layar utama, izinkan atau tolak izin penggunaan aplikasi.
         \n\nCatatan: Tidak ada data penggunaan aplikasi yang dikumpulkan. Semua diproses di perangkat Anda.</string>
-    <string name="pro_message">Olauncher juga memiliki versi pro yang disebut Pro Launcher. Ini memiliki fitur tambahan seperti cuaca, widget, font, folder, wallpaper AMOLED, dan banyak lagi.
-        \n\nIni juga merupakan cara terbaik untuk mendukung pengembang Olauncher. Cek it out!</string>
-    <string name="wallpaper_message">Olauncher menawarkan wallpaper baru yang indah setiap hari. Berikan tampilan baru pada layar utama Anda setiap hari, secara gratis!
-        \n\nIngin mencobanya?</string>
-    <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan ketuk dua kali untuk mengunci dan tombol beranda untuk menampilkan aplikasi terbaru. Data apa pun yang diperoleh Olauncher melalui layanan ini tidak akan meninggalkan perangkat Anda.</string>
-    <string name="support_olauncher_for_free">Dukung Olauncher secara gratis dengan menggunakan tautan afiliasi Amazon kami.</string>
+    <string name="accessibility_service_description">Izin aksesibilitas diperlukan untuk mengaktifkan ketuk dua kali untuk mengunci dan tombol beranda untuk menampilkan aplikasi terbaru. Data apa pun yang diperoleh Elauncher melalui layanan ini tidak akan meninggalkan perangkat Anda.</string>
+    <string name="support_olauncher_for_free">Dukung Elauncher secara gratis dengan menggunakan tautan afiliasi Amazon kami.</string>
     <string name="support_olauncher_message">Setiap kali Anda membeli sesuatu menggunakan tautan kami, kami mendapat komisi kecil. Harap simpan tautan dan gunakan setiap kali Anda berbelanja online.\nTerima kasih!</string>
     <string name="open">Buka tautan</string>
     <string name="copy">Salin</string>
     <string name="close">Tutup</string>
     <string name="not_now">Tidak sekarang</string>
-    <string name="public_roadmap">Peta jalan publik Olauncher</string>
+    <string name="public_roadmap">Peta jalan publik Elauncher</string>
     <string name="roadmap">Peta jalan</string>
     <string name="date">Tanggal</string>
     <string name="date_only">Tanggal saja</string>
     <string name="bottom_on">Bawah: Nyala</string>
     <string name="bottom_off">Bawah: Mati</string>
-    <string name="please_set_olauncher_as_default_first">Silakan atur Olauncher sebagai peluncur default Anda terlebih dahulu</string>
+    <string name="please_set_olauncher_as_default_first">Silakan atur Elauncher sebagai peluncur default Anda terlebih dahulu</string>
     <string name="affiliate">Afiliasi</string>
     <string name="tip_start_typing_for_rename">Tip: Mulailah mengetik untuk opsi RENAME aplikasi</string>
-    <string name="hidden_apps_message">Catatan: Ketuk \'Olauncher\' di bagian atas halaman Pengaturan ini untuk menemukan aplikasi tersembunyi Anda.\n\nRincian lebih lanjut tersedia di halaman Tentang kami di bawah ini.</string>
+    <string name="hidden_apps_message">Catatan: Ketuk \'Elauncher\' di bagian atas halaman Pengaturan ini untuk menemukan aplikasi tersembunyi Anda.\n\nRincian lebih lanjut tersedia di halaman Tentang kami di bawah ini.</string>
     <string name="swipe_down_for">Geser ke bawah untuk</string>
     <string name="search">Cari</string>
     <string name="notifications">Notifikasi</string>
-    <string name="accessibility_disclosure">Harap aktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan gerakan ketuk dua kali untuk mengunci atau tombol beranda untuk aplikasi terbaru.\n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk gerakan-gerakan ini. Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
+    <string name="accessibility_disclosure">Harap aktifkan layanan aksesibilitas Elauncher di pengaturan perangkat Anda untuk mengaktifkan gerakan ketuk dua kali untuk mengunci atau tombol beranda untuk aplikasi terbaru.\n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk gerakan-gerakan ini. Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
     <string name="accept">Terima</string>
     <string name="permission">Izin</string>
     <string name="double_tap_lock">Ketuk dua kali untuk mengunci</string>
@@ -103,7 +98,7 @@
     <string name="enabled">Diaktifkan</string>
     <string name="disabled">Dinonaktifkan</string>
     <string name="please_turn_on_double_tap_to_unlock">Harap aktifkan ketuk dua kali untuk mengunci</string>
-    <string name="launcher_failed_to_lock_device">Olauncher gagal mengunci perangkat.\nSilakan periksa pengaturan aplikasi Anda.</string>
+    <string name="launcher_failed_to_lock_device">Elauncher gagal mengunci perangkat.\nSilakan periksa pengaturan aplikasi Anda.</string>
     <string name="long_press_to_select_app">Tekan lama untuk memilih aplikasi</string>
     <string name="unable_to_open_app">Tidak dapat membuka info aplikasi</string>
     <string name="copied">Disalin</string>
@@ -116,32 +111,28 @@
     <string name="swipe_right_app_enabled">Aplikasi geser ke kanan diaktifkan</string>
     <string name="swipe_left_app_disabled">Aplikasi geser ke kiri dinonaktifkan</string>
     <string name="swipe_right_app_disabled">Aplikasi geser ke kanan dinonaktifkan</string>
-    <string name="your_wallpaper_will_update_shortly">Wallpaper Anda akan segera diperbarui</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher bukan peluncur default.\nPembaruan wallpaper harian mungkin gagal.</string>
     <string name="long_press_to_enable">Tekan lama untuk mengaktifkan</string>
     <string name="no_hidden_apps">Aplikasi tersembunyi tidak ada</string>
     <string name="hidden_apps">Aplikasi tersembunyi</string>
     <string name="adapter_show">perlihatkan</string>
     <string name="adapter_hide">sembunyikan</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Apakah Anda menggunakan ponsel Anda, atau ponsel Anda menggunakan Anda?</string>
-    <string name="about_olauncher">Tentang Olauncher</string>
+    <string name="about_olauncher">Tentang Elauncher</string>
     <string name="learn_more">Pelajari lebih lanjut</string>
     <string name="screen_time">Waktu layar</string>
     <string name="did_you_know">Tahukah kamu?</string>
     <string name="leave_a_review">Tinggalkan ulasan</string>
-    <string name="review_message">Olauncher sepenuhnya gratis dan akan selalu gratis. Tidak ada iklan. Tidak mengumpulkan data pribadi. Yang terpenting, ini membantu Anda mengurangi waktu pemakaian perangkat dan menjalani kehidupan digital yang lebih sehat.
+    <string name="review_message">Elauncher sepenuhnya gratis dan akan selalu gratis. Tidak ada iklan. Tidak mengumpulkan data pribadi. Yang terpenting, ini membantu Anda mengurangi waktu pemakaian perangkat dan menjalani kehidupan digital yang lebih sehat.
         \n\nKami percaya bahwa beralih ke peluncur minimal adalah keputusan yang sangat baik. Meskipun kami jelas-jelas bias, kami harap Anda menikmati pengalaman ini. Jangan ragu untuk berbagi pemikiran Anda dengan kami!</string>
     <string name="alignment_changed">Penyelarasan diubah ✅</string>
     <string name="home_screen">Layar beranda</string>
     <string name="hey">Hai</string>
-    <string name="more_features">Fitur lainnya…</string>
     <string name="new_year_wish">Untuk tahun yang lebih baik dari sebelumnya. Selamat tahun baru!</string>
     <string name="new_year_wish_1">Tidak peduli bagaimana bulan Januari berlalu. Anda masih punya sisa tahun untuk melakukan yang lebih baik dari sebelumnya.</string>
     <string name="cheers">Bersulang!</string>
     <string name="notification_bar">Bilah pemberitahuan</string>
     <string name="private_space">Ruang pribadi</string>
     <string name="invalid_pin_request">Permintaan penyematan tidak valid</string>
-    <string name="widgets_not_supported">Widget tidak didukung</string>
     <string name="pin_action_not_supported">Tindakan penyematan ini tidak didukung</string>
     <string name="shortcut_pinned">Pintasan ditambahkan</string>
     <string name="shortcut_pin_failed">Tidak dapat menambahkan pintasan</string>

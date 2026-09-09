@@ -8,8 +8,10 @@ lifecycleViewmodelKtx = "2.9.0"
 material = "1.12.0"
 navigationFragmentKtx = "2.9.0"
 recyclerview = "1.4.0"
-workRuntimeKtx = "2.10.1"
+viewpager2 = "1.1.0"
 junit = "4.13.2"
+mockitoCore = "5.14.2"
+orgJson = "20250107"
 [libraries]
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -21,5 +23,7 @@ lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx
 material = { module = "com.google.android.material:material", version.ref = "material" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
+viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 junit = { module = "junit:junit", version.ref = "junit" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+org-json = { module = "org.json:json", version.ref = "orgJson" }

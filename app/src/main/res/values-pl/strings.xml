@@ -17,17 +17,15 @@
     <string name="okay">OK</string>
     <string name="cool">Fajny!</string>
     <string name="tip_start_typing_for_rename">Wskazówka: zacznij pisać by zmienić nazwę aplikacji</string>
-    <string name="your_wallpaper_will_update_shortly">Twoja tapeta zostanie wkrótce zaktualizowana</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher nie jest domyślnym programem uruchamiającym. Codzienna aktualizacja tapety może się nie powieść.</string>
     <string name="long_press_to_enable">Naciśnij długo, aby włączyć</string>
     <string name="no_hidden_apps">Brak ukrytych aplikacji</string>
     <string name="hidden_apps">Ukrytych aplikacji</string>
-    <string name="hidden_apps_message">Uwaga: Stuknij w „Olauncher” u góry tej strony ustawień, aby znaleźć ukryte aplikacje.
+    <string name="hidden_apps_message">Uwaga: Stuknij w „Elauncher” u góry tej strony ustawień, aby znaleźć ukryte aplikacje.
         \n\nWięcej informacji znajduje się na stronie Informacje poniżej.</string>
     <string name="swipe_down_for">Przesuń w dół, aby</string>
     <string name="search">Szukaj</string>
     <string name="notifications">Powiadomienia</string>
-    <string name="accessibility_disclosure">Włącz usługę ułatwień dostępu Olauncher w ustawieniach swojego urządzenia, aby włączyć gesty podwójnego dotknięcia do zablokowania lub przycisku ekranu głównego dla ostatnich aplikacji.\n\nZwróć uwagę, że ta usługa jest używana tylko do tych gestów. Nasza usługa ułatwień dostępu nie zbiera ani nie udostępnia żadnych danych.</string>
+    <string name="accessibility_disclosure">Włącz usługę ułatwień dostępu Elauncher w ustawieniach swojego urządzenia, aby włączyć gesty podwójnego dotknięcia do zablokowania lub przycisku ekranu głównego dla ostatnich aplikacji.\n\nZwróć uwagę, że ta usługa jest używana tylko do tych gestów. Nasza usługa ułatwień dostępu nie zbiera ani nie udostępnia żadnych danych.</string>
     <string name="accept">Akceptuj</string>
     <string name="permission">Uprawnienie</string>
     <string name="double_tap_lock">Kliknij dwukrotnie, aby zablokować</string>
@@ -41,7 +39,7 @@
     <string name="enabled">Włączony</string>
     <string name="disabled">Wyłączony</string>
     <string name="please_turn_on_double_tap_to_unlock">Włącz podwójne dotknięcie, aby zablokować</string>
-    <string name="launcher_failed_to_lock_device">Olauncherowi nie udało się zablokować urządzenia. Sprawdź ustawienia aplikacji.</string>
+    <string name="launcher_failed_to_lock_device">Elauncherowi nie udało się zablokować urządzenia. Sprawdź ustawienia aplikacji.</string>
     <string name="long_press_to_select_app">Naciśnij długo, aby wybrać aplikację</string>
     <string name="unable_to_open_app">Nie można otworzyć informacji o aplikacji</string>
     <string name="copied">Skopiowane</string>
@@ -51,7 +49,7 @@
     <string name="adapter_hide">Ukryj</string>
     <string name="app_text_color">Kolor tekstu</string>
     <string name="double_tap_to_lock_screen">Kliknij dwukrotnie, aby zablokować</string>
-    <string name="admin_permission_message">Olauncher obiecuje odpowiedzialnie korzystać z uprawnień blokady ekranu. Olauncher nie gromadzi ani nie udostępnia żadnych danych.</string>
+    <string name="admin_permission_message">Elauncher obiecuje odpowiedzialnie korzystać z uprawnień blokady ekranu. Elauncher nie gromadzi ani nie udostępnia żadnych danych.</string>
     <string name="about">Informacje</string>
     <string name="off">Nie</string>
     <string name="on">Tak</string>
@@ -69,7 +67,6 @@
     <string name="donate">Wspomóż</string>
     <string name="swipe_up_for_apps">1. Przesuń palcem w górę, aby wyświetlić wszystkie aplikacje\n2. Naciśnij i przytrzymaj dowolne miejsce, aby przejść do ustawień</string>
     <string name="apps_on_home_screen">Aplikacje na ekranie głównym</string>
-    <string name="daily_wallpaper_update">Codziennie nowa tapeta</string>
     <string name="left">Lewo</string>
     <string name="right">Prawo</string>
     <string name="center">Środek</string>
@@ -89,32 +86,28 @@
     <string name="light">Jasny</string>
     <string name="welcome_to_olauncher_settings">Witamy w ustawieniach!
         \n\nPamiętaj, jeśli masz jakiekolwiek pytania, nasza strona „O nas” ma odpowiedź.</string>
-    <string name="rate_us_message">Hej, czy uważasz, że Olauncher jest przydatny? Jeśli tak, ocena 5 gwiazdek to najlepszy sposób, aby nas wesprzeć.\n\nDziękuję i więcej tego nie zobaczysz.</string>
+    <string name="rate_us_message">Hej, czy uważasz, że Elauncher jest przydatny? Jeśli tak, ocena 5 gwiazdek to najlepszy sposób, aby nas wesprzeć.\n\nDziękuję i więcej tego nie zobaczysz.</string>
     <string name="share_message">Cześć, potrzebujemy Twojej pomocy! W zeszłym roku przekroczyliśmy milion pobrań. W tym roku chcemy dotrzeć do kolejnego miliona, ale sami nie możemy tego zrobić.
-        \n\nCzy byłbyś tak miły i udostępnił Olauncher swoim znajomym? Dziękuję i życzę cudownego dnia!</string>
-    <string name="keyboard_message">Cześć, klawiatura to najszybszy sposób znajdowania i uruchamiania aplikacji w Olauncher. Czy możemy poprosić o pozostawienie tego włączonego jeszcze przez kilka dni, a następnie podjęcie decyzji?\n\nWybór zawsze należy do Ciebie.</string>
+        \n\nCzy byłbyś tak miły i udostępnił Elauncher swoim znajomym? Dziękuję i życzę cudownego dnia!</string>
+    <string name="keyboard_message">Cześć, klawiatura to najszybszy sposób znajdowania i uruchamiania aplikacji w Elauncher. Czy możemy poprosić o pozostawienie tego włączonego jeszcze przez kilka dni, a następnie podjęcie decyzji?\n\nWybór zawsze należy do Ciebie.</string>
     <string name="digital_wellbeing_message">Jeśli chcesz ustawić limity czasowe dla niektórych aplikacji, funkcja Cyfrowa równowaga w systemie Android może Ci w tym pomóc.
         \n\nWyszukaj opcję Cyfrowa równowaga w ustawieniach telefonu i włącz ją.</string>
     <string name="app_usage_message">Aby wyświetlić/ukryć czas ekranu na ekranie głównym, pozwól lub zabroń aplikacji na dostęp do danych o użyciu.
         \n\nUwaga: Nie są gromadzone żadne dane o użyciu aplikacji. Wszystko jest przetwarzane na Twoim urządzeniu.</string>
-    <string name="pro_message">Olauncher ma również wersję pro o nazwie Pro Launcher. Posiada dodatkowe funkcje, takie jak pogoda, widgety, czcionki, foldery, tapety AMOLED itp.
-        \n\nTo także najlepszy sposób na wsparcie deweloperów Olauncher. Sprawdź to!</string>
-    <string name="wallpaper_message">Olauncher oferuje piękne nowe tapety codziennie. Nadaj swojemu ekranowi głównemu świeży wygląd każdego dnia, za darmo!
-        \n\nChcesz spróbować?</string>
-    <string name="accessibility_service_description">Uprawnienia dostępu są wymagane, aby włączyć podwójne dotknięcie do zablokowania i przycisk ekranu głównego do wyświetlania ostatnich aplikacji. Wszelkie dane pozyskane przez Olauncher za pośrednictwem tej usługi nie opuszczą Twojego urządzenia.</string>
-    <string name="support_olauncher_for_free">Wesprzyj Olauncher za darmo, korzystając z naszego linku afiliacyjnego Amazon.</string>
+    <string name="accessibility_service_description">Uprawnienia dostępu są wymagane, aby włączyć podwójne dotknięcie do zablokowania i przycisk ekranu głównego do wyświetlania ostatnich aplikacji. Wszelkie dane pozyskane przez Elauncher za pośrednictwem tej usługi nie opuszczą Twojego urządzenia.</string>
+    <string name="support_olauncher_for_free">Wesprzyj Elauncher za darmo, korzystając z naszego linku afiliacyjnego Amazon.</string>
     <string name="support_olauncher_message">Za każdym razem, gdy kupujesz coś za pomocą naszego linku, otrzymujemy niewielką prowizję. Zapisz link i używaj go podczas zakupów online. Dziękuję!</string>
     <string name="open">Otwórz łącze</string>
     <string name="copy">Kopiuj</string>
     <string name="close">Zamknij</string>
     <string name="not_now">Nie teraz</string>
-    <string name="public_roadmap">Publiczna mapa drogowa Olauncher</string>
+    <string name="public_roadmap">Publiczna mapa drogowa Elauncher</string>
     <string name="roadmap">Mapa drogowa</string>
     <string name="date">Data</string>
     <string name="date_only">Tylko data</string>
     <string name="bottom_on">Dół: włączony</string>
     <string name="bottom_off">Dół: wyłączone</string>
-    <string name="please_set_olauncher_as_default_first">Najpierw ustaw Olauncher jako domyślny program uruchamiający</string>
+    <string name="please_set_olauncher_as_default_first">Najpierw ustaw Elauncher jako domyślny program uruchamiający</string>
     <string name="affiliate">Przyłącz</string>
     <string name="app_not_found">Nie znaleziono aplikacji</string>
     <string name="unable_to_launch_app">Nie można uruchomić aplikacji</string>
@@ -124,24 +117,22 @@
     <string name="swipe_left_app_disabled">Gest Przesuń w lewo wyłączony</string>
     <string name="swipe_right_app_disabled">Gest Przesuń w prawo jest wyłączony</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Czy używasz telefonu, czy telefon używa ciebie?</string>
-    <string name="about_olauncher">O Olauncher</string>
+    <string name="about_olauncher">O Elauncher</string>
     <string name="screen_time">Czas ekranowy</string>
     <string name="learn_more">Ucz się więcej</string>
     <string name="did_you_know">Czy wiedziałeś?</string>
     <string name="leave_a_review">Ucz się więcej</string>
-    <string name="review_message">Olauncher jest i zawsze będzie całkowicie darmowy. Nie zawiera reklam. Nie zbiera żadnych danych. Co najważniejsze, pomaga skrócić czas spędzany przed ekranem i prowadzić zdrowsze cyfrowe życie.
+    <string name="review_message">Elauncher jest i zawsze będzie całkowicie darmowy. Nie zawiera reklam. Nie zbiera żadnych danych. Co najważniejsze, pomaga skrócić czas spędzany przed ekranem i prowadzić zdrowsze cyfrowe życie.
         \n\nWierzymy, że przejście na minimalny program uruchamiający to doskonała decyzja. Chociaż jesteśmy oczywiście stronniczy, mamy nadzieję, że spodoba ci się to doświadczenie. Podziel się z nami swoimi przemyśleniami!</string>
     <string name="alignment_changed">Wyrównanie zmienione ✅</string>
     <string name="home_screen">Ekran główny</string>
     <string name="hey">Hej</string>
-    <string name="more_features">Więcej funkcji…</string>
     <string name="new_year_wish">Za rok lepszy niż wszystkie poprzednie. Szczęśliwego nowego roku!</string>
     <string name="new_year_wish_1">Nie ma znaczenia, jak minął styczeń. Wciąż masz resztę roku, aby poradzić sobie lepiej niż kiedykolwiek.</string>
     <string name="cheers">Na zdrowie!</string>
     <string name="notification_bar">Pasek powiadomień</string>
     <string name="private_space">Przestrzeń prywatna</string>
     <string name="invalid_pin_request">Nieprawidłowe żądanie przypięcia</string>
-    <string name="widgets_not_supported">Widżety nie są obsługiwane</string>
     <string name="pin_action_not_supported">Ta czynność przypinania nie jest obsługiwana</string>
     <string name="shortcut_pinned">Dodano skrót</string>
     <string name="shortcut_pin_failed">Nie można dodać skrótu</string>

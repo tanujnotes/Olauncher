@@ -6,7 +6,7 @@
     <string name="set_as_default_launcher_first">Definir como launcher padrão</string>
     <string name="app_text_color">Cor do texto</string>
     <string name="double_tap_to_lock_screen">Toque duplo para bloquear</string>
-    <string name="admin_permission_message">Olauncher promete usar a permissão de bloqueio de telemóvel de forma responsável. Olauncher não faz coleção ou compartilha quaisquer dados.</string>
+    <string name="admin_permission_message">Elauncher promete usar a permissão de bloqueio de telemóvel de forma responsável. Elauncher não faz coleção ou compartilha quaisquer dados.</string>
     <string name="about">Sobre</string>
     <string name="off">Desligado</string>
     <string name="on">Ligado</string>
@@ -24,7 +24,6 @@
     <string name="donate">Fazer donativo</string>
     <string name="swipe_up_for_apps">1. Deslize para cima para ver todos os aplicativos\n2. Pressione continuamente em qualquer ponto do ecrã para aceder às configurações</string>
     <string name="apps_on_home_screen">Aplicativos na home</string>
-    <string name="daily_wallpaper_update">Novo fundo de ecrã diariamente</string>
     <string name="left">Esquerda</string>
     <string name="right">Direita</string>
     <string name="center">Centro</string>
@@ -56,41 +55,37 @@
     <string name="light">Claro</string>
     <string name="welcome_to_olauncher_settings">Bem-vindo às configurações!
         \n\nLembre-se, se você tiver alguma dúvida, nossa página Sobre tem a resposta.</string>
-    <string name="rate_us_message">Ei, você acha Olauncher útil? Se sim, uma classificação de 5 estrelas é a melhor maneira de nos apoiar. Obrigado.</string>
+    <string name="rate_us_message">Ei, você acha Elauncher útil? Se sim, uma classificação de 5 estrelas é a melhor maneira de nos apoiar. Obrigado.</string>
     <string name="share_message">Olá, precisamos da sua ajuda! No ano passado ultrapassamos um milhão de downloads. Este ano queremos chegar a mais um milhão, mas não podemos fazê-lo sozinhos.
-        \n\nVocê poderia fazer a gentileza de compartilhar o Olauncher com seus amigos, por favor? Obrigado e tenha um dia maravilhoso!</string>
-    <string name="keyboard_message">Olá, o teclado é a maneira mais rápida de encontrar e iniciar aplicativos no Olauncher. Podemos pedir-lhe que mantenha isto ligado por mais alguns dias para depois decidir?
+        \n\nVocê poderia fazer a gentileza de compartilhar o Elauncher com seus amigos, por favor? Obrigado e tenha um dia maravilhoso!</string>
+    <string name="keyboard_message">Olá, o teclado é a maneira mais rápida de encontrar e iniciar aplicativos no Elauncher. Podemos pedir-lhe que mantenha isto ligado por mais alguns dias para depois decidir?
         \n\nA escolha é sempre sua!</string>
     <string name="digital_wellbeing_message">Se você deseja definir limites de tempo para determinados aplicativos, o recurso Bem-estar digital do Android pode ajudá-lo a fazer isso.
         \n\nProcure Bem-estar Digital nas configurações do seu telefone e ative-o.</string>
     <string name="app_usage_message">Para exibir/ocultar o tempo de tela na tela inicial, permita ou negue a permissão de uso do aplicativo.
         \n\nNota: Não são coletados dados de uso do aplicativo. Tudo é processado no seu dispositivo.</string>
-    <string name="pro_message">Olauncher também tem uma versão pro chamada Pro Launcher. Tem recursos extras como clima, widgets, fontes, pastas, papéis de parede AMOLED, e assim por diante.
-        \n\nÉ também a melhor maneira de apoiar os desenvolvedores do Olauncher. Confira!</string>
-    <string name="wallpaper_message">Olauncher oferece lindos papéis de parede novos todos os dias. Dê uma nova aparência à sua tela inicial todos os dias, gratuitamente!
-        \n\nQuer tentar?</string>
-    <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear e o botão início para mostrar aplicativos recentes. Quaisquer dados adquiridos pelo Olauncher através deste serviço não sairão do seu dispositivo.</string>
-    <string name="support_olauncher_for_free">Apoie o Olauncher gratuitamente usando nosso link de afiliado da Amazon.</string>
+    <string name="accessibility_service_description">A permissão de acessibilidade é necessária para ativar o toque duplo para bloquear e o botão início para mostrar aplicativos recentes. Quaisquer dados adquiridos pelo Elauncher através deste serviço não sairão do seu dispositivo.</string>
+    <string name="support_olauncher_for_free">Apoie o Elauncher gratuitamente usando nosso link de afiliado da Amazon.</string>
     <string name="support_olauncher_message">Sempre que você comprar algo usando nosso link, receberemos uma pequena comissão. Salve o link e use-o sempre que fizer compras online. Obrigado!</string>
     <string name="open">Abrir link</string>
     <string name="copy">Copiar</string>
     <string name="close">Fechar</string>
     <string name="not_now">Agora não</string>
-    <string name="public_roadmap">Roteiro público do Olauncher</string>
+    <string name="public_roadmap">Roteiro público do Elauncher</string>
     <string name="roadmap">Roteiro</string>
     <string name="date">Data</string>
     <string name="date_only">Apenas data</string>
     <string name="bottom_on">Fundo: Ativado</string>
     <string name="bottom_off">Fundo: Desligado</string>
-    <string name="please_set_olauncher_as_default_first">Por favor, defina Olauncher como seu lançador padrão primeiro</string>
+    <string name="please_set_olauncher_as_default_first">Por favor, defina Elauncher como seu lançador padrão primeiro</string>
     <string name="affiliate">Afiliar</string>
     <string name="tip_start_typing_for_rename">Dica: comece a digitar para a opção RENAME do aplicativo</string>
-    <string name="hidden_apps_message">Nota: Toque em \"Olauncher\" na parte superior desta página de Configurações para encontrar seus aplicativos ocultos.
+    <string name="hidden_apps_message">Nota: Toque em \"Elauncher\" na parte superior desta página de Configurações para encontrar seus aplicativos ocultos.
         \n\nMais detalhes disponíveis em nossa página Sobre abaixo.</string>
     <string name="swipe_down_for">Deslize para baixo para</string>
     <string name="search">Procurar</string>
     <string name="notifications">Notificações</string>
-    <string name="accessibility_disclosure">Ative o serviço de acessibilidade do Olauncher nas configurações do seu dispositivo para ativar os gestos de toque duplo para bloquear ou botão início para aplicativos recentes.\n\nObserve que este serviço é usado apenas para esses gestos. Nosso serviço de acessibilidade não coleta nem compartilha nenhum dado.</string>
+    <string name="accessibility_disclosure">Ative o serviço de acessibilidade do Elauncher nas configurações do seu dispositivo para ativar os gestos de toque duplo para bloquear ou botão início para aplicativos recentes.\n\nObserve que este serviço é usado apenas para esses gestos. Nosso serviço de acessibilidade não coleta nem compartilha nenhum dado.</string>
     <string name="accept">Aceitar</string>
     <string name="permission">Permissão</string>
     <string name="double_tap_lock">Toque duas vezes para bloquear</string>
@@ -104,7 +99,7 @@
     <string name="enabled">Habilitado</string>
     <string name="disabled">Desactivado</string>
     <string name="please_turn_on_double_tap_to_unlock">Ative o toque duplo para bloquear</string>
-    <string name="launcher_failed_to_lock_device">Olauncher falhou ao bloquear o dispositivo. Verifique as configurações do seu aplicativo.</string>
+    <string name="launcher_failed_to_lock_device">Elauncher falhou ao bloquear o dispositivo. Verifique as configurações do seu aplicativo.</string>
     <string name="long_press_to_select_app">Pressione por muito tempo para selecionar o aplicativo</string>
     <string name="unable_to_open_app">Não é possível abrir as informações do aplicativo</string>
     <string name="copied">Copiado</string>
@@ -117,32 +112,28 @@
     <string name="swipe_right_app_enabled">Deslizar para a direita para abrir aplicativo ativado</string>
     <string name="swipe_left_app_disabled">Deslizar para a esquerda para abrir aplicativo desativado</string>
     <string name="swipe_right_app_disabled">Deslizar para a direita para abrir aplicativo desativado</string>
-    <string name="your_wallpaper_will_update_shortly">Seu fundo de ecrã será atualizado em breve</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher não é launcher padrão. A atualização diária do fundo de ecrã pode falhar.</string>
     <string name="long_press_to_enable">Pressione por muito tempo para ativar</string>
     <string name="no_hidden_apps">Sem aplicativos ocultos</string>
     <string name="hidden_apps">Aplicativos ocultos</string>
     <string name="adapter_show">Mostrar</string>
     <string name="adapter_hide">Esconder</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Você está usando seu telefone, ou seu telefone está usando você?</string>
-    <string name="about_olauncher">Sobre Olauncher</string>
+    <string name="about_olauncher">Sobre Elauncher</string>
     <string name="learn_more">Saber mais</string>
     <string name="screen_time">Tempo de tela</string>
     <string name="did_you_know">Você sabia?</string>
     <string name="leave_a_review">Deixe um comentário</string>
-    <string name="review_message">Olauncher é e sempre será totalmente gratuito. Não tem anúncios. Não coleta dados. Mais importante ainda, ajuda você a reduzir o tempo de tela e a ter uma vida digital mais saudável.
+    <string name="review_message">Elauncher é e sempre será totalmente gratuito. Não tem anúncios. Não coleta dados. Mais importante ainda, ajuda você a reduzir o tempo de tela e a ter uma vida digital mais saudável.
         \n\nAcreditamos que mudar para um launcher mínimo é uma excelente decisão. Embora sejamos obviamente tendenciosos, esperamos que você esteja gostando da experiência. Sinta-se à vontade para compartilhar suas idéias conosco!</string>
     <string name="alignment_changed">Alinhamento alterado ✅</string>
     <string name="home_screen">Tela inicial</string>
     <string name="hey">Oi</string>
-    <string name="more_features">Mais recursos…</string>
     <string name="new_year_wish">A um ano melhor do que qualquer um anterior. Feliz ano novo!</string>
     <string name="new_year_wish_1">Não importa como foi janeiro. Você ainda tem o resto do ano para se sair melhor do que nunca.</string>
     <string name="cheers">Saúde!</string>
     <string name="notification_bar">Barra de notificações</string>
     <string name="private_space">Espaço privado</string>
     <string name="invalid_pin_request">Solicitação de fixação inválida</string>
-    <string name="widgets_not_supported">Widgets não são compatíveis</string>
     <string name="pin_action_not_supported">Esta ação de fixação não é compatível</string>
     <string name="shortcut_pinned">Atalho adicionado</string>
     <string name="shortcut_pin_failed">Não foi possível adicionar o atalho</string>

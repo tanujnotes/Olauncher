@@ -17,17 +17,15 @@
     <string name="okay">Tamam</string>
     <string name="cool">Harika!</string>
     <string name="tip_start_typing_for_rename">İpucu: Uygulama ismi değiştirmek için yazmaya başlayın</string>
-    <string name="your_wallpaper_will_update_shortly">Duvar kağıdınız birazdan güncellenecek</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher varsayılan başlatıcınız değil. Günlük duvar kağıtları hatalı çalışabilir.</string>
     <string name="long_press_to_enable">Etkinleştirmek için uzun basın</string>
     <string name="no_hidden_apps">Gizli uygulama yok</string>
     <string name="hidden_apps">Gizli uygulamalar</string>
-    <string name="hidden_apps_message">Not: Gizli uygulamalarınızı bulmak için bu ayarlar sayfasının üst kısmındaki \"Olauncher\" yazısına dokunun.
+    <string name="hidden_apps_message">Not: Gizli uygulamalarınızı bulmak için bu ayarlar sayfasının üst kısmındaki \"Elauncher\" yazısına dokunun.
         \n\nDaha fazla ayrıntı "Hakkında" sayfasında mevcuttur.</string>
     <string name="swipe_down_for">Aşağı kaydır:</string>
     <string name="search">Ara</string>
     <string name="notifications">Bildirimler</string>
-    <string name="accessibility_disclosure">Kilitlemek için çift dokunma veya son uygulamalar için ana ekran düğmesi hareketlerini etkinleştirmek için lütfen cihazınızın ayarlarında Olauncher\'ın erişilebilirlik hizmetini açın.\n\nBu hizmetin yalnızca bu hareketler için kullanıldığını lütfen unutmayın. Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
+    <string name="accessibility_disclosure">Kilitlemek için çift dokunma veya son uygulamalar için ana ekran düğmesi hareketlerini etkinleştirmek için lütfen cihazınızın ayarlarında Elauncher\'ın erişilebilirlik hizmetini açın.\n\nBu hizmetin yalnızca bu hareketler için kullanıldığını lütfen unutmayın. Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
     <string name="accept">Kabul et</string>
     <string name="permission">İzin</string>
     <string name="double_tap_lock">Kilitlemek için iki kez dokunun</string>
@@ -41,7 +39,7 @@
     <string name="enabled">Etkin</string>
     <string name="disabled">Devre Dışı</string>
     <string name="please_turn_on_double_tap_to_unlock">Lütfen kilitlemek için çift dokunmayı açın</string>
-    <string name="launcher_failed_to_lock_device">Olauncher cihazı kilitleyemedi. Lütfen uygulama ayarlarınızı kontrol edin.</string>
+    <string name="launcher_failed_to_lock_device">Elauncher cihazı kilitleyemedi. Lütfen uygulama ayarlarınızı kontrol edin.</string>
     <string name="long_press_to_select_app">Uygulamayı seçmek için uzun basın</string>
     <string name="unable_to_open_app">Uygulama bilgisi açılamıyor</string>
     <string name="copied">Kopyalandı</string>
@@ -51,7 +49,7 @@
     <string name="adapter_hide">Gizle</string>
     <string name="app_text_color">Metin rengi</string>
     <string name="double_tap_to_lock_screen">Kilitlemek için çift dokunun</string>
-    <string name="admin_permission_message">Olauncher, kilit ekranı iznini sorumlu bir şekilde kullanacaktır. Olauncher herhangi bir veri toplamaz veya paylaşmaz.</string>
+    <string name="admin_permission_message">Elauncher, kilit ekranı iznini sorumlu bir şekilde kullanacaktır. Elauncher herhangi bir veri toplamaz veya paylaşmaz.</string>
     <string name="about">Hakkında</string>
     <string name="off">Kapalı</string>
     <string name="on">Açık</string>
@@ -69,7 +67,6 @@
     <string name="donate">Bağış yap</string>
     <string name="swipe_up_for_apps">1. Tüm uygulamalar için yukarı kaydırın\n2. Ayarlar için herhangi bir yere uzun basın</string>
     <string name="apps_on_home_screen">Ana ekran uygulamaları</string>
-    <string name="daily_wallpaper_update">Günlük duvar kağıtları</string>
     <string name="left">Sol</string>
     <string name="right">Sağ</string>
     <string name="center">Merkez</string>
@@ -90,33 +87,29 @@
     <string name="welcome_to_olauncher_settings">Ayarlar sayfasına hoş geldiniz!
         \n\nUnutmayın, herhangi bir sorunuz olursa "Hakkında" sayfamıza danışabilirsiniz.</string>
     <string name="rate_us_message">Merhaba, bu mesajı bir daha görmeyeceksiniz.
-        \n\nOlauncher\'ı beğendiyseniz bize tam puan verir misiniz? Sıralamamızı yükseltmemize yardımcı oluyor ve bizi neşelendiriyor. Teşekkür ederiz!</string>
+        \n\nElauncher\'ı beğendiyseniz bize tam puan verir misiniz? Sıralamamızı yükseltmemize yardımcı oluyor ve bizi neşelendiriyor. Teşekkür ederiz!</string>
     <string name="share_message">Merhaba, yardımınıza ihtiyacımız var! Geçen yıl bir milyon indirmeyi geçtik. Bu yıl bir milyona daha ulaşmak istiyoruz ama bunu tek başımıza yapamayız.
-        \n\nOlauncher\'ı arkadaşlarınızla paylaşma nezaketini gösterir misiniz lütfen? Teşekkür eder, harika bir gün geçirmenizi dileriz!</string>
-    <string name="keyboard_message">Merhaba, klavye, Olauncher\'da uygulamaları bulmanın ve başlatmanın en hızlı yoludur. Birkaç gün daha kullanıp karar vermenizi rica ederiz.
+        \n\nElauncher\'ı arkadaşlarınızla paylaşma nezaketini gösterir misiniz lütfen? Teşekkür eder, harika bir gün geçirmenizi dileriz!</string>
+    <string name="keyboard_message">Merhaba, klavye, Elauncher\'da uygulamaları bulmanın ve başlatmanın en hızlı yoludur. Birkaç gün daha kullanıp karar vermenizi rica ederiz.
         \n\nSeçim her zaman sizindir.</string>
     <string name="digital_wellbeing_message">Belirli uygulamalar için zaman sınırları belirlemek istiyorsanız Android\'in Dijital Denge özelliği bunu yapmanıza yardımcı olacaktır.
         \n\nLütfen telefon ayarlarınızda Dijital Denge\'yi arayın ve etkinleştirin.</string>
     <string name="app_usage_message">Ana ekranınızda ekran sürenizi göstermek/gizlemek için lütfen uygulama kullanım iznini onaylayın veya reddedin.
         \n\nNot: Uygulama kullanım verileri toplanmaz. Her şey cihazınızda işlenir.</string>
-    <string name="pro_message">Olauncher\'ın Pro Launcher adında bir pro versiyonu da var. Hava durumu, widget\'lar, yazı tipleri, klasörler, AMOLED duvar kağıtları gibi ekstra özelliklere sahip.
-        \n\nAyrıca Olauncher geliştiricilerini desteklemenin en iyi yoludur. Mutlaka inceleyin!</string>
-    <string name="wallpaper_message">Olauncher, ana ekranınıza taze bir görünüm kazandırmak için her gün yeni duvar kağıtları sunuyor. Hem de ücretsiz!
-        \n\nDenemek ister misiniz?</string>
-    <string name="accessibility_service_description">Kilitlemek için çift dokunmayı ve son uygulamaları göstermek için ana ekran düğmesini etkinleştirmek için erişilebilirlik izni gereklidir. Olauncher tarafından bu hizmet aracılığıyla elde edilen hiçbir veri cihazınızdan ayrılmayacaktır.</string>
-    <string name="support_olauncher_for_free">Amazon ortaklık bağlantımızı kullanarak Olauncher\'ı ücretsiz olarak destekleyin.</string>
+    <string name="accessibility_service_description">Kilitlemek için çift dokunmayı ve son uygulamaları göstermek için ana ekran düğmesini etkinleştirmek için erişilebilirlik izni gereklidir. Elauncher tarafından bu hizmet aracılığıyla elde edilen hiçbir veri cihazınızdan ayrılmayacaktır.</string>
+    <string name="support_olauncher_for_free">Amazon ortaklık bağlantımızı kullanarak Elauncher\'ı ücretsiz olarak destekleyin.</string>
     <string name="support_olauncher_message">Bağlantımızı kullanarak her bir şey satın aldığınızda, küçük bir komisyon alırız. Lütfen bağlantıyı kaydedin ve çevrimiçi alışveriş yaptığınızda kullanın. Teşekkür ederiz!</string>
     <string name="open">Linki aç</string>
     <string name="copy">Kopyala</string>
     <string name="close">Kapat</string>
     <string name="not_now">Şimdi değil</string>
-    <string name="public_roadmap">Olauncher Yol Çizelgesi</string>
+    <string name="public_roadmap">Elauncher Yol Çizelgesi</string>
     <string name="roadmap">Yol Çizelgesi</string>
     <string name="date">Tarih</string>
     <string name="date_only">Sadece tarih</string>
     <string name="bottom_on">Alt: Açık</string>
     <string name="bottom_off">Alt: Kapalı</string>
-    <string name="please_set_olauncher_as_default_first">Lütfen önce Olauncher\'ı varsayılan başlatıcınız olarak ayarlayın</string>
+    <string name="please_set_olauncher_as_default_first">Lütfen önce Elauncher\'ı varsayılan başlatıcınız olarak ayarlayın</string>
     <string name="affiliate">Ortak</string>
     <string name="app_not_found">Uygulama bulunamadı</string>
     <string name="unable_to_launch_app">Uygulama başlatılamadı</string>
@@ -126,24 +119,22 @@
     <string name="swipe_left_app_disabled">Sola kaydırma uygulaması devre dışı</string>
     <string name="swipe_right_app_disabled">Sağa kaydırma uygulaması devre dışı</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Sen mi telefonunu, kullanıyorsun yoksa telefon mu seni kullanıyor?</string>
-    <string name="about_olauncher">Olauncher Hakkında</string>
+    <string name="about_olauncher">Elauncher Hakkında</string>
     <string name="learn_more">Daha fazla bilgi</string>
     <string name="screen_time">Ekran süresi</string>
     <string name="did_you_know">Biliyor muydunuz?</string>
     <string name="leave_a_review">Değerlendirme bırakın</string>
-    <string name="review_message">Olauncher tamamen ücretsizdir ve her zaman ücretsiz olacaktır. Reklam yok, veri toplamaz ve en önemlisi ekran sürenizi azaltmanıza ve daha sağlıklı bir dijital yaşam sürmenize yardımcı olur.
+    <string name="review_message">Elauncher tamamen ücretsizdir ve her zaman ücretsiz olacaktır. Reklam yok, veri toplamaz ve en önemlisi ekran sürenizi azaltmanıza ve daha sağlıklı bir dijital yaşam sürmenize yardımcı olur.
         \n\nUmarım hoşunuza gider. Düşüncelerinizi mutlaka bizimle paylaşın!</string>
     <string name="alignment_changed">Hizalama değiştirildi ✅</string>
     <string name="home_screen">Ana ekran</string>
     <string name="hey">Merhaba</string>
-    <string name="more_features">Daha fazla özellik…</string>
     <string name="new_year_wish">Öncekilerin hepsinden daha iyi bir yıl olsun. Mutlu yıllar!</string>
     <string name="new_year_wish_1">Ocak ayının nasıl geçtiği önemli değil. Her zamankinden daha iyisini yapmak için hala yılın geri kalanı var.</string>
     <string name="cheers">Şerefe!</string>
     <string name="notification_bar">Bildirim çubuğu</string>
     <string name="private_space">Özel alan</string>
     <string name="invalid_pin_request">Geçersiz sabitleme isteği</string>
-    <string name="widgets_not_supported">Widget\'lar desteklenmiyor</string>
     <string name="pin_action_not_supported">Bu sabitleme işlemi desteklenmiyor</string>
     <string name="shortcut_pinned">Kısayol eklendi</string>
     <string name="shortcut_pin_failed">Kısayol eklenemedi</string>

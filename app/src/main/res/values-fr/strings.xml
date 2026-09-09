@@ -6,7 +6,7 @@
     <string name="set_as_default_launcher_first">Définir comme lanceur par défaut</string>
     <string name="app_text_color">Couleur du texte</string>
     <string name="double_tap_to_lock_screen">Double appui pour verrouiller</string>
-    <string name="admin_permission_message">Olauncher promet d\'utiliser l\'autorisation d\'écran de verrouillage de manière responsable. Olauncher ne collecte ni ne partage aucune donnée.</string>
+    <string name="admin_permission_message">Elauncher promet d\'utiliser l\'autorisation d\'écran de verrouillage de manière responsable. Elauncher ne collecte ni ne partage aucune donnée.</string>
     <string name="about">À propos</string>
     <string name="off">Désactivé</string>
     <string name="on">Activé</string>
@@ -24,7 +24,6 @@
     <string name="donate">Donner</string>
     <string name="swipe_up_for_apps">1. Balayez vers le haut pour toutes les applications.\n2. Appuyez longuement n\'importe où pour les paramètres.</string>
     <string name="apps_on_home_screen">Applications sur l\'écran d\'accueil</string>
-    <string name="daily_wallpaper_update">Nouveau fond d\'écran quotidien</string>
     <string name="left">Gauche</string>
     <string name="right">Droite</string>
     <string name="center">Centre</string>
@@ -56,40 +55,36 @@
     <string name="light">Clair</string>
     <string name="welcome_to_olauncher_settings">Bienvenue dans les paramètres !
         \n\nN\'oubliez pas, si vous avez des questions, notre page À propos a la réponse.</string>
-    <string name="rate_us_message">Hé, trouvez-vous Olauncher utile? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
+    <string name="rate_us_message">Hé, trouvez-vous Elauncher utile? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
         \n\nMerci, vous ne verrez plus ce message.</string>
     <string name="share_message">Bonjour, nous avons besoin de votre aide ! L\'année dernière, nous avons franchi le million de téléchargements. Cette année, nous voulons atteindre un million de plus, mais nous ne pouvons pas le faire seuls.
-        \n\nAuriez-vous la gentillesse de partager Olauncher avec vos amis, s\'il vous plaît ? Merci et passez une merveilleuse journée!</string>
-    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de garder cela activé pendant quelques jours de plus, puis de décider? Le choix vous appartient toujours.</string>
+        \n\nAuriez-vous la gentillesse de partager Elauncher avec vos amis, s\'il vous plaît ? Merci et passez une merveilleuse journée!</string>
+    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Elauncher. Pouvons-nous vous demander de garder cela activé pendant quelques jours de plus, puis de décider? Le choix vous appartient toujours.</string>
     <string name="digital_wellbeing_message">Si vous souhaitez définir des limites de temps pour certaines applications, la fonctionnalité Digital Wellbeing d\'Android peut vous aider à le faire.
         \n\nVeuillez rechercher Digital Wellbeing dans les paramètres de votre téléphone et l\'activer.</string>
     <string name="app_usage_message">Pour afficher/masquer le temps d\'écran sur l\'écran d\'accueil, autorisez ou refusez l\'autorisation d\'utilisation de l\'application.
         \n\nRemarque : Aucune donnée d\'utilisation de l\'application n\'est collectée. Tout est traité sur votre appareil.</string>
-    <string name="pro_message">Olauncher a également une version pro appelée Pro Launcher. Elle dispose de fonctionnalités supplémentaires telles que la météo, les widgets, les polices, les dossiers, les fonds d\'écran AMOLED, etc.
-        \n\nC\'est aussi le meilleur moyen de soutenir les développeurs d\'Olauncher. Jetez-y un œil !</string>
-    <string name="wallpaper_message">Olauncher propose de superbes fonds d\'écran nouveaux chaque jour. Donne un nouveau look à ton écran d\'accueil chaque jour, gratuitement!
-        \n\nTu veux essayer?</string>
-    <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller et le bouton d\'accueil pour afficher les applications récentes. Toutes les données acquises par Olauncher via ce service ne quitteront pas votre appareil.</string>
-    <string name="support_olauncher_for_free">Soutenez Olauncher gratuitement en utilisant notre lien d\'affiliation Amazon.</string>
+    <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller et le bouton d\'accueil pour afficher les applications récentes. Toutes les données acquises par Elauncher via ce service ne quitteront pas votre appareil.</string>
+    <string name="support_olauncher_for_free">Soutenez Elauncher gratuitement en utilisant notre lien d\'affiliation Amazon.</string>
     <string name="support_olauncher_message">Chaque fois que vous achetez quelque chose en utilisant notre lien, nous recevons une petite commission. Enregistrez le lien et utilisez le chaque fois que vous commandez en ligne. Merci!</string>
     <string name="open">Ouvrir le lien</string>
     <string name="copy">Copier</string>
     <string name="close">Fermer</string>
     <string name="not_now">Plus tard</string>
-    <string name="public_roadmap">Feuille de route publique d\'Olauncher</string>
+    <string name="public_roadmap">Feuille de route publique d\'Elauncher</string>
     <string name="roadmap">Feuille de route</string>
     <string name="date">Date</string>
     <string name="date_only">Date uniquement</string>
     <string name="bottom_on">Bas : Activé</string>
     <string name="bottom_off">Bas : Désactivé</string>
-    <string name="please_set_olauncher_as_default_first">Veuillez d\'abord définir Olauncher comme lanceur par défaut.</string>
+    <string name="please_set_olauncher_as_default_first">Veuillez d\'abord définir Elauncher comme lanceur par défaut.</string>
     <string name="affiliate">Affilier</string>
     <string name="tip_start_typing_for_rename">Conseil : Commencez à écrire pour faire apparaitre l\'option RENOMMER.</string>
-    <string name="hidden_apps_message">Remarque : Appuyez sur \"Olauncher\" en haut de cette page pour trouver vos applications cachées.\n\nPlus de détails sont disponibles dans notre page \"À propos\" ci-dessous.</string>
+    <string name="hidden_apps_message">Remarque : Appuyez sur \"Elauncher\" en haut de cette page pour trouver vos applications cachées.\n\nPlus de détails sont disponibles dans notre page \"À propos\" ci-dessous.</string>
     <string name="swipe_down_for">Balayer vers le bas pour</string>
     <string name="search">Rechercher</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">Veuillez activer le service d\'accessibilité d\'Olauncher dans les paramètres de votre appareil pour utiliser les gestes Double appui pour verrouiller ou Bouton d\'accueil pour les applications récentes.\n\nVeuillez noter que ce service est utilisé uniquement pour ces gestes. Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
+    <string name="accessibility_disclosure">Veuillez activer le service d\'accessibilité d\'Elauncher dans les paramètres de votre appareil pour utiliser les gestes Double appui pour verrouiller ou Bouton d\'accueil pour les applications récentes.\n\nVeuillez noter que ce service est utilisé uniquement pour ces gestes. Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
     <string name="accept">Accepter</string>
     <string name="permission">Autorisation</string>
     <string name="double_tap_lock">Appuyer deux fois pour verrouiller</string>
@@ -103,7 +98,7 @@
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
     <string name="please_turn_on_double_tap_to_unlock">Veuillez appuyer deux fois pour verrouiller.</string>
-    <string name="launcher_failed_to_lock_device">Olauncher n\'a pas réussi à verrouiller le téléphone.
+    <string name="launcher_failed_to_lock_device">Elauncher n\'a pas réussi à verrouiller le téléphone.
         Veuillez vérifier les paramètres de votre application.</string>
     <string name="long_press_to_select_app">Appuyez longuement pour sélectionner une application.</string>
     <string name="unable_to_open_app">Impossible d\'ouvrir les informations sur l\'application</string>
@@ -117,33 +112,28 @@
     <string name="swipe_right_app_enabled">Balayage vers la droite activée</string>
     <string name="swipe_left_app_disabled">Balayage vers la gauche désactivé</string>
     <string name="swipe_right_app_disabled">Balayage vers la droite désactivé</string>
-    <string name="your_wallpaper_will_update_shortly">Votre fond d\'écran sera bientôt mis à jour.</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher n\'est pas le lanceur par défaut.
-        La mise à jour quotidienne du fond d\'écran peut échouer.</string>
     <string name="long_press_to_enable">Appuyez longuement pour activer.</string>
     <string name="no_hidden_apps">Aucune application cachées</string>
     <string name="hidden_apps">Applications cachées</string>
     <string name="adapter_show">Afficher</string>
     <string name="adapter_hide">Masquer</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Utilisez-vous votre téléphone, ou votre téléphone vous utilise-t-il?</string>
-    <string name="about_olauncher">À propos Olauncher</string>
+    <string name="about_olauncher">À propos Elauncher</string>
     <string name="learn_more">Apprendre encore plus</string>
     <string name="screen_time">Temps d\'écran</string>
     <string name="did_you_know">Saviez-vous?</string>
     <string name="leave_a_review">Laisser un commentaire</string>
-    <string name="review_message">Olauncher est et sera toujours entièrement gratuit. Il n\'y a pas de publicité. Il ne collecte aucune donnée. Plus important encore, cela vous aide à réduire votre temps d’écran et à vivre une vie numérique plus saine.
+    <string name="review_message">Elauncher est et sera toujours entièrement gratuit. Il n\'y a pas de publicité. Il ne collecte aucune donnée. Plus important encore, cela vous aide à réduire votre temps d’écran et à vivre une vie numérique plus saine.
         \n\nNous pensons que passer à un lanceur minimal est une excellente décision. Même si nous sommes évidemment partiaux, nous espérons que vous appréciez l\'expérience. N\'hésitez pas à partager vos idées avec nous!</string>
     <string name="alignment_changed">Alignement changé ✅</string>
     <string name="home_screen">Écran d\'accueil</string>
     <string name="hey">Salut</string>
-    <string name="more_features">Plus de fonctionnalités…</string>
     <string name="new_year_wish">À une année meilleure que toutes les précédentes. Bonne année !</string>
     <string name="new_year_wish_1">" Peu importe comment s'est passé le mois de janvier. Tu as encore le reste de l'année pour faire mieux que jamais."</string>
     <string name="cheers">Santé!</string>
     <string name="notification_bar">Barre de notifications</string>
     <string name="private_space">Espace privé</string>
     <string name="invalid_pin_request">Demande d\'épinglage non valide</string>
-    <string name="widgets_not_supported">Les widgets ne sont pas pris en charge</string>
     <string name="pin_action_not_supported">Cette action d\'épinglage n\'est pas prise en charge</string>
     <string name="shortcut_pinned">Raccourci ajouté</string>
     <string name="shortcut_pin_failed">Impossible d\'ajouter le raccourci</string>

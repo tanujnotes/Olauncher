@@ -2,14 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="PackageVisibilityPolicy,QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
-    <!--Used only for downloading wallpapers-->
-    <uses-permission android:name="android.permission.INTERNET" />
     <!--Used only for opening alarm app-->
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission
@@ -60,6 +57,23 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Deliberately NOT singleTask (unlike MainActivity): registerForActivityResult()'s
+             callback is confirmed, on-device, to silently never fire when a singleTask Activity
+             is the one waiting on an ACTION_OPEN_DOCUMENT result. This activity exists solely to
+             host that round trip away from MainActivity - see its kdoc. -->
+        <activity
+            android:name=".helper.FontPickerActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- Same reason as FontPickerActivity above, for the widget pick/bind/configure round
+             trips: deliberately NOT singleTask, so registerForActivityResult()'s callbacks
+             actually fire - see its kdoc. -->
+        <activity
+            android:name=".helper.WidgetPickerActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
             android:name=".helper.FakeHomeActivity"

@@ -1,13 +1,10 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="app_name" translatable="false">Elauncher</string>
     <string name="github" translatable="false">Github</string>
     <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
     <!-- Home button for recents feature disabled -->
     <!-- <string name="recents_layout_description" translatable="false">recents layout description to be used a unique id to show recent apps</string> -->
-    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
     <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
-    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
     <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
     <string name="tag_0" translatable="false">0</string>
     <string name="tag_1" translatable="false">1</string>
@@ -21,17 +18,16 @@
     <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
     <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
 
-    <string name="x_twitter" translatable="false">X/Twitter</string>
     <string name="instagram" translatable="false">Instagram</string>
 
     <string name="app">App</string>
     <string name="set_as_default_launcher">Set as default launcher</string>
     <string name="set_as_default_launcher_u"><u>Set as default launcher</u></string>
-    <string name="set_as_default_launcher_first">Set Olauncher default first</string>
+    <string name="set_as_default_launcher_first">Set Elauncher default first</string>
     <string name="app_text_color">Text color</string>
     <string name="double_tap_to_lock_screen">Double tap to lock</string>
     <string name="home_button_show_recents">Home button for recents</string>
-    <string name="admin_permission_message">Olauncher promises to use the accessibility permission responsibly. Olauncher does not collect or share any data.</string>
+    <string name="admin_permission_message">Elauncher promises to use the accessibility permission responsibly. Elauncher does not collect or share any data.</string>
     <string name="about">About</string>
     <string name="off">Off</string>
     <string name="on">On</string>
@@ -48,7 +44,6 @@
     <string name="donate">Donate</string>
     <string name="swipe_up_for_apps">1. Swipe up for all apps\n2. Long press anywhere for settings</string>
     <string name="apps_on_home_screen">Apps on home screen</string>
-    <string name="daily_wallpaper_update">Daily new wallpaper</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="center">Center</string>
@@ -81,41 +76,37 @@
     <string name="welcome_to_olauncher_settings">Welcome to the settings!
         \n\nRemember, if you have any questions, our About page has the answer.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
-        \n\nIf you\'re finding Olauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
-    <string name="share_message">We need your help! We believe everyone should know about Olauncher and its benefits, but we can\'t do it alone.
-        \n\nCould you please share Olauncher with your friends, family, and followers? Thank you for your support! ❤</string>
+        \n\nIf you\'re finding Elauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
+    <string name="share_message">We need your help! We believe everyone should know about Elauncher and its benefits, but we can\'t do it alone.
+        \n\nCould you please share Elauncher with your friends, family, and followers? Thank you for your support! ❤</string>
     <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
-    <!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
-    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Olauncher. Can we request you to keep this On for a few more days and then decide?
+    <!--         \n\nIf you have a moment to spare, could you please share Elauncher with others? Elauncher needs people. More importantly, people need Elauncher.</string>-->
+    <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Elauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
     <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.           Please search for Digital Wellbeing in your phone settings and enable it.</string>
     <string name="app_usage_message">To show/hide your screen time on the home screen, please allow or disallow the app usage permission.
         \n\nNote: No app usage data is collected. Everything is processed on your device.</string>
-    <string name="pro_message">Olauncher also has a pro version called Pro Launcher. It has extra features like weather, widgets, fonts, folders, AMOLED wallpapers, and so on.
-        \n\nIt\'s also the best way to support the developers of Olauncher. Check it out!</string>
-    <string name="wallpaper_message">Olauncher offers beautiful new wallpapers daily. Give your homescreen a fresh new look every day, for free!
-        \n\nWant to try it?</string>
-    <string name="accessibility_service_description">The accessibility permission is required to enable the gesture - double tap to lock . Any data acquired by Olauncher via this service will not leave your device.</string>
-    <string name="support_olauncher_for_free">Support Olauncher for free by using our Amazon affiliate link.</string>
+    <string name="accessibility_service_description">The accessibility permission is required to enable the gesture - double tap to lock . Any data acquired by Elauncher via this service will not leave your device.</string>
+    <string name="support_olauncher_for_free">Support Elauncher for free by using our Amazon affiliate link.</string>
     <string name="support_olauncher_message">Every time you buy something using our link, we get a small commission. Please save the link and use it whenever you shop online.\nThank you!</string>
     <string name="open">Open link</string>
     <string name="copy">Copy</string>
     <string name="close">Close</string>
     <string name="not_now">Not now</string>
-    <string name="public_roadmap">Olauncher public roadmap</string>
+    <string name="public_roadmap">Elauncher public roadmap</string>
     <string name="roadmap">Roadmap</string>
     <string name="date">Date</string>
     <string name="date_only">Date only</string>
     <string name="bottom_on">Bottom: On</string>
     <string name="bottom_off">Bottom: Off</string>
-    <string name="please_set_olauncher_as_default_first">Please set Olauncher as default first</string>
+    <string name="please_set_olauncher_as_default_first">Please set Elauncher as default first</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
-    <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page.</string>
+    <string name="hidden_apps_message">Note: Tap on \'Elauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page.</string>
     <string name="swipe_down_for">Swipe down for</string>
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
-    <string name="accessibility_disclosure">Please turn on Olauncher\'s accessibility service in your device\'s settings to enable Double tap to lock gesture.
+    <string name="accessibility_disclosure">Please turn on Elauncher\'s accessibility service in your device\'s settings to enable Double tap to lock gesture.
     \n\nPlease note that this service is only used for this particular feature. Our accessibility service does not collect or share any data.</string>
     <string name="accept">Accept</string>
     <string name="permission">Permission</string>
@@ -127,10 +118,16 @@
     <string name="delete">Uninstall</string>
     <string name="text_size">Text size</string>
     <string name="bold_font">Bold font</string>
+    <string name="invalid_font_file">Invalid font file. Please pick a .ttf or .otf file.</string>
+    <string name="custom_font">Custom font</string>
+    <string name="custom_font_active">Custom font: %1$s</string>
+    <string name="choose_file">Choose file</string>
+    <string name="reset_to_default">Reset to default</string>
+    <string name="custom_font_overrides_bold">Custom font overrides Bold font when both are set</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
-    <string name="launcher_failed_to_lock_device">Olauncher failed to lock device.\nPlease check your app settings.</string>
+    <string name="launcher_failed_to_lock_device">Elauncher failed to lock device.\nPlease check your app settings.</string>
     <string name="long_press_to_select_app">Long press to select app</string>
     <string name="unable_to_open_app">Unable to open app</string>
     <string name="unable_to_open_app_info">Unable to open app info</string>
@@ -144,8 +141,6 @@
     <string name="swipe_right_app_enabled">Swipe right app enabled</string>
     <string name="swipe_left_app_disabled">Swipe left app disabled</string>
     <string name="swipe_right_app_disabled">Swipe right app disabled</string>
-    <string name="your_wallpaper_will_update_shortly">Your wallpaper will update shortly</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher is not default. Wallpaper update will fail.</string>
     <string name="long_press_to_enable">Long press to enable</string>
     <string name="no_hidden_apps">No hidden apps</string>
     <string name="hidden_apps">Hidden apps</string>
@@ -157,23 +152,38 @@
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
     <string name="leave_a_review">Leave a review</string>
-    <string name="review_message">Olauncher is free and always will be. It has no ads, collects no data, and reduces your screen time, resulting in a healthier life.
+    <string name="review_message">Elauncher is free and always will be. It has no ads, collects no data, and reduces your screen time, resulting in a healthier life.
         \n\nWe hope you enjoy it. Tell us what you think.</string>
     <string name="alignment_changed">Alignment changed ✅</string>
     <string name="home_screen">Home screen</string>
     <string name="hey">Hey</string>
-    <string name="more_features">More features…</string>
     <string name="new_year_wish">Here\'s to a year better than any before. Happy new year!</string>
     <string name="new_year_wish_1">It doesn\'t matter how January went. You still have the rest of the year to do better than ever.</string>
     <string name="cheers">Cheers!</string>
     <string name="notification_bar">Notification bar</string>
     <string name="private_space">Private space</string>
     <string name="invalid_pin_request">Invalid pin request</string>
-    <string name="widgets_not_supported">Widgets are not supported</string>
     <string name="pin_action_not_supported">This pin action is not supported</string>
     <string name="shortcut_pinned">Shortcut added</string>
     <string name="shortcut_pin_failed">Could not add shortcut</string>
+    <string name="widget_pinned">Widget added</string>
+    <string name="widget_pin_failed">Could not add widget</string>
     <string name="invalid_shortcut">Invalid shortcut</string>
     <string name="shortcut_not_found">Shortcut not found</string>
     <string name="unable_to_open_shortcut">Unable to open shortcut</string>
+
+    <string name="pages">Pages</string>
+    <string name="add_page">Add page</string>
+    <string name="rename_page">Rename page</string>
+    <string name="page_name_default">Page %d</string>
+    <string name="remove_page">Remove page</string>
+    <string name="remove_page_confirm_title">Delete this page?</string>
+    <string name="remove_page_confirm_message">This page has items on it. Deleting it will also delete those items. This can\'t be undone.</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="add_widget">Add widget</string>
+    <string name="widget_unavailable">Widget unavailable\nTap to remove</string>
+    <string name="settings">Settings</string>
+    <string name="page_move_up" translatable="false">▲</string>
+    <string name="page_move_down" translatable="false">▼</string>
 </resources>
