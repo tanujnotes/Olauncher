@@ -28,6 +28,7 @@ import android.widget.Toast
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
+import androidx.core.graphics.ColorUtils
 import androidx.core.net.toUri
 import app.elauncher.BuildConfig
 import app.elauncher.R
@@ -426,8 +427,15 @@ fun Context.getColorFromAttr(
     return typedValue.data
 }
 
-fun View.animateAlpha(alpha: Float = 1.0f) {
-    if (context.isEinkDisplay()) {
+@ColorInt
+fun Context.themedBackgroundColor(opacity: Int): Int {
+    val baseColor = if (isDarkThemeOn()) 0xFF000000.toInt() else 0xFFFFFFFF.toInt()
+    val alpha = opacity * 255 / 100
+    return ColorUtils.setAlphaComponent(baseColor, alpha)
+}
+
+fun View.animateAlpha(alpha: Float = 1.0f, reduceAnimations: Boolean = false) {
+    if (context.isEinkDisplay() || reduceAnimations) {
         this.alpha = alpha
         return
     }

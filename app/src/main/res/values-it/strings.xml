@@ -14,10 +14,6 @@
     <string name="white">Chiaro</string>
     <string name="change_default_launcher">Cambia il launcher  predefinito</string>
     <string name="privacy">Privacy</string>
-    <string name="share">Condividi</string>
-    <string name="share_now">Condividi</string>
-    <string name="rate">Valuta</string>
-    <string name="rate_now">Valuta</string>
     <string name="follow">Segui</string>
     <string name="email">E-mail</string>
 
@@ -27,7 +23,6 @@
     <string name="left">Sinistra</string>
     <string name="right">Destra</string>
     <string name="center">Centrato</string>
-    <string name="home_layout_alignment">Allineamento app in Home screen</string>
     <string name="swipe_left_app">Scorri verso sinistra</string>
     <string name="swipe_right_app">Scorri verso destra l\'app</string>
     <string name="_0">0</string>
@@ -57,8 +52,6 @@
         \n\nRicorda, se hai domande, la nostra pagina Informazioni ha la risposta.</string>
     <string name="rate_us_message">Ehi, trovi utile Elauncher? Se sì, una valutazione a 5 stelle è il modo migliore per sostenerci.
         \n\nGrazie e non lo vedrai più.</string>
-    <string name="share_message">Ciao, abbiamo bisogno del tuo aiuto! L\'anno scorso abbiamo superato il milione di download. Quest’anno vogliamo raggiungere un milione in più ma non possiamo farcela da soli.
-        \n\nSaresti così gentile da condividere Elauncher con i tuoi amici, per favore? Grazie e buona giornata!</string>
     <string name="keyboard_message">Ciao, la tastiera è il modo più veloce per trovare e avviare le app in Elauncher. Possiamo chiederti di metterlo alla prova ancora per qualche giorno e poi decidere?
         \n\nSei sempre tu a scegliere.</string>
     <string name="digital_wellbeing_message">Se desideri impostare limiti di tempo per determinate app, la funzionalità Benessere digitale di Android può aiutarti a farlo.
@@ -76,8 +69,6 @@
     <string name="roadmap">Roadmap</string>
     <string name="date">Data</string>
     <string name="date_only">Solo data</string>
-    <string name="bottom_on">In basso: acceso</string>
-    <string name="bottom_off">In basso: spento</string>
     <string name="please_set_olauncher_as_default_first">Imposta Elauncher come launcher predefinito</string>
     <string name="affiliate">Affiliazione</string>
     <string name="tip_start_typing_for_rename">Suggerimento: inizia a digitare per RINOMINARE l\'app</string>
@@ -119,13 +110,9 @@
     <string name="adapter_show">mostra</string>
     <string name="adapter_hide">nascondi</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Stai usando il tuo telefono, o è il tuo telefono che sta usando te?</string>
-    <string name="about_olauncher">Info Elauncher</string>
     <string name="learn_more">Saperne di più</string>
     <string name="screen_time">Tempo di schermo</string>
     <string name="did_you_know">Lo sapevate?</string>
-    <string name="leave_a_review">Lascia una recensione</string>
-    <string name="review_message">Elauncher è e sarà sempre completamente gratuito. Non ha pubblicità. Non raccoglie dati. Ancora più importante, ti aiuta a ridurre il tempo trascorso davanti allo schermo e a vivere una vita digitale più sana.
-        \n\nCrediamo che passare a un launcher minimale sia un\'ottima decisione. Anche se siamo ovviamente di parte, ci auguriamo che l\'esperienza ti piaccia. Sentitevi liberi di condividere i tuoi pensieri con noi!</string>
     <string name="alignment_changed">Allineamento cambiato ✅</string>
     <string name="home_screen">Schermata principale</string>
     <string name="hey">Ciao</string>

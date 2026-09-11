@@ -48,10 +48,14 @@ class Prefs(private val context: Context) {
     private val CURRENT_PAGE = "CURRENT_PAGE"
     private val GRID_CELL_SIZE_DP = "GRID_CELL_SIZE_DP"
     private val APP_LIST_MIGRATION_DONE = "APP_LIST_MIGRATION_DONE"
+    private val CLOCK_DATE_SPLIT_DONE = "CLOCK_DATE_SPLIT_DONE"
+    private val PAGES_PRE_CLOCK_SPLIT_BACKUP = "PAGES_PRE_CLOCK_SPLIT_BACKUP"
     private val HIDE_SET_DEFAULT_LAUNCHER = "HIDE_SET_DEFAULT_LAUNCHER"
     private val SCREEN_TIME_LAST_UPDATED = "SCREEN_TIME_LAST_UPDATED"
     private val LAUNCHER_RESTART_TIMESTAMP = "LAUNCHER_RECREATE_TIMESTAMP"
     private val SHOWN_ON_DAY_OF_YEAR = "SHOWN_ON_DAY_OF_YEAR"
+    private val REDUCE_ANIMATIONS = "REDUCE_ANIMATIONS"
+    private val BACKGROUND_OPACITY = "BACKGROUND_OPACITY"
     // Home button for recents feature disabled
     // private val HOME_BUTTON_SHOW_RECENTS = "HOME_BUTTON_SHOW_RECENTS"
 
@@ -198,6 +202,11 @@ class Prefs(private val context: Context) {
         get() = prefs.getInt(APP_THEME, AppCompatDelegate.MODE_NIGHT_YES)
         set(value) = prefs.edit { putInt(APP_THEME, value).apply() }
 
+    // Opacity (0-100) of the Settings/App-Drawer background scrim. 100 = fully opaque.
+    var backgroundOpacity: Int
+        get() = prefs.getInt(BACKGROUND_OPACITY, 100)
+        set(value) = prefs.edit { putInt(BACKGROUND_OPACITY, value).apply() }
+
     var textSizeScale: Float
         get() = prefs.getFloat(TEXT_SIZE_SCALE, 1.0f)
         set(value) = prefs.edit { putFloat(TEXT_SIZE_SCALE, value).apply() }
@@ -205,6 +214,12 @@ class Prefs(private val context: Context) {
     var boldFont: Boolean
         get() = prefs.getBoolean(BOLD_FONT, false)
         set(value) = prefs.edit { putBoolean(BOLD_FONT, value).apply() }
+
+    // Manual override to skip fragment-transition/scroll animations, ORed into the existing
+    // e-ink animation gates - for slow-refresh displays that isEinkDisplay() doesn't detect.
+    var reduceAnimations: Boolean
+        get() = prefs.getBoolean(REDUCE_ANIMATIONS, false)
+        set(value) = prefs.edit { putBoolean(REDUCE_ANIMATIONS, value).apply() }
 
     // Separate on/off flag from "is a custom font file present": turning this off reverts to
     // the system font (light/bold) without deleting the stored file picked via FontManager, so
@@ -262,9 +277,13 @@ class Prefs(private val context: Context) {
             if (stored.isBlank()) {
                 val flatSlotPages = migratePagesFromFlatSlots()
                 // A genuinely fresh install (no legacy appName1..8 data to carry over) gets the same
-                // starter content newly-added pages get, rather than a page holding only the
-                // synthesized clock below - migratePagesFromFlatSlots() returns exactly one "Home"
-                // page with an empty item list in this case, so an empty first page is the signal.
+                // starter content newly-added pages get - which is nothing at all now that every
+                // widget is long-press-added (see newPageDefaultItems), so this branch is a no-op
+                // kept as the single seam a seeded default would come back through.
+                // migratePagesFromFlatSlots() returns exactly one "Home" page with an empty item
+                // list in that case, so an empty first page is the signal - and it stays the signal
+                // end-to-end, because migrateAppItemsToAppLists synthesizes nothing for a page that
+                // started empty either.
                 val migrated = if (flatSlotPages.singleOrNull()?.items?.isEmpty() == true) {
                     listOf(flatSlotPages.single().copy(items = newPageDefaultItems(defaultColumnCount())))
                 } else {
@@ -276,12 +295,16 @@ class Prefs(private val context: Context) {
                 pages = migrated
                 // Not exempt from the App List migration the way it is from the rescale:
                 // migratePagesFromFlatSlots() still emits GridItemType.APP items, which genuinely
-                // need converting, so both branches go through the same pass. (The synthetic branch
-                // above already has its own DATE_TIME item, so this is a no-op for it.)
-                return migrateToAppLists(migrated)
+                // need converting, so both branches go through the same pass. (For the blank
+                // synthetic page above both migrations are no-ops - nothing to convert, nothing to
+                // split - but they still run so their run-once markers get set.)
+                return splitDateTimeItems(migrateToAppLists(migrated))
             }
             val storedPages = stored.toPages()
-            return migrateToAppLists(rescaleForCurrentCellSize(storedPages))
+            // App Lists first, then the clock/date split: the split's fallback placement scans
+            // every item on the page, so it has to see the converted (APP -> APP_LIST) set and any
+            // item migrateToAppLists synthesized, not the pre-conversion one.
+            return splitDateTimeItems(migrateToAppLists(rescaleForCurrentCellSize(storedPages)))
         }
         set(value) = prefs.edit { putString(PAGES, value.toJson()).apply() }
 
@@ -344,6 +367,58 @@ class Prefs(private val context: Context) {
         appListMigrationDone = true
         pages = migrated
         return migrated
+    }
+
+    /**
+     * Marker for the one-time [splitDateTimeItems] pass, same run-once shape as
+     * [appListMigrationDone]: set as soon as the split has run, and never cleared. Without it a
+     * second read would split the already-split DATE_TIME items again, adding a second CLOCK item
+     * per page every time the pages are loaded.
+     */
+    var clockDateSplitDone: Boolean
+        get() = prefs.getBoolean(CLOCK_DATE_SPLIT_DONE, false)
+        set(value) = prefs.edit { putBoolean(CLOCK_DATE_SPLIT_DONE, value).apply() }
+
+    /**
+     * The raw [PAGES] json exactly as it stood immediately before [splitDateTimeItems] ran, or ""
+     * if that has not happened yet.
+     *
+     * The split is one-way, guarded, and runs against the only copy of a real page layout: this is
+     * the escape hatch if it turns out to have placed something wrong. Written once and then left
+     * alone forever - a few KB of json is a cheap price for being able to recover a layout by hand
+     * (adb shell run-as app.elauncher cat shared_prefs/app.elauncher.xml).
+     */
+    var pagesPreClockSplitBackup: String
+        get() = prefs.getString(PAGES_PRE_CLOCK_SPLIT_BACKUP, "").toString()
+        set(value) = prefs.edit { putString(PAGES_PRE_CLOCK_SPLIT_BACKUP, value).apply() }
+
+    /**
+     * One-time, guarded split of every pre-split combined clock+date item into a CLOCK item plus a
+     * simplified DATE_TIME one (see [splitDateTimeIntoClockAndDate] for what each old
+     * dateTimeVisibility becomes and how the two are placed). Persists its result immediately so
+     * the very next read is a plain load of already-split data.
+     *
+     * Backs the incoming json up first - see [pagesPreClockSplitBackup].
+     */
+    private fun splitDateTimeItems(storedPages: List<Page>): List<Page> {
+        if (clockDateSplitDone) return storedPages
+        val raw = prefs.getString(PAGES, "").toString()
+        // Both callers have already persisted [storedPages], so raw is normally exactly it;
+        // re-serializing covers the case where it somehow isn't, rather than storing a blank backup.
+        pagesPreClockSplitBackup = raw.ifBlank { storedPages.toJson() }
+        val split = storedPages.map { page ->
+            page.copy(
+                items = page.items
+                    .splitDateTimeIntoClockAndDate(
+                        columnCount = defaultColumnCount(),
+                        rowCount = defaultRowCount(),
+                    )
+                    .toMutableList(),
+            )
+        }
+        clockDateSplitDone = true
+        pages = split
+        return split
     }
 
     /**

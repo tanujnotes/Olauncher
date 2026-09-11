@@ -35,10 +35,6 @@
     <string name="white">White</string>
     <string name="change_default_launcher">Change default launcher</string>
     <string name="privacy">Privacy</string>
-    <string name="share">Share</string>
-    <string name="share_now">Share now</string>
-    <string name="rate">Rate</string>
-    <string name="rate_now">Rate now</string>
     <string name="follow">Follow</string>
     <string name="email">Email</string>
     <string name="donate">Donate</string>
@@ -47,7 +43,7 @@
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="center">Center</string>
-    <string name="home_layout_alignment">App alignment</string>
+    <string name="app_list_alignment">App list alignment</string>
     <string name="swipe_left_app">Swipe left app</string>
     <string name="swipe_right_app">Swipe right app</string>
     <string name="_0">0</string>
@@ -70,6 +66,8 @@
     <string name="appearance">Appearance</string>
     <string name="gestures">Gestures</string>
     <string name="theme_mode">Theme mode</string>
+    <string name="background_opacity">Background opacity</string>
+    <string name="percentage_value">%1$d%%</string>
     <string name="system_default">System</string>
     <string name="dark">Dark</string>
     <string name="light">Light</string>
@@ -77,10 +75,6 @@
         \n\nRemember, if you have any questions, our About page has the answer.</string>
     <string name="rate_us_message">Hi, you won\'t see this message again.
         \n\nIf you\'re finding Elauncher useful, could you please leave a 5-star review? It\'ll mean the world to us. Thank you!</string>
-    <string name="share_message">We need your help! We believe everyone should know about Elauncher and its benefits, but we can\'t do it alone.
-        \n\nCould you please share Elauncher with your friends, family, and followers? Thank you for your support! ❤</string>
-    <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
-    <!--         \n\nIf you have a moment to spare, could you please share Elauncher with others? Elauncher needs people. More importantly, people need Elauncher.</string>-->
     <string name="keyboard_message">Hi, keyboard is the fastest way to find and launch apps in Elauncher. Can we request you to keep this On for a few more days and then decide?
         \n\nThe choice is always yours.</string>
     <string name="digital_wellbeing_message">If you want to set time limits for certain apps, Digital Wellbeing feature of Android can help you do it.           Please search for Digital Wellbeing in your phone settings and enable it.</string>
@@ -97,8 +91,6 @@
     <string name="roadmap">Roadmap</string>
     <string name="date">Date</string>
     <string name="date_only">Date only</string>
-    <string name="bottom_on">Bottom: On</string>
-    <string name="bottom_off">Bottom: Off</string>
     <string name="please_set_olauncher_as_default_first">Please set Elauncher as default first</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
@@ -124,6 +116,8 @@
     <string name="choose_file">Choose file</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="custom_font_overrides_bold">Custom font overrides Bold font when both are set</string>
+    <string name="reduce_animations">Reduce animations</string>
+    <string name="reduce_animations_hint">Skips transition and scroll animations, useful on e-ink or slow-refresh displays</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
     <string name="please_turn_on_double_tap_to_unlock">Please turn on double tap to lock</string>
@@ -147,13 +141,9 @@
     <string name="adapter_show">Show</string>
     <string name="adapter_hide">Hide</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
-    <string name="about_olauncher">About and FAQs</string>
     <string name="screen_time">Screen time</string>
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
-    <string name="leave_a_review">Leave a review</string>
-    <string name="review_message">Elauncher is free and always will be. It has no ads, collects no data, and reduces your screen time, resulting in a healthier life.
-        \n\nWe hope you enjoy it. Tell us what you think.</string>
     <string name="alignment_changed">Alignment changed ✅</string>
     <string name="home_screen">Home screen</string>
     <string name="hey">Hey</string>
@@ -183,6 +173,8 @@
     <string name="save">Save</string>
     <string name="add_widget">Add widget</string>
     <string name="add_app_list">Add app list</string>
+    <string name="add_clock">Add clock</string>
+    <string name="add_date_time">Add date</string>
     <string name="edit_widget">Edit widget</string>
     <string name="remove_this_app">Remove this app</string>
     <string name="rename_app">Rename app</string>
@@ -194,6 +186,7 @@
     <string name="page_move_down" translatable="false">▼</string>
 
     <string name="app_list_settings">App list settings</string>
+    <string name="clock_settings">Clock settings</string>
     <string name="date_time_settings">Date and screen time</string>
     <string name="alignment">Alignment</string>
     <string name="number_of_apps">Number of apps</string>

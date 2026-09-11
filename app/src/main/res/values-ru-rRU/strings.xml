@@ -14,10 +14,6 @@
     <string name="white">Белый</string>
     <string name="change_default_launcher">Изменить лаунчер по умолчанию</string>
     <string name="privacy">Конфиденциальность</string>
-    <string name="share">Поделиться</string>
-    <string name="share_now">Поделиться</string>
-    <string name="rate">Оценить</string>
-    <string name="rate_now">Оценить</string>
     <string name="follow">Перейти</string>
     <string name="email">Электронная почта</string>
 
@@ -27,7 +23,6 @@
     <string name="left">Слева</string>
     <string name="right">Справа</string>
     <string name="center">Центр</string>
-    <string name="home_layout_alignment">Расположение приложений</string>
     <string name="swipe_left_app">Свайп влево</string>
     <string name="swipe_right_app">Свайп вправо</string>
     <string name="_0">0</string>
@@ -57,8 +52,6 @@
         \n\nПомните, если у вас есть вопросы, на нашей странице «О нас» есть ответ.</string>
     <string name="rate_us_message">Здравствуйте, вы больше не увидите это сообщение.
         \n\nЕсли вам нравится Elauncher, не могли бы вы поставить нам 5 звезд? Это поможет улучшить наш рейтинг и сделает нас счастливыми. Спасибо!</string>
-    <string name="share_message">Привет, нам нужна ваша помощь! В прошлом году мы преодолели миллион загрузок. В этом году мы хотим достичь еще миллиона, но мы не можем сделать это в одиночку.
-        \n\nНе могли бы вы поделиться Elauncher со своими друзьями, пожалуйста? Спасибо, хорошего дня!</string>
     <string name="keyboard_message">Привет, клавиатура — это самый быстрый способ найти и запустить приложения в Elauncher. Могли бы вы продолжить использовать Автопоказ клавиатуры еще несколько дней, прежде чем принять окончательное решение?
         \n\nВыбор всегда за вами.</string>
     <string name="digital_wellbeing_message">Если вы хотите установить ограничения по времени для определенных приложений, функция «Цифровое благополучие» Android может помочь вам в этом.
@@ -76,8 +69,6 @@
     <string name="roadmap">Дорожная карта</string>
     <string name="date">Дата</string>
     <string name="date_only">Только дата</string>
-    <string name="bottom_on">Внизу: Вкл</string>
-    <string name="bottom_off">Внизу: Выкл</string>
     <string name="please_set_olauncher_as_default_first">Сначала установите Elauncher в качестве лаунчера по умолчанию.</string>
     <string name="affiliate">Партнер</string>
     <string name="tip_start_typing_for_rename">Совет: начните вводить текст чтобы ПЕРЕИМЕНОВАТЬ приложение.</string>
@@ -119,13 +110,9 @@
     <string name="adapter_show">Показать</string>
     <string name="adapter_hide">Скрыть</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Вы используете свой телефон, или ваш телефон использует вас?</string>
-    <string name="about_olauncher">О нас Elauncher</string>
     <string name="screen_time">Время на экране</string>
     <string name="learn_more">Узнать больше</string>
     <string name="did_you_know">Вы знали?</string>
-    <string name="leave_a_review">Оставить отзыв</string>
-    <string name="review_message">Elauncher есть и всегда будет полностью бесплатным. В нем нет рекламы. Он не собирает никаких данных. Самое главное, это помогает вам сократить время, проводимое перед экраном, и вести более здоровую цифровую жизнь.
-        \n\nМы считаем, что переход на минимальный лаунчер — отличное решение. Хотя мы явно предвзяты, мы надеемся, что вам понравится этот опыт. Не стесняйтесь поделиться с нами своим мнением!</string>
     <string name="alignment_changed">Выравнивание изменено ✅</string>
     <string name="home_screen">Главный экран</string>
     <string name="hey">Привет</string>

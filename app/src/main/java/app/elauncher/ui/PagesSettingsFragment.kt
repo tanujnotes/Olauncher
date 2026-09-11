@@ -15,6 +15,7 @@ import app.elauncher.data.Prefs
 import app.elauncher.data.newPageDefaultItems
 import app.elauncher.databinding.FragmentPagesSettingsBinding
 import app.elauncher.helper.FontManager
+import app.elauncher.helper.themedBackgroundColor
 import java.util.UUID
 
 /**
@@ -40,6 +41,7 @@ class PagesSettingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
+        binding.root.setBackgroundColor(requireContext().themedBackgroundColor(prefs.backgroundOpacity))
         pages = prefs.pages.toMutableList()
 
         adapter = PagesAdapter(

@@ -13,7 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
-import android.widget.Toast
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -28,15 +28,13 @@ import app.elauncher.databinding.FragmentSettingsBinding
 import app.elauncher.helper.FontManager
 import app.elauncher.helper.FontPickerActivity
 import app.elauncher.helper.animateAlpha
-import app.elauncher.helper.appUsagePermissionGranted
 import app.elauncher.helper.getColorFromAttr
 import app.elauncher.helper.isAccessServiceEnabled
 import app.elauncher.helper.isTablet
 import app.elauncher.helper.openAppInfo
 import app.elauncher.helper.openUrl
-import app.elauncher.helper.rateApp
-import app.elauncher.helper.shareApp
 import app.elauncher.helper.showToast
+import app.elauncher.helper.themedBackgroundColor
 import app.elauncher.listener.DeviceAdmin
 
 class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListener {
@@ -62,32 +60,32 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         } ?: throw Exception("Invalid Activity")
         viewModel.isElauncherDefault()
 
+        applyBackgroundColor()
+
         deviceManager = requireContext().getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
         populatePagesSettings()
         populateKeyboardText()
-        populateScreenTimeOnOff()
         populateLockSettings()
         // Home button for recents feature disabled
         // populateHomeButtonRecents()
         populateAppThemeText()
+        populateBackgroundOpacity()
         populateTextSize()
         populateBoldFont()
+        populateReduceAnimations()
         populateCustomFont()
         populateAlignment()
         populateStatusBar()
-        populateDateTime()
         populateSwipeApps()
         populateSwipeDownAction()
-        populateActionHints()
         initClickListeners()
         initObservers()
     }
 
     override fun onClick(view: View) {
-        binding.dateTimeSelectLayout.visibility = View.GONE
         binding.appThemeSelectLayout.visibility = View.GONE
         binding.swipeDownSelectLayout.visibility = View.GONE
         if (view.id != R.id.customFont && view.id != R.id.customFontChoose && view.id != R.id.customFontReset)
@@ -98,12 +96,10 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
                 applyTextSizeScale()
             }
         }
-        if (view.id != R.id.alignmentBottom)
-            binding.alignmentSelectLayout.visibility = View.GONE
+        binding.alignmentSelectLayout.visibility = View.GONE
 
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
-            R.id.screenTimeOnOff -> viewModel.showDialog.postValue(Constants.Dialog.DIGITAL_WELLBEING)
             R.id.appInfo -> openAppInfo(requireContext(), Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.toggleLock -> toggleLockMode()
@@ -112,21 +108,17 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.autoShowKeyboard -> toggleKeyboardText()
             R.id.pagesSettingsRow -> findNavController().navigate(R.id.action_settingsFragment_to_pagesSettingsFragment)
             R.id.alignment -> binding.alignmentSelectLayout.visibility = View.VISIBLE
-            R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
-            R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
-            R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
-            R.id.alignmentBottom -> updateHomeBottomAlignment()
+            R.id.alignmentLeft -> updateAppListAlignment(Gravity.START)
+            R.id.alignmentCenter -> updateAppListAlignment(Gravity.CENTER)
+            R.id.alignmentRight -> updateAppListAlignment(Gravity.END)
             R.id.statusBar -> toggleStatusBar()
-            R.id.dateTime -> binding.dateTimeSelectLayout.visibility = View.VISIBLE
-            R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
-            R.id.dateTimeOff -> toggleDateTime(Constants.DateTime.OFF)
-            R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
             R.id.appThemeText -> binding.appThemeSelectLayout.visibility = View.VISIBLE
             R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
             R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
             R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             R.id.textSizeValue -> binding.textSizesLayout.visibility = View.VISIBLE
             R.id.boldFont -> toggleBoldFont()
+            R.id.reduceAnimations -> toggleReduceAnimations()
             R.id.customFont -> binding.customFontSelectLayout.visibility = View.VISIBLE
             R.id.customFontChoose -> {
                 binding.customFontSelectLayout.visibility = View.GONE
@@ -151,17 +143,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.notifications -> updateSwipeDownAction(Constants.SwipeDownAction.NOTIFICATIONS)
             R.id.search -> updateSwipeDownAction(Constants.SwipeDownAction.SEARCH)
 
-            R.id.aboutOlauncher -> {
-                prefs.aboutClicked = true
-                requireContext().openUrl(Constants.URL_ABOUT)
-            }
-
-            R.id.share -> requireActivity().shareApp()
-            R.id.rate -> {
-                prefs.rateClicked = true
-                requireActivity().rateApp()
-            }
-
             R.id.github -> requireContext().openUrl(Constants.URL_GITHUB)
             R.id.privacy -> requireContext().openUrl(Constants.URL_PRIVACY)
         }
@@ -170,7 +151,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
             R.id.alignment -> {
-                prefs.appLabelAlignment = prefs.homeAlignment
                 findNavController().navigate(R.id.action_settingsFragment_to_appListFragment)
                 requireContext().showToast(getString(R.string.alignment_changed))
             }
@@ -192,23 +172,16 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.scrollLayout.setOnClickListener(this)
         binding.appInfo.setOnClickListener(this)
         binding.setLauncher.setOnClickListener(this)
-        binding.aboutOlauncher.setOnClickListener(this)
         binding.autoShowKeyboard.setOnClickListener(this)
         binding.toggleLock.setOnClickListener(this)
         // Home button for recents feature disabled
         // binding.homeButtonRecents.setOnClickListener(this)
         binding.pagesSettingsRow.setOnClickListener(this)
-        binding.screenTimeOnOff.setOnClickListener(this)
         binding.alignment.setOnClickListener(this)
         binding.alignmentLeft.setOnClickListener(this)
         binding.alignmentCenter.setOnClickListener(this)
         binding.alignmentRight.setOnClickListener(this)
-        binding.alignmentBottom.setOnClickListener(this)
         binding.statusBar.setOnClickListener(this)
-        binding.dateTime.setOnClickListener(this)
-        binding.dateTimeOn.setOnClickListener(this)
-        binding.dateTimeOff.setOnClickListener(this)
-        binding.dateOnly.setOnClickListener(this)
         binding.swipeLeftApp.setOnClickListener(this)
         binding.swipeRightApp.setOnClickListener(this)
         binding.swipeDownAction.setOnClickListener(this)
@@ -220,6 +193,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.themeSystem.setOnClickListener(this)
         binding.textSizeValue.setOnClickListener(this)
         binding.boldFont.setOnClickListener(this)
+        binding.reduceAnimations.setOnClickListener(this)
         binding.customFont.setOnClickListener(this)
         binding.customFontChoose.setOnClickListener(this)
         binding.customFontReset.setOnClickListener(this)
@@ -227,8 +201,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.closeAccessibility.setOnClickListener(this)
         binding.notWorking.setOnClickListener(this)
 
-        binding.share.setOnClickListener(this)
-        binding.rate.setOnClickListener(this)
         binding.github.setOnClickListener(this)
         binding.privacy.setOnClickListener(this)
 
@@ -240,11 +212,31 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.swipeLeftApp.setOnLongClickListener(this)
         binding.swipeRightApp.setOnLongClickListener(this)
         binding.toggleLock.setOnLongClickListener(this)
+
+        binding.backgroundOpacitySeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                binding.backgroundOpacityValue.text = getString(R.string.percentage_value, progress)
+                if (fromUser) {
+                    prefs.backgroundOpacity = progress
+                    applyBackgroundColor()
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                prefs.backgroundOpacity = seekBar.progress
+                applyBackgroundColor()
+            }
+        })
+    }
+
+    private fun applyBackgroundColor() {
+        binding.root.setBackgroundColor(requireContext().themedBackgroundColor(prefs.backgroundOpacity))
     }
 
     private fun initObservers() {
         if (prefs.firstSettingsOpen) {
-            viewModel.showDialog.postValue(Constants.Dialog.ABOUT)
             prefs.firstSettingsOpen = false
         }
         viewModel.isElauncherDefault.observe(viewLifecycleOwner) {
@@ -298,22 +290,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         }
     }
 
-    private fun toggleDateTime(selected: Int) {
-        prefs.dateTimeVisibility = selected
-        populateDateTime()
-        viewModel.toggleDateTime()
-    }
-
-    private fun populateDateTime() {
-        binding.dateTime.text = getString(
-            when (prefs.dateTimeVisibility) {
-                Constants.DateTime.DATE_ONLY -> R.string.date
-                Constants.DateTime.ON -> R.string.on
-                else -> R.string.off
-            }
-        )
-    }
-
     private fun showStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
             requireActivity().window.insetsController?.show(WindowInsets.Type.statusBars())
@@ -359,7 +335,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         if (isAccessServiceEnabled(requireContext()))
             binding.actionAccessibility.text = getString(R.string.disable)
         binding.accessibilityLayout.isVisible = show
-        binding.scrollView.animateAlpha(if (show) 0.5f else 1f)
+        binding.scrollView.animateAlpha(if (show) 0.5f else 1f, prefs.reduceAnimations)
     }
 
     private fun openAccessibilityService() {
@@ -480,6 +456,20 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.boldFont.text = getString(if (prefs.boldFont) R.string.on else R.string.off)
     }
 
+    private fun populateBackgroundOpacity() {
+        binding.backgroundOpacitySeekBar.progress = prefs.backgroundOpacity
+        binding.backgroundOpacityValue.text = getString(R.string.percentage_value, prefs.backgroundOpacity)
+    }
+
+    private fun toggleReduceAnimations() {
+        prefs.reduceAnimations = !prefs.reduceAnimations
+        populateReduceAnimations()
+    }
+
+    private fun populateReduceAnimations() {
+        binding.reduceAnimations.text = getString(if (prefs.reduceAnimations) R.string.on else R.string.off)
+    }
+
     private fun resetCustomFont() {
         FontManager.clearCustomFont(requireContext())
         prefs.useCustomFont = false
@@ -498,37 +488,22 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.customFontReset.isVisible = hasActiveCustomFont
     }
 
-    private fun populateScreenTimeOnOff() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            if (requireContext().appUsagePermissionGranted()) binding.screenTimeOnOff.text = getString(R.string.on)
-            else binding.screenTimeOnOff.text = getString(R.string.off)
-        } else binding.screenTimeLayout.visibility = View.GONE
-    }
-
     private fun populateKeyboardText() {
         if (prefs.autoShowKeyboard) binding.autoShowKeyboard.text = getString(R.string.on)
         else binding.autoShowKeyboard.text = getString(R.string.off)
     }
 
-    private fun updateHomeBottomAlignment() {
-        if (viewModel.isElauncherDefault.value != true) {
-            requireContext().showToast(getString(R.string.please_set_olauncher_as_default_first), Toast.LENGTH_LONG)
-            return
-        }
-        prefs.homeBottomAlignment = !prefs.homeBottomAlignment
+    private fun updateAppListAlignment(gravity: Int) {
+        prefs.appLabelAlignment = gravity
         populateAlignment()
-        viewModel.updateHomeAlignment(prefs.homeAlignment)
     }
 
     private fun populateAlignment() {
-        when (prefs.homeAlignment) {
+        when (prefs.appLabelAlignment) {
             Gravity.START -> binding.alignment.text = getString(R.string.left)
             Gravity.CENTER -> binding.alignment.text = getString(R.string.center)
             Gravity.END -> binding.alignment.text = getString(R.string.right)
         }
-        binding.alignmentBottom.text = if (prefs.homeBottomAlignment)
-            getString(R.string.bottom_on)
-        else getString(R.string.bottom_off)
     }
 
     // Home button for recents feature disabled
@@ -604,14 +579,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.action_settingsFragment_to_appListFragment,
             bundleOf(Constants.Key.FLAG to flag)
         )
-    }
-
-    private fun populateActionHints() {
-        if (prefs.aboutClicked.not())
-            binding.aboutOlauncher.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_info, 0)
-        if (viewModel.isElauncherDefault.value != true) return
-        if (prefs.rateClicked.not() && prefs.toShowHintCounter > Constants.HINT_RATE_US && prefs.toShowHintCounter < Constants.HINT_RATE_US + 100)
-            binding.rate.setCompoundDrawablesWithIntrinsicBounds(0, android.R.drawable.arrow_down_float, 0, 0)
     }
 
     override fun onResume() {

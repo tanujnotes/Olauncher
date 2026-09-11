@@ -135,18 +135,19 @@ class AppListMigrationTest {
         assertEquals(defaultDateTimeSpanX(columnCount), dateTime.spanX)
         assertEquals(defaultDateTimeSpanY(showScreenTime = true), dateTime.spanY)
         // The DATE_TIME item is full-width (spanX == columnCount) and, with showScreenTime true,
-        // defaultDateTimeSpanY(true) rows tall (4, bumped from 3 in Step 10 after on-device
-        // clipping showed the large clock text style needs closer to two full rows by itself -
-        // see defaultDateTimeSpanY's kdoc). That makes rows 0-3 overlap the app item at row 3, so
-        // (0, 0) is no longer free; the next free row-major spot is row 4 (the app only occupies
-        // row 3, so nothing blocks columns 0-7 there).
+        // defaultDateTimeSpanY(true) rows tall - 3 since the clock moved out into its own CLOCK
+        // item (plan 003 Step 7), so it covers rows 0-2 and clears the app item at row 3: (0, 0)
+        // is free and the row-major scan stops there. (When it was 4 rows tall this landed at row
+        // 4 instead, having overlapped that app item at (0, 0).)
         assertEquals(0, dateTime.col)
-        assertEquals(4, dateTime.row)
+        assertEquals(0, dateTime.row)
     }
 
     @Test
     fun `a pre-existing OFF or DATE_ONLY choice survives the migration instead of coming back fully visible`() {
-        val pages = listOf(Page("p1", "Home", mutableListOf()))
+        // A page that held something: nothing is synthesized for a page that started empty (see
+        // `a page that started empty gets nothing synthesized`).
+        val pages = listOf(Page("p1", "Home", mutableListOf(appItem(0, 6, "Phone", "com.android.dialer"))))
 
         val off = pages.migrate(dateTimeVisibility = Constants.DateTime.OFF).single()
         assertEquals(
@@ -180,11 +181,10 @@ class AppListMigrationTest {
     }
 
     @Test
-    fun `every page gets its own DATE_TIME item`() {
+    fun `every page that held something gets its own DATE_TIME item`() {
         val pages = listOf(
             Page("p1", "Home", mutableListOf(appItem(0, 0, "Phone", "com.android.dialer"))),
-            Page("p2", "Work", mutableListOf()),
-            Page("p3", "Play", mutableListOf(GridItem(GridItemType.WIDGET, 0, 0, 2, 2, appWidgetId = 9))),
+            Page("p2", "Play", mutableListOf(GridItem(GridItemType.WIDGET, 0, 0, 2, 2, appWidgetId = 9))),
         )
 
         val migrated = pages.migrate()
@@ -192,6 +192,23 @@ class AppListMigrationTest {
         migrated.forEach { page ->
             assertEquals(page.name, 1, page.items.count { it.type == GridItemType.DATE_TIME })
         }
+    }
+
+    @Test
+    fun `a page that started empty gets nothing synthesized`() {
+        // The "no defaults anywhere" rule (plan 003): every widget is long-press-added, so a fresh
+        // install's blank first page has to come out of the migration chain still blank. The guard
+        // reads the page's *original* items, which is the only thing that tells a genuinely blank
+        // page apart from a legacy page whose items all converted to App Lists.
+        val pages = listOf(
+            Page("p1", "Home", mutableListOf()),
+            Page("p2", "Work", mutableListOf(appItem(0, 0, "Phone", "com.android.dialer"))),
+        )
+
+        val migrated = pages.migrate()
+
+        assertTrue(migrated[0].items.isEmpty())
+        assertEquals(1, migrated[1].items.count { it.type == GridItemType.DATE_TIME })
     }
 
     @Test
@@ -245,19 +262,9 @@ class AppListMigrationTest {
     }
 
     @Test
-    fun `a new page is seeded with a date time item and a four empty slot app list`() {
-        val items = newPageDefaultItems(columnCount)
-
-        assertEquals(2, items.size)
-        val dateTime = items.single { it.type == GridItemType.DATE_TIME }
-        val appList = items.single { it.type == GridItemType.APP_LIST }
-        assertEquals(Gravity.START, dateTime.alignment)
-        assertTrue(dateTime.showScreenTime.not())
-        assertEquals(Constants.DateTime.ON, dateTime.dateTimeVisibility)
-        assertEquals(Gravity.START, appList.alignment)
-        assertEquals(DEFAULT_APP_LIST_SLOT_COUNT, appList.appSlots.size)
-        assertTrue(appList.appSlots.all { it.appPackage == null })
-        // Stacked, not overlapping.
-        assertTrue(dateTime.row + dateTime.spanY <= appList.row)
+    fun `a new page starts empty`() {
+        // Every widget (App List, Clock, Date & Screen Time) is long-press-added as of plan 003, so
+        // a new page is blank rather than pre-seeded with items the user then has to delete.
+        assertTrue(newPageDefaultItems(columnCount).isEmpty())
     }
 }

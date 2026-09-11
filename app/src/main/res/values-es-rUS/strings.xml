@@ -14,10 +14,6 @@
     <string name="white">Blanco</string>
     <string name="change_default_launcher">Cambiar lanzador principal</string>
     <string name="privacy">Privacidad</string>
-    <string name="share">Compartir</string>
-    <string name="share_now">Compartir ya</string>
-    <string name="rate">Calificar</string>
-    <string name="rate_now">Calificar ya</string>
     <string name="follow">Seguir</string>
     <string name="email">Correo electrónico</string>
 
@@ -27,7 +23,6 @@
     <string name="left">Izquierda</string>
     <string name="right">Derecha</string>
     <string name="center">Centro</string>
-    <string name="home_layout_alignment">Alineación de aplicaciones</string>
     <string name="swipe_left_app">Deslizar a la izquierda para abrir</string>
     <string name="swipe_right_app">Deslizar a la derecha para abrir</string>
     <string name="_0">0</string>
@@ -57,8 +52,6 @@
         \n\nRecuerda, si tienes alguna pregunta, nuestra página Acerca de tiene la respuesta.</string>
     <string name="rate_us_message">Hola, no volverá a ver este mensaje.
         \n\nSi le gusta Elauncher, ¿puede darnos una calificación de 5 estrellas? Nos ayuda a mejorar nuestra clasificación y nos hace felices. ¡Gracias!</string>
-    <string name="share_message">Hola, necesitamos su ayuda! El año pasado superamos el millón de descargas. Este año queremos llegar a un millón más pero no podemos hacerlo solos.
-        \n\n¿Sería tan amable de compartir Elauncher con sus amigos, por favor? ¡Gracias, y tenga un maravilloso día!</string>
     <string name="keyboard_message">Hola, el teclado es la forma más rápida de encontrar y abrir aplicaciones en Elauncher. ¿Podemos pedirle que mantenga esto activado por unos días más y luego decidir? La decisión siempre es suya.</string>
     <string name="digital_wellbeing_message">Si desea establecer límites de tiempo para determinadas aplicaciones, la función Bienestar Digital de Android puede ayudarle a hacerlo.
         \n\nBusque Bienestar Digital en la configuración de su teléfono y habilítelo.</string>
@@ -75,8 +68,6 @@
     <string name="roadmap">Objetivos</string>
     <string name="date">Fecha</string>
     <string name="date_only">Sólo fecha</string>
-    <string name="bottom_on">Abajo: Sí</string>
-    <string name="bottom_off">Abajo: No</string>
     <string name="please_set_olauncher_as_default_first">Por favor, primero configure Elauncher como su lanzador principal</string>
     <string name="affiliate">Afiliar</string>
     <string name="tip_start_typing_for_rename">Consejo: Comience a escribir para poder RENOMBRAR la aplicación</string>
@@ -117,13 +108,9 @@
     <string name="adapter_show">demostrar</string>
     <string name="adapter_hide">esconder</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">¿Está usando su teléfono, o el teléfono lo usa a usted?</string>
-    <string name="about_olauncher">Acerca de Elauncher</string>
     <string name="learn_more">Aprenda más</string>
     <string name="screen_time">Tiempo de pantalla</string>
     <string name="did_you_know">¿Sabía qué?</string>
-    <string name="leave_a_review">Dejar un comentario</string>
-    <string name="review_message">Elauncher es y será siempre completamente gratuito. No tiene anuncios. No recopila datos. Lo más importante es que le ayuda a reducir el tiempo que pasa frente a la pantalla y a vivir una vida digital más saludable.
-        \n\nCreemos que cambiar a un lanzador mínimo es una excelente decisión. Aunque obviamente somos parciales, esperamos que disfrutes la experiencia. ¡No dude en compartir sus pensamientos con nosotros!</string>
     <string name="alignment_changed">Alineación cambiada ✅</string>
     <string name="home_screen">Pantalla de inicio</string>
     <string name="hey">Hola</string>

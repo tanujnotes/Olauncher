@@ -14,10 +14,6 @@
     <string name="white">Bijelo</string>
     <string name="change_default_launcher">Promijeni zadani pokretač</string>
     <string name="privacy">Privatnost</string>
-    <string name="share">Podijeli</string>
-    <string name="share_now">Podijeli</string>
-    <string name="rate">Ocijeni</string>
-    <string name="rate_now">Ocijeni</string>
     <string name="follow">Prati</string>
     <string name="email">E-pošta</string>
     <string name="donate">Doniraj</string>
@@ -26,7 +22,6 @@
     <string name="left">Lijevo</string>
     <string name="right">Desno</string>
     <string name="center">Sredina</string>
-    <string name="home_layout_alignment">Poravnanje aplikacija</string>
     <string name="swipe_left_app">Aplikacija za lijevi potez</string>
     <string name="swipe_right_app">Aplikacija za desni potez</string>
     <string name="_0">0</string>
@@ -56,8 +51,6 @@
         \n\nZapamtite, ako imate bilo kakvih pitanja, naša stranica O nama ima odgovor.</string>
     <string name="rate_us_message">Ovu poruku više nećeš vidjeti.
         \n\nBok, ako uživaš u korištenju Elaunchera, možeš li nam dati recenziju s 5 zvijezdica? To nam donosi više korisnika i usrećuje nas.\nHvala ti i sretan ostatak dana!</string>
-    <string name="share_message">Bok, trebamo tvoju pomoć! Prošle godine prešli smo milijun preuzimanja. Ove godine želimo doseći milijun više, ali ne možemo sami.
-        \n\nHoćete li, molim vas, biti ljubazni podijeliti Elauncher sa svojim prijateljima? Hvala i ugodan dan!</string>
     <string name="keyboard_message">Bok, tipkovnica je najbrži način za pronalaženje i pokretanje aplikacija u Elauncheru. Možemo li vas zamoliti da to zadržite uključeno još nekoliko dana, a zatim odlučite?
         \n\nIzbor je uvijek vaš.</string>
     <string name="digital_wellbeing_message">Ako želite postaviti vremenska ograničenja za određene aplikacije, značajka Digital Wellbeing na Androidu može vam pomoći u tome.
@@ -75,8 +68,6 @@
     <string name="roadmap">Plan razvoja</string>
     <string name="date">Datum</string>
     <string name="date_only">Samo datum</string>
-    <string name="bottom_on">Dno: uklj.</string>
-    <string name="bottom_off">Dno: isklj.</string>
     <string name="please_set_olauncher_as_default_first">Prvo postavite Elauncher kao zadani pokretač</string>
     <string name="affiliate">Sponzorstvo</string>
     <string name="tip_start_typing_for_rename">Savjet: počni pisati za opciju preimenovanja aplikacija</string>
@@ -87,9 +78,6 @@
     <string name="learn_more">Saznajte više</string>
     <string name="did_you_know">Dali si znao?</string>
     <string name="screen_time">Vrijeme na ekranu</string>
-    <string name="leave_a_review">Ostavite recenziju</string>
-    <string name="review_message">Elauncher jest i uvijek će biti potpuno besplatan. Nema reklama. Ne prikuplja podatke. Što je najvažnije, pomaže vam u smanjenju vremena koje provodite pred ekranom i živite zdravijim digitalnim životom.
-        \n\nVjerujemo da je prelazak na minimalni launcher izvrsna odluka. Iako smo očito pristrani, nadamo se da uživate u iskustvu. Slobodno podijelite svoje misli s nama!</string>
 
     <string name="accessibility_disclosure">Molimo vas da uključite Elauncherovu uslugu pristupa u postavkama vašeg uređaja kako biste omogućili geste dvostrukog dodira za zaključavanje ili tipke Početna za prikaz nedavnih aplikacija.\n\nImajte na umu da se ova usluga koristi samo za te geste. Naša usluga pristupa ne prikuplja niti dijeli bilo kakve podatke.</string>
     <string name="accept">Prihvati</string>
@@ -124,7 +112,6 @@
     <string name="adapter_show">Prikaži</string>
     <string name="adapter_hide">Sakrij</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Koristite li svoj telefon ili vaš telefon koristi vas?</string>
-    <string name="about_olauncher">O Elauncher-u i ČPP</string>
     <string name="alignment_changed">Poravnanje promijenjeno ✅</string>
     <string name="home_screen">Početni ekran</string>
     <string name="hey">Bok</string>

@@ -57,10 +57,6 @@
     <string name="white">Beyaz</string>
     <string name="change_default_launcher">Varsayılan başlatıcıyı değiştir</string>
     <string name="privacy">Gizlilik</string>
-    <string name="share">Paylaş</string>
-    <string name="share_now">Şimdi paylaş</string>
-    <string name="rate">Değerlendir</string>
-    <string name="rate_now">Şimdi değerlendir</string>
     <string name="follow">Takip et</string>
     <string name="email">E-posta</string>
 
@@ -70,7 +66,6 @@
     <string name="left">Sol</string>
     <string name="right">Sağ</string>
     <string name="center">Merkez</string>
-    <string name="home_layout_alignment">Uygulama hizalaması</string>
     <string name="swipe_left_app">Sola kaydırma uygulaması</string>
     <string name="swipe_right_app">Sağa kaydırma uygulaması</string>
     <string name="auto_show_keyboard">Klavyeyi otomatik göster</string>
@@ -88,8 +83,6 @@
         \n\nUnutmayın, herhangi bir sorunuz olursa "Hakkında" sayfamıza danışabilirsiniz.</string>
     <string name="rate_us_message">Merhaba, bu mesajı bir daha görmeyeceksiniz.
         \n\nElauncher\'ı beğendiyseniz bize tam puan verir misiniz? Sıralamamızı yükseltmemize yardımcı oluyor ve bizi neşelendiriyor. Teşekkür ederiz!</string>
-    <string name="share_message">Merhaba, yardımınıza ihtiyacımız var! Geçen yıl bir milyon indirmeyi geçtik. Bu yıl bir milyona daha ulaşmak istiyoruz ama bunu tek başımıza yapamayız.
-        \n\nElauncher\'ı arkadaşlarınızla paylaşma nezaketini gösterir misiniz lütfen? Teşekkür eder, harika bir gün geçirmenizi dileriz!</string>
     <string name="keyboard_message">Merhaba, klavye, Elauncher\'da uygulamaları bulmanın ve başlatmanın en hızlı yoludur. Birkaç gün daha kullanıp karar vermenizi rica ederiz.
         \n\nSeçim her zaman sizindir.</string>
     <string name="digital_wellbeing_message">Belirli uygulamalar için zaman sınırları belirlemek istiyorsanız Android\'in Dijital Denge özelliği bunu yapmanıza yardımcı olacaktır.
@@ -107,8 +100,6 @@
     <string name="roadmap">Yol Çizelgesi</string>
     <string name="date">Tarih</string>
     <string name="date_only">Sadece tarih</string>
-    <string name="bottom_on">Alt: Açık</string>
-    <string name="bottom_off">Alt: Kapalı</string>
     <string name="please_set_olauncher_as_default_first">Lütfen önce Elauncher\'ı varsayılan başlatıcınız olarak ayarlayın</string>
     <string name="affiliate">Ortak</string>
     <string name="app_not_found">Uygulama bulunamadı</string>
@@ -119,13 +110,9 @@
     <string name="swipe_left_app_disabled">Sola kaydırma uygulaması devre dışı</string>
     <string name="swipe_right_app_disabled">Sağa kaydırma uygulaması devre dışı</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Sen mi telefonunu, kullanıyorsun yoksa telefon mu seni kullanıyor?</string>
-    <string name="about_olauncher">Elauncher Hakkında</string>
     <string name="learn_more">Daha fazla bilgi</string>
     <string name="screen_time">Ekran süresi</string>
     <string name="did_you_know">Biliyor muydunuz?</string>
-    <string name="leave_a_review">Değerlendirme bırakın</string>
-    <string name="review_message">Elauncher tamamen ücretsizdir ve her zaman ücretsiz olacaktır. Reklam yok, veri toplamaz ve en önemlisi ekran sürenizi azaltmanıza ve daha sağlıklı bir dijital yaşam sürmenize yardımcı olur.
-        \n\nUmarım hoşunuza gider. Düşüncelerinizi mutlaka bizimle paylaşın!</string>
     <string name="alignment_changed">Hizalama değiştirildi ✅</string>
     <string name="home_screen">Ana ekran</string>
     <string name="hey">Merhaba</string>

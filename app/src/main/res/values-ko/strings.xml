@@ -14,10 +14,6 @@
     <string name="white">흰색</string>
     <string name="change_default_launcher">기본 런처 변경</string>
     <string name="privacy">개인정보</string>
-    <string name="share">공유</string>
-    <string name="share_now">지금 공유</string>
-    <string name="rate">평가</string>
-    <string name="rate_now">지금 평가</string>
     <string name="follow">팔로우</string>
     <string name="email">이메일</string>
     <string name="donate">후원</string>
@@ -26,7 +22,6 @@
     <string name="left">왼쪽</string>
     <string name="right">오른쪽</string>
     <string name="center">가운데</string>
-    <string name="home_layout_alignment">앱 정렬</string>
     <string name="swipe_left_app">왼쪽으로 넘길 앱</string>
     <string name="swipe_right_app">오른쪽으로 넘길 앱</string>
     <string name="_0">0</string>
@@ -54,7 +49,6 @@
     <string name="light">라이트</string>
     <string name="welcome_to_olauncher_settings">설정에 오신 것을 환영합니다!\n\n궁금한 점이 있으면 앱 정보(About) 페이지를 확인하세요.</string>
     <string name="rate_us_message">안녕하세요, 이 메시지는 다시 표시되지 않습니다.\n\nElauncher가 도움이 된다면 5성 리뷰를 남겨주실 수 있나요? 정말 큰 힘이 됩니다. 감사합니다!</string>
-    <string name="share_message">도움이 필요합니다! Elauncher의 장점을 더 많은 사람에게 알리고 싶습니다.\n\n친구, 가족, 팔로워와 Elauncher를 공유해 주실 수 있나요? 지원해 주셔서 감사합니다! ❤</string>
     <string name="keyboard_message">안내: 키보드는 Elauncher에서 앱을 빠르게 찾고 실행하는 가장 빠른 방법입니다. 며칠 동안 켜 두었다가 결정해 보시길 권합니다.\n\n선택은 항상 사용자에게 있습니다.</string>
     <string name="digital_wellbeing_message">특정 앱의 사용 시간을 제한하려면 Android의 Digital Wellbeing(디지털 웰빙) 기능을 사용해 보세요. 휴대폰 설정에서 Digital Wellbeing을 검색해 활성화하세요.</string>
     <string name="app_usage_message">홈 화면에 화면 사용 시간을 표시하거나 숨기려면 앱 사용 권한을 허용하거나 거부하세요.\n\n참고: 앱 사용 데이터는 수집되지 않으며 모든 처리는 기기 내에서 이루어집니다.</string>
@@ -69,8 +63,6 @@
     <string name="roadmap">로드맵</string>
     <string name="date">날짜</string>
     <string name="date_only">날짜만</string>
-    <string name="bottom_on">하단: 켬</string>
-    <string name="bottom_off">하단: 끔</string>
     <string name="please_set_olauncher_as_default_first">먼저 Elauncher를 기본으로 설정하세요</string>
     <string name="affiliate">제휴</string>
     <string name="tip_start_typing_for_rename">팁: 앱 이름 변경을 위해 입력을 시작하세요</string>
@@ -111,12 +103,9 @@
     <string name="adapter_show">보이기</string>
     <string name="adapter_hide">숨기기</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">당신이 휴대폰을 사용하고 있나요, 아니면 휴대폰이 당신을 사용하고 있나요?</string>
-    <string name="about_olauncher">앱 정보 및 FAQ</string>
     <string name="screen_time">스크린 타임</string>
     <string name="learn_more">자세히 알아보기</string>
     <string name="did_you_know">알고 계셨나요?</string>
-    <string name="leave_a_review">리뷰 남기기</string>
-    <string name="review_message">Elauncher는 무료이며 앞으로도 무료입니다. 광고가 없고 데이터를 수집하지 않으며 화면 사용 시간을 줄여 더 건강한 생활을 돕습니다.\n\n마음에 드셨다면 의견을 들려주세요.</string>
     <string name="alignment_changed">정렬이 변경되었습니다 ✅</string>
     <string name="home_screen">홈 화면</string>
     <string name="hey">안녕하세요</string>

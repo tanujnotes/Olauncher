@@ -59,10 +59,6 @@
     <string name="white">أبيض</string>
     <string name="change_default_launcher">تغيير المشغل الافتراضي</string>
     <string name="privacy">خصوصية</string>
-    <string name="share">شارك</string>
-    <string name="share_now">يشارك اﻵن</string>
-    <string name="rate">قيّم</string>
-    <string name="rate_now">قيّم اﻵن</string>
     <string name="follow">تابع</string>
     <string name="email">بريد</string>
     <string name="donate">تبرّع</string>
@@ -71,7 +67,6 @@
     <string name="left">يسار</string>
     <string name="right">يمين</string>
     <string name="center">مركز</string>
-    <string name="home_layout_alignment">محاذاة التطبيق</string>
     <string name="swipe_left_app">افتح عند التمرير لليسار</string>
     <string name="swipe_right_app">افتح عند التمرير لليمين</string>
     <string name="auto_show_keyboard">العرض التلقائي للوحة المفاتيح</string>
@@ -88,8 +83,6 @@
     <string name="welcome_to_olauncher_settings">مرحبًا بك في الإعدادات!\n\nتذكر، إذا كان لديك أي سؤال، فإن صفحة "حول" لدينا تحتوي على الإجابة.</string>
     <string name="rate_us_message">مرحبًا ، لن ترى هذه الرسالة مرة أخرى.
         \n\nإذا كنت تحب Elauncher ، فهل يمكنك أن تعطينا تصنيف 5 نجوم؟ يساعدنا ذلك على تحسين تصنيفنا ويجعلنا سعداء. شكرًا لك!</string>
-    <string name="share_message">مرحبا، نحن بحاجة لمساعدتكم! في العام الماضي تجاوزنا مليون عملية تنزيل. نريد هذا العام أن نصل إلى مليون آخرين ولكن لا يمكننا القيام بذلك بمفردنا.
-        \n\nهل تتفضل بمشاركة Elauncher مع أصدقائك، من فضلك؟ شكرا لك، ويوم رائع!</string>
     <string name="keyboard_message">مرحبًا ، لوحة المفاتيح هي أسرع طريقة للعثور على التطبيقات وتشغيلها في Elauncher. هل يمكننا أن نطلب منك الاحتفاظ بهذا الأمر لبضعة أيام أخرى ثم اتخاذ القرار؟ الاختيار دائما لك.</string>
     <string name="digital_wellbeing_message">إذا كنت تريد تعيين حدود زمنية لتطبيقات معينة، فيمكن أن تساعدك ميزة الرفاهية الرقمية في Android على القيام بذلك.
         \n\nيرجى البحث عن الرفاهية الرقمية في إعدادات هاتفك وتمكينها.</string>
@@ -106,8 +99,6 @@
     <string name="roadmap">خريطة الطريق</string>
     <string name="date">تاريخ</string>
     <string name="date_only">التاريخ فقط</string>
-    <string name="bottom_on">المحاذاة ﻷسفل</string>
-    <string name="bottom_off">المحاذاة ﻷعلى</string>
     <string name="please_set_olauncher_as_default_first">يرجى تعيين Elauncher كمشغل افتراضي أولاً</string>
     <string name="affiliate">شركة تابعة</string>
     <string name="app_not_found">التطبيق غير موجود</string>
@@ -116,12 +107,8 @@
     <string name="swipe_left_app_enabled">التمرير لليسار مفعّل</string>
     <string name="swipe_right_app_enabled">التمرير لليمين مفعّل</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">هل تستخدم هاتفك أم أن هاتفك يستخدمك؟</string>
-    <string name="about_olauncher">عن Elauncher</string>
     <string name="learn_more">تعلم أكثر</string>
     <string name="did_you_know">هل كنت تعلم؟</string>
-    <string name="leave_a_review">أخبرنا رأيك</string>
-    <string name="review_message">Elauncher هو وسيظل دائمًا مجانيًا تمامًا. ليس لديها إعلانات. لا يجمع أي بيانات. والأهم من ذلك أنه يساعدك على تقليل وقت الشاشة والعيش حياة رقمية أكثر صحة.
-        \n\nنحن نعتقد أن التحول إلى الحد الأدنى من المشغل هو قرار ممتاز. على الرغم من أننا متحيزون بشكل واضح، إلا أننا نأمل أن تستمتع بالتجربة. لا تتردد في مشاركة أفكارك معنا!</string>
     <string name="screen_time">وقت الشاشة</string>
     <string name="alignment_changed">تم تغيير المحاذاة ✅</string>
     <string name="home_screen">الشاشة الرئيسية</string>

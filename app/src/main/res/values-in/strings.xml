@@ -14,10 +14,6 @@
     <string name="white">Putih</string>
     <string name="change_default_launcher">Ubah peluncur default</string>
     <string name="privacy">Privasi</string>
-    <string name="share">Bagikan</string>
-    <string name="share_now">Bagikan sekarang</string>
-    <string name="rate">Peringkat</string>
-    <string name="rate_now">Berikan peringkat sekarang</string>
     <string name="follow">Ikuti</string>
     <string name="email">Surel</string>
 
@@ -27,7 +23,6 @@
     <string name="left">Kiri</string>
     <string name="right">kanan</string>
     <string name="center">Tengah</string>
-    <string name="home_layout_alignment">Penyelarasan aplikasi</string>
     <string name="swipe_left_app">Geser aplikasi ke kiri</string>
     <string name="swipe_right_app">Geser aplikasi ke kanan</string>
     <string name="_0">0</string>
@@ -57,8 +52,6 @@
         \n\nIngat, jika Anda memiliki pertanyaan, halaman Tentang kami memiliki jawabannya.</string>
     <string name="rate_us_message">Hai, Anda tidak akan melihat pesan ini lagi.
         \n\nJika Anda menyukai Elauncher, bisakah Anda memberi kami peringkat bintang 5? Ini membantu kami meningkatkan peringkat kami dan membuat kami bahagia. Terima kasih!</string>
-    <string name="share_message">Hai, kami membutuhkan bantuan Anda! Tahun lalu kami melampaui satu juta unduhan. Tahun ini kami ingin menjangkau satu juta orang lagi tetapi kami tidak dapat melakukannya sendiri.
-        \n\nMaukah Anda berbaik hati membagikan Elauncher kepada teman-teman Anda? Terima kasih dan semoga harimu menyenangkan!</string>
     <string name="keyboard_message">Hai, keyboard adalah cara tercepat untuk menemukan dan meluncurkan aplikasi di Elauncher. Bisakah kami meminta Anda untuk mengaktifkannya selama beberapa hari lagi dan kemudian memutuskan?           Pilihan selalu menjadi milik Anda.</string>
     <string name="digital_wellbeing_message">Jika Anda ingin menetapkan batas waktu untuk aplikasi tertentu, fitur Digital Wellbeing Android dapat membantu Anda melakukannya.
         \n\nSilakan cari Digital Wellbeing di pengaturan ponsel Anda dan aktifkan.</string>
@@ -75,8 +68,6 @@
     <string name="roadmap">Peta jalan</string>
     <string name="date">Tanggal</string>
     <string name="date_only">Tanggal saja</string>
-    <string name="bottom_on">Bawah: Nyala</string>
-    <string name="bottom_off">Bawah: Mati</string>
     <string name="please_set_olauncher_as_default_first">Silakan atur Elauncher sebagai peluncur default Anda terlebih dahulu</string>
     <string name="affiliate">Afiliasi</string>
     <string name="tip_start_typing_for_rename">Tip: Mulailah mengetik untuk opsi RENAME aplikasi</string>
@@ -117,13 +108,9 @@
     <string name="adapter_show">perlihatkan</string>
     <string name="adapter_hide">sembunyikan</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Apakah Anda menggunakan ponsel Anda, atau ponsel Anda menggunakan Anda?</string>
-    <string name="about_olauncher">Tentang Elauncher</string>
     <string name="learn_more">Pelajari lebih lanjut</string>
     <string name="screen_time">Waktu layar</string>
     <string name="did_you_know">Tahukah kamu?</string>
-    <string name="leave_a_review">Tinggalkan ulasan</string>
-    <string name="review_message">Elauncher sepenuhnya gratis dan akan selalu gratis. Tidak ada iklan. Tidak mengumpulkan data pribadi. Yang terpenting, ini membantu Anda mengurangi waktu pemakaian perangkat dan menjalani kehidupan digital yang lebih sehat.
-        \n\nKami percaya bahwa beralih ke peluncur minimal adalah keputusan yang sangat baik. Meskipun kami jelas-jelas bias, kami harap Anda menikmati pengalaman ini. Jangan ragu untuk berbagi pemikiran Anda dengan kami!</string>
     <string name="alignment_changed">Penyelarasan diubah ✅</string>
     <string name="home_screen">Layar beranda</string>
     <string name="hey">Hai</string>

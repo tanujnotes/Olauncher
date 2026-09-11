@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-    Content view of HomeFragment.showDateTimeSettings()'s AlertDialog: the per-item settings of one
-    DATE_TIME grid item - text alignment and whether the screen-time line is shown. There is no
-    visibility control: date visibility is presence-only now (an item that exists always draws its
-    date line, hiding it means removing the widget), so the old On/Date only/Off RadioGroup is gone.
-    Same plain/unstyled approach as dialog_app_list_settings.xml.
+    Content view of HomeFragment.showClockSettings()'s AlertDialog: the per-item settings of one
+    CLOCK grid item - text alignment and nothing else (a clock has no count, no visibility and no
+    extra lines; hiding it means removing the widget). Same plain/unstyled approach as
+    dialog_app_list_settings.xml: dialog content lives in its own window with the dialog theme's own
+    text colors, and the app's custom font is applied at runtime instead
+    (FontManager.applyCustomTypeface).
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -45,12 +46,5 @@
             android:text="@string/right" />
 
     </RadioGroup>
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/screenTimeSwitch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/screen_time" />
 
 </LinearLayout>

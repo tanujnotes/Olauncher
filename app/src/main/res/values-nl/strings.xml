@@ -14,10 +14,6 @@
     <string name="white">Wit</string>
     <string name="change_default_launcher">Wijzig standaard launcher</string>
     <string name="privacy">Privacy</string>
-    <string name="share">Delen</string>
-    <string name="share_now">Nu delen</string>
-    <string name="rate">Beoordeel</string>
-    <string name="rate_now">Nu beoordelen</string>
     <string name="follow">Volgen</string>
     <string name="email">E-mail</string>
     <string name="donate">Doneren</string>
@@ -26,7 +22,6 @@
     <string name="left">Links</string>
     <string name="right">Rechts</string>
     <string name="center">Midden</string>
-    <string name="home_layout_alignment">App uitlijning</string>
     <string name="swipe_left_app">Veeg naar links app</string>
     <string name="swipe_right_app">Veeg naar rechts app</string>
     <string name="_0">0</string>
@@ -56,10 +51,7 @@
         \n\nOnthoud, als je vragen hebt, heeft onze Over-pagina het antwoord.</string>
     <string name="rate_us_message">Hoi, je zult dit bericht niet meer zien.
         \n\nAls je Elauncher nuttig vindt, zou je dan een 5-sterren beoordeling willen achterlaten? Het zou veel voor ons betekenen. Dank je!</string>
-    <string name="share_message">We hebben je hulp nodig! We willen elke Android-gebruiker vertellen over de voordelen van Elauncher, maar we kunnen het niet alleen.
-         \n\nZou je Elauncher willen delen met je vrienden, familie en volgers? Dat zou heel behulpzaam zijn. Bedankt!</string>
-    <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
-    <!--         \n\nIf you have a moment to spare, could you please share Elauncher with others? Elauncher needs people. More importantly, people need Elauncher.</string>-->
+    <!---->
     <string name="keyboard_message">Hoi, het toetsenbord is de snelste manier om apps te vinden en te starten in Elauncher. Mag ik je vragen dit nog een paar dagen ingeschakeld te laten en daarna te beslissen?
         \n\nDe keuze is altijd aan jou.</string>
     <string name="digital_wellbeing_message">Als je tijdslimieten voor bepaalde apps wilt instellen, kan de Digital Wellbeing-functie van Android je daarbij helpen.
@@ -77,8 +69,6 @@
     <string name="roadmap">Routekaart</string>
     <string name="date">Datum</string>
     <string name="date_only">Alleen datum</string>
-    <string name="bottom_on">Onder: Aan</string>
-    <string name="bottom_off">Onder: Uit</string>
     <string name="please_set_olauncher_as_default_first">Stel Elauncher eerst in als standaard</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Begin met typen om een app te hernoemen</string>
@@ -119,12 +109,9 @@
     <string name="adapter_show">Toon</string>
     <string name="adapter_hide">Verbergen</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Gebruik je je telefoon, of gebruikt je telefoon jou?</string>
-    <string name="about_olauncher">Over en veelgestelde vragen</string>
     <string name="screen_time">Schermtijd</string>
     <string name="learn_more">Meer informatie</string>
     <string name="did_you_know">Wist je dat?</string>
-    <string name="leave_a_review">Laat een recensie achter</string>
-    <string name="review_message">Elauncher is gratis en zal dat altijd blijven. Het heeft geen advertenties, verzamelt geen gegevens en vermindert je schermtijd, wat leidt tot een gezonder leven.\n\nWe hopen dat je ervan geniet. Vertel ons wat je ervan vindt.</string>
     <string name="alignment_changed">Uitlijning gewijzigd ✅</string>
     <string name="home_screen">Startscherm</string>
     <string name="hey">Hoi</string>

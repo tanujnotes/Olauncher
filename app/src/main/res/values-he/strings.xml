@@ -13,10 +13,6 @@
     <string name="white">לבן</string>
     <string name="change_default_launcher">שינוי משגר ברירת המחדל</string>
     <string name="privacy">פרטיות</string>
-    <string name="share">שיתוף</string>
-    <string name="share_now">שתף עכשיו</string>
-    <string name="rate">דירוג</string>
-    <string name="rate_now">דרג עכשיו</string>
     <string name="follow">עקבו אחריי</string>
     <string name="email">דואר אלקטרוני</string>
     <string name="donate">תרומה</string>
@@ -25,7 +21,6 @@
     <string name="left">ימין</string>
     <string name="right">שמאל</string>
     <string name="center">מרכז</string>
-    <string name="home_layout_alignment">יישור היישומים</string>
     <string name="swipe_left_app">יישום לפתיחה בהחלקה שמאלה</string>
     <string name="swipe_right_app">יישום לפתיחה בהחלקה ימינה</string>
     <string name="_0">0</string>
@@ -55,8 +50,6 @@
         \n\nThank you.</string>
     <string name="rate_us_message">היי, לא נציג לך הודעה זו בשנית.
         \n\nאם כיף לך להשתמש ב־Elauncher, האם נוכל בבקשה לקבל ממך דירוג של 5 כוכבים? זה יעזור לנו להתקדם בדירוג ויעשה לנו טוב על הלב. תודה מראש!</string>
-    <string name="share_message">שלום, יש לנו משימה ענקית! אנחנו רוצים להגיע למיליון הורדות לפני סוף שנת 2023, ואנו זקוקים לעזרתך.
-        \n\nהיית רוצה אולי לספר לחברים שלך על Elauncher? זה יכול לסייע לנו מאוד. תודה רבה!</string>
     <string name="keyboard_message">היי, יותר מהיר למצוא ולפתוח יישומים ב־Elauncher בעזרת ההקלדה. אולי בכל זאת היית רוצה להשאיר את ההגדרה הזאת ולתת לה עוד הזדמנות?
         \n\nThe choice is always yours.</string>
     <string name="accessibility_service_description">הרשאת הנגישות נחוצה להפעלת הנעילה בהקשה כפולה ולחצן הבית להצגת אפליקציות אחרונות. כל הנתונים שייאספו על ידי Elauncher דרך השירות הזה לא יועברו הלאה ממכשירך.</string>
@@ -70,8 +63,6 @@
     <string name="roadmap">Roadmap</string>
     <string name="date">תאריך</string>
     <string name="date_only">תאריך בלבד</string>
-    <string name="bottom_on">הצגה למטה: מופעל</string>
-    <string name="bottom_off">הצגה למטה: כבוי</string>
     <string name="please_set_olauncher_as_default_first">ראשית, נא להגדיר את Elauncher בתור ברירת המחדל למסך בית.</string>
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">עצה: אפשר להתחיל להקליד בשביל להגיע לאפשרות לשינוי שם של יישומים</string>
@@ -116,12 +107,9 @@
     <string name="new_year_wish">לעבר שנה טובה יותר מכל מה שקדם. שנה טובה!</string>
     <string name="new_year_wish_1">לא משנה איך עבר ינואר. עדיין יש לך את שאר השנה להצליח יותר מתמיד</string>
     <string name="cheers">לחיים!</string>
-    <string name="about_olauncher">אודות ושאלות נפוצות</string>
     <string name="screen_time">זמן מסך</string>
     <string name="learn_more">למדו עוד</string>
     <string name="did_you_know">האם ידעת?</string>
-    <string name="leave_a_review">השאירו ביקורת</string>
-    <string name="review_message">‏Elauncher חינמית ותמיד תהיה. אין בה פרסומות, היא אינה אוספת נתונים, והיא מפחיתה את זמן המסך שלכם – מה שמוביל לחיים בריאים יותר.</string>
     <string name="alignment_changed">היישור השתנה ✅</string>
     <string name="home_screen">מסך הבית</string>
     <string name="digital_wellbeing_message">אם ברצונך להגדיר מגבלות זמן עבור אפליקציות מסוימות, תכונת Digital Wellbeing של אנדרואיד יכולה לעזור לך לעשות זאת. חפש את Digital Wellbeing בהגדרות הטלפון שלך והפעל אותה.</string>

@@ -57,10 +57,6 @@
     <string name="white">Biały</string>
     <string name="change_default_launcher">Zmień domyślny program uruchamiający</string>
     <string name="privacy">Prywatność</string>
-    <string name="share">Udostępnij</string>
-    <string name="share_now">Udostępnij</string>
-    <string name="rate">Oceń</string>
-    <string name="rate_now">Oceń</string>
     <string name="follow">Śledź</string>
     <string name="email">E-mail</string>
 
@@ -70,7 +66,6 @@
     <string name="left">Lewo</string>
     <string name="right">Prawo</string>
     <string name="center">Środek</string>
-    <string name="home_layout_alignment">Wyrównanie aplikacji</string>
     <string name="swipe_left_app">Przesuń w lewo aplikację</string>
     <string name="swipe_right_app">Przesuń w prawo aplikację</string>
     <string name="auto_show_keyboard">Automatyczne wyświetlanie klawiatury</string>
@@ -87,8 +82,6 @@
     <string name="welcome_to_olauncher_settings">Witamy w ustawieniach!
         \n\nPamiętaj, jeśli masz jakiekolwiek pytania, nasza strona „O nas” ma odpowiedź.</string>
     <string name="rate_us_message">Hej, czy uważasz, że Elauncher jest przydatny? Jeśli tak, ocena 5 gwiazdek to najlepszy sposób, aby nas wesprzeć.\n\nDziękuję i więcej tego nie zobaczysz.</string>
-    <string name="share_message">Cześć, potrzebujemy Twojej pomocy! W zeszłym roku przekroczyliśmy milion pobrań. W tym roku chcemy dotrzeć do kolejnego miliona, ale sami nie możemy tego zrobić.
-        \n\nCzy byłbyś tak miły i udostępnił Elauncher swoim znajomym? Dziękuję i życzę cudownego dnia!</string>
     <string name="keyboard_message">Cześć, klawiatura to najszybszy sposób znajdowania i uruchamiania aplikacji w Elauncher. Czy możemy poprosić o pozostawienie tego włączonego jeszcze przez kilka dni, a następnie podjęcie decyzji?\n\nWybór zawsze należy do Ciebie.</string>
     <string name="digital_wellbeing_message">Jeśli chcesz ustawić limity czasowe dla niektórych aplikacji, funkcja Cyfrowa równowaga w systemie Android może Ci w tym pomóc.
         \n\nWyszukaj opcję Cyfrowa równowaga w ustawieniach telefonu i włącz ją.</string>
@@ -105,8 +98,6 @@
     <string name="roadmap">Mapa drogowa</string>
     <string name="date">Data</string>
     <string name="date_only">Tylko data</string>
-    <string name="bottom_on">Dół: włączony</string>
-    <string name="bottom_off">Dół: wyłączone</string>
     <string name="please_set_olauncher_as_default_first">Najpierw ustaw Elauncher jako domyślny program uruchamiający</string>
     <string name="affiliate">Przyłącz</string>
     <string name="app_not_found">Nie znaleziono aplikacji</string>
@@ -117,13 +108,9 @@
     <string name="swipe_left_app_disabled">Gest Przesuń w lewo wyłączony</string>
     <string name="swipe_right_app_disabled">Gest Przesuń w prawo jest wyłączony</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Czy używasz telefonu, czy telefon używa ciebie?</string>
-    <string name="about_olauncher">O Elauncher</string>
     <string name="screen_time">Czas ekranowy</string>
     <string name="learn_more">Ucz się więcej</string>
     <string name="did_you_know">Czy wiedziałeś?</string>
-    <string name="leave_a_review">Ucz się więcej</string>
-    <string name="review_message">Elauncher jest i zawsze będzie całkowicie darmowy. Nie zawiera reklam. Nie zbiera żadnych danych. Co najważniejsze, pomaga skrócić czas spędzany przed ekranem i prowadzić zdrowsze cyfrowe życie.
-        \n\nWierzymy, że przejście na minimalny program uruchamiający to doskonała decyzja. Chociaż jesteśmy oczywiście stronniczy, mamy nadzieję, że spodoba ci się to doświadczenie. Podziel się z nami swoimi przemyśleniami!</string>
     <string name="alignment_changed">Wyrównanie zmienione ✅</string>
     <string name="home_screen">Ekran główny</string>
     <string name="hey">Hej</string>

@@ -200,8 +200,11 @@ class HomeGridView @JvmOverloads constructor(
             // The item didn't fit the grid before the user ever touched it, so every move/resize
             // target would be rejected as out of bounds and edit mode would appear broken. Repair it
             // first, then let the rebuild lay it out at its corrected size and re-add the chrome.
+            // isAttachedToWindow guard: see onSizeChanged's kdoc for why a deferred rebuildChildren()
+            // needs this (it calls back into HomeFragment via touchListenerFor, which throws if the
+            // owning fragment was detached before this runnable fires).
             onItemsChanged?.invoke(items)
-            post { rebuildChildren() }
+            post { if (isAttachedToWindow) rebuildChildren() }
             return
         }
         editingItemView = viewForItem(item)
@@ -282,7 +285,15 @@ class HomeGridView @JvmOverloads constructor(
         // view's parent is still mid-layout-pass, leaving the newly added cells with a stale
         // (zero) measured size until some later, unrelated layout pass happens to fix them up -
         // post() defers the rebuild to right after the current traversal finishes instead.
-        post { rebuildChildren() }
+        //
+        // isAttachedToWindow guards against a real crash: rebuildChildren() calls back into
+        // HomeFragment (touchListenerFor -> cellTouchListenerFor -> requireContext()) to build
+        // each cell's listener. If this view - and the fragment that owns it - were detached by
+        // the time this deferred block runs (e.g. a system dialog like the "set as default
+        // launcher" role request causing MainActivity/HomeFragment to be recreated while this
+        // Runnable was still queued from the old instance), requireContext() throws
+        // IllegalStateException. A detached view has nothing useful to rebuild anyway.
+        post { if (isAttachedToWindow) rebuildChildren() }
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -354,6 +365,7 @@ class HomeGridView @JvmOverloads constructor(
             GridItemType.WIDGET -> createWidgetView(item, customTypeface)
             GridItemType.APP_LIST -> createAppListView(item, customTypeface)
             GridItemType.DATE_TIME -> createDateTimeView(item, customTypeface)
+            GridItemType.CLOCK -> createClockView(item, customTypeface)
             // An empty cell, and - since Step 9 - a legacy GridItemType.APP item too: Step 6's
             // migration converted every stored APP item into a one-slot APP_LIST one and Step 9
             // removed the last path that could create a new one, so nothing renders, launches or
@@ -429,43 +441,19 @@ class HomeGridView @JvmOverloads constructor(
         }
 
     /**
-     * A vertical block of up to three lines - clock, date, screen time - for a DATE_TIME item.
-     * Structurally the same "build in code" shape [createAppListView] uses: each visible line is
-     * its own view with `layout_weight = 1` so the stack divides the cell's height evenly, and
-     * [GridItem.alignment] is set as every line's own gravity, which is what makes the whole block
-     * shift together.
+     * A standalone clock item: one real, self-updating [TextClock] line. Split out of what used to
+     * be the combined DATE_TIME block's clock line (Step 7 split the stored data, this step splits
+     * the rendering to match) - construction, gravity, typeface and click wiring are unchanged from
+     * that block, just hosted on its own [GridItemType.CLOCK] item instead of a shared one.
      *
-     * Line visibility: [Constants.DateTime.isTimeVisible]/[isDateVisible] against
-     * [GridItem.dateTimeVisibility] gate the clock/date lines independently (ON shows both,
-     * DATE_ONLY only the date, OFF neither); [GridItem.showScreenTime] gates the third line
-     * independently of that, and only when [screenTimeTextProvider] actually has something to show
-     * (Q+, usage-access permission granted, a measurement completed - see
-     * HomeFragment.currentScreenTimeText()). When nothing is visible (OFF + no screen time) this
-     * still returns a real, empty container rather than null/nothing, so edit mode - reached the
-     * same way an App List's slots reach it, via a touch on this view - has chrome to attach to.
-     *
-     * The clock line is a real [TextClock] (self-updating every minute without this view or
-     * HomeFragment polling anything), matching how the old fixed header's clock worked before
-     * Step 7. The date line is a plain [TextView] whose text comes from [dateTextProvider]
-     * (HomeFragment's preserved formatDateText(), which also folds in the battery percentage when
-     * the status bar is hidden) - re-resolved on every rebuild, the same cadence the old fixed
-     * header's date text refreshed on (every bind, not a timer).
-     *
-     * Tap/long-press for the clock/date lines are plain click listeners (not the swipe-gesture
-     * touch listeners [touchListenerFor]/[slotTouchListenerFor] give cells/slots): the pre-Step-7
-     * header never supported swiping over the clock/date either, only tap-to-launch and
-     * long-press-to-reassign, so this reproduces that exactly rather than inventing new gesture
-     * support for it.
+     * Wrapped in a single-child [LinearLayout] (rather than returning the [TextClock] directly) so
+     * this has the same "always a real container" shape [createDateTimeView]/[createAppListView]
+     * return, which is what edit mode attaches its chrome to.
      */
-    private fun createDateTimeView(item: GridItem, customTypeface: Typeface?): View =
+    private fun createClockView(item: GridItem, customTypeface: Typeface?): View =
         LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
-
-            val showTime = Constants.DateTime.isTimeVisible(item.dateTimeVisibility)
-            val showDate = Constants.DateTime.isDateVisible(item.dateTimeVisibility)
-            val screenTimeLineText = if (item.showScreenTime) screenTimeTextProvider?.invoke() else null
-
-            if (showTime) addView(
+            addView(
                 TextClock(context).apply {
                     setTextAppearance(R.style.TextDefault)
                     setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.time_size))
@@ -480,8 +468,43 @@ class HomeGridView @JvmOverloads constructor(
                 },
                 dateTimeLineParams(),
             )
+        }
 
-            if (showDate) addView(
+    /**
+     * A vertical block of up to two lines - date, screen time - for a DATE_TIME item.
+     * Structurally the same "build in code" shape [createAppListView] uses: each visible line is
+     * its own view with `layout_weight = 1` so the stack divides the cell's height evenly, and
+     * [GridItem.alignment] is set as every line's own gravity, which is what makes the whole block
+     * shift together.
+     *
+     * Line visibility: the date line is unconditional - presence of a DATE_TIME item on a page is
+     * itself the on/off switch now (plan.md, "Date widget visibility"); [GridItem.dateTimeVisibility]
+     * is dead from here on (Step 7 only ever reads it once, at migration time). [GridItem.showScreenTime]
+     * gates the second line independently, and only when [screenTimeTextProvider] actually has
+     * something to show (Q+, usage-access permission granted, a measurement completed - see
+     * HomeFragment.currentScreenTimeText()). When nothing is visible (no screen time) this still
+     * returns a real, non-empty container (the date line always renders) rather than null/nothing,
+     * so edit mode - reached the same way an App List's slots reach it, via a touch on this view -
+     * has chrome to attach to.
+     *
+     * The date line is a plain [TextView] whose text comes from [dateTextProvider] (HomeFragment's
+     * preserved formatDateText(), which also folds in the battery percentage when the status bar is
+     * hidden) - re-resolved on every rebuild, the same cadence the old fixed header's date text
+     * refreshed on (every bind, not a timer).
+     *
+     * Tap/long-press for the date line is a plain click listener (not the swipe-gesture touch
+     * listeners [touchListenerFor]/[slotTouchListenerFor] give cells/slots): the pre-Step-7 header
+     * never supported swiping over the clock/date either, only tap-to-launch and
+     * long-press-to-reassign, so this reproduces that exactly rather than inventing new gesture
+     * support for it.
+     */
+    private fun createDateTimeView(item: GridItem, customTypeface: Typeface?): View =
+        LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+
+            val screenTimeLineText = if (item.showScreenTime) screenTimeTextProvider?.invoke() else null
+
+            addView(
                 TextView(context).apply {
                     setTextAppearance(R.style.TextDefault)
                     setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.date_size))
@@ -818,14 +841,17 @@ class HomeGridView @JvmOverloads constructor(
     /**
      * Whether [item]'s type has per-item settings worth a gear badge in edit mode.
      *
-     * True for the two types this launcher renders itself and therefore owns the appearance of:
-     * APP_LIST (alignment, how many slots) and DATE_TIME (alignment, which lines are shown). False
-     * for WIDGET - a hosted widget's settings belong to its provider, not to us - and for the legacy
+     * True for the three types this launcher renders itself and therefore owns the appearance of:
+     * APP_LIST (alignment, how many slots), DATE_TIME (alignment) and CLOCK (alignment). False for
+     * WIDGET - a hosted widget's settings belong to its provider, not to us - and for the legacy
      * APP type, which no longer renders or gets created at all (Step 6/9); the branch is kept so
      * this stays total over the enum rather than relying on an else.
      */
     private fun hasSettings(item: GridItem): Boolean = when (item.type) {
         GridItemType.APP_LIST, GridItemType.DATE_TIME -> true
+        // CLOCK has settings too - alignment, and only alignment
+        // (HomeFragment.showClockSettings).
+        GridItemType.CLOCK -> true
         GridItemType.APP, GridItemType.WIDGET -> false
     }
 
@@ -1008,9 +1034,10 @@ class HomeGridView @JvmOverloads constructor(
         // Move the already-attached views straight away so the commit is visible on this frame,
         // then rebuild for real: cell coverage (and therefore which empty cells exist, and the
         // child z-order the touch dispatch depends on) changed, and only a rebuild fixes that up.
+        // isAttachedToWindow guard: see onSizeChanged's kdoc.
         editingItemView?.layoutParams = cellParams(col, row, spanX, spanY)
         overlayView?.layoutParams = cellParams(col, row, spanX, spanY)
-        post { rebuildChildren() }
+        post { if (isAttachedToWindow) rebuildChildren() }
     }
 
     /**
@@ -1055,11 +1082,11 @@ class HomeGridView @JvmOverloads constructor(
      *
      * App shortcuts have no provider to ask, so anything from 1x1 up to the whole page is fine.
      *
-     * APP_LIST and DATE_TIME resize horizontally only. Their height is content-driven - one row per
-     * app slot, and the clock/date/screen-time block's own line count - so it follows from their
-     * settings dialog (HomeFragment.showAppListSettings/showDateTimeSettings), and letting a
-     * vertical drag contradict that would just produce squeezed or half-empty items that the next
-     * settings change silently undoes. `canResizeVertically = false` also means [buildOverlay] never
+     * APP_LIST, DATE_TIME and CLOCK resize horizontally only. Their height is content-driven - one
+     * row per app slot, or the date/screen-time (DATE_TIME) or clock (CLOCK) block's own line count
+     * - so it follows from their settings dialog (HomeFragment.showAppListSettings/showDateTimeSettings),
+     * and letting a vertical drag contradict that would just produce squeezed or half-empty items
+     * that the next settings change silently undoes. `canResizeVertically = false` also means [buildOverlay] never
      * adds a bottom handle for them, the same way it skips an axis a widget's provider disallows.
      *
      * Widgets are clamped to what their provider declared: [AppWidgetProviderInfo.resizeMode] gates
@@ -1077,7 +1104,7 @@ class HomeGridView @JvmOverloads constructor(
             maxSpanX = columnCount.coerceAtLeast(1),
             maxSpanY = rowCount.coerceAtLeast(1),
         )
-        if (item.type == GridItemType.APP_LIST || item.type == GridItemType.DATE_TIME) {
+        if (item.type == GridItemType.APP_LIST || item.type == GridItemType.DATE_TIME || item.type == GridItemType.CLOCK) {
             val maxSpanX = columnCount.coerceAtLeast(1)
             return ResizeConstraints(
                 canResizeHorizontally = true,

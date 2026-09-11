@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import app.elauncher.data.Prefs
 import app.elauncher.helper.FontManager
 import app.elauncher.helper.isEinkDisplay
 import app.elauncher.helper.isSystemAnimationsDisabled
@@ -26,7 +27,16 @@ open class BaseFragment : Fragment() {
     }
 
     override fun onCreateAnimator(transit: Int, enter: Boolean, nextAnim: Int): Animator? {
-        if (nextAnim != 0 && (requireContext().isSystemAnimationsDisabled() || requireContext().isEinkDisplay()))
+        // Not a hot path (fires once per fragment transaction), so a fresh Prefs lookup here is
+        // fine - subclasses already hold their own `prefs` field (private, not shared via this
+        // base class), so this reads its own instance rather than duplicating that plumbing.
+        if (nextAnim != 0 &&
+            (
+                requireContext().isSystemAnimationsDisabled() ||
+                    requireContext().isEinkDisplay() ||
+                    Prefs(requireContext()).reduceAnimations
+                )
+        )
             return ValueAnimator.ofFloat(0f, 1f).setDuration(0)
         return null
     }

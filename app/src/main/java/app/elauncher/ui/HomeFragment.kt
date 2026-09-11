@@ -37,8 +37,12 @@ import app.elauncher.data.GridItemType
 import app.elauncher.data.Prefs
 import app.elauncher.data.defaultAppListSpanX
 import app.elauncher.data.defaultAppListSpanY
+import app.elauncher.data.defaultClockSpanX
+import app.elauncher.data.defaultClockSpanY
+import app.elauncher.data.defaultDateTimeSpanX
 import app.elauncher.data.defaultDateTimeSpanY
 import app.elauncher.databinding.DialogAppListSettingsBinding
+import app.elauncher.databinding.DialogClockSettingsBinding
 import app.elauncher.databinding.DialogDateTimeSettingsBinding
 import app.elauncher.databinding.FragmentHomeBinding
 import app.elauncher.databinding.ItemHomePageBinding
@@ -376,7 +380,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         // defers the rebuild to right after the current view tree settles instead.
         val binding = _binding ?: return
         binding.pageIndicator.post {
-            if (_binding == null) return@post // fragment view may have been destroyed by then
+            // Fragment view may have been destroyed, or the fragment detached from its context
+            // (e.g. a system dialog like the "set as default launcher" role request interrupting
+            // the lifecycle), by the time this deferred block runs - requireContext() below needs
+            // both checked, not just the binding.
+            if (_binding == null || !isAdded) return@post
             val pageCount = prefs.pages.size.coerceAtLeast(1)
             binding.pageIndicator.removeAllViews()
             binding.pageIndicator.isVisible = pageCount > 1
@@ -695,6 +703,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         when (item.type) {
             GridItemType.APP_LIST -> showAppListSettings(item)
             GridItemType.DATE_TIME -> showDateTimeSettings(item)
+            GridItemType.CLOCK -> showClockSettings(item)
             // Never reached: no gear badge is drawn for these (HomeGridView.hasSettings), and a
             // widget's own settings belong to its provider. Spelled out rather than left to an else
             // so adding a fifth type is a compile error here, not a silently ignored tap.
@@ -770,38 +779,76 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     /**
-     * Date & Screen Time settings: text alignment, which of the clock/date lines are shown
-     * (deliberately Settings' own On/Date only/Off wording for the same three states, so the
-     * per-item control reads like the global one it replaced), and whether the screen-time line is
-     * shown.
+     * Clock settings: text alignment, and nothing else - a clock has no count, no extra lines and no
+     * visibility state (hiding it means removing the widget), so this is showAppListSettings()
+     * without the slot-count stepper.
+     */
+    private fun showClockSettings(item: GridItem) {
+        val content = DialogClockSettingsBinding.inflate(layoutInflater)
+        content.alignmentGroup.check(alignmentRadioId(item.alignment))
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.clock_settings)
+            .setView(content.root)
+            .setPositiveButton(R.string.save) { dialog, _ ->
+                applyClockSettings(
+                    item = item,
+                    alignment = alignmentFor(content.alignmentGroup.checkedRadioButtonId),
+                )
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .show()
+        dialog.window?.decorView?.let { FontManager.applyCustomTypeface(it) }
+    }
+
+    /**
+     * Writes a Clock item's settings back. No span recompute, unlike its App List/Date counterparts:
+     * alignment is the only thing this dialog can change and a clock's footprint never follows from
+     * it, so there is nothing to clamp against the rest of the page.
+     */
+    private fun applyClockSettings(item: GridItem, alignment: Int) {
+        updateGridItem(item) { target, _ ->
+            target.alignment = alignment
+        }
+    }
+
+    /**
+     * Date & Screen Time settings: text alignment and whether the screen-time line is shown.
+     *
+     * No visibility control - date visibility is presence-only now, so an item that exists always
+     * draws its date line and hiding it means removing the widget.
+     *
+     * Saving with screen time newly turned on and usage-access permission missing posts
+     * Constants.Dialog.DIGITAL_WELLBEING, the same permission prompt Settings' own (now removed)
+     * "Screen time" row used to open - this switch is the only entry point left for it. Posted after
+     * the dialog is dismissed, not from the switch's own change listener: MainActivity renders that
+     * prompt as a view inside its own layout (messageLayout), which an open AlertDialog's window
+     * would sit on top of, leaving the prompt invisible and its button untappable until the settings
+     * dialog was closed.
+     *
+     * "Ask, don't block": the setting is written either way, matching Prefs.screenTimeAvailable(),
+     * which treats the permission as a separate check rather than a gate on the preference itself.
      */
     private fun showDateTimeSettings(item: GridItem) {
         val content = DialogDateTimeSettingsBinding.inflate(layoutInflater)
         content.alignmentGroup.check(alignmentRadioId(item.alignment))
-        content.visibilityGroup.check(
-            when (item.dateTimeVisibility) {
-                Constants.DateTime.OFF -> R.id.visibilityOff
-                Constants.DateTime.DATE_ONLY -> R.id.visibilityDateOnly
-                else -> R.id.visibilityOn
-            }
-        )
         content.screenTimeSwitch.isChecked = item.showScreenTime
 
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle(R.string.date_time_settings)
             .setView(content.root)
             .setPositiveButton(R.string.save) { dialog, _ ->
+                val showScreenTime = content.screenTimeSwitch.isChecked
                 applyDateTimeSettings(
                     item = item,
                     alignment = alignmentFor(content.alignmentGroup.checkedRadioButtonId),
-                    visibility = when (content.visibilityGroup.checkedRadioButtonId) {
-                        R.id.visibilityOff -> Constants.DateTime.OFF
-                        R.id.visibilityDateOnly -> Constants.DateTime.DATE_ONLY
-                        else -> Constants.DateTime.ON
-                    },
-                    showScreenTime = content.screenTimeSwitch.isChecked,
+                    showScreenTime = showScreenTime,
                 )
                 dialog.dismiss()
+                if (showScreenTime && requireContext().appUsagePermissionGranted().not()) {
+                    viewModel.showDialog.postValue(Constants.Dialog.DIGITAL_WELLBEING)
+                }
             }
             .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
             .show()
@@ -812,17 +859,15 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
      * Writes a Date & Screen Time item's settings back, re-deriving its height from the line count
      * (defaultDateTimeSpanY, the same function that sizes a freshly created one).
      *
-     * The height is deliberately *not* reduced to nothing when everything is switched off: an item
-     * with no visible lines still keeps its footprint, so it stays somewhere the user can long-press
-     * to reach edit mode and switch the lines back on - a zero-height item would be unreachable.
+     * dateTimeVisibility is deliberately left alone: the field is dead after the clock/date split's
+     * migration (see GridItem's kdoc) and nothing writes it any more.
      *
-     * Growing spanY (e.g. turning screen time on) is clamped to whatever sits below this item on the
+     * Growing spanY (turning screen time on) is clamped to whatever sits below this item on the
      * page (clampSpanYToOverlap), for the same reason applyAppListSettings() clamps it.
      */
-    private fun applyDateTimeSettings(item: GridItem, alignment: Int, visibility: Int, showScreenTime: Boolean) {
+    private fun applyDateTimeSettings(item: GridItem, alignment: Int, showScreenTime: Boolean) {
         updateGridItem(item) { target, items ->
             target.alignment = alignment
-            target.dateTimeVisibility = visibility
             target.showScreenTime = showScreenTime
             val desiredSpanY = defaultDateTimeSpanY(showScreenTime).coerceAtMost(gridGeometry().second.coerceAtLeast(1))
             target.spanY = clampSpanYToOverlap(target, items, desiredSpanY, gridGeometry().second)
@@ -1240,15 +1285,17 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     /**
-     * Long-press on an empty grid cell: add a widget or an App List there, or open Settings. Matches
-     * the AlertDialog style used by PagesSettingsFragment's rename/delete dialogs, including its
-     * custom-font fix-up (dialog content lives in its own window, outside this fragment's view
-     * tree, so BaseFragment's typeface walk never reaches it).
+     * Long-press on an empty grid cell: add a widget, an App List, a clock or a date there, or open
+     * Settings. Matches the AlertDialog style used by PagesSettingsFragment's rename/delete dialogs,
+     * including its custom-font fix-up (dialog content lives in its own window, outside this
+     * fragment's view tree, so BaseFragment's typeface walk never reaches it).
      */
     private fun showEmptyCellOptions(col: Int, row: Int) {
         val options = arrayOf(
             getString(R.string.add_widget),
             getString(R.string.add_app_list),
+            getString(R.string.add_clock),
+            getString(R.string.add_date_time),
             getString(R.string.settings),
         )
         val dialog = AlertDialog.Builder(requireContext())
@@ -1257,6 +1304,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 when (which) {
                     0 -> startWidgetPicker(col, row)
                     1 -> addAppList(col, row)
+                    2 -> addClock(col, row)
+                    3 -> addDateTime(col, row)
                     else -> openSettings()
                 }
             }
@@ -1310,6 +1359,76 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 spanY = spanY,
                 appSlots = MutableList(DEFAULT_APP_LIST_SLOT_COUNT) { AppSlot() },
                 alignment = Gravity.START,
+            )
+        )
+        val updatedPages = pages.toMutableList()
+        updatedPages[pageIndex] = page.copy(items = updatedItems)
+        prefs.pages = updatedPages
+        pagerAdapter.notifyItemChanged(pageIndex)
+    }
+
+    /**
+     * Adds a new Clock item at the long-pressed cell (or the first cell it fits, same rule
+     * addAppList()/startWidgetPicker()'s placement uses), sized from the same defaults a new page's
+     * clock gets. Alignment is the one setting it has, and starts where a new page's clock starts.
+     */
+    private fun addClock(col: Int, row: Int) {
+        val pages = prefs.pages
+        if (pages.isEmpty()) return
+        val pageIndex = prefs.currentPageIndex.coerceIn(0, pages.size - 1)
+        val page = pages[pageIndex]
+
+        val (columnCount, rowCount) = gridGeometry()
+        val spanX = defaultClockSpanX(columnCount)
+        val spanY = defaultClockSpanY().coerceAtMost(rowCount.coerceAtLeast(1))
+        val position = firstFreePosition(page.items, col, row, spanX, spanY, columnCount, rowCount)
+
+        val updatedItems = page.items.toMutableList()
+        updatedItems.add(
+            GridItem(
+                type = GridItemType.CLOCK,
+                col = position.first,
+                row = position.second,
+                spanX = spanX,
+                spanY = spanY,
+                alignment = Gravity.START,
+            )
+        )
+        val updatedPages = pages.toMutableList()
+        updatedPages[pageIndex] = page.copy(items = updatedItems)
+        prefs.pages = updatedPages
+        pagerAdapter.notifyItemChanged(pageIndex)
+    }
+
+    /**
+     * Adds a new Date item at the long-pressed cell (or the first cell it fits), sized for the
+     * date line alone - screen time starts off, so the item only claims the extra row once the user
+     * turns it on in the item's own settings (applyDateTimeSettings re-derives spanY then).
+     */
+    private fun addDateTime(col: Int, row: Int) {
+        val pages = prefs.pages
+        if (pages.isEmpty()) return
+        val pageIndex = prefs.currentPageIndex.coerceIn(0, pages.size - 1)
+        val page = pages[pageIndex]
+
+        val (columnCount, rowCount) = gridGeometry()
+        val spanX = defaultDateTimeSpanX(columnCount)
+        val spanY = defaultDateTimeSpanY(showScreenTime = false).coerceAtMost(rowCount.coerceAtLeast(1))
+        val position = firstFreePosition(page.items, col, row, spanX, spanY, columnCount, rowCount)
+
+        val updatedItems = page.items.toMutableList()
+        updatedItems.add(
+            GridItem(
+                type = GridItemType.DATE_TIME,
+                col = position.first,
+                row = position.second,
+                spanX = spanX,
+                spanY = spanY,
+                alignment = Gravity.START,
+                showScreenTime = false,
+                // Dead field, kept only because it has to hold some value - a DATE_TIME item's date
+                // line is shown whenever the item exists (see GridItem's kdoc). Never read again.
+                dateTimeVisibility = Constants.DateTime.ON,
             )
         )
         val updatedPages = pages.toMutableList()

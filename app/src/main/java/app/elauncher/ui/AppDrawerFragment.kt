@@ -34,6 +34,7 @@ import app.elauncher.helper.openSearch
 import app.elauncher.helper.openUrl
 import app.elauncher.helper.showKeyboard
 import app.elauncher.helper.showToast
+import app.elauncher.helper.themedBackgroundColor
 import app.elauncher.helper.uninstall
 
 class AppDrawerFragment : BaseFragment() {
@@ -75,6 +76,8 @@ class AppDrawerFragment : BaseFragment() {
             targetRow = it.getInt(Constants.Key.ROW, -1)
             targetSlotIndex = it.getInt(Constants.Key.SLOT_INDEX, -1)
         }
+
+        binding.root.setBackgroundColor(requireContext().themedBackgroundColor(prefs.backgroundOpacity))
 
         initViews()
         initSearch()
@@ -255,7 +258,7 @@ class AppDrawerFragment : BaseFragment() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
         binding.recyclerView.itemAnimator = null
-        if (requireContext().isEinkDisplay())
+        if (requireContext().isEinkDisplay() || prefs.reduceAnimations)
             binding.recyclerView.overScrollMode = View.OVER_SCROLL_NEVER
         else if (requireContext().isSystemAnimationsDisabled().not())
             binding.recyclerView.layoutAnimation =

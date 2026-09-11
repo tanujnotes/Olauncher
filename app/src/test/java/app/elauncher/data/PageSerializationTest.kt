@@ -120,9 +120,11 @@ class PageSerializationTest {
 
         assertEquals(1, pages.size)
         // The flat-slot page is built as APP items and then goes straight through the App List
-        // migration (see Prefs.migrateToAppLists), so what comes back out is an App List plus the
-        // synthesized Date & Screen Time item, not the raw APP item.
-        assertEquals(2, pages[0].items.size)
+        // migration (see Prefs.migrateToAppLists) and the clock/date split (Prefs.splitDateTimeItems),
+        // so what comes back out is an App List plus the synthesized Date & Screen Time item already
+        // split into a Clock and a Date item - three items, not the raw APP one.
+        assertEquals(3, pages[0].items.size)
+        assertEquals(1, pages[0].items.count { it.type == GridItemType.CLOCK })
         val item = pages[0].items.single { it.type == GridItemType.APP_LIST }
         val slot = item.appSlots.single()
         assertEquals("Phone", slot.appName)
@@ -134,17 +136,15 @@ class PageSerializationTest {
     }
 
     @Test
-    fun `unset PAGES with all flat slots blank defaults to a single page with starter content`() {
+    fun `unset PAGES with all flat slots blank defaults to a single empty page`() {
         val prefs = buildPrefs()
 
         val pages = prefs.pages
 
+        // A fresh install: one blank "Home" page and nothing on it. newPageDefaultItems seeds
+        // nothing, and neither migration in the chain synthesizes an item for a page that started
+        // empty - every widget is long-press-added (plan 003 Step 7).
         assertEquals(1, pages.size)
-        val items = pages[0].items
-        assertEquals(2, items.size)
-        assertEquals(1, items.count { it.type == GridItemType.DATE_TIME })
-        val appList = items.single { it.type == GridItemType.APP_LIST }
-        assertEquals(DEFAULT_APP_LIST_SLOT_COUNT, appList.appSlots.size)
-        assertTrue(appList.appSlots.all { it.appPackage == null })
+        assertTrue(pages[0].items.isEmpty())
     }
 }
