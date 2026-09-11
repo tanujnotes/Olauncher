@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    Content view of HomeFragment.showDateTimeSettings()'s AlertDialog: the per-item settings of one
+    DATE_TIME grid item. The visibility options deliberately reuse Settings' own On/Date only/Off
+    wording (fragment_settings.xml's dateTimeOn/dateOnly/dateTimeOff row) so the terminology matches
+    what the old global "Show date time" setting already taught. Same plain/unstyled approach as
+    dialog_app_list_settings.xml.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alignment" />
+
+    <RadioGroup
+        android:id="@+id/alignmentGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/alignStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/left" />
+
+        <RadioButton
+            android:id="@+id/alignCenter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/center" />
+
+        <RadioButton
+            android:id="@+id/alignEnd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/right" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/show_date_time" />
+
+    <RadioGroup
+        android:id="@+id/visibilityGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/visibilityOn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/on" />
+
+        <RadioButton
+            android:id="@+id/visibilityDateOnly"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/date_only" />
+
+        <RadioButton
+            android:id="@+id/visibilityOff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/off" />
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/screenTimeSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/screen_time" />
+
+</LinearLayout>

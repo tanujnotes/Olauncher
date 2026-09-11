@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.LauncherApps
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -267,7 +268,11 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.DIGITAL_WELLBEING -> {
                     showMessageDialog(R.string.screen_time, R.string.app_usage_message, R.string.permission) {
-                        startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+                        val deepLinkIntent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS).apply {
+                            data = Uri.fromParts("package", packageName, null)
+                        }
+                        runCatching { startActivity(deepLinkIntent) }
+                            .onFailure { startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)) }
                     }
                 }
             }

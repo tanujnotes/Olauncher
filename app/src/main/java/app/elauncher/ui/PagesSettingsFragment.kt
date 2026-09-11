@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import app.elauncher.R
 import app.elauncher.data.Page
 import app.elauncher.data.Prefs
+import app.elauncher.data.newPageDefaultItems
 import app.elauncher.databinding.FragmentPagesSettingsBinding
 import app.elauncher.helper.FontManager
 import java.util.UUID
@@ -60,9 +61,13 @@ class PagesSettingsFragment : BaseFragment() {
     }
 
     private fun addPage() {
+        // Seeded rather than blank: every page is meant to carry a Date & Screen Time item (the
+        // fixed header it replaces was on every page), and an empty-slot App List gives the user
+        // somewhere to put apps without first having to add a widget. See Page.newPageDefaultItems.
         val newPage = Page(
             id = UUID.randomUUID().toString(),
             name = getString(R.string.page_name_default, pages.size + 1),
+            items = newPageDefaultItems(prefs.defaultColumnCount()),
         )
         pages.add(newPage)
         persistAndRefresh()

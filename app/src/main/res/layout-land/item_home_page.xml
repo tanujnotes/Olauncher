@@ -1,70 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- One page's content, inflated per-item by HomePagerAdapter. Pages are fully independent
-     (plan.md), so the clock/date header and screen-time label live here rather than as fixed
-     chrome in fragment_home.xml - see HomeFragment.bindPage(). -->
+     (plan.md). The date/time header and screen-time label used to live here as fixed chrome
+     (see history.md Step 7) - Date & Screen Time is now a DATE_TIME GridItem rendered inside
+     HomeGridView like any other item (Step 10), not fixed per-page chrome. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Clock and calendar-->
-    <LinearLayout
-        android:id="@+id/dateTimeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <TextClock
-            android:id="@+id/clock"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:format12Hour="h:mm"
-            android:textSize="@dimen/time_size"
-            tools:text="02:34" />
-
-        <TextView
-            android:id="@+id/date"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:format12Hour="EEE, dd MMM"
-            android:format24Hour="EEE, dd MMM"
-            android:paddingHorizontal="3dp"
-            android:textSize="@dimen/date_size"
-            tools:text="Thu, 30 Dec" />
-    </LinearLayout>
-
-    <!-- Screen time-->
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvScreenTime"
-        style="@style/TextSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginHorizontal="74dp"
-        android:layout_marginTop="72dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textSize="@dimen/date_size"
-        android:visibility="gone"
-        tools:text="2h 11m"
-        tools:visibility="visible" />
-
     <!-- One HomeGridView per page, showing that page's items - see
-         HomeFragment.bindPage()/populateHomeGrid(). Margins here reproduce the old
-         homeAppsLayout's marginHorizontal/paddingVertical, since HomeGridView positions cells
-         from its own top-left corner rather than honoring its own padding. -->
+         HomeFragment.bindPage()/populateHomeGrid(). HomeGridView positions cells from its own
+         top-left corner and ignores its own padding, so the space around the grid is set here.
+
+         Horizontal is deliberately wider than portrait's 8dp: in landscape this is the edge the
+         display cutout and the rounded corners live on. Any width left over beyond the last whole
+         cell is split between both sides by HomeGridView itself (gridOffsetX).
+         Vertical: unlike portrait, this was never a large fixed reservation for the old header
+         (Step 7) - the header's compact landscape content just overlaid this same small margin.
+         Left as-is: already the "minimum breathing room" this margin is meant to be. -->
     <app.elauncher.ui.HomeGridView
         android:id="@+id/homeGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="74dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="@dimen/home_app_padding_vertical" />
 </FrameLayout>

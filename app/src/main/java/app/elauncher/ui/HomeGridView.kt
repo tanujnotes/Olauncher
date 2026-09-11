@@ -2,20 +2,26 @@ package app.elauncher.ui
 
 import android.appwidget.AppWidgetProviderInfo
 import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.InsetDrawable
 import android.os.Build
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.TextClock
 import android.widget.TextView
 import androidx.core.view.setPadding
 import app.elauncher.R
+import app.elauncher.data.AppSlot
 import app.elauncher.data.Constants
 import app.elauncher.data.GridItem
 import app.elauncher.data.GridItemType
@@ -51,7 +57,7 @@ class HomeGridView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private val cellSizePx: Int = (CELL_SIZE_DP * resources.displayMetrics.density).toInt()
+    private val cellSizePx: Int = (Constants.Grid.CELL_SIZE_DP * resources.displayMetrics.density).toInt()
     private val touchSlopPx: Int = ViewConfiguration.get(context).scaledTouchSlop
 
     /**
@@ -65,10 +71,35 @@ class HomeGridView @JvmOverloads constructor(
     private var columnCount: Int = 0
     private var rowCount: Int = 0
 
+    /**
+     * Where cell (0, 0) starts inside this view. A view's size is almost never an exact multiple of
+     * the cell size, and the whole-cell count discards that remainder - left at 0 the leftover
+     * would all pile up against the right/bottom edge as unreachable dead space, so it is split
+     * evenly between the two edges of each axis instead. At most half a cell per side.
+     */
+    private var gridOffsetX: Int = 0
+    private var gridOffsetY: Int = 0
+
     private var items: List<GridItem> = emptyList()
     private var touchListenerFor: ((col: Int, row: Int, item: GridItem?) -> View.OnTouchListener)? = null
+    private var slotTouchListenerFor: ((item: GridItem, slotIndex: Int) -> View.OnTouchListener)? = null
+    private var isAppSlotUnavailable: ((AppSlot) -> Boolean)? = null
     private var onItemsChanged: ((List<GridItem>) -> Unit)? = null
     private var onItemDeleted: ((GridItem) -> Unit)? = null
+    private var onOpenSettings: ((GridItem) -> Unit)? = null
+
+    // DATE_TIME rendering/wiring - all caller-owned for the same reason touchListenerFor etc. are
+    // (this view touches no Prefs/Context helpers): dateTextProvider/screenTimeTextProvider supply
+    // the already-formatted text (HomeFragment's preserved formatDateText()/currentScreenTimeText(),
+    // Step 7), and the on*Click/on*LongClick callbacks are the preserved openClockApp()/
+    // openCalendarApp()/reassignment flows, re-wired onto the views createDateTimeView builds
+    // instead of the old fixed pageBinding.clock/date (Step 10).
+    private var dateTextProvider: (() -> String)? = null
+    private var screenTimeTextProvider: (() -> String?)? = null
+    private var onClockClick: (() -> Unit)? = null
+    private var onClockLongClick: (() -> Unit)? = null
+    private var onDateClick: (() -> Unit)? = null
+    private var onDateLongClick: (() -> Unit)? = null
 
     /** The item currently being edited, identified by reference into [items]. Null when not editing. */
     private var editingItem: GridItem? = null
@@ -91,6 +122,7 @@ class HomeGridView @JvmOverloads constructor(
 
     // Edit-mode chrome, all direct children of this view, added on top of the cells in this order.
     private var scrimView: View? = null
+    private var gridLinesView: View? = null
     private var previewView: View? = null
     private var overlayView: View? = null
 
@@ -100,20 +132,48 @@ class HomeGridView @JvmOverloads constructor(
      * for every cell, occupied or empty, and its result is set via [View.setOnTouchListener] -
      * this view has no click/long-click/swipe logic of its own.
      *
+     * An App List item's rows are addressable individually rather than as one cell, so
+     * [slotTouchListenerFor] supplies the same kind of caller-owned gesture listener per slot -
+     * which, being on a child view filling the cell, is what a touch on such a cell reaches instead
+     * of [touchListenerFor]'s listener (see [createAppListView]). [isAppSlotUnavailable] answers
+     * "is this filled slot's app still resolvable", the one question about a slot this view can't
+     * answer itself (no package-manager access, same reasoning as Prefs/navigation).
+     *
      * [onItemsChanged] is invoked with the (mutated in place) item list after an edit-mode move or
      * resize commits, and [onItemDeleted] when the edit-mode delete badge is tapped; both exist so
      * that persistence stays with the caller, exactly like the gesture callbacks above.
+     * [onOpenSettings] is the same shape again, for the edit-mode settings (gear) badge shown on the
+     * item types that have per-item settings ([hasSettings]): this view knows nothing about what
+     * those settings are or how they are edited, it only reports the tap.
      */
     fun setItems(
         items: List<GridItem>,
         touchListenerFor: (col: Int, row: Int, item: GridItem?) -> View.OnTouchListener,
+        slotTouchListenerFor: ((item: GridItem, slotIndex: Int) -> View.OnTouchListener)? = null,
+        isAppSlotUnavailable: ((AppSlot) -> Boolean)? = null,
         onItemsChanged: ((List<GridItem>) -> Unit)? = null,
         onItemDeleted: ((GridItem) -> Unit)? = null,
+        onOpenSettings: ((GridItem) -> Unit)? = null,
+        dateTextProvider: (() -> String)? = null,
+        screenTimeTextProvider: (() -> String?)? = null,
+        onClockClick: (() -> Unit)? = null,
+        onClockLongClick: (() -> Unit)? = null,
+        onDateClick: (() -> Unit)? = null,
+        onDateLongClick: (() -> Unit)? = null,
     ) {
         this.items = items
         this.touchListenerFor = touchListenerFor
+        this.slotTouchListenerFor = slotTouchListenerFor
+        this.isAppSlotUnavailable = isAppSlotUnavailable
         this.onItemsChanged = onItemsChanged
         this.onItemDeleted = onItemDeleted
+        this.onOpenSettings = onOpenSettings
+        this.dateTextProvider = dateTextProvider
+        this.screenTimeTextProvider = screenTimeTextProvider
+        this.onClockClick = onClockClick
+        this.onClockLongClick = onClockLongClick
+        this.onDateClick = onDateClick
+        this.onDateLongClick = onDateLongClick
         // A fresh list means fresh GridItem instances (they're re-parsed from Prefs' JSON on every
         // read), so an item being edited can't survive a rebind - drop edit mode rather than
         // silently editing a detached copy.
@@ -151,10 +211,10 @@ class HomeGridView @JvmOverloads constructor(
     /**
      * Pulls [item] inside the grid, returning true if anything had to change.
      *
-     * App items are created spanning `Prefs.defaultColumnCount()` cells, which is derived from the
-     * raw screen width and so can be one cell wider than this grid actually is once
-     * item_home_page.xml's side margins are taken off - a pre-existing mismatch, harmless until an
-     * item has to satisfy the bounds check below.
+     * Items reach this view from storage, where nothing guarantees they still fit: they may have
+     * been sized against a different screen (rotation, a restored backup) or restated by the
+     * one-time cell-size rescale in Prefs. Anything out of bounds would fail every subsequent
+     * move/resize as "doesn't fit", so it is repaired on selection instead.
      */
     private fun clampToGrid(item: GridItem): Boolean {
         if (columnCount <= 0 || rowCount <= 0) return false
@@ -234,6 +294,8 @@ class HomeGridView @JvmOverloads constructor(
         if (cellSizePx <= 0) return
         columnCount = floor(width.toFloat() / cellSizePx).toInt()
         rowCount = floor(height.toFloat() / cellSizePx).toInt()
+        gridOffsetX = ((width - columnCount * cellSizePx) / 2).coerceAtLeast(0)
+        gridOffsetY = ((height - rowCount * cellSizePx) / 2).coerceAtLeast(0)
     }
 
     private fun rebuildChildren() {
@@ -244,6 +306,7 @@ class HomeGridView @JvmOverloads constructor(
         // ever carried over from a previous bind of this (possibly recycled) page view.
         removeAllViews()
         scrimView = null
+        gridLinesView = null
         previewView = null
         overlayView = null
         editingItemView = null
@@ -279,10 +342,7 @@ class HomeGridView @JvmOverloads constructor(
 
                 val spanX = item?.spanX ?: 1
                 val spanY = item?.spanY ?: 1
-                val params = LayoutParams(spanX * cellSizePx, spanY * cellSizePx)
-                params.leftMargin = col * cellSizePx
-                params.topMargin = row * cellSizePx
-                addView(cellView, params)
+                addView(cellView, cellParams(col, row, spanX, spanY))
             }
         }
 
@@ -291,15 +351,15 @@ class HomeGridView @JvmOverloads constructor(
 
     private fun createCellView(item: GridItem?, customTypeface: Typeface?): View {
         return when (item?.type) {
-            GridItemType.APP -> TextView(context).apply {
-                setTextAppearance(R.style.TextLarge)
-                text = item.appName
-                ellipsize = android.text.TextUtils.TruncateAt.END
-                isSingleLine = true
-                if (customTypeface != null) setTypeface(customTypeface, typeface?.style ?: Typeface.NORMAL)
-            }
             GridItemType.WIDGET -> createWidgetView(item, customTypeface)
-            null -> View(context).apply {
+            GridItemType.APP_LIST -> createAppListView(item, customTypeface)
+            GridItemType.DATE_TIME -> createDateTimeView(item, customTypeface)
+            // An empty cell, and - since Step 9 - a legacy GridItemType.APP item too: Step 6's
+            // migration converted every stored APP item into a one-slot APP_LIST one and Step 9
+            // removed the last path that could create a new one, so nothing renders, launches or
+            // creates one any more. The enum value survives purely so a straggler unmigrated item
+            // still deserializes instead of being dropped.
+            GridItemType.APP, null -> View(context).apply {
                 setBackgroundColor(android.graphics.Color.TRANSPARENT)
             }
         }
@@ -325,6 +385,147 @@ class HomeGridView @JvmOverloads constructor(
             addView(hostView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         }
     }
+
+    /**
+     * A vertical stack of one row per [GridItem.appSlots] entry - `item.appSlots.size` is expected
+     * to equal `item.spanY` (an invariant the settings dialog and picking flow are responsible for
+     * maintaining, not something enforced defensively here). Each row is its own [TextView], sized
+     * with `layout_weight = 1` so the stack divides the cell view's height evenly no matter how many
+     * rows there are, which composes with the outer cell's own `spanY * cellSizePx` sizing without
+     * this view needing to know [cellSizePx] itself.
+     *
+     * Row text, in order of preference: [AppSlot.customLabel], else [AppSlot.appName], else the
+     * "App" placeholder for an empty slot ([AppSlot.appPackage] == null).
+     *
+     * Each row carries its own gesture listener from `slotTouchListenerFor` (Step 9), so a tap or
+     * long press lands on the *slot*, not the cell. That listener is on a child filling the whole
+     * cell, so the outer per-cell listener never sees a touch on an App List item at all - which is
+     * why the slot long-press dialog is the only way into edit mode for one (plan.md, "Editing
+     * gesture model"). The rows' listeners resolve swipes exactly like the cell listener does, so
+     * page switching and the swipe-up drawer keep working over an App List.
+     *
+     * A filled slot whose app can no longer be resolved (uninstalled or disabled while pinned) keeps
+     * its label but is dimmed to [UNAVAILABLE_SLOT_ALPHA], so it reads as neither live nor empty;
+     * tapping it clears the slot (HomeFragment.onAppSlotClick).
+     */
+    private fun createAppListView(item: GridItem, customTypeface: Typeface?): View =
+        LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            item.appSlots.forEachIndexed { slotIndex, slot ->
+                addView(
+                    TextView(context).apply {
+                        setTextAppearance(R.style.TextLarge)
+                        text = slot.customLabel ?: slot.appName ?: context.getString(R.string.app)
+                        ellipsize = android.text.TextUtils.TruncateAt.END
+                        isSingleLine = true
+                        gravity = item.alignment
+                        if (isAppSlotUnavailable?.invoke(slot) == true) alpha = UNAVAILABLE_SLOT_ALPHA
+                        if (customTypeface != null) setTypeface(customTypeface, typeface?.style ?: Typeface.NORMAL)
+                        slotTouchListenerFor?.let { setOnTouchListener(it(item, slotIndex)) }
+                    },
+                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f)
+                )
+            }
+        }
+
+    /**
+     * A vertical block of up to three lines - clock, date, screen time - for a DATE_TIME item.
+     * Structurally the same "build in code" shape [createAppListView] uses: each visible line is
+     * its own view with `layout_weight = 1` so the stack divides the cell's height evenly, and
+     * [GridItem.alignment] is set as every line's own gravity, which is what makes the whole block
+     * shift together.
+     *
+     * Line visibility: [Constants.DateTime.isTimeVisible]/[isDateVisible] against
+     * [GridItem.dateTimeVisibility] gate the clock/date lines independently (ON shows both,
+     * DATE_ONLY only the date, OFF neither); [GridItem.showScreenTime] gates the third line
+     * independently of that, and only when [screenTimeTextProvider] actually has something to show
+     * (Q+, usage-access permission granted, a measurement completed - see
+     * HomeFragment.currentScreenTimeText()). When nothing is visible (OFF + no screen time) this
+     * still returns a real, empty container rather than null/nothing, so edit mode - reached the
+     * same way an App List's slots reach it, via a touch on this view - has chrome to attach to.
+     *
+     * The clock line is a real [TextClock] (self-updating every minute without this view or
+     * HomeFragment polling anything), matching how the old fixed header's clock worked before
+     * Step 7. The date line is a plain [TextView] whose text comes from [dateTextProvider]
+     * (HomeFragment's preserved formatDateText(), which also folds in the battery percentage when
+     * the status bar is hidden) - re-resolved on every rebuild, the same cadence the old fixed
+     * header's date text refreshed on (every bind, not a timer).
+     *
+     * Tap/long-press for the clock/date lines are plain click listeners (not the swipe-gesture
+     * touch listeners [touchListenerFor]/[slotTouchListenerFor] give cells/slots): the pre-Step-7
+     * header never supported swiping over the clock/date either, only tap-to-launch and
+     * long-press-to-reassign, so this reproduces that exactly rather than inventing new gesture
+     * support for it.
+     */
+    private fun createDateTimeView(item: GridItem, customTypeface: Typeface?): View =
+        LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+
+            val showTime = Constants.DateTime.isTimeVisible(item.dateTimeVisibility)
+            val showDate = Constants.DateTime.isDateVisible(item.dateTimeVisibility)
+            val screenTimeLineText = if (item.showScreenTime) screenTimeTextProvider?.invoke() else null
+
+            if (showTime) addView(
+                TextClock(context).apply {
+                    setTextAppearance(R.style.TextDefault)
+                    setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.time_size))
+                    // Both formats set explicitly (the old header only set format12Hour) so the
+                    // clock reads correctly regardless of the device's 12h/24h setting.
+                    format12Hour = "h:mm"
+                    format24Hour = "H:mm"
+                    gravity = item.alignment
+                    if (customTypeface != null) setTypeface(customTypeface, typeface?.style ?: Typeface.NORMAL)
+                    onClockClick?.let { onClick -> setOnClickListener { onClick() } }
+                    onClockLongClick?.let { onLongClick -> setOnLongClickListener { onLongClick(); true } }
+                },
+                dateTimeLineParams(),
+            )
+
+            if (showDate) addView(
+                TextView(context).apply {
+                    setTextAppearance(R.style.TextDefault)
+                    setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.date_size))
+                    text = dateTextProvider?.invoke().orEmpty()
+                    gravity = item.alignment
+                    isSingleLine = true
+                    ellipsize = android.text.TextUtils.TruncateAt.END
+                    if (customTypeface != null) setTypeface(customTypeface, typeface?.style ?: Typeface.NORMAL)
+                    onDateClick?.let { onClick -> setOnClickListener { onClick() } }
+                    onDateLongClick?.let { onLongClick -> setOnLongClickListener { onLongClick(); true } }
+                },
+                dateTimeLineParams(),
+            )
+
+            if (screenTimeLineText != null) addView(
+                TextView(context).apply {
+                    setTextAppearance(R.style.TextSmall)
+                    setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.date_size))
+                    text = screenTimeLineText
+                    gravity = item.alignment
+                    isSingleLine = true
+                    ellipsize = android.text.TextUtils.TruncateAt.END
+                    if (customTypeface != null) setTypeface(customTypeface, typeface?.style ?: Typeface.NORMAL)
+                    // Deliberately non-interactive - see Step 10 deviation notes (plan.md left the
+                    // screen-time line's own tap target, openScreenTimeDigitalWellbeing(), optional).
+                },
+                dateTimeLineParams(),
+            )
+        }
+
+    /**
+     * Shared layout params for a DATE_TIME line: MATCH_PARENT width (so [GridItem.alignment]'s
+     * gravity has room to place text against either edge or center) but - unlike
+     * [createAppListView]'s equal-weight rows - WRAP_CONTENT height. Confirmed on-device
+     * (Pixel 9 Pro) that dividing the cell height evenly between lines clips the large clock text
+     * style whenever the actual glyph line is taller than its even share of [GridItem.spanY]'s
+     * allotted rows - `time_size` alone (50-66sp depending on density bucket) needs close to two
+     * full 48dp rows by itself. WRAP_CONTENT means each line only ever takes what it actually
+     * needs, so a spanY estimate that runs slightly generous just leaves blank space below the
+     * block instead of squeezing text - the failure mode this deliberately avoids is clipping, not
+     * a few dp of unused space.
+     */
+    private fun dateTimeLineParams(): LinearLayout.LayoutParams =
+        LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
 
     /**
      * Wraps a hosted widget so a long press on it can still select it for editing.
@@ -400,20 +601,30 @@ class HomeGridView @JvmOverloads constructor(
      * HomeFragment.cellTouchListenerFor), which keeps every other cell gesture - swipe to change
      * page, long-press to enter edit mode - working on this cell exactly like any other.
      */
-    private fun widgetPlaceholderView(customTypeface: Typeface?): View = TextView(context).apply {
-        setTextAppearance(R.style.TextSmall)
-        textSize = PLACEHOLDER_TEXT_SIZE_SP
-        text = context.getString(R.string.widget_unavailable)
-        gravity = Gravity.CENTER
-        maxLines = 3
-        ellipsize = android.text.TextUtils.TruncateAt.END
-        setPadding(PLACEHOLDER_PADDING_DP.dpToPx())
-        if (customTypeface != null) setTypeface(customTypeface, typeface?.style ?: Typeface.NORMAL)
-        background = GradientDrawable().apply {
-            setColor(WIDGET_PLACEHOLDER_COLOR)
-            cornerRadius = CORNER_RADIUS_DP.dpToPx().toFloat()
+    private fun widgetPlaceholderView(customTypeface: Typeface?): View =
+        neutralPlaceholderView(R.string.widget_unavailable, customTypeface)
+
+    /**
+     * Generic neutral-grey box used for any [GridItem] type that doesn't have real rendering yet
+     * (or, for WIDGET, can't currently be hosted) - same visual language for all of them so an
+     * unfinished/unavailable cell always reads the same way rather than each type inventing its
+     * own look.
+     */
+    private fun neutralPlaceholderView(@androidx.annotation.StringRes textRes: Int, customTypeface: Typeface?): View =
+        TextView(context).apply {
+            setTextAppearance(R.style.TextSmall)
+            textSize = PLACEHOLDER_TEXT_SIZE_SP
+            text = context.getString(textRes)
+            gravity = Gravity.CENTER
+            maxLines = 3
+            ellipsize = android.text.TextUtils.TruncateAt.END
+            setPadding(PLACEHOLDER_PADDING_DP.dpToPx())
+            if (customTypeface != null) setTypeface(customTypeface, typeface?.style ?: Typeface.NORMAL)
+            background = GradientDrawable().apply {
+                setColor(WIDGET_PLACEHOLDER_COLOR)
+                cornerRadius = CORNER_RADIUS_DP.dpToPx().toFloat()
+            }
         }
-    }
 
     // region edit mode
 
@@ -421,7 +632,9 @@ class HomeGridView @JvmOverloads constructor(
         for (index in 0 until childCount) {
             val child = getChildAt(index)
             val params = child.layoutParams as? LayoutParams ?: continue
-            if (params.leftMargin == item.col * cellSizePx && params.topMargin == item.row * cellSizePx) {
+            if (params.leftMargin == gridOffsetX + item.col * cellSizePx &&
+                params.topMargin == gridOffsetY + item.row * cellSizePx
+            ) {
                 return child
             }
         }
@@ -430,9 +643,11 @@ class HomeGridView @JvmOverloads constructor(
 
     private fun removeEditChrome() {
         scrimView?.let { removeView(it) }
+        gridLinesView?.let { removeView(it) }
         previewView?.let { removeView(it) }
         overlayView?.let { removeView(it) }
         scrimView = null
+        gridLinesView = null
         previewView = null
         overlayView = null
     }
@@ -453,6 +668,14 @@ class HomeGridView @JvmOverloads constructor(
         addView(scrim, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
         scrimView = scrim
 
+        // Full-grid cell boundaries: purely visual reference for the whole page's cell layout
+        // while editing, not just the occupied cells. Sits above the scrim but below the snap
+        // preview/overlay (added next), and never gets a touch listener, so it can't affect the
+        // scrim's exit-on-tap behavior or the overlay's move/resize handling above it.
+        val gridLines = GridLinesView(context)
+        addView(gridLines, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
+        gridLinesView = gridLines
+
         // Snap preview: shown only while a drag is in progress, at the cell range the item would
         // land on / grow to, tinted to say whether that target is accepted or rejected.
         val preview = View(context).apply { visibility = View.GONE }
@@ -466,9 +689,43 @@ class HomeGridView @JvmOverloads constructor(
 
     private fun cellParams(col: Int, row: Int, spanX: Int, spanY: Int): LayoutParams =
         LayoutParams(spanX * cellSizePx, spanY * cellSizePx).apply {
-            leftMargin = col * cellSizePx
-            topMargin = row * cellSizePx
+            leftMargin = gridOffsetX + col * cellSizePx
+            topMargin = gridOffsetY + row * cellSizePx
         }
+
+    /**
+     * Draws the boundary of every cell across the whole grid (not just occupied ones) for the
+     * duration of edit mode, so a drag/resize target can be judged against the whole page. Reads
+     * [columnCount]/[rowCount]/[cellSizePx]/[gridOffsetX]/[gridOffsetY] straight from the outer
+     * view on every draw, so it always reflects the current geometry with no invalidation of its
+     * own to manage - [addEditChrome] rebuilds this view fresh whenever geometry could have
+     * changed. Never given a touch listener (matches [previewView]'s non-interactive chrome), so
+     * it cannot affect touch dispatch to the scrim or overlay around it.
+     */
+    private inner class GridLinesView(context: Context) : View(context) {
+        private val paint = Paint().apply {
+            color = withAlpha(chromeColor(), GRID_LINE_ALPHA)
+            style = Paint.Style.STROKE
+            strokeWidth = GRID_LINE_WIDTH_DP.dpToPx().toFloat()
+        }
+
+        override fun onDraw(canvas: Canvas) {
+            super.onDraw(canvas)
+            if (columnCount <= 0 || rowCount <= 0) return
+            val left = gridOffsetX.toFloat()
+            val top = gridOffsetY.toFloat()
+            val right = (gridOffsetX + columnCount * cellSizePx).toFloat()
+            val bottom = (gridOffsetY + rowCount * cellSizePx).toFloat()
+            for (col in 0..columnCount) {
+                val x = (gridOffsetX + col * cellSizePx).toFloat()
+                canvas.drawLine(x, top, x, bottom, paint)
+            }
+            for (row in 0..rowCount) {
+                val y = (gridOffsetY + row * cellSizePx).toFloat()
+                canvas.drawLine(left, y, right, y, paint)
+            }
+        }
+    }
 
     private fun buildOverlay(item: GridItem): FrameLayout {
         val chrome = chromeColor()
@@ -503,6 +760,37 @@ class HomeGridView @JvmOverloads constructor(
             LayoutParams(BADGE_SIZE_DP.dpToPx(), BADGE_SIZE_DP.dpToPx(), Gravity.START or Gravity.TOP)
         )
 
+        // Settings badge, bottom-start: the last corner still free once the delete badge (top-start)
+        // and the resize handles (end edge / bottom edge) have their places. Only the item types
+        // that actually have per-item settings get one - see [hasSettings]. Same construction as the
+        // delete badge above, a different glyph apart: two identical-looking badges a corner apart
+        // would be easy to hit by mistake, and one of them deletes the item.
+        if (hasSettings(item)) {
+            val settings = TextView(context).apply {
+                text = SETTINGS_GLYPH
+                gravity = Gravity.CENTER
+                includeFontPadding = false
+                setTextColor(inverseChromeColor())
+                textSize = BADGE_TEXT_SIZE_SP
+                background = GradientDrawable().apply {
+                    shape = GradientDrawable.OVAL
+                    setColor(chrome)
+                }
+                setOnClickListener {
+                    val target = editingItem
+                    // Edit mode ends first, exactly like the delete badge: applying the settings
+                    // re-reads and re-renders the page, which drops edit mode anyway (a rebind
+                    // hands this view fresh GridItem instances - see setItems).
+                    exitEditMode()
+                    if (target != null) onOpenSettings?.invoke(target)
+                }
+            }
+            overlay.addView(
+                settings,
+                LayoutParams(BADGE_SIZE_DP.dpToPx(), BADGE_SIZE_DP.dpToPx(), Gravity.START or Gravity.BOTTOM)
+            )
+        }
+
         val constraints = resizeConstraints(item)
         if (constraints.canResizeHorizontally) {
             overlay.addView(
@@ -528,8 +816,22 @@ class HomeGridView @JvmOverloads constructor(
     }
 
     /**
+     * Whether [item]'s type has per-item settings worth a gear badge in edit mode.
+     *
+     * True for the two types this launcher renders itself and therefore owns the appearance of:
+     * APP_LIST (alignment, how many slots) and DATE_TIME (alignment, which lines are shown). False
+     * for WIDGET - a hosted widget's settings belong to its provider, not to us - and for the legacy
+     * APP type, which no longer renders or gets created at all (Step 6/9); the branch is kept so
+     * this stays total over the enum rather than relying on an else.
+     */
+    private fun hasSettings(item: GridItem): Boolean = when (item.type) {
+        GridItemType.APP_LIST, GridItemType.DATE_TIME -> true
+        GridItemType.APP, GridItemType.WIDGET -> false
+    }
+
+    /**
      * A resize grip: a generous (touch-sized) transparent view with a small dot drawn inside it, so
-     * the handle is easy to hit without visually dominating an 80dp cell.
+     * the handle is easy to hit without visually dominating a single cell.
      */
     private fun handleView(item: GridItem, horizontal: Boolean): View =
         View(context).apply {
@@ -718,8 +1020,8 @@ class HomeGridView @JvmOverloads constructor(
      */
     private fun notifyWidgetResized(item: GridItem) {
         val appWidgetId = item.appWidgetId ?: return
-        val widthDp = item.spanX * CELL_SIZE_DP
-        val heightDp = item.spanY * CELL_SIZE_DP
+        val widthDp = item.spanX * Constants.Grid.CELL_SIZE_DP
+        val heightDp = item.spanY * Constants.Grid.CELL_SIZE_DP
         WidgetHostManager.updateWidgetSize(context, appWidgetId, widthDp, heightDp, widthDp, heightDp)
     }
 
@@ -752,6 +1054,14 @@ class HomeGridView @JvmOverloads constructor(
      * What the item is allowed to be resized to, in whole cells.
      *
      * App shortcuts have no provider to ask, so anything from 1x1 up to the whole page is fine.
+     *
+     * APP_LIST and DATE_TIME resize horizontally only. Their height is content-driven - one row per
+     * app slot, and the clock/date/screen-time block's own line count - so it follows from their
+     * settings dialog (HomeFragment.showAppListSettings/showDateTimeSettings), and letting a
+     * vertical drag contradict that would just produce squeezed or half-empty items that the next
+     * settings change silently undoes. `canResizeVertically = false` also means [buildOverlay] never
+     * adds a bottom handle for them, the same way it skips an axis a widget's provider disallows.
+     *
      * Widgets are clamped to what their provider declared: [AppWidgetProviderInfo.resizeMode] gates
      * each axis entirely (a handle for a disallowed axis is never even added), minResizeWidth/Height
      * give the lower bound - rounded *up*, so the widget is never handed less room than it asked
@@ -767,6 +1077,19 @@ class HomeGridView @JvmOverloads constructor(
             maxSpanX = columnCount.coerceAtLeast(1),
             maxSpanY = rowCount.coerceAtLeast(1),
         )
+        if (item.type == GridItemType.APP_LIST || item.type == GridItemType.DATE_TIME) {
+            val maxSpanX = columnCount.coerceAtLeast(1)
+            return ResizeConstraints(
+                canResizeHorizontally = true,
+                canResizeVertically = false,
+                minSpanX = MIN_TEXT_ITEM_SPAN_X.coerceAtMost(maxSpanX),
+                // Height is fixed at whatever the item currently is: no vertical handle is drawn,
+                // so these only exist to keep a stray span calculation from moving it.
+                minSpanY = item.spanY,
+                maxSpanX = maxSpanX,
+                maxSpanY = item.spanY,
+            )
+        }
         if (item.type != GridItemType.WIDGET) return unconstrained
         val appWidgetId = item.appWidgetId ?: return unconstrained
         val info = WidgetHostManager.providerInfoFor(context, appWidgetId) ?: return unconstrained
@@ -801,7 +1124,7 @@ class HomeGridView @JvmOverloads constructor(
         )
     }
 
-    /** AppWidgetProviderInfo's dimensions are px; the grid counts 80dp cells. */
+    /** AppWidgetProviderInfo's dimensions are px; the grid counts whole cells. */
     private fun spansForPx(dimensionPx: Int, roundUp: Boolean): Int {
         if (dimensionPx <= 0) return 1
         val cells = dimensionPx.toFloat() / cellSizePx
@@ -818,9 +1141,12 @@ class HomeGridView @JvmOverloads constructor(
     // endregion
 
     companion object {
-        private const val CELL_SIZE_DP = 80
         private const val WIDGET_PLACEHOLDER_COLOR = 0x33808080 // neutral, semi-transparent grey
-        private const val PLACEHOLDER_TEXT_SIZE_SP = 11f // has to read inside one 80dp cell
+
+        // Dimming for an App List slot whose app is gone - same "inactive" strength the page
+        // indicator's unselected dots use, so nothing new is invented for it.
+        private const val UNAVAILABLE_SLOT_ALPHA = 0.4f
+        private const val PLACEHOLDER_TEXT_SIZE_SP = 11f // has to read inside one cell
         private const val PLACEHOLDER_PADDING_DP = 4
 
         private const val STROKE_WIDTH_DP = 2
@@ -830,8 +1156,19 @@ class HomeGridView @JvmOverloads constructor(
         private const val HANDLE_SIZE_DP = 36 // touch target
         private const val HANDLE_DOT_SIZE_DP = 14 // what's actually drawn
         private const val DELETE_GLYPH = "×"
+        private const val SETTINGS_GLYPH = "⚙"
+
+        /**
+         * Narrowest an APP_LIST/DATE_TIME item may be dragged to, in cells. At 48dp cells one cell
+         * is not enough for a single line of an app name or a date to read as anything but
+         * truncated, so two is the floor - the item's own alignment/content settings are what its
+         * width is for, not fitting text into one cell.
+         */
+        private const val MIN_TEXT_ITEM_SPAN_X = 2
         private const val EDIT_FILL_ALPHA = 0x1A
         private const val PREVIEW_FILL_ALPHA = 0x33
         private const val INVALID_TARGET_COLOR = 0xFFE53935.toInt() // only used to say "won't fit"
+        private const val GRID_LINE_WIDTH_DP = 1
+        private const val GRID_LINE_ALPHA = 0x33 // subtle - same tint strength as the preview fill
     }
 }

@@ -1,70 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- One page's content, inflated per-item by HomePagerAdapter. Pages are fully independent
-     (plan.md), so the clock/date header and screen-time label live here rather than as fixed
-     chrome in fragment_home.xml - see HomeFragment.bindPage(). -->
+     (plan.md). The date/time header and screen-time label used to live here as fixed chrome
+     (see history.md Step 7) - Date & Screen Time is now a DATE_TIME GridItem rendered inside
+     HomeGridView like any other item (Step 10), not fixed per-page chrome. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Clock and calendar-->
-    <LinearLayout
-        android:id="@+id/dateTimeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="56dp"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <TextClock
-            android:id="@+id/clock"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:format12Hour="h:mm"
-            android:textSize="@dimen/time_size"
-            tools:text="02:34" />
-
-        <TextView
-            android:id="@+id/date"
-            style="@style/TextDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:format12Hour="EEE, dd MMM"
-            android:format24Hour="EEE, dd MMM"
-            android:paddingHorizontal="3dp"
-            android:textSize="@dimen/date_size"
-            tools:text="Thu, 30 Dec" />
-    </LinearLayout>
-
-    <!-- Screen time-->
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvScreenTime"
-        style="@style/TextSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="72dp"
-        android:gravity="center"
-        android:padding="10dp"
-        android:textSize="@dimen/date_size"
-        android:visibility="gone"
-        tools:text="2h 11m"
-        tools:visibility="visible" />
-
     <!-- One HomeGridView per page, showing that page's items - see
-         HomeFragment.bindPage()/populateHomeGrid(). Margins here reproduce the old
-         homeAppsLayout's paddingTop/paddingHorizontal/paddingBottom, since HomeGridView positions
-         cells from its own top-left corner rather than honoring its own padding. -->
+         HomeFragment.bindPage()/populateHomeGrid(). HomeGridView positions cells from its own
+         top-left corner and ignores its own padding, so the space around the grid is set here.
+
+         Horizontal: only enough to keep cells off the screen edge - the grid is meant to use the
+         full width. Whatever width isn't a whole number of cells is split between the two sides by
+         HomeGridView itself (gridOffsetX), so this is a floor, not the total gap.
+         Top: minimum breathing room now that the fixed date/time header is gone (Step 7) - matches
+         the side margins' "no disproportionate wasted edge space" goal (Constants.Grid.
+         VERTICAL_MARGIN_DP tracks this + the bottom margin below).
+         Bottom: the page-indicator dots row, untouched. -->
     <app.elauncher.ui.HomeGridView
         android:id="@+id/homeGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="48dp" />
 </FrameLayout>

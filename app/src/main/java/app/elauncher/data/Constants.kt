@@ -4,9 +4,13 @@ object Constants {
 
     object Key {
         const val FLAG = "flag"
-        const val RENAME = "rename"
         const val COL = "col"
         const val ROW = "row"
+
+        // Which slot of the App List item at (COL, ROW) a picked app should be written into - the
+        // App List widget replaced standalone one-app cells, so (col, row) alone no longer
+        // identifies a single app.
+        const val SLOT_INDEX = "slotIndex"
     }
 
     object Dialog {
@@ -40,6 +44,31 @@ object Constants {
         }
     }
 
+    /**
+     * The home grid's geometry, in dp.
+     *
+     * Single source of truth: before this existed the cell size was written out three times
+     * (HomeGridView's own constant, HomeFragment's pre-measure fallback, Prefs.defaultColumnCount)
+     * and the margin subtraction only in one of them, which is what let app items be created wider
+     * than the grid they had to fit into.
+     */
+    object Grid {
+        const val CELL_SIZE_DP = 48
+
+        /**
+         * What [CELL_SIZE_DP] was before it shrank to 48dp. Items' col/row/spanX/spanY are stored
+         * as cell *counts*, so every pre-existing item has to be rescaled once when the cell size
+         * changes - see Prefs.gridCellSizeDp and rescaleForCellSize().
+         */
+        const val LEGACY_CELL_SIZE_DP = 80
+
+        // item_home_page.xml's margins around HomeGridView. Only used to predict the grid's size
+        // before it has been measured (Prefs.defaultColumnCount/defaultRowCount and
+        // HomeFragment.gridGeometry's fallback); once measured, HomeGridView's own numbers win.
+        const val HORIZONTAL_MARGIN_DP = 16 // 8dp each side
+        const val VERTICAL_MARGIN_DP = 56 // 8dp top (breathing room, Step 7) + 48dp bottom (page dots)
+    }
+
     object SwipeDownAction {
         const val SEARCH = 1
         const val NOTIFICATIONS = 2
@@ -64,9 +93,9 @@ object Constants {
     const val FLAG_LAUNCH_APP = 100
     const val FLAG_HIDDEN_APPS = 101
 
-    // Superseded the old FLAG_SET_HOME_APP_1..8 (one flag per fixed flat Prefs slot). Grid cells
-    // are addressed by (col, row) - see Key.COL/Key.ROW - so a single flag now covers "pick an
-    // app to place in a grid cell" regardless of which cell it targets.
+    // Superseded the old FLAG_SET_HOME_APP_1..8 (one flag per fixed flat Prefs slot). The target is
+    // addressed by (col, row) plus a slot index - see Key.COL/Key.ROW/Key.SLOT_INDEX - so a single
+    // flag now covers "pick an app for this App List slot" regardless of which slot it targets.
     const val FLAG_SET_HOME_APP_CELL = 1
 
     const val FLAG_SET_SWIPE_LEFT_APP = 11

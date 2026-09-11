@@ -45,9 +45,9 @@ class AppDrawerFragment : BaseFragment() {
     private var cachedIsCjkKeyboard: Boolean? = null
 
     private var flag = Constants.FLAG_LAUNCH_APP
-    private var canRename = false
     private var targetCol = -1
     private var targetRow = -1
+    private var targetSlotIndex = -1
     private var currentAppList: List<AppModel>? = null
     private var currentPrivateSpaceApps: List<AppModel>? = null
     private var currentPrivateSpaceLocked: Boolean = true
@@ -71,16 +71,15 @@ class AppDrawerFragment : BaseFragment() {
         prefs = Prefs(requireContext())
         arguments?.let {
             flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
-            canRename = it.getBoolean(Constants.Key.RENAME, false)
             targetCol = it.getInt(Constants.Key.COL, -1)
             targetRow = it.getInt(Constants.Key.ROW, -1)
+            targetSlotIndex = it.getInt(Constants.Key.SLOT_INDEX, -1)
         }
 
         initViews()
         initSearch()
         initAdapter()
         initObservers()
-        initClickListeners()
     }
 
     private fun initViews() {
@@ -112,8 +111,6 @@ class AppDrawerFragment : BaseFragment() {
                 try {
                     adapter.allowAutoLaunch = !isSearchComposing()
                     adapter.filter.filter(newText)
-                    binding.appRename.visibility =
-                        if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
                     return true
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -155,7 +152,7 @@ class AppDrawerFragment : BaseFragment() {
             flag,
             prefs.appLabelAlignment,
             appClickListener = { appModel ->
-                viewModel.selectedApp(appModel, flag, targetCol, targetRow)
+                viewModel.selectedApp(appModel, flag, targetCol, targetRow, targetSlotIndex)
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
                     findNavController().popBackStack(R.id.mainFragment, false)
                 else
@@ -311,40 +308,10 @@ class AppDrawerFragment : BaseFragment() {
         adapter.filter.filter(binding.search.query)
     }
 
-    private fun initClickListeners() {
-        binding.appRename.setOnClickListener {
-            val name = binding.search.query.toString().trim()
-            if (name.isEmpty()) {
-                requireContext().showToast(getString(R.string.type_a_new_app_name_first))
-                binding.search.showKeyboard()
-                return@setOnClickListener
-            }
-
-            if (flag == Constants.FLAG_SET_HOME_APP_CELL) renameGridItemAtTarget(name)
-            findNavController().popBackStack()
-        }
-    }
-
-    /**
-     * Relabels the [app.elauncher.data.GridItem] already sitting at (targetCol, targetRow),
-     * keeping its package/activity/shortcut fields as-is. Direct successor to the old
-     * appRename click handler's flat prefs.appNameN = name writes for FLAG_SET_HOME_APP_1..8.
-     */
-    private fun renameGridItemAtTarget(name: String) {
-        if (targetCol < 0 || targetRow < 0) return
-        val pages = prefs.pages
-        if (pages.isEmpty()) return
-        val pageIndex = prefs.currentPageIndex.coerceIn(0, pages.size - 1)
-        val page = pages[pageIndex]
-        val itemIndex = page.items.indexOfFirst { it.col == targetCol && it.row == targetRow }
-        if (itemIndex == -1) return
-
-        val updatedItems = page.items.toMutableList()
-        updatedItems[itemIndex] = updatedItems[itemIndex].copy(appName = name)
-        val updatedPages = pages.toMutableList()
-        updatedPages[pageIndex] = page.copy(items = updatedItems)
-        prefs.pages = updatedPages
-    }
+    // The "Rename" affordance that used to live in this screen's header (a search-box-driven rename
+    // of the grid item being targeted) was never reachable: nothing ever navigated here with
+    // Key.RENAME set. Renaming an App List slot is now its own text-input dialog, opened by
+    // long-pressing that slot on the home screen (HomeFragment.showAppSlotRenameDialog).
 
     private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
         return object : RecyclerView.OnScrollListener() {

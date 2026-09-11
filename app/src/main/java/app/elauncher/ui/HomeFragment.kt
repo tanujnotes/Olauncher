@@ -4,10 +4,10 @@ import android.app.admin.DevicePolicyManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.LauncherApps
-import android.content.res.Configuration
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import android.text.InputType
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +18,9 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.core.view.setPadding
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,10 +29,17 @@ import androidx.viewpager2.widget.ViewPager2
 import app.elauncher.MainViewModel
 import app.elauncher.R
 import app.elauncher.data.AppModel
+import app.elauncher.data.AppSlot
 import app.elauncher.data.Constants
+import app.elauncher.data.DEFAULT_APP_LIST_SLOT_COUNT
 import app.elauncher.data.GridItem
 import app.elauncher.data.GridItemType
 import app.elauncher.data.Prefs
+import app.elauncher.data.defaultAppListSpanX
+import app.elauncher.data.defaultAppListSpanY
+import app.elauncher.data.defaultDateTimeSpanY
+import app.elauncher.databinding.DialogAppListSettingsBinding
+import app.elauncher.databinding.DialogDateTimeSettingsBinding
 import app.elauncher.databinding.FragmentHomeBinding
 import app.elauncher.databinding.ItemHomePageBinding
 import app.elauncher.helper.FontManager
@@ -67,10 +74,19 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
     private lateinit var pagerAdapter: HomePagerAdapter
 
-    /** Applied to every page's dateTimeLayout on bind - see setHomeAlignment(). */
+    /**
+     * The home alignment preference - used to apply to every page's dateTimeLayout on bind
+     * (see setHomeAlignment()) back when the date/time header was fixed page chrome. That view
+     * is gone as of Step 7; kept here for Step 10 to re-apply to the new DATE_TIME widget's own
+     * views.
+     */
     private var homeAlignment: Int = Gravity.START
 
-    /** Latest measured screen-time text, applied to every page's tvScreenTime on bind. */
+    /**
+     * Latest measured screen-time text - used to apply to every page's tvScreenTime on bind
+     * (see currentScreenTimeText()) back when it was fixed page chrome. That view is gone as of
+     * Step 7; kept here for Step 10 to re-apply to the new DATE_TIME widget's own views.
+     */
     private var screenTimeText: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -132,13 +148,17 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             R.id.lock -> {}
             // Home button for recents feature disabled
             // R.id.recents -> {}
-            R.id.clock -> openClockApp()
-            R.id.date -> openCalendarApp()
             R.id.setDefaultLauncher -> viewModel.resetLauncherLiveData.call()
-            R.id.tvScreenTime -> openScreenTimeDigitalWellbeing()
+            // R.id.clock/date/tvScreenTime handled these until Step 7 removed the fixed header
+            // views they belonged to - openClockApp()/openCalendarApp() are now wired directly as
+            // onClickListeners on the DATE_TIME widget's own dynamically-built views instead of
+            // through this id-keyed dispatch (see populateHomeGridFor()). tvScreenTime's
+            // openScreenTimeDigitalWellbeing() is left unwired - see Step 10 deviation notes.
         }
     }
 
+    // Wired (Step 10) as the DATE_TIME widget's clock line's onClickListener - see
+    // populateHomeGridFor()'s setItems call.
     private fun openClockApp() {
         if (prefs.clockAppPackage.isBlank())
             openAlarmApp(requireContext())
@@ -151,6 +171,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             )
     }
 
+    // Wired (Step 10) as the DATE_TIME widget's date line's onClickListener - see
+    // populateHomeGridFor()'s setItems call.
     private fun openCalendarApp() {
         if (prefs.calendarAppPackage.isBlank())
             openCalendar(requireContext())
@@ -163,29 +185,31 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             )
     }
 
+    /**
+     * Long-press-to-reassign for the DATE_TIME widget's clock line. This exact flow lived inline
+     * in onLongClick's `when (view.id)` until Step 7 removed the fixed header view it dispatched
+     * from; reconstructed here as its own function so it can be wired onto the dynamically-built
+     * clock TextClock instead (no fixed R.id to switch on any more). Clearing the assignment
+     * before opening the picker is what makes MainViewModel's save flow treat the next pick as a
+     * fresh assignment rather than appending.
+     */
+    private fun reassignClockApp() {
+        showAppList(Constants.FLAG_SET_CLOCK_APP)
+        prefs.clockAppPackage = ""
+        prefs.clockAppClassName = ""
+        prefs.clockAppUser = ""
+    }
+
+    /** Same as [reassignClockApp], for the date line / calendar app. */
+    private fun reassignCalendarApp() {
+        showAppList(Constants.FLAG_SET_CALENDAR_APP)
+        prefs.calendarAppPackage = ""
+        prefs.calendarAppClassName = ""
+        prefs.calendarAppUser = ""
+    }
+
     override fun onLongClick(view: View): Boolean {
         when (view.id) {
-            R.id.clock -> {
-                showAppList(Constants.FLAG_SET_CLOCK_APP)
-                prefs.clockAppPackage = ""
-                prefs.clockAppClassName = ""
-                prefs.clockAppUser = ""
-            }
-
-            R.id.date -> {
-                showAppList(Constants.FLAG_SET_CALENDAR_APP)
-                prefs.calendarAppPackage = ""
-                prefs.calendarAppClassName = ""
-                prefs.calendarAppUser = ""
-            }
-
-            R.id.tvScreenTime -> {
-                showAppList(Constants.FLAG_SET_SCREEN_TIME_APP)
-                prefs.screenTimeAppPackage = ""
-                prefs.screenTimeAppClassName = ""
-                prefs.screenTimeAppUser = ""
-            }
-
             R.id.setDefaultLauncher -> {
                 prefs.hideSetDefaultLauncher = true
                 binding.setDefaultLauncher.visibility = View.GONE
@@ -194,6 +218,12 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                     findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
                 }
             }
+            // R.id.clock/date/tvScreenTime handled long-press-to-reassign here until Step 7
+            // removed the fixed header views they belonged to (the FLAG_SET_CLOCK_APP/
+            // FLAG_SET_CALENDAR_APP/FLAG_SET_SCREEN_TIME_APP showAppList() flows themselves are
+            // untouched, still wired up in AppDrawerFragment) - reassignClockApp()/
+            // reassignCalendarApp() above are now wired directly as onLongClickListeners on the
+            // DATE_TIME widget's own dynamically-built views instead (see populateHomeGridFor()).
         }
         return true
     }
@@ -246,45 +276,42 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         // binding.recents.setOnClickListener(this)
         binding.setDefaultLauncher.setOnClickListener(this)
         binding.setDefaultLauncher.setOnLongClickListener(this)
-        // clock/date/tvScreenTime now live inside each page's item_home_page.xml (pages are fully
-        // independent per plan.md) - their listeners are wired per-instance in bindPage().
+        // The old fixed clock/date/tvScreenTime views (removed in Step 7) used to be wired
+        // per-instance in bindPage(), since pages are fully independent (plan.md). Their listeners
+        // are now wired directly onto the DATE_TIME widget's own dynamically-built views instead,
+        // via populateHomeGridFor()'s setItems call, not through this id-keyed dispatch.
     }
 
     /**
-     * Binds one page's clock/date/screen-time/grid content - called by HomePagerAdapter for every
-     * page (occupied or the "at least 1 blank page" fallback). Multiple instances of this exist
-     * at once (ViewPager2 pre-renders adjacent pages), all sharing the same view ids, so
-     * HomeFragment.onClick/onLongClick's `when (view.id)` dispatch still works unchanged - it
-     * doesn't care which page instance triggered it.
+     * Binds one page's grid content - called by HomePagerAdapter for every page (occupied or the
+     * "at least 1 blank page" fallback). Until Step 7 this also bound the page's fixed
+     * clock/date/screen-time header; that's gone now (Date & Screen Time is a DATE_TIME GridItem
+     * rendered inside HomeGridView, wired up by Step 10 instead).
      */
     private fun bindPage(pageBinding: ItemHomePageBinding, pageIndex: Int) {
-        pageBinding.clock.setOnClickListener(this)
-        pageBinding.date.setOnClickListener(this)
-        pageBinding.clock.setOnLongClickListener(this)
-        pageBinding.date.setOnLongClickListener(this)
-        pageBinding.tvScreenTime.setOnClickListener(this)
-        pageBinding.tvScreenTime.setOnLongClickListener(this)
-
-        pageBinding.dateTimeLayout.gravity = homeAlignment
-        populateDateTime(pageBinding)
-        applyScreenTime(pageBinding)
         populateHomeGridFor(pageBinding, pageIndex)
     }
 
     private fun setHomeAlignment(horizontalGravity: Int = prefs.homeAlignment) {
         // homeBottomAlignment/vertical gravity and per-item horizontal gravity used to apply to
         // the homeApp1..8 labels in the old vertically-stacked layout; HomeGridView lays cells out
-        // at absolute (col, row) positions and has no gravity concept, so only the date/time
-        // header's alignment is still meaningful here. See deviation notes for this step.
+        // at absolute (col, row) positions and has no gravity concept. The date/time header's
+        // alignment (this function's only remaining effect before Step 7) is gone too, now that
+        // the header itself was removed - homeAlignment is kept for Step 10 to re-apply to the new
+        // DATE_TIME widget's own views.
         homeAlignment = horizontalGravity
         if (::pagerAdapter.isInitialized) pagerAdapter.notifyDataSetChanged()
     }
 
-    private fun populateDateTime(pageBinding: ItemHomePageBinding) {
-        pageBinding.dateTimeLayout.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF
-        pageBinding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
-        pageBinding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
-
+    /**
+     * The date/time header's date-line text (e.g. "Thu, 30 Dec" or, with the status bar hidden,
+     * "Thu, 30 Dec - 82%"). Preserved from the pre-Step-7 populateDateTime(), which also toggled
+     * view visibility for a since-removed fixed header - just the string-formatting logic
+     * survives here. Wired (Step 10) as populateHomeGridFor()'s dateTextProvider, re-resolved on
+     * every HomeGridView rebuild (same cadence the old fixed header refreshed it on - a bind, not
+     * a timer).
+     */
+    private fun formatDateText(): String {
         val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
         var dateText = dateFormat.format(Date())
 
@@ -294,7 +321,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             if (battery > 0)
                 dateText = getString(R.string.day_battery, dateText, battery)
         }
-        pageBinding.date.text = dateText.replace(".,", ",")
+        return dateText.replace(".,", ",")
     }
 
     /** Kicks off the (possibly expensive) screen-time measurement once per refresh, not per page. */
@@ -304,32 +331,17 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.getTodaysScreenTime()
     }
 
-    /** Applies the latest measured [screenTimeText] to one page - cheap, safe to call per bind. */
-    private fun applyScreenTime(pageBinding: ItemHomePageBinding) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return
-        if (requireContext().appUsagePermissionGranted().not()) return
-
-        pageBinding.tvScreenTime.visibility = View.VISIBLE
-        pageBinding.tvScreenTime.text = screenTimeText
-
-        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-        val horizontalMargin = if (isLandscape) 64.dpToPx() else 10.dpToPx()
-        val marginTop = if (isLandscape) {
-            if (prefs.dateTimeVisibility == Constants.DateTime.DATE_ONLY) 36.dpToPx() else 56.dpToPx()
-        } else {
-            if (prefs.dateTimeVisibility == Constants.DateTime.DATE_ONLY) 45.dpToPx() else 72.dpToPx()
-        }
-        val params = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT
-        ).apply {
-            topMargin = marginTop
-            marginStart = horizontalMargin
-            marginEnd = horizontalMargin
-            gravity = if (prefs.homeAlignment == Gravity.END) Gravity.START else Gravity.END
-        }
-        pageBinding.tvScreenTime.layoutParams = params
-        pageBinding.tvScreenTime.setPadding(10.dpToPx())
+    /**
+     * Whether the screen-time text should currently be shown at all, and what it should say if
+     * so - null means "don't show". Preserved from the pre-Step-7 applyScreenTime(), minus the
+     * margin/gravity computation that only made sense for that single fixed-position view (tied
+     * to the old header's layout and to global homeAlignment). Wired (Step 10) as
+     * populateHomeGridFor()'s screenTimeTextProvider.
+     */
+    private fun currentScreenTimeText(): String? {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return null
+        if (requireContext().appUsagePermissionGranted().not()) return null
+        return screenTimeText
     }
 
     private fun populateHomeScreen(appCountUpdated: Boolean) {
@@ -405,25 +417,33 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             return
         }
 
-        val validItems = page.items.filter(::isGridItemValid)
-        if (validItems.size != page.items.size) {
-            // An app was uninstalled or a pinned shortcut was removed since the page was last
-            // populated - drop the stale item and persist that, mirroring the old behavior of
-            // clearing prefs.appNameN/appPackageN when setHomeAppText() found nothing installed.
-            val updatedPages = pages.toMutableList()
-            updatedPages[pageIndex] = page.copy(items = validItems.toMutableList())
-            prefs.pages = updatedPages
-        }
-
+        // No item-level validity filter any more: apps only live inside an App List item's slots
+        // now (Step 6/9), and one slot's app going missing must not take the whole item - and its
+        // other slots - down with it. That case is resolved per slot instead, see
+        // isAppSlotUnavailable()/onAppSlotClick().
         pageBinding.homeGridView.setItems(
-            items = validItems,
+            items = page.items,
             touchListenerFor = ::cellTouchListenerFor,
+            slotTouchListenerFor = ::slotTouchListenerFor,
+            isAppSlotUnavailable = ::isAppSlotUnavailable,
             // Edit mode (Step 19) resolves move/resize inside HomeGridView, which owns no Prefs
             // access, and hands the result back here to be written - deliberately without a
             // notifyItemChanged(), since the grid has already re-laid itself out and a rebind would
             // just drop the user out of edit mode after every single adjustment.
             onItemsChanged = { updatedItems -> persistPageItems(pageIndex, updatedItems) },
             onItemDeleted = ::removeGridItem,
+            // Edit mode's gear badge (Step 11): HomeGridView only reports the tap, the per-item
+            // settings themselves are edited here, where Prefs and the dialog theme live.
+            onOpenSettings = ::showItemSettings,
+            // DATE_TIME rendering/wiring (Step 10): HomeGridView touches no Prefs/Context itself,
+            // so the formatted text and the clock/date tap/long-press flows are handed in the same
+            // way the touch listeners above are.
+            dateTextProvider = ::formatDateText,
+            screenTimeTextProvider = ::currentScreenTimeText,
+            onClockClick = ::openClockApp,
+            onClockLongClick = ::reassignClockApp,
+            onDateClick = ::openCalendarApp,
+            onDateLongClick = ::reassignCalendarApp,
         )
     }
 
@@ -436,16 +456,22 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         prefs.pages = updatedPages
     }
 
-    /** Adapted from the old setHomeAppText(): true if [item] still points at something launchable. */
-    private fun isGridItemValid(item: GridItem): Boolean {
-        if (item.type != GridItemType.APP) return true // widget validity isn't this step's concern
+    /**
+     * True if [slot] is filled but no longer points at something launchable - its app was
+     * uninstalled or disabled, or its pinned shortcut was removed, while the slot kept pointing at
+     * it. The per-slot counterpart of isUnavailableWidget(), and the direct successor of the old
+     * isGridItemValid() (itself adapted from setHomeAppText()), which asked the same question about
+     * a whole standalone APP item back when apps were their own grid items.
+     *
+     * An *empty* slot is not "unavailable" - it is simply unfilled, and taps on it open the picker.
+     */
+    private fun isAppSlotUnavailable(slot: AppSlot): Boolean {
+        val packageName = slot.appPackage
+        if (packageName.isNullOrEmpty()) return false
+        if (slot.appName.isNullOrEmpty()) return true
+        val userString = slot.appUser.orEmpty()
 
-        val appName = item.appName
-        if (appName.isNullOrEmpty()) return false
-        val packageName = item.appPackage.orEmpty()
-        val userString = item.appUser.orEmpty()
-
-        if (item.isShortcut) {
+        if (slot.isShortcut) {
             val userHandle = getUserHandleFromString(requireContext(), userString)
             val launcherApps = requireContext().getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
             val query = LauncherApps.ShortcutQuery().apply {
@@ -454,14 +480,14 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             }
             return try {
                 val shortcuts = launcherApps.getShortcuts(query, userHandle)
-                shortcuts?.any { it.id == item.shortcutId } == true
+                shortcuts?.any { it.id == slot.shortcutId } != true
             } catch (e: Exception) {
                 e.printStackTrace()
-                false
+                true
             }
         }
 
-        return isPackageInstalled(requireContext(), packageName, userString)
+        return !isPackageInstalled(requireContext(), packageName, userString)
     }
 
     private fun launchAppOrShortcut(
@@ -535,16 +561,345 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         return WidgetHostManager.providerInfoFor(requireContext(), appWidgetId) == null
     }
 
-    private fun launchGridItem(item: GridItem) {
-        if (item.type != GridItemType.APP) return // widgets aren't launchable
-        launchAppOrShortcut(
-            appName = item.appName.orEmpty(),
-            packageName = item.appPackage.orEmpty(),
-            activityClassName = item.appActivityClassName,
-            shortcutId = item.shortcutId,
-            isShortcut = item.isShortcut,
-            userString = item.appUser.orEmpty()
+    /**
+     * Tap on one App List slot: pick an app for it if it is empty, clear it if what it points at is
+     * gone (the per-slot counterpart of the "Widget unavailable - tap to remove" cell), otherwise
+     * launch it.
+     *
+     * The picker is the same app drawer the whole app uses, in "set home app" mode, now targeted at
+     * (the item's col/row, this slot index) rather than a bare cell - AppDrawerFragment threads
+     * those args back into MainViewModel.saveAppInAppListSlot(), which writes the slot.
+     */
+    private fun onAppSlotClick(item: GridItem, slotIndex: Int) {
+        val slot = item.appSlots.getOrNull(slotIndex) ?: return
+        when {
+            slot.appPackage.isNullOrEmpty() -> showAppList(
+                Constants.FLAG_SET_HOME_APP_CELL,
+                includeHiddenApps = true, // matches the old long-press-on-home-app behavior
+                col = item.col,
+                row = item.row,
+                slotIndex = slotIndex,
+            )
+
+            isAppSlotUnavailable(slot) -> clearAppSlot(item, slotIndex)
+
+            else -> launchAppOrShortcut(
+                appName = slot.appName.orEmpty(),
+                packageName = slot.appPackage.orEmpty(),
+                activityClassName = slot.appActivityClassName,
+                shortcutId = slot.shortcutId,
+                isShortcut = slot.isShortcut,
+                userString = slot.appUser.orEmpty(),
+            )
+        }
+    }
+
+    /**
+     * Long press on one App List slot. Slots fill their item's whole cell, so this is also the only
+     * route into edit mode for an App List item (plan.md, "Editing gesture model") - hence "Edit
+     * widget" being offered on an empty slot too, where there is nothing slot-specific to do.
+     * Same dialog shape as showEmptyCellOptions(), custom-font fix-up included.
+     */
+    private fun showAppSlotOptions(item: GridItem, slotIndex: Int) {
+        val slot = item.appSlots.getOrNull(slotIndex) ?: return
+        val filled = !slot.appPackage.isNullOrEmpty()
+        val options = if (filled)
+            arrayOf(
+                getString(R.string.rename),
+                getString(R.string.remove_this_app),
+                getString(R.string.edit_widget),
+            )
+        else
+            arrayOf(getString(R.string.edit_widget))
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setItems(options) { dialog, which ->
+                dialog.dismiss()
+                when {
+                    !filled -> currentHomeGridView()?.enterEditMode(item)
+                    which == 0 -> showAppSlotRenameDialog(item, slotIndex)
+                    which == 1 -> clearAppSlot(item, slotIndex)
+                    else -> currentHomeGridView()?.enterEditMode(item)
+                }
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .show()
+        dialog.window?.decorView?.let { FontManager.applyCustomTypeface(it) }
+    }
+
+    /**
+     * Relabels one slot, writing [AppSlot.customLabel] and leaving [AppSlot.appName] (the real app
+     * name) alone, so the rename is reversible by clearing the field. Mirrors PagesSettingsFragment's
+     * rename-page dialog, the app's existing text-input dialog.
+     */
+    private fun showAppSlotRenameDialog(item: GridItem, slotIndex: Int) {
+        val slot = item.appSlots.getOrNull(slotIndex) ?: return
+        val input = AppCompatEditText(requireContext()).apply {
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
+            setText(slot.customLabel ?: slot.appName)
+            setSelection(text?.length ?: 0)
+            maxLines = 1
+        }
+        val paddingHorizontal = (RENAME_DIALOG_PADDING_DP * resources.displayMetrics.density).toInt()
+        val inputContainer = FrameLayout(requireContext()).apply {
+            setPadding(paddingHorizontal, 0, paddingHorizontal, 0)
+            addView(input)
+        }
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.rename_app)
+            .setView(inputContainer)
+            .setPositiveButton(R.string.save) { dialog, _ ->
+                val newLabel = input.text?.toString()?.trim().orEmpty()
+                if (newLabel.isNotEmpty()) updateAppSlot(item, slotIndex, slot.copy(customLabel = newLabel))
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .show()
+        dialog.window?.decorView?.let { FontManager.applyCustomTypeface(it) }
+    }
+
+    /**
+     * Empties one slot, deliberately without touching the item's slot *count* - how many slots an
+     * App List has is a widget-level setting, not something removing one app should change. Like
+     * removeGridItem(), immediate and unconfirmed.
+     */
+    private fun clearAppSlot(item: GridItem, slotIndex: Int) = updateAppSlot(item, slotIndex, AppSlot())
+
+    /**
+     * Writes [slot] into slot [slotIndex] of the App List item at [item]'s cell on the current page,
+     * and re-renders that page.
+     *
+     * Looked up by (col, row) rather than by identity: prefs.pages re-parses its JSON on every read,
+     * so the item this fragment hands out to HomeGridView is never the same object as the one a
+     * fresh read returns.
+     */
+    private fun updateAppSlot(item: GridItem, slotIndex: Int, slot: AppSlot) {
+        val pages = prefs.pages
+        if (pages.isEmpty()) return
+        val pageIndex = prefs.currentPageIndex.coerceIn(0, pages.size - 1)
+        val target = pages[pageIndex].items.firstOrNull {
+            it.type == GridItemType.APP_LIST && it.col == item.col && it.row == item.row
+        } ?: return
+        if (slotIndex !in target.appSlots.indices) return
+
+        target.appSlots[slotIndex] = slot
+        prefs.pages = pages
+        pagerAdapter.notifyItemChanged(pageIndex)
+    }
+
+    /**
+     * Opens the per-item settings dialog for [item] - the edit-mode gear badge's action
+     * (HomeGridView.hasSettings decides which items get a badge at all, this decides what it opens).
+     */
+    private fun showItemSettings(item: GridItem) {
+        when (item.type) {
+            GridItemType.APP_LIST -> showAppListSettings(item)
+            GridItemType.DATE_TIME -> showDateTimeSettings(item)
+            // Never reached: no gear badge is drawn for these (HomeGridView.hasSettings), and a
+            // widget's own settings belong to its provider. Spelled out rather than left to an else
+            // so adding a fifth type is a compile error here, not a silently ignored tap.
+            GridItemType.APP, GridItemType.WIDGET -> Unit
+        }
+    }
+
+    /**
+     * App List settings: text alignment, and how many app slots the item has (1-8, stepped rather
+     * than typed - the range is small enough that +/- is fewer taps than any picker).
+     *
+     * Nothing is written until Save, so a stepper fiddled with and then cancelled leaves the item
+     * exactly as it was. Same AlertDialog shape and custom-font fix-up as showAppSlotRenameDialog(),
+     * with an inflated multi-field layout instead of a single text input.
+     */
+    private fun showAppListSettings(item: GridItem) {
+        val content = DialogAppListSettingsBinding.inflate(layoutInflater)
+        content.alignmentGroup.check(alignmentRadioId(item.alignment))
+
+        var slotCount = item.appSlots.size.coerceIn(MIN_APP_LIST_SLOT_COUNT, MAX_APP_LIST_SLOT_COUNT)
+        fun renderCount() {
+            content.countValue.text = slotCount.toString()
+            content.countDecrease.isEnabled = slotCount > MIN_APP_LIST_SLOT_COUNT
+            content.countIncrease.isEnabled = slotCount < MAX_APP_LIST_SLOT_COUNT
+        }
+        renderCount()
+        content.countDecrease.setOnClickListener {
+            if (slotCount > MIN_APP_LIST_SLOT_COUNT) slotCount--
+            renderCount()
+        }
+        content.countIncrease.setOnClickListener {
+            if (slotCount < MAX_APP_LIST_SLOT_COUNT) slotCount++
+            renderCount()
+        }
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.app_list_settings)
+            .setView(content.root)
+            .setPositiveButton(R.string.save) { dialog, _ ->
+                applyAppListSettings(
+                    item = item,
+                    alignment = alignmentFor(content.alignmentGroup.checkedRadioButtonId),
+                    slotCount = slotCount,
+                )
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .show()
+        dialog.window?.decorView?.let { FontManager.applyCustomTypeface(it) }
+    }
+
+    /**
+     * Writes an App List item's settings back.
+     *
+     * Growing the slot count appends empty slots, shrinking drops the trailing ones - filled or not,
+     * immediately and unconfirmed, the same rule removeGridItem()/clearAppSlot() already follow for
+     * comparably scoped actions (an app leaves the home screen; nothing is uninstalled). The item's
+     * height follows the count, keeping the one-slot-per-row invariant HomeGridView's row rendering
+     * assumes; clamped to the grid the same way addAppList() clamps a new item's, and to whatever
+     * sits below it on the page (clampSpanYToOverlap) so growing this item can't silently occlude a
+     * neighbor's origin cell the way HomeGridView.rebuildChildren()'s occupied-cell skip would.
+     */
+    private fun applyAppListSettings(item: GridItem, alignment: Int, slotCount: Int) {
+        updateGridItem(item) { target, items ->
+            target.alignment = alignment
+            if (target.appSlots.size != slotCount) {
+                while (target.appSlots.size < slotCount) target.appSlots.add(AppSlot())
+                while (target.appSlots.size > slotCount) target.appSlots.removeAt(target.appSlots.size - 1)
+                val desiredSpanY = defaultAppListSpanY(slotCount).coerceAtMost(gridGeometry().second.coerceAtLeast(1))
+                target.spanY = clampSpanYToOverlap(target, items, desiredSpanY, gridGeometry().second)
+            }
+        }
+    }
+
+    /**
+     * Date & Screen Time settings: text alignment, which of the clock/date lines are shown
+     * (deliberately Settings' own On/Date only/Off wording for the same three states, so the
+     * per-item control reads like the global one it replaced), and whether the screen-time line is
+     * shown.
+     */
+    private fun showDateTimeSettings(item: GridItem) {
+        val content = DialogDateTimeSettingsBinding.inflate(layoutInflater)
+        content.alignmentGroup.check(alignmentRadioId(item.alignment))
+        content.visibilityGroup.check(
+            when (item.dateTimeVisibility) {
+                Constants.DateTime.OFF -> R.id.visibilityOff
+                Constants.DateTime.DATE_ONLY -> R.id.visibilityDateOnly
+                else -> R.id.visibilityOn
+            }
         )
+        content.screenTimeSwitch.isChecked = item.showScreenTime
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.date_time_settings)
+            .setView(content.root)
+            .setPositiveButton(R.string.save) { dialog, _ ->
+                applyDateTimeSettings(
+                    item = item,
+                    alignment = alignmentFor(content.alignmentGroup.checkedRadioButtonId),
+                    visibility = when (content.visibilityGroup.checkedRadioButtonId) {
+                        R.id.visibilityOff -> Constants.DateTime.OFF
+                        R.id.visibilityDateOnly -> Constants.DateTime.DATE_ONLY
+                        else -> Constants.DateTime.ON
+                    },
+                    showScreenTime = content.screenTimeSwitch.isChecked,
+                )
+                dialog.dismiss()
+            }
+            .setNegativeButton(R.string.cancel) { dialog, _ -> dialog.dismiss() }
+            .show()
+        dialog.window?.decorView?.let { FontManager.applyCustomTypeface(it) }
+    }
+
+    /**
+     * Writes a Date & Screen Time item's settings back, re-deriving its height from the line count
+     * (defaultDateTimeSpanY, the same function that sizes a freshly created one).
+     *
+     * The height is deliberately *not* reduced to nothing when everything is switched off: an item
+     * with no visible lines still keeps its footprint, so it stays somewhere the user can long-press
+     * to reach edit mode and switch the lines back on - a zero-height item would be unreachable.
+     *
+     * Growing spanY (e.g. turning screen time on) is clamped to whatever sits below this item on the
+     * page (clampSpanYToOverlap), for the same reason applyAppListSettings() clamps it.
+     */
+    private fun applyDateTimeSettings(item: GridItem, alignment: Int, visibility: Int, showScreenTime: Boolean) {
+        updateGridItem(item) { target, items ->
+            target.alignment = alignment
+            target.dateTimeVisibility = visibility
+            target.showScreenTime = showScreenTime
+            val desiredSpanY = defaultDateTimeSpanY(showScreenTime).coerceAtMost(gridGeometry().second.coerceAtLeast(1))
+            target.spanY = clampSpanYToOverlap(target, items, desiredSpanY, gridGeometry().second)
+        }
+    }
+
+    /**
+     * Applies [mutate] to the current page's copy of [item] and persists/re-renders the page.
+     *
+     * Looked up by type and (col, row) rather than by identity, for exactly the reason
+     * updateAppSlot() does: prefs.pages re-parses its JSON on every read, so the GridItem a dialog
+     * was opened with is never the same object a fresh read returns.
+     *
+     * [mutate] also receives the current page's item list (the same list [target] came from, by
+     * reference) so a mutation that changes span can check it against the rest of the page - see
+     * clampSpanYToOverlap().
+     */
+    private fun updateGridItem(item: GridItem, mutate: (GridItem, List<GridItem>) -> Unit) {
+        val pages = prefs.pages
+        if (pages.isEmpty()) return
+        val pageIndex = prefs.currentPageIndex.coerceIn(0, pages.size - 1)
+        val target = pages[pageIndex].items.firstOrNull {
+            it.type == item.type && it.col == item.col && it.row == item.row
+        } ?: return
+
+        mutate(target, pages[pageIndex].items)
+        prefs.pages = pages
+        pagerAdapter.notifyItemChanged(pageIndex)
+    }
+
+    /**
+     * The largest spanY, starting at [target]'s own row and capped at [desiredSpanY], that doesn't
+     * overlap another item's cells in [items] or run past [rowCount].
+     *
+     * HomeGridView's drag-resize (moveTouchListener/resizeTouchListener) rejects any target that
+     * overlaps another item outright - "no push/displace behavior". The settings dialogs' spanY
+     * changes don't go through that touch path, so without this they could silently grow one item's
+     * footprint over a neighbor's origin cell; rebuildChildren()'s occupied-cell skip then treats
+     * that neighbor as covered and stops rendering it (and its own cell listener) entirely, rather
+     * than the two items visibly overlapping. Clamping here keeps the same "reject growth past a
+     * neighbor" rule the drag path already enforces, just applied to a height that changes via a
+     * dialog instead of a finger.
+     */
+    private fun clampSpanYToOverlap(target: GridItem, items: List<GridItem>, desiredSpanY: Int, rowCount: Int): Int {
+        val occupied = mutableSetOf<Pair<Int, Int>>()
+        items.forEach { other ->
+            if (other === target) return@forEach
+            for (dx in 0 until other.spanX) {
+                for (dy in 0 until other.spanY) {
+                    occupied.add((other.col + dx) to (other.row + dy))
+                }
+            }
+        }
+        var span = 1
+        while (span < desiredSpanY && target.row + span < rowCount) {
+            val blocked = (0 until target.spanX).any { dx -> (target.col + dx) to (target.row + span) in occupied }
+            if (blocked) break
+            span++
+        }
+        return span.coerceIn(1, desiredSpanY)
+    }
+
+    /** The alignment radio button matching [alignment], for pre-selecting a settings dialog. */
+    private fun alignmentRadioId(alignment: Int): Int = when (alignment) {
+        // CENTER is what Settings' own alignment picker stores (and therefore what the migration
+        // copied into pre-existing items); CENTER_HORIZONTAL is accepted as the same choice so an
+        // item written with it doesn't come back showing "Left".
+        Gravity.CENTER, Gravity.CENTER_HORIZONTAL -> R.id.alignCenter
+        Gravity.END -> R.id.alignEnd
+        else -> R.id.alignStart
+    }
+
+    /** The inverse of [alignmentRadioId] - Gravity.START/CENTER/END, as Prefs.homeAlignment uses. */
+    private fun alignmentFor(checkedRadioButtonId: Int): Int = when (checkedRadioButtonId) {
+        R.id.alignCenter -> Gravity.CENTER
+        R.id.alignEnd -> Gravity.END
+        else -> Gravity.START
     }
 
     /**
@@ -609,17 +964,17 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun showAppList(
         flag: Int,
-        rename: Boolean = false,
         includeHiddenApps: Boolean = false,
         col: Int = -1,
         row: Int = -1,
+        slotIndex: Int = -1,
     ) {
         viewModel.getAppList(includeHiddenApps)
         val args = bundleOf(
             Constants.Key.FLAG to flag,
-            Constants.Key.RENAME to rename,
             Constants.Key.COL to col,
             Constants.Key.ROW to row,
+            Constants.Key.SLOT_INDEX to slotIndex,
         )
         try {
             findNavController().navigate(R.id.action_mainFragment_to_appListFragment, args)
@@ -811,16 +1166,14 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                     // remove" placeholder (HomeGridView.widgetPlaceholderView); this is the tap
                     // that label promises. Removal is immediate, matching removeGridItem()'s
                     // no-confirmation rule - and there is nothing to lose here anyway, since the
-                    // widget it points at no longer exists.
+                    // widget it points at no longer exists. Nothing else here is launchable: apps
+                    // live in App List slots now, which handle their own taps.
                     if (isUnavailableWidget(item)) removeGridItem(item)
-                    else launchGridItem(item)
-                } else {
-                    // Tap on an empty cell opens the app drawer in "pick an app for this cell"
-                    // mode, keyed off (col, row) instead of the old fixed FLAG_SET_HOME_APP_N
-                    // slot flags. includeHiddenApps = true mirrors the old long-press-on-home-app
-                    // behavior, which also allowed picking a hidden app for a slot.
-                    showAppList(Constants.FLAG_SET_HOME_APP_CELL, includeHiddenApps = true, col = col, row = row)
                 }
+                // Tapping a genuinely empty cell does nothing: it used to open the app drawer to
+                // place a single app there, but standalone app cells no longer exist (Step 9) - an
+                // app is added by tapping an empty slot of an App List instead. Adding something to
+                // the grid is a long-press action now, like every other one.
             }
 
             override fun onLongClick(view: View) {
@@ -845,18 +1198,65 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     /**
-     * Long-press on an empty grid cell: add a widget there, or open Settings. Matches the
-     * AlertDialog style used by PagesSettingsFragment's rename/delete dialogs, including its
+     * The per-slot counterpart of [cellTouchListenerFor], for the row views inside an App List item
+     * (HomeGridView.createAppListView). Those rows fill the item's cell entirely, so this listener -
+     * not the cell's - is what a touch on an App List reaches; it therefore has to resolve the same
+     * swipe gestures as well, or page switching and the swipe-up drawer would stop working over
+     * what is usually the largest item on the page.
+     */
+    private fun slotTouchListenerFor(item: GridItem, slotIndex: Int): View.OnTouchListener {
+        val context = requireContext()
+        return object : ViewSwipeTouchListener(context, View(context)) {
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                if (!goToAdjacentPage(forward = true)) openSwipeLeftApp()
+            }
+
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                if (!goToAdjacentPage(forward = false)) openSwipeRightApp()
+            }
+
+            override fun onSwipeUp() {
+                super.onSwipeUp()
+                showAppList(Constants.FLAG_LAUNCH_APP)
+            }
+
+            override fun onSwipeDown() {
+                super.onSwipeDown()
+                swipeDownAction()
+            }
+
+            override fun onClick(view: View) {
+                super.onClick(view)
+                onAppSlotClick(item, slotIndex)
+            }
+
+            override fun onLongClick(view: View) {
+                super.onLongClick(view)
+                showAppSlotOptions(item, slotIndex)
+            }
+        }
+    }
+
+    /**
+     * Long-press on an empty grid cell: add a widget or an App List there, or open Settings. Matches
+     * the AlertDialog style used by PagesSettingsFragment's rename/delete dialogs, including its
      * custom-font fix-up (dialog content lives in its own window, outside this fragment's view
      * tree, so BaseFragment's typeface walk never reaches it).
      */
     private fun showEmptyCellOptions(col: Int, row: Int) {
-        val options = arrayOf(getString(R.string.add_widget), getString(R.string.settings))
+        val options = arrayOf(
+            getString(R.string.add_widget),
+            getString(R.string.add_app_list),
+            getString(R.string.settings),
+        )
         val dialog = AlertDialog.Builder(requireContext())
             .setItems(options) { dialog, which ->
                 dialog.dismiss()
                 when (which) {
                     0 -> startWidgetPicker(col, row)
+                    1 -> addAppList(col, row)
                     else -> openSettings()
                 }
             }
@@ -881,6 +1281,41 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    /**
+     * Adds a new, all-empty App List item at the long-pressed cell (or the first cell it fits, same
+     * rule startWidgetPicker's placement uses). Sized from the same defaults a new page's App List
+     * gets - one slot per grid row, so spanY == slot count, the invariant HomeGridView's row
+     * rendering assumes.
+     */
+    private fun addAppList(col: Int, row: Int) {
+        val pages = prefs.pages
+        if (pages.isEmpty()) return
+        val pageIndex = prefs.currentPageIndex.coerceIn(0, pages.size - 1)
+        val page = pages[pageIndex]
+
+        val (columnCount, rowCount) = gridGeometry()
+        val spanX = defaultAppListSpanX(columnCount)
+        val spanY = defaultAppListSpanY(DEFAULT_APP_LIST_SLOT_COUNT).coerceAtMost(rowCount.coerceAtLeast(1))
+        val position = firstFreePosition(page.items, col, row, spanX, spanY, columnCount, rowCount)
+
+        val updatedItems = page.items.toMutableList()
+        updatedItems.add(
+            GridItem(
+                type = GridItemType.APP_LIST,
+                col = position.first,
+                row = position.second,
+                spanX = spanX,
+                spanY = spanY,
+                appSlots = MutableList(DEFAULT_APP_LIST_SLOT_COUNT) { AppSlot() },
+                alignment = Gravity.START,
+            )
+        )
+        val updatedPages = pages.toMutableList()
+        updatedPages[pageIndex] = page.copy(items = updatedItems)
+        prefs.pages = updatedPages
+        pagerAdapter.notifyItemChanged(pageIndex)
     }
 
     private fun openSettings() {
@@ -990,29 +1425,26 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     /**
-     * Converts one of AppWidgetProviderInfo's minimum dimensions (px) to a whole number of 80dp
+     * Converts one of AppWidgetProviderInfo's minimum dimensions (px) to a whole number of
      * grid cells, rounding up so the widget is never given less room than it asked for - same
      * conversion PinItemActivity does for externally pinned widgets.
      */
     private fun spanForMinDimension(minDimensionPx: Int): Int {
         if (minDimensionPx <= 0) return 1
         val minDimensionDp = minDimensionPx / resources.displayMetrics.density
-        return ceil(minDimensionDp / GRID_CELL_SIZE_DP).toInt().coerceAtLeast(1)
+        return ceil(minDimensionDp / Constants.Grid.CELL_SIZE_DP).toInt().coerceAtLeast(1)
     }
 
     /**
      * Column/row capacity of the visible grid. Read straight off the current page's HomeGridView
      * when it has been measured (the authoritative numbers); before its first layout pass it
-     * reports 0, so fall back to the same screen-size arithmetic Prefs.defaultColumnCount() uses,
-     * minus item_home_page.xml's margins around the grid.
+     * reports 0, so fall back to Prefs' screen-size prediction, which subtracts
+     * item_home_page.xml's margins around the grid the same way.
      */
     private fun gridGeometry(): Pair<Int, Int> {
         val gridView = currentHomeGridView()
-        val configuration = resources.configuration
-        val columnCount = gridView?.columnCount()?.takeIf { it > 0 }
-            ?: maxOf(1, (configuration.screenWidthDp - GRID_HORIZONTAL_MARGIN_DP) / GRID_CELL_SIZE_DP.toInt())
-        val rowCount = gridView?.rowCount()?.takeIf { it > 0 }
-            ?: maxOf(1, (configuration.screenHeightDp - GRID_VERTICAL_MARGIN_DP) / GRID_CELL_SIZE_DP.toInt())
+        val columnCount = gridView?.columnCount()?.takeIf { it > 0 } ?: prefs.defaultColumnCount()
+        val rowCount = gridView?.rowCount()?.takeIf { it > 0 } ?: prefs.defaultRowCount()
         return columnCount to rowCount
     }
 
@@ -1030,10 +1462,13 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     companion object {
-        // Matches HomeGridView's own (private) CELL_SIZE_DP and item_home_page.xml's margins
-        // around the grid - only used as a fallback when the grid hasn't been measured yet.
-        private const val GRID_CELL_SIZE_DP = 80f
-        private const val GRID_HORIZONTAL_MARGIN_DP = 48 // 24dp each side
-        private const val GRID_VERTICAL_MARGIN_DP = 160 // 112dp top + 48dp bottom
+        /** Side padding around a dialog's text input, matching PagesSettingsFragment's. */
+        private const val RENAME_DIALOG_PADDING_DP = 20
+
+        // Range of the App List settings dialog's slot-count stepper. One slot is the smallest
+        // thing still worth calling a list; eight matches the launcher's long-standing home-app
+        // count (Prefs' appUser1..8 storage shape) and keeps a full-width list inside one screen.
+        private const val MIN_APP_LIST_SLOT_COUNT = 1
+        private const val MAX_APP_LIST_SLOT_COUNT = 8
     }
 }

@@ -182,8 +182,21 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="add_widget">Add widget</string>
+    <string name="add_app_list">Add app list</string>
+    <string name="edit_widget">Edit widget</string>
+    <string name="remove_this_app">Remove this app</string>
+    <string name="rename_app">Rename app</string>
     <string name="widget_unavailable">Widget unavailable\nTap to remove</string>
+    <string name="app_list_placeholder">App list</string>
+    <string name="date_time_placeholder">Date &amp; time</string>
     <string name="settings">Settings</string>
     <string name="page_move_up" translatable="false">▲</string>
     <string name="page_move_down" translatable="false">▼</string>
+
+    <string name="app_list_settings">App list settings</string>
+    <string name="date_time_settings">Date and screen time</string>
+    <string name="alignment">Alignment</string>
+    <string name="number_of_apps">Number of apps</string>
+    <string name="count_decrease" translatable="false">−</string>
+    <string name="count_increase" translatable="false">+</string>
 </resources>

@@ -37,18 +37,6 @@
             app:searchIcon="@null"
             app:theme="@style/AppSearchText" />
 
-        <TextView
-            android:id="@+id/appRename"
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="20dp"
-            android:paddingVertical="@dimen/app_padding_vertical"
-            android:text="@string/rename"
-            android:textAllCaps="true"
-            android:visibility="gone" />
-
     </LinearLayout>
 
     <Space

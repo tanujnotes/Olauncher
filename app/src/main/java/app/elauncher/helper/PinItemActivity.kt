@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import app.elauncher.R
+import app.elauncher.data.Constants
 import app.elauncher.data.GridItem
 import app.elauncher.data.GridItemType
 import app.elauncher.data.Prefs
@@ -103,7 +104,7 @@ class PinItemActivity : AppCompatActivity() {
 
     /**
      * Converts one of [AppWidgetProviderInfo]'s minimum dimensions (in px) to a whole number of
-     * 80dp home-grid cells, rounding up so the widget is never given less room than it asked for.
+     * home-grid cells, rounding up so the widget is never given less room than it asked for.
      *
      * [minDimensionPx] is null when the provider info couldn't be read back (shouldn't happen for a
      * just-accepted pin, since accepting binds the widget) - fall back to the smallest valid span.
@@ -111,12 +112,6 @@ class PinItemActivity : AppCompatActivity() {
     private fun spanFor(minDimensionPx: Int?): Int {
         if (minDimensionPx == null || minDimensionPx <= 0) return 1
         val minDimensionDp = minDimensionPx / resources.displayMetrics.density
-        return ceil(minDimensionDp / GRID_CELL_SIZE_DP).toInt().coerceAtLeast(1)
-    }
-
-    companion object {
-        // Matches HomeGridView's own cell size; that constant is private to it, and the 80dp figure
-        // is a fixed design decision rather than something either file tunes independently.
-        private const val GRID_CELL_SIZE_DP = 80f
+        return ceil(minDimensionDp / Constants.Grid.CELL_SIZE_DP).toInt().coerceAtLeast(1)
     }
 }

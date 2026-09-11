@@ -12,8 +12,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import app.elauncher.data.AppModel
+import app.elauncher.data.AppSlot
 import app.elauncher.data.Constants
-import app.elauncher.data.GridItem
 import app.elauncher.data.GridItemType
 import app.elauncher.data.Prefs
 import app.elauncher.helper.SingleLiveEvent
@@ -59,7 +59,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     // Home button for recents feature disabled
     // val showRecentApps = SingleLiveEvent<Unit?>()
 
-    fun selectedApp(appModel: AppModel, flag: Int, col: Int = -1, row: Int = -1) {
+    fun selectedApp(appModel: AppModel, flag: Int, col: Int = -1, row: Int = -1, slotIndex: Int = -1) {
         if (appModel is AppModel.PrivateSpaceHeader) return
         when (flag) {
             Constants.FLAG_LAUNCH_APP -> {
@@ -78,7 +78,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 }
             }
 
-            Constants.FLAG_SET_HOME_APP_CELL -> saveAppAtCell(appModel, col, row)
+            Constants.FLAG_SET_HOME_APP_CELL -> saveAppInAppListSlot(appModel, col, row, slotIndex)
 
             Constants.FLAG_SET_SWIPE_LEFT_APP -> saveSwipeApp(appModel, isLeft = true)
             Constants.FLAG_SET_SWIPE_RIGHT_APP -> saveSwipeApp(appModel, isLeft = false)
@@ -108,24 +108,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     /**
-     * Places [appModel] into the current page's grid at ([col], [row]), replacing whatever's
-     * already there. Direct successor to the old saveHomeApp(appModel, position: Int 1..8), which
-     * wrote to one of 8 fixed flat Prefs slots; this writes a [GridItem] into prefs.pages instead,
-     * addressed by (col, row) rather than a fixed slot index. New app placements default to full
-     * row width (spanX = current column count, spanY = 1) per plan.md's "keep today's look"
-     * decision for app-shortcut grid items - see Prefs.defaultColumnCount().
+     * Writes [appModel] into slot [slotIndex] of the [GridItemType.APP_LIST] item at ([col], [row])
+     * on the current page, replacing whatever that slot held.
+     *
+     * Successor to saveAppAtCell(), which created a standalone [GridItemType.APP] item per picked
+     * app. Apps now only ever live inside an App List item's slots, so nothing here creates a
+     * GridItem: the target item already exists (the tap that opened the app drawer came from one of
+     * its slots), and a missing/short target is simply a no-op rather than a silently-created item
+     * somewhere the user didn't ask for.
      */
-    private fun saveAppAtCell(appModel: AppModel, col: Int, row: Int) {
-        if (col < 0 || row < 0) return
+    private fun saveAppInAppListSlot(appModel: AppModel, col: Int, row: Int, slotIndex: Int) {
+        if (col < 0 || row < 0 || slotIndex < 0) return
 
-        val gridItem = when (appModel) {
+        val slot = when (appModel) {
             is AppModel.PrivateSpaceHeader -> return
-            is AppModel.App -> GridItem(
-                type = GridItemType.APP,
-                col = col,
-                row = row,
-                spanX = prefs.defaultColumnCount(),
-                spanY = 1,
+            is AppModel.App -> AppSlot(
                 appName = appModel.appLabel,
                 appPackage = appModel.appPackage,
                 appActivityClassName = appModel.activityClassName,
@@ -134,12 +131,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 shortcutId = null,
             )
 
-            is AppModel.PinnedShortcut -> GridItem(
-                type = GridItemType.APP,
-                col = col,
-                row = row,
-                spanX = prefs.defaultColumnCount(),
-                spanY = 1,
+            is AppModel.PinnedShortcut -> AppSlot(
                 appName = appModel.appLabel,
                 appPackage = appModel.appPackage,
                 appActivityClassName = null,
@@ -153,13 +145,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         if (pages.isEmpty()) return
         val pageIndex = prefs.currentPageIndex.coerceIn(0, pages.size - 1)
         val page = pages[pageIndex]
-        val updatedItems = page.items.toMutableList().apply {
-            removeAll { it.col == col && it.row == row } // replace whatever was at this cell
-            add(gridItem)
-        }
-        val updatedPages = pages.toMutableList()
-        updatedPages[pageIndex] = page.copy(items = updatedItems)
-        prefs.pages = updatedPages
+        val target = page.items.firstOrNull {
+            it.type == GridItemType.APP_LIST && it.col == col && it.row == row
+        } ?: return
+        if (slotIndex !in target.appSlots.indices) return
+
+        // prefs.pages re-parses its JSON on every read, so `pages` is a fresh object graph nothing
+        // else holds - mutating the slot in place and writing the whole list back is safe here.
+        target.appSlots[slotIndex] = slot
+        prefs.pages = pages
 
         refreshHome(false)
     }

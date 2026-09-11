@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    Content view of HomeFragment.showAppListSettings()'s AlertDialog: the per-item settings of one
+    APP_LIST grid item (alignment + how many app slots it has). Deliberately plain, unstyled
+    widgets - dialog content lives in its own window with the dialog theme's own text colors, and
+    the app's custom font is applied at runtime instead (FontManager.applyCustomTypeface), exactly
+    like the rename dialog's text input.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alignment" />
+
+    <RadioGroup
+        android:id="@+id/alignmentGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/alignStart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/left" />
+
+        <RadioButton
+            android:id="@+id/alignCenter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/center" />
+
+        <RadioButton
+            android:id="@+id/alignEnd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/right" />
+
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/number_of_apps" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/countDecrease"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:text="@string/count_decrease"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/countValue"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="20sp"
+            tools:text="4" />
+
+        <Button
+            android:id="@+id/countIncrease"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="48dp"
+            android:text="@string/count_increase"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

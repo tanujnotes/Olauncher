@@ -2,9 +2,11 @@ package app.elauncher.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
+import app.elauncher.helper.appUsagePermissionGranted
 import java.util.UUID
 
 class Prefs(private val context: Context) {
@@ -44,6 +46,8 @@ class Prefs(private val context: Context) {
     private val PENDING_WIDGET_ROW = "PENDING_WIDGET_ROW"
     private val PAGES = "PAGES"
     private val CURRENT_PAGE = "CURRENT_PAGE"
+    private val GRID_CELL_SIZE_DP = "GRID_CELL_SIZE_DP"
+    private val APP_LIST_MIGRATION_DONE = "APP_LIST_MIGRATION_DONE"
     private val HIDE_SET_DEFAULT_LAUNCHER = "HIDE_SET_DEFAULT_LAUNCHER"
     private val SCREEN_TIME_LAST_UPDATED = "SCREEN_TIME_LAST_UPDATED"
     private val LAUNCHER_RESTART_TIMESTAMP = "LAUNCHER_RECREATE_TIMESTAMP"
@@ -255,12 +259,105 @@ class Prefs(private val context: Context) {
     var pages: List<Page>
         get() {
             val stored = prefs.getString(PAGES, "").toString()
-            if (stored.isNotBlank()) return stored.toPages()
-            val migrated = migratePagesFromFlatSlots()
-            pages = migrated
-            return migrated
+            if (stored.isBlank()) {
+                val flatSlotPages = migratePagesFromFlatSlots()
+                // A genuinely fresh install (no legacy appName1..8 data to carry over) gets the same
+                // starter content newly-added pages get, rather than a page holding only the
+                // synthesized clock below - migratePagesFromFlatSlots() returns exactly one "Home"
+                // page with an empty item list in this case, so an empty first page is the signal.
+                val migrated = if (flatSlotPages.singleOrNull()?.items?.isEmpty() == true) {
+                    listOf(flatSlotPages.single().copy(items = newPageDefaultItems(defaultColumnCount())))
+                } else {
+                    flatSlotPages
+                }
+                // Built from today's defaultColumnCount(), so it is already in current-cell-size
+                // units - record that so the rescale below never touches it.
+                gridCellSizeDp = Constants.Grid.CELL_SIZE_DP
+                pages = migrated
+                // Not exempt from the App List migration the way it is from the rescale:
+                // migratePagesFromFlatSlots() still emits GridItemType.APP items, which genuinely
+                // need converting, so both branches go through the same pass. (The synthetic branch
+                // above already has its own DATE_TIME item, so this is a no-op for it.)
+                return migrateToAppLists(migrated)
+            }
+            val storedPages = stored.toPages()
+            return migrateToAppLists(rescaleForCurrentCellSize(storedPages))
         }
         set(value) = prefs.edit { putString(PAGES, value.toJson()).apply() }
+
+    /**
+     * The cell size, in dp, that this install's stored [pages] were laid out against.
+     *
+     * Defaults to [Constants.Grid.LEGACY_CELL_SIZE_DP] so any install predating the 48dp grid is
+     * recognised as needing the one-time rescale in [rescaleForCurrentCellSize]; that rescale
+     * writes the current size here, which is what stops it from ever running twice.
+     */
+    var gridCellSizeDp: Int
+        get() = prefs.getInt(GRID_CELL_SIZE_DP, Constants.Grid.LEGACY_CELL_SIZE_DP)
+        set(value) = prefs.edit { putInt(GRID_CELL_SIZE_DP, value).apply() }
+
+    /**
+     * One-time, guarded migration: items are stored as cell *counts*, so a changed cell size moves
+     * and resizes every one of them unless their counts are restated in the new unit. Runs at most
+     * once per cell-size change (see [gridCellSizeDp]) and persists its result immediately.
+     */
+    private fun rescaleForCurrentCellSize(storedPages: List<Page>): List<Page> {
+        val storedCellSizeDp = gridCellSizeDp
+        if (storedCellSizeDp == Constants.Grid.CELL_SIZE_DP) return storedPages
+        val rescaled = storedPages.rescaleForCellSize(
+            oldCellSizeDp = storedCellSizeDp,
+            newCellSizeDp = Constants.Grid.CELL_SIZE_DP,
+            columnCount = defaultColumnCount(),
+            rowCount = defaultRowCount(),
+        )
+        gridCellSizeDp = Constants.Grid.CELL_SIZE_DP
+        pages = rescaled
+        return rescaled
+    }
+
+    /**
+     * Marker for the one-time [migrateToAppLists] pass, same run-once shape as [gridCellSizeDp]:
+     * set as soon as the migration has run, and never cleared. Without it a second read would
+     * re-wrap already-wrapped items and append a second DATE_TIME item to every page.
+     */
+    var appListMigrationDone: Boolean
+        get() = prefs.getBoolean(APP_LIST_MIGRATION_DONE, false)
+        set(value) = prefs.edit { putBoolean(APP_LIST_MIGRATION_DONE, value).apply() }
+
+    /**
+     * One-time, guarded migration off standalone APP grid items onto App List items, plus a
+     * synthesized Date & Screen Time item for any page lacking one. Persists its result immediately
+     * so the very next read is a plain load of already-migrated data.
+     *
+     * The global settings the synthesized item inherits are read here, before anything is written,
+     * so it comes up looking like what the fixed header showed until now.
+     */
+    private fun migrateToAppLists(storedPages: List<Page>): List<Page> {
+        if (appListMigrationDone) return storedPages
+        val migrated = storedPages.migrateAppItemsToAppLists(
+            columnCount = defaultColumnCount(),
+            rowCount = defaultRowCount(),
+            dateTimeAlignment = homeAlignment,
+            dateTimeShowScreenTime = screenTimeAvailable(),
+            dateTimeVisibility = dateTimeVisibility,
+        )
+        appListMigrationDone = true
+        pages = migrated
+        return migrated
+    }
+
+    /**
+     * The current source of truth for "is screen time actually being shown", matching what
+     * SettingsFragment's screen-time row reports and what HomeFragment.applyScreenTime() gates on:
+     * the usage-access permission on Q+. Deliberately not gated on [dateTimeVisibility] - that
+     * controls the clock/date text, never the screen-time line.
+     *
+     * runCatching because this is reached from a plain-JUnit unit test's mocked Context, where the
+     * AppOps lookup has no implementation to call.
+     */
+    private fun screenTimeAvailable(): Boolean = runCatching {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && context.appUsagePermissionGranted()
+    }.getOrDefault(false)
 
     var currentPageIndex: Int
         get() {
@@ -296,13 +393,31 @@ class Prefs(private val context: Context) {
         return listOf(Page(id = UUID.randomUUID().toString(), name = "Home", items = items))
     }
 
-    // Matches the grid geometry used elsewhere for the page/grid layout: fixed 80dp cells,
-    // column count = floor(screen width dp / 80). Also used by MainViewModel.saveAppAtCell() to
-    // size a newly-placed app's spanX to a full row, matching HomeGridView's own CELL_SIZE_DP.
+    /**
+     * How many whole cells the grid holds across, predicted from the screen size.
+     *
+     * The screen is not the grid: item_home_page.xml insets HomeGridView on every side, so the
+     * margins have to come off before dividing, exactly as HomeFragment.gridGeometry()'s fallback
+     * does. Without that subtraction this over-reported by a column, and the then-existing
+     * MainViewModel.saveAppAtCell() - which sized a newly-placed app's spanX to a full row from
+     * this - created items one column wider than the grid they had to fit inside.
+     *
+     * A prediction, not the truth: HomeGridView.columnCount()/rowCount() are authoritative once it
+     * has been measured. Used where no measured grid is in reach (placement, the one-time rescale).
+     */
     fun defaultColumnCount(): Int {
         val screenWidthDp = context.resources.configuration.screenWidthDp
-        return maxOf(1, screenWidthDp / 80)
+        return usableCellCount(screenWidthDp, Constants.Grid.HORIZONTAL_MARGIN_DP)
     }
+
+    /** Vertical counterpart of [defaultColumnCount]. */
+    fun defaultRowCount(): Int {
+        val screenHeightDp = context.resources.configuration.screenHeightDp
+        return usableCellCount(screenHeightDp, Constants.Grid.VERTICAL_MARGIN_DP)
+    }
+
+    private fun usableCellCount(screenSizeDp: Int, marginDp: Int): Int =
+        maxOf(1, (screenSizeDp - marginDp) / Constants.Grid.CELL_SIZE_DP)
 
     var hideSetDefaultLauncher: Boolean
         get() = prefs.getBoolean(HIDE_SET_DEFAULT_LAUNCHER, false)
