@@ -31,6 +31,16 @@ sealed class AppModel : Comparable<AppModel> {
             get() = shortcutIdentity(appPackage, shortcutId, user.toString())
     }
 
+    data class Folder(
+        val folderId: String,
+        override val appLabel: String,
+        override val key: CollationKey?,
+        override val isNew: Boolean = false,
+        override val user: UserHandle = android.os.Process.myUserHandle(),
+    ) : AppModel() {
+        override val appPackage: String = ""
+    }
+
     data class PrivateSpaceHeader(
         val isLocked: Boolean = true,
         override val user: UserHandle = android.os.Process.myUserHandle(),

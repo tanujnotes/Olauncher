@@ -5,6 +5,12 @@ object Constants {
     object Key {
         const val FLAG = "flag"
         const val RENAME = "rename"
+        const val FOLDER_ID = "folder_id"
+        const val APP_PACKAGE = "app_package"
+        const val APP_USER = "app_user"
+        const val ACTIVITY = "activity"
+        const val IS_SHORTCUT = "is_shortcut"
+        const val SHORTCUT_ID = "shortcut_id"
     }
 
     object Dialog {
@@ -82,6 +88,8 @@ object Constants {
     const val FLAG_SET_CLOCK_APP = 13
     const val FLAG_SET_CALENDAR_APP = 14
     const val FLAG_SET_SCREEN_TIME_APP = 15
+    const val FLAG_FOLDER_PICKER = 16
+    const val FLAG_FOLDER_CONTENTS = 17
 
     const val REQUEST_CODE_ENABLE_ADMIN = 666
     const val REQUEST_CODE_LAUNCHER_SELECTOR = 678

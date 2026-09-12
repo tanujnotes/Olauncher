@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
+import org.json.JSONArray
+import java.util.UUID
 
 class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
@@ -43,6 +45,7 @@ class Prefs(context: Context) {
     private val SCREEN_TIME_LAST_UPDATED = "SCREEN_TIME_LAST_UPDATED"
     private val LAUNCHER_RESTART_TIMESTAMP = "LAUNCHER_RECREATE_TIMESTAMP"
     private val SHOWN_ON_DAY_OF_YEAR = "SHOWN_ON_DAY_OF_YEAR"
+    private val FOLDERS = "FOLDERS"
     // Home button for recents feature disabled
     // private val HOME_BUTTON_SHOW_RECENTS = "HOME_BUTTON_SHOW_RECENTS"
 
@@ -649,4 +652,66 @@ class Prefs(context: Context) {
     fun getAppRenameLabel(appPackage: String): String = prefs.getString(appPackage, "").toString()
 
     fun setAppRenameLabel(appPackage: String, renameLabel: String) = prefs.edit { putString(appPackage, renameLabel) }
+
+    var folders: String
+        get() = prefs.getString(FOLDERS, "").toString()
+        set(value) = prefs.edit { putString(FOLDERS, value).apply() }
+
+    fun getFolders(): List<FolderItem> {
+        if (folders.isBlank()) return emptyList()
+        return try {
+            val array = JSONArray(folders)
+            (0 until array.length()).map { array.getJSONObject(it).toFolderItem() }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
+    }
+
+    private fun saveFolders(folderList: List<FolderItem>) {
+        folders = JSONArray(folderList.map { it.toJson() }).toString()
+    }
+
+    fun getFolder(id: String): FolderItem? = getFolders().firstOrNull { it.id == id }
+
+    fun folderExists(id: String): Boolean = getFolder(id) != null
+
+    fun getFolderName(id: String): String = getFolder(id)?.name.orEmpty()
+
+    fun createFolder(name: String, app: FolderApp? = null): String {
+        val id = UUID.randomUUID().toString()
+        saveFolders(getFolders() + FolderItem(id, name, listOfNotNull(app)))
+        return id
+    }
+
+    fun renameFolder(id: String, newName: String): Boolean =
+        updateFolder(id) { it.copy(name = newName) }
+
+    fun addAppToFolder(folderId: String, app: FolderApp): Boolean =
+        updateFolder(folderId) { folder ->
+            if (folder.apps.any { it.memberEquals(app) }) folder
+            else folder.copy(apps = folder.apps + app)
+        }
+
+    fun removeAppFromFolder(folderId: String, app: FolderApp): Boolean =
+        updateFolder(folderId) { folder ->
+            folder.copy(apps = folder.apps.filterNot { it.memberEquals(app) })
+        }
+
+    fun deleteFolder(id: String): Boolean {
+        val folderList = getFolders()
+        val existed = folderList.any { it.id == id }
+        if (existed) saveFolders(folderList.filterNot { it.id == id })
+        return existed
+    }
+
+    private fun updateFolder(folderId: String, transform: (FolderItem) -> FolderItem): Boolean {
+        val folderList = getFolders()
+        val index = folderList.indexOfFirst { it.id == folderId }
+        if (index < 0) return false
+        val updated = folderList.toMutableList()
+        updated[index] = transform(folderList[index])
+        saveFolders(updated)
+        return true
+    }
 }

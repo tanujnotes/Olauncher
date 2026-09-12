@@ -274,6 +274,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
             }
+            is AppModel.Folder -> {}
         }
         refreshHome(false)
     }
@@ -316,6 +317,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     prefs.shortcutIdSwipeRight = appModel.shortcutId
                 }
             }
+            is AppModel.Folder -> {}
         }
         updateSwipeApps()
     }

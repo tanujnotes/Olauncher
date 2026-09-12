@@ -177,6 +177,8 @@ class AppDrawerFragment : BaseFragment() {
                             )
                         }
 
+                    is AppModel.Folder -> {}
+
                     is AppModel.App -> {
                         if (appModel.user != Process.myUserHandle()) {
                             openAppInfo(requireContext(), appModel.user, appModel.appPackage)
