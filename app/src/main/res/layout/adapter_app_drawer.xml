@@ -101,6 +101,21 @@
             app:drawableTopCompat="@drawable/ic_info" />
 
         <TextView
+            android:id="@+id/appAddFolder"
+            style="@style/TextSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="2dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingHorizontal="8dp"
+            android:text="@string/add_to_folder"
+            android:textSize="12sp"
+            app:drawableTopCompat="@drawable/ic_folder" />
+
+        <TextView
             android:id="@+id/appMenuClose"
             style="@style/TextSmall"
             android:layout_width="0dp"

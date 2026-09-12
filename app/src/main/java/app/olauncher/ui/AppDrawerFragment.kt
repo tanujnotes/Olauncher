@@ -13,6 +13,7 @@ import android.view.inputmethod.BaseInputConnection
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,12 +23,15 @@ import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
+import app.olauncher.data.FolderApp
 import app.olauncher.data.Prefs
+import app.olauncher.data.toAppModel
 import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isSystemAnimationsDisabled
+import java.text.Collator
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.openAppInfo
 import app.olauncher.helper.openSearch
@@ -84,6 +88,10 @@ class AppDrawerFragment : BaseFragment() {
             binding.search.queryHint = getString(R.string.hidden_apps)
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
             binding.search.queryHint = "Please select an app"
+        else if (flag == Constants.FLAG_FOLDER_PICKER) {
+            binding.search.queryHint = getString(R.string.select_folder)
+            binding.newFolder.visibility = View.VISIBLE
+        }
         try {
             searchTextView = binding.search.findViewById(R.id.search_src_text)
             searchTextView?.gravity = prefs.appLabelAlignment
@@ -151,11 +159,21 @@ class AppDrawerFragment : BaseFragment() {
             flag,
             prefs.appLabelAlignment,
             appClickListener = { appModel ->
-                viewModel.selectedApp(appModel, flag)
-                if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
-                    findNavController().popBackStack(R.id.mainFragment, false)
-                else
+                if (flag == Constants.FLAG_FOLDER_PICKER) {
+                    if (appModel is AppModel.Folder) {
+                        val folderApp = pendingFolderApp()
+                        if (folderApp.packageName.isNotBlank() &&
+                            prefs.addAppToFolder(appModel.folderId, folderApp)
+                        ) requireContext().showToast(getString(R.string.app_added_to_folder))
+                    }
                     findNavController().popBackStack()
+                } else {
+                    viewModel.selectedApp(appModel, flag)
+                    if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
+                        findNavController().popBackStack(R.id.mainFragment, false)
+                    else
+                        findNavController().popBackStack()
+                }
             },
             appInfoListener = {
                 openAppInfo(
@@ -229,6 +247,19 @@ class AppDrawerFragment : BaseFragment() {
                 prefs.setAppRenameLabel(identifier, renameLabel)
                 viewModel.getAppList()
             },
+            appAddToFolderListener = { appModel ->
+                findNavController().navigate(
+                    R.id.appListFragment,
+                    bundleOf(
+                        Constants.Key.FLAG to Constants.FLAG_FOLDER_PICKER,
+                        Constants.Key.APP_PACKAGE to appModel.appPackage,
+                        Constants.Key.APP_USER to appModel.user.toString(),
+                        Constants.Key.ACTIVITY to (appModel as? AppModel.App)?.activityClassName.orEmpty(),
+                        Constants.Key.IS_SHORTCUT to (appModel is AppModel.PinnedShortcut),
+                        Constants.Key.SHORTCUT_ID to (appModel as? AppModel.PinnedShortcut)?.shortcutId.orEmpty(),
+                    )
+                )
+            },
             privateSpaceToggleListener = {
                 viewModel.togglePrivateSpaceLock()
             },
@@ -272,6 +303,8 @@ class AppDrawerFragment : BaseFragment() {
                     adapter.setAppList(it.toMutableList())
                 }
             }
+        } else if (flag == Constants.FLAG_FOLDER_PICKER) {
+            setFolderPickerList()
         } else {
             viewModel.appList.observe(viewLifecycleOwner) {
                 currentAppList = it
@@ -294,6 +327,11 @@ class AppDrawerFragment : BaseFragment() {
         }
     }
 
+    private fun setFolderPickerList() {
+        val collator = Collator.getInstance()
+        adapter.setAppList(prefs.getFolders().map { it.toAppModel(collator) }.toMutableList())
+    }
+
     private fun updateCombinedAppList() {
         val apps = currentAppList ?: return
         val combined = apps.toMutableList()
@@ -309,7 +347,29 @@ class AppDrawerFragment : BaseFragment() {
         adapter.filter.filter(binding.search.query)
     }
 
+    private fun pendingFolderApp(): FolderApp {
+        val isShortcut = arguments?.getBoolean(Constants.Key.IS_SHORTCUT) ?: false
+        return FolderApp(
+            packageName = arguments?.getString(Constants.Key.APP_PACKAGE).orEmpty(),
+            user = arguments?.getString(Constants.Key.APP_USER).orEmpty(),
+            activityClassName = if (isShortcut)
+                null
+            else
+                arguments?.getString(Constants.Key.ACTIVITY)?.ifBlank { null },
+            isShortcut = isShortcut,
+            shortcutId = if (isShortcut) arguments?.getString(Constants.Key.SHORTCUT_ID).orEmpty() else "",
+        )
+    }
+
     private fun initClickListeners() {
+        binding.newFolder.setOnClickListener {
+            val folderApp = pendingFolderApp()
+            if (folderApp.packageName.isNotBlank()) {
+                prefs.createFolder(getString(R.string.new_folder), folderApp)
+                requireContext().showToast(getString(R.string.folder_created))
+                findNavController().popBackStack()
+            }
+        }
         binding.appRename.setOnClickListener {
             val name = binding.search.query.toString().trim()
             if (name.isEmpty()) {

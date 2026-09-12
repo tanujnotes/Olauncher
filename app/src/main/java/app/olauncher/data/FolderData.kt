@@ -1,5 +1,6 @@
 package app.olauncher.data
 
+import java.text.Collator
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -15,6 +16,12 @@ data class FolderApp(
     val activityClassName: String?,
     val isShortcut: Boolean,
     val shortcutId: String,
+)
+
+fun FolderItem.toAppModel(collator: Collator): AppModel.Folder = AppModel.Folder(
+    folderId = id,
+    appLabel = name,
+    key = collator.getCollationKey(name),
 )
 
 fun FolderApp.memberEquals(other: FolderApp): Boolean = when {

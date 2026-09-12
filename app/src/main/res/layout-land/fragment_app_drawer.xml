@@ -56,6 +56,16 @@
         android:layout_height="0dp"
         android:layout_weight="0.06" />
 
+    <TextView
+        android:id="@+id/newFolder"
+        style="@style/TextMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:paddingVertical="8dp"
+        android:text="@string/new_folder"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

@@ -176,4 +176,9 @@
     <string name="invalid_shortcut">Invalid shortcut</string>
     <string name="shortcut_not_found">Shortcut not found</string>
     <string name="unable_to_open_shortcut">Unable to open shortcut</string>
+    <string name="add_to_folder">Add to folder</string>
+    <string name="new_folder">New folder</string>
+    <string name="select_folder">Select folder</string>
+    <string name="app_added_to_folder">Added to folder</string>
+    <string name="folder_created">Folder created</string>
 </resources>

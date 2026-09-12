@@ -33,6 +33,7 @@ class AppDrawerAdapter(
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
+    private val appAddToFolderListener: (AppModel) -> Unit = {},
     private val privateSpaceToggleListener: () -> Unit = {},
     private val privateSpaceSettingsListener: () -> Unit = {},
 ) : ListAdapter<AppModel, RecyclerView.ViewHolder>(DIFF_CALLBACK), Filterable {
@@ -48,6 +49,9 @@ class AppDrawerAdapter(
 
                 oldItem is AppModel.PinnedShortcut && newItem is AppModel.PinnedShortcut ->
                     oldItem.identity == newItem.identity
+
+                oldItem is AppModel.Folder && newItem is AppModel.Folder ->
+                    oldItem.folderId == newItem.folderId
 
                 oldItem is AppModel.PrivateSpaceHeader && newItem is AppModel.PrivateSpaceHeader -> true
 
@@ -119,7 +123,8 @@ class AppDrawerAdapter(
                     appDeleteListener,
                     appInfoListener,
                     appHideListener,
-                    appRenameListener
+                    appRenameListener,
+                    appAddToFolderListener
                 )
             }
         } catch (e: Exception) {
@@ -233,6 +238,7 @@ class AppDrawerAdapter(
             appInfoListener: (AppModel) -> Unit,
             appHideListener: (AppModel, Int) -> Unit,
             appRenameListener: (AppModel, String) -> Unit,
+            appAddToFolderListener: (AppModel) -> Unit,
         ) = with(binding) {
             appHideLayout.visibility = View.GONE
             renameLayout.visibility = View.GONE
@@ -268,6 +274,8 @@ class AppDrawerAdapter(
                     appHideLayout.visibility = View.VISIBLE
                     // Only allow renaming non hidden apps
                     appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
+                    appAddFolder.visibility =
+                        if (flag == Constants.FLAG_LAUNCH_APP) View.VISIBLE else View.GONE
                 }
                 true
             }
@@ -330,6 +338,7 @@ class AppDrawerAdapter(
                 }
             }
             appInfo.setOnClickListener { appInfoListener(appModel) }
+            appAddFolder.setOnClickListener { appAddToFolderListener(appModel) }
             appDelete.setOnClickListener { appDeleteListener(appModel) }
             appMenuClose.setOnClickListener {
                 appHideLayout.visibility = View.GONE
