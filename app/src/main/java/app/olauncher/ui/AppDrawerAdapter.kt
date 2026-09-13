@@ -30,7 +30,7 @@ class AppDrawerAdapter(
     private val appLabelGravity: Int,
     private val appClickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
-    private val appDeleteListener: (AppModel) -> Unit,
+    private val appDeleteListener: (AppModel, Int) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
     private val appAddToFolderListener: (AppModel) -> Unit = {},
@@ -171,6 +171,7 @@ class AppDrawerAdapter(
                 && flag == Constants.FLAG_LAUNCH_APP
                 && appFilteredList.isNotEmpty()
                 && appFilteredList[0] !is AppModel.PrivateSpaceHeader
+                && appFilteredList[0] !is AppModel.Folder
             ) appClickListener(appFilteredList[0])
         } catch (e: Exception) {
             e.printStackTrace()
@@ -234,7 +235,7 @@ class AppDrawerAdapter(
             myUserHandle: UserHandle,
             appModel: AppModel,
             clickListener: (AppModel) -> Unit,
-            appDeleteListener: (AppModel) -> Unit,
+            appDeleteListener: (AppModel, Int) -> Unit,
             appInfoListener: (AppModel) -> Unit,
             appHideListener: (AppModel, Int) -> Unit,
             appRenameListener: (AppModel, String) -> Unit,
@@ -242,7 +243,31 @@ class AppDrawerAdapter(
         ) = with(binding) {
             appHideLayout.visibility = View.GONE
             renameLayout.visibility = View.GONE
+            confirmDeleteLayout.visibility = View.GONE
             appTitle.visibility = View.VISIBLE
+
+            val isFolder = appModel is AppModel.Folder
+            appDelete.visibility = if (flag == Constants.FLAG_FOLDER_CONTENTS)
+                View.GONE
+            else
+                View.VISIBLE
+            appDelete.text = if (isFolder)
+                root.context.getString(R.string.remove)
+            else
+                root.context.getString(R.string.delete)
+            appInfo.visibility = if (isFolder) View.GONE else View.VISIBLE
+            appAddFolder.visibility =
+                if (flag == Constants.FLAG_LAUNCH_APP && !isFolder) View.VISIBLE else View.GONE
+            appHide.visibility = if (isFolder) View.GONE else View.VISIBLE
+            appHide.text = when {
+                flag == Constants.FLAG_HIDDEN_APPS ->
+                    root.context.getString(R.string.adapter_show)
+
+                flag == Constants.FLAG_FOLDER_CONTENTS ->
+                    root.context.getString(R.string.remove_from_folder)
+
+                else -> root.context.getString(R.string.adapter_hide)
+            }
 
             // Show indicators in title based on app type and state
             appTitle.text = buildString {
@@ -255,35 +280,35 @@ class AppDrawerAdapter(
             appTitle.setOnClickListener { clickListener(appModel) }
 
             appTitle.setOnLongClickListener {
-                if (appModel.appPackage.isNotEmpty()) {
-                    appDelete.alpha = when (
-                        appModel is AppModel.PinnedShortcut || !root.context.isSystemApp(appModel.appPackage, appModel.user)
-                    ) {
-                        true -> 1.0f
-                        false -> 0.5f
+                if (appModel.appPackage.isNotEmpty() || appModel is AppModel.Folder) {
+                    appDelete.alpha = when {
+                        isFolder -> 1.0f
+                        appModel is AppModel.PinnedShortcut || !root.context.isSystemApp(
+                            appModel.appPackage,
+                            appModel.user
+                        ) -> 1.0f
+
+                        else -> 0.5f
                     }
-                    appHide.text = if (flag == Constants.FLAG_HIDDEN_APPS)
-                        root.context.getString(R.string.adapter_show)
-                    else
-                        root.context.getString(R.string.adapter_hide)
                     appTitle.visibility = View.INVISIBLE
-                    appHide.alpha = when (appModel is AppModel.PinnedShortcut) {
+                    appHide.alpha = when (appModel is AppModel.PinnedShortcut && flag != Constants.FLAG_FOLDER_CONTENTS) {
                         true -> 0.5f
                         false -> 1.0f
                     }
                     appHideLayout.visibility = View.VISIBLE
                     // Only allow renaming non hidden apps
                     appRename.isVisible = flag != Constants.FLAG_HIDDEN_APPS
-                    appAddFolder.visibility =
-                        if (flag == Constants.FLAG_LAUNCH_APP) View.VISIBLE else View.GONE
                 }
                 true
             }
 
             // Configure rename behavior
             appRename.setOnClickListener {
-                if (appModel.appPackage.isNotEmpty()) {
-                    etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage, appModel.user)
+                if (appModel.appPackage.isNotEmpty() || appModel is AppModel.Folder) {
+                    etAppRename.hint = if (appModel is AppModel.Folder)
+                        appModel.appLabel
+                    else
+                        getAppName(etAppRename.context, appModel.appPackage, appModel.user)
                     etAppRename.setText(appModel.appLabel)
                     etAppRename.setSelectAllOnFocus(true)
                     renameLayout.visibility = View.VISIBLE
@@ -315,7 +340,9 @@ class AppDrawerAdapter(
             etAppRename.setOnEditorActionListener { _, actionCode, _ ->
                 if (actionCode == EditorInfo.IME_ACTION_DONE) {
                     val renameLabel = etAppRename.text.toString().trim()
-                    if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
+                    if (renameLabel.isNotBlank() &&
+                        (appModel.appPackage.isNotBlank() || appModel is AppModel.Folder)
+                    ) {
                         appRenameListener(appModel, renameLabel)
                         renameLayout.visibility = View.GONE
                     }
@@ -326,26 +353,47 @@ class AppDrawerAdapter(
             tvSaveRename.setOnClickListener {
                 etAppRename.hideKeyboard()
                 val renameLabel = etAppRename.text.toString().trim()
-                if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
-                    appRenameListener(appModel, renameLabel)
-                    renameLayout.visibility = View.GONE
-                } else {
-                    appRenameListener(
-                        appModel,
-                        getAppName(etAppRename.context, appModel.appPackage, appModel.user)
-                    )
+                if ((appModel.appPackage.isNotBlank() || appModel is AppModel.Folder)) {
+                    if (renameLabel.isNotBlank()) {
+                        appRenameListener(appModel, renameLabel)
+                    } else if (appModel is AppModel.Folder) {
+                        appRenameListener(appModel, appModel.appLabel)
+                    } else {
+                        appRenameListener(
+                            appModel,
+                            getAppName(etAppRename.context, appModel.appPackage, appModel.user)
+                        )
+                    }
                     renameLayout.visibility = View.GONE
                 }
             }
             appInfo.setOnClickListener { appInfoListener(appModel) }
             appAddFolder.setOnClickListener { appAddToFolderListener(appModel) }
-            appDelete.setOnClickListener { appDeleteListener(appModel) }
+            appDelete.setOnClickListener {
+                if (appModel is AppModel.Folder) {
+                    tvConfirmMessage.text = appModel.appLabel
+                    appHideLayout.visibility = View.GONE
+                    confirmDeleteLayout.visibility = View.VISIBLE
+                    appTitle.visibility = View.INVISIBLE
+                } else {
+                    appDeleteListener(appModel, bindingAdapterPosition)
+                }
+            }
             appMenuClose.setOnClickListener {
                 appHideLayout.visibility = View.GONE
                 appTitle.visibility = View.VISIBLE
             }
             appRenameClose.setOnClickListener {
                 renameLayout.visibility = View.GONE
+                appTitle.visibility = View.VISIBLE
+            }
+            tvConfirmDelete.setOnClickListener {
+                appDeleteListener(appModel, bindingAdapterPosition)
+                confirmDeleteLayout.visibility = View.GONE
+                appTitle.visibility = View.VISIBLE
+            }
+            tvConfirmClose.setOnClickListener {
+                confirmDeleteLayout.visibility = View.GONE
                 appTitle.visibility = View.VISIBLE
             }
             appHide.setOnClickListener { appHideListener(appModel, bindingAdapterPosition) }

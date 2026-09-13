@@ -125,6 +125,7 @@
     <string name="not_working"><u>Not working?</u></string>
     <string name="info">Info</string>
     <string name="delete">Uninstall</string>
+    <string name="remove">Remove</string>
     <string name="text_size">Text size</string>
     <string name="bold_font">Bold font</string>
     <string name="enabled">Enabled</string>
@@ -181,4 +182,6 @@
     <string name="select_folder">Select folder</string>
     <string name="app_added_to_folder">Added to folder</string>
     <string name="folder_created">Folder created</string>
+    <string name="folder_deleted">Folder deleted</string>
+    <string name="remove_from_folder">Remove from folder</string>
 </resources>

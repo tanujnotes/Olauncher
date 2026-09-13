@@ -26,6 +26,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.FolderApp
 import app.olauncher.data.Prefs
 import app.olauncher.data.toAppModel
+import app.olauncher.data.toFolderApp
 import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.hideKeyboard
@@ -91,6 +92,9 @@ class AppDrawerFragment : BaseFragment() {
         else if (flag == Constants.FLAG_FOLDER_PICKER) {
             binding.search.queryHint = getString(R.string.select_folder)
             binding.newFolder.visibility = View.VISIBLE
+        } else if (flag == Constants.FLAG_FOLDER_CONTENTS) {
+            binding.search.queryHint =
+                prefs.getFolderName(arguments?.getString(Constants.Key.FOLDER_ID).orEmpty())
         }
         try {
             searchTextView = binding.search.findViewById(R.id.search_src_text)
@@ -167,6 +171,17 @@ class AppDrawerFragment : BaseFragment() {
                         ) requireContext().showToast(getString(R.string.app_added_to_folder))
                     }
                     findNavController().popBackStack()
+                } else if (flag == Constants.FLAG_LAUNCH_APP && appModel is AppModel.Folder) {
+                    findNavController().navigate(
+                        R.id.appListFragment,
+                        bundleOf(
+                            Constants.Key.FLAG to Constants.FLAG_FOLDER_CONTENTS,
+                            Constants.Key.FOLDER_ID to appModel.folderId,
+                        )
+                    )
+                } else if (flag == Constants.FLAG_FOLDER_CONTENTS) {
+                    viewModel.selectedApp(appModel, Constants.FLAG_LAUNCH_APP)
+                    findNavController().popBackStack()
                 } else {
                     viewModel.selectedApp(appModel, flag)
                     if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
@@ -183,7 +198,7 @@ class AppDrawerFragment : BaseFragment() {
                 )
                 findNavController().popBackStack(R.id.mainFragment, false)
             },
-            appDeleteListener = { appModel ->
+            appDeleteListener = { appModel, position ->
                 when (appModel) {
                     is AppModel.PrivateSpaceHeader -> {}
                     is AppModel.PinnedShortcut ->
@@ -195,7 +210,13 @@ class AppDrawerFragment : BaseFragment() {
                             )
                         }
 
-                    is AppModel.Folder -> {}
+                    is AppModel.Folder -> {
+                        prefs.deleteFolder(appModel.folderId)
+                        adapter.appsList.remove(appModel)
+                        adapter.appFilteredList.removeAt(position)
+                        adapter.notifyItemRemoved(position)
+                        requireContext().showToast(getString(R.string.folder_deleted))
+                    }
 
                     is AppModel.App -> {
                         if (appModel.user != Process.myUserHandle()) {
@@ -211,6 +232,15 @@ class AppDrawerFragment : BaseFragment() {
                 viewModel.getAppList()
             },
             appHideListener = { appModel, position ->
+                if (flag == Constants.FLAG_FOLDER_CONTENTS) {
+                    val folderId = arguments?.getString(Constants.Key.FOLDER_ID)
+                        ?: return@AppDrawerAdapter
+                    if (prefs.removeAppFromFolder(folderId, appModel.toFolderApp())) {
+                        setFolderContentsList()
+                        viewModel.getAppList()
+                    }
+                    return@AppDrawerAdapter
+                }
                 if (appModel is AppModel.PinnedShortcut) {
                     requireContext().showToast("Hiding pinned shortcuts is not supported")
                     return@AppDrawerAdapter
@@ -239,12 +269,12 @@ class AppDrawerFragment : BaseFragment() {
                 viewModel.getHiddenApps()
             },
             appRenameListener = { appModel, renameLabel ->
-                val identifier = when (appModel) {
-                    is AppModel.PinnedShortcut -> appModel.identity
-                    is AppModel.App -> appModel.appPackage
+                when (appModel) {
+                    is AppModel.PinnedShortcut -> prefs.setAppRenameLabel(appModel.identity, renameLabel)
+                    is AppModel.App -> prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
+                    is AppModel.Folder -> prefs.renameFolder(appModel.folderId, renameLabel)
                     else -> return@AppDrawerAdapter
                 }
-                prefs.setAppRenameLabel(identifier, renameLabel)
                 viewModel.getAppList()
             },
             appAddToFolderListener = { appModel ->
@@ -308,7 +338,10 @@ class AppDrawerFragment : BaseFragment() {
         } else {
             viewModel.appList.observe(viewLifecycleOwner) {
                 currentAppList = it
-                updateCombinedAppList()
+                if (flag == Constants.FLAG_FOLDER_CONTENTS)
+                    setFolderContentsList()
+                else
+                    updateCombinedAppList()
             }
             if (flag == Constants.FLAG_LAUNCH_APP) {
                 viewModel.privateSpaceAvailable.observe(viewLifecycleOwner) {
@@ -329,12 +362,25 @@ class AppDrawerFragment : BaseFragment() {
 
     private fun setFolderPickerList() {
         val collator = Collator.getInstance()
-        adapter.setAppList(prefs.getFolders().map { it.toAppModel(collator) }.toMutableList())
+        adapter.setAppList(
+            prefs.getFolders()
+                .map { it.toAppModel(collator) }
+                .sortedWith(compareBy(collator) { it.appLabel })
+                .toMutableList()
+        )
+    }
+
+    private fun setFolderContentsList() {
+        val folderId = arguments?.getString(Constants.Key.FOLDER_ID) ?: return
+        val folder = prefs.getFolder(folderId) ?: return
+        val apps = currentAppList ?: return
+        adapter.setAppList(folder.apps.mapNotNull { it.toAppModel(apps) }.toMutableList())
     }
 
     private fun updateCombinedAppList() {
         val apps = currentAppList ?: return
         val combined = apps.toMutableList()
+        if (flag != Constants.FLAG_LAUNCH_APP) combined.removeAll { it is AppModel.Folder }
 
         if (flag == Constants.FLAG_LAUNCH_APP && currentPrivateSpaceAvailable) {
             combined.add(AppModel.PrivateSpaceHeader(isLocked = currentPrivateSpaceLocked))
@@ -367,6 +413,7 @@ class AppDrawerFragment : BaseFragment() {
             if (folderApp.packageName.isNotBlank()) {
                 prefs.createFolder(getString(R.string.new_folder), folderApp)
                 requireContext().showToast(getString(R.string.folder_created))
+                viewModel.getAppList()
                 findNavController().popBackStack()
             }
         }

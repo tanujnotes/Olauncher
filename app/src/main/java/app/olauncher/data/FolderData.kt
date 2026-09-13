@@ -24,6 +24,28 @@ fun FolderItem.toAppModel(collator: Collator): AppModel.Folder = AppModel.Folder
     key = collator.getCollationKey(name),
 )
 
+fun FolderApp.toAppModel(appList: List<AppModel>): AppModel? = when {
+    isShortcut -> appList.firstOrNull {
+        it is AppModel.PinnedShortcut &&
+            it.appPackage == packageName &&
+            it.user.toString() == user &&
+            it.shortcutId == shortcutId
+    }
+
+    else -> appList.firstOrNull {
+        it is AppModel.App &&
+            it.appPackage == packageName &&
+            it.user.toString() == user &&
+            it.activityClassName == activityClassName
+    }
+}
+
+fun AppModel.toFolderApp(): FolderApp = when (this) {
+    is AppModel.PinnedShortcut -> FolderApp(appPackage, user.toString(), null, true, shortcutId)
+    is AppModel.App -> FolderApp(appPackage, user.toString(), activityClassName, false, "")
+    else -> FolderApp("", user.toString(), null, false, "")
+}
+
 fun FolderApp.memberEquals(other: FolderApp): Boolean = when {
     isShortcut || other.isShortcut ->
         isShortcut == other.isShortcut && shortcutId == other.shortcutId &&

@@ -44,6 +44,7 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.data.shortcutIdentity
+import app.olauncher.data.toAppModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -124,6 +125,12 @@ suspend fun getAppsList(
                     emptyList()
                 }
                 appList.addAll(pinned)
+            }
+
+            // Add folders if we're getting regular apps
+            if (includeRegularApps) {
+                val collatorFolders = Collator.getInstance()
+                appList.addAll(prefs.getFolders().map { it.toAppModel(collatorFolders) })
             }
 
             appList.sortWith(compareBy(collator) { it.appLabel })
