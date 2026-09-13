@@ -121,6 +121,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun saveHomeApp(appModel: AppModel, position: Int) {
+        prefs.setFolderId(position, "")
         when (appModel) {
             is AppModel.PrivateSpaceHeader -> return
             is AppModel.App -> {
@@ -274,12 +275,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
             }
-            is AppModel.Folder -> {}
+            is AppModel.Folder -> {
+                prefs.clearHomeApp(position)
+                prefs.setAppName(position, appModel.appLabel)
+                prefs.setFolderId(position, appModel.folderId)
+            }
         }
         refreshHome(false)
     }
 
     private fun saveSwipeApp(appModel: AppModel, isLeft: Boolean) {
+        prefs.setSwipeFolderId(isLeft, "")
         when (appModel) {
             is AppModel.PrivateSpaceHeader -> return
             is AppModel.App -> {
@@ -317,7 +323,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     prefs.shortcutIdSwipeRight = appModel.shortcutId
                 }
             }
-            is AppModel.Folder -> {}
+            is AppModel.Folder -> {
+                prefs.clearSwipeApp(isLeft)
+                if (isLeft) prefs.appNameSwipeLeft = appModel.appLabel else prefs.appNameSwipeRight = appModel.appLabel
+                prefs.setSwipeFolderId(isLeft, appModel.folderId)
+            }
         }
         updateSwipeApps()
     }

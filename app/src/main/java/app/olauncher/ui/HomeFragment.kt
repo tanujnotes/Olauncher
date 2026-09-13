@@ -325,58 +325,50 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         if (homeAppsNum == 0) return
 
         binding.homeApp1.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp1, prefs.appName1, prefs.appPackage1, prefs.appUser1, prefs.isShortcut1, prefs.shortcutId1)) {
-            prefs.appName1 = ""
-            prefs.appPackage1 = ""
+        if (!setHomeAppText(binding.homeApp1, prefs.appName1, prefs.appPackage1, prefs.appUser1, prefs.isShortcut1, prefs.shortcutId1, prefs.getFolderId(1))) {
+            prefs.clearHomeApp(1)
         }
         if (homeAppsNum == 1) return
 
         binding.homeApp2.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp2, prefs.appName2, prefs.appPackage2, prefs.appUser2, prefs.isShortcut2, prefs.shortcutId2)) {
-            prefs.appName2 = ""
-            prefs.appPackage2 = ""
+        if (!setHomeAppText(binding.homeApp2, prefs.appName2, prefs.appPackage2, prefs.appUser2, prefs.isShortcut2, prefs.shortcutId2, prefs.getFolderId(2))) {
+            prefs.clearHomeApp(2)
         }
         if (homeAppsNum == 2) return
 
         binding.homeApp3.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp3, prefs.appName3, prefs.appPackage3, prefs.appUser3, prefs.isShortcut3, prefs.shortcutId3)) {
-            prefs.appName3 = ""
-            prefs.appPackage3 = ""
+        if (!setHomeAppText(binding.homeApp3, prefs.appName3, prefs.appPackage3, prefs.appUser3, prefs.isShortcut3, prefs.shortcutId3, prefs.getFolderId(3))) {
+            prefs.clearHomeApp(3)
         }
         if (homeAppsNum == 3) return
 
         binding.homeApp4.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp4, prefs.appName4, prefs.appPackage4, prefs.appUser4, prefs.isShortcut4, prefs.shortcutId4)) {
-            prefs.appName4 = ""
-            prefs.appPackage4 = ""
+        if (!setHomeAppText(binding.homeApp4, prefs.appName4, prefs.appPackage4, prefs.appUser4, prefs.isShortcut4, prefs.shortcutId4, prefs.getFolderId(4))) {
+            prefs.clearHomeApp(4)
         }
         if (homeAppsNum == 4) return
 
         binding.homeApp5.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp5, prefs.appName5, prefs.appPackage5, prefs.appUser5, prefs.isShortcut5, prefs.shortcutId5)) {
-            prefs.appName5 = ""
-            prefs.appPackage5 = ""
+        if (!setHomeAppText(binding.homeApp5, prefs.appName5, prefs.appPackage5, prefs.appUser5, prefs.isShortcut5, prefs.shortcutId5, prefs.getFolderId(5))) {
+            prefs.clearHomeApp(5)
         }
         if (homeAppsNum == 5) return
 
         binding.homeApp6.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp6, prefs.appName6, prefs.appPackage6, prefs.appUser6, prefs.isShortcut6, prefs.shortcutId6)) {
-            prefs.appName6 = ""
-            prefs.appPackage6 = ""
+        if (!setHomeAppText(binding.homeApp6, prefs.appName6, prefs.appPackage6, prefs.appUser6, prefs.isShortcut6, prefs.shortcutId6, prefs.getFolderId(6))) {
+            prefs.clearHomeApp(6)
         }
         if (homeAppsNum == 6) return
 
         binding.homeApp7.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp7, prefs.appName7, prefs.appPackage7, prefs.appUser7, prefs.isShortcut7, prefs.shortcutId7)) {
-            prefs.appName7 = ""
-            prefs.appPackage7 = ""
+        if (!setHomeAppText(binding.homeApp7, prefs.appName7, prefs.appPackage7, prefs.appUser7, prefs.isShortcut7, prefs.shortcutId7, prefs.getFolderId(7))) {
+            prefs.clearHomeApp(7)
         }
         if (homeAppsNum == 7) return
 
         binding.homeApp8.visibility = View.VISIBLE
-        if (!setHomeAppText(binding.homeApp8, prefs.appName8, prefs.appPackage8, prefs.appUser8, prefs.isShortcut8, prefs.shortcutId8)) {
-            prefs.appName8 = ""
-            prefs.appPackage8 = ""
+        if (!setHomeAppText(binding.homeApp8, prefs.appName8, prefs.appPackage8, prefs.appUser8, prefs.isShortcut8, prefs.shortcutId8, prefs.getFolderId(8))) {
+            prefs.clearHomeApp(8)
         }
     }
 
@@ -387,7 +379,17 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         userString: String,
         isShortcut: Boolean,
         shortcutId: String?,
+        folderId: String,
     ): Boolean {
+        if (folderId.isNotEmpty()) {
+            if (prefs.folderExists(folderId)) {
+                textView.text = prefs.getFolderName(folderId)
+                return true
+            }
+            textView.text = ""
+            return false
+        }
+
         // Get user handle for the app/shortcut
         val userHandle = getUserHandleFromString(requireContext(), userString)
 
@@ -498,6 +500,10 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun homeAppClicked(location: Int) {
+        if (prefs.getIsFolder(location)) {
+            openFolder(prefs.getFolderId(location))
+            return
+        }
         launchAppOrShortcut(
             appName = prefs.getAppName(location),
             packageName = prefs.getAppPackage(location),
@@ -508,8 +514,34 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         )
     }
 
+    private fun openFolder(folderId: String) {
+        if (!prefs.folderExists(folderId)) return
+        try {
+            findNavController().navigate(
+                R.id.action_mainFragment_to_appListFragment,
+                bundleOf(
+                    Constants.Key.FLAG to Constants.FLAG_FOLDER_CONTENTS,
+                    Constants.Key.FOLDER_ID to folderId,
+                )
+            )
+        } catch (e: Exception) {
+            findNavController().navigate(
+                R.id.appListFragment,
+                bundleOf(
+                    Constants.Key.FLAG to Constants.FLAG_FOLDER_CONTENTS,
+                    Constants.Key.FOLDER_ID to folderId,
+                )
+            )
+            e.printStackTrace()
+        }
+    }
+
     private fun openSwipeRightApp() {
         if (!prefs.swipeRightEnabled) return
+        if (prefs.folderIdSwipeRight.isNotEmpty()) {
+            openFolder(prefs.folderIdSwipeRight)
+            return
+        }
         launchAppOrShortcut(
             appName = prefs.appNameSwipeRight,
             packageName = prefs.appPackageSwipeRight,
@@ -523,6 +555,10 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
     private fun openSwipeLeftApp() {
         if (!prefs.swipeLeftEnabled) return
+        if (prefs.folderIdSwipeLeft.isNotEmpty()) {
+            openFolder(prefs.folderIdSwipeLeft)
+            return
+        }
         launchAppOrShortcut(
             appName = prefs.appNameSwipeLeft,
             packageName = prefs.appPackageSwipeLeft,

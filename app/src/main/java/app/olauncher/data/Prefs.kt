@@ -122,6 +122,9 @@ class Prefs(context: Context) {
     private val SHORTCUT_ID_SWIPE_RIGHT = "SHORTCUT_ID_SWIPE_RIGHT"
     private val IS_SHORTCUT_SWIPE_RIGHT = "IS_SHORTCUT_SWIPE_RIGHT"
 
+    private val FOLDER_ID_SWIPE_LEFT = "FOLDER_ID_SWIPE_LEFT"
+    private val FOLDER_ID_SWIPE_RIGHT = "FOLDER_ID_SWIPE_RIGHT"
+
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_FILENAME, 0)
 
     var firstOpen: Boolean
@@ -541,6 +544,14 @@ class Prefs(context: Context) {
         get() = prefs.getBoolean(IS_SHORTCUT_SWIPE_RIGHT, false)
         set(value) = prefs.edit { putBoolean(IS_SHORTCUT_SWIPE_RIGHT, value) }
 
+    var folderIdSwipeLeft: String
+        get() = prefs.getString(FOLDER_ID_SWIPE_LEFT, "").toString()
+        set(value) = prefs.edit { putString(FOLDER_ID_SWIPE_LEFT, value) }
+
+    var folderIdSwipeRight: String
+        get() = prefs.getString(FOLDER_ID_SWIPE_RIGHT, "").toString()
+        set(value) = prefs.edit { putString(FOLDER_ID_SWIPE_RIGHT, value) }
+
     fun getAppName(location: Int): String {
         return when (location) {
             1 -> prefs.getString(APP_NAME_1, "").toString()
@@ -625,6 +636,50 @@ class Prefs(context: Context) {
         }
     }
 
+    fun getFolderId(location: Int): String = prefs.getString("FOLDER_ID_$location", "").toString()
+
+    fun getIsFolder(location: Int): Boolean = getFolderId(location).isNotEmpty()
+
+    fun setFolderId(location: Int, value: String) = prefs.edit { putString("FOLDER_ID_$location", value) }
+
+    fun setAppName(location: Int, value: String) = prefs.edit { putString("APP_NAME_$location", value) }
+
+    fun setSwipeFolderId(isLeft: Boolean, value: String) {
+        if (isLeft) folderIdSwipeLeft = value else folderIdSwipeRight = value
+    }
+
+    fun clearHomeApp(location: Int) {
+        prefs.edit {
+            putString("APP_NAME_$location", "")
+            putString("APP_PACKAGE_$location", "")
+            putString("APP_ACTIVITY_CLASS_NAME_$location", null)
+            putString("APP_USER_$location", "")
+            putBoolean("IS_SHORTCUT_$location", false)
+            putString("SHORTCUT_ID_$location", "")
+            putString("FOLDER_ID_$location", "")
+        }
+    }
+
+    fun clearSwipeApp(isLeft: Boolean) {
+        if (isLeft) {
+            appNameSwipeLeft = ""
+            appPackageSwipeLeft = ""
+            appActivityClassNameSwipeLeft = null
+            appUserSwipeLeft = ""
+            isShortcutSwipeLeft = false
+            shortcutIdSwipeLeft = ""
+            folderIdSwipeLeft = ""
+        } else {
+            appNameSwipeRight = ""
+            appPackageSwipeRight = ""
+            appActivityClassNameRight = null
+            appUserSwipeRight = ""
+            isShortcutSwipeRight = false
+            shortcutIdSwipeRight = ""
+            folderIdSwipeRight = ""
+        }
+    }
+
     fun setAppActivityClassName(location: Int, activityClassName: String) {
         when (location) {
             1 -> appActivityClassName1 = activityClassName
@@ -702,6 +757,9 @@ class Prefs(context: Context) {
         val folderList = getFolders()
         val existed = folderList.any { it.id == id }
         if (existed) saveFolders(folderList.filterNot { it.id == id })
+        for (slot in 1..8) if (getFolderId(slot) == id) clearHomeApp(slot)
+        if (folderIdSwipeLeft == id) clearSwipeApp(true)
+        if (folderIdSwipeRight == id) clearSwipeApp(false)
         return existed
     }
 

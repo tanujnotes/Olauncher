@@ -272,7 +272,11 @@ class AppDrawerFragment : BaseFragment() {
                 when (appModel) {
                     is AppModel.PinnedShortcut -> prefs.setAppRenameLabel(appModel.identity, renameLabel)
                     is AppModel.App -> prefs.setAppRenameLabel(appModel.appPackage, renameLabel)
-                    is AppModel.Folder -> prefs.renameFolder(appModel.folderId, renameLabel)
+                    is AppModel.Folder -> {
+                        prefs.renameFolder(appModel.folderId, renameLabel)
+                        viewModel.refreshHome(false)
+                    }
+
                     else -> return@AppDrawerAdapter
                 }
                 viewModel.getAppList()
@@ -380,7 +384,11 @@ class AppDrawerFragment : BaseFragment() {
     private fun updateCombinedAppList() {
         val apps = currentAppList ?: return
         val combined = apps.toMutableList()
-        if (flag != Constants.FLAG_LAUNCH_APP) combined.removeAll { it is AppModel.Folder }
+        val foldersAllowed = flag == Constants.FLAG_LAUNCH_APP ||
+                flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_HOME_APP_8 ||
+                flag == Constants.FLAG_SET_SWIPE_LEFT_APP ||
+                flag == Constants.FLAG_SET_SWIPE_RIGHT_APP
+        if (!foldersAllowed) combined.removeAll { it is AppModel.Folder }
 
         if (flag == Constants.FLAG_LAUNCH_APP && currentPrivateSpaceAvailable) {
             combined.add(AppModel.PrivateSpaceHeader(isLocked = currentPrivateSpaceLocked))
