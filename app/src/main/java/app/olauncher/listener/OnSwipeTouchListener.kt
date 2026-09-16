@@ -88,7 +88,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
                     }
                 } else {
                     if (abs(diffY) > SWIPE_THRESHOLD && abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                        if (diffY < 0) onSwipeUp() else onSwipeDown()
+                        if (diffY < 0) onSwipeUp() else onSwipeDown(event1?.rawY ?: 0F)
                     }
                 }
             } catch (exception: Exception) {
@@ -101,7 +101,7 @@ internal open class OnSwipeTouchListener(c: Context?) : OnTouchListener {
     open fun onSwipeRight() {}
     open fun onSwipeLeft() {}
     open fun onSwipeUp() {}
-    open fun onSwipeDown() {}
+    open fun onSwipeDown(startY: Float) {}
     open fun onLongClick() {}
     open fun onDoubleClick() {}
     open fun onTripleClick() {}

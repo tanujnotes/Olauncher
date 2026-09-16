@@ -57,6 +57,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    // Swipe down starting in this top strip opens the notification drawer; below it opens the app list
+    private val topSwipeThreshold by lazy { 100.dpToPx() }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -533,6 +536,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         )
     }
 
+    private fun handleSwipeDown(startY: Float) {
+        if (startY < topSwipeThreshold) expandNotificationDrawer(requireContext())
+        else showAppList(Constants.FLAG_LAUNCH_APP)
+    }
+
     private fun showAppList(flag: Int, rename: Boolean = false, includeHiddenApps: Boolean = false) {
         viewModel.getAppList(includeHiddenApps)
         try {
@@ -655,9 +663,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 showAppList(Constants.FLAG_LAUNCH_APP)
             }
 
-            override fun onSwipeDown() {
-                super.onSwipeDown()
-                expandNotificationDrawer(requireContext())
+            override fun onSwipeDown(startY: Float) {
+                super.onSwipeDown(startY)
+                handleSwipeDown(startY)
             }
 
             override fun onLongClick() {
@@ -703,9 +711,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 showAppList(Constants.FLAG_LAUNCH_APP)
             }
 
-            override fun onSwipeDown() {
-                super.onSwipeDown()
-                expandNotificationDrawer(requireContext())
+            override fun onSwipeDown(startY: Float) {
+                super.onSwipeDown(startY)
+                handleSwipeDown(startY)
             }
 
             override fun onLongClick(view: View) {

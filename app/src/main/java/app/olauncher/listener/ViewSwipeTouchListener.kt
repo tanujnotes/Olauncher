@@ -72,7 +72,7 @@ internal open class ViewSwipeTouchListener(c: Context?, v: View) : OnTouchListen
                     }
                 } else {
                     if (abs(diffY) > SWIPE_THRESHOLD && abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                        if (diffY < 0) onSwipeUp() else onSwipeDown()
+                        if (diffY < 0) onSwipeUp() else onSwipeDown(event1?.rawY ?: 0F)
                     }
                 }
             } catch (exception: Exception) {
@@ -85,7 +85,7 @@ internal open class ViewSwipeTouchListener(c: Context?, v: View) : OnTouchListen
     open fun onSwipeRight() {}
     open fun onSwipeLeft() {}
     open fun onSwipeUp() {}
-    open fun onSwipeDown() {}
+    open fun onSwipeDown(startY: Float) {}
     open fun onLongClick(view: View) {}
     private fun onDoubleClick() {}
     open fun onClick(view: View) {}
