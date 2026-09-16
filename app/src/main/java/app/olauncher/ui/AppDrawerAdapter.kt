@@ -59,9 +59,6 @@ class AppDrawerAdapter(
         }
     }
 
-    private var autoLaunch = true
-    private var isBangSearch = false
-    var allowAutoLaunch = true
     private val diacriticsRegex = Regex("\\p{InCombiningDiacriticalMarks}+")
     private val separatorsRegex = Regex("[-_+,.`'\\s\\p{Z}]")
     private val appFilter = createAppFilter()
@@ -132,9 +129,6 @@ class AppDrawerAdapter(
     private fun createAppFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(charSearch: CharSequence?): FilterResults {
-                isBangSearch = charSearch?.startsWith("!") ?: false
-                autoLaunch = allowAutoLaunch && (charSearch?.startsWith(" ")?.not() ?: true)
-
                 val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
                 else appsList.filter { app ->
                     app !is AppModel.PrivateSpaceHeader && appLabelMatches(app.appLabel, charSearch)
@@ -150,25 +144,9 @@ class AppDrawerAdapter(
                 results?.values?.let {
                     val items = it as MutableList<AppModel>
                     appFilteredList = items
-                    submitList(appFilteredList) {
-                        autoLaunch()
-                    }
+                    submitList(appFilteredList)
                 }
             }
-        }
-    }
-
-    private fun autoLaunch() {
-        try {
-            if (itemCount == 1
-                && autoLaunch
-                && isBangSearch.not()
-                && flag == Constants.FLAG_LAUNCH_APP
-                && appFilteredList.isNotEmpty()
-                && appFilteredList[0] !is AppModel.PrivateSpaceHeader
-            ) appClickListener(appFilteredList[0])
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
