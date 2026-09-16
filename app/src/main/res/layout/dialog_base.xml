@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Every gap is 20dp: edge to title, title to message/content, message to action, action to edge.
+    Touch padding on the action (8dp) and the close icon (6dp) is subtracted from the
+    neighbouring margins so the visible text keeps that rhythm.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="12dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginEnd="48dp"
+            android:includeFontPadding="false"
+            android:textColor="?attr/primaryColor"
+            tools:text="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:alpha="0.5"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/close"
+            android:focusable="true"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            android:src="@drawable/ic_close" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvMessage"
+        style="@style/TextSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="2dp"
+        android:paddingEnd="8dp"
+        android:textColor="?attr/primaryColor"
+        android:visibility="gone"
+        tools:ignore="RtlSymmetry"
+        tools:text="@string/rate_us_message"
+        tools:visibility="visible" />
+
+    <!-- Custom content supplies its own margins, see dialog_text_size.xml -->
+    <FrameLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvNeutral"
+            style="@style/TextSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:includeFontPadding="false"
+            android:paddingVertical="8dp"
+            android:paddingEnd="8dp"
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry"
+            tools:text="@string/not_working"
+            tools:visibility="visible" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvAction"
+            style="@style/TextSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:focusable="true"
+            android:includeFontPadding="false"
+            android:padding="8dp"
+            android:textSize="18sp"
+            tools:text="@string/okay" />
+    </LinearLayout>
+
+</LinearLayout>

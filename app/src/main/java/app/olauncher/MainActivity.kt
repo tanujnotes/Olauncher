@@ -13,9 +13,9 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.view.View
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +34,7 @@ import app.olauncher.helper.isDaySince
 import app.olauncher.helper.isDefaultLauncher
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isOlauncherDefault
+import app.olauncher.helper.isSystemAnimationsDisabled
 import app.olauncher.helper.isTablet
 import app.olauncher.helper.openUrl
 import app.olauncher.helper.rateApp
@@ -41,6 +42,7 @@ import app.olauncher.helper.resetLauncherViaFakeActivity
 import app.olauncher.helper.setPlainWallpaper
 import app.olauncher.helper.shareApp
 import app.olauncher.helper.showLauncherSelector
+import app.olauncher.helper.showMessageDialog
 import app.olauncher.helper.showToast
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
     private var isResumed = false
     private var profileReceiver: BroadcastReceiver? = null
     private var launcherAppsCallback: LauncherApps.Callback? = null
+    private var messageDialog: AlertDialog? = null
 
 //    override fun onBackPressed() {
 //        if (navController.currentDestination?.id != R.id.mainFragment)
@@ -76,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
         super.onCreate(savedInstanceState)
         if (prefs.boldFont) theme.applyStyle(R.style.BoldFontOverlay, true)
+        if (isEinkDisplay() || isSystemAnimationsDisabled()) theme.applyStyle(R.style.NoAnimationOverlay, true)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -84,16 +88,9 @@ class MainActivity : AppCompatActivity() {
 
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (navController.currentDestination?.id != R.id.mainFragment) {
-                    // then we might want to finish the activity or disable this callback.
-                    if (navController.popBackStack()) {
-                        // Successfully popped back
-                    } else {
-                        // if you want other system/activity level handling
-                    }
-                } else {
-                    binding.messageLayout.visibility = View.GONE
-                }
+                // Back never leaves the home screen; elsewhere it pops the nav stack
+                if (navController.currentDestination?.id != R.id.mainFragment)
+                    navController.popBackStack()
             }
         }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
@@ -106,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             viewModel.resetLauncherLiveData.call()
         }
 
-        initClickListeners()
         initObservers(viewModel)
         viewModel.getAppList()
         registerShortcutCallback()
@@ -200,12 +196,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initClickListeners() {
-        binding.ivClose.setOnClickListener {
-            binding.messageLayout.visibility = View.GONE
-        }
-    }
-
     private fun initObservers(viewModel: MainViewModel) {
         viewModel.launcherResetFailed.observe(this) {
             openLauncherChooser(it)
@@ -222,15 +212,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.showDialog.observe(this) {
             when (it) {
                 Constants.Dialog.ABOUT -> {
-                    showMessageDialog(R.string.app_name, R.string.welcome_to_olauncher_settings, R.string.okay) {
-                        binding.messageLayout.visibility = View.GONE
-                    }
+                    showMessage(R.string.app_name, R.string.welcome_to_olauncher_settings, R.string.okay) {}
                 }
 
                 Constants.Dialog.WALLPAPER -> {
                     prefs.wallpaperMsgShown = true
                     prefs.userState = Constants.UserState.REVIEW
-                    showMessageDialog(R.string.did_you_know, R.string.wallpaper_message, R.string.enable) {
+                    showMessage(R.string.did_you_know, R.string.wallpaper_message, R.string.enable) {
                         prefs.dailyWallpaper = true
                         viewModel.setWallpaperWorker()
                         showToast(getString(R.string.your_wallpaper_will_update_shortly))
@@ -239,7 +227,7 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.REVIEW -> {
                     prefs.userState = Constants.UserState.RATE
-                    showMessageDialog(R.string.hey, R.string.review_message, R.string.leave_a_review) {
+                    showMessage(R.string.hey, R.string.review_message, R.string.leave_a_review) {
                         prefs.rateClicked = true
                         showToast("😇❤️")
                         rateApp()
@@ -248,7 +236,7 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.RATE -> {
                     prefs.userState = Constants.UserState.SHARE
-                    showMessageDialog(R.string.app_name, R.string.rate_us_message, R.string.rate_now) {
+                    showMessage(R.string.app_name, R.string.rate_us_message, R.string.rate_now) {
                         prefs.rateClicked = true
                         showToast("🤩❤️")
                         rateApp()
@@ -257,30 +245,30 @@ class MainActivity : AppCompatActivity() {
 
                 Constants.Dialog.SHARE -> {
                     prefs.shareShownTime = System.currentTimeMillis()
-                    showMessageDialog(R.string.hey, R.string.share_message, R.string.share_now) {
+                    showMessage(R.string.hey, R.string.share_message, R.string.share_now) {
                         showToast("😊❤️")
                         shareApp()
                     }
                 }
 
                 Constants.Dialog.HIDDEN -> {
-                    showMessageDialog(R.string.hidden_apps, R.string.hidden_apps_message, R.string.okay) {
+                    showMessage(R.string.hidden_apps, R.string.hidden_apps_message, R.string.okay) {
                     }
                 }
 
                 Constants.Dialog.KEYBOARD -> {
-                    showMessageDialog(R.string.app_name, R.string.keyboard_message, R.string.okay) {
+                    showMessage(R.string.app_name, R.string.keyboard_message, R.string.okay) {
                     }
                 }
 
                 Constants.Dialog.DIGITAL_WELLBEING -> {
-                    showMessageDialog(R.string.screen_time, R.string.app_usage_message, R.string.permission) {
+                    showMessage(R.string.screen_time, R.string.app_usage_message, R.string.permission) {
                         startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
                     }
                 }
 
                 Constants.Dialog.PRO_MESSAGE -> {
-                    showMessageDialog(R.string.hey, R.string.pro_message, R.string.olauncher_pro) {
+                    showMessage(R.string.hey, R.string.pro_message, R.string.olauncher_pro) {
                         openUrl(Constants.URL_OLAUNCHER_PRO)
                     }
                 }
@@ -288,15 +276,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showMessageDialog(title: Int, message: Int, action: Int, clickListener: () -> Unit) {
-        binding.tvTitle.text = getString(title)
-        binding.tvMessage.text = getString(message)
-        binding.tvAction.text = getString(action)
-        binding.tvAction.setOnClickListener {
-            clickListener()
-            binding.messageLayout.visibility = View.GONE
-        }
-        binding.messageLayout.visibility = View.VISIBLE
+    private fun showMessage(title: Int, message: Int, action: Int, clickListener: () -> Unit) {
+        messageDialog?.dismiss()
+        messageDialog = showMessageDialog(title, message, action, clickListener)
     }
 
     private fun checkForMessages() {
@@ -307,11 +289,11 @@ class MainActivity : AppCompatActivity() {
         val dayOfYear = calendar.get(Calendar.DAY_OF_YEAR)
         if (dayOfYear == 1 && dayOfYear != prefs.shownOnDayOfYear) {
             prefs.shownOnDayOfYear = dayOfYear
-            showMessageDialog(R.string.hey, R.string.new_year_wish, R.string.cheers) {}
+            showMessage(R.string.hey, R.string.new_year_wish, R.string.cheers) {}
             return
         } else if (dayOfYear == 32 && dayOfYear != prefs.shownOnDayOfYear) {
             prefs.shownOnDayOfYear = dayOfYear
-            showMessageDialog(R.string.hey, R.string.new_year_wish_1, R.string.cheers) {}
+            showMessage(R.string.hey, R.string.new_year_wish_1, R.string.cheers) {}
             return
         }
 
@@ -363,7 +345,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun backToHomeScreen() {
         if (viewModel.isPrivateSpaceToggling) return
-        binding.messageLayout.visibility = View.GONE
+        messageDialog?.dismiss()
         if (navController.currentDestination?.id != R.id.mainFragment)
             navController.popBackStack(R.id.mainFragment, false)
     }
@@ -402,6 +384,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        messageDialog?.dismiss()
+        messageDialog = null
         launcherAppsCallback?.let {
             getSystemService(LauncherApps::class.java).unregisterCallback(it)
         }

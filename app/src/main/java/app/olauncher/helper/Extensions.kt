@@ -16,6 +16,8 @@ import android.os.UserHandle
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.view.View
+import android.view.Window
+import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
@@ -24,6 +26,22 @@ import app.olauncher.R
 import app.olauncher.data.Constants
 import java.util.Calendar
 import java.util.Locale
+
+fun Window.showStatusBar() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        insetsController?.show(WindowInsets.Type.statusBars())
+    else
+        @Suppress("DEPRECATION", "InlinedApi")
+        decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+}
+
+fun Window.hideStatusBar() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
+        insetsController?.hide(WindowInsets.Type.statusBars())
+    else
+        @Suppress("DEPRECATION")
+        decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN
+}
 
 fun View.hideKeyboard() {
     this.clearFocus()

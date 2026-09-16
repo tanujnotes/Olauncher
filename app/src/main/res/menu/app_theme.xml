@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shown only when the theme row is long pressed -->
+    <item
+        android:id="@+id/themeSystem"
+        android:title="@string/system_default"
+        android:visible="false" />
+    <item
+        android:id="@+id/themeLight"
+        android:title="@string/light" />
+    <item
+        android:id="@+id/themeDark"
+        android:title="@string/dark" />
+</menu>

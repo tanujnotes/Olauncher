@@ -45,6 +45,12 @@
 
         <item name="mainFontFamily">sans-serif-light</item>
 
+        <!-- Popup menus and dialogs used by settings -->
+        <item name="popupMenuStyle">@style/OlPopupMenu</item>
+        <item name="textAppearanceLargePopupMenu">@style/OlPopupMenuText</item>
+        <item name="textAppearanceSmallPopupMenu">@style/OlPopupMenuText</item>
+        <item name="alertDialogTheme">@style/OlAlertDialog</item>
+
     </style>
 
     <!-- Applied over AppTheme when bold font is enabled -->
@@ -96,6 +102,43 @@
 
     <style name="TextSmallLight" parent="TextSmall">
         <item name="android:textColor">@drawable/text_colors_light</item>
+    </style>
+
+    <!-- Popup menu anchored to a settings row -->
+    <style name="OlPopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/rounded_primary_gradient</item>
+        <item name="android:popupElevation">8dp</item>
+    </style>
+
+    <style name="OlPopupMenu.NoAnimation">
+        <item name="android:popupAnimationStyle">@style/NoWindowAnimation</item>
+    </style>
+
+    <style name="OlPopupMenuText" parent="TextAppearance.AppCompat.Widget.PopupMenu.Large">
+        <item name="android:textColor">?attr/primaryColor</item>
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Alert dialogs: the window only; content comes from layout/dialog_base.xml -->
+    <style name="OlAlertDialog" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="OlAlertDialog.NoAnimation">
+        <item name="android:windowAnimationStyle">@style/NoWindowAnimation</item>
+    </style>
+
+    <!-- Applied over AppTheme on e-ink displays or when system animations are off -->
+    <style name="NoAnimationOverlay">
+        <item name="popupMenuStyle">@style/OlPopupMenu.NoAnimation</item>
+        <item name="alertDialogTheme">@style/OlAlertDialog.NoAnimation</item>
+    </style>
+
+    <style name="NoWindowAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
     </style>
 
 </resources>

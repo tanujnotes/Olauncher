@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/alignmentLeft"
+        android:title="@string/left" />
+    <item
+        android:id="@+id/alignmentCenter"
+        android:title="@string/center" />
+    <item
+        android:id="@+id/alignmentRight"
+        android:title="@string/right" />
+    <!-- Title is set at runtime to bottom_on / bottom_off -->
+    <item
+        android:id="@+id/alignmentBottom"
+        android:title="@string/bottom_off" />
+</menu>

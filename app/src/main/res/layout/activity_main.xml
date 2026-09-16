@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainActivityLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true">
+    android:layout_height="match_parent">
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -15,85 +14,4 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
         tools:ignore="FragmentTagUsage" />
-
-    <FrameLayout
-        android:id="@+id/messageLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/dialogShadeColor"
-        android:clickable="true"
-        android:clipToPadding="false"
-        android:focusable="true"
-        android:padding="32dp"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/rounded_rectangle_dark"
-            android:elevation="8dp"
-            android:orientation="vertical"
-            android:outlineAmbientShadowColor="@color/colorPrimaryDark"
-            android:outlineSpotShadowColor="@color/colorPrimaryDark"
-            android:paddingVertical="24dp"
-            android:paddingStart="24dp"
-            android:paddingEnd="16dp"
-            tools:targetApi="p">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/ivClose"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:alpha="0.5"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/close"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_close" />
-
-                <TextView
-                    android:id="@+id/tvTitle"
-                    style="@style/TextLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="48dp"
-                    android:clickable="false"
-                    android:includeFontPadding="false"
-                    android:text="@string/app_name"
-                    android:textColor="?attr/primaryColor" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/tvMessage"
-                style="@style/TextSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:lineSpacingExtra="2dp"
-                android:textColor="?attr/primaryColor"
-                tools:text="@string/rate_us_message" />
-
-            <TextView
-                android:id="@+id/tvAction"
-                style="@style/TextSmallBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="20dp"
-                android:background="?attr/selectableItemBackground"
-                android:padding="8dp"
-                android:text="@string/okay"
-                android:textAllCaps="false"
-                android:textSize="18sp" />
-
-        </LinearLayout>
-
-    </FrameLayout>
 </FrameLayout>
