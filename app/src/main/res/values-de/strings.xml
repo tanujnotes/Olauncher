@@ -24,9 +24,6 @@
     <string name="hidden_apps">Versteckte Apps</string>
     <string name="hidden_apps_message">Hinweis: Tippen Sie oben auf dieser Einstellungsseite auf „Olauncher“, um Ihre versteckten Apps zu finden.
         \n\nWeitere Einzelheiten finden Sie auf der „Über“ Seite unten.</string>
-    <string name="swipe_down_for">Wischen Sie nach unten für</string>
-    <string name="search">Suchen</string>
-    <string name="notifications">Benachrichtigungen</string>
     <string name="accessibility_disclosure">Bitte schalten Sie den Barrierefreiheitsdienst von Olauncher in den Einstellungen Ihres Geräts ein, um die Gesten Doppeltippen zum Sperren oder Home-Taste für letzte Apps zu aktivieren.\n\nBitte beachten Sie, dass dieser Dienst nur für diese Gesten verwendet wird. Unser Barrierefreiheitsdienst sammelt oder teilt keine Daten.</string>
     <string name="accept">Akzeptieren</string>
     <string name="permission">Erlaubnis</string>

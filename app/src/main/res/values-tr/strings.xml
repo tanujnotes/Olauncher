@@ -24,9 +24,6 @@
     <string name="hidden_apps">Gizli uygulamalar</string>
     <string name="hidden_apps_message">Not: Gizli uygulamalarınızı bulmak için bu ayarlar sayfasının üst kısmındaki \"Olauncher\" yazısına dokunun.
         \n\nDaha fazla ayrıntı "Hakkında" sayfasında mevcuttur.</string>
-    <string name="swipe_down_for">Aşağı kaydır:</string>
-    <string name="search">Ara</string>
-    <string name="notifications">Bildirimler</string>
     <string name="accessibility_disclosure">Kilitlemek için çift dokunma veya son uygulamalar için ana ekran düğmesi hareketlerini etkinleştirmek için lütfen cihazınızın ayarlarında Olauncher\'ın erişilebilirlik hizmetini açın.\n\nBu hizmetin yalnızca bu hareketler için kullanıldığını lütfen unutmayın. Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
     <string name="accept">Kabul et</string>
     <string name="permission">İzin</string>

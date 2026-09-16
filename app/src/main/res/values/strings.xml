@@ -112,9 +112,6 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
     <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page.</string>
-    <string name="swipe_down_for">Swipe down for</string>
-    <string name="search">Search</string>
-    <string name="notifications">Notifications</string>
     <string name="accessibility_disclosure">Please turn on Olauncher\'s accessibility service in your device\'s settings to enable Double tap to lock gesture.
     \n\nPlease note that this service is only used for this particular feature. Our accessibility service does not collect or share any data.</string>
     <string name="accept">Accept</string>

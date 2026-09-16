@@ -78,9 +78,6 @@
     <string name="affiliate">제휴</string>
     <string name="tip_start_typing_for_rename">팁: 앱 이름 변경을 위해 입력을 시작하세요</string>
     <string name="hidden_apps_message">참고: 이 설정 페이지 상단에서 \'Olauncher\'를 탭하면 숨긴 앱을 찾을 수 있습니다.\n\n자세한 내용은 앱 정보 페이지를 확인하세요.</string>
-    <string name="swipe_down_for">아래로 밀기</string>
-    <string name="search">검색</string>
-    <string name="notifications">알림</string>
     <string name="accessibility_disclosure">두 번 탭하여 잠금 제스처를 사용하려면 기기 설정에서 Olauncher의 접근성 서비스를 켜 주세요.\n\n이 서비스는 해당 기능에만 사용되며, 어떤 데이터도 수집하거나 공유하지 않습니다.</string>
     <string name="accept">수락</string>
     <string name="permission">권한</string>

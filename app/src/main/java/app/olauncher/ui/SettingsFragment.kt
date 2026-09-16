@@ -90,7 +90,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         populateStatusBar()
         populateDateTime()
         populateSwipeApps()
-        populateSwipeDownAction()
         populateActionHints()
         initClickListeners()
         initObservers()
@@ -120,11 +119,8 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.textSizeValue -> showTextSizeDialog()
             R.id.boldFont -> toggleBoldFont()
 
-            R.id.tvGestures -> binding.flSwipeDown.visibility = View.VISIBLE
-
             R.id.swipeLeftApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_LEFT_APP)
             R.id.swipeRightApp -> showAppListIfEnabled(Constants.FLAG_SET_SWIPE_RIGHT_APP)
-            R.id.swipeDownAction -> showSwipeDownMenu(view)
 
             R.id.aboutOlauncher -> {
                 prefs.aboutClicked = true
@@ -184,7 +180,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.dateTime.setOnClickListener(this)
         binding.swipeLeftApp.setOnClickListener(this)
         binding.swipeRightApp.setOnClickListener(this)
-        binding.swipeDownAction.setOnClickListener(this)
         binding.appThemeText.setOnClickListener(this)
         binding.textSizeValue.setOnClickListener(this)
         binding.boldFont.setOnClickListener(this)
@@ -271,15 +266,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
                 R.id.themeLight -> updateTheme(AppCompatDelegate.MODE_NIGHT_NO)
                 R.id.themeDark -> updateTheme(AppCompatDelegate.MODE_NIGHT_YES)
                 R.id.themeSystem -> updateTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            }
-        }
-    }
-
-    private fun showSwipeDownMenu(anchor: View) {
-        anchor.showPopupMenu(R.menu.swipe_down) { item ->
-            when (item.itemId) {
-                R.id.notifications -> updateSwipeDownAction(Constants.SwipeDownAction.NOTIFICATIONS)
-                R.id.search -> updateSwipeDownAction(Constants.SwipeDownAction.SEARCH)
             }
         }
     }
@@ -628,19 +614,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
                 else R.string.off
             )
         }
-    }
-
-    private fun populateSwipeDownAction() {
-        binding.swipeDownAction.text = when (prefs.swipeDownAction) {
-            Constants.SwipeDownAction.NOTIFICATIONS -> getString(R.string.notifications)
-            else -> getString(R.string.search)
-        }
-    }
-
-    private fun updateSwipeDownAction(swipeDownFor: Int) {
-        if (prefs.swipeDownAction == swipeDownFor) return
-        prefs.swipeDownAction = swipeDownFor
-        populateSwipeDownAction()
     }
 
     private fun populateSwipeApps() {

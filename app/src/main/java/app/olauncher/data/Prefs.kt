@@ -35,7 +35,6 @@ class Prefs(context: Context) {
     private val RATE_CLICKED = "RATE_CLICKED"
     private val WALLPAPER_MSG_SHOWN = "WALLPAPER_MSG_SHOWN"
     private val SHARE_SHOWN_TIME = "SHARE_SHOWN_TIME"
-    private val SWIPE_DOWN_ACTION = "SWIPE_DOWN_ACTION"
     private val TEXT_SIZE_SCALE = "TEXT_SIZE_SCALE"
     private val BOLD_FONT = "BOLD_FONT"
     private val PRO_MESSAGE_SHOWN = "PRO_MESSAGE_SHOWN"
@@ -257,10 +256,6 @@ class Prefs(context: Context) {
     var shareShownTime: Long
         get() = prefs.getLong(SHARE_SHOWN_TIME, 0L)
         set(value) = prefs.edit { putLong(SHARE_SHOWN_TIME, value).apply() }
-
-    var swipeDownAction: Int
-        get() = prefs.getInt(SWIPE_DOWN_ACTION, Constants.SwipeDownAction.NOTIFICATIONS)
-        set(value) = prefs.edit { putInt(SWIPE_DOWN_ACTION, value).apply() }
 
     var appName1: String
         get() = prefs.getString(APP_NAME_1, "").toString()

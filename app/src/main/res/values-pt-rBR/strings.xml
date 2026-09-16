@@ -87,9 +87,6 @@
     <string name="tip_start_typing_for_rename">Dica: comece a digitar para a opção RENAME do aplicativo</string>
     <string name="hidden_apps_message">Nota: Toque em \"Olauncher\" na parte superior desta página de Configurações para encontrar seus aplicativos ocultos.
         \n\nMais detalhes disponíveis em nossa página Sobre abaixo.</string>
-    <string name="swipe_down_for">Deslize para baixo para</string>
-    <string name="search">Procurar</string>
-    <string name="notifications">Notificações</string>
     <string name="accessibility_disclosure">Ative o serviço de acessibilidade do Olauncher nas configurações do seu dispositivo para ativar os gestos de toque duplo para bloquear ou botão início para aplicativos recentes.\n\nObserve que este serviço é usado apenas para esses gestos. Nosso serviço de acessibilidade não coleta nem compartilha nenhum dado.</string>
     <string name="accept">Aceitar</string>
     <string name="permission">Permissão</string>

@@ -88,9 +88,6 @@
     <string name="tip_start_typing_for_rename">Порада: почніть вводити текст, щоб перейменувати програму.</string>
     <string name="hidden_apps_message">Примітка. Натисніть «Olauncher» у верхній частині сторінки налаштувань, щоб знайти приховані програми.
         \n\nДокладніша інформація доступна на нашій сторінці «Про нас» нижче.</string>
-    <string name="swipe_down_for">Проведіть вниз для</string>
-    <string name="search">Пошук</string>
-    <string name="notifications">Повідомлення</string>
     <string name="accessibility_disclosure">Увімкніть службу доступності Olauncher у налаштуваннях Вашого пристрою, щоб увімкнути жести подвійного торкання для блокування або кнопки «Домому» для нещодавніх додатків.\n\nЗверніть увагу, що ця служба використовується лише для цих жестів. Наша служба доступності не збирає та не поширює жодних даних.</string>
     <string name="accept">Прийняти</string>
     <string name="permission">Дозвіл</string>

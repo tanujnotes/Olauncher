@@ -88,9 +88,6 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Begin met typen om een app te hernoemen</string>
     <string name="hidden_apps_message">Opmerking: Tik bovenaan deze instellingenpagina op \'Olauncher\' om je verborgen apps te vinden.\n\nMeer informatie is beschikbaar op onze Over-pagina.</string>
-    <string name="swipe_down_for">Veeg omlaag voor</string>
-    <string name="search">Zoeken</string>
-    <string name="notifications">Meldingen</string>
     <string name="accessibility_disclosure">Schakel de toegankelijkheidsdienst van Olauncher in via de instellingen van je apparaat om de gebaren dubbel tikken om te vergrendelen of startknop voor recente apps te activeren.\n\nHoud er rekening mee dat deze service alleen wordt gebruikt voor deze gebaren. Onze toegankelijkheidsdienst verzamelt of deelt geen gegevens.</string>
     <string name="accept">Accepteren</string>
     <string name="permission">Toestemming</string>

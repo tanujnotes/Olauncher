@@ -25,9 +25,6 @@
     <string name="swipe_left_app_disabled">التمرير لليسار معطّل</string>
     <string name="swipe_right_app_disabled">التمرير لليمين معطّل</string>
     <string name="hidden_apps_message">ملاحظة: اضغط على \"Olauncher\" أعلى الصفحة للعثور على تطبيقاتك المخفية.  المزيد من التفاصيل متوفرة في صفحة \"حول\" أدناه.</string>
-    <string name="swipe_down_for">اسحب لأسفل من أجل</string>
-    <string name="search">يبحث</string>
-    <string name="notifications">إشعارات</string>
     <string name="accessibility_disclosure">يرجى تشغيل خدمة الوصول في Olauncher في إعدادات جهازك لتمكين إيماءة النقر المزدوج للقفل أو زر الشاشة الرئيسية لعرض التطبيقات الأخيرة.
     \n\nيرجى ملاحظة أن هذه الخدمة تُستخدم فقط لهذه الإيماءات. خدمة الوصول لدينا لا تجمع أو تشارك أي بيانات.</string>
     <string name="accept">يقبل</string>

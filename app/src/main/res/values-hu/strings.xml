@@ -90,9 +90,6 @@
     <string name="tip_start_typing_for_rename">Tipp: Kezdjen el gépelni az alkalmazás ÁTNEVEZÉSE opcióhoz</string>
     <string name="hidden_apps_message">Megjegyzés: A rejtett alkalmazások megtalálásához érintse meg az "Olauncher" elemet ennek a beállítás oldalnak a tetején.
     \n\nTöbb részlet elérhető az alábbi, Névjegy oldalon.</string>
-    <string name="swipe_down_for">Simítson lefelé a következőért</string>
-    <string name="search">Keresés</string>
-    <string name="notifications">Értesítések</string>
     <string name="accessibility_disclosure">Kérjük, kapcsolja be az Olauncher hozzáférhetőségi szolgáltatását az eszköz beállításaiban a dupla koppintás zároláshoz vagy a kezdőgomb a legutóbbi alkalmazásokhoz gesztusok engedélyezéséhez.\n\nKérjük, vegye figyelembe, hogy ez a szolgáltatás csak ezekhez a gesztusokhoz használatos. Hozzáférhetőségi szolgáltatásunk nem gyűjt és nem oszt meg semmilyen adatot.</string>
     <string name="accept">Elfogad</string>
     <string name="permission">Engedély</string>

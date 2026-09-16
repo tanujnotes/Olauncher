@@ -388,7 +388,6 @@
                 android:padding="12dp">
 
                 <TextView
-                    android:id="@+id/tvGestures"
                     style="@style/TextLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -453,36 +452,6 @@
                         android:lines="1"
                         android:padding="8dp" />
                 </LinearLayout>
-
-                <FrameLayout
-                    android:id="@+id/flSwipeDown"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <TextView
-                        style="@style/TextSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="24dp"
-                        android:lines="1"
-                        android:paddingVertical="8dp"
-                        android:text="@string/swipe_down_for"
-                        android:textColor="?attr/primaryColor" />
-
-                    <TextView
-                        android:id="@+id/swipeDownAction"
-                        style="@style/TextSmallBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end|bottom"
-                        android:layout_marginEnd="4dp"
-                        android:lines="1"
-                        android:padding="8dp" />
-                </FrameLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"

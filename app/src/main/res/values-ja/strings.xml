@@ -25,9 +25,6 @@
     <string name="hidden_apps">隠しアプリ</string>
     <string name="hidden_apps_message">注: この設定ページの上部にある「Olauncher」をタップして、隠れたアプリを見つけます。
         \n\n詳細については、以下の About ページをご覧ください。</string>
-    <string name="swipe_down_for">下にスワイプして</string>
-    <string name="search">検索</string>
-    <string name="notifications">通知</string>
     <string name="accessibility_disclosure">ダブルタップでロックまたはホームボタンで最近のアプリのジェスチャーを有効にするには、デバイスの設定で Olauncher のアクセシビリティ サービスをオンにしてください。\n\nこのサービスはこれらのジェスチャーにのみ使用されます。アクセシビリティ サービスはデータを収集したり共有したりすることはありません。</string>
     <string name="accept">受け入れる</string>
     <string name="permission">許可</string>

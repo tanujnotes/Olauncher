@@ -86,9 +86,6 @@
     <string name="affiliate">Affilier</string>
     <string name="tip_start_typing_for_rename">Conseil : Commencez à écrire pour faire apparaitre l\'option RENOMMER.</string>
     <string name="hidden_apps_message">Remarque : Appuyez sur \"Olauncher\" en haut de cette page pour trouver vos applications cachées.\n\nPlus de détails sont disponibles dans notre page \"À propos\" ci-dessous.</string>
-    <string name="swipe_down_for">Balayer vers le bas pour</string>
-    <string name="search">Rechercher</string>
-    <string name="notifications">Notifications</string>
     <string name="accessibility_disclosure">Veuillez activer le service d\'accessibilité d\'Olauncher dans les paramètres de votre appareil pour utiliser les gestes Double appui pour verrouiller ou Bouton d\'accueil pour les applications récentes.\n\nVeuillez noter que ce service est utilisé uniquement pour ces gestes. Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
     <string name="accept">Accepter</string>
     <string name="permission">Autorisation</string>

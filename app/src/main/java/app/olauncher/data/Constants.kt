@@ -41,11 +41,6 @@ object Constants {
         }
     }
 
-    object SwipeDownAction {
-        const val SEARCH = 1
-        const val NOTIFICATIONS = 2
-    }
-
     object CharacterIndicator {
         const val SHOW = 102
         const val HIDE = 101

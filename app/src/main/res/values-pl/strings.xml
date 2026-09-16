@@ -24,9 +24,6 @@
     <string name="hidden_apps">Ukrytych aplikacji</string>
     <string name="hidden_apps_message">Uwaga: Stuknij w „Olauncher” u góry tej strony ustawień, aby znaleźć ukryte aplikacje.
         \n\nWięcej informacji znajduje się na stronie Informacje poniżej.</string>
-    <string name="swipe_down_for">Przesuń w dół, aby</string>
-    <string name="search">Szukaj</string>
-    <string name="notifications">Powiadomienia</string>
     <string name="accessibility_disclosure">Włącz usługę ułatwień dostępu Olauncher w ustawieniach swojego urządzenia, aby włączyć gesty podwójnego dotknięcia do zablokowania lub przycisku ekranu głównego dla ostatnich aplikacji.\n\nZwróć uwagę, że ta usługa jest używana tylko do tych gestów. Nasza usługa ułatwień dostępu nie zbiera ani nie udostępnia żadnych danych.</string>
     <string name="accept">Akceptuj</string>
     <string name="permission">Uprawnienie</string>

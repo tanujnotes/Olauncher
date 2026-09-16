@@ -88,9 +88,6 @@
     <string name="tip_start_typing_for_rename">Suggerimento: inizia a digitare per RINOMINARE l\'app</string>
     <string name="hidden_apps_message">Nota: tocca \'Olauncher\' nella parte superiore di questa pagina per trovare le tue app nascoste.
         \n\nUlteriori dettagli sono disponibili nella pagina Informazioni di seguito.</string>
-    <string name="swipe_down_for">Scorri verso il basso per</string>
-    <string name="search">Ricerca</string>
-    <string name="notifications">Notifiche</string>
     <string name="accessibility_disclosure">Attiva il servizio di accessibilità di Olauncher nelle impostazioni del tuo dispositivo per abilitare i gesti Doppio tocco per bloccare o Tasto Home per le app recenti.\n\nTieni presente che questo servizio viene utilizzato solo per questi gesti. Il nostro servizio di accessibilità non raccoglie né condivide alcun dato.</string>
     <string name="accept">Accetta</string>
     <string name="permission">Autorizza</string>

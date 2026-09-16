@@ -78,9 +78,6 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">עצה: אפשר להתחיל להקליד בשביל להגיע לאפשרות לשינוי שם של יישומים</string>
     <string name="hidden_apps_message">הערה: בשביל להגיע ליישומים המוסתרים, יש ללחוץ על הכיתוב \'Olauncher\' שנמצא בראש עמוד ההגדרות.\n\nפרטים נוספים אפשר למצוא בעמוד ה"מידע כללי" שלנו למטה.</string>
-    <string name="swipe_down_for">פעולה בעת החלקה למטה</string>
-    <string name="search">חיפוש</string>
-    <string name="notifications">התראות</string>
     <string name="accessibility_disclosure">נא להפעיל את שירות הנגישות של Olauncher בהגדרות המכשיר שלך כדי להפעיל את מחוות הנעילה בהקשה כפולה או לחצן הבית לאפליקציות אחרונות.\n\nשימו לב ששירות זה משמש רק למחוות אלה. שירות הנגישות שלנו אינו אוסף או משתף נתונים כלשהם.</string>
     <string name="accept">הסכמה</string>
     <string name="permission">הרשאה</string>

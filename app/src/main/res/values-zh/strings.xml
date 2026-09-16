@@ -15,9 +15,6 @@
     <string name="hidden_apps">隐藏的应用程序</string>
     <string name="hidden_apps_message">注意：点击此设置页面顶部的“Olauncher”即可找到隐藏的应用程序。
         \n\n更多详细信息请参阅下面的“关于”页面。</string>
-    <string name="swipe_down_for">向下滑动查看</string>
-    <string name="search">搜索</string>
-    <string name="notifications">通知</string>
     <string name="accessibility_disclosure">请在您设备的设置中打开 Olauncher 的辅助服务，以启用双击锁屏或主页键显示最近应用手势。
         \n\n请注意，此服务仅用于这些手势。我们的辅助服务不会收集或共享任何数据。</string>
     <string name="accept">接受</string>

@@ -40,7 +40,6 @@ import app.olauncher.helper.openAlarmApp
 import app.olauncher.helper.openCalendar
 import app.olauncher.helper.openCameraApp
 import app.olauncher.helper.openDialerApp
-import app.olauncher.helper.openSearch
 import app.olauncher.helper.setPlainWallpaperByTheme
 import app.olauncher.helper.showToast
 import app.olauncher.listener.OnSwipeTouchListener
@@ -556,13 +555,6 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         }
     }
 
-    private fun swipeDownAction() {
-        when (prefs.swipeDownAction) {
-            Constants.SwipeDownAction.SEARCH -> openSearch(requireContext())
-            else -> expandNotificationDrawer(requireContext())
-        }
-    }
-
     private fun lockPhone() {
         requireActivity().runOnUiThread {
             try {
@@ -665,7 +657,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                swipeDownAction()
+                expandNotificationDrawer(requireContext())
             }
 
             override fun onLongClick() {
@@ -713,7 +705,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                swipeDownAction()
+                expandNotificationDrawer(requireContext())
             }
 
             override fun onLongClick(view: View) {

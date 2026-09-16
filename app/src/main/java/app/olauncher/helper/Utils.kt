@@ -1,7 +1,6 @@
 package app.olauncher.helper
 
 import android.annotation.SuppressLint
-import android.app.SearchManager
 import android.app.WallpaperManager
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -460,12 +459,6 @@ fun getBackupWallpaper(wallType: String): String {
     return if (wallType == Constants.WALL_TYPE_LIGHT)
         Constants.URL_DEFAULT_LIGHT_WALLPAPER
     else Constants.URL_DEFAULT_DARK_WALLPAPER
-}
-
-fun openSearch(context: Context) {
-    val intent = Intent(Intent.ACTION_WEB_SEARCH)
-    intent.putExtra(SearchManager.QUERY, "")
-    context.startActivity(intent)
 }
 
 @SuppressLint("WrongConstant", "PrivateApi")
