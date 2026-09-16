@@ -41,6 +41,10 @@ android {
         viewBinding = true
         buildConfig = true
     }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = true
+    }
     namespace 'app.olauncher'
 }
 
