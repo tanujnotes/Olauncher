@@ -14,7 +14,6 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
@@ -40,8 +39,8 @@ import app.olauncher.helper.openUrl
 import app.olauncher.helper.rateApp
 import app.olauncher.helper.setPlainWallpaper
 import app.olauncher.helper.shareApp
+import app.olauncher.helper.OlDialog
 import app.olauncher.helper.showPopupMenu
-import app.olauncher.helper.showRespectingStatusBar
 import app.olauncher.helper.showStatusBar
 import app.olauncher.helper.showToast
 import app.olauncher.listener.DeviceAdmin
@@ -56,7 +55,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
     private val showPentastic = System.currentTimeMillis() % 2 == 0L
-    private var dialog: AlertDialog? = null
+    private var dialog: OlDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
@@ -272,7 +271,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
 
     // Dialogs
 
-    private fun showDialog(newDialog: AlertDialog) {
+    private fun showDialog(newDialog: OlDialog) {
         dialog?.dismiss()
         dialog = newDialog
         newDialog.showRespectingStatusBar()

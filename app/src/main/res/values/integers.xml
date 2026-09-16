@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dialog fade in/out, shared by the window animation and the blur ramp -->
+    <integer name="dialog_anim_duration">250</integer>
+</resources>

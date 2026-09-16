@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +31,7 @@ import app.olauncher.helper.hasBeenMinutes
 import app.olauncher.helper.isDarkThemeOn
 import app.olauncher.helper.isDaySince
 import app.olauncher.helper.isDefaultLauncher
+import app.olauncher.helper.OlDialog
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.isSystemAnimationsDisabled
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     private var isResumed = false
     private var profileReceiver: BroadcastReceiver? = null
     private var launcherAppsCallback: LauncherApps.Callback? = null
-    private var messageDialog: AlertDialog? = null
+    private var messageDialog: OlDialog? = null
 
 //    override fun onBackPressed() {
 //        if (navController.currentDestination?.id != R.id.mainFragment)

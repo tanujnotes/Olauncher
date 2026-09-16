@@ -37,6 +37,34 @@ fun View.showPopupMenu(
 }
 
 /**
+ * App dialog: shows without bringing back a hidden status bar, and blurs the
+ * screen behind it on Android 12+, fading blur and dialog out together on dismiss.
+ */
+class OlDialog(context: Context) : AlertDialog(context) {
+
+    private var blur: WindowBlur? = null
+
+    fun showRespectingStatusBar() {
+        val window = window
+        if (window == null || Prefs(context).showStatusBar) {
+            show()
+        } else {
+            window.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            show()
+            window.hideStatusBar()
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        }
+        blur = window?.let { WindowBlur(it).apply { fadeIn() } }
+    }
+
+    override fun dismiss() {
+        val blur = blur ?: return super.dismiss()
+        this.blur = null
+        blur.fadeOut { super.dismiss() }
+    }
+}
+
+/**
  * Builds a dialog using the app's own layout: a title row with a close icon,
  * an optional [message] or custom [content], and a text [action] at the end.
  * [content] receives the container so the inflated view keeps its XML margins.
@@ -49,9 +77,9 @@ fun Context.createDialog(
     onNeutral: () -> Unit = {},
     onAction: () -> Unit = {},
     content: ((ViewGroup) -> View)? = null,
-): AlertDialog {
-    val builder = AlertDialog.Builder(this)
-    val binding = DialogBaseBinding.inflate(LayoutInflater.from(builder.context))
+): OlDialog {
+    val dialog = OlDialog(this)
+    val binding = DialogBaseBinding.inflate(LayoutInflater.from(dialog.context))
     binding.tvTitle.setText(title)
     binding.tvAction.setText(action)
     if (message != 0) {
@@ -66,7 +94,7 @@ fun Context.createDialog(
         binding.contentContainer.addView(it(binding.contentContainer))
         binding.contentContainer.isVisible = true
     }
-    val dialog = builder.setView(binding.root).create()
+    dialog.setView(binding.root)
     binding.ivClose.setOnClickListener { dialog.dismiss() }
     binding.tvNeutral.setOnClickListener {
         onNeutral()
@@ -85,24 +113,8 @@ fun Context.showMessageDialog(
     @StringRes message: Int,
     @StringRes action: Int,
     onAction: () -> Unit,
-): AlertDialog {
+): OlDialog {
     val dialog = createDialog(title, action, message = message, onAction = onAction)
     dialog.showRespectingStatusBar()
     return dialog
-}
-
-/**
- * Shows the dialog without letting its window bring back a status bar
- * the user has hidden in settings.
- */
-fun AlertDialog.showRespectingStatusBar() {
-    val window = window
-    if (window == null || Prefs(context).showStatusBar) {
-        show()
-        return
-    }
-    window.addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-    show()
-    window.hideStatusBar()
-    window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
 }

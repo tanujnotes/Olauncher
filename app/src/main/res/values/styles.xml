@@ -124,6 +124,12 @@
     <style name="OlAlertDialog" parent="ThemeOverlay.AppCompat.Dialog.Alert">
         <item name="android:windowBackground">@drawable/bg_dialog</item>
         <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:windowAnimationStyle">@style/OlDialogAnimation</item>
+    </style>
+
+    <style name="OlDialogAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
     </style>
 
     <style name="OlAlertDialog.NoAnimation">
