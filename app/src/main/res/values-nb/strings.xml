@@ -1,27 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
-    <string name="github" translatable="false">Github</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
-    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
-    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
-    <string name="tag_0" translatable="false">0</string>
-    <string name="tag_1" translatable="false">1</string>
-    <string name="tag_2" translatable="false">2</string>
-    <string name="tag_3" translatable="false">3</string>
-    <string name="tag_4" translatable="false">4</string>
-    <string name="tag_5" translatable="false">5</string>
-    <string name="tag_6" translatable="false">6</string>
-    <string name="tag_7" translatable="false">7</string>
-    <string name="tag_8" translatable="false">8</string>
-    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
-    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
-
-    <string name="x_twitter" translatable="false">X/Twitter</string>
-    <string name="instagram" translatable="false">Instagram</string>
-
     <string name="app">App</string>
     <string name="set_as_default_launcher">Angi som standard launcher</string>
     <string name="set_as_default_launcher_u"><u>Angi som standard launcher</u></string>
@@ -108,11 +85,7 @@
     <string name="affiliate">Partner</string>
     <string name="tip_start_typing_for_rename">Tips: Begynn å skrive for å få opp alternativet for å endre navn på appen</string>
     <string name="hidden_apps_message">Merk: Trykk på \'Olauncher\' øverst på denne innstillingssiden for å finne de skjulte appene dine.\n\nFlere detaljer finnes på vår Om-side.</string>
-    <string name="swipe_down_for">Sveip ned for</string>
-    <string name="search">Søk</string>
-    <string name="notifications">Varsler</string>
-    <string name="accessibility_disclosure">Slå på Olauncher\'s tilgjengelighetstjeneste i enhetens innstillinger for å aktivere bevegelsen Dobbelttrykk for å låse.
-    \n\nMerk at denne tjenesten kun brukes til denne bestemte funksjonen. Tilgjengelighetstjenesten vår samler ikke inn eller deler noen data.</string>
+    <string name="accessibility_disclosure">Slå på Olaunchers tilgjengelighetstjeneste i enhetens innstillinger for å aktivere bevegelsen Dobbelttrykk for å låse.\n\nMerk at denne tjenesten kun brukes til denne bestemte funksjonen. Tilgjengelighetstjenesten vår samler ikke inn eller deler noen data.</string>
     <string name="accept">Godta</string>
     <string name="permission">Tillatelse</string>
     <string name="double_tap_lock">Dobbelttrykk for å låse</string>
@@ -163,4 +136,13 @@
     <string name="cheers">Skål!</string>
     <string name="notification_bar">Varslingslinje</string>
     <string name="private_space">Privat område</string>
+    <string name="invalid_pin_request">Ugyldig festeforespørsel</string>
+    <string name="widgets_not_supported">Widgeter støttes ikke</string>
+    <string name="pin_action_not_supported">Denne festehandlingen støttes ikke</string>
+    <string name="shortcut_pinned">Snarvei lagt til</string>
+    <string name="shortcut_pin_failed">Kunne ikke legge til snarvei</string>
+    <string name="invalid_shortcut">Ugyldig snarvei</string>
+    <string name="shortcut_not_found">Snarvei ikke funnet</string>
+    <string name="unable_to_open_shortcut">Kan ikke åpne snarvei</string>
+    <string name="bold_font">Fet skrift</string>
 </resources>

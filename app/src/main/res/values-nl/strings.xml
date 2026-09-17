@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Polish -->
+<?xml version="1.0" encoding="utf-8"?><!-- Dutch -->
 <resources>
     <string name="app">App</string>
     <string name="set_as_default_launcher">Stel in als standaard launcher</string>
@@ -6,7 +6,7 @@
     <string name="set_as_default_launcher_first">Stel Olauncher eerst in als standaard</string>
     <string name="app_text_color">Tekstkleur</string>
     <string name="double_tap_to_lock_screen">Dubbel tik om te vergrendelen</string>
-    <string name="admin_permission_message">Olauncher belooft de toestemming voor vergrendelingsscherm verantwoord te gebruiken. Olauncher verzamelt of deelt geen gegevens.</string>
+    <string name="admin_permission_message">Olauncher belooft de toegankelijkheidstoestemming verantwoord te gebruiken. Olauncher verzamelt of deelt geen gegevens.</string>
     <string name="about">Over</string>
     <string name="off">Uit</string>
     <string name="on">Aan</string>
@@ -40,7 +40,7 @@
     <string name="_7">7</string>
     <string name="_8">8</string>
     <string name="app_drawer_tips">Tip: Begin met het typen van een app-naam om deze automatisch te starten</string>
-    <string name="okay">Oke</string>
+    <string name="okay">Oké</string>
     <string name="cool">Cool!</string>
     <string name="auto_show_keyboard">Auto tonen toetsenbord</string>
     <string name="hide">Verbergen</string>
@@ -49,7 +49,7 @@
     <string name="show_date_time">Datum en tijd weergeven</string>
     <string name="appearance">Uiterlijk</string>
     <string name="gestures">Gebaren</string>
-    <string name="theme_mode">Thema modus</string>
+    <string name="theme_mode">Themamodus</string>
     <string name="system_default">Systeem</string>
     <string name="dark">Donker</string>
     <string name="light">Licht</string>
@@ -57,9 +57,7 @@
         \n\nOnthoud, als je vragen hebt, heeft onze Over-pagina het antwoord.</string>
     <string name="rate_us_message">Hoi, je zult dit bericht niet meer zien.
         \n\nAls je Olauncher nuttig vindt, zou je dan een 5-sterren beoordeling willen achterlaten? Het zou veel voor ons betekenen. Dank je!</string>
-    <string name="share_message">We hebben je hulp nodig! We willen elke Android-gebruiker vertellen over de voordelen van Olauncher, maar we kunnen het niet alleen.
-         \n\nZou je Olauncher willen delen met je vrienden, familie en volgers? Dat zou heel behulpzaam zijn. Bedankt!</string>
-    <!--    <string name="share_message">Your monthly reminder - you should use your phone, not the other way round. Stay strong. You\'re doing great!-->
+    <string name="share_message">We hebben je hulp nodig! We vinden dat iedereen Olauncher en de voordelen ervan zou moeten kennen, maar we kunnen het niet alleen.\n\nZou je Olauncher willen delen met je vrienden, familie en volgers? Bedankt voor je steun! ❤</string>
     <!--         \n\nIf you have a moment to spare, could you please share Olauncher with others? Olauncher needs people. More importantly, people need Olauncher.</string>-->
     <string name="keyboard_message">Hoi, het toetsenbord is de snelste manier om apps te vinden en te starten in Olauncher. Mag ik je vragen dit nog een paar dagen ingeschakeld te laten en daarna te beslissen?
         \n\nDe keuze is altijd aan jou.</string>
@@ -71,7 +69,7 @@
         \n\nHet is ook de beste manier om de ontwikkelaars van Olauncher te steunen. Bekijk het eens!</string>
     <string name="wallpaper_message">Olauncher biedt dagelijks mooie nieuwe achtergronden. Geef je startscherm iedere dag een frisse nieuwe look, gratis!
         \n\nWil je het proberen?</string>
-    <string name="accessibility_service_description">De toegankelijkheidstoestemming is vereist om dubbel tikken om te vergrendelen en de startknop voor recente apps mogelijk te maken. Alle gegevens die Olauncher via deze service verkrijgt, verlaten je apparaat niet.</string>
+    <string name="accessibility_service_description">De toegankelijkheidstoestemming is vereist om het gebaar dubbel tikken om te vergrendelen mogelijk te maken. Gegevens die Olauncher via deze service verkrijgt, verlaten je apparaat niet.</string>
     <string name="support_olauncher_for_free">Steun Olauncher gratis door onze Amazon-affiliatelink te gebruiken.</string>
     <string name="support_olauncher_message">Elke keer dat je iets koopt via onze link, ontvangen wij een kleine commissie. Bewaar de link en gebruik deze wanneer je online winkelt.\nDank je!</string>
     <string name="open">Link openen</string>
@@ -88,7 +86,7 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Begin met typen om een app te hernoemen</string>
     <string name="hidden_apps_message">Opmerking: Tik bovenaan deze instellingenpagina op \'Olauncher\' om je verborgen apps te vinden.\n\nMeer informatie is beschikbaar op onze Over-pagina.</string>
-    <string name="accessibility_disclosure">Schakel de toegankelijkheidsdienst van Olauncher in via de instellingen van je apparaat om de gebaren dubbel tikken om te vergrendelen of startknop voor recente apps te activeren.\n\nHoud er rekening mee dat deze service alleen wordt gebruikt voor deze gebaren. Onze toegankelijkheidsdienst verzamelt of deelt geen gegevens.</string>
+    <string name="accessibility_disclosure">Schakel de toegankelijkheidsdienst van Olauncher in via de instellingen van je apparaat om het gebaar dubbel tikken om te vergrendelen te activeren.\n\nHoud er rekening mee dat deze service alleen voor deze specifieke functie wordt gebruikt. Onze toegankelijkheidsdienst verzamelt of deelt geen gegevens.</string>
     <string name="accept">Accepteren</string>
     <string name="permission">Toestemming</string>
     <string name="double_tap_lock">Dubbel tik om te vergrendelen</string>
@@ -104,7 +102,7 @@
     <string name="please_turn_on_double_tap_to_unlock">Schakel dubbel tik om te vergrendelen in</string>
     <string name="launcher_failed_to_lock_device">Olauncher kon het apparaat niet vergrendelen.\nControleer je app-instellingen.</string>
     <string name="long_press_to_select_app">Lang indrukken om app te selecteren</string>
-    <string name="unable_to_open_app">Kan app-info niet openen</string>
+    <string name="unable_to_open_app">Kan app niet openen</string>
     <string name="copied">Gekopieerd</string>
     <string name="system_app_cannot_delete">Systeem-app, kan niet worden verwijderd</string>
     <string name="type_a_new_app_name_first">Typ eerst een nieuwe app-naam</string>
@@ -146,4 +144,6 @@
     <string name="invalid_shortcut">Ongeldige snelkoppeling</string>
     <string name="shortcut_not_found">Snelkoppeling niet gevonden</string>
     <string name="unable_to_open_shortcut">Kan snelkoppeling niet openen</string>
+    <string name="unable_to_open_app_info">Kan app-info niet openen</string>
+    <string name="bold_font">Vet lettertype</string>
 </resources><!-- Dutch -->

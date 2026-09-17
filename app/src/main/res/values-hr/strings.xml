@@ -3,10 +3,10 @@
     <string name="app">Aplikacija</string>
     <string name="set_as_default_launcher">Postavi kao zadani pokretač</string>
     <string name="set_as_default_launcher_u"><u>Postavi kao zadani pokretač</u></string>
-    <string name="set_as_default_launcher_first">Postavi kao zadani pokretač</string>
+    <string name="set_as_default_launcher_first">Prvo postavite Olauncher kao zadani</string>
     <string name="app_text_color">Boja teksta</string>
     <string name="double_tap_to_lock_screen">Dvostruki dodir za zaključavanje</string>
-    <string name="admin_permission_message">Olauncher obećava da će odgovorno koristiti dozvolu za zaključavanje zaslona.</string>
+    <string name="admin_permission_message">Olauncher obećava da će odgovorno koristiti dozvolu pristupačnosti. Olauncher ne prikuplja niti dijeli nikakve podatke.</string>
     <string name="about">Informacije</string>
     <string name="off">Isklj.</string>
     <string name="on">Uklj.</string>
@@ -15,9 +15,9 @@
     <string name="change_default_launcher">Promijeni zadani pokretač</string>
     <string name="privacy">Privatnost</string>
     <string name="share">Podijeli</string>
-    <string name="share_now">Podijeli</string>
+    <string name="share_now">Podijeli sada</string>
     <string name="rate">Ocijeni</string>
-    <string name="rate_now">Ocijeni</string>
+    <string name="rate_now">Ocijeni sada</string>
     <string name="follow">Prati</string>
     <string name="email">E-pošta</string>
     <string name="donate">Doniraj</string>
@@ -39,12 +39,12 @@
     <string name="_6">6</string>
     <string name="_7">7</string>
     <string name="_8">8</string>
-    <string name="app_drawer_tips">Savjet: Povuci prema dolje za zatvaranje. Pomakni zaslon za zatvaranje tipkovnice.</string>
+    <string name="app_drawer_tips">Savjet: Počnite tipkati naziv aplikacije da bi se automatski pokrenula</string>
     <string name="okay">U redu</string>
     <string name="cool">Cool!</string>
     <string name="auto_show_keyboard">Automatski prikaži tipkovnicu</string>
     <string name="hide">Sakrij</string>
-    <string name="status_bar">Prikaži statusnu traku</string>
+    <string name="status_bar">Statusna traka na vrhu</string>
     <string name="rename">Preimenuj</string>
     <string name="show_date_time">Prikaži datum i vrijeme</string>
     <string name="appearance">Izgled</string>
@@ -55,10 +55,8 @@
     <string name="light">Svijetla</string>
     <string name="welcome_to_olauncher_settings">Dobrodošli u postavke!
         \n\nZapamtite, ako imate bilo kakvih pitanja, naša stranica O nama ima odgovor.</string>
-    <string name="rate_us_message">Ovu poruku više nećeš vidjeti.
-        \n\nBok, ako uživaš u korištenju Olaunchera, možeš li nam dati recenziju s 5 zvijezdica? To nam donosi više korisnika i usrećuje nas.\nHvala ti i sretan ostatak dana!</string>
-    <string name="share_message">Bok, trebamo tvoju pomoć! Prošle godine prešli smo milijun preuzimanja. Ove godine želimo doseći milijun više, ali ne možemo sami.
-        \n\nHoćete li, molim vas, biti ljubazni podijeliti Olauncher sa svojim prijateljima? Hvala i ugodan dan!</string>
+    <string name="rate_us_message">Bok, ovu poruku više nećete vidjeti.\n\nAko vam je Olauncher koristan, možete li nam ostaviti recenziju s 5 zvjezdica? To bi nam jako puno značilo. Hvala!</string>
+    <string name="share_message">Trebamo vašu pomoć! Vjerujemo da bi svi trebali znati za Olauncher i njegove prednosti, ali ne možemo to sami.\n\nMožete li podijeliti Olauncher sa svojim prijateljima, obitelji i pratiteljima? Hvala na podršci! ❤</string>
     <string name="keyboard_message">Bok, tipkovnica je najbrži način za pronalaženje i pokretanje aplikacija u Olauncheru. Možemo li vas zamoliti da to zadržite uključeno još nekoliko dana, a zatim odlučite?
         \n\nIzbor je uvijek vaš.</string>
     <string name="digital_wellbeing_message">Ako želite postaviti vremenska ograničenja za određene aplikacije, značajka Digital Wellbeing na Androidu može vam pomoći u tome.
@@ -69,7 +67,7 @@
         \n\nTo je također najbolji način da podržite programere Olauncher-a. Pogledajte!</string>
     <string name="wallpaper_message">Olauncher nudi predivne nove pozadine svaki dan. Daj svom početnom ekranu svjež izgled svaki dan, besplatno!
         \n\nŽeliš li isprobati?</string>
-    <string name="accessibility_service_description">Dozvola za pristupačnost potrebna je za omogućavanje zaključavanja dvostrukim dodirom i tipke Početna za prikaz nedavnih aplikacija. Bilo koji podatci prikupljeni ovim servisom neće napustiti tvoj uređaj.</string>
+    <string name="accessibility_service_description">Dozvola pristupačnosti potrebna je za omogućavanje geste dvostrukog dodira za zaključavanje. Nikakvi podaci koje Olauncher prikupi putem ove usluge neće napustiti vaš uređaj.</string>
     <string name="support_olauncher_for_free">Besplatno podrži Olauncher korištenjem naše sponzorske poveznice za Amazon.</string>
     <string name="support_olauncher_message">Svaki puta kada kupiš nešto pomoću naše poveznice, mi primimo malu naknadu. Molimo spremi poveznicu i koristi ju svaki puta kada kupuješ online.\nHvala ti!</string>
     <string name="open">Otvori poveznicu</string>
@@ -85,15 +83,14 @@
     <string name="please_set_olauncher_as_default_first">Prvo postavite Olauncher kao zadani pokretač</string>
     <string name="affiliate">Sponzorstvo</string>
     <string name="tip_start_typing_for_rename">Savjet: počni pisati za opciju preimenovanja aplikacija</string>
-    <string name="hidden_apps_message">Pazi: Dodirni \'Olauncher\' na vrhu da pronađeš svoje skrivene aplikacije.\n\nViše detalja dostupno dolje na našoj stranici Informacije.</string>
+    <string name="hidden_apps_message">Napomena: Dodirnite \'Olauncher\' na vrhu ove stranice postavki da biste pronašli svoje skrivene aplikacije.\n\nViše detalja dostupno je na našoj stranici Informacije.</string>
     <string name="learn_more">Saznajte više</string>
-    <string name="did_you_know">Dali si znao?</string>
+    <string name="did_you_know">Jeste li znali?</string>
     <string name="screen_time">Vrijeme na ekranu</string>
     <string name="leave_a_review">Ostavite recenziju</string>
-    <string name="review_message">Olauncher jest i uvijek će biti potpuno besplatan. Nema reklama. Ne prikuplja podatke. Što je najvažnije, pomaže vam u smanjenju vremena koje provodite pred ekranom i živite zdravijim digitalnim životom.
-        \n\nVjerujemo da je prelazak na minimalni launcher izvrsna odluka. Iako smo očito pristrani, nadamo se da uživate u iskustvu. Slobodno podijelite svoje misli s nama!</string>
+    <string name="review_message">Olauncher je besplatan i uvijek će biti. Nema reklama, ne prikuplja podatke i smanjuje vaše vrijeme pred ekranom, što vodi zdravijem životu.\n\nNadamo se da će vam se svidjeti. Recite nam što mislite.</string>
 
-    <string name="accessibility_disclosure">Molimo vas da uključite Olauncherovu uslugu pristupa u postavkama vašeg uređaja kako biste omogućili geste dvostrukog dodira za zaključavanje ili tipke Početna za prikaz nedavnih aplikacija.\n\nImajte na umu da se ova usluga koristi samo za te geste. Naša usluga pristupa ne prikuplja niti dijeli bilo kakve podatke.</string>
+    <string name="accessibility_disclosure">Molimo uključite Olauncherovu uslugu pristupačnosti u postavkama uređaja kako biste omogućili gestu dvostrukog dodira za zaključavanje.\n\nImajte na umu da se ova usluga koristi samo za tu značajku. Naša usluga pristupačnosti ne prikuplja niti dijeli nikakve podatke.</string>
     <string name="accept">Prihvati</string>
     <string name="permission">Dozvola</string>
     <string name="double_tap_lock">Dvostruki dodir za zaključavanje</string>
@@ -102,26 +99,26 @@
     <string name="disable">Onemogući</string>
     <string name="not_working"><u>Ne radi?</u></string>
     <string name="info">Informacije</string>
-    <string name="delete">Izbriši</string>
+    <string name="delete">Deinstaliraj</string>
     <string name="text_size">Veličina teksta</string>
     <string name="enabled">Omogućeno</string>
     <string name="disabled">Onemogućeno</string>
-    <string name="please_turn_on_double_tap_to_unlock">Molimo vas da uključite dvostruki dodir za otključavanje</string>
+    <string name="please_turn_on_double_tap_to_unlock">Molimo uključite dvostruki dodir za zaključavanje</string>
     <string name="launcher_failed_to_lock_device">Olauncher nije uspio zaključati uređaj.\nMolimo provjerite postavke aplikacije.</string>
     <string name="long_press_to_select_app">Dugo pritisnite za odabir aplikacije</string>
-    <string name="unable_to_open_app">Nije moguće otvoriti informacije o aplikaciji</string>
+    <string name="unable_to_open_app">Nije moguće otvoriti aplikaciju</string>
     <string name="copied">Kopirano</string>
-    <string name="system_app_cannot_delete">Sistemska aplikacija, ne može se izbrisati</string>
+    <string name="system_app_cannot_delete">Sistemska aplikacija, ne može se deinstalirati</string>
     <string name="type_a_new_app_name_first">Prvo upišite novo ime aplikacije</string>
     <string name="app_not_found">Aplikacija nije pronađena</string>
     <string name="unable_to_launch_app">Nije moguće pokrenuti aplikaciju</string>
     <string name="search_for_Launcher_or_home_app">Pretraži Launcher ili Home aplikaciju</string>
-    <string name="swipe_left_app_enabled">Povucite lijevo, aplikacija omogućena</string>
-    <string name="swipe_right_app_enabled">Povucite desno, aplikacija omogućena</string>
-    <string name="swipe_left_app_disabled">Povucite lijevo, aplikacija onemogućena</string>
-    <string name="swipe_right_app_disabled">Povucite desno, aplikacija onemogućena</string>
+    <string name="swipe_left_app_enabled">Aplikacija za lijevi potez omogućena</string>
+    <string name="swipe_right_app_enabled">Aplikacija za desni potez omogućena</string>
+    <string name="swipe_left_app_disabled">Aplikacija za lijevi potez onemogućena</string>
+    <string name="swipe_right_app_disabled">Aplikacija za desni potez onemogućena</string>
     <string name="your_wallpaper_will_update_shortly">Vaša pozadina će se uskoro ažurirati</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher nije zadani. Ažuriranje pozadine će ne uspjeti.</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher nije zadani. Ažuriranje pozadine neće uspjeti.</string>
     <string name="long_press_to_enable">Dugo pritisnite za omogućavanje</string>
     <string name="no_hidden_apps">Nema skrivenih aplikacija</string>
     <string name="hidden_apps">Skrivene aplikacije</string>
@@ -146,4 +143,6 @@
     <string name="invalid_shortcut">Nevažeći prečac</string>
     <string name="shortcut_not_found">Prečac nije pronađen</string>
     <string name="unable_to_open_shortcut">Prečac nije moguće otvoriti</string>
+    <string name="unable_to_open_app_info">Nije moguće otvoriti informacije o aplikaciji</string>
+    <string name="bold_font">Podebljani font</string>
 </resources><!-- Croatian -->

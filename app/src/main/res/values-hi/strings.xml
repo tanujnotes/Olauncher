@@ -1,27 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
-    <string name="github" translatable="false">Github</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
-    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
-    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
-    <string name="tag_0" translatable="false">0</string>
-    <string name="tag_1" translatable="false">1</string>
-    <string name="tag_2" translatable="false">2</string>
-    <string name="tag_3" translatable="false">3</string>
-    <string name="tag_4" translatable="false">4</string>
-    <string name="tag_5" translatable="false">5</string>
-    <string name="tag_6" translatable="false">6</string>
-    <string name="tag_7" translatable="false">7</string>
-    <string name="tag_8" translatable="false">8</string>
-    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
-    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
-
-    <string name="x_twitter" translatable="false">X/Twitter</string>
-    <string name="instagram" translatable="false">Instagram</string>
-
     <string name="app">ऐप</string>
     <string name="set_as_default_launcher">डिफ़ॉल्ट लॉन्चर के रूप में सेट करें</string>
     <string name="set_as_default_launcher_u"><u>डिफ़ॉल्ट लॉन्चर के रूप में सेट करें</u></string>
@@ -108,9 +85,6 @@
     <string name="affiliate">अफिलिएट</string>
     <string name="tip_start_typing_for_rename">टिप: ऐप का नाम बदलने के विकल्प के लिए टाइप करना शुरू करें</string>
     <string name="hidden_apps_message">नोट: अपनी छिपी हुई ऐप्स ढूंढने के लिए इस Settings पेज के ऊपर \'Olauncher\' पर टैप करें।\n\nअधिक जानकारी हमारे About पेज पर उपलब्ध है।</string>
-    <string name="swipe_down_for">नीचे स्वाइप करें</string>
-    <string name="search">खोजें</string>
-    <string name="notifications">सूचनाएं</string>
     <string name="accessibility_disclosure">डबल टैप टू लॉक जेस्चर चालू करने के लिए कृपया अपनी डिवाइस की सेटिंग्स में Olauncher की एक्सेसिबिलिटी सर्विस चालू करें।
     \n\nकृपया ध्यान दें कि यह सर्विस केवल इसी विशेष फीचर के लिए उपयोग की जाती है। हमारी एक्सेसिबिलिटी सर्विस कोई डेटा एकत्र या साझा नहीं करती।</string>
     <string name="accept">स्वीकार करें</string>
@@ -156,11 +130,20 @@
         \n\nहमें उम्मीद है कि आपको यह पसंद आएगा। हमें बताएं आप क्या सोचते हैं।</string>
     <string name="alignment_changed">अलाइनमेंट बदल गया ✅</string>
     <string name="home_screen">होम स्क्रीन</string>
-    <string name="hey">हे</string>
+    <string name="hey">नमस्ते</string>
     <string name="more_features">और फीचर्स…</string>
     <string name="new_year_wish">यह साल पहले से कहीं बेहतर हो। नया साल मुबारक हो!</string>
     <string name="new_year_wish_1">जनवरी कैसा भी गया हो, इससे कोई फ़र्क नहीं पड़ता। पूरा साल अभी बाकी है, इसे पहले से बेहतर बनाने के लिए।</string>
     <string name="cheers">चियर्स!</string>
     <string name="notification_bar">नोटिफिकेशन बार</string>
     <string name="private_space">प्राइवेट स्पेस</string>
+    <string name="invalid_pin_request">अमान्य पिन अनुरोध</string>
+    <string name="widgets_not_supported">विजेट समर्थित नहीं हैं</string>
+    <string name="pin_action_not_supported">यह पिन क्रिया समर्थित नहीं है</string>
+    <string name="shortcut_pinned">शॉर्टकट जोड़ा गया</string>
+    <string name="shortcut_pin_failed">शॉर्टकट नहीं जोड़ा जा सका</string>
+    <string name="invalid_shortcut">अमान्य शॉर्टकट</string>
+    <string name="shortcut_not_found">शॉर्टकट नहीं मिला</string>
+    <string name="unable_to_open_shortcut">शॉर्टकट खोलने में असमर्थ</string>
+    <string name="bold_font">बोल्ड फ़ॉन्ट</string>
 </resources>

@@ -136,4 +136,5 @@
     <string name="invalid_shortcut">잘못된 바로가기</string>
     <string name="shortcut_not_found">바로가기를 찾을 수 없습니다</string>
     <string name="unable_to_open_shortcut">바로가기를 열 수 없습니다</string>
+    <string name="bold_font">굵은 글꼴</string>
 </resources>

@@ -1,27 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
-    <string name="github" translatable="false">Github</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
-    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
-    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
-    <string name="tag_0" translatable="false">0</string>
-    <string name="tag_1" translatable="false">1</string>
-    <string name="tag_2" translatable="false">2</string>
-    <string name="tag_3" translatable="false">3</string>
-    <string name="tag_4" translatable="false">4</string>
-    <string name="tag_5" translatable="false">5</string>
-    <string name="tag_6" translatable="false">6</string>
-    <string name="tag_7" translatable="false">7</string>
-    <string name="tag_8" translatable="false">8</string>
-    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
-    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
-
-    <string name="x_twitter" translatable="false">X/Twitter</string>
-    <string name="instagram" translatable="false">Instagram</string>
-
     <string name="app">Ứng dụng</string>
     <string name="set_as_default_launcher">Đặt làm trình khởi chạy mặc định</string>
     <string name="set_as_default_launcher_u"><u>Đặt làm trình khởi chạy mặc định</u></string>
@@ -108,9 +85,6 @@
     <string name="affiliate">Tiếp thị liên kết</string>
     <string name="tip_start_typing_for_rename">Mẹo: Bắt đầu gõ để có tùy chọn ĐỔI TÊN ứng dụng</string>
     <string name="hidden_apps_message">Lưu ý: Nhấn vào \'Olauncher\' ở đầu trang Cài đặt này để tìm các ứng dụng ẩn của bạn.\n\nCó thêm chi tiết trên trang Giới thiệu của chúng tôi.</string>
-    <string name="swipe_down_for">Vuốt xuống để</string>
-    <string name="search">Tìm kiếm</string>
-    <string name="notifications">Thông báo</string>
     <string name="accessibility_disclosure">Vui lòng bật dịch vụ trợ năng của Olauncher trong cài đặt thiết bị của bạn để bật cử chỉ Chạm hai lần để khóa.
     \n\nXin lưu ý rằng dịch vụ này chỉ được sử dụng cho tính năng cụ thể này. Dịch vụ trợ năng của chúng tôi không thu thập hoặc chia sẻ bất kỳ dữ liệu nào.</string>
     <string name="accept">Đồng ý</string>
@@ -133,7 +107,7 @@
     <string name="system_app_cannot_delete">Ứng dụng hệ thống, không thể gỡ cài đặt</string>
     <string name="type_a_new_app_name_first">Vui lòng nhập tên ứng dụng mới trước</string>
     <string name="app_not_found">Không tìm thấy ứng dụng</string>
-    <string name="unable_to_launch_app">Không thể mở ứng dụng</string>
+    <string name="unable_to_launch_app">Không thể khởi chạy ứng dụng</string>
     <string name="search_for_Launcher_or_home_app">Tìm ứng dụng Launcher hoặc Home</string>
     <string name="swipe_left_app_enabled">Đã bật ứng dụng khi vuốt trái</string>
     <string name="swipe_right_app_enabled">Đã bật ứng dụng khi vuốt phải</string>
@@ -163,4 +137,13 @@
     <string name="cheers">Cạn ly!</string>
     <string name="notification_bar">Thanh thông báo</string>
     <string name="private_space">Không gian riêng tư</string>
+    <string name="invalid_pin_request">Yêu cầu ghim không hợp lệ</string>
+    <string name="widgets_not_supported">Không hỗ trợ widget</string>
+    <string name="pin_action_not_supported">Thao tác ghim này không được hỗ trợ</string>
+    <string name="shortcut_pinned">Đã thêm lối tắt</string>
+    <string name="shortcut_pin_failed">Không thể thêm lối tắt</string>
+    <string name="invalid_shortcut">Lối tắt không hợp lệ</string>
+    <string name="shortcut_not_found">Không tìm thấy lối tắt</string>
+    <string name="unable_to_open_shortcut">Không thể mở lối tắt</string>
+    <string name="bold_font">Phông chữ đậm</string>
 </resources>

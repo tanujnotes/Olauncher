@@ -1,27 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
-    <string name="github" translatable="false">Github</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
-    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
-    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
-    <string name="tag_0" translatable="false">0</string>
-    <string name="tag_1" translatable="false">1</string>
-    <string name="tag_2" translatable="false">2</string>
-    <string name="tag_3" translatable="false">3</string>
-    <string name="tag_4" translatable="false">4</string>
-    <string name="tag_5" translatable="false">5</string>
-    <string name="tag_6" translatable="false">6</string>
-    <string name="tag_7" translatable="false">7</string>
-    <string name="tag_8" translatable="false">8</string>
-    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
-    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
-
-    <string name="x_twitter" translatable="false">X/Twitter</string>
-    <string name="instagram" translatable="false">Instagram</string>
-
     <string name="app">Sovellus</string>
     <string name="set_as_default_launcher">Aseta oletuskäynnistimeksi</string>
     <string name="set_as_default_launcher_u"><u>Aseta oletuskäynnistimeksi</u></string>
@@ -91,7 +68,7 @@
         \n\nSe on myös paras tapa tukea Olauncherin kehittäjiä. Tutustu siihen!</string>
     <string name="wallpaper_message">Olauncher tarjoaa kauniita uusia taustakuvia päivittäin. Anna aloitusnäytöllesi uusi ilme joka päivä, ilmaiseksi!
         \n\nHaluatko kokeilla?</string>
-    <string name="accessibility_service_description">Esteettömyysoikeus vaaditaan eleen - kaksoisnapautus lukitakseen - käyttöönottamiseksi. Mitään Olauncherin tämän palvelun kautta hankkimaa tietoa ei lähetetä laitteestasi pois.</string>
+    <string name="accessibility_service_description">Esteettömyysoikeus vaaditaan Lukitse kaksoisnapautuksella -eleen käyttöönottoon. Mitään Olauncherin tämän palvelun kautta hankkimaa tietoa ei lähetetä laitteestasi pois.</string>
     <string name="support_olauncher_for_free">Tue Olauncheria ilmaiseksi käyttämällä Amazon-kumppanuuslinkkiämme.</string>
     <string name="support_olauncher_message">Aina kun ostat jotain linkkimme kautta, saamme pienen palkkion. Tallenna linkki ja käytä sitä aina kun teet ostoksia verkossa.\nKiitos!</string>
     <string name="open">Avaa linkki</string>
@@ -108,11 +85,7 @@
     <string name="affiliate">Kumppanuus</string>
     <string name="tip_start_typing_for_rename">Vinkki: Aloita kirjoittaminen saadaksesi sovelluksen NIMEÄ UUDELLEEN -vaihtoehdon</string>
     <string name="hidden_apps_message">Huomio: Napauta \'Olauncher\' tämän asetussivun yläreunassa löytääksesi piilotetut sovelluksesi.\n\nLisätietoja Tietoja-sivulla.</string>
-    <string name="swipe_down_for">Pyyhkäise alas saadaksesi</string>
-    <string name="search">Haku</string>
-    <string name="notifications">Ilmoitukset</string>
-    <string name="accessibility_disclosure">Ota Olauncherin esteettömyyspalvelu käyttöön laitteesi asetuksista, jotta voit ottaa käyttöön Kaksoisnapautus lukitakseen -eleen.
-    \n\nHuomaa, että tätä palvelua käytetään vain tähän tiettyyn ominaisuuteen. Esteettömyyspalvelumme ei kerää tai jaa mitään tietoja.</string>
+    <string name="accessibility_disclosure">Ota Olauncherin esteettömyyspalvelu käyttöön laitteesi asetuksista, jotta voit ottaa käyttöön Lukitse kaksoisnapautuksella -eleen.\n\nHuomaa, että tätä palvelua käytetään vain tähän tiettyyn ominaisuuteen. Esteettömyyspalvelumme ei kerää tai jaa mitään tietoja.</string>
     <string name="accept">Hyväksy</string>
     <string name="permission">Käyttöoikeus</string>
     <string name="double_tap_lock">Lukitse kaksoisnapautuksella</string>
@@ -124,7 +97,7 @@
     <string name="text_size">Tekstin koko</string>
     <string name="enabled">Käytössä</string>
     <string name="disabled">Ei käytössä</string>
-    <string name="please_turn_on_double_tap_to_unlock">Ota käyttöön kaksoisnapautus lukitakseen</string>
+    <string name="please_turn_on_double_tap_to_unlock">Ota käyttöön lukitus kaksoisnapautuksella</string>
     <string name="launcher_failed_to_lock_device">Olauncher ei pystynyt lukitsemaan laitetta.\nTarkista sovelluksen asetukset.</string>
     <string name="long_press_to_select_app">Pitkä painallus valitaksesi sovelluksen</string>
     <string name="unable_to_open_app">Sovellusta ei voida avata</string>
@@ -133,7 +106,7 @@
     <string name="system_app_cannot_delete">Järjestelmäsovellus, ei voida poistaa</string>
     <string name="type_a_new_app_name_first">Kirjoita ensin uusi sovelluksen nimi</string>
     <string name="app_not_found">Sovellusta ei löytynyt</string>
-    <string name="unable_to_launch_app">Sovellusta ei voida avata</string>
+    <string name="unable_to_launch_app">Sovellusta ei voida käynnistää</string>
     <string name="search_for_Launcher_or_home_app">Etsi Käynnistin- tai Koti-sovellusta</string>
     <string name="swipe_left_app_enabled">Sovellus vasemmalle pyyhkäisyllä otettu käyttöön</string>
     <string name="swipe_right_app_enabled">Sovellus oikealle pyyhkäisyllä otettu käyttöön</string>
@@ -163,4 +136,13 @@
     <string name="cheers">Kippis!</string>
     <string name="notification_bar">Ilmoituspalkki</string>
     <string name="private_space">Yksityinen tila</string>
+    <string name="invalid_pin_request">Virheellinen kiinnityspyyntö</string>
+    <string name="widgets_not_supported">Widgetejä ei tueta</string>
+    <string name="pin_action_not_supported">Tätä kiinnitystoimintoa ei tueta</string>
+    <string name="shortcut_pinned">Pikakuvake lisätty</string>
+    <string name="shortcut_pin_failed">Pikakuvaketta ei voitu lisätä</string>
+    <string name="invalid_shortcut">Virheellinen pikakuvake</string>
+    <string name="shortcut_not_found">Pikakuvaketta ei löytynyt</string>
+    <string name="unable_to_open_shortcut">Pikakuvaketta ei voida avata</string>
+    <string name="bold_font">Lihavoitu fontti</string>
 </resources>

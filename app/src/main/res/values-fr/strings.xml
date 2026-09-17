@@ -3,10 +3,10 @@
     <string name="app">App</string>
     <string name="set_as_default_launcher">Définir comme lanceur par défaut</string>
     <string name="set_as_default_launcher_u"><u>Définir comme lanceur par défaut</u></string>
-    <string name="set_as_default_launcher_first">Définir comme lanceur par défaut</string>
+    <string name="set_as_default_launcher_first">Définissez d\'abord Olauncher par défaut</string>
     <string name="app_text_color">Couleur du texte</string>
     <string name="double_tap_to_lock_screen">Double appui pour verrouiller</string>
-    <string name="admin_permission_message">Olauncher promet d\'utiliser l\'autorisation d\'écran de verrouillage de manière responsable. Olauncher ne collecte ni ne partage aucune donnée.</string>
+    <string name="admin_permission_message">Olauncher promet d\'utiliser l\'autorisation d\'accessibilité de manière responsable. Olauncher ne collecte ni ne partage aucune donnée.</string>
     <string name="about">À propos</string>
     <string name="off">Désactivé</string>
     <string name="on">Activé</string>
@@ -15,9 +15,9 @@
     <string name="change_default_launcher">Changer le lanceur par défaut</string>
     <string name="privacy">Confidentialité</string>
     <string name="share">Partager</string>
-    <string name="share_now">Partager</string>
+    <string name="share_now">Partager maintenant</string>
     <string name="rate">Évaluer</string>
-    <string name="rate_now">Évaluer</string>
+    <string name="rate_now">Évaluer maintenant</string>
     <string name="follow">Suivre</string>
     <string name="email">E-mail</string>
 
@@ -29,8 +29,8 @@
     <string name="right">Droite</string>
     <string name="center">Centre</string>
     <string name="home_layout_alignment">Alignement des applications</string>
-    <string name="swipe_left_app">Balayer vers la gauche</string>
-    <string name="swipe_right_app">Balayer vers la droite</string>
+    <string name="swipe_left_app">Application du balayage vers la gauche</string>
+    <string name="swipe_right_app">Application du balayage vers la droite</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -44,8 +44,8 @@
     <string name="okay">D\'accord</string>
     <string name="cool">Cool !</string>
     <string name="auto_show_keyboard">Afficher automatiquement le clavier</string>
-    <string name="hide">Cacher</string>
-    <string name="status_bar">Afficher la barre d\'état</string>
+    <string name="hide">Masquer</string>
+    <string name="status_bar">Barre d\'état en haut</string>
     <string name="rename">Renommer</string>
     <string name="show_date_time">Afficher la date et l\'heure</string>
     <string name="appearance">Apparence</string>
@@ -56,22 +56,19 @@
     <string name="light">Clair</string>
     <string name="welcome_to_olauncher_settings">Bienvenue dans les paramètres !
         \n\nN\'oubliez pas, si vous avez des questions, notre page À propos a la réponse.</string>
-    <string name="rate_us_message">Hé, trouvez-vous Olauncher utile? Si oui, une note de 5 étoiles est le meilleur moyen de nous soutenir.
-        \n\nMerci, vous ne verrez plus ce message.</string>
-    <string name="share_message">Bonjour, nous avons besoin de votre aide ! L\'année dernière, nous avons franchi le million de téléchargements. Cette année, nous voulons atteindre un million de plus, mais nous ne pouvons pas le faire seuls.
-        \n\nAuriez-vous la gentillesse de partager Olauncher avec vos amis, s\'il vous plaît ? Merci et passez une merveilleuse journée!</string>
-    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de garder cela activé pendant quelques jours de plus, puis de décider? Le choix vous appartient toujours.</string>
+    <string name="rate_us_message">Bonjour, vous ne verrez plus ce message.\n\nSi vous trouvez Olauncher utile, pourriez-vous laisser un avis 5 étoiles ? Cela compterait énormément pour nous. Merci !</string>
+    <string name="share_message">Nous avons besoin de votre aide ! Nous pensons que tout le monde devrait connaître Olauncher et ses avantages, mais nous ne pouvons pas y arriver seuls.\n\nPourriez-vous partager Olauncher avec vos amis, votre famille et vos abonnés ? Merci pour votre soutien ! ❤</string>
+    <string name="keyboard_message">Bonjour, le clavier est le moyen le plus rapide de trouver et de lancer des applications dans Olauncher. Pouvons-nous vous demander de le laisser activé quelques jours de plus avant de décider ?\n\nLe choix vous appartient toujours.</string>
     <string name="digital_wellbeing_message">Si vous souhaitez définir des limites de temps pour certaines applications, la fonctionnalité Digital Wellbeing d\'Android peut vous aider à le faire.
         \n\nVeuillez rechercher Digital Wellbeing dans les paramètres de votre téléphone et l\'activer.</string>
     <string name="app_usage_message">Pour afficher/masquer le temps d\'écran sur l\'écran d\'accueil, autorisez ou refusez l\'autorisation d\'utilisation de l\'application.
         \n\nRemarque : Aucune donnée d\'utilisation de l\'application n\'est collectée. Tout est traité sur votre appareil.</string>
     <string name="pro_message">Olauncher a également une version pro appelée Pro Launcher. Elle dispose de fonctionnalités supplémentaires telles que la météo, les widgets, les polices, les dossiers, les fonds d\'écran AMOLED, etc.
         \n\nC\'est aussi le meilleur moyen de soutenir les développeurs d\'Olauncher. Jetez-y un œil !</string>
-    <string name="wallpaper_message">Olauncher propose de superbes fonds d\'écran nouveaux chaque jour. Donne un nouveau look à ton écran d\'accueil chaque jour, gratuitement!
-        \n\nTu veux essayer?</string>
-    <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le double appui pour verrouiller et le bouton d\'accueil pour afficher les applications récentes. Toutes les données acquises par Olauncher via ce service ne quitteront pas votre appareil.</string>
+    <string name="wallpaper_message">Olauncher propose chaque jour de superbes nouveaux fonds d\'écran. Donnez un nouveau look à votre écran d\'accueil chaque jour, gratuitement !\n\nVoulez-vous essayer ?</string>
+    <string name="accessibility_service_description">L\'autorisation d\'accessibilité est requise pour activer le geste Double appui pour verrouiller. Les données obtenues par Olauncher via ce service ne quitteront pas votre appareil.</string>
     <string name="support_olauncher_for_free">Soutenez Olauncher gratuitement en utilisant notre lien d\'affiliation Amazon.</string>
-    <string name="support_olauncher_message">Chaque fois que vous achetez quelque chose en utilisant notre lien, nous recevons une petite commission. Enregistrez le lien et utilisez le chaque fois que vous commandez en ligne. Merci!</string>
+    <string name="support_olauncher_message">Chaque fois que vous achetez quelque chose en utilisant notre lien, nous recevons une petite commission. Enregistrez le lien et utilisez-le chaque fois que vous faites des achats en ligne.\nMerci !</string>
     <string name="open">Ouvrir le lien</string>
     <string name="copy">Copier</string>
     <string name="close">Fermer</string>
@@ -83,10 +80,10 @@
     <string name="bottom_on">Bas : Activé</string>
     <string name="bottom_off">Bas : Désactivé</string>
     <string name="please_set_olauncher_as_default_first">Veuillez d\'abord définir Olauncher comme lanceur par défaut.</string>
-    <string name="affiliate">Affilier</string>
+    <string name="affiliate">Affiliation</string>
     <string name="tip_start_typing_for_rename">Conseil : Commencez à écrire pour faire apparaitre l\'option RENOMMER.</string>
-    <string name="hidden_apps_message">Remarque : Appuyez sur \"Olauncher\" en haut de cette page pour trouver vos applications cachées.\n\nPlus de détails sont disponibles dans notre page \"À propos\" ci-dessous.</string>
-    <string name="accessibility_disclosure">Veuillez activer le service d\'accessibilité d\'Olauncher dans les paramètres de votre appareil pour utiliser les gestes Double appui pour verrouiller ou Bouton d\'accueil pour les applications récentes.\n\nVeuillez noter que ce service est utilisé uniquement pour ces gestes. Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
+    <string name="hidden_apps_message">Remarque : Appuyez sur \'Olauncher\' en haut de cette page Paramètres pour trouver vos applications cachées.\n\nPlus de détails sont disponibles sur notre page À propos.</string>
+    <string name="accessibility_disclosure">Veuillez activer le service d\'accessibilité d\'Olauncher dans les paramètres de votre appareil pour utiliser le geste Double appui pour verrouiller.\n\nVeuillez noter que ce service est utilisé uniquement pour cette fonctionnalité. Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
     <string name="accept">Accepter</string>
     <string name="permission">Autorisation</string>
     <string name="double_tap_lock">Appuyer deux fois pour verrouiller</string>
@@ -95,17 +92,16 @@
     <string name="disable">Désactiver</string>
     <string name="not_working"><u>Ne fonctionne pas?</u></string>
     <string name="info">Info</string>
-    <string name="delete">Supprimer</string>
+    <string name="delete">Désinstaller</string>
     <string name="text_size">Taille du texte</string>
     <string name="enabled">Activé</string>
     <string name="disabled">Désactivé</string>
     <string name="please_turn_on_double_tap_to_unlock">Veuillez appuyer deux fois pour verrouiller.</string>
-    <string name="launcher_failed_to_lock_device">Olauncher n\'a pas réussi à verrouiller le téléphone.
-        Veuillez vérifier les paramètres de votre application.</string>
+    <string name="launcher_failed_to_lock_device">Olauncher n\'a pas réussi à verrouiller l\'appareil.\nVeuillez vérifier les paramètres de votre application.</string>
     <string name="long_press_to_select_app">Appuyez longuement pour sélectionner une application.</string>
-    <string name="unable_to_open_app">Impossible d\'ouvrir les informations sur l\'application</string>
+    <string name="unable_to_open_app">Impossible d\'ouvrir l\'application</string>
     <string name="copied">Copié</string>
-    <string name="system_app_cannot_delete">Application système, impossible de supprimer</string>
+    <string name="system_app_cannot_delete">Application système, impossible de désinstaller</string>
     <string name="type_a_new_app_name_first">Tapez d\'abord un nouveau nom d\'application.</string>
     <string name="app_not_found">Application introuvable</string>
     <string name="unable_to_launch_app">Impossible de lancer l\'application</string>
@@ -115,27 +111,25 @@
     <string name="swipe_left_app_disabled">Balayage vers la gauche désactivé</string>
     <string name="swipe_right_app_disabled">Balayage vers la droite désactivé</string>
     <string name="your_wallpaper_will_update_shortly">Votre fond d\'écran sera bientôt mis à jour.</string>
-    <string name="olauncher_is_not_default_launcher">Olauncher n\'est pas le lanceur par défaut.
-        La mise à jour quotidienne du fond d\'écran peut échouer.</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher n\'est pas le lanceur par défaut.\nLa mise à jour du fond d\'écran échouera.</string>
     <string name="long_press_to_enable">Appuyez longuement pour activer.</string>
-    <string name="no_hidden_apps">Aucune application cachées</string>
+    <string name="no_hidden_apps">Aucune application cachée</string>
     <string name="hidden_apps">Applications cachées</string>
     <string name="adapter_show">Afficher</string>
     <string name="adapter_hide">Masquer</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Utilisez-vous votre téléphone, ou votre téléphone vous utilise-t-il?</string>
-    <string name="about_olauncher">À propos Olauncher</string>
-    <string name="learn_more">Apprendre encore plus</string>
+    <string name="about_olauncher">À propos et FAQ</string>
+    <string name="learn_more">En savoir plus</string>
     <string name="screen_time">Temps d\'écran</string>
-    <string name="did_you_know">Saviez-vous?</string>
-    <string name="leave_a_review">Laisser un commentaire</string>
-    <string name="review_message">Olauncher est et sera toujours entièrement gratuit. Il n\'y a pas de publicité. Il ne collecte aucune donnée. Plus important encore, cela vous aide à réduire votre temps d’écran et à vivre une vie numérique plus saine.
-        \n\nNous pensons que passer à un lanceur minimal est une excellente décision. Même si nous sommes évidemment partiaux, nous espérons que vous appréciez l\'expérience. N\'hésitez pas à partager vos idées avec nous!</string>
+    <string name="did_you_know">Le saviez-vous ?</string>
+    <string name="leave_a_review">Laisser un avis</string>
+    <string name="review_message">Olauncher est gratuit et le restera toujours. Il n\'a pas de publicité, ne collecte aucune donnée et réduit votre temps d\'écran, pour une vie plus saine.\n\nNous espérons qu\'il vous plaira. Dites-nous ce que vous en pensez.</string>
     <string name="alignment_changed">Alignement changé ✅</string>
     <string name="home_screen">Écran d\'accueil</string>
     <string name="hey">Salut</string>
     <string name="more_features">Plus de fonctionnalités…</string>
     <string name="new_year_wish">À une année meilleure que toutes les précédentes. Bonne année !</string>
-    <string name="new_year_wish_1">" Peu importe comment s'est passé le mois de janvier. Tu as encore le reste de l'année pour faire mieux que jamais."</string>
+    <string name="new_year_wish_1">Peu importe comment s\'est passé le mois de janvier. Vous avez encore le reste de l\'année pour faire mieux que jamais.</string>
     <string name="cheers">Santé!</string>
     <string name="notification_bar">Barre de notifications</string>
     <string name="private_space">Espace privé</string>
@@ -147,4 +141,6 @@
     <string name="invalid_shortcut">Raccourci non valide</string>
     <string name="shortcut_not_found">Raccourci introuvable</string>
     <string name="unable_to_open_shortcut">Impossible d\'ouvrir le raccourci</string>
+    <string name="unable_to_open_app_info">Impossible d\'ouvrir les informations sur l\'application</string>
+    <string name="bold_font">Police en gras</string>
 </resources><!-- French -->

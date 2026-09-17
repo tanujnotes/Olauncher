@@ -20,7 +20,7 @@ android {
         versionCode 112
         versionName "v6.9.1"
 
-        resourceConfigurations += ["en", "ar", "de", "es-rES", "es-rUS", "fr", "he", "hr", "hu", "in", "it", "ja", "ko", "nl", "pl", "pt-rBR", "ru-rRU", "sv", "tr", "uk", "zh"]
+        resourceConfigurations += ["en", "ar", "cs", "da", "de", "el", "es-rES", "es-rUS", "fi", "fr", "he", "hi", "hr", "hu", "in", "it", "ja", "ko", "nb", "nl", "pl", "pt-rBR", "ro", "ru-rRU", "sv", "th", "tr", "uk", "vi", "zh"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

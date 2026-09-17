@@ -1,27 +1,4 @@
 <resources>
-    <string name="app_name" translatable="false">Olauncher</string>
-    <string name="github" translatable="false">Github</string>
-    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
-    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
-    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
-    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
-    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
-    <string name="tag_0" translatable="false">0</string>
-    <string name="tag_1" translatable="false">1</string>
-    <string name="tag_2" translatable="false">2</string>
-    <string name="tag_3" translatable="false">3</string>
-    <string name="tag_4" translatable="false">4</string>
-    <string name="tag_5" translatable="false">5</string>
-    <string name="tag_6" translatable="false">6</string>
-    <string name="tag_7" translatable="false">7</string>
-    <string name="tag_8" translatable="false">8</string>
-    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
-    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
-
-    <string name="x_twitter" translatable="false">X/Twitter</string>
-    <string name="instagram" translatable="false">Instagram</string>
-
     <string name="app">Aplicație</string>
     <string name="set_as_default_launcher">Setează ca launcher implicit</string>
     <string name="set_as_default_launcher_u"><u>Setează ca launcher implicit</u></string>
@@ -108,9 +85,6 @@
     <string name="affiliate">Afiliat</string>
     <string name="tip_start_typing_for_rename">Sfat: Începe să tastezi pentru opțiunea de REDENUMIRE aplicație</string>
     <string name="hidden_apps_message">Notă: Atinge \'Olauncher\' în partea de sus a acestei pagini de setări pentru a găsi aplicațiile tale ascunse.\n\nMai multe detalii sunt disponibile pe pagina noastră Despre.</string>
-    <string name="swipe_down_for">Glisează în jos pentru</string>
-    <string name="search">Căutare</string>
-    <string name="notifications">Notificări</string>
     <string name="accessibility_disclosure">Te rugăm să activezi serviciul de accesibilitate Olauncher din setările dispozitivului pentru a activa gestul Atinge dublu pentru blocare.
     \n\nTe rugăm să reții că acest serviciu este utilizat doar pentru această funcție specifică. Serviciul nostru de accesibilitate nu colectează și nu partajează date.</string>
     <string name="accept">Acceptă</string>
@@ -163,4 +137,13 @@
     <string name="cheers">Noroc!</string>
     <string name="notification_bar">Bară de notificări</string>
     <string name="private_space">Spațiu privat</string>
+    <string name="invalid_pin_request">Cerere de fixare nevalidă</string>
+    <string name="widgets_not_supported">Widgeturile nu sunt acceptate</string>
+    <string name="pin_action_not_supported">Această acțiune de fixare nu este acceptată</string>
+    <string name="shortcut_pinned">Comandă rapidă adăugată</string>
+    <string name="shortcut_pin_failed">Nu s-a putut adăuga comanda rapidă</string>
+    <string name="invalid_shortcut">Comandă rapidă nevalidă</string>
+    <string name="shortcut_not_found">Comanda rapidă nu a fost găsită</string>
+    <string name="unable_to_open_shortcut">Nu se poate deschide comanda rapidă</string>
+    <string name="bold_font">Font îngroșat</string>
 </resources>

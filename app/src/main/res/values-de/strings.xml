@@ -3,7 +3,7 @@
     <string name="app">App</string>
     <string name="set_as_default_launcher">Als Standard-Launcher festlegen</string>
     <string name="set_as_default_launcher_u"><u>Als Standard-Launcher festlegen</u></string>
-    <string name="set_as_default_launcher_first">Als Standard-Launcher festlegen</string>
+    <string name="set_as_default_launcher_first">Legen Sie zuerst Olauncher als Standard fest</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
@@ -16,15 +16,14 @@
     <string name="app_drawer_tips">Tipp: Beginnen Sie mit der Eingabe eines App-Namens, um sie automatisch zu starten</string>
     <string name="okay">Okay</string>
     <string name="cool">Cool!</string>
-    <string name="tip_start_typing_for_rename">Tipp: Beginnen Sie mit der Eingabe der Option „App RENAME“.</string>
+    <string name="tip_start_typing_for_rename">Tipp: Tippen Sie los, um die Option zum Umbenennen der App zu erhalten</string>
     <string name="your_wallpaper_will_update_shortly">Ihr Hintergrundbild wird in Kürze aktualisiert</string>
     <string name="olauncher_is_not_default_launcher">Olauncher ist kein Standard-Launcher. Die tägliche Aktualisierung des Hintergrundbilds schlägt möglicherweise fehl.</string>
     <string name="long_press_to_enable">Zum Aktivieren lange drücken</string>
     <string name="no_hidden_apps">Keine versteckten Apps</string>
     <string name="hidden_apps">Versteckte Apps</string>
-    <string name="hidden_apps_message">Hinweis: Tippen Sie oben auf dieser Einstellungsseite auf „Olauncher“, um Ihre versteckten Apps zu finden.
-        \n\nWeitere Einzelheiten finden Sie auf der „Über“ Seite unten.</string>
-    <string name="accessibility_disclosure">Bitte schalten Sie den Barrierefreiheitsdienst von Olauncher in den Einstellungen Ihres Geräts ein, um die Gesten Doppeltippen zum Sperren oder Home-Taste für letzte Apps zu aktivieren.\n\nBitte beachten Sie, dass dieser Dienst nur für diese Gesten verwendet wird. Unser Barrierefreiheitsdienst sammelt oder teilt keine Daten.</string>
+    <string name="hidden_apps_message">Hinweis: Tippen Sie oben auf dieser Einstellungsseite auf „Olauncher“, um Ihre versteckten Apps zu finden.\n\nWeitere Einzelheiten finden Sie auf unserer Seite „Über“.</string>
+    <string name="accessibility_disclosure">Bitte aktivieren Sie den Bedienungshilfen-Dienst von Olauncher in den Einstellungen Ihres Geräts, um die Geste „Doppeltippen zum Sperren“ zu aktivieren.\n\nBitte beachten Sie, dass dieser Dienst nur für diese eine Funktion verwendet wird. Unser Bedienungshilfen-Dienst sammelt oder teilt keine Daten.</string>
     <string name="accept">Akzeptieren</string>
     <string name="permission">Erlaubnis</string>
     <string name="double_tap_lock">Zum Sperren zweimal tippen</string>
@@ -32,23 +31,23 @@
     <string name="enable">Aktivieren</string>
     <string name="disable">Deaktivieren</string>
     <string name="not_working"><u>Funktioniert nicht?</u></string>
-    <string name="info">Die Info</string>
-    <string name="delete">Löschen</string>
+    <string name="info">Info</string>
+    <string name="delete">Deinstallieren</string>
     <string name="text_size">Textgröße</string>
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>
     <string name="please_turn_on_double_tap_to_unlock">Zum Sperren bitte Doppeltippen aktivieren</string>
     <string name="launcher_failed_to_lock_device">Olauncher konnte das Gerät nicht sperren. Bitte überprüfen Sie Ihre App-Einstellungen.</string>
     <string name="long_press_to_select_app">Lange drücken, um die App auszuwählen</string>
-    <string name="unable_to_open_app">App-Informationen können nicht geöffnet werden</string>
+    <string name="unable_to_open_app">App kann nicht geöffnet werden</string>
     <string name="copied">Kopiert</string>
-    <string name="system_app_cannot_delete">System-App, kann nicht gelöscht werden</string>
+    <string name="system_app_cannot_delete">System-App, kann nicht deinstalliert werden</string>
     <string name="type_a_new_app_name_first">Geben Sie zuerst einen neuen App-Namen ein</string>
-    <string name="adapter_show">Zeigen</string>
-    <string name="adapter_hide">Verstecken</string>
+    <string name="adapter_show">Anzeigen</string>
+    <string name="adapter_hide">Ausblenden</string>
     <string name="app_text_color">Textfarbe</string>
     <string name="double_tap_to_lock_screen">Zum Sperren zweimal tippen</string>
-    <string name="admin_permission_message">Olauncher verspricht, verantwortungsvoll mit der Sperrbildschirmberechtigung umzugehen. Olauncher sammelt oder gibt keine Daten weiter.</string>
+    <string name="admin_permission_message">Olauncher verspricht, verantwortungsvoll mit der Berechtigung für Bedienungshilfen umzugehen. Olauncher sammelt keine Daten und gibt keine weiter.</string>
     <string name="about">Über</string>
     <string name="off">Aus</string>
     <string name="on">Ein</string>
@@ -57,11 +56,11 @@
     <string name="change_default_launcher">Standard-Launcher ändern</string>
     <string name="privacy">Privatsphäre</string>
     <string name="share">Teilen</string>
-    <string name="share_now">Teilen</string>
+    <string name="share_now">Jetzt teilen</string>
     <string name="rate">Bewerten</string>
-    <string name="rate_now">Bewerten</string>
+    <string name="rate_now">Jetzt bewerten</string>
     <string name="follow">Folgen</string>
-    <string name="email">Email</string>
+    <string name="email">E-Mail</string>
 
     <string name="donate">Spenden</string>
     <string name="swipe_up_for_apps">1. Für alle Apps nach oben wischen\n2. Drücken Sie lange auf eine beliebige Stelle, um Einstellungen vorzunehmen</string>
@@ -71,11 +70,11 @@
     <string name="right">Rechts</string>
     <string name="center">Mitte</string>
     <string name="home_layout_alignment">App-Ausrichtung</string>
-    <string name="swipe_left_app">Wischen Sie nach links über die App</string>
-    <string name="swipe_right_app">Wischen Sie nach rechts über die App</string>
+    <string name="swipe_left_app">App bei Wischen nach links</string>
+    <string name="swipe_right_app">App bei Wischen nach rechts</string>
     <string name="auto_show_keyboard">Tastatur automatisch anzeigen</string>
-    <string name="hide">Verstecken</string>
-    <string name="status_bar">Zeige Statusleiste</string>
+    <string name="hide">Ausblenden</string>
+    <string name="status_bar">Statusleiste oben</string>
     <string name="rename">Umbenennen</string>
     <string name="show_date_time">Datum und Uhrzeit anzeigen</string>
     <string name="appearance">Aussehen</string>
@@ -86,24 +85,20 @@
     <string name="light">Hell</string>
     <string name="welcome_to_olauncher_settings">Willkommen in den Einstellungen!
         \n\nDenken Sie daran, wenn Sie Fragen haben, unsere Seite „Über“ hat die Antwort.</string>
-    <string name="rate_us_message">Hallo, diese Nachricht wird Ihnen nicht mehr angezeigt.
-        \n\nWenn Ihnen Olauncher gefällt, können Sie uns bitte eine 5-Sterne-Bewertung geben? Es hilft uns, unser Ranking zu verbessern und macht uns glücklich. Dan­ke­schön!</string>
-    <string name="share_message">Hallo, wir brauchen deine Hilfe! Letztes Jahr haben wir die Marke von einer Million Downloads überschritten. Dieses Jahr wollen wir eine Million mehr erreichen, aber alleine schaffen wir das nicht.
-        \n\nWären Sie bitte so freundlich, Olauncher mit Ihren Freunden zu teilen? Vielen Dank und einen wunderschönen Tag!</string>
+    <string name="rate_us_message">Hallo, diese Nachricht wird Ihnen nicht mehr angezeigt.\n\nWenn Sie Olauncher nützlich finden, könnten Sie uns bitte eine 5-Sterne-Bewertung hinterlassen? Es würde uns sehr viel bedeuten. Danke!</string>
+    <string name="share_message">Wir brauchen Ihre Hilfe! Wir glauben, dass jeder Olauncher und seine Vorteile kennen sollte, aber alleine schaffen wir das nicht.\n\nKönnten Sie Olauncher bitte mit Ihren Freunden, Ihrer Familie und Ihren Followern teilen? Vielen Dank für Ihre Unterstützung! ❤</string>
     <string name="keyboard_message">Hallo, die Tastatur ist der schnellste Weg, Apps in Olauncher zu finden und zu starten. Können wir Sie bitten, die Funktion noch ein paar Tage eingeschaltet zu lassen und dann zu entscheiden?
         \n\nDie Wahl liegt immer bei Ihnen.</string>
     <string name="digital_wellbeing_message">Wenn Sie Zeitlimits für bestimmte Apps festlegen möchten, kann Ihnen die Digital Wellbeing-Funktion von Android dabei helfen.
         \n\nBitte suchen Sie in Ihren Telefoneinstellungen nach Digital Wellbeing und aktivieren Sie es.</string>
     <string name="app_usage_message">Um die Bildschirmzeit auf dem Startbildschirm anzuzeigen oder zu verbergen, erteilen Sie bitte die Erlaubnis für die App-Nutzung oder verweigern Sie sie.
         \n\nHinweis: Es werden keine Daten zur App-Nutzung gesammelt. Alles wird auf Ihrem Gerät verarbeitet.</string>
-    <string name="pro_message">Olauncher hat auch eine Pro-Version namens Pro Launcher. Sie bietet zusätzliche Funktionen wie Wetter, Widgets, Schriftarten, Ordner, AMOLED-Hintergründe usw.
-        \n\nEs ist auch der beste Weg, die Entwickler von Olauncher zu unterstützen. Schau es dir an!</string>
-    <string name="wallpaper_message">Olauncher bietet täglich wunderschöne neue Wallpapers. Verleihe deinem Homescreen jeden Tag ein frisches Aussehen – kostenlos!
-        \n\nMöchtest du es ausprobieren?</string>
-    <string name="accessibility_service_description">Die Zugriffsberechtigung ist erforderlich, um das Sperren durch Doppeltippen und die Home-Taste zum Anzeigen der letzten Apps zu ermöglichen. Die von Olauncher über diesen Dienst erfassten Daten verlassen Ihr Gerät nicht.</string>
+    <string name="pro_message">Olauncher hat auch eine Pro-Version namens Pro Launcher. Sie bietet zusätzliche Funktionen wie Wetter, Widgets, Schriftarten, Ordner, AMOLED-Hintergründe usw.\n\nEs ist auch der beste Weg, die Entwickler von Olauncher zu unterstützen. Sehen Sie es sich an!</string>
+    <string name="wallpaper_message">Olauncher bietet täglich wunderschöne neue Hintergrundbilder. Verleihen Sie Ihrem Startbildschirm jeden Tag ein frisches Aussehen – kostenlos!\n\nMöchten Sie es ausprobieren?</string>
+    <string name="accessibility_service_description">Die Berechtigung für Bedienungshilfen ist erforderlich, um die Geste „Doppeltippen zum Sperren“ zu aktivieren. Daten, die Olauncher über diesen Dienst erhält, verlassen Ihr Gerät nicht.</string>
     <string name="support_olauncher_for_free">Unterstützen Sie Olauncher kostenlos, indem Sie unseren Amazon-Partnerlink verwenden.</string>
-    <string name="support_olauncher_message">Jedes Mal, wenn Sie über unseren Link etwas kaufen, erhalten wir eine kleine Provision. Bitte speichern Sie den Link und verwenden Sie ihn bei jedem Online-Einkauf. Dan­ke­schön!</string>
-    <string name="open">Verbindung öffnen</string>
+    <string name="support_olauncher_message">Jedes Mal, wenn Sie über unseren Link etwas kaufen, erhalten wir eine kleine Provision. Bitte speichern Sie den Link und verwenden Sie ihn bei jedem Online-Einkauf.\nDanke!</string>
+    <string name="open">Link öffnen</string>
     <string name="copy">Kopieren</string>
     <string name="close">Schließen</string>
     <string name="not_now">Nicht jetzt</string>
@@ -124,18 +119,17 @@
     <string name="swipe_right_app_disabled">App nach rechts wischen deaktiviert</string>
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Benutzen Sie Ihr Telefon, oder nutzt Ihr Telefon Sie?</string>
     <string name="screen_time">Bildschirmzeit</string>
-    <string name="about_olauncher">Über Olauncher</string>
+    <string name="about_olauncher">Über und FAQ</string>
     <string name="learn_more">Erfahren Sie mehr</string>
     <string name="did_you_know">Wussten Sie?</string>
-    <string name="leave_a_review">Rezension</string>
-    <string name="review_message">Olauncher ist und bleibt völlig kostenlos. Es gibt keine Werbung. Es werden keine Daten erfasst. Am wichtigsten ist, dass es Ihnen dabei hilft, Ihre Bildschirmzeit zu verkürzen und ein gesünderes digitales Leben zu führen.
-        \n\nWir glauben, dass der Wechsel zu einem Minimal Launcher eine ausgezeichnete Entscheidung ist. Obwohl wir offensichtlich voreingenommen sind, hoffen wir, dass Ihnen die Erfahrung gefällt. Teilen Sie uns gerne Ihre Gedanken mit!</string>
+    <string name="leave_a_review">Bewertung schreiben</string>
+    <string name="review_message">Olauncher ist kostenlos und wird es immer bleiben. Es hat keine Werbung, sammelt keine Daten und reduziert Ihre Bildschirmzeit, was zu einem gesünderen Leben führt.\n\nWir hoffen, es gefällt Ihnen. Sagen Sie uns, was Sie denken.</string>
     <string name="alignment_changed">Ausrichtung geändert ✅</string>
     <string name="home_screen">Startbildschirm</string>
     <string name="hey">Hey</string>
     <string name="more_features">Weitere Funktionen…</string>
     <string name="new_year_wish">Auf ein Jahr, das besser ist als alle zuvor. Frohes neues Jahr!</string>
-    <string name="new_year_wish_1">Egal, wie der Januar gelaufen ist. Du hast noch den Rest des Jahres Zeit, um besser zu sein als je zuvor.</string>
+    <string name="new_year_wish_1">Egal, wie der Januar gelaufen ist. Sie haben noch den Rest des Jahres Zeit, um besser zu sein als je zuvor.</string>
     <string name="cheers">Prost!</string>
     <string name="notification_bar">Benachrichtigungsleiste</string>
     <string name="private_space">Privater Bereich</string>
@@ -147,4 +141,6 @@
     <string name="invalid_shortcut">Ungültige Verknüpfung</string>
     <string name="shortcut_not_found">Verknüpfung nicht gefunden</string>
     <string name="unable_to_open_shortcut">Verknüpfung kann nicht geöffnet werden</string>
+    <string name="unable_to_open_app_info">App-Informationen können nicht geöffnet werden</string>
+    <string name="bold_font">Fette Schrift</string>
 </resources>
