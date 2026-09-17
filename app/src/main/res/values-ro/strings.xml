@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">Aplicație</string>
+    <string name="set_as_default_launcher">Setează ca launcher implicit</string>
+    <string name="set_as_default_launcher_u"><u>Setează ca launcher implicit</u></string>
+    <string name="set_as_default_launcher_first">Setează mai întâi Olauncher ca implicit</string>
+    <string name="app_text_color">Culoare text</string>
+    <string name="double_tap_to_lock_screen">Atinge dublu pentru blocare</string>
+    <string name="home_button_show_recents">Buton Acasă pentru aplicații recente</string>
+    <string name="admin_permission_message">Olauncher promite să folosească responsabil permisiunea de accesibilitate. Olauncher nu colectează și nu partajează date.</string>
+    <string name="about">Despre</string>
+    <string name="off">Dezactivat</string>
+    <string name="on">Activat</string>
+    <string name="black">Negru</string>
+    <string name="white">Alb</string>
+    <string name="change_default_launcher">Schimbă launcherul implicit</string>
+    <string name="privacy">Confidențialitate</string>
+    <string name="share">Distribuie</string>
+    <string name="share_now">Distribuie acum</string>
+    <string name="rate">Evaluează</string>
+    <string name="rate_now">Evaluează acum</string>
+    <string name="follow">Urmărește</string>
+    <string name="email">E-mail</string>
+    <string name="donate">Donează</string>
+    <string name="swipe_up_for_apps">1. Glisează în sus pentru toate aplicațiile\n2. Apasă lung oriunde pentru setări</string>
+    <string name="apps_on_home_screen">Aplicații pe ecranul de start</string>
+    <string name="daily_wallpaper_update">Fundal nou zilnic</string>
+    <string name="left">Stânga</string>
+    <string name="right">Dreapta</string>
+    <string name="center">Centru</string>
+    <string name="home_layout_alignment">Aliniere aplicații</string>
+    <string name="swipe_left_app">Aplicație la glisare stânga</string>
+    <string name="swipe_right_app">Aplicație la glisare dreapta</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Sfat: Începe să tastezi numele unei aplicații pentru a o lansa automat</string>
+    <string name="okay">Bine</string>
+    <string name="cool">Super!</string>
+    <string name="auto_show_keyboard">Afișează tastatura automat</string>
+    <string name="hide">Ascunde</string>
+    <string name="status_bar">Bară de stare sus</string>
+    <string name="rename">Redenumește</string>
+    <string name="show_date_time">Afișează data și ora</string>
+    <string name="appearance">Aspect</string>
+    <string name="gestures">Gesturi</string>
+    <string name="theme_mode">Mod temă</string>
+    <string name="system_default">Sistem</string>
+    <string name="dark">Întunecat</string>
+    <string name="light">Luminos</string>
+    <string name="welcome_to_olauncher_settings">Bine ai venit în setări!
+        \n\nȚine minte, dacă ai întrebări, pagina Despre are răspunsul.</string>
+    <string name="rate_us_message">Salut, nu vei mai vedea acest mesaj din nou.
+        \n\nDacă găsești Olauncher util, ai putea să ne lași o recenzie de 5 stele? Ar însemna enorm pentru noi. Mulțumim!</string>
+    <string name="share_message">Avem nevoie de ajutorul tău! Credem că toată lumea ar trebui să știe despre Olauncher și beneficiile sale, dar nu putem face asta singuri.
+        \n\nAi putea distribui Olauncher prietenilor, familiei și urmăritorilor tăi? Îți mulțumim pentru sprijin! ❤</string>
+    <string name="keyboard_message">Salut, tastatura este cea mai rapidă modalitate de a găsi și lansa aplicații în Olauncher. Te putem ruga să o lași activată câteva zile în plus și apoi să decizi?
+        \n\nAlegerea îți aparține întotdeauna.</string>
+    <string name="digital_wellbeing_message">Dacă vrei să setezi limite de timp pentru anumite aplicații, funcția Bunăstare digitală din Android te poate ajuta. Caută Bunăstare digitală în setările telefonului și activeaz-o.</string>
+    <string name="app_usage_message">Pentru a afișa/ascunde timpul petrecut pe ecran de pe ecranul de start, permite sau refuză permisiunea de utilizare a aplicațiilor.
+        \n\nNotă: Nu se colectează date privind utilizarea aplicațiilor. Totul este procesat pe dispozitivul tău.</string>
+    <string name="pro_message">Olauncher are și o versiune pro numită Pro Launcher. Aceasta are funcții suplimentare precum vremea, widgeturi, fonturi, foldere, fundaluri AMOLED și altele.
+        \n\nEste, de asemenea, cea mai bună modalitate de a sprijini dezvoltatorii Olauncher. Aruncă o privire!</string>
+    <string name="wallpaper_message">Olauncher oferă fundaluri noi și frumoase zilnic, gratuit. Dă ecranului tău de start un aspect nou în fiecare zi, gratis!
+        \n\nVrei să încerci?</string>
+    <string name="accessibility_service_description">Permisiunea de accesibilitate este necesară pentru a activa gestul - atinge dublu pentru blocare. Niciun fel de date obținute de Olauncher prin acest serviciu nu părăsesc dispozitivul tău.</string>
+    <string name="support_olauncher_for_free">Sprijină Olauncher gratuit folosind linkul nostru afiliat Amazon.</string>
+    <string name="support_olauncher_message">De fiecare dată când cumperi ceva folosind linkul nostru, primim un mic comision. Te rugăm să salvezi linkul și să îl folosești ori de câte ori faci cumpărături online.\nMulțumim!</string>
+    <string name="open">Deschide linkul</string>
+    <string name="copy">Copiază</string>
+    <string name="close">Închide</string>
+    <string name="not_now">Nu acum</string>
+    <string name="public_roadmap">Foaia de parcurs publică Olauncher</string>
+    <string name="roadmap">Foaie de parcurs</string>
+    <string name="date">Dată</string>
+    <string name="date_only">Doar data</string>
+    <string name="bottom_on">Jos: Activat</string>
+    <string name="bottom_off">Jos: Dezactivat</string>
+    <string name="please_set_olauncher_as_default_first">Te rugăm să setezi mai întâi Olauncher ca implicit</string>
+    <string name="affiliate">Afiliat</string>
+    <string name="tip_start_typing_for_rename">Sfat: Începe să tastezi pentru opțiunea de REDENUMIRE aplicație</string>
+    <string name="hidden_apps_message">Notă: Atinge \'Olauncher\' în partea de sus a acestei pagini de setări pentru a găsi aplicațiile tale ascunse.\n\nMai multe detalii sunt disponibile pe pagina noastră Despre.</string>
+    <string name="swipe_down_for">Glisează în jos pentru</string>
+    <string name="search">Căutare</string>
+    <string name="notifications">Notificări</string>
+    <string name="accessibility_disclosure">Te rugăm să activezi serviciul de accesibilitate Olauncher din setările dispozitivului pentru a activa gestul Atinge dublu pentru blocare.
+    \n\nTe rugăm să reții că acest serviciu este utilizat doar pentru această funcție specifică. Serviciul nostru de accesibilitate nu colectează și nu partajează date.</string>
+    <string name="accept">Acceptă</string>
+    <string name="permission">Permisiune</string>
+    <string name="double_tap_lock">Atinge dublu pentru blocare</string>
+    <string name="enable">Activează</string>
+    <string name="disable">Dezactivează</string>
+    <string name="not_working"><u>Nu funcționează?</u></string>
+    <string name="info">Informații</string>
+    <string name="delete">Dezinstalează</string>
+    <string name="text_size">Dimensiune text</string>
+    <string name="enabled">Activat</string>
+    <string name="disabled">Dezactivat</string>
+    <string name="please_turn_on_double_tap_to_unlock">Te rugăm să activezi atinge dublu pentru blocare</string>
+    <string name="launcher_failed_to_lock_device">Olauncher nu a reușit să blocheze dispozitivul.\nTe rugăm să verifici setările aplicației.</string>
+    <string name="long_press_to_select_app">Apasă lung pentru a selecta aplicația</string>
+    <string name="unable_to_open_app">Nu se poate deschide aplicația</string>
+    <string name="unable_to_open_app_info">Nu se pot deschide informațiile aplicației</string>
+    <string name="copied">Copiat</string>
+    <string name="system_app_cannot_delete">Aplicație de sistem, nu poate fi dezinstalată</string>
+    <string name="type_a_new_app_name_first">Introdu mai întâi un nume nou pentru aplicație</string>
+    <string name="app_not_found">Aplicația nu a fost găsită</string>
+    <string name="unable_to_launch_app">Nu se poate lansa aplicația</string>
+    <string name="search_for_Launcher_or_home_app">Caută aplicația Launcher sau Acasă</string>
+    <string name="swipe_left_app_enabled">Aplicație la glisare stânga activată</string>
+    <string name="swipe_right_app_enabled">Aplicație la glisare dreapta activată</string>
+    <string name="swipe_left_app_disabled">Aplicație la glisare stânga dezactivată</string>
+    <string name="swipe_right_app_disabled">Aplicație la glisare dreapta dezactivată</string>
+    <string name="your_wallpaper_will_update_shortly">Fundalul tău se va actualiza în curând</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher nu este implicit. Actualizarea fundalului va eșua.</string>
+    <string name="long_press_to_enable">Apasă lung pentru a activa</string>
+    <string name="no_hidden_apps">Nicio aplicație ascunsă</string>
+    <string name="hidden_apps">Aplicații ascunse</string>
+    <string name="adapter_show">Afișează</string>
+    <string name="adapter_hide">Ascunde</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Îți folosești telefonul sau telefonul te folosește pe tine?</string>
+    <string name="about_olauncher">Despre și întrebări frecvente</string>
+    <string name="screen_time">Timp pe ecran</string>
+    <string name="learn_more">Află mai multe</string>
+    <string name="did_you_know">Știai că?</string>
+    <string name="leave_a_review">Lasă o recenzie</string>
+    <string name="review_message">Olauncher este gratuit și va rămâne mereu așa. Nu are reclame, nu colectează date și îți reduce timpul petrecut pe ecran, ducând la o viață mai sănătoasă.
+        \n\nSperăm că îl vei aprecia. Spune-ne ce părere ai.</string>
+    <string name="alignment_changed">Aliniere schimbată ✅</string>
+    <string name="home_screen">Ecran de start</string>
+    <string name="hey">Salut</string>
+    <string name="more_features">Mai multe funcții…</string>
+    <string name="new_year_wish">Un an mai bun decât oricare altul. La mulți ani!</string>
+    <string name="new_year_wish_1">Nu contează cum a fost ianuarie. Mai ai tot restul anului pentru a face mai bine ca niciodată.</string>
+    <string name="cheers">Noroc!</string>
+    <string name="notification_bar">Bară de notificări</string>
+    <string name="private_space">Spațiu privat</string>
+</resources>

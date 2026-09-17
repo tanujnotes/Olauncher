@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">Εφαρμογή</string>
+    <string name="set_as_default_launcher">Ορισμός ως προεπιλεγμένου launcher</string>
+    <string name="set_as_default_launcher_u"><u>Ορισμός ως προεπιλεγμένου launcher</u></string>
+    <string name="set_as_default_launcher_first">Ορίστε πρώτα το Olauncher ως προεπιλογή</string>
+    <string name="app_text_color">Χρώμα κειμένου</string>
+    <string name="double_tap_to_lock_screen">Διπλό πάτημα για κλείδωμα</string>
+    <string name="home_button_show_recents">Κουμπί αρχικής για πρόσφατες εφαρμογές</string>
+    <string name="admin_permission_message">Το Olauncher υπόσχεται να χρησιμοποιεί υπεύθυνα την άδεια προσβασιμότητας. Το Olauncher δεν συλλέγει ούτε μοιράζεται δεδομένα.</string>
+    <string name="about">Σχετικά</string>
+    <string name="off">Ανενεργό</string>
+    <string name="on">Ενεργό</string>
+    <string name="black">Μαύρο</string>
+    <string name="white">Λευκό</string>
+    <string name="change_default_launcher">Αλλαγή προεπιλεγμένου launcher</string>
+    <string name="privacy">Απόρρητο</string>
+    <string name="share">Κοινοποίηση</string>
+    <string name="share_now">Κοινοποίηση τώρα</string>
+    <string name="rate">Αξιολόγηση</string>
+    <string name="rate_now">Αξιολόγηση τώρα</string>
+    <string name="follow">Ακολούθηση</string>
+    <string name="email">Email</string>
+    <string name="donate">Δωρεά</string>
+    <string name="swipe_up_for_apps">1. Σύρετε προς τα πάνω για όλες τις εφαρμογές\n2. Παρατεταμένο πάτημα οπουδήποτε για τις ρυθμίσεις</string>
+    <string name="apps_on_home_screen">Εφαρμογές στην αρχική οθόνη</string>
+    <string name="daily_wallpaper_update">Καθημερινή νέα ταπετσαρία</string>
+    <string name="left">Αριστερά</string>
+    <string name="right">Δεξιά</string>
+    <string name="center">Κέντρο</string>
+    <string name="home_layout_alignment">Στοίχιση εφαρμογών</string>
+    <string name="swipe_left_app">Εφαρμογή σε σύρσιμο αριστερά</string>
+    <string name="swipe_right_app">Εφαρμογή σε σύρσιμο δεξιά</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Συμβουλή: Ξεκινήστε να πληκτρολογείτε το όνομα μιας εφαρμογής για αυτόματο άνοιγμα</string>
+    <string name="okay">Εντάξει</string>
+    <string name="cool">Ωραία!</string>
+    <string name="auto_show_keyboard">Αυτόματη εμφάνιση πληκτρολογίου</string>
+    <string name="hide">Απόκρυψη</string>
+    <string name="status_bar">Γραμμή κατάστασης επάνω</string>
+    <string name="rename">Μετονομασία</string>
+    <string name="show_date_time">Εμφάνιση ημερομηνίας/ώρας</string>
+    <string name="appearance">Εμφάνιση</string>
+    <string name="gestures">Χειρονομίες</string>
+    <string name="theme_mode">Λειτουργία θέματος</string>
+    <string name="system_default">Σύστημα</string>
+    <string name="dark">Σκούρο</string>
+    <string name="light">Ανοιχτόχρωμο</string>
+    <string name="welcome_to_olauncher_settings">Καλώς ήρθατε στις ρυθμίσεις!
+        \n\nΘυμηθείτε, αν έχετε οποιεσδήποτε ερωτήσεις, η σελίδα Σχετικά έχει την απάντηση.</string>
+    <string name="rate_us_message">Γεια σας, δεν θα ξαναδείτε αυτό το μήνυμα.
+        \n\nΑν βρίσκετε το Olauncher χρήσιμο, θα μπορούσατε να αφήσετε μια αξιολόγηση 5 αστέρων; Θα σημαίνει πολλά για εμάς. Ευχαριστούμε!</string>
+    <string name="share_message">Χρειαζόμαστε τη βοήθειά σας! Πιστεύουμε ότι όλοι πρέπει να γνωρίζουν για το Olauncher και τα οφέλη του, αλλά δεν μπορούμε να το κάνουμε μόνοι μας.
+        \n\nΘα μπορούσατε να μοιραστείτε το Olauncher με τους φίλους, την οικογένεια και τους ακολούθους σας; Ευχαριστούμε για την υποστήριξή σας! ❤</string>
+    <string name="keyboard_message">Γεια σας, το πληκτρολόγιο είναι ο ταχύτερος τρόπος για να βρείτε και να ανοίξετε εφαρμογές στο Olauncher. Μπορούμε να σας ζητήσουμε να το αφήσετε ενεργό για λίγες ακόμη ημέρες και μετά να αποφασίσετε;
+        \n\nΗ επιλογή είναι πάντα δική σας.</string>
+    <string name="digital_wellbeing_message">Αν θέλετε να ορίσετε χρονικά όρια για συγκεκριμένες εφαρμογές, η λειτουργία Ψηφιακή Ευεξία του Android μπορεί να σας βοηθήσει. Αναζητήστε το Ψηφιακή Ευεξία στις ρυθμίσεις του τηλεφώνου σας και ενεργοποιήστε το.</string>
+    <string name="app_usage_message">Για να εμφανίσετε/αποκρύψετε τον χρόνο οθόνης στην αρχική οθόνη, επιτρέψτε ή απορρίψτε την άδεια χρήσης εφαρμογών.
+        \n\nΣημείωση: Δεν συλλέγονται δεδομένα χρήσης εφαρμογών. Όλα επεξεργάζονται στη συσκευή σας.</string>
+    <string name="pro_message">Το Olauncher διαθέτει επίσης μια έκδοση pro με το όνομα Pro Launcher. Έχει επιπλέον λειτουργίες όπως καιρός, widgets, γραμματοσειρές, φάκελοι, ταπετσαρίες AMOLED και άλλα.
+        \n\nΕίναι επίσης ο καλύτερος τρόπος να υποστηρίξετε τους προγραμματιστές του Olauncher. Ρίξτε μια ματιά!</string>
+    <string name="wallpaper_message">Το Olauncher προσφέρει καθημερινά όμορφες νέες ταπετσαρίες. Δώστε στην αρχική σας οθόνη μια νέα εμφάνιση κάθε μέρα, δωρεάν!
+        \n\nΘέλετε να το δοκιμάσετε;</string>
+    <string name="accessibility_service_description">Η άδεια προσβασιμότητας απαιτείται για την ενεργοποίηση της χειρονομίας - διπλό πάτημα για κλείδωμα. Κανένα δεδομένο που αποκτάται από το Olauncher μέσω αυτής της υπηρεσίας δεν εγκαταλείπει τη συσκευή σας.</string>
+    <string name="support_olauncher_for_free">Υποστηρίξτε το Olauncher δωρεάν χρησιμοποιώντας τον σύνδεσμο συνεργάτη μας στο Amazon.</string>
+    <string name="support_olauncher_message">Κάθε φορά που αγοράζετε κάτι μέσω του συνδέσμου μας, λαμβάνουμε μια μικρή προμήθεια. Αποθηκεύστε τον σύνδεσμο και χρησιμοποιήστε τον όποτε κάνετε αγορές online.\nΕυχαριστούμε!</string>
+    <string name="open">Άνοιγμα συνδέσμου</string>
+    <string name="copy">Αντιγραφή</string>
+    <string name="close">Κλείσιμο</string>
+    <string name="not_now">Όχι τώρα</string>
+    <string name="public_roadmap">Δημόσιος οδικός χάρτης Olauncher</string>
+    <string name="roadmap">Οδικός χάρτης</string>
+    <string name="date">Ημερομηνία</string>
+    <string name="date_only">Μόνο ημερομηνία</string>
+    <string name="bottom_on">Κάτω: Ενεργό</string>
+    <string name="bottom_off">Κάτω: Ανενεργό</string>
+    <string name="please_set_olauncher_as_default_first">Ορίστε πρώτα το Olauncher ως προεπιλογή</string>
+    <string name="affiliate">Συνεργάτης</string>
+    <string name="tip_start_typing_for_rename">Συμβουλή: Ξεκινήστε να πληκτρολογείτε για επιλογή ΜΕΤΟΝΟΜΑΣΙΑΣ εφαρμογής</string>
+    <string name="hidden_apps_message">Σημείωση: Πατήστε στο \'Olauncher\' στην κορυφή αυτής της σελίδας Ρυθμίσεων για να βρείτε τις κρυφές εφαρμογές σας.\n\nΠερισσότερες λεπτομέρειες διαθέσιμες στη σελίδα Σχετικά.</string>
+    <string name="swipe_down_for">Σύρσιμο προς τα κάτω για</string>
+    <string name="search">Αναζήτηση</string>
+    <string name="notifications">Ειδοποιήσεις</string>
+    <string name="accessibility_disclosure">Ενεργοποιήστε την υπηρεσία προσβασιμότητας του Olauncher στις ρυθμίσεις της συσκευής σας για να ενεργοποιήσετε τη χειρονομία Διπλό πάτημα για κλείδωμα.
+    \n\nΣημειώστε ότι αυτή η υπηρεσία χρησιμοποιείται μόνο για αυτή τη συγκεκριμένη λειτουργία. Η υπηρεσία προσβασιμότητάς μας δεν συλλέγει ούτε μοιράζεται δεδομένα.</string>
+    <string name="accept">Αποδοχή</string>
+    <string name="permission">Άδεια</string>
+    <string name="double_tap_lock">Διπλό πάτημα για κλείδωμα</string>
+    <string name="enable">Ενεργοποίηση</string>
+    <string name="disable">Απενεργοποίηση</string>
+    <string name="not_working"><u>Δεν λειτουργεί;</u></string>
+    <string name="info">Πληροφορίες</string>
+    <string name="delete">Απεγκατάσταση</string>
+    <string name="text_size">Μέγεθος κειμένου</string>
+    <string name="enabled">Ενεργοποιημένο</string>
+    <string name="disabled">Απενεργοποιημένο</string>
+    <string name="please_turn_on_double_tap_to_unlock">Ενεργοποιήστε το διπλό πάτημα για κλείδωμα</string>
+    <string name="launcher_failed_to_lock_device">Το Olauncher απέτυχε να κλειδώσει τη συσκευή.\nΕλέγξτε τις ρυθμίσεις της εφαρμογής σας.</string>
+    <string name="long_press_to_select_app">Παρατεταμένο πάτημα για επιλογή εφαρμογής</string>
+    <string name="unable_to_open_app">Αδύνατο το άνοιγμα εφαρμογής</string>
+    <string name="unable_to_open_app_info">Αδύνατο το άνοιγμα πληροφοριών εφαρμογής</string>
+    <string name="copied">Αντιγράφηκε</string>
+    <string name="system_app_cannot_delete">Εφαρμογή συστήματος, δεν μπορεί να απεγκατασταθεί</string>
+    <string name="type_a_new_app_name_first">Πληκτρολογήστε πρώτα ένα νέο όνομα εφαρμογής</string>
+    <string name="app_not_found">Η εφαρμογή δεν βρέθηκε</string>
+    <string name="unable_to_launch_app">Αδύνατο το άνοιγμα της εφαρμογής</string>
+    <string name="search_for_Launcher_or_home_app">Αναζητήστε εφαρμογή Launcher ή Αρχικής</string>
+    <string name="swipe_left_app_enabled">Ενεργοποιήθηκε η εφαρμογή σε σύρσιμο αριστερά</string>
+    <string name="swipe_right_app_enabled">Ενεργοποιήθηκε η εφαρμογή σε σύρσιμο δεξιά</string>
+    <string name="swipe_left_app_disabled">Απενεργοποιήθηκε η εφαρμογή σε σύρσιμο αριστερά</string>
+    <string name="swipe_right_app_disabled">Απενεργοποιήθηκε η εφαρμογή σε σύρσιμο δεξιά</string>
+    <string name="your_wallpaper_will_update_shortly">Η ταπετσαρία σας θα ενημερωθεί σύντομα</string>
+    <string name="olauncher_is_not_default_launcher">Το Olauncher δεν είναι προεπιλεγμένο. Η ενημέρωση ταπετσαρίας θα αποτύχει.</string>
+    <string name="long_press_to_enable">Παρατεταμένο πάτημα για ενεργοποίηση</string>
+    <string name="no_hidden_apps">Καμία κρυφή εφαρμογή</string>
+    <string name="hidden_apps">Κρυφές εφαρμογές</string>
+    <string name="adapter_show">Εμφάνιση</string>
+    <string name="adapter_hide">Απόκρυψη</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Χρησιμοποιείτε το τηλέφωνό σας ή το τηλέφωνο χρησιμοποιεί εσάς;</string>
+    <string name="about_olauncher">Σχετικά και Συχνές Ερωτήσεις</string>
+    <string name="screen_time">Χρόνος οθόνης</string>
+    <string name="learn_more">Μάθετε περισσότερα</string>
+    <string name="did_you_know">Το γνωρίζατε;</string>
+    <string name="leave_a_review">Αφήστε μια αξιολόγηση</string>
+    <string name="review_message">Το Olauncher είναι δωρεάν και θα παραμείνει πάντα. Δεν έχει διαφημίσεις, δεν συλλέγει δεδομένα και μειώνει τον χρόνο οθόνης σας, οδηγώντας σε μια πιο υγιή ζωή.
+        \n\nΕλπίζουμε να το απολαύσετε. Πείτε μας τη γνώμη σας.</string>
+    <string name="alignment_changed">Η στοίχιση άλλαξε ✅</string>
+    <string name="home_screen">Αρχική οθόνη</string>
+    <string name="hey">Γεια</string>
+    <string name="more_features">Περισσότερα χαρακτηριστικά…</string>
+    <string name="new_year_wish">Σε μια χρονιά καλύτερη από κάθε άλλη. Καλή χρονιά!</string>
+    <string name="new_year_wish_1">Δεν έχει σημασία πώς πήγε ο Ιανουάριος. Έχετε ακόμα τον υπόλοιπο χρόνο για να τα πάτε καλύτερα από ποτέ.</string>
+    <string name="cheers">Στην υγειά μας!</string>
+    <string name="notification_bar">Γραμμή ειδοποιήσεων</string>
+    <string name="private_space">Ιδιωτικός χώρος</string>
+</resources>

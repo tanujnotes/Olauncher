@@ -1,0 +1,166 @@
+<resources>
+    <string name="app_name" translatable="false">Olauncher</string>
+    <string name="github" translatable="false">Github</string>
+    <string name="lock_layout_description" translatable="false">lock layout description to be used a unique id to lock screen</string>
+    <string name="olauncher_pro" translatable="false">Olauncher Pro</string>
+    <string name="digital_minimalism" translatable="false"><u>Digital Minimalism</u></string>
+    <string name="new_app_note_safe" translatable="false"><u>Note to Self</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="new_app_minimal_todo_lists" translatable="false"><u>Minimal Todo Lists</u>\n<sub><small>(Ad-Free)</small></sub></string>
+    <string name="day_battery" formatted="false" translatable="false">%s, %d%%</string>
+    <string name="tag_0" translatable="false">0</string>
+    <string name="tag_1" translatable="false">1</string>
+    <string name="tag_2" translatable="false">2</string>
+    <string name="tag_3" translatable="false">3</string>
+    <string name="tag_4" translatable="false">4</string>
+    <string name="tag_5" translatable="false">5</string>
+    <string name="tag_6" translatable="false">6</string>
+    <string name="tag_7" translatable="false">7</string>
+    <string name="tag_8" translatable="false">8</string>
+    <string name="time_spent_min" translatable="false"><b>%1$sm</b></string>
+    <string name="time_spent_hour" translatable="false">%1$sh %2$sm</string>
+
+    <string name="x_twitter" translatable="false">X/Twitter</string>
+    <string name="instagram" translatable="false">Instagram</string>
+
+    <string name="app">Aplikace</string>
+    <string name="set_as_default_launcher">Nastavit jako výchozí spouštěč</string>
+    <string name="set_as_default_launcher_u"><u>Nastavit jako výchozí spouštěč</u></string>
+    <string name="set_as_default_launcher_first">Nejprve nastavte Olauncher jako výchozí</string>
+    <string name="app_text_color">Barva textu</string>
+    <string name="double_tap_to_lock_screen">Dvojité klepnutí pro zamknutí</string>
+    <string name="home_button_show_recents">Tlačítko domů pro nedávné aplikace</string>
+    <string name="admin_permission_message">Olauncher slibuje odpovědně používat oprávnění přístupnosti. Olauncher nesbírá ani nesdílí žádná data.</string>
+    <string name="about">O aplikaci</string>
+    <string name="off">Vypnuto</string>
+    <string name="on">Zapnuto</string>
+    <string name="black">Černá</string>
+    <string name="white">Bílá</string>
+    <string name="change_default_launcher">Změnit výchozí spouštěč</string>
+    <string name="privacy">Soukromí</string>
+    <string name="share">Sdílet</string>
+    <string name="share_now">Sdílet nyní</string>
+    <string name="rate">Ohodnotit</string>
+    <string name="rate_now">Ohodnotit nyní</string>
+    <string name="follow">Sledovat</string>
+    <string name="email">E-mail</string>
+    <string name="donate">Přispět</string>
+    <string name="swipe_up_for_apps">1. Přejetím nahoru zobrazíte všechny aplikace\n2. Dlouhým podržením kdekoli otevřete nastavení</string>
+    <string name="apps_on_home_screen">Aplikace na domovské obrazovce</string>
+    <string name="daily_wallpaper_update">Denně nová tapeta</string>
+    <string name="left">Vlevo</string>
+    <string name="right">Vpravo</string>
+    <string name="center">Na střed</string>
+    <string name="home_layout_alignment">Zarovnání aplikací</string>
+    <string name="swipe_left_app">Aplikace při přejetí vlevo</string>
+    <string name="swipe_right_app">Aplikace při přejetí vpravo</string>
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="app_drawer_tips">Tip: Začněte psát název aplikace pro její automatické spuštění</string>
+    <string name="okay">Dobře</string>
+    <string name="cool">Skvělé!</string>
+    <string name="auto_show_keyboard">Automaticky zobrazit klávesnici</string>
+    <string name="hide">Skrýt</string>
+    <string name="status_bar">Stavový řádek nahoře</string>
+    <string name="rename">Přejmenovat</string>
+    <string name="show_date_time">Zobrazit datum a čas</string>
+    <string name="appearance">Vzhled</string>
+    <string name="gestures">Gesta</string>
+    <string name="theme_mode">Motiv</string>
+    <string name="system_default">Systémový</string>
+    <string name="dark">Tmavý</string>
+    <string name="light">Světlý</string>
+    <string name="welcome_to_olauncher_settings">Vítejte v nastavení!
+        \n\nPamatujte, pokud máte jakékoli otázky, na stránce O aplikaci najdete odpovědi.</string>
+    <string name="rate_us_message">Ahoj, tuto zprávu už znovu neuvidíte.
+        \n\nPokud vám Olauncher přijde užitečný, mohli byste nám prosím nechat pětihvězdičkové hodnocení? Bude to pro nás moc znamenat. Děkujeme!</string>
+    <string name="share_message">Potřebujeme vaši pomoc! Věříme, že by měl o Olauncheru a jeho výhodách vědět každý, ale sami to nezvládneme.
+        \n\nMohli byste prosím sdílet Olauncher se svými přáteli, rodinou a sledujícími? Děkujeme za vaši podporu! ❤</string>
+    <string name="keyboard_message">Ahoj, klávesnice je nejrychlejší způsob, jak v Olauncheru najít a spustit aplikace. Můžeme vás požádat, abyste ji nechali zapnutou ještě pár dní a pak se rozhodli?
+        \n\nVolba je vždy na vás.</string>
+    <string name="digital_wellbeing_message">Pokud chcete nastavit časové limity pro určité aplikace, může vám pomoci funkce Digital Wellbeing v Androidu. Vyhledejte prosím Digital Wellbeing v nastavení telefonu a zapněte ji.</string>
+    <string name="app_usage_message">Chcete-li zobrazit nebo skrýt dobu používání obrazovky na domovské obrazovce, povolte nebo zakažte prosím oprávnění k používání aplikací.
+        \n\nPoznámka: Žádná data o používání aplikací se nesbírají. Vše se zpracovává přímo ve vašem zařízení.</string>
+    <string name="pro_message">Olauncher má také verzi Pro s názvem Pro Launcher. Obsahuje další funkce jako počasí, widgety, písma, složky, AMOLED tapety a další.
+        \n\nJe to také nejlepší způsob, jak podpořit vývojáře Olauncheru. Podívejte se na ni!</string>
+    <string name="wallpaper_message">Olauncher nabízí denně nové krásné tapety zdarma. Dejte své domovské obrazovce každý den nový vzhled, zdarma!
+        \n\nChcete to vyzkoušet?</string>
+    <string name="accessibility_service_description">Oprávnění přístupnosti je vyžadováno pro povolení gesta - dvojité klepnutí pro zamknutí. Žádná data získaná Olauncherem prostřednictvím této služby neopustí vaše zařízení.</string>
+    <string name="support_olauncher_for_free">Podpořte Olauncher zdarma pomocí našeho affiliate odkazu na Amazon.</string>
+    <string name="support_olauncher_message">Pokaždé, když si přes náš odkaz něco koupíte, dostaneme malou provizi. Uložte si prosím odkaz a používejte ho, kdykoli nakupujete online.\nDěkujeme!</string>
+    <string name="open">Otevřít odkaz</string>
+    <string name="copy">Kopírovat</string>
+    <string name="close">Zavřít</string>
+    <string name="not_now">Teď ne</string>
+    <string name="public_roadmap">Veřejný plán vývoje Olauncher</string>
+    <string name="roadmap">Plán vývoje</string>
+    <string name="date">Datum</string>
+    <string name="date_only">Pouze datum</string>
+    <string name="bottom_on">Dole: Zapnuto</string>
+    <string name="bottom_off">Dole: Vypnuto</string>
+    <string name="please_set_olauncher_as_default_first">Nejprve prosím nastavte Olauncher jako výchozí</string>
+    <string name="affiliate">Affiliate</string>
+    <string name="tip_start_typing_for_rename">Tip: Začněte psát pro možnost přejmenování aplikace</string>
+    <string name="hidden_apps_message">Poznámka: Klepněte na \'Olauncher\' v horní části stránky Nastavení a najdete své skryté aplikace.\n\nVíce podrobností najdete na stránce O aplikaci.</string>
+    <string name="swipe_down_for">Přejetí dolů pro</string>
+    <string name="search">Hledat</string>
+    <string name="notifications">Oznámení</string>
+    <string name="accessibility_disclosure">Zapněte prosím službu přístupnosti Olauncher v nastavení zařízení, abyste povolili gesto Dvojité klepnutí pro zamknutí.
+    \n\nUpozorňujeme, že tato služba se používá pouze pro tuto konkrétní funkci. Naše služba přístupnosti nesbírá ani nesdílí žádná data.</string>
+    <string name="accept">Přijmout</string>
+    <string name="permission">Oprávnění</string>
+    <string name="double_tap_lock">Dvojité klepnutí pro zamknutí</string>
+    <string name="enable">Povolit</string>
+    <string name="disable">Zakázat</string>
+    <string name="not_working"><u>Nefunguje to?</u></string>
+    <string name="info">Informace</string>
+    <string name="delete">Odinstalovat</string>
+    <string name="text_size">Velikost textu</string>
+    <string name="enabled">Povoleno</string>
+    <string name="disabled">Zakázáno</string>
+    <string name="please_turn_on_double_tap_to_unlock">Zapněte prosím dvojité klepnutí pro zamknutí</string>
+    <string name="launcher_failed_to_lock_device">Olauncheru se nepodařilo zamknout zařízení.\nZkontrolujte prosím nastavení aplikace.</string>
+    <string name="long_press_to_select_app">Dlouhým podržením vyberte aplikaci</string>
+    <string name="unable_to_open_app">Nelze otevřít aplikaci</string>
+    <string name="unable_to_open_app_info">Nelze otevřít informace o aplikaci</string>
+    <string name="copied">Zkopírováno</string>
+    <string name="system_app_cannot_delete">Systémová aplikace, nelze odinstalovat</string>
+    <string name="type_a_new_app_name_first">Nejprve zadejte nový název aplikace</string>
+    <string name="app_not_found">Aplikace nenalezena</string>
+    <string name="unable_to_launch_app">Nelze spustit aplikaci</string>
+    <string name="search_for_Launcher_or_home_app">Vyhledejte aplikaci Spouštěč nebo Domů</string>
+    <string name="swipe_left_app_enabled">Aplikace při přejetí vlevo povolena</string>
+    <string name="swipe_right_app_enabled">Aplikace při přejetí vpravo povolena</string>
+    <string name="swipe_left_app_disabled">Aplikace při přejetí vlevo zakázána</string>
+    <string name="swipe_right_app_disabled">Aplikace při přejetí vpravo zakázána</string>
+    <string name="your_wallpaper_will_update_shortly">Vaše tapeta se brzy aktualizuje</string>
+    <string name="olauncher_is_not_default_launcher">Olauncher není výchozí. Aktualizace tapety selže.</string>
+    <string name="long_press_to_enable">Dlouhým podržením povolíte</string>
+    <string name="no_hidden_apps">Žádné skryté aplikace</string>
+    <string name="hidden_apps">Skryté aplikace</string>
+    <string name="adapter_show">Zobrazit</string>
+    <string name="adapter_hide">Skrýt</string>
+    <string name="are_you_using_your_phone_or_is_your_phone_using_you">Používáte svůj telefon, nebo telefon používá vás?</string>
+    <string name="about_olauncher">O aplikaci a časté dotazy</string>
+    <string name="screen_time">Doba u obrazovky</string>
+    <string name="learn_more">Zjistit více</string>
+    <string name="did_you_know">Věděli jste?</string>
+    <string name="leave_a_review">Zanechat recenzi</string>
+    <string name="review_message">Olauncher je zdarma a vždy bude. Nemá reklamy, nesbírá žádná data a zkracuje dobu strávenou u obrazovky, což vede ke zdravějšímu životu.
+        \n\nDoufáme, že se vám bude líbit. Řekněte nám, co si myslíte.</string>
+    <string name="alignment_changed">Zarovnání změněno ✅</string>
+    <string name="home_screen">Domovská obrazovka</string>
+    <string name="hey">Ahoj</string>
+    <string name="more_features">Další funkce…</string>
+    <string name="new_year_wish">Ať je tento rok lepší než kterýkoli předchozí. Šťastný nový rok!</string>
+    <string name="new_year_wish_1">Nezáleží na tom, jaký byl leden. Zbytek roku máte pořád před sebou, abyste ho zvládli lépe než kdy dřív.</string>
+    <string name="cheers">Na zdraví!</string>
+    <string name="notification_bar">Panel oznámení</string>
+    <string name="private_space">Soukromý prostor</string>
+</resources>
