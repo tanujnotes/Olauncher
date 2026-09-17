@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Every gap is 20dp: edge to title, title to message/content, message to action, action to edge.
-    Touch padding on the action (8dp) and the close icon (6dp) is subtracted from the
-    neighbouring margins so the visible text keeps that rhythm.
--->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,7 +7,7 @@
     android:paddingStart="24dp"
     android:paddingTop="20dp"
     android:paddingEnd="16dp"
-    android:paddingBottom="12dp">
+    android:paddingBottom="24dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -69,6 +64,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
