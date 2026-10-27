@@ -95,6 +95,7 @@
     <string name="not_working"><u>Nefunguje to?</u></string>
     <string name="info">Informace</string>
     <string name="delete">Odinstalovat</string>
+    <string name="remove">Odebrat</string>
     <string name="text_size">Velikost textu</string>
     <string name="enabled">Povoleno</string>
     <string name="disabled">Zakázáno</string>

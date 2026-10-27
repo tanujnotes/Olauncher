@@ -95,6 +95,7 @@
     <string name="not_working"><u>Fungerar inte?</u></string>
     <string name="info">Info</string>
     <string name="delete">Avinstallera</string>
+    <string name="remove">Ta bort</string>
     <string name="text_size">Textstorlek</string>
     <string name="enabled">Aktiverad</string>
     <string name="disabled">Inaktiverad</string>

@@ -24,6 +24,7 @@
     <string name="not_working"><u>不起作用？</u></string>
     <string name="info">信息</string>
     <string name="delete">卸载</string>
+    <string name="remove">移除</string>
     <string name="text_size">字体大小</string>
     <string name="enabled">已启用</string>
     <string name="disabled">已禁用</string>

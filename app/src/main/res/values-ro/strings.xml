@@ -95,6 +95,7 @@
     <string name="not_working"><u>Nu funcționează?</u></string>
     <string name="info">Informații</string>
     <string name="delete">Dezinstalează</string>
+    <string name="remove">Elimină</string>
     <string name="text_size">Dimensiune text</string>
     <string name="enabled">Activat</string>
     <string name="disabled">Dezactivat</string>

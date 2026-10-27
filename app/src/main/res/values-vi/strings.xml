@@ -95,6 +95,7 @@
     <string name="not_working"><u>Không hoạt động?</u></string>
     <string name="info">Thông tin</string>
     <string name="delete">Gỡ cài đặt</string>
+    <string name="remove">Xóa</string>
     <string name="text_size">Cỡ chữ</string>
     <string name="enabled">Đã bật</string>
     <string name="disabled">Đã tắt</string>

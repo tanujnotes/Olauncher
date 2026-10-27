@@ -96,6 +96,7 @@
     <string name="not_working"><u>Nem működik?</u></string>
     <string name="info">Információ</string>
     <string name="delete">Eltávolítás</string>
+    <string name="remove">Törlés</string>
     <string name="text_size">Szövegméret</string>
     <string name="enabled">Engedélyezve</string>
     <string name="disabled">Letiltva</string>

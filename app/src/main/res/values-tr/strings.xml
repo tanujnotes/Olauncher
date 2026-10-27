@@ -33,6 +33,7 @@
     <string name="not_working"><u>Çalışmıyor mu?</u></string>
     <string name="info">Bilgi</string>
     <string name="delete">Kaldır</string>
+    <string name="remove">Kaldır</string>
     <string name="text_size">Yazı Boyutu</string>
     <string name="enabled">Etkin</string>
     <string name="disabled">Devre Dışı</string>

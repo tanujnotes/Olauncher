@@ -35,6 +35,7 @@
     <string name="not_working"><u>لا يعمل؟</u></string>
     <string name="info">معلومات</string>
     <string name="delete">إلغاء التثبيت</string>
+    <string name="remove">إزالة</string>
     <string name="text_size">حجم الخط</string>
     <string name="enabled">ممكّن</string>
     <string name="disabled">مُطفأ</string>

@@ -93,6 +93,7 @@
     <string name="not_working"><u>¿No funciona?</u></string>
     <string name="info">Información</string>
     <string name="delete">Desinstalar</string>
+    <string name="remove">Quitar</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>

@@ -34,6 +34,7 @@
     <string name="not_working"><u>動作しませんか？</u></string>
     <string name="info">情報</string>
     <string name="delete">アンインストール</string>
+    <string name="remove">削除</string>
     <string name="text_size">文字サイズ</string>
     <string name="enabled">有効</string>
     <string name="disabled">無効</string>

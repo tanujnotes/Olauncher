@@ -94,6 +94,7 @@
     <string name="not_working"><u>Не работает?</u></string>
     <string name="info">Информация</string>
     <string name="delete">Удалить</string>
+    <string name="remove">Убрать</string>
     <string name="text_size">Размер текста</string>
     <string name="enabled">Включено</string>
     <string name="disabled">Выключено</string>

@@ -100,6 +100,7 @@
     <string name="not_working"><u>Ne radi?</u></string>
     <string name="info">Informacije</string>
     <string name="delete">Deinstaliraj</string>
+    <string name="remove">Ukloni</string>
     <string name="text_size">Veličina teksta</string>
     <string name="enabled">Omogućeno</string>
     <string name="disabled">Onemogućeno</string>

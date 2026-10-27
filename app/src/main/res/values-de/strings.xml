@@ -33,6 +33,7 @@
     <string name="not_working"><u>Funktioniert nicht?</u></string>
     <string name="info">Info</string>
     <string name="delete">Deinstallieren</string>
+    <string name="remove">Entfernen</string>
     <string name="text_size">Textgröße</string>
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>

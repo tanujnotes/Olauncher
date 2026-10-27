@@ -95,6 +95,7 @@
     <string name="not_working"><u>ใช้งานไม่ได้ใช่ไหม?</u></string>
     <string name="info">ข้อมูล</string>
     <string name="delete">ถอนการติดตั้ง</string>
+    <string name="remove">ลบ</string>
     <string name="text_size">ขนาดข้อความ</string>
     <string name="enabled">เปิดใช้งานแล้ว</string>
     <string name="disabled">ปิดใช้งานแล้ว</string>

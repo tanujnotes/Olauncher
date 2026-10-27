@@ -95,6 +95,7 @@
     <string name="not_working"><u>काम नहीं कर रहा?</u></string>
     <string name="info">जानकारी</string>
     <string name="delete">अनइंस्टॉल करें</string>
+    <string name="remove">हटाएं</string>
     <string name="text_size">टेक्स्ट का आकार</string>
     <string name="enabled">चालू है</string>
     <string name="disabled">बंद है</string>

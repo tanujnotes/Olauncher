@@ -95,6 +95,7 @@
     <string name="not_working"><u>Δεν λειτουργεί;</u></string>
     <string name="info">Πληροφορίες</string>
     <string name="delete">Απεγκατάσταση</string>
+    <string name="remove">Αφαίρεση</string>
     <string name="text_size">Μέγεθος κειμένου</string>
     <string name="enabled">Ενεργοποιημένο</string>
     <string name="disabled">Απενεργοποιημένο</string>

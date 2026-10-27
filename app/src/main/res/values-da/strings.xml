@@ -94,6 +94,7 @@
     <string name="not_working"><u>Virker det ikke?</u></string>
     <string name="info">Info</string>
     <string name="delete">Afinstaller</string>
+    <string name="remove">Fjern</string>
     <string name="text_size">Tekststørrelse</string>
     <string name="enabled">Aktiveret</string>
     <string name="disabled">Deaktiveret</string>

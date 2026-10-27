@@ -87,6 +87,7 @@
     <string name="not_working"><u>작동하지 않나요?</u></string>
     <string name="info">정보</string>
     <string name="delete">제거</string>
+    <string name="remove">삭제</string>
     <string name="text_size">텍스트 크기</string>
     <string name="enabled">활성</string>
     <string name="disabled">비활성</string>

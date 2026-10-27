@@ -94,6 +94,7 @@
     <string name="not_working"><u>Eikö toimi?</u></string>
     <string name="info">Tiedot</string>
     <string name="delete">Poista asennus</string>
+    <string name="remove">Poista</string>
     <string name="text_size">Tekstin koko</string>
     <string name="enabled">Käytössä</string>
     <string name="disabled">Ei käytössä</string>
