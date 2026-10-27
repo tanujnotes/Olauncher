@@ -376,9 +376,11 @@ class MainActivity : AppCompatActivity() {
         timerJob?.cancel()
         timerJob = lifecycleScope.launch {
             delay(200)
-            if ((prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.white))
-                || (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_NO && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.black))
-            )
+            val themeMismatch =
+                (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.white))
+                        || (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_NO && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.black))
+            // If recreating doesn't fix the theme (e.g. an OEM ROM overriding it), don't recreate in an endless loop (#734)
+            if (themeMismatch && prefs.launcherRestartTimestamp.hasBeenMinutes(1))
                 restartLauncherOrCheckTheme(true)
         }
     }
