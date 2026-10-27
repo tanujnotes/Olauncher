@@ -61,6 +61,7 @@ class AppDrawerAdapter(
 
     private var autoLaunch = true
     private var isBangSearch = false
+    private var autoLaunchedQuery: String? = null
     var allowAutoLaunch = true
     private val diacriticsRegex = Regex("\\p{InCombiningDiacriticalMarks}+")
     private val separatorsRegex = Regex("[-_+,.`'\\s\\p{Z}]")
@@ -151,14 +152,17 @@ class AppDrawerAdapter(
                     val items = it as MutableList<AppModel>
                     appFilteredList = items
                     submitList(appFilteredList) {
-                        autoLaunch()
+                        autoLaunch(constraint?.toString())
                     }
                 }
             }
         }
     }
 
-    private fun autoLaunch() {
+    private fun autoLaunch(query: String?) {
+        // App list refreshes re-run the current query, so launch only once until it changes
+        if (query == autoLaunchedQuery) return
+        autoLaunchedQuery = null
         try {
             if (itemCount == 1
                 && autoLaunch
@@ -168,7 +172,10 @@ class AppDrawerAdapter(
                 && appFilteredList[0] !is AppModel.PrivateSpaceHeader
                 // Skip the empty bottom-padding item, left alone when the app list is empty
                 && appFilteredList[0].appPackage.isNotEmpty()
-            ) appClickListener(appFilteredList[0])
+            ) {
+                autoLaunchedQuery = query
+                appClickListener(appFilteredList[0])
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
