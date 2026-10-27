@@ -197,7 +197,7 @@ private fun upgradeHiddenApps(prefs: Prefs) {
     val newHiddenAppsSet = mutableSetOf<String>()
     for (hiddenPackage in hiddenAppsSet) {
         if (hiddenPackage.contains("|")) newHiddenAppsSet.add(hiddenPackage)
-        else newHiddenAppsSet.add(hiddenPackage + android.os.Process.myUserHandle().toString())
+        else newHiddenAppsSet.add(hiddenPackage + "|" + android.os.Process.myUserHandle().toString())
     }
     prefs.hiddenApps = newHiddenAppsSet
     prefs.hiddenAppsUpdated = true
