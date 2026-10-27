@@ -144,4 +144,5 @@
     <string name="unable_to_open_shortcut">No se puede abrir el acceso directo</string>
     <string name="unable_to_open_app_info">No se ha podido abrir la información de la aplicación</string>
     <string name="bold_font">Fuente en negrita</string>
+    <string name="battery_percentage">Porcentaje de batería</string>
 </resources><!-- Spanish -->

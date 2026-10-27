@@ -146,4 +146,5 @@
     <string name="unable_to_open_shortcut">Det går inte att öppna genvägen</string>
     <string name="unable_to_open_app_info">Kunde inte öppna appinfon</string>
     <string name="bold_font">Fetstil</string>
+    <string name="battery_percentage">Batteriprocent</string>
 </resources><!-- Swedish -->

@@ -145,4 +145,5 @@
     <string name="unable_to_open_shortcut">Не вдалося відкрити ярлик</string>
     <string name="unable_to_open_app_info">Неможливо відкрити інформацію про додаток</string>
     <string name="bold_font">Жирний шрифт</string>
+    <string name="battery_percentage">Відсоток заряду батареї</string>
 </resources><!-- Ukrainian -->

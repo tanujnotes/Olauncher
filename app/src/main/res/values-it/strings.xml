@@ -144,4 +144,5 @@
     <string name="unable_to_open_shortcut">Impossibile aprire la scorciatoia</string>
     <string name="unable_to_open_app_info">Impossibile aprire le informazioni dell\'app</string>
     <string name="bold_font">Carattere in grassetto</string>
+    <string name="battery_percentage">Percentuale batteria</string>
 </resources><!-- Italian -->

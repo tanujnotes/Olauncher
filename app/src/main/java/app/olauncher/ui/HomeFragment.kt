@@ -277,9 +277,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         val dateFormat = SimpleDateFormat("EEE, d MMM", Locale.getDefault())
         var dateText = dateFormat.format(Date())
 
-        if (!prefs.showStatusBar) {
-            val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
-                .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+        if (prefs.showBatteryPercent) {
+            val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as? BatteryManager)
+                ?.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY) ?: -1
             if (battery > 0)
                 dateText = getString(R.string.day_battery, dateText, battery)
         }

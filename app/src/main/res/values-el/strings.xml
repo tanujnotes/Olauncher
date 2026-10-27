@@ -147,4 +147,5 @@
     <string name="shortcut_not_found">Η συντόμευση δεν βρέθηκε</string>
     <string name="unable_to_open_shortcut">Αδύνατο το άνοιγμα της συντόμευσης</string>
     <string name="bold_font">Έντονη γραμματοσειρά</string>
+    <string name="battery_percentage">Ποσοστό μπαταρίας</string>
 </resources>

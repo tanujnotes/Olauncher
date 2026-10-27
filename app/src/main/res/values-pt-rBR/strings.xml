@@ -146,4 +146,5 @@
     <string name="unable_to_open_shortcut">Não é possível abrir o atalho</string>
     <string name="unable_to_open_app_info">Não é possível abrir as informações do aplicativo</string>
     <string name="bold_font">Fonte em negrito</string>
+    <string name="battery_percentage">Porcentagem da bateria</string>
 </resources><!-- Portuguese -->

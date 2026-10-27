@@ -24,6 +24,7 @@ class Prefs(context: Context) {
     private val HOME_BOTTOM_ALIGNMENT = "HOME_BOTTOM_ALIGNMENT"
     private val APP_LABEL_ALIGNMENT = "APP_LABEL_ALIGNMENT"
     private val STATUS_BAR = "STATUS_BAR"
+    private val SHOW_BATTERY_PERCENT = "SHOW_BATTERY_PERCENT"
     private val DATE_TIME_VISIBILITY = "DATE_TIME_VISIBILITY"
     private val SWIPE_LEFT_ENABLED = "SWIPE_LEFT_ENABLED"
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
@@ -183,6 +184,10 @@ class Prefs(context: Context) {
     var dateTimeVisibility: Int
         get() = prefs.getInt(DATE_TIME_VISIBILITY, Constants.DateTime.ON)
         set(value) = prefs.edit { putInt(DATE_TIME_VISIBILITY, value).apply() }
+
+    var showBatteryPercent: Boolean
+        get() = prefs.getBoolean(SHOW_BATTERY_PERCENT, false)
+        set(value) = prefs.edit { putBoolean(SHOW_BATTERY_PERCENT, value).apply() }
 
     var swipeLeftEnabled: Boolean
         get() = prefs.getBoolean(SWIPE_LEFT_ENABLED, true)

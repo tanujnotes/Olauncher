@@ -146,4 +146,5 @@
     <string name="shortcut_not_found">Pikakuvaketta ei löytynyt</string>
     <string name="unable_to_open_shortcut">Pikakuvaketta ei voida avata</string>
     <string name="bold_font">Lihavoitu fontti</string>
+    <string name="battery_percentage">Akun varausprosentti</string>
 </resources>

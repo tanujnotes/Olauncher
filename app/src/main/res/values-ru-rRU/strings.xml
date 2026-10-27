@@ -145,4 +145,5 @@
     <string name="unable_to_open_shortcut">Не удалось открыть ярлык</string>
     <string name="unable_to_open_app_info">Не удалось открыть информацию о приложении</string>
     <string name="bold_font">Жирный шрифт</string>
+    <string name="battery_percentage">Процент заряда батареи</string>
 </resources><!-- Russian -->

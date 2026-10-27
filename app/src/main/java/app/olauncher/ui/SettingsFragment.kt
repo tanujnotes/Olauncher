@@ -90,6 +90,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         populateAlignment()
         populateStatusBar()
         populateDateTime()
+        populateBatteryPercentage()
         populateSwipeApps()
         populateActionHints()
         initClickListeners()
@@ -116,6 +117,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.alignment -> showAlignmentMenu(view)
             R.id.statusBar -> toggleStatusBar()
             R.id.dateTime -> showDateTimeMenu(view)
+            R.id.batteryPercentage -> toggleBatteryPercentage()
             R.id.appThemeText -> showAppThemeMenu(view, showSystem = false)
             R.id.textSizeValue -> showTextSizeDialog()
             R.id.boldFont -> toggleBoldFont()
@@ -179,6 +181,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.alignment.setOnClickListener(this)
         binding.statusBar.setOnClickListener(this)
         binding.dateTime.setOnClickListener(this)
+        binding.batteryPercentage.setOnClickListener(this)
         binding.swipeLeftApp.setOnClickListener(this)
         binding.swipeRightApp.setOnClickListener(this)
         binding.appThemeText.setOnClickListener(this)
@@ -359,6 +362,16 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
                 else -> R.string.off
             }
         )
+    }
+
+    private fun toggleBatteryPercentage() {
+        prefs.showBatteryPercent = !prefs.showBatteryPercent
+        populateBatteryPercentage()
+        viewModel.toggleDateTime()
+    }
+
+    private fun populateBatteryPercentage() {
+        binding.batteryPercentage.text = getString(if (prefs.showBatteryPercent) R.string.on else R.string.off)
     }
 
     private fun showHiddenApps() {

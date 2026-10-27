@@ -144,4 +144,5 @@
     <string name="unable_to_open_shortcut">Tidak dapat membuka pintasan</string>
     <string name="unable_to_open_app_info">Tidak dapat membuka info aplikasi</string>
     <string name="bold_font">Font tebal</string>
+    <string name="battery_percentage">Persentase baterai</string>
 </resources><!-- Indonesian -->

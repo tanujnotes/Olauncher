@@ -147,4 +147,5 @@
     <string name="shortcut_not_found">Comanda rapidă nu a fost găsită</string>
     <string name="unable_to_open_shortcut">Nu se poate deschide comanda rapidă</string>
     <string name="bold_font">Font îngroșat</string>
+    <string name="battery_percentage">Procentaj baterie</string>
 </resources>

@@ -144,4 +144,5 @@
     <string name="unable_to_open_shortcut">Impossible d\'ouvrir le raccourci</string>
     <string name="unable_to_open_app_info">Impossible d\'ouvrir les informations sur l\'application</string>
     <string name="bold_font">Police en gras</string>
+    <string name="battery_percentage">Pourcentage de batterie</string>
 </resources><!-- French -->

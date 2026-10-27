@@ -143,4 +143,5 @@
     <string name="unable_to_open_shortcut">يتعذر فتح الاختصار</string>
     <string name="unable_to_open_app_info">تعذر فتح معلومات التطبيق</string>
     <string name="bold_font">خط عريض</string>
+    <string name="battery_percentage">نسبة البطارية</string>
 </resources>

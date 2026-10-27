@@ -147,4 +147,5 @@
     <string name="unable_to_open_shortcut">Nem lehet megnyitni a parancsikont</string>
     <string name="unable_to_open_app_info">Nem lehet megnyitni az alkalmazás adatait</string>
     <string name="bold_font">Félkövér betűtípus</string>
+    <string name="battery_percentage">Akkumulátor százalék</string>
 </resources><!-- Hungarian -->

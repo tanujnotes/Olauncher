@@ -144,4 +144,5 @@
     <string name="unable_to_open_shortcut">Verknüpfung kann nicht geöffnet werden</string>
     <string name="unable_to_open_app_info">App-Informationen können nicht geöffnet werden</string>
     <string name="bold_font">Fette Schrift</string>
+    <string name="battery_percentage">Akkustand in Prozent</string>
 </resources>

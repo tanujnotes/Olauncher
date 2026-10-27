@@ -146,4 +146,5 @@
     <string name="shortcut_not_found">Snarvei ikke funnet</string>
     <string name="unable_to_open_shortcut">Kan ikke åpne snarvei</string>
     <string name="bold_font">Fet skrift</string>
+    <string name="battery_percentage">Batteriprosent</string>
 </resources>

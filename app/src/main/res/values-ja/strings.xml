@@ -145,4 +145,5 @@
     <string name="unable_to_open_shortcut">ショートカットを開けません</string>
     <string name="unable_to_open_app_info">アプリ情報を開けません</string>
     <string name="bold_font">太字フォント</string>
+    <string name="battery_percentage">バッテリー残量</string>
 </resources> <!-- Japanese -->

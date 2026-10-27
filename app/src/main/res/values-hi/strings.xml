@@ -147,4 +147,5 @@
     <string name="shortcut_not_found">शॉर्टकट नहीं मिला</string>
     <string name="unable_to_open_shortcut">शॉर्टकट खोलने में असमर्थ</string>
     <string name="bold_font">बोल्ड फ़ॉन्ट</string>
+    <string name="battery_percentage">बैटरी प्रतिशत</string>
 </resources>
