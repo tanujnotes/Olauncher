@@ -155,7 +155,7 @@ class AppDrawerFragment : BaseFragment() {
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
                     findNavController().popBackStack(R.id.mainFragment, false)
                 else
-                    findNavController().popBackStack()
+                    closeDrawer()
             },
             appInfoListener = {
                 openAppInfo(
@@ -208,7 +208,7 @@ class AppDrawerFragment : BaseFragment() {
 
                 prefs.hiddenApps = newSet
                 if (newSet.isEmpty())
-                    findNavController().popBackStack()
+                    closeDrawer()
                 if (prefs.firstHide) {
                     binding.search.hideKeyboard()
                     prefs.firstHide = false
@@ -326,7 +326,7 @@ class AppDrawerFragment : BaseFragment() {
                 Constants.FLAG_SET_HOME_APP_7 -> prefs.appName7 = name
                 Constants.FLAG_SET_HOME_APP_8 -> prefs.appName8 = name
             }
-            findNavController().popBackStack()
+            closeDrawer()
         }
     }
 
@@ -358,10 +358,14 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun checkMessageAndExit() {
-        findNavController().popBackStack()
+        if (!closeDrawer()) return
         if (flag == Constants.FLAG_LAUNCH_APP)
             viewModel.checkForMessages.call()
     }
+
+    // Pops only the drawer. A plain popBackStack() from a late overscroll frame could pop the
+    // home screen too, leaving a drawer that auto-launch and back can't close (#766)
+    private fun closeDrawer() = findNavController().popBackStack(R.id.appListFragment, true)
 
     override fun onStart() {
         super.onStart()
