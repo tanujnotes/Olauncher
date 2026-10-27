@@ -82,33 +82,44 @@ suspend fun getAppsList(
                 context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
             val collator = Collator.getInstance()
 
+            // Catch errors per profile and per app, so one bad entry doesn't empty the whole list
             for (profile in userManager.userProfiles) {
                 if (isPrivateSpaceProfile(context, profile)) continue
-                for (app in launcherApps.getActivityList(null, profile)) {
-                    val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
-                        .ifBlank { app.label.toString() }
-                    val appModel = AppModel.App(
-                        appLabel = appLabelShown,
-                        key = collator.getCollationKey(app.label.toString()),
-                        appPackage = app.applicationInfo.packageName,
-                        activityClassName = app.componentName.className,
-                        isNew = (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
-                        user = profile
-                    )
+                val activityList = try {
+                    launcherApps.getActivityList(null, profile)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    continue
+                }
+                for (app in activityList) {
+                    try {
+                        val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
+                            .ifBlank { app.label.toString() }
+                        val appModel = AppModel.App(
+                            appLabel = appLabelShown,
+                            key = collator.getCollationKey(app.label.toString()),
+                            appPackage = app.applicationInfo.packageName,
+                            activityClassName = app.componentName.className,
+                            isNew = (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
+                            user = profile
+                        )
 
-                    // if the current app is not OLauncher
-                    if (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID) {
-                        // is this a hidden app?
-                        if (hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())) {
-                            if (includeHiddenApps) {
-                                appList.add(appModel)
-                            }
-                        } else {
-                            // this is a regular app
-                            if (includeRegularApps) {
-                                appList.add(appModel)
+                        // if the current app is not OLauncher
+                        if (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID) {
+                            // is this a hidden app?
+                            if (hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())) {
+                                if (includeHiddenApps) {
+                                    appList.add(appModel)
+                                }
+                            } else {
+                                // this is a regular app
+                                if (includeRegularApps) {
+                                    appList.add(appModel)
+                                }
                             }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
             }
