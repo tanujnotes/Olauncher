@@ -4,6 +4,8 @@ import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
@@ -501,9 +503,39 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
 
     private fun updateTheme(appTheme: Int) {
         if (AppCompatDelegate.getDefaultNightMode() == appTheme) return
+        if (prefs.dailyWallpaper) applyTheme(appTheme)
+        else showThemeWallpaperDialog(appTheme)
+    }
+
+    private fun applyTheme(appTheme: Int) {
         prefs.appTheme = appTheme
         populateAppThemeText(appTheme)
         setAppTheme(appTheme)
+    }
+
+    // Daily wallpaper off: keep the user's own wallpaper, or switch to a plain one matching the theme.
+    // Closing the dialog (X or back) cancels the theme change.
+    private fun showThemeWallpaperDialog(appTheme: Int) {
+        val dark = when (appTheme) {
+            AppCompatDelegate.MODE_NIGHT_YES -> true
+            AppCompatDelegate.MODE_NIGHT_NO -> false
+            else -> Resources.getSystem().configuration.uiMode and
+                    Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+        }
+        val color = if (dark) android.R.color.black else android.R.color.white
+        showDialog(
+            requireContext().createDialog(
+                title = R.string.wallpaper,
+                action = if (dark) R.string.black else R.string.white,
+                message = R.string.theme_wallpaper_message,
+                neutral = R.string.keep_current,
+                onNeutral = { applyTheme(appTheme) },
+                onAction = {
+                    setPlainWallpaper(requireContext(), color)
+                    applyTheme(appTheme)
+                },
+            )
+        )
     }
 
     private fun setAppTheme(theme: Int) {

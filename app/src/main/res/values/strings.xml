@@ -37,6 +37,9 @@
     <string name="on">On</string>
     <string name="black">Black</string>
     <string name="white">White</string>
+    <string name="wallpaper">Wallpaper</string>
+    <string name="keep_current">Keep current</string>
+    <string name="theme_wallpaper_message">Keep your current wallpaper, or switch to a plain one that matches the new theme?</string>
     <string name="change_default_launcher">Change default launcher</string>
     <string name="privacy">Privacy</string>
     <string name="share">Share</string>
