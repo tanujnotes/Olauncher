@@ -106,8 +106,13 @@ class AppDrawerFragment : BaseFragment() {
 
             override fun onQueryTextChange(newText: String): Boolean {
                 try {
-                    adapter.allowAutoLaunch = !isSearchComposing()
-                    adapter.filter.filter(newText)
+                    val composing = isSearchComposing()
+                    adapter.allowAutoLaunch = !composing
+                    // While the IME is composing (e.g. typing pinyin before choosing a
+                    // Chinese character), the search field only holds temporary letters —
+                    // don't filter or auto-launch with them. Search after the text is
+                    // committed (composition ends).
+                    if (!composing) adapter.filter.filter(newText)
                     binding.appRename.visibility =
                         if (canRename && newText.isNotBlank()) View.VISIBLE else View.GONE
                     return true
@@ -136,11 +141,17 @@ class AppDrawerFragment : BaseFragment() {
             val language = when {
                 subtype == null -> ""
                 subtype.languageTag.isNotEmpty() -> subtype.languageTag // e.g. "zh-CN", "ja-JP", "en-US"
-                else -> subtype.locale // deprecated fallback, e.g. "zh_CN"
+                subtype.locale.isNullOrEmpty().not() -> subtype.locale // deprecated fallback, e.g. "zh_CN"
+                else -> ""
             }
-            language.startsWith("zh") || language.startsWith("ja") || language.startsWith("ko")
+            // Many Chinese IMEs (WeChat, Sogou, Baidu, Xunfei and some Gboard setups)
+            // don't set a subtype or languageTag, leaving language empty. When we can't
+            // confirm a Latin keyboard, treat it as CJK conservatively to avoid filtering
+            // or auto-launching with in-progress pinyin (issue #629/#694).
+            language.isEmpty() || language.startsWith("zh") ||
+                language.startsWith("ja") || language.startsWith("ko")
         } catch (e: Exception) {
-            false
+            true
         }
         cachedIsCjkKeyboard = result
         return result
