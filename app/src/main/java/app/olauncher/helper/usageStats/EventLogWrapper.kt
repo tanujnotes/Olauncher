@@ -354,9 +354,19 @@ class EventLogWrapper(private val context: Context) {
     fun aggregateSimpleUsageStats(usageStats: List<SimpleUsageStat>): Long {
         return usageStats.sumOf { it.timeUsed }
     }
+
+    /**
+     * Total time that any app was in the foreground. Unlike summing per-app totals, time when
+     * several apps were visible at once (e.g. split screen) is only counted once.
+     */
+    fun getTotalForegroundTime(foregroundStats: List<ComponentForegroundStat>): Long {
+        return mergeOverlappingIntervals(foregroundStats.filter { it.endTime > it.beginTime })
+            .sumOf { it.endTime - it.beginTime }
+    }
+
     /**
      * Merges overlapping or adjacent time intervals to prevent double-counting
-     * when multiple components of the same package have overlapping foreground times.
+     * when multiple components have overlapping foreground times.
      */
     private fun mergeOverlappingIntervals(
         stats: List<ComponentForegroundStat>

@@ -30,6 +30,9 @@ class UnmatchedCloseEventGuardian(private val usageStatsManager: UsageStatsManag
 
         // Track whether the package is currently in foreground or background
         var open = false // Not open until opened
+        // The package's last resumed activity. An app's previous activity is stopped after its next one
+        // resumes, so only this activity's ACTIVITY_STOPPED means the package left the foreground
+        var resumedClass: String? = null
 
         while (events.hasNextEvent()) {
             events.getNextEvent(e)
@@ -45,10 +48,16 @@ class UnmatchedCloseEventGuardian(private val usageStatsManager: UsageStatsManag
                     // see EventLogWrapper
                     UsageEvents.Event.ACTIVITY_RESUMED, 4 -> {
                         open = true
+                        resumedClass = e.className
                     }
                     UsageEvents.Event.ACTIVITY_PAUSED, 3 -> {
                         if (e.timeStamp != event.timeStamp) {
                             // Don't flip to 'false' if we're looking at the original event itself
+                            open = false
+                        }
+                    }
+                    UsageEvents.Event.ACTIVITY_STOPPED -> {
+                        if (e.timeStamp != event.timeStamp && e.className == resumedClass) {
                             open = false
                         }
                     }
