@@ -464,10 +464,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             // Querying a whole day of usage events is slow, so keep it off the main thread
             val timeSpent = withContext(Dispatchers.IO) {
                 val eventLogWrapper = EventLogWrapper(appContext)
-                eventLogWrapper.aggregateSimpleUsageStats(
-                    eventLogWrapper.aggregateForegroundStats(
-                        eventLogWrapper.getForegroundStatsByTimestamps(startTime, endTime)
-                    )
+                eventLogWrapper.getTotalForegroundTime(
+                    eventLogWrapper.getForegroundStatsByTimestamps(startTime, endTime)
                 )
             }
             screenTimeValue.value = appContext.formattedTimeSpent(timeSpent)
