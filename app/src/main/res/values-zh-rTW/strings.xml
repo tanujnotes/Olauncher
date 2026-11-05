@@ -79,7 +79,8 @@
     <string name="affiliate">聯盟行銷</string>
     <string name="tip_start_typing_for_rename">提示：開始輸入即可使用應用程式的 [重新命名] 選項</string>
     <string name="hidden_apps_message">注意：輕觸此設定頁面頂端的 [Olauncher]，即可找到隱藏的應用程式。\n\n如需更多詳細資料，請前往 [關於與常見問題] 頁面。</string>
-    <string name="accessibility_disclosure">請在裝置設定中開啟 Olauncher 的無障礙服務，以啟用 [輕觸兩下鎖定螢幕] 手勢。\n\n請注意，這項服務只會用於這個功能。Olauncher 的無障礙服務不會收集或分享任何資料。</string>
+    <string name="accessibility_permission">無障礙權限</string>
+    <string name="accessibility_disclosure">Olauncher 只會將 Accessibility Service API 用於一項功能：[輕觸兩下鎖定螢幕]。這項功能可讓 Olauncher 在你輕觸兩下主畫面時鎖定螢幕。\n\n這項服務只會看到你在 Olauncher 內的輕觸動作，而且只會用來鎖定螢幕，不會查看其他應用程式或你輸入的任何內容。\n\nOlauncher 不會收集、儲存或分享任何資料，也不會有任何資料離開你的裝置。\n\n請輕觸 [接受]，然後在裝置的無障礙設定中開啟 Olauncher。</string>
     <string name="accept">接受</string>
     <string name="permission">設定權限</string>
     <string name="double_tap_lock">輕觸兩下鎖定螢幕</string>

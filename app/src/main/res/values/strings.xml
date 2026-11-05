@@ -115,8 +115,11 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Start typing for app RENAME option</string>
     <string name="hidden_apps_message">Note: Tap on \'Olauncher\' at the top of this Settings page to find your hidden apps.\n\nMore details available in our About page.</string>
-    <string name="accessibility_disclosure">Please turn on Olauncher\'s accessibility service in your device\'s settings to enable Double tap to lock gesture.
-    \n\nPlease note that this service is only used for this particular feature. Our accessibility service does not collect or share any data.</string>
+    <string name="accessibility_permission">Accessibility permission</string>
+    <string name="accessibility_disclosure">Olauncher uses the Accessibility Service API for one feature only: Double tap to lock. It lets Olauncher lock your screen when you double tap on the home screen.
+    \n\nThe service only sees taps inside Olauncher, and only uses them to lock your screen. It does not look at other apps or anything you type.
+    \n\nNo data is collected, stored or shared. Nothing leaves your device.
+    \n\nTap Accept, then turn on Olauncher in your device\'s Accessibility settings.</string>
     <string name="accept">Accept</string>
     <string name="permission">Permission</string>
     <string name="double_tap_lock">Double tap to lock</string>

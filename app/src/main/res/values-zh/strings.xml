@@ -14,7 +14,8 @@
     <string name="no_hidden_apps">没有隐藏的应用程序</string>
     <string name="hidden_apps">隐藏的应用程序</string>
     <string name="hidden_apps_message">注意：点击此设置页面顶部的“Olauncher”即可找到隐藏的应用程序。\n\n更多详细信息请参阅“关于”页面。</string>
-    <string name="accessibility_disclosure">请在您设备的设置中打开 Olauncher 的无障碍服务，以启用双击锁屏手势。\n\n请注意，此服务仅用于该功能。我们的无障碍服务不会收集或共享任何数据。</string>
+    <string name="accessibility_permission">无障碍权限</string>
+    <string name="accessibility_disclosure">Olauncher 仅将 Accessibility Service API 用于一项功能：“双击即可锁定”。它可让 Olauncher 在您双击主屏幕时锁定屏幕。\n\n该服务只能看到 Olauncher 内的点按操作，并且仅用于锁定屏幕。它不会查看其他应用或您输入的任何内容。\n\n不会收集、存储或共享任何数据。任何数据都不会离开您的设备。\n\n请点按“接受”，然后在设备的无障碍设置中开启 Olauncher。</string>
     <string name="accept">接受</string>
     <string name="permission">权限</string>
     <string name="double_tap_lock">双击即可锁定</string>

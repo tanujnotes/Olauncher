@@ -90,7 +90,8 @@
     <string name="leave_a_review">Ostavite recenziju</string>
     <string name="review_message">Olauncher je besplatan i uvijek će biti. Nema reklama, ne prikuplja podatke i smanjuje vaše vrijeme pred ekranom, što vodi zdravijem životu.\n\nNadamo se da će vam se svidjeti. Recite nam što mislite.</string>
 
-    <string name="accessibility_disclosure">Molimo uključite Olauncherovu uslugu pristupačnosti u postavkama uređaja kako biste omogućili gestu dvostrukog dodira za zaključavanje.\n\nImajte na umu da se ova usluga koristi samo za tu značajku. Naša usluga pristupačnosti ne prikuplja niti dijeli nikakve podatke.</string>
+    <string name="accessibility_permission">Dopuštenje za pristupačnost</string>
+    <string name="accessibility_disclosure">Olauncher koristi Accessibility Service API samo za jednu značajku: Dvostruki dodir za zaključavanje. Ona omogućuje Olauncheru da zaključa zaslon kada dvaput dodirnete početni zaslon.\n\nUsluga vidi samo dodire unutar Olaunchera i koristi ih samo za zaključavanje zaslona. Ne gleda druge aplikacije ni bilo što što upisujete.\n\nNikakvi podaci se ne prikupljaju, ne pohranjuju niti dijele. Ništa ne napušta vaš uređaj.\n\nDodirnite Prihvati, a zatim uključite Olauncher u postavkama Pristupačnosti na uređaju.</string>
     <string name="accept">Prihvati</string>
     <string name="permission">Dozvola</string>
     <string name="double_tap_lock">Dvostruki dodir za zaključavanje</string>

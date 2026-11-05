@@ -25,6 +25,7 @@ import app.olauncher.MainViewModel
 import app.olauncher.R
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.databinding.DialogNotWorkingBinding
 import app.olauncher.databinding.DialogTextSizeBinding
 import app.olauncher.databinding.FragmentSettingsBinding
 import app.olauncher.helper.appUsagePermissionGranted
@@ -157,7 +158,13 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.appThemeText -> showAppThemeMenu(view, showSystem = true)
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
-            R.id.toggleLock -> startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+            R.id.toggleLock -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                // Turning the service off needs no disclosure, turning it on does
+                if (isAccessServiceEnabled(requireContext()))
+                    startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                else
+                    showAccessibilityDialog()
+            }
         }
         return true
     }
@@ -293,18 +300,21 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         showDialog(dialog)
     }
 
-    // Prominent disclosure before sending the user to accessibility settings
+    // Play policy: prominent disclosure and an explicit Accept before sending the user to
+    // accessibility settings. Not now, the close icon, back or tapping outside never count as consent.
     private fun showAccessibilityDialog() {
-        val serviceEnabled = isAccessServiceEnabled(requireContext())
         showDialog(
             requireContext().createDialog(
-                title = R.string.gestures,
-                action = if (serviceEnabled) R.string.disable else R.string.enable,
+                title = R.string.accessibility_permission,
+                action = R.string.accept,
                 message = R.string.accessibility_disclosure,
-                neutral = R.string.not_working,
-                onNeutral = { requireContext().openUrl(Constants.URL_DOUBLE_TAP) },
+                neutral = R.string.not_now,
                 onAction = { openAccessibilityService() },
-            )
+            ) { container ->
+                DialogNotWorkingBinding.inflate(layoutInflater, container, false).root.apply {
+                    setOnClickListener { requireContext().openUrl(Constants.URL_DOUBLE_TAP) }
+                }
+            }
         )
     }
 

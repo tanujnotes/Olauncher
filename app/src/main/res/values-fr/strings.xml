@@ -83,7 +83,8 @@
     <string name="affiliate">Affiliation</string>
     <string name="tip_start_typing_for_rename">Conseil : Commencez à écrire pour faire apparaitre l\'option RENOMMER.</string>
     <string name="hidden_apps_message">Remarque : Appuyez sur \'Olauncher\' en haut de cette page Paramètres pour trouver vos applications cachées.\n\nPlus de détails sont disponibles sur notre page À propos.</string>
-    <string name="accessibility_disclosure">Veuillez activer le service d\'accessibilité d\'Olauncher dans les paramètres de votre appareil pour utiliser le geste Double appui pour verrouiller.\n\nVeuillez noter que ce service est utilisé uniquement pour cette fonctionnalité. Notre service d\'accessibilité ne collecte ni ne partage aucune donnée.</string>
+    <string name="accessibility_permission">Autorisation d\'accessibilité</string>
+    <string name="accessibility_disclosure">Olauncher utilise l\'API Accessibility Service pour une seule fonctionnalité : Appuyer deux fois pour verrouiller. Elle permet à Olauncher de verrouiller votre écran lorsque vous appuyez deux fois sur l\'écran d\'accueil.\n\nLe service voit uniquement les appuis effectués dans Olauncher et ne s\'en sert que pour verrouiller votre écran. Il ne regarde ni les autres applications ni ce que vous saisissez.\n\nAucune donnée n\'est collectée, stockée ou partagée. Rien ne quitte votre appareil.\n\nAppuyez sur Accepter, puis activez Olauncher dans les paramètres d\'Accessibilité de votre appareil.</string>
     <string name="accept">Accepter</string>
     <string name="permission">Autorisation</string>
     <string name="double_tap_lock">Appuyer deux fois pour verrouiller</string>

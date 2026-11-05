@@ -24,7 +24,8 @@
     <string name="no_hidden_apps">非表示のアプリはありません</string>
     <string name="hidden_apps">非表示のアプリ</string>
     <string name="hidden_apps_message">注: この設定ページの上部にある「Olauncher」をタップすると、非表示のアプリを確認できます。\n\n詳細については「アプリについて」ページをご覧ください。</string>
-    <string name="accessibility_disclosure">ダブルタップでロックのジェスチャーを有効にするには、デバイスの設定で Olauncher のユーザー補助サービスをオンにしてください。\n\nこのサービスはこの機能にのみ使用されます。当社のユーザー補助サービスはデータを収集したり共有したりすることはありません。</string>
+    <string name="accessibility_permission">ユーザー補助の権限</string>
+    <string name="accessibility_disclosure">Olauncher は Accessibility Service API を「ダブルタップでロック」機能にのみ使用します。ホーム画面をダブルタップしたときに、Olauncher が画面をロックできるようにするためのものです。\n\nこのサービスが認識するのは Olauncher 内でのタップのみで、画面のロックにのみ使用されます。他のアプリや、入力した内容を見ることはありません。\n\nデータの収集、保存、共有は一切行いません。データがデバイスの外に送信されることもありません。\n\n「同意する」をタップしてから、デバイスのユーザー補助設定で Olauncher をオンにしてください。</string>
     <string name="accept">同意する</string>
     <string name="permission">許可</string>
     <string name="double_tap_lock">ダブルタップでロック</string>

@@ -23,7 +23,8 @@
     <string name="no_hidden_apps">Gizli uygulama yok</string>
     <string name="hidden_apps">Gizli uygulamalar</string>
     <string name="hidden_apps_message">Not: Gizli uygulamalarınızı bulmak için bu ayarlar sayfasının üst kısmındaki \"Olauncher\" yazısına dokunun.\n\nDaha fazla ayrıntı \"Hakkında\" sayfamızda mevcuttur.</string>
-    <string name="accessibility_disclosure">Kilitlemek için çift dokunma hareketini etkinleştirmek için lütfen cihazınızın ayarlarında Olauncher\'ın erişilebilirlik hizmetini açın.\n\nBu hizmetin yalnızca bu özellik için kullanıldığını lütfen unutmayın. Erişilebilirlik hizmetimiz herhangi bir veri toplamaz veya paylaşmaz.</string>
+    <string name="accessibility_permission">Erişilebilirlik izni</string>
+    <string name="accessibility_disclosure">Olauncher, Accessibility Service API\'yi yalnızca tek bir özellik için kullanır: “Kilitlemek için iki kez dokunun”. Bu özellik, ana ekrana iki kez dokunduğunuzda Olauncher\'ın ekranınızı kilitlemesini sağlar.\n\nHizmet yalnızca Olauncher içindeki dokunmaları görür ve bunları yalnızca ekranınızı kilitlemek için kullanır. Diğer uygulamalara veya yazdığınız hiçbir şeye bakmaz.\n\nHiçbir veri toplanmaz, saklanmaz veya paylaşılmaz. Hiçbir şey cihazınızdan çıkmaz.\n\nKabul et\'e dokunun, ardından cihazınızın Erişilebilirlik ayarlarından Olauncher\'ı açın.</string>
     <string name="accept">Kabul et</string>
     <string name="permission">İzin</string>
     <string name="double_tap_lock">Kilitlemek için iki kez dokunun</string>

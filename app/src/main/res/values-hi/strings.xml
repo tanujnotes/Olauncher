@@ -85,8 +85,8 @@
     <string name="affiliate">अफिलिएट</string>
     <string name="tip_start_typing_for_rename">टिप: ऐप का नाम बदलने के विकल्प के लिए टाइप करना शुरू करें</string>
     <string name="hidden_apps_message">नोट: अपनी छिपी हुई ऐप्स ढूंढने के लिए इस Settings पेज के ऊपर \'Olauncher\' पर टैप करें।\n\nअधिक जानकारी हमारे About पेज पर उपलब्ध है।</string>
-    <string name="accessibility_disclosure">डबल टैप टू लॉक जेस्चर चालू करने के लिए कृपया अपनी डिवाइस की सेटिंग्स में Olauncher की एक्सेसिबिलिटी सर्विस चालू करें।
-    \n\nकृपया ध्यान दें कि यह सर्विस केवल इसी विशेष फीचर के लिए उपयोग की जाती है। हमारी एक्सेसिबिलिटी सर्विस कोई डेटा एकत्र या साझा नहीं करती।</string>
+    <string name="accessibility_permission">एक्सेसिबिलिटी अनुमति</string>
+    <string name="accessibility_disclosure">Olauncher, Accessibility Service API का इस्तेमाल सिर्फ़ एक फ़ीचर के लिए करता है: “लॉक करने के लिए डबल टैप करें”। इससे होम स्क्रीन पर डबल टैप करने पर Olauncher आपकी स्क्रीन लॉक कर पाता है।\n\nयह सर्विस सिर्फ़ Olauncher के अंदर किए गए टैप देखती है, और उनका इस्तेमाल सिर्फ़ आपकी स्क्रीन लॉक करने के लिए करती है। यह दूसरे ऐप या आपका टाइप किया हुआ कुछ भी नहीं देखती।\n\nकोई डेटा इकट्ठा, सेव या शेयर नहीं किया जाता। कुछ भी आपके डिवाइस से बाहर नहीं जाता।\n\n“स्वीकार करें” पर टैप करें, फिर अपने डिवाइस की एक्सेसिबिलिटी सेटिंग में Olauncher चालू करें।</string>
     <string name="accept">स्वीकार करें</string>
     <string name="permission">परमिशन</string>
     <string name="double_tap_lock">लॉक करने के लिए डबल टैप करें</string>

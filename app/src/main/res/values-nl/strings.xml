@@ -86,7 +86,8 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Begin met typen om een app te hernoemen</string>
     <string name="hidden_apps_message">Opmerking: Tik bovenaan deze instellingenpagina op \'Olauncher\' om je verborgen apps te vinden.\n\nMeer informatie is beschikbaar op onze Over-pagina.</string>
-    <string name="accessibility_disclosure">Schakel de toegankelijkheidsdienst van Olauncher in via de instellingen van je apparaat om het gebaar dubbel tikken om te vergrendelen te activeren.\n\nHoud er rekening mee dat deze service alleen voor deze specifieke functie wordt gebruikt. Onze toegankelijkheidsdienst verzamelt of deelt geen gegevens.</string>
+    <string name="accessibility_permission">Toestemming voor toegankelijkheid</string>
+    <string name="accessibility_disclosure">Olauncher gebruikt de Accessibility Service API voor maar één functie: Dubbel tik om te vergrendelen. Hiermee kan Olauncher je scherm vergrendelen als je dubbel tikt op het startscherm.\n\nDe service ziet alleen tikken binnen Olauncher en gebruikt ze alleen om je scherm te vergrendelen. Hij kijkt niet naar andere apps of naar wat je typt.\n\nEr worden geen gegevens verzameld, opgeslagen of gedeeld. Niets verlaat je apparaat.\n\nTik op Accepteren en zet daarna Olauncher aan in de Toegankelijkheidsinstellingen van je apparaat.</string>
     <string name="accept">Accepteren</string>
     <string name="permission">Toestemming</string>
     <string name="double_tap_lock">Dubbel tik om te vergrendelen</string>

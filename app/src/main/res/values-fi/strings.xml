@@ -85,7 +85,8 @@
     <string name="affiliate">Kumppanuus</string>
     <string name="tip_start_typing_for_rename">Vinkki: Aloita kirjoittaminen saadaksesi sovelluksen NIMEÄ UUDELLEEN -vaihtoehdon</string>
     <string name="hidden_apps_message">Huomio: Napauta \'Olauncher\' tämän asetussivun yläreunassa löytääksesi piilotetut sovelluksesi.\n\nLisätietoja Tietoja-sivulla.</string>
-    <string name="accessibility_disclosure">Ota Olauncherin esteettömyyspalvelu käyttöön laitteesi asetuksista, jotta voit ottaa käyttöön Lukitse kaksoisnapautuksella -eleen.\n\nHuomaa, että tätä palvelua käytetään vain tähän tiettyyn ominaisuuteen. Esteettömyyspalvelumme ei kerää tai jaa mitään tietoja.</string>
+    <string name="accessibility_permission">Esteettömyyslupa</string>
+    <string name="accessibility_disclosure">Olauncher käyttää Accessibility Service API:a vain yhteen ominaisuuteen: Lukitse kaksoisnapautuksella. Sen avulla Olauncher voi lukita näytön, kun napautat aloitusnäyttöä kahdesti.\n\nPalvelu näkee vain Olauncherin sisällä tehdyt napautukset ja käyttää niitä vain näytön lukitsemiseen. Se ei katso muita sovelluksia eikä mitään, mitä kirjoitat.\n\nMitään tietoja ei kerätä, tallenneta eikä jaeta. Mikään ei poistu laitteeltasi.\n\nNapauta Hyväksy ja ota sitten Olauncher käyttöön laitteesi Esteettömyys-asetuksista.</string>
     <string name="accept">Hyväksy</string>
     <string name="permission">Käyttöoikeus</string>
     <string name="double_tap_lock">Lukitse kaksoisnapautuksella</string>

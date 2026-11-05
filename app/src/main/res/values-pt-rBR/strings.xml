@@ -85,7 +85,8 @@
     <string name="affiliate">Afiliado</string>
     <string name="tip_start_typing_for_rename">Dica: comece a digitar para ver a opção de RENOMEAR o aplicativo</string>
     <string name="hidden_apps_message">Nota: Toque em \'Olauncher\' na parte superior desta página de Configurações para encontrar seus aplicativos ocultos.\n\nMais detalhes disponíveis em nossa página Sobre.</string>
-    <string name="accessibility_disclosure">Ative o serviço de acessibilidade do Olauncher nas configurações do seu dispositivo para ativar o gesto de toque duplo para bloquear.\n\nObserve que este serviço é usado apenas para esse recurso específico. Nosso serviço de acessibilidade não coleta nem compartilha nenhum dado.</string>
+    <string name="accessibility_permission">Permissão de acessibilidade</string>
+    <string name="accessibility_disclosure">O Olauncher usa a Accessibility Service API para apenas um recurso: Toque duas vezes para bloquear. Ela permite que o Olauncher bloqueie sua tela quando você toca duas vezes na tela inicial.\n\nO serviço só vê os toques dentro do Olauncher e só os usa para bloquear sua tela. Ele não olha outros apps nem nada do que você digita.\n\nNenhum dado é coletado, armazenado ou compartilhado. Nada sai do seu dispositivo.\n\nToque em Aceitar e, depois, ative o Olauncher nas configurações de Acessibilidade do seu dispositivo.</string>
     <string name="accept">Aceitar</string>
     <string name="permission">Permissão</string>
     <string name="double_tap_lock">Toque duas vezes para bloquear</string>

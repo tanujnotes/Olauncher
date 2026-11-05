@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Help link under the accessibility disclosure; its 8dp padding keeps the dialog's 20dp rhythm -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/TextSmall"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:includeFontPadding="false"
+    android:paddingVertical="8dp"
+    android:paddingEnd="8dp"
+    android:text="@string/not_working"
+    tools:ignore="RtlSymmetry" />

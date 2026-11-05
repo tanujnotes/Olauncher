@@ -83,7 +83,8 @@
     <string name="affiliate">Afiliasi</string>
     <string name="tip_start_typing_for_rename">Tip: Mulailah mengetik untuk opsi RENAME aplikasi</string>
     <string name="hidden_apps_message">Catatan: Ketuk \'Olauncher\' di bagian atas halaman Pengaturan ini untuk menemukan aplikasi tersembunyi Anda.\n\nRincian lebih lanjut tersedia di halaman Tentang kami.</string>
-    <string name="accessibility_disclosure">Harap aktifkan layanan aksesibilitas Olauncher di pengaturan perangkat Anda untuk mengaktifkan gerakan ketuk dua kali untuk mengunci.\n\nHarap perhatikan bahwa layanan ini hanya digunakan untuk fitur ini saja. Layanan aksesibilitas kami tidak mengumpulkan atau membagikan data apa pun.</string>
+    <string name="accessibility_permission">Izin aksesibilitas</string>
+    <string name="accessibility_disclosure">Olauncher menggunakan Accessibility Service API hanya untuk satu fitur: Ketuk dua kali untuk mengunci. Fitur ini memungkinkan Olauncher mengunci layar Anda saat Anda mengetuk dua kali layar utama.\n\nLayanan ini hanya melihat ketukan di dalam Olauncher, dan hanya menggunakannya untuk mengunci layar Anda. Layanan ini tidak melihat aplikasi lain atau apa pun yang Anda ketik.\n\nTidak ada data yang dikumpulkan, disimpan, atau dibagikan. Tidak ada yang keluar dari perangkat Anda.\n\nKetuk Terima, lalu aktifkan Olauncher di setelan Aksesibilitas perangkat Anda.</string>
     <string name="accept">Terima</string>
     <string name="permission">Izin</string>
     <string name="double_tap_lock">Ketuk dua kali untuk mengunci</string>

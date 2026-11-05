@@ -85,8 +85,8 @@
     <string name="affiliate">Tiếp thị liên kết</string>
     <string name="tip_start_typing_for_rename">Mẹo: Bắt đầu gõ để có tùy chọn ĐỔI TÊN ứng dụng</string>
     <string name="hidden_apps_message">Lưu ý: Nhấn vào \'Olauncher\' ở đầu trang Cài đặt này để tìm các ứng dụng ẩn của bạn.\n\nCó thêm chi tiết trên trang Giới thiệu của chúng tôi.</string>
-    <string name="accessibility_disclosure">Vui lòng bật dịch vụ trợ năng của Olauncher trong cài đặt thiết bị của bạn để bật cử chỉ Chạm hai lần để khóa.
-    \n\nXin lưu ý rằng dịch vụ này chỉ được sử dụng cho tính năng cụ thể này. Dịch vụ trợ năng của chúng tôi không thu thập hoặc chia sẻ bất kỳ dữ liệu nào.</string>
+    <string name="accessibility_permission">Quyền trợ năng</string>
+    <string name="accessibility_disclosure">Olauncher chỉ dùng Accessibility Service API cho một tính năng: Chạm hai lần để khóa. Tính năng này cho phép Olauncher khóa màn hình khi bạn chạm hai lần vào màn hình chính.\n\nDịch vụ chỉ thấy các lần chạm bên trong Olauncher và chỉ dùng chúng để khóa màn hình. Dịch vụ không xem các ứng dụng khác hay bất cứ nội dung nào bạn nhập.\n\nKhông có dữ liệu nào được thu thập, lưu trữ hay chia sẻ. Không có gì rời khỏi thiết bị của bạn.\n\nNhấn Đồng ý, sau đó bật Olauncher trong phần cài đặt Hỗ trợ tiếp cận của thiết bị.</string>
     <string name="accept">Đồng ý</string>
     <string name="permission">Quyền</string>
     <string name="double_tap_lock">Chạm hai lần để khóa</string>

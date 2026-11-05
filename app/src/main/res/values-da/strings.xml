@@ -85,7 +85,8 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tip: Begynd at skrive for muligheden for at omdøbe appen</string>
     <string name="hidden_apps_message">Bemærk: Tryk på \'Olauncher\' øverst på denne indstillingsside for at finde dine skjulte apps.\n\nFlere detaljer findes på vores Om-side.</string>
-    <string name="accessibility_disclosure">Aktivér venligst Olaunchers tilgængelighedstjeneste i din enheds indstillinger for at aktivere bevægelsen Dobbelttryk for at låse.\n\nBemærk, at denne tjeneste kun bruges til denne bestemte funktion. Vores tilgængelighedstjeneste indsamler eller deler ikke nogen data.</string>
+    <string name="accessibility_permission">Tilladelse til hjælpefunktioner</string>
+    <string name="accessibility_disclosure">Olauncher bruger Accessibility Service API til kun én funktion: Dobbelttryk for at låse. Den lader Olauncher låse din skærm, når du dobbelttrykker på startskærmen.\n\nTjenesten ser kun tryk inde i Olauncher og bruger dem kun til at låse din skærm. Den kigger ikke på andre apps eller på noget, du skriver.\n\nIngen data bliver indsamlet, gemt eller delt. Intet forlader din enhed.\n\nTryk på Accepter, og slå derefter Olauncher til under Hjælpefunktioner i din enheds indstillinger.</string>
     <string name="accept">Accepter</string>
     <string name="permission">Tilladelse</string>
     <string name="double_tap_lock">Dobbelttryk for at låse</string>

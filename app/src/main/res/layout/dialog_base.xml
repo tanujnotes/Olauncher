@@ -38,28 +38,41 @@
             android:src="@drawable/ic_close" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvMessage"
-        style="@style/TextSmall"
+    <!-- Shrinks and scrolls when the body is taller than the screen, keeping the title and actions visible -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="12dp"
-        android:includeFontPadding="false"
-        android:lineSpacingExtra="2dp"
-        android:paddingEnd="8dp"
-        android:textColor="?attr/primaryColor"
-        android:visibility="gone"
-        tools:ignore="RtlSymmetry"
-        tools:text="@string/rate_us_message"
-        tools:visibility="visible" />
+        android:layout_weight="1">
 
-    <!-- Custom content supplies its own margins, see dialog_text_size.xml -->
-    <FrameLayout
-        android:id="@+id/contentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvMessage"
+                style="@style/TextSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="2dp"
+                android:paddingEnd="8dp"
+                android:textColor="?attr/primaryColor"
+                android:visibility="gone"
+                tools:ignore="RtlSymmetry"
+                tools:text="@string/rate_us_message"
+                tools:visibility="visible" />
+
+            <!-- Custom content supplies its own margins, see dialog_text_size.xml -->
+            <FrameLayout
+                android:id="@+id/contentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -85,8 +85,8 @@
     <string name="affiliate">Afiliat</string>
     <string name="tip_start_typing_for_rename">Sfat: Începe să tastezi pentru opțiunea de REDENUMIRE aplicație</string>
     <string name="hidden_apps_message">Notă: Atinge \'Olauncher\' în partea de sus a acestei pagini de setări pentru a găsi aplicațiile tale ascunse.\n\nMai multe detalii sunt disponibile pe pagina noastră Despre.</string>
-    <string name="accessibility_disclosure">Te rugăm să activezi serviciul de accesibilitate Olauncher din setările dispozitivului pentru a activa gestul Atinge dublu pentru blocare.
-    \n\nTe rugăm să reții că acest serviciu este utilizat doar pentru această funcție specifică. Serviciul nostru de accesibilitate nu colectează și nu partajează date.</string>
+    <string name="accessibility_permission">Permisiune de accesibilitate</string>
+    <string name="accessibility_disclosure">Olauncher folosește Accessibility Service API pentru o singură funcție: Atinge dublu pentru blocare. Aceasta îi permite lui Olauncher să îți blocheze ecranul când atingi de două ori ecranul de pornire.\n\nServiciul vede doar atingerile din Olauncher și le folosește doar pentru a-ți bloca ecranul. Nu se uită la alte aplicații sau la ce tastezi.\n\nNicio dată nu este colectată, stocată sau partajată. Nimic nu părăsește dispozitivul tău.\n\nAtinge Acceptă, apoi activează Olauncher în setările de Accesibilitate ale dispozitivului.</string>
     <string name="accept">Acceptă</string>
     <string name="permission">Permisiune</string>
     <string name="double_tap_lock">Atinge dublu pentru blocare</string>

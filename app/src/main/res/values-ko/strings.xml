@@ -78,7 +78,8 @@
     <string name="affiliate">제휴</string>
     <string name="tip_start_typing_for_rename">팁: 앱 이름 변경을 위해 입력을 시작하세요</string>
     <string name="hidden_apps_message">참고: 이 설정 페이지 상단에서 \'Olauncher\'를 탭하면 숨긴 앱을 찾을 수 있습니다.\n\n자세한 내용은 앱 정보 페이지를 확인하세요.</string>
-    <string name="accessibility_disclosure">두 번 탭하여 잠금 제스처를 사용하려면 기기 설정에서 Olauncher의 접근성 서비스를 켜 주세요.\n\n이 서비스는 해당 기능에만 사용되며, 어떤 데이터도 수집하거나 공유하지 않습니다.</string>
+    <string name="accessibility_permission">접근성 권한</string>
+    <string name="accessibility_disclosure">Olauncher는 Accessibility Service API를 \'두 번 탭하여 잠금\' 기능 하나에만 사용합니다. 이 기능을 사용하면 홈 화면을 두 번 탭할 때 Olauncher가 화면을 잠글 수 있습니다.\n\n이 서비스는 Olauncher 안에서의 탭만 인식하며, 화면을 잠그는 데에만 사용합니다. 다른 앱이나 입력하는 내용은 보지 않습니다.\n\n어떤 데이터도 수집, 저장 또는 공유하지 않으며, 기기 밖으로 전송되는 것은 없습니다.\n\n\'수락\'을 탭한 다음, 기기의 접근성 설정에서 Olauncher를 켜 주세요.</string>
     <string name="accept">수락</string>
     <string name="permission">권한</string>
     <string name="double_tap_lock">두 번 탭하여 잠금</string>

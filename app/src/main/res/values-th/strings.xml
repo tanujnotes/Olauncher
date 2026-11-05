@@ -85,8 +85,8 @@
     <string name="affiliate">พันธมิตร</string>
     <string name="tip_start_typing_for_rename">เคล็ดลับ: เริ่มพิมพ์เพื่อดูตัวเลือกเปลี่ยนชื่อแอป</string>
     <string name="hidden_apps_message">หมายเหตุ: แตะที่ \'Olauncher\' ที่ด้านบนของหน้าการตั้งค่านี้เพื่อค้นหาแอปที่ซ่อนอยู่\n\nดูรายละเอียดเพิ่มเติมได้ที่หน้าเกี่ยวกับเรา</string>
-    <string name="accessibility_disclosure">โปรดเปิดบริการการเข้าถึงของ Olauncher ในการตั้งค่าอุปกรณ์ของคุณเพื่อเปิดใช้งานท่าทางแตะสองครั้งเพื่อล็อก
-    \n\nโปรดทราบว่าบริการนี้ใช้สำหรับฟีเจอร์นี้เท่านั้น บริการการเข้าถึงของเราไม่เก็บรวบรวมหรือแชร์ข้อมูลใดๆ</string>
+    <string name="accessibility_permission">สิทธิ์การช่วยการเข้าถึง</string>
+    <string name="accessibility_disclosure">Olauncher ใช้ Accessibility Service API สำหรับฟีเจอร์เดียวเท่านั้น คือ แตะสองครั้งเพื่อล็อก ซึ่งช่วยให้ Olauncher ล็อกหน้าจอได้เมื่อคุณแตะสองครั้งบนหน้าจอหลัก\n\nบริการนี้เห็นเฉพาะการแตะภายใน Olauncher และใช้เพื่อล็อกหน้าจอเท่านั้น โดยจะไม่ดูแอปอื่นหรือสิ่งที่คุณพิมพ์\n\nไม่มีการเก็บรวบรวม จัดเก็บ หรือแชร์ข้อมูลใดๆ และไม่มีข้อมูลใดออกจากอุปกรณ์ของคุณ\n\nแตะ ยอมรับ จากนั้นเปิด Olauncher ในการตั้งค่าการช่วยการเข้าถึงของอุปกรณ์</string>
     <string name="accept">ยอมรับ</string>
     <string name="permission">สิทธิ์การเข้าถึง</string>
     <string name="double_tap_lock">แตะสองครั้งเพื่อล็อก</string>

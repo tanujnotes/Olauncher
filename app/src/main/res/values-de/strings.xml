@@ -23,7 +23,8 @@
     <string name="no_hidden_apps">Keine versteckten Apps</string>
     <string name="hidden_apps">Versteckte Apps</string>
     <string name="hidden_apps_message">Hinweis: Tippen Sie oben auf dieser Einstellungsseite auf „Olauncher“, um Ihre versteckten Apps zu finden.\n\nWeitere Einzelheiten finden Sie auf unserer Seite „Über“.</string>
-    <string name="accessibility_disclosure">Bitte aktivieren Sie den Bedienungshilfen-Dienst von Olauncher in den Einstellungen Ihres Geräts, um die Geste „Doppeltippen zum Sperren“ zu aktivieren.\n\nBitte beachten Sie, dass dieser Dienst nur für diese eine Funktion verwendet wird. Unser Bedienungshilfen-Dienst sammelt oder teilt keine Daten.</string>
+    <string name="accessibility_permission">Berechtigung für Bedienungshilfen</string>
+    <string name="accessibility_disclosure">Olauncher verwendet die Accessibility Service API nur für eine Funktion: „Zum Sperren zweimal tippen“. Damit kann Olauncher Ihren Bildschirm sperren, wenn Sie zweimal auf den Startbildschirm tippen.\n\nDer Dienst sieht nur Fingertipps innerhalb von Olauncher und nutzt sie nur, um Ihren Bildschirm zu sperren. Er sieht sich weder andere Apps an noch das, was Sie eingeben.\n\nEs werden keine Daten erfasst, gespeichert oder geteilt. Nichts verlässt Ihr Gerät.\n\nTippen Sie auf „Akzeptieren“ und aktivieren Sie dann Olauncher in den Bedienungshilfen-Einstellungen Ihres Geräts.</string>
     <string name="accept">Akzeptieren</string>
     <string name="permission">Erlaubnis</string>
     <string name="double_tap_lock">Zum Sperren zweimal tippen</string>

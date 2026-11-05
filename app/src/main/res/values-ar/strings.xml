@@ -25,7 +25,8 @@
     <string name="swipe_left_app_disabled">التمرير لليسار معطّل</string>
     <string name="swipe_right_app_disabled">التمرير لليمين معطّل</string>
     <string name="hidden_apps_message">ملاحظة: اضغط على \'Olauncher\' أعلى صفحة الإعدادات هذه للعثور على تطبيقاتك المخفية.\n\nالمزيد من التفاصيل متوفرة في صفحة \"حول\".</string>
-    <string name="accessibility_disclosure">يرجى تشغيل خدمة إمكانية الوصول الخاصة بـ Olauncher في إعدادات جهازك لتفعيل إيماءة النقر المزدوج للقفل.\n\nيرجى ملاحظة أن هذه الخدمة تُستخدم فقط لهذه الميزة بالذات. خدمة إمكانية الوصول لدينا لا تجمع أو تشارك أي بيانات.</string>
+    <string name="accessibility_permission">إذن إمكانية الوصول</string>
+    <string name="accessibility_disclosure">يستخدم Olauncher واجهة Accessibility Service API لميزة واحدة فقط: النقر المزدوج للقفل. فهي تتيح لـ Olauncher قفل الشاشة عند النقر المزدوج على الشاشة الرئيسية.\n\nلا ترى الخدمة سوى النقرات داخل Olauncher، ولا تستخدمها إلا لقفل الشاشة. ولا تطّلع على التطبيقات الأخرى أو على أي شيء تكتبه.\n\nلا يتم جمع أي بيانات أو تخزينها أو مشاركتها. لا يغادر أي شيء جهازك.\n\nانقر على «قبول»، ثم شغّل Olauncher في إعدادات «إمكانية الوصول» على جهازك.</string>
     <string name="accept">قبول</string>
     <string name="permission">إذن</string>
     <string name="double_tap_lock">النقر المزدوج للقفل</string>

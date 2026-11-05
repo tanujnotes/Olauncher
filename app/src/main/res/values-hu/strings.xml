@@ -86,7 +86,8 @@
     <string name="affiliate">Affiliate</string>
     <string name="tip_start_typing_for_rename">Tipp: Kezdjen el gépelni az alkalmazás ÁTNEVEZÉSE opcióhoz</string>
     <string name="hidden_apps_message">Megjegyzés: A rejtett alkalmazások megtalálásához érintse meg az \"Olauncher\" elemet ennek a beállítás oldalnak a tetején.\n\nTöbb részlet elérhető a Névjegy oldalon.</string>
-    <string name="accessibility_disclosure">Kérjük, kapcsolja be az Olauncher kisegítő lehetőségek szolgáltatását az eszköz beállításaiban a dupla koppintás a lezáráshoz mozdulat engedélyezéséhez.\n\nKérjük, vegye figyelembe, hogy ez a szolgáltatás csak ehhez az egy funkcióhoz használatos. Kisegítő lehetőségek szolgáltatásunk nem gyűjt és nem oszt meg semmilyen adatot.</string>
+    <string name="accessibility_permission">Kisegítő lehetőségek engedély</string>
+    <string name="accessibility_disclosure">Az Olauncher csak egy funkcióhoz használja az Accessibility Service API-t: Dupla koppintás a lezáráshoz. Ennek segítségével az Olauncher lezárja a képernyőt, ha duplán koppint a kezdőképernyőn.\n\nA szolgáltatás csak az Olauncheren belüli koppintásokat látja, és csak a képernyő lezárására használja őket. Nem nézi a többi alkalmazást, sem azt, amit begépel.\n\nSemmilyen adatot nem gyűjtünk, tárolunk vagy osztunk meg. Semmi sem hagyja el az eszközét.\n\nKoppintson az Elfogad gombra, majd kapcsolja be az Olaunchert az eszköz Kisegítő lehetőségek beállításaiban.</string>
     <string name="accept">Elfogad</string>
     <string name="permission">Engedély</string>
     <string name="double_tap_lock">Dupla koppintás a lezáráshoz</string>
