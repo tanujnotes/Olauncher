@@ -75,7 +75,7 @@
     <string name="tip_start_typing_for_rename">עצה: אפשר להתחיל להקליד בשביל להגיע לאפשרות לשינוי שם של יישומים</string>
     <string name="hidden_apps_message">הערה: כדי להגיע ליישומים המוסתרים, יש ללחוץ על הכיתוב \'Olauncher\' שנמצא בראש עמוד ההגדרות.\n\nפרטים נוספים אפשר למצוא בעמוד \"מידע כללי\" שלנו.</string>
     <string name="accessibility_permission">הרשאת נגישות</string>
-    <string name="accessibility_disclosure">Olauncher משתמש ב-Accessibility Service API לתכונה אחת בלבד: לחיצה כפולה לנעילת המסך. התכונה מאפשרת ל-Olauncher לנעול את המסך כשמקישים פעמיים על מסך הבית.\n\nהשירות רואה רק הקשות בתוך Olauncher, ומשתמש בהן רק כדי לנעול את המסך. הוא לא מסתכל על אפליקציות אחרות או על מה שמקלידים.\n\nשום מידע לא נאסף, נשמר או משותף. שום דבר לא יוצא מהמכשיר.\n\nיש להקיש על \"הסכמה\" ואז להפעיל את Olauncher בהגדרות הנגישות של המכשיר.</string>
+    <string name="accessibility_disclosure">האפליקציה Olauncher משתמשת ב-Accessibility Service API לתכונה אחת בלבד: לחיצה כפולה לנעילת המסך. התכונה מאפשרת ל-Olauncher לנעול את המסך כשמקישים פעמיים על מסך הבית.\n\nהשירות רואה רק הקשות בתוך Olauncher, ומשתמש בהן רק כדי לנעול את המסך. הוא לא מסתכל על אפליקציות אחרות או על מה שמקלידים.\n\nשום מידע לא נאסף, נשמר או משותף. שום דבר לא יוצא מהמכשיר.\n\nיש להקיש על \"הסכמה\" ואז להפעיל את Olauncher בהגדרות הנגישות של המכשיר.</string>
     <string name="accept">הסכמה</string>
     <string name="permission">הרשאה</string>
     <string name="double_tap_lock">לחיצה כפולה לנעילת המסך</string>
