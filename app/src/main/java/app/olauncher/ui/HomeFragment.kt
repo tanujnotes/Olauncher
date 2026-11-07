@@ -1,24 +1,37 @@
 package app.olauncher.ui
 
+import android.Manifest
 import android.app.admin.DevicePolicyManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.content.pm.LauncherApps
 import android.content.res.Configuration
+import android.location.Location
+import android.location.LocationManager
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.ColorUtils
+import androidx.core.content.ContextCompat
+import androidx.core.location.LocationManagerCompat
+import androidx.core.net.toUri
 import androidx.core.os.bundleOf
+import androidx.core.util.Consumer
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.Observer
@@ -29,11 +42,16 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.data.calendar.CalendarEvent
+import app.olauncher.data.calendar.CalendarRepository
+import app.olauncher.data.weather.WeatherRepository
+import app.olauncher.data.weather.weatherSymbol
 import app.olauncher.databinding.FragmentHomeBinding
 import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.dpToPx
 import app.olauncher.helper.expandNotificationDrawer
 import app.olauncher.helper.getChangedAppTheme
+import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.getUserHandleFromString
 import app.olauncher.helper.isPackageInstalled
 import app.olauncher.helper.openAlarmApp
@@ -42,17 +60,28 @@ import app.olauncher.helper.openCameraApp
 import app.olauncher.helper.openDialerApp
 import app.olauncher.helper.setPlainWallpaperByTheme
 import app.olauncher.helper.showToast
+import app.olauncher.helper.createDialog
+import app.olauncher.helper.OlDialog
 import app.olauncher.listener.OnSwipeTouchListener
 import app.olauncher.listener.ViewSwipeTouchListener
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.concurrent.Executors
 
 class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListener {
 
     private lateinit var prefs: Prefs
     private lateinit var viewModel: MainViewModel
     private lateinit var deviceManager: DevicePolicyManager
+    private val ioExecutor = Executors.newSingleThreadExecutor()
+    private var upcomingEvents: List<CalendarEvent> = emptyList()
+    private var batteryReceiverRegistered = false
+    private val batteryReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (_binding != null) populateDateTime()
+        }
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -83,6 +112,29 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.isOlauncherDefault()
         if (prefs.showStatusBar) showStatusBar()
         else hideStatusBar()
+        refreshAgenda()
+        refreshWeather()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!batteryReceiverRegistered) {
+            ContextCompat.registerReceiver(
+                requireContext(),
+                batteryReceiver,
+                IntentFilter(Intent.ACTION_BATTERY_CHANGED),
+                ContextCompat.RECEIVER_EXPORTED,
+            )
+            batteryReceiverRegistered = true
+        }
+    }
+
+    override fun onStop() {
+        if (batteryReceiverRegistered) {
+            requireContext().unregisterReceiver(batteryReceiver)
+            batteryReceiverRegistered = false
+        }
+        super.onStop()
     }
 
     override fun onClick(view: View) {
@@ -92,6 +144,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             // R.id.recents -> {}
             R.id.clock -> openClockApp()
             R.id.date -> openCalendarApp()
+            R.id.nextEvent -> showAgendaDialog()
+            R.id.weather -> openWeatherApp()
             R.id.setDefaultLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.tvScreenTime -> openScreenTimeDigitalWellbeing()
 
@@ -152,6 +206,13 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 prefs.calendarAppPackage = ""
                 prefs.calendarAppClassName = ""
                 prefs.calendarAppUser = ""
+            }
+
+            R.id.weather -> {
+                showAppList(Constants.FLAG_SET_WEATHER_APP)
+                prefs.weatherAppPackage = ""
+                prefs.weatherAppClassName = ""
+                prefs.weatherAppUser = ""
             }
 
             R.id.tvScreenTime -> {
@@ -230,6 +291,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         binding.date.setOnClickListener(this)
         binding.clock.setOnLongClickListener(this)
         binding.date.setOnLongClickListener(this)
+        binding.nextEvent.setOnClickListener(this)
+        binding.weather.setOnClickListener(this)
+        binding.weather.setOnLongClickListener(this)
         binding.setDefaultLauncher.setOnClickListener(this)
         binding.setDefaultLauncher.setOnLongClickListener(this)
         binding.tvScreenTime.setOnClickListener(this)
@@ -258,6 +322,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         val verticalGravity = if (prefs.homeBottomAlignment) Gravity.BOTTOM else Gravity.CENTER_VERTICAL
         binding.homeAppsLayout.gravity = horizontalGravity or verticalGravity
         binding.dateTimeLayout.gravity = horizontalGravity
+        binding.nextEvent.gravity = horizontalGravity
+        binding.weather.gravity = horizontalGravity
         binding.homeApp1.gravity = horizontalGravity
         binding.homeApp2.gravity = horizontalGravity
         binding.homeApp3.gravity = horizontalGravity
@@ -269,7 +335,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateDateTime() {
-        binding.dateTimeLayout.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF
+        binding.dateTimeLayout.isVisible = prefs.dateTimeVisibility != Constants.DateTime.OFF || prefs.agendaEnabled || prefs.weatherEnabled
         binding.clock.isVisible = Constants.DateTime.isTimeVisible(prefs.dateTimeVisibility)
         binding.date.isVisible = Constants.DateTime.isDateVisible(prefs.dateTimeVisibility)
 
@@ -280,10 +346,19 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         if (!prefs.showStatusBar) {
             val battery = (requireContext().getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
                 .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-            if (battery > 0)
+            if (battery > 0) {
                 dateText = getString(R.string.day_battery, dateText, battery)
+                if (isBatteryCharging()) dateText += " ⚡"
+            }
         }
         binding.date.text = dateText.replace(".,", ",")
+    }
+
+    private fun isBatteryCharging(): Boolean {
+        val status = requireContext().registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            ?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
+        return status == BatteryManager.BATTERY_STATUS_CHARGING ||
+            status == BatteryManager.BATTERY_STATUS_FULL
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -377,6 +452,185 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             prefs.appName8 = ""
             prefs.appPackage8 = ""
         }
+    }
+
+    private fun refreshAgenda() {
+        if (!prefs.agendaEnabled || ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            upcomingEvents = emptyList()
+            binding.nextEvent.isVisible = false
+            return
+        }
+        val appContext = requireContext().applicationContext
+        ioExecutor.execute {
+            val events = runCatching { CalendarRepository(appContext).upcoming() }.getOrDefault(emptyList())
+            activity?.runOnUiThread {
+                if (_binding == null) return@runOnUiThread
+                upcomingEvents = events
+                binding.nextEvent.text = events.firstOrNull()?.let(::formatEventSummary).orEmpty()
+                binding.nextEvent.isVisible = events.isNotEmpty()
+            }
+        }
+    }
+
+    private fun refreshWeather() {
+        if (!prefs.weatherEnabled) {
+            binding.weather.isVisible = false
+            return
+        }
+        val context = requireContext().applicationContext
+        WeatherRepository(context).cached()?.let { showWeather(it.temperature, it.weatherCode, it.locationName) }
+        val manualName = prefs.weatherLocationName.takeIf { prefs.weatherManual }
+        if (prefs.weatherManual) {
+            android.location.Location("manual").apply {
+                latitude = prefs.weatherLatitude.toDouble()
+                longitude = prefs.weatherLongitude.toDouble()
+            }.also { loadWeather(context, it, manualName) }
+        } else {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) return
+            requestCurrentLocation(context)
+        }
+    }
+
+    private fun requestCurrentLocation(context: Context) {
+        val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val hasFineLocation = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        val provider = when {
+            hasFineLocation && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) -> LocationManager.GPS_PROVIDER
+            locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER
+            else -> locationManager.getProviders(true).firstOrNull()
+        }
+        val fallback = runCatching {
+            locationManager.getProviders(true).mapNotNull(locationManager::getLastKnownLocation).maxByOrNull(Location::getTime)
+        }.getOrNull()
+        if (provider == null) {
+            fallback?.let { loadWeather(context, it) }
+            return
+        }
+        runCatching {
+            LocationManagerCompat.getCurrentLocation(
+                locationManager,
+                provider,
+                null as android.os.CancellationSignal?,
+                ContextCompat.getMainExecutor(context),
+                Consumer<Location> { current ->
+                    (current ?: fallback)?.let { loadWeather(context, it) }
+                },
+            )
+        }.onFailure {
+            fallback?.let { loadWeather(context, it) }
+        }
+    }
+
+    private fun loadWeather(context: Context, location: Location, locationName: String? = null) {
+        ioExecutor.execute {
+            val snapshot = runCatching { WeatherRepository(context).load(location, locationName = locationName) }.getOrNull() ?: return@execute
+            activity?.runOnUiThread {
+                if (_binding != null) showWeather(snapshot.temperature, snapshot.weatherCode, snapshot.locationName)
+            }
+        }
+    }
+
+    private fun showWeather(temperature: Double, code: Int, location: String) {
+        binding.weather.text = getString(R.string.weather_summary, weatherSymbol(code), temperature.toInt(), location)
+        binding.weather.isVisible = true
+    }
+
+    private fun openWeatherApp() {
+        if (prefs.weatherAppPackage.isBlank()) {
+            showAppList(Constants.FLAG_SET_WEATHER_APP)
+        } else launchApp("Weather", prefs.weatherAppPackage, prefs.weatherAppClassName, prefs.weatherAppUser)
+    }
+
+    private fun showAgendaDialog() {
+        var dialog: OlDialog? = null
+        dialog = requireContext().createDialog(
+            title = R.string.upcoming_events,
+            action = R.string.close,
+        ) { container ->
+            LinearLayout(requireContext()).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(0, 8.dpToPx(), 0, 8.dpToPx())
+                addView(LinearLayout(context).apply {
+                    gravity = Gravity.END or Gravity.CENTER_VERTICAL
+                    addView(TextView(context).apply {
+                        setTextAppearance(R.style.TextSmallBold)
+                        setText(R.string.add_event)
+                        setPadding(8.dpToPx())
+                        setOnClickListener { dialog?.dismiss(); addCalendarEvent() }
+                    })
+                    addView(TextView(context).apply {
+                        setTextAppearance(R.style.TextSmallBold)
+                        setText(R.string.open_calendar)
+                        setPadding(8.dpToPx())
+                        setOnClickListener { dialog?.dismiss(); openCalendarApp() }
+                    })
+                })
+                upcomingEvents.forEachIndexed { index, event ->
+                    if (index > 0) addView(createAgendaDivider())
+                    addView(createAgendaEventView(event))
+                }
+            }
+        }
+        dialog?.showRespectingStatusBar()
+    }
+
+    private fun createAgendaDivider(): View = View(requireContext()).apply {
+        setBackgroundColor(ColorUtils.setAlphaComponent(requireContext().getColorFromAttr(R.attr.primaryColor), 38))
+        layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1.dpToPx()).apply {
+            marginStart = 12.dpToPx()
+            marginEnd = 12.dpToPx()
+        }
+    }
+
+    private fun createAgendaEventView(event: CalendarEvent): View = LinearLayout(requireContext()).apply {
+        orientation = LinearLayout.VERTICAL
+        addView(TextView(context).apply {
+            setTextAppearance(R.style.TextSmall)
+            text = formatEvent(event)
+            maxLines = 2
+            ellipsize = android.text.TextUtils.TruncateAt.END
+            setPadding(0, 8.dpToPx(), 0, if (event.location.isBlank()) 8.dpToPx() else 2.dpToPx())
+            setOnClickListener { openCalendarEvent(event) }
+        })
+        if (event.location.isNotBlank()) {
+            addView(TextView(context).apply {
+                setTextAppearance(R.style.TextSmall)
+                text = getString(R.string.event_location, event.location)
+                maxLines = 1
+                ellipsize = android.text.TextUtils.TruncateAt.END
+                setPadding(0, 2.dpToPx(), 0, 8.dpToPx())
+                setOnClickListener { openMap(event.location) }
+            })
+        }
+    }
+
+    private fun formatEventSummary(event: CalendarEvent): String {
+        val day = SimpleDateFormat("EEE", Locale.getDefault()).format(Date(event.begin))
+        return "$day ${event.title}"
+    }
+
+    private fun formatEvent(event: CalendarEvent): String {
+        val day = SimpleDateFormat("EEE, d MMM", Locale.getDefault()).format(Date(event.begin))
+        val time = if (event.allDay) getString(R.string.all_day) else SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date(event.begin))
+        return "${event.title}\n$day · $time"
+    }
+
+    private fun openMap(address: String) {
+        val intent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=${android.net.Uri.encode(address)}".toUri())
+        if (intent.resolveActivity(requireContext().packageManager) != null) startActivity(intent)
+        else requireContext().showToast(R.string.unable_to_open_map)
+    }
+
+    private fun addCalendarEvent() {
+        startActivity(Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI))
+    }
+
+    private fun openCalendarEvent(event: CalendarEvent) {
+        val uri = android.content.ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.id)
+        startActivity(Intent(Intent.ACTION_VIEW, uri).apply {
+            putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.begin)
+            putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.end)
+        })
     }
 
     private fun setHomeAppText(

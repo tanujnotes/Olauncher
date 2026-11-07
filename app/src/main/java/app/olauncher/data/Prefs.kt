@@ -95,6 +95,18 @@ class Prefs(context: Context) {
     private val SCREEN_TIME_APP_PACKAGE = "SCREEN_TIME_APP_PACKAGE"
     private val SCREEN_TIME_APP_USER = "SCREEN_TIME_APP_USER"
     private val SCREEN_TIME_APP_CLASS_NAME = "SCREEN_TIME_APP_CLASS_NAME"
+    private val WEATHER_APP_PACKAGE = "WEATHER_APP_PACKAGE"
+    private val WEATHER_APP_USER = "WEATHER_APP_USER"
+    private val WEATHER_APP_CLASS_NAME = "WEATHER_APP_CLASS_NAME"
+    private val WEATHER_ENABLED = "WEATHER_ENABLED"
+    private val AGENDA_ENABLED = "AGENDA_ENABLED"
+    private val WEATHER_TEMPERATURE = "WEATHER_TEMPERATURE"
+    private val WEATHER_CODE = "WEATHER_CODE"
+    private val WEATHER_LOCATION_NAME = "WEATHER_LOCATION_NAME"
+    private val WEATHER_UPDATED_AT = "WEATHER_UPDATED_AT"
+    private val WEATHER_MANUAL = "WEATHER_MANUAL"
+    private val WEATHER_LATITUDE = "WEATHER_LATITUDE"
+    private val WEATHER_LONGITUDE = "WEATHER_LONGITUDE"
 
     private val IS_SHORTCUT_1 = "IS_SHORTCUT_1"
     private val SHORTCUT_ID_1 = "SHORTCUT_ID_1"
@@ -452,6 +464,43 @@ class Prefs(context: Context) {
     var screenTimeAppClassName: String?
         get() = prefs.getString(SCREEN_TIME_APP_CLASS_NAME, "").toString()
         set(value) = prefs.edit { putString(SCREEN_TIME_APP_CLASS_NAME, value).apply() }
+
+    var weatherAppPackage: String
+        get() = prefs.getString(WEATHER_APP_PACKAGE, "").toString()
+        set(value) = prefs.edit { putString(WEATHER_APP_PACKAGE, value) }
+    var weatherAppUser: String
+        get() = prefs.getString(WEATHER_APP_USER, "").toString()
+        set(value) = prefs.edit { putString(WEATHER_APP_USER, value) }
+    var weatherAppClassName: String?
+        get() = prefs.getString(WEATHER_APP_CLASS_NAME, "").toString()
+        set(value) = prefs.edit { putString(WEATHER_APP_CLASS_NAME, value) }
+    var weatherEnabled: Boolean
+        get() = prefs.getBoolean(WEATHER_ENABLED, false)
+        set(value) = prefs.edit { putBoolean(WEATHER_ENABLED, value) }
+    var agendaEnabled: Boolean
+        get() = prefs.getBoolean(AGENDA_ENABLED, false)
+        set(value) = prefs.edit { putBoolean(AGENDA_ENABLED, value) }
+    var weatherTemperature: Float
+        get() = prefs.getFloat(WEATHER_TEMPERATURE, 0f)
+        set(value) = prefs.edit { putFloat(WEATHER_TEMPERATURE, value) }
+    var weatherCode: Int
+        get() = prefs.getInt(WEATHER_CODE, 0)
+        set(value) = prefs.edit { putInt(WEATHER_CODE, value) }
+    var weatherLocationName: String
+        get() = prefs.getString(WEATHER_LOCATION_NAME, "").toString()
+        set(value) = prefs.edit { putString(WEATHER_LOCATION_NAME, value) }
+    var weatherUpdatedAt: Long
+        get() = prefs.getLong(WEATHER_UPDATED_AT, 0L)
+        set(value) = prefs.edit { putLong(WEATHER_UPDATED_AT, value) }
+    var weatherManual: Boolean
+        get() = prefs.getBoolean(WEATHER_MANUAL, false)
+        set(value) = prefs.edit { putBoolean(WEATHER_MANUAL, value) }
+    var weatherLatitude: Float
+        get() = prefs.getFloat(WEATHER_LATITUDE, 0f)
+        set(value) = prefs.edit { putFloat(WEATHER_LATITUDE, value) }
+    var weatherLongitude: Float
+        get() = prefs.getFloat(WEATHER_LONGITUDE, 0f)
+        set(value) = prefs.edit { putFloat(WEATHER_LONGITUDE, value) }
 
     var isShortcut1: Boolean
         get() = prefs.getBoolean(IS_SHORTCUT_1, false)

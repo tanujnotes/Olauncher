@@ -102,6 +102,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             Constants.FLAG_SET_CLOCK_APP -> saveClockApp(appModel)
             Constants.FLAG_SET_CALENDAR_APP -> saveCalendarApp(appModel)
             Constants.FLAG_SET_SCREEN_TIME_APP -> saveScreenTimeApp(appModel)
+            Constants.FLAG_SET_WEATHER_APP -> saveWeatherApp(appModel)
         }
     }
 
@@ -345,6 +346,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             prefs.screenTimeAppPackage = appModel.appPackage
             prefs.screenTimeAppUser = appModel.user.toString()
             prefs.screenTimeAppClassName = appModel.activityClassName
+        }
+    }
+
+    private fun saveWeatherApp(appModel: AppModel) {
+        if (appModel is AppModel.App) {
+            prefs.weatherAppPackage = appModel.appPackage
+            prefs.weatherAppUser = appModel.user.toString()
+            prefs.weatherAppClassName = appModel.activityClassName
         }
     }
 

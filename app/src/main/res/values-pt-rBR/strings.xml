@@ -146,4 +146,17 @@
     <string name="unable_to_open_shortcut">Não é possível abrir o atalho</string>
     <string name="unable_to_open_app_info">Não é possível abrir as informações do aplicativo</string>
     <string name="bold_font">Fonte em negrito</string>
+    <string name="upcoming_events">Próximos eventos</string>
+    <string name="open_calendar">Abrir calendário</string>
+    <string name="add_event">Adicionar evento</string>
+    <string name="all_day">Dia inteiro</string>
+    <string name="weather_summary">%1$s %2$d °C  ·  ⌖ %3$s</string>
+    <string name="agenda_on_home">Próximos eventos</string>
+    <string name="weather_on_home">Clima atual</string>
+    <string name="set_location">Definir localização</string>
+    <string name="manual_location_hint">Cidade ou região</string>
+    <string name="location_not_found">Localização não encontrada</string>
+    <string name="automatic_location">Automática</string>
+    <string name="unable_to_open_map">Não foi possível abrir um aplicativo de mapas</string>
+    <string name="event_location">⌖ %1$s</string>
 </resources><!-- Portuguese -->
