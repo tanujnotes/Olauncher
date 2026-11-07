@@ -33,6 +33,7 @@ class AppDrawerAdapter(
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel, Int) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
+    private val appSelected: (AppModel) -> Boolean = { false },
     private val privateSpaceToggleListener: () -> Unit = {},
     private val privateSpaceSettingsListener: () -> Unit = {},
 ) : ListAdapter<AppModel, RecyclerView.ViewHolder>(DIFF_CALLBACK), Filterable {
@@ -118,7 +119,8 @@ class AppDrawerAdapter(
                     appDeleteListener,
                     appInfoListener,
                     appHideListener,
-                    appRenameListener
+                    appRenameListener,
+                    appSelected,
                 )
             }
         } catch (e: Exception) {
@@ -229,6 +231,7 @@ class AppDrawerAdapter(
             appInfoListener: (AppModel) -> Unit,
             appHideListener: (AppModel, Int) -> Unit,
             appRenameListener: (AppModel, String) -> Unit,
+            appSelected: (AppModel) -> Boolean,
         ) = with(binding) {
             appHideLayout.visibility = View.GONE
             renameLayout.visibility = View.GONE
@@ -238,6 +241,7 @@ class AppDrawerAdapter(
             appTitle.text = buildString {
                 append(appModel.appLabel)
                 if (appModel.isNew) append(" ✦")
+                if (flag == Constants.FLAG_MINDFUL_APPS && appSelected(appModel)) append("  ✓")
             }
             appTitle.gravity = appLabelGravity
             otherProfileIndicator.isVisible = appModel.user != myUserHandle

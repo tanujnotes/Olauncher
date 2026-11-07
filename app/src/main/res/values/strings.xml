@@ -155,6 +155,12 @@
     <string name="are_you_using_your_phone_or_is_your_phone_using_you">Are you using your phone, or is your phone using you?</string>
     <string name="about_olauncher">About and FAQs</string>
     <string name="screen_time">Screen time</string>
+    <string name="mindful_apps" tools:ignore="MissingTranslation">Apps with opening delay</string>
+    <string name="mindful_pause" tools:ignore="MissingTranslation">Mindful pause</string>
+    <string name="mindful_opening_title" tools:ignore="MissingTranslation">Opening %1$s</string>
+    <string name="mindful_opening_count" tools:ignore="MissingTranslation,PluralsCandidate">Opening %1$d today</string>
+    <string name="mindful_opening_wait" tools:ignore="MissingTranslation,PluralsCandidate">Opening in %1$d seconds…</string>
+    <string name="cancel" tools:ignore="MissingTranslation">Cancel</string>
     <string name="learn_more">Learn more</string>
     <string name="did_you_know">Did you know?</string>
     <string name="leave_a_review">Leave a review</string>

@@ -20,6 +20,8 @@ import androidx.work.WorkManager
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.data.MindfulLaunchDelay
+import app.olauncher.data.PendingAppLaunch
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
 import app.olauncher.helper.formattedTimeSpent
@@ -37,6 +39,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Calendar
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 
@@ -64,6 +69,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     var isPrivateSpaceToggling = false
 
     val showDialog = SingleLiveEvent<String>()
+    val pendingMindfulLaunch = SingleLiveEvent<PendingAppLaunch>()
     val checkForMessages = SingleLiveEvent<Unit?>()
     val resetLauncherLiveData = SingleLiveEvent<Unit?>()
     // Home button for recents feature disabled
@@ -76,7 +82,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 when (appModel) {
                     is AppModel.PinnedShortcut -> launchShortcut(appModel)
                     is AppModel.App ->
-                        launchApp(appModel.appPackage, appModel.activityClassName, appModel.user)
+                        requestAppLaunch(appModel)
 
                     else -> {}
                 }
@@ -84,9 +90,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
             Constants.FLAG_HIDDEN_APPS -> {
                 if (appModel is AppModel.App) {
-                    launchApp(appModel.appPackage, appModel.activityClassName, appModel.user)
+                    requestAppLaunch(appModel)
                 }
             }
+
+            Constants.FLAG_MINDFUL_APPS -> toggleMindfulApp(appModel)
 
             Constants.FLAG_SET_HOME_APP_1 -> saveHomeApp(appModel, 1)
             Constants.FLAG_SET_HOME_APP_2 -> saveHomeApp(appModel, 2)
@@ -371,6 +379,42 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun updateSwipeApps() {
         updateSwipeApps.postValue(Unit)
+    }
+
+    private fun toggleMindfulApp(appModel: AppModel) {
+        if (appModel !is AppModel.App || appModel.appPackage.isBlank()) return
+        val identity = appModel.appPackage + "|" + appModel.user
+        val selected = prefs.mindfulApps.toMutableSet()
+        if (!selected.add(identity)) selected.remove(identity)
+        prefs.mindfulApps = selected
+    }
+
+    private fun requestAppLaunch(appModel: AppModel.App) {
+        val identity = appModel.appPackage + "|" + appModel.user
+        if (identity !in prefs.mindfulApps) {
+            launchApp(appModel.appPackage, appModel.activityClassName, appModel.user)
+            return
+        }
+
+        val localDate = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+        val openingNumber = prefs.registerMindfulOpening(identity, localDate)
+        val delaySeconds = MindfulLaunchDelay.secondsFor(openingNumber)
+        if (delaySeconds == 0) {
+            launchApp(appModel.appPackage, appModel.activityClassName, appModel.user)
+            return
+        }
+        pendingMindfulLaunch.value = PendingAppLaunch(
+            appName = appModel.appLabel,
+            packageName = appModel.appPackage,
+            activityClassName = appModel.activityClassName,
+            user = appModel.user,
+            openingNumber = openingNumber,
+            delaySeconds = delaySeconds,
+        )
+    }
+
+    fun completeMindfulLaunch(pending: PendingAppLaunch) {
+        launchApp(pending.packageName, pending.activityClassName, pending.user)
     }
 
     private fun launchApp(packageName: String, activityClassName: String?, userHandle: UserHandle) {

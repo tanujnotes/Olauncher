@@ -22,8 +22,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import app.olauncher.data.Constants
+import app.olauncher.data.PendingAppLaunch
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
+import app.olauncher.databinding.DialogMindfulLaunchBinding
+import app.olauncher.helper.createDialog
 import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.hasBeenDays
 import app.olauncher.helper.hasBeenHours
@@ -60,6 +63,8 @@ class MainActivity : AppCompatActivity() {
     private var profileReceiver: BroadcastReceiver? = null
     private var launcherAppsCallback: LauncherApps.Callback? = null
     private var messageDialog: OlDialog? = null
+    private var mindfulDialog: OlDialog? = null
+    private var mindfulLaunchJob: Job? = null
 
 //    override fun onBackPressed() {
 //        if (navController.currentDestination?.id != R.id.mainFragment)
@@ -197,6 +202,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObservers(viewModel: MainViewModel) {
+        viewModel.pendingMindfulLaunch.observe(this) { pending ->
+            showMindfulLaunch(pending)
+        }
         viewModel.launcherResetFailed.observe(this) {
             openLauncherChooser(it)
         }
@@ -273,6 +281,41 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun showMindfulLaunch(pending: PendingAppLaunch) {
+        mindfulLaunchJob?.cancel()
+        mindfulDialog?.dismiss()
+
+        lateinit var contentBinding: DialogMindfulLaunchBinding
+        var countdownCompleted = false
+        val dialog = createDialog(
+            title = R.string.mindful_pause,
+            action = R.string.cancel,
+            content = { parent ->
+                DialogMindfulLaunchBinding.inflate(layoutInflater, parent, false).also {
+                    contentBinding = it
+                    it.appName.text = getString(R.string.mindful_opening_title, pending.appName)
+                    it.openingCount.text = getString(R.string.mindful_opening_count, pending.openingNumber)
+                }.root
+            },
+        )
+        mindfulDialog = dialog
+        dialog.setOnDismissListener {
+            if (!countdownCompleted) mindfulLaunchJob?.cancel()
+            if (mindfulDialog === dialog) mindfulDialog = null
+        }
+        dialog.showRespectingStatusBar()
+
+        mindfulLaunchJob = lifecycleScope.launch {
+            for (remaining in pending.delaySeconds downTo 1) {
+                contentBinding.waitTime.text = getString(R.string.mindful_opening_wait, remaining)
+                delay(1000)
+            }
+            countdownCompleted = true
+            dialog.dismiss()
+            viewModel.completeMindfulLaunch(pending)
         }
     }
 

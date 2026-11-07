@@ -124,6 +124,12 @@
     <string name="about_olauncher">Sobre e perguntas frequentes</string>
     <string name="learn_more">Saber mais</string>
     <string name="screen_time">Tempo de tela</string>
+    <string name="mindful_apps">Apps com espera ao abrir</string>
+    <string name="mindful_pause">Pausa consciente</string>
+    <string name="mindful_opening_title">Abrindo %1$s</string>
+    <string name="mindful_opening_count">%1$dª abertura hoje</string>
+    <string name="mindful_opening_wait">Abrindo em %1$d segundos…</string>
+    <string name="cancel">Cancelar</string>
     <string name="did_you_know">Você sabia?</string>
     <string name="leave_a_review">Deixe uma avaliação</string>
     <string name="review_message">O Olauncher é gratuito e sempre será. Não tem anúncios, não coleta dados e reduz seu tempo de tela, resultando em uma vida mais saudável.\n\nEsperamos que você goste. Diga-nos o que achou.</string>

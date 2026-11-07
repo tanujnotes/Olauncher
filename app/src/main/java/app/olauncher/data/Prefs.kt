@@ -29,6 +29,9 @@ class Prefs(context: Context) {
     private val SWIPE_RIGHT_ENABLED = "SWIPE_RIGHT_ENABLED"
     private val HIDDEN_APPS = "HIDDEN_APPS"
     private val HIDDEN_APPS_UPDATED = "HIDDEN_APPS_UPDATED"
+    private val MINDFUL_APPS = "MINDFUL_APPS"
+    private val MINDFUL_OPEN_DATE_PREFIX = "MINDFUL_OPEN_DATE_"
+    private val MINDFUL_OPEN_COUNT_PREFIX = "MINDFUL_OPEN_COUNT_"
     private val SHOW_HINT_COUNTER = "SHOW_HINT_COUNTER"
     private val APP_THEME = "APP_THEME"
     private val ABOUT_CLICKED = "ABOUT_CLICKED"
@@ -248,6 +251,26 @@ class Prefs(context: Context) {
     var hiddenAppsUpdated: Boolean
         get() = prefs.getBoolean(HIDDEN_APPS_UPDATED, false)
         set(value) = prefs.edit { putBoolean(HIDDEN_APPS_UPDATED, value).apply() }
+
+    var mindfulApps: Set<String>
+        get() = prefs.getStringSet(MINDFUL_APPS, emptySet())?.toSet() ?: emptySet()
+        set(value) = prefs.edit { putStringSet(MINDFUL_APPS, value).apply() }
+
+    fun registerMindfulOpening(appIdentity: String, localDate: String): Int {
+        val safeIdentity = appIdentity
+        val dateKey = MINDFUL_OPEN_DATE_PREFIX + safeIdentity
+        val countKey = MINDFUL_OPEN_COUNT_PREFIX + safeIdentity
+        val count = if (prefs.getString(dateKey, null) == localDate) {
+            prefs.getInt(countKey, 0) + 1
+        } else {
+            1
+        }
+        prefs.edit {
+            putString(dateKey, localDate)
+            putInt(countKey, count)
+        }
+        return count
+    }
 
     var toShowHintCounter: Int
         get() = prefs.getInt(SHOW_HINT_COUNTER, 1)
