@@ -17,7 +17,10 @@ sealed class AppModel : Comparable<AppModel> {
         val activityClassName: String?,
         override val isNew: Boolean = false,
         override val user: UserHandle,
-    ) : AppModel()
+    ) : AppModel() {
+        val hiddenKey: String
+            get() = "$appPackage|$user|${activityClassName.orEmpty()}"
+    }
 
     data class PinnedShortcut(
         override val appLabel: String,
