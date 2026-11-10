@@ -40,6 +40,17 @@
         android:requiresFadingEdge="vertical" />
 
     <TextView
+        android:id="@+id/contactsEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/drawer_contacts_empty"
+        android:textColor="#FAFAFA"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/appRename"
         style="@style/TextSmall"
         android:layout_width="wrap_content"

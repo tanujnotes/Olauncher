@@ -69,6 +69,15 @@
     <string name="_8">8</string>
     <string name="drawer_apps">Apps</string>
     <string name="drawer_contacts">Contacts</string>
+    <string name="drawer_contacts_permission">Allow contacts access to search and open your contacts.</string>
+    <string name="drawer_contacts_empty">No contacts found</string>
+    <string name="drawer_contact_unnamed">Unnamed contact</string>
+    <string name="drawer_contact_call">Call %1$s</string>
+    <string name="drawer_contact_text">Text %1$s</string>
+    <string name="drawer_contact_whatsapp">WhatsApp %1$s</string>
+    <string name="drawer_contact_choose_number">Choose a phone number</string>
+    <string name="drawer_contact_action_unavailable">This contact action is unavailable.</string>
+    <string name="drawer_contact_international_number">Save this number with its country code to open it in WhatsApp.</string>
     <string name="drawer_search">Search</string>
     <string name="drawer_actions">Actions</string>
     <string name="app_drawer_tips">Tip: Start typing an app name to auto-launch it</string>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/bg_drawer_app_tile"
+    android:gravity="center_vertical"
+    android:minHeight="56dp"
+    android:orientation="horizontal"
+    android:paddingStart="12dp"
+    android:paddingEnd="6dp">
+
+    <LinearLayout
+        android:id="@+id/contactDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        android:paddingEnd="4dp">
+
+        <TextView
+            android:id="@+id/contactInitials"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_drawer_contact_avatar"
+            android:gravity="center"
+            android:importantForAccessibility="no"
+            android:maxLines="1"
+            android:textColor="#101010"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contactName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#FAFAFA"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/contactCall"
+        style="@style/DrawerContactAction"
+        android:src="@drawable/ic_drawer_contact_call" />
+
+    <View style="@style/DrawerContactActionDivider" />
+
+    <ImageButton
+        android:id="@+id/contactText"
+        style="@style/DrawerContactAction"
+        android:src="@drawable/ic_drawer_contact_text" />
+
+    <View style="@style/DrawerContactActionDivider" />
+
+    <ImageButton
+        android:id="@+id/contactWhatsApp"
+        style="@style/DrawerContactAction"
+        android:src="@drawable/ic_drawer_contact_whatsapp" />
+
+</LinearLayout>

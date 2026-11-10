@@ -10,7 +10,10 @@
     android:orientation="horizontal"
     android:visibility="gone">
 
-    <FrameLayout style="@style/DrawerCategorySlot">
+    <FrameLayout
+        android:id="@+id/categoryApps"
+        android:foreground="?attr/selectableItemBackground"
+        style="@style/DrawerCategorySlot">
 
         <TextView
             style="@style/DrawerCategoryLabel"
@@ -21,7 +24,10 @@
 
     <View style="@style/DrawerCategoryDivider" />
 
-    <FrameLayout style="@style/DrawerCategorySlot">
+    <FrameLayout
+        android:id="@+id/categoryContacts"
+        android:foreground="?attr/selectableItemBackground"
+        style="@style/DrawerCategorySlot">
 
         <TextView
             style="@style/DrawerCategoryLabel"
