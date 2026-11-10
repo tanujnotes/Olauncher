@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/app_drawer_search_margin"
+    android:layout_marginTop="6dp"
+    android:background="@drawable/bg_drawer_category_menu"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <FrameLayout style="@style/DrawerCategorySlot">
+
+        <TextView
+            style="@style/DrawerCategoryLabel"
+            android:text="@string/drawer_apps"
+            app:drawableStartCompat="@drawable/ic_drawer_apps" />
+
+    </FrameLayout>
+
+    <View style="@style/DrawerCategoryDivider" />
+
+    <FrameLayout style="@style/DrawerCategorySlot">
+
+        <TextView
+            style="@style/DrawerCategoryLabel"
+            android:text="@string/drawer_contacts"
+            app:drawableStartCompat="@drawable/ic_drawer_contacts" />
+
+    </FrameLayout>
+
+    <View style="@style/DrawerCategoryDivider" />
+
+    <FrameLayout style="@style/DrawerCategorySlot">
+
+        <TextView
+            style="@style/DrawerCategoryLabel"
+            android:text="@string/drawer_search"
+            app:drawableStartCompat="@drawable/ic_drawer_magnifier" />
+
+    </FrameLayout>
+
+    <View style="@style/DrawerCategoryDivider" />
+
+    <FrameLayout style="@style/DrawerCategorySlot">
+
+        <TextView
+            style="@style/DrawerCategoryLabel"
+            android:text="@string/drawer_actions"
+            app:drawableStartCompat="@drawable/ic_drawer_bolt" />
+
+    </FrameLayout>
+
+</LinearLayout>

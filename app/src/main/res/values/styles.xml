@@ -63,6 +63,42 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
+    <style name="DrawerDarkOverlay" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="primaryColor">#FAFAFA</item>
+        <item name="primaryColorTrans50">#80FFFFFF</item>
+        <item name="primaryColorTrans80">#CCFFFFFF</item>
+        <item name="primaryTextShadowColor">@android:color/transparent</item>
+        <item name="primaryShadeDarkColor">#1C1C1C</item>
+    </style>
+
+    <style name="DrawerCategorySlot">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="DrawerCategoryLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:drawablePadding">3dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:minHeight">42dp</item>
+        <item name="android:paddingHorizontal">2dp</item>
+        <item name="android:paddingVertical">6dp</item>
+        <item name="android:textColor">#FAFAFA</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="DrawerCategoryDivider">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:background">#B3FFFFFF</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
+
     <style name="DrawerSearchInput" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">#202020</item>
         <item name="colorControlActivated">#202020</item>

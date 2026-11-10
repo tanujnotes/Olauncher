@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/primaryShadeDarkColor"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:paddingTop="24dp">
+
+    <TextView
+        android:id="@+id/appsHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/app_drawer_search_margin"
+        android:layout_marginBottom="6dp"
+        android:accessibilityHeading="true"
+        android:background="@drawable/bg_drawer_search_white"
+        android:drawablePadding="6dp"
+        android:gravity="center_vertical"
+        android:minHeight="32dp"
+        android:paddingHorizontal="10dp"
+        android:text="@string/drawer_apps"
+        android:textColor="#101010"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_drawer_apps_badge" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -31,7 +51,12 @@
         android:textAllCaps="true"
         android:visibility="gone" />
 
+    <include
+        android:id="@+id/categoryMenu"
+        layout="@layout/app_drawer_category_menu" />
+
     <LinearLayout
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/app_drawer_search_margin"
@@ -48,6 +73,7 @@
         android:paddingBottom="4dp">
 
         <ImageView
+            android:id="@+id/searchLeadingIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:importantForAccessibility="no"
@@ -76,6 +102,7 @@
             android:theme="@style/DrawerSearchInput" />
 
         <View
+            android:id="@+id/searchDivider"
             android:layout_width="1dp"
             android:layout_height="24dp"
             android:layout_marginEnd="6dp"
@@ -83,6 +110,7 @@
             android:importantForAccessibility="no" />
 
         <ImageView
+            android:id="@+id/searchLegacyRail"
             android:layout_width="128dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_drawer_search_rail"
@@ -93,6 +121,15 @@
             android:paddingBottom="9dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_drawer_search_rail" />
+
+        <ImageView
+            android:id="@+id/searchActionBadge"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginEnd="2dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_drawer_action_badge"
+            android:visibility="gone" />
 
     </LinearLayout>
 </LinearLayout>
