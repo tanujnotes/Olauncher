@@ -64,131 +64,107 @@ fun Context.showToast(stringResource: Int, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, getString(stringResource), duration).show()
 }
 
-suspend fun getAppsList(
-    context: Context,
-    prefs: Prefs,
-    includeRegularApps: Boolean = true,
-    includeHiddenApps: Boolean = false,
-): MutableList<AppModel> {
-    return withContext(Dispatchers.IO) {
-        val appList: MutableList<AppModel> = mutableListOf()
+data class InstalledApps(
+    val visible: List<AppModel>,
+    val hidden: List<AppModel>,
+    val all: List<AppModel>,
+)
 
-        try {
-            if (!Prefs(context).hiddenAppsUpdated) upgradeHiddenApps(Prefs(context))
-            val hiddenApps = Prefs(context).hiddenApps
+suspend fun getAppsList(context: Context, prefs: Prefs): InstalledApps =
+    withContext(Dispatchers.IO) {
+        val apps = mutableListOf<AppModel>()
+        if (!prefs.hiddenAppsUpdated) upgradeHiddenApps(prefs)
+        val hiddenApps = prefs.hiddenApps
+        val userManager = context.getSystemService(UserManager::class.java)
+        val launcherApps = context.getSystemService(LauncherApps::class.java)
+        val collator = Collator.getInstance()
+        val newAppCutoff = System.currentTimeMillis() - Constants.ONE_HOUR_IN_MILLIS
 
-            val userManager = context.getSystemService(Context.USER_SERVICE) as UserManager
-            val launcherApps =
-                context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-            val collator = Collator.getInstance()
-
-            // Catch errors per profile and per app, so one bad entry doesn't empty the whole list
-            for (profile in userManager.userProfiles) {
-                if (isPrivateSpaceProfile(context, profile)) continue
-                val activityList = try {
-                    launcherApps.getActivityList(null, profile)
+        for (profile in userManager.userProfiles) {
+            if (isPrivateSpaceProfile(context, profile)) continue
+            val activityList = try {
+                launcherApps.getActivityList(null, profile)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                continue
+            }
+            for (app in activityList) {
+                val packageName = app.componentName.packageName
+                if (packageName == BuildConfig.APPLICATION_ID) continue
+                try {
+                    val originalLabel = app.label.toString()
+                    apps.add(
+                        AppModel.App(
+                            appLabel = prefs.getAppRenameLabel(packageName).ifBlank { originalLabel },
+                            key = collator.getCollationKey(originalLabel),
+                            appPackage = packageName,
+                            activityClassName = app.componentName.className,
+                            isNew = app.firstInstallTime > newAppCutoff,
+                            user = profile,
+                        )
+                    )
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    continue
-                }
-                for (app in activityList) {
-                    try {
-                        val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
-                            .ifBlank { app.label.toString() }
-                        val appModel = AppModel.App(
-                            appLabel = appLabelShown,
-                            key = collator.getCollationKey(app.label.toString()),
-                            appPackage = app.applicationInfo.packageName,
-                            activityClassName = app.componentName.className,
-                            isNew = (System.currentTimeMillis() - app.firstInstallTime) < Constants.ONE_HOUR_IN_MILLIS,
-                            user = profile
-                        )
-
-                        // if the current app is not OLauncher
-                        if (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID) {
-                            // is this a hidden app?
-                            if (hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())) {
-                                if (includeHiddenApps) {
-                                    appList.add(appModel)
-                                }
-                            } else {
-                                // this is a regular app
-                                if (includeRegularApps) {
-                                    appList.add(appModel)
-                                }
-                            }
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
                 }
             }
-
-            // Add shortcuts if we're getting regular apps
-            if (includeRegularApps && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val pinned = try {
-                    getPinnedShortcuts(context, prefs, collator)
-                } catch (e: Exception) {
-                    emptyList()
-                }
-                appList.addAll(pinned)
-            }
-
-            appList.sortWith(compareBy(collator) { it.appLabel })
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
-        appList
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            try {
+                apps.addAll(getPinnedShortcuts(context, prefs, collator))
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        apps.sortWith(compareBy(collator) { it.appLabel })
+        val (hidden, visible) = apps.partition {
+            it is AppModel.App && "${it.appPackage}|${it.user}" in hiddenApps
+        }
+        InstalledApps(visible, hidden, apps)
     }
-}
 
 @RequiresApi(Build.VERSION_CODES.O)
-private suspend fun getPinnedShortcuts(
+private fun getPinnedShortcuts(
     context: Context,
     prefs: Prefs,
     collator: Collator,
-): List<AppModel.PinnedShortcut> =
-    withContext(Dispatchers.IO) {
-        val pinnedShortcuts = mutableListOf<AppModel.PinnedShortcut>()
-        val shortcuts = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as? LauncherApps
-        if (shortcuts?.hasShortcutHostPermission() == true) {
-            val query = LauncherApps.ShortcutQuery().apply {
-                setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
-            }
-            shortcuts.profiles.forEach { profile ->
-                if (isPrivateSpaceProfile(context, profile)) return@forEach
-                try {
-                    shortcuts.getShortcuts(query, profile)?.forEach { shortcut ->
-                        val identity = shortcutIdentity(
-                            shortcut.`package`,
-                            shortcut.id,
-                            profile.toString()
+): List<AppModel.PinnedShortcut> {
+    val pinnedShortcuts = mutableListOf<AppModel.PinnedShortcut>()
+    val shortcuts = context.getSystemService(LauncherApps::class.java)
+    if (!shortcuts.hasShortcutHostPermission()) return pinnedShortcuts
+
+    val seen = mutableSetOf<String>()
+    val query = LauncherApps.ShortcutQuery().apply {
+        setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
+    }
+    for (profile in shortcuts.profiles) {
+        if (isPrivateSpaceProfile(context, profile)) continue
+        try {
+            shortcuts.getShortcuts(query, profile)?.forEach { shortcut ->
+                val identity = shortcutIdentity(shortcut.`package`, shortcut.id, profile.toString())
+                if (shortcut.isPinned && seen.add(identity)) {
+                    val label = prefs.getAppRenameLabel(identity)
+                        .ifBlank { prefs.getAppRenameLabel(shortcut.id) }
+                        .takeIf { it.isNotBlank() }
+                        ?: shortcut.shortLabel?.toString()
+                        ?: shortcut.longLabel?.toString().orEmpty()
+                    pinnedShortcuts.add(
+                        AppModel.PinnedShortcut(
+                            appLabel = label,
+                            key = collator.getCollationKey(label),
+                            appPackage = shortcut.`package`,
+                            shortcutId = shortcut.id,
+                            user = profile,
                         )
-                        if (shortcut.isPinned && pinnedShortcuts.none { it.identity == identity }) {
-                            val label = prefs.getAppRenameLabel(identity)
-                                .ifBlank { prefs.getAppRenameLabel(shortcut.id) }
-                                .takeIf { it.isNotBlank() }
-                                ?: shortcut.shortLabel?.toString()
-                                ?: shortcut.longLabel?.toString().orEmpty()
-                            pinnedShortcuts.add(
-                                AppModel.PinnedShortcut(
-                                    appLabel = label,
-                                    key = collator.getCollationKey(label),
-                                    appPackage = shortcut.`package`,
-                                    shortcutId = shortcut.id,
-                                    isNew = false,
-                                    user = profile
-                                )
-                            )
-                        }
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                    )
                 }
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        pinnedShortcuts
     }
+    return pinnedShortcuts
+}
 
 // This is to ensure backward compatibility with older app versions
 // which did not support multiple user profiles
@@ -238,38 +214,36 @@ fun getPrivateSpaceUserHandle(context: Context): UserHandle? {
     return null
 }
 
-suspend fun getPrivateSpaceApps(
+fun getPrivateSpaceApps(
     context: Context,
     prefs: Prefs,
-): MutableList<AppModel> {
-    return withContext(Dispatchers.IO) {
-        val appList: MutableList<AppModel> = mutableListOf()
-        try {
-            val privateSpaceHandle = getPrivateSpaceUserHandle(context) ?: return@withContext appList
-            val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-            val collator = Collator.getInstance()
+    privateSpaceHandle: UserHandle,
+): List<AppModel> {
+    val appList: MutableList<AppModel> = mutableListOf()
+    try {
+        val launcherApps = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+        val collator = Collator.getInstance()
 
-            for (app in launcherApps.getActivityList(null, privateSpaceHandle)) {
-                if (app.applicationInfo.packageName == BuildConfig.APPLICATION_ID) continue
-                val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
-                    .ifBlank { app.label.toString() }
-                appList.add(
-                    AppModel.App(
-                        appLabel = appLabelShown,
-                        key = collator.getCollationKey(app.label.toString()),
-                        appPackage = app.applicationInfo.packageName,
-                        activityClassName = app.componentName.className,
-                        isNew = false,
-                        user = privateSpaceHandle
-                    )
+        for (app in launcherApps.getActivityList(null, privateSpaceHandle)) {
+            if (app.applicationInfo.packageName == BuildConfig.APPLICATION_ID) continue
+            val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
+                .ifBlank { app.label.toString() }
+            appList.add(
+                AppModel.App(
+                    appLabel = appLabelShown,
+                    key = collator.getCollationKey(app.label.toString()),
+                    appPackage = app.applicationInfo.packageName,
+                    activityClassName = app.componentName.className,
+                    isNew = false,
+                    user = privateSpaceHandle
                 )
-            }
-            appList.sortWith(compareBy(collator) { it.appLabel })
-        } catch (e: Exception) {
-            e.printStackTrace()
+            )
         }
-        appList
+        appList.sortWith(compareBy(collator) { it.appLabel })
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
+    return appList
 }
 
 fun getUserHandleFromString(context: Context, userHandleString: String): UserHandle {

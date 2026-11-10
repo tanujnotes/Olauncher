@@ -43,7 +43,7 @@ class AppSearchMatcherTest {
         // String.contains("") is always true — this mirrors the pre-existing behaviour
         // exactly (not a new edge case introduced by extracting this function). The
         // production caller (AppDrawerAdapter) never reaches this path with a blank
-        // query: it shows the unfiltered list instead via its own isNullOrBlank() guard.
+        // query: it shows the unfiltered list instead via its own isBlank() guard.
         assertTrue(appLabelMatches("Camera", ""))
         assertTrue(appLabelMatches("Camera", "   "))
     }

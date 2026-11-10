@@ -21,6 +21,7 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
+import androidx.core.view.SoftwareKeyboardControllerCompat
 import app.olauncher.BuildConfig
 import app.olauncher.R
 import app.olauncher.data.Constants
@@ -49,13 +50,8 @@ fun View.hideKeyboard() {
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun View.showKeyboard(show: Boolean = true) {
-    if (show.not()) return
-    if (this.requestFocus())
-        postDelayed({
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
-        }, 100)
+fun View.showKeyboard() {
+    if (requestFocus()) SoftwareKeyboardControllerCompat(this).show()
 }
 
 

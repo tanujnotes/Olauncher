@@ -4,17 +4,13 @@ import android.content.Context
 import android.content.pm.LauncherApps
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.util.LruCache
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -27,13 +23,14 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
 import app.olauncher.databinding.AdapterPrivateSpaceHeaderBinding
-import app.olauncher.helper.appLabelMatches
+import app.olauncher.helper.appLabelMatcher
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -46,11 +43,11 @@ class AppDrawerAdapter(
     private val appClickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
     private val appDeleteListener: (AppModel) -> Unit,
-    private val appHideListener: (AppModel, Int) -> Unit,
+    private val appHideListener: (AppModel) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
     private val privateSpaceToggleListener: () -> Unit = {},
     private val privateSpaceSettingsListener: () -> Unit = {},
-) : ListAdapter<AppModel, RecyclerView.ViewHolder>(DIFF_CALLBACK), Filterable {
+) : ListAdapter<AppModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         const val VIEW_TYPE_APP = 0
@@ -59,7 +56,8 @@ class AppDrawerAdapter(
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
             override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean = when {
                 oldItem is AppModel.App && newItem is AppModel.App ->
-                    oldItem.appPackage == newItem.appPackage && oldItem.user == newItem.user
+                    oldItem.appPackage == newItem.appPackage && oldItem.user == newItem.user &&
+                        oldItem.activityClassName == newItem.activityClassName
 
                 oldItem is AppModel.PinnedShortcut && newItem is AppModel.PinnedShortcut ->
                     oldItem.identity == newItem.identity
@@ -75,13 +73,14 @@ class AppDrawerAdapter(
     }
 
     private val appIcons = LruCache<AppModel, Drawable.ConstantState>(80)
-    private var autoLaunchedQuery: String? = null
-    var allowAutoLaunch = true
-    private val appFilter = createAppFilter()
     private val myUserHandle = android.os.Process.myUserHandle()
-
-    var appsList: MutableList<AppModel> = mutableListOf()
-    var appFilteredList: MutableList<AppModel> = mutableListOf()
+    private var apps: List<AppModel>? = null
+    private var query = ""
+    private var pendingAutoLaunch = false
+    private var pendingSubmit: ((AppModel?) -> Unit)? = null
+    private var filterJob: Job? = null
+    private var filterGeneration = 0
+    private var appliedGeneration = 0
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -134,7 +133,11 @@ class AppDrawerAdapter(
                         appLabelGravity,
                         myUserHandle,
                         appModel,
-                        appClickListener,
+                        { app ->
+                            if (appliedGeneration == filterGeneration && isCurrentSearch(query)) {
+                                appClickListener(app)
+                            }
+                        },
                         appDeleteListener,
                         appInfoListener,
                         appHideListener,
@@ -148,73 +151,78 @@ class AppDrawerAdapter(
         }
     }
 
-    override fun getFilter(): Filter = this.appFilter
+    fun updateSearch(query: String, allowAutoLaunch: Boolean) {
+        this.query = query
+        pendingAutoLaunch = allowAutoLaunch
+        pendingSubmit = null
+        filterApps()
+    }
 
-    private fun createAppFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(charSearch: CharSequence?): FilterResults {
-                val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
-                else appsList.filter { app ->
-                    app !is AppModel.PrivateSpaceHeader && appLabelMatches(app.appLabel, charSearch)
-                } as MutableList<AppModel>)
+    fun setAppList(apps: List<AppModel>) {
+        if (this.apps == apps) return
+        this.apps = apps
+        filterApps()
+    }
 
-                val filterResults = FilterResults()
-                filterResults.values = appFilteredList
-                return filterResults
-            }
+    fun cancelPendingSearchAction() {
+        pendingAutoLaunch = false
+        pendingSubmit = null
+    }
 
-            @Suppress("UNCHECKED_CAST")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                results?.values?.let {
-                    val items = it as MutableList<AppModel>
-                    appFilteredList = items
-                    submitList(appFilteredList) {
-                        val query = constraint?.toString().orEmpty()
-                        if (isCurrentSearch(query)) {
-                            onSearchResultsApplied(query)
-                            autoLaunch(query)
-                        }
-                    }
+    fun submitSearch(onResult: (AppModel?) -> Unit) {
+        pendingAutoLaunch = false
+        if (apps != null && appliedGeneration == filterGeneration) {
+            onResult(currentList.firstOrNull())
+        } else {
+            pendingSubmit = onResult
+        }
+    }
+
+    private fun filterApps() {
+        val source = apps ?: return
+        val query = this.query
+        val generation = ++filterGeneration
+        filterJob?.cancel()
+        if (query.isBlank()) {
+            val items = if (flag == Constants.FLAG_LAUNCH_APP) source else source + AppModel.App(
+                appLabel = "",
+                key = null,
+                appPackage = "",
+                activityClassName = "",
+                user = myUserHandle,
+            )
+            applyResults(query, generation, items)
+            return
+        }
+        filterJob = iconScope.launch {
+            val items = withContext(Dispatchers.Default) {
+                val matches = appLabelMatcher(query)
+                source.filter {
+                    ensureActive()
+                    it !is AppModel.PrivateSpaceHeader && matches(it.appLabel)
                 }
             }
+            applyResults(query, generation, items)
         }
     }
 
-    private fun autoLaunch(query: String) {
-        if (query == autoLaunchedQuery) return
-        autoLaunchedQuery = null
-        if (query.isBlank() || !allowAutoLaunch || query.startsWith(" ") || query.startsWith("!") ||
-            flag != Constants.FLAG_LAUNCH_APP
-        ) return
-
-        val app = currentList.singleOrNull() ?: return
-        if (app is AppModel.PrivateSpaceHeader || app.appPackage.isEmpty()) return
-        autoLaunchedQuery = query
-        appClickListener(app)
-    }
-
-    fun setAppList(appsList: MutableList<AppModel>) {
-        if (flag != Constants.FLAG_LAUNCH_APP) {
-            // The other drawer modes retain the trailing space used by their plain list.
-            appsList.add(
-                AppModel.App(
-                    appLabel = "",
-                    key = null,
-                    appPackage = "",
-                    activityClassName = "",
-                    isNew = false,
-                    user = myUserHandle
-                )
-            )
+    private fun applyResults(query: String, generation: Int, items: List<AppModel>) {
+        submitList(items) {
+            if (generation != filterGeneration || !isCurrentSearch(query)) return@submitList
+            appliedGeneration = generation
+            onSearchResultsApplied(query)
+            pendingSubmit?.let { submit ->
+                pendingSubmit = null
+                submit(items.firstOrNull())
+                return@submitList
+            }
+            val launch = pendingAutoLaunch
+            pendingAutoLaunch = false
+            if (!launch || flag != Constants.FLAG_LAUNCH_APP ||
+                query.isBlank() || query.startsWith(" ") || query.startsWith("!")
+            ) return@submitList
+            items.singleOrNull()?.let(appClickListener)
         }
-        this.appsList = appsList
-        this.appFilteredList = appsList
-        submitList(appsList)
-    }
-
-    fun launchFirstInList() {
-        val first = appFilteredList.firstOrNull { it !is AppModel.PrivateSpaceHeader && it.appPackage.isNotEmpty() }
-        if (first != null) appClickListener(first)
     }
 
     class PrivateSpaceHeaderViewHolder(private val binding: AdapterPrivateSpaceHeaderBinding) :
@@ -315,7 +323,7 @@ class AppDrawerAdapter(
             clickListener: (AppModel) -> Unit,
             appDeleteListener: (AppModel) -> Unit,
             appInfoListener: (AppModel) -> Unit,
-            appHideListener: (AppModel, Int) -> Unit,
+            appHideListener: (AppModel) -> Unit,
             appRenameListener: (AppModel, String) -> Unit,
         ) = with(binding) {
             appHideLayout.visibility = View.GONE
@@ -330,7 +338,9 @@ class AppDrawerAdapter(
             appTitle.gravity = if (showTiles) appLabelGravity or Gravity.CENTER_VERTICAL else appLabelGravity
             otherProfileIndicator.isVisible = appModel.user != myUserHandle
 
-            appTitle.setOnClickListener { clickListener(appModel) }
+            appTitle.setOnClickListener {
+                if (appModel.appPackage.isNotEmpty()) clickListener(appModel)
+            }
 
             appTitle.setOnLongClickListener {
                 if (appModel.appPackage.isNotEmpty()) {
@@ -363,59 +373,37 @@ class AppDrawerAdapter(
             // Configure rename behavior
             appRename.setOnClickListener {
                 if (appModel.appPackage.isNotEmpty()) {
-                    etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage, appModel.user)
+                    etAppRename.hint = (appModel as? AppModel.App)?.key?.sourceString
+                        ?: getAppName(etAppRename.context, appModel.appPackage, appModel.user)
                     etAppRename.setText(appModel.appLabel)
                     etAppRename.setSelectAllOnFocus(true)
                     renameLayout.visibility = View.VISIBLE
                     appHideLayout.visibility = View.GONE
-                    etAppRename.showKeyboard()
                     etAppRename.imeOptions = EditorInfo.IME_ACTION_DONE
+                    etAppRename.showKeyboard()
                 }
             }
             etAppRename.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
                 appTitle.visibility = if (hasFocus) View.INVISIBLE else View.VISIBLE
             }
-            etAppRename.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    etAppRename.hint = getAppName(etAppRename.context, appModel.appPackage, appModel.user)
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    etAppRename.hint = ""
-                }
-            })
             etAppRename.setOnEditorActionListener { _, actionCode, _ ->
-                if (actionCode == EditorInfo.IME_ACTION_DONE) {
-                    val renameLabel = etAppRename.text.toString().trim()
-                    if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
-                        appRenameListener(appModel, renameLabel)
-                        renameLayout.visibility = View.GONE
-                    }
-                    true
+                if (actionCode != EditorInfo.IME_ACTION_DONE) return@setOnEditorActionListener false
+                val renameLabel = etAppRename.text.toString().trim()
+                if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
+                    appRenameListener(appModel, renameLabel)
+                    etAppRename.hideKeyboard()
+                    renameLayout.visibility = View.GONE
+                    appTitle.visibility = View.VISIBLE
                 }
-                false
+                true
             }
             tvSaveRename.setOnClickListener {
                 etAppRename.hideKeyboard()
                 val renameLabel = etAppRename.text.toString().trim()
-                if (renameLabel.isNotBlank() && appModel.appPackage.isNotBlank()) {
-                    appRenameListener(appModel, renameLabel)
-                    renameLayout.visibility = View.GONE
-                } else {
-                    appRenameListener(
-                        appModel,
-                        getAppName(etAppRename.context, appModel.appPackage, appModel.user)
-                    )
-                    renameLayout.visibility = View.GONE
-                }
+                    .ifBlank { etAppRename.hint?.toString().orEmpty() }
+                appRenameListener(appModel, renameLabel)
+                renameLayout.visibility = View.GONE
+                appTitle.visibility = View.VISIBLE
             }
             appInfo.setOnClickListener { appInfoListener(appModel) }
             appDelete.setOnClickListener { appDeleteListener(appModel) }
@@ -427,7 +415,7 @@ class AppDrawerAdapter(
                 renameLayout.visibility = View.GONE
                 appTitle.visibility = View.VISIBLE
             }
-            appHide.setOnClickListener { appHideListener(appModel, bindingAdapterPosition) }
+            appHide.setOnClickListener { appHideListener(appModel) }
         }
 
         private fun getAppName(context: Context, appPackage: String, user: UserHandle): String {
