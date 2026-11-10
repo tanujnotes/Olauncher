@@ -1,70 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     android:background="?attr/primaryShadeDarkColor"
-    android:orientation="vertical">
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:layout_weight="0.1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        android:orientation="horizontal">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:imeOptions="actionSearch"
-            android:paddingHorizontal="7dp"
-            android:paddingVertical="0dp"
-            android:textCursorDrawable="@null"
-            app:closeIcon="@null"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@null"
-            app:queryHint=" ___"
-            app:searchIcon="@null"
-            app:theme="@style/AppSearchText" />
-
-        <TextView
-            android:id="@+id/appRename"
-            style="@style/TextSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="20dp"
-            android:paddingVertical="@dimen/app_padding_vertical"
-            android:text="@string/rename"
-            android:textAllCaps="true"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.06" />
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingTop="24dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="@dimen/app_drawer_side_inset"
+        android:layout_marginEnd="@dimen/app_drawer_side_inset"
         android:layout_weight="1"
-        android:layout_marginBottom="24dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:fadingEdgeLength="24dp"
         android:requiresFadingEdge="vertical" />
 
+    <TextView
+        android:id="@+id/appRename"
+        style="@style/TextSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/app_drawer_search_margin"
+        android:paddingVertical="@dimen/app_padding_vertical"
+        android:text="@string/rename"
+        android:textAllCaps="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/app_drawer_search_margin"
+        android:layout_marginEnd="@dimen/app_drawer_search_margin"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/bg_drawer_search"
+        android:gravity="center_vertical"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="4dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_drawer_search" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:cursorVisible="true"
+            android:hint="@string/search_anything"
+            android:imeOptions="actionSearch|flagNoExtractUi"
+            android:inputType="textCapSentences|textNoSuggestions"
+            android:maxLength="200"
+            android:minHeight="42dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="6dp"
+            android:singleLine="true"
+            android:textColor="#202020"
+            android:textColorHint="#414143"
+            android:textCursorDrawable="@drawable/cursor_drawer_search"
+            android:textDirection="locale"
+            android:textSize="16sp"
+            android:theme="@style/DrawerSearchInput" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="6dp"
+            android:background="#F5F5F5"
+            android:importantForAccessibility="no" />
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_drawer_search_rail"
+            android:importantForAccessibility="no"
+            android:paddingStart="4dp"
+            android:paddingTop="9dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="9dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_drawer_search_rail" />
+
+    </LinearLayout>
 </LinearLayout>

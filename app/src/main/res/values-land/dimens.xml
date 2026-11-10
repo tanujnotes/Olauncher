@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_drawer_side_inset">56dp</dimen>
+    <dimen name="app_drawer_search_margin">56dp</dimen>
+</resources>

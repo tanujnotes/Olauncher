@@ -1,0 +1,32 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="22dp"
+    android:viewportWidth="120"
+    android:viewportHeight="22">
+
+    <!-- Apps -->
+    <path
+        android:pathData="M7,3 H11 Q12,3 12,4 V8 Q12,9 11,9 H7 Q6,9 6,8 V4 Q6,3 7,3 Z M17,3 H21 Q22,3 22,4 V8 Q22,9 21,9 H17 Q16,9 16,8 V4 Q16,3 17,3 Z M7,13 H11 Q12,13 12,14 V18 Q12,19 11,19 H7 Q6,19 6,18 V14 Q6,13 7,13 Z M17,13 H21 Q22,13 22,14 V18 Q22,19 21,19 H17 Q16,19 16,18 V14 Q16,13 17,13 Z"
+        android:strokeColor="#DADADC"
+        android:strokeWidth="1.7" />
+
+    <!-- Contacts -->
+    <path
+        android:pathData="M49,6 A4.5,4.5 0,1 1,40 6 A4.5,4.5 0,1 1,49 6 Z M36,20 V19 C36,15 39.8,12.5 44.5,12.5 C49.2,12.5 53,15 53,19 V20 Z"
+        android:strokeColor="#DADADC"
+        android:strokeLineJoin="round"
+        android:strokeWidth="1.7" />
+
+    <!-- Web search -->
+    <path
+        android:pathData="M85,11 A10,10 0,1 1,65 11 A10,10 0,1 1,85 11 Z M75,1 C69,6 69,16 75,21 C81,16 81,6 75,1 Z M65,11 H85 M68,4 C72,8 78,8 82,4 M68,18 C72,14 78,14 82,18"
+        android:strokeColor="#DADADC"
+        android:strokeWidth="1.7" />
+
+    <!-- Commands -->
+    <path
+        android:pathData="M108,1 L98,13 H105 L102,21 L113,9 H106 Z"
+        android:strokeColor="#DADADC"
+        android:strokeLineJoin="round"
+        android:strokeWidth="1.7" />
+</vector>
