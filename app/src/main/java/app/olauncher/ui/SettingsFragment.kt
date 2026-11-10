@@ -12,7 +12,6 @@ import android.os.Process
 import android.provider.Settings
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -77,7 +76,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         componentName = ComponentName(requireContext(), DeviceAdmin::class.java)
         checkAdminPermission()
 
-        binding.homeAppsNum.text = prefs.homeAppsNum.toString()
         populateProMessage()
         populateKeyboardText()
         populateScreenTimeOnOff()
@@ -111,7 +109,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             // Home button for recents feature disabled
             // R.id.homeButtonRecents -> toggleHomeButtonRecents()
             R.id.autoShowKeyboard -> toggleKeyboardText()
-            R.id.homeAppsNum -> showHomeAppsNumMenu(view)
             R.id.dailyWallpaperUrl -> requireContext().openUrl(prefs.dailyWallpaperUrl)
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> showAlignmentMenu(view)
@@ -179,7 +176,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.toggleLock.setOnClickListener(this)
         // Home button for recents feature disabled
         // binding.homeButtonRecents.setOnClickListener(this)
-        binding.homeAppsNum.setOnClickListener(this)
         binding.screenTimeOnOff.setOnClickListener(this)
         binding.dailyWallpaperUrl.setOnClickListener(this)
         binding.dailyWallpaper.setOnClickListener(this)
@@ -228,14 +224,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
 
     // Popup menus
 
-    private fun showHomeAppsNumMenu(anchor: View) {
-        anchor.showPopupMenu(
-            configure = { menu ->
-                for (num in 0..8) menu.add(Menu.NONE, num, num, num.toString())
-            }
-        ) { item -> updateHomeAppsNum(item.itemId) }
-    }
-
     private fun showDateTimeMenu(anchor: View) {
         anchor.showPopupMenu(R.menu.date_time) { item ->
             when (item.itemId) {
@@ -247,19 +235,11 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     }
 
     private fun showAlignmentMenu(anchor: View) {
-        anchor.showPopupMenu(
-            R.menu.alignment,
-            configure = { menu ->
-                menu.findItem(R.id.alignmentBottom).setTitle(
-                    if (prefs.homeBottomAlignment) R.string.bottom_on else R.string.bottom_off
-                )
-            }
-        ) { item ->
+        anchor.showPopupMenu(R.menu.alignment) { item ->
             when (item.itemId) {
                 R.id.alignmentLeft -> viewModel.updateHomeAlignment(Gravity.START)
                 R.id.alignmentCenter -> viewModel.updateHomeAlignment(Gravity.CENTER)
                 R.id.alignmentRight -> viewModel.updateHomeAlignment(Gravity.END)
-                R.id.alignmentBottom -> updateHomeBottomAlignment()
             }
         }
     }
@@ -464,12 +444,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             requireContext().showToast(getString(R.string.olauncher_is_not_default_launcher), Toast.LENGTH_LONG)
     }
 
-    private fun updateHomeAppsNum(num: Int) {
-        binding.homeAppsNum.text = num.toString()
-        prefs.homeAppsNum = num
-        viewModel.refreshHome(true)
-    }
-
     private var pendingTextSizeScale: Float = -1f
 
     private fun pendingOrCurrentTextSizeScale(): Float =
@@ -606,16 +580,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     private fun populateWallpaperText() {
         if (prefs.dailyWallpaper) binding.dailyWallpaper.text = getString(R.string.on)
         else binding.dailyWallpaper.text = getString(R.string.off)
-    }
-
-    private fun updateHomeBottomAlignment() {
-        if (viewModel.isOlauncherDefault.value != true) {
-            requireContext().showToast(getString(R.string.please_set_olauncher_as_default_first), Toast.LENGTH_LONG)
-            return
-        }
-        prefs.homeBottomAlignment = !prefs.homeBottomAlignment
-        populateAlignment()
-        viewModel.updateHomeAlignment(prefs.homeAlignment)
     }
 
     private fun populateAlignment() {
