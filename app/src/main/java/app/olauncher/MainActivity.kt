@@ -104,8 +104,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         initObservers(viewModel)
-        viewModel.getAppList()
-        registerShortcutCallback()
+        registerAppCallback()
         setupOrientation()
 
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
@@ -127,7 +126,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        restartLauncherOrCheckTheme()
+        checkTheme()
     }
 
     override fun onResume() {
@@ -137,23 +136,23 @@ class MainActivity : AppCompatActivity() {
         viewModel.getAppList()
     }
 
-    private fun registerShortcutCallback() {
+    private fun registerAppCallback() {
         val launcherApps = getSystemService(LauncherApps::class.java)
         launcherAppsCallback = object : LauncherApps.Callback() {
-            override fun onPackageRemoved(packageName: String, user: android.os.UserHandle) = Unit
-            override fun onPackageAdded(packageName: String, user: android.os.UserHandle) = Unit
-            override fun onPackageChanged(packageName: String, user: android.os.UserHandle) = Unit
+            override fun onPackageRemoved(packageName: String, user: android.os.UserHandle) = viewModel.getAppList()
+            override fun onPackageAdded(packageName: String, user: android.os.UserHandle) = viewModel.getAppList()
+            override fun onPackageChanged(packageName: String, user: android.os.UserHandle) = viewModel.getAppList()
             override fun onPackagesAvailable(
                 packageNames: Array<out String>,
                 user: android.os.UserHandle,
                 replacing: Boolean,
-            ) = Unit
+            ) = viewModel.getAppList()
 
             override fun onPackagesUnavailable(
                 packageNames: Array<out String>,
                 user: android.os.UserHandle,
                 replacing: Boolean,
-            ) = Unit
+            ) = viewModel.getAppList()
 
             override fun onShortcutsChanged(
                 packageName: String,
@@ -363,15 +362,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun restartLauncherOrCheckTheme(forceRestart: Boolean = false) {
-        if (forceRestart || prefs.launcherRestartTimestamp.hasBeenHours(4)) {
-            prefs.launcherRestartTimestamp = System.currentTimeMillis()
-            cacheDir.deleteRecursively()
-            recreate()
-        } else
-            checkTheme()
-    }
-
     private fun checkTheme() {
         timerJob?.cancel()
         timerJob = lifecycleScope.launch {
@@ -380,8 +370,10 @@ class MainActivity : AppCompatActivity() {
                 (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_YES && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.white))
                         || (prefs.appTheme == AppCompatDelegate.MODE_NIGHT_NO && getColorFromAttr(R.attr.primaryColor) != getColor(R.color.black))
             // If recreating doesn't fix the theme (e.g. an OEM ROM overriding it), don't recreate in an endless loop (#734)
-            if (themeMismatch && prefs.launcherRestartTimestamp.hasBeenMinutes(1))
-                restartLauncherOrCheckTheme(true)
+            if (themeMismatch && prefs.launcherRestartTimestamp.hasBeenMinutes(1)) {
+                prefs.launcherRestartTimestamp = System.currentTimeMillis()
+                recreate()
+            }
         }
     }
 

@@ -20,6 +20,7 @@ import androidx.work.WorkManager
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
+import app.olauncher.helper.InstalledApps
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
 import app.olauncher.helper.formattedTimeSpent
@@ -48,17 +49,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val refreshHome = MutableLiveData<Boolean>()
     val toggleDateTime = MutableLiveData<Unit>()
     val updateSwipeApps = MutableLiveData<Any>()
-    val appList = MutableLiveData<List<AppModel>?>()
-    val hiddenApps = MutableLiveData<List<AppModel>?>()
+    val installedApps = MutableLiveData<InstalledApps>()
+    private var appListJob: Job? = null
+    private var appListRefreshRequested = false
     val isOlauncherDefault = MutableLiveData<Boolean>()
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
     val screenTimeValue = MutableLiveData<String>()
     private var screenTimeJob: Job? = null
 
-    val privateSpaceApps = MutableLiveData<List<AppModel>?>()
-    val privateSpaceLocked = MutableLiveData<Boolean>()
-    val privateSpaceAvailable = MutableLiveData<Boolean>()
+    val privateSpaceApps = MutableLiveData<List<AppModel>>()
+    private var privateSpaceJob: Job? = null
 
     // Suppress backToHomeScreen during Private Space lock/unlock auth
     var isPrivateSpaceToggling = false
@@ -106,21 +107,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun launchShortcut(appModel: AppModel.PinnedShortcut) {
-        val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-        val query = LauncherApps.ShortcutQuery().apply {
-            setPackage(appModel.appPackage)
-            setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) return
+        val launcher = appContext.getSystemService(LauncherApps::class.java)
         try {
-            val shortcut = launcher.getShortcuts(query, appModel.user)
-                ?.find { it.id == appModel.shortcutId }
-            if (shortcut == null) {
-                appContext.showToast(appContext.getString(R.string.shortcut_not_found))
-                return
-            }
-            launcher.startShortcut(shortcut, null, null)
+            launcher.startShortcut(appModel.appPackage, appModel.shortcutId, null, null, appModel.user)
+        } catch (_: android.content.ActivityNotFoundException) {
+            appContext.showToast(R.string.shortcut_not_found)
         } catch (_: Exception) {
-            appContext.showToast(appContext.getString(R.string.unable_to_open_shortcut))
+            appContext.showToast(R.string.unable_to_open_shortcut)
         }
     }
 
@@ -365,52 +359,55 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun launchApp(packageName: String, activityClassName: String?, userHandle: UserHandle) {
-        val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
-        val activityInfo = launcher.getActivityList(packageName, userHandle)
-
-        val isActivityValid = activityClassName.isNullOrBlank().not()
-                && activityInfo.any { it.componentName.className == activityClassName }
-
-        val component = if (isActivityValid)
-            ComponentName(packageName, activityClassName)
-        else {
-            when (activityInfo.size) {
-                0 -> {
-                    appContext.showToast(appContext.getString(R.string.app_not_found))
-                    return
-                }
-
-                1 -> ComponentName(packageName, activityInfo[0].name)
-                else -> ComponentName(packageName, activityInfo[activityInfo.size - 1].name)
-            }.also { prefs.updateAppActivityClassName(packageName, it.className) }
+        val launcher = appContext.getSystemService(LauncherApps::class.java)
+        if (!activityClassName.isNullOrBlank()) {
+            try {
+                launcher.startMainActivity(ComponentName(packageName, activityClassName), userHandle, null, null)
+                return
+            } catch (_: android.content.ActivityNotFoundException) {
+                // A saved component can become invalid after an app update.
+            } catch (_: SecurityException) {
+                // Some Android versions report an invalid launcher activity this way.
+            } catch (_: Exception) {
+                appContext.showToast(R.string.unable_to_open_app)
+                return
+            }
         }
 
-        try {
-            launcher.startMainActivity(component, userHandle, null, null)
-        } catch (e: SecurityException) {
+        viewModelScope.launch {
             try {
-                launcher.startMainActivity(component, android.os.Process.myUserHandle(), null, null)
-            } catch (e: Exception) {
-                appContext.showToast(appContext.getString(R.string.unable_to_open_app))
+                val component = withContext(Dispatchers.IO) {
+                    launcher.getActivityList(packageName, userHandle).lastOrNull()?.componentName
+                }
+                if (component == null) {
+                    appContext.showToast(R.string.app_not_found)
+                    return@launch
+                }
+                launcher.startMainActivity(component, userHandle, null, null)
+                prefs.updateAppActivityClassName(packageName, component.className)
+            } catch (e: kotlinx.coroutines.CancellationException) {
+                throw e
+            } catch (_: Exception) {
+                appContext.showToast(R.string.unable_to_open_app)
             }
-        } catch (e: Exception) {
-            appContext.showToast(appContext.getString(R.string.unable_to_open_app))
         }
     }
 
-    fun getAppList(includeHiddenApps: Boolean = false) {
-        viewModelScope.launch {
-            val apps = getAppsList(appContext, prefs, includeRegularApps = true, includeHiddenApps)
-            appList.value = apps
+    fun getAppList() {
+        appListRefreshRequested = true
+        if (appListJob?.isActive != true) {
+            appListJob = viewModelScope.launch {
+                while (appListRefreshRequested) {
+                    appListRefreshRequested = false
+                    val apps = getAppsList(appContext, prefs)
+                    // If the inputs changed during the scan, publish only the newer snapshot.
+                    if (!appListRefreshRequested && installedApps.value != apps) {
+                        installedApps.value = apps
+                    }
+                }
+            }
         }
         getPrivateSpaceAppList()
-    }
-
-    fun getHiddenApps() {
-        viewModelScope.launch {
-            hiddenApps.value =
-                getAppsList(appContext, prefs, includeRegularApps = false, includeHiddenApps = true)
-        }
     }
 
     fun isOlauncherDefault() {
@@ -474,16 +471,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getPrivateSpaceAppList() {
-        viewModelScope.launch {
-            val handle = getPrivateSpaceUserHandle(appContext)
-            privateSpaceAvailable.value = handle != null
-            if (handle != null) {
-                privateSpaceLocked.value = isPrivateSpaceLocked(appContext, handle)
-                privateSpaceApps.value = getPrivateSpaceApps(appContext, prefs)
-            } else {
-                privateSpaceLocked.value = true
-                privateSpaceApps.value = emptyList()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) return
+        privateSpaceJob?.cancel()
+        privateSpaceJob = viewModelScope.launch {
+            val apps = withContext(Dispatchers.IO) {
+                val handle = getPrivateSpaceUserHandle(appContext) ?: return@withContext emptyList()
+                val locked = isPrivateSpaceLocked(appContext, handle)
+                val header = listOf(AppModel.PrivateSpaceHeader(isLocked = locked))
+                if (locked) header else header + getPrivateSpaceApps(appContext, prefs, handle)
             }
+            if (privateSpaceApps.value != apps) privateSpaceApps.value = apps
         }
     }
 
