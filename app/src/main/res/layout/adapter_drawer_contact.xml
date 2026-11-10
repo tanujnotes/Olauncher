@@ -22,17 +22,29 @@
         android:orientation="horizontal"
         android:paddingEnd="4dp">
 
-        <TextView
-            android:id="@+id/contactInitials"
+        <FrameLayout
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="@drawable/bg_drawer_contact_avatar"
-            android:gravity="center"
-            android:importantForAccessibility="no"
-            android:maxLines="1"
-            android:textColor="#101010"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:clipToOutline="true"
+            android:importantForAccessibility="noHideDescendants">
+
+            <TextView
+                android:id="@+id/contactInitial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="#101010"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/contactPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/contactName"

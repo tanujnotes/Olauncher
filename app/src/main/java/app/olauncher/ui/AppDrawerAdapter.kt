@@ -2,6 +2,7 @@ package app.olauncher.ui
 
 import android.content.Context
 import android.content.pm.LauncherApps
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.UserHandle
 import android.text.TextUtils
@@ -24,6 +25,7 @@ import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
 import app.olauncher.databinding.AdapterDrawerSectionBinding
 import app.olauncher.helper.DrawerContact
+import app.olauncher.helper.DrawerContactPhoto
 import app.olauncher.helper.ContactAction
 import app.olauncher.databinding.AdapterPrivateSpaceHeaderBinding
 import app.olauncher.helper.appLabelMatcher
@@ -92,6 +94,7 @@ class AppDrawerAdapter(
     }
 
     private val appIcons = LruCache<AppModel, Drawable.ConstantState>(80)
+    private val contactPhotos = LruCache<DrawerContactPhoto, Bitmap>(80)
     private val myUserHandle = android.os.Process.myUserHandle()
     private var apps: List<AppModel>? = null
     private var contacts: List<DrawerContact>? = emptyList()
@@ -138,6 +141,7 @@ class AppDrawerAdapter(
 
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         if (holder is ViewHolder) holder.cancelIconLoad()
+        if (holder is ContactViewHolder) holder.clearPhoto()
         super.onViewRecycled(holder)
     }
 
@@ -154,7 +158,7 @@ class AppDrawerAdapter(
                 }
 
                 is SectionViewHolder -> holder.bind(row as Row.Section)
-                is ContactViewHolder -> holder.bind((row as Row.Contact).model) { contact, action ->
+                is ContactViewHolder -> holder.bind((row as Row.Contact).model, iconScope, contactPhotos) { contact, action ->
                     if (appliedGeneration == filterGeneration && isCurrentSearch(query)) {
                         contactClickListener(contact, action)
                     }
