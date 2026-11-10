@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="ic_launcher" type="mipmap">@drawable/ic_drawer_action_badge</item>
+    <item name="ic_launcher_round" type="mipmap">@drawable/ic_drawer_action_badge</item>
+</resources>
