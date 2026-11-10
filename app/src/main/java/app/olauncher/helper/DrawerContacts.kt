@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.ContactsContract.CommonDataKinds.Phone
+import android.provider.ContactsContract.CommonDataKinds.StructuredName
 import android.provider.ContactsContract.Contacts
+import android.provider.ContactsContract.Data
 import android.telephony.PhoneNumberUtils
 import android.telephony.TelephonyManager
 import androidx.appcompat.app.AlertDialog
@@ -19,9 +21,13 @@ data class DrawerContact(
     val lookupKey: String,
     val name: String,
     val numbers: List<DrawerContactNumber>,
+    val givenName: String?,
+    val photo: DrawerContactPhoto?,
 )
 
 data class DrawerContactNumber(val display: String, val normalized: String?)
+
+data class DrawerContactPhoto(val uri: Uri, val updatedAt: Long)
 
 enum class ContactAction { OPEN, CALL, TEXT, WHATSAPP }
 
@@ -43,10 +49,26 @@ suspend fun readDrawerContacts(context: Context): List<DrawerContact> {
                 if (existing.none { phoneKey(it) == phoneKey(entry) }) existing.add(entry)
             }
         }
+        val givenNames = mutableMapOf<Long, String>()
+        resolver.query(
+            Data.CONTENT_URI,
+            arrayOf(Data.RAW_CONTACT_ID, StructuredName.GIVEN_NAME),
+            "${Data.MIMETYPE} = ?", arrayOf(StructuredName.CONTENT_ITEM_TYPE), null,
+        )?.use { cursor ->
+            while (cursor.moveToNext()) {
+                coroutineContext.ensureActive()
+                val givenName = cursor.getString(1)?.trim().orEmpty()
+                if (givenName.isNotEmpty()) givenNames[cursor.getLong(0)] = givenName
+            }
+        }
         return buildList {
             resolver.query(
                 Contacts.CONTENT_URI,
-                arrayOf(Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME_PRIMARY),
+                arrayOf(
+                    Contacts._ID, Contacts.LOOKUP_KEY, Contacts.DISPLAY_NAME_PRIMARY,
+                    Contacts.NAME_RAW_CONTACT_ID, Contacts.PHOTO_THUMBNAIL_URI,
+                    Contacts.CONTACT_LAST_UPDATED_TIMESTAMP,
+                ),
                 null, null, Contacts.SORT_KEY_PRIMARY + " ASC",
             )?.use { cursor ->
                 while (cursor.moveToNext()) {
@@ -61,6 +83,8 @@ suspend fun readDrawerContacts(context: Context): List<DrawerContact> {
                             contactNumbers.firstOrNull()?.display ?: context.getString(R.string.drawer_contact_unnamed)
                         },
                         contactNumbers,
+                        givenNames[cursor.getLong(3)],
+                        cursor.getString(4)?.let { DrawerContactPhoto(Uri.parse(it), cursor.getLong(5)) },
                     ))
                 }
             }

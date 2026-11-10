@@ -62,6 +62,8 @@ class AppDrawerFragment : BaseFragment() {
     private lateinit var adapter: AppDrawerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var displayedSearchQuery = ""
+    private var displayedContactsOnly = false
+    private var animateCategoryChanges = false
     private var contactsOnly = false
     private var contactsLoaded = false
     private var contactsJob: Job? = null
@@ -113,6 +115,7 @@ class AppDrawerFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
         displayedSearchQuery = ""
+        displayedContactsOnly = false
         contactsOnly = false
         contactsLoaded = false
         currentAppList = null
@@ -144,6 +147,9 @@ class AppDrawerFragment : BaseFragment() {
         root.setBackgroundColor(Color.rgb(11, 11, 11))
         appsHeading.isVisible = true
         categoryMenu.root.isVisible = true
+        categoryMenu.categoryApps.isSelected = true
+        animateCategoryChanges = !requireContext().isEinkDisplay() &&
+            !requireContext().isSystemAnimationsDisabled()
         val sideMargin = resources.getDimensionPixelSize(R.dimen.app_drawer_search_margin)
         recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             marginStart = sideMargin
@@ -254,15 +260,7 @@ class AppDrawerFragment : BaseFragment() {
                     findNavController().currentDestination?.id == R.id.appListFragment
             },
             onSearchResultsApplied = { query ->
-                if (flag == Constants.FLAG_LAUNCH_APP) {
-                    binding.appsHeading.isVisible = !contactsOnly && query.isBlank()
-                    updateContactsEmptyState()
-                    if (query != displayedSearchQuery) {
-                        displayedSearchQuery = query
-                        linearLayoutManager.reverseLayout = !contactsOnly && query.isNotBlank()
-                        linearLayoutManager.scrollToPositionWithOffset(0, 0)
-                    }
-                }
+                if (flag == Constants.FLAG_LAUNCH_APP) showSearchResults(query)
             },
             appClickListener = ::selectApp,
             contactClickListener = { contact, action ->
@@ -461,11 +459,7 @@ class AppDrawerFragment : BaseFragment() {
         contactsOnly = enabled
         binding.categoryMenu.categoryContacts.isSelected = enabled
         binding.categoryMenu.categoryApps.isSelected = !enabled
-        binding.appsHeading.isVisible = !enabled && binding.search.text.isNullOrBlank()
-        linearLayoutManager.reverseLayout = !enabled && !binding.search.text.isNullOrBlank()
-        linearLayoutManager.scrollToPositionWithOffset(0, 0)
         adapter.setContactsOnly(enabled)
-        updateContactsEmptyState()
     }
 
     private fun refreshContacts() {
@@ -482,14 +476,31 @@ class AppDrawerFragment : BaseFragment() {
             val contacts = withContext(Dispatchers.IO) { readDrawerContacts(context) }
             contactsLoaded = true
             adapter.setContacts(contacts)
-            updateContactsEmptyState()
         }
     }
 
-    private fun updateContactsEmptyState() {
+    private fun showSearchResults(query: String): Unit = with(binding) {
+        val categoryChanged = displayedContactsOnly != contactsOnly
+        if (categoryChanged || query != displayedSearchQuery) {
+            displayedContactsOnly = contactsOnly
+            displayedSearchQuery = query
+            linearLayoutManager.reverseLayout = !contactsOnly && query.isNotBlank()
+            linearLayoutManager.scrollToPositionWithOffset(0, 0)
+        }
+        appsHeading.isVisible = !contactsOnly && query.isBlank()
         val empty = contactsOnly && contactsLoaded && adapter.itemCount == 0
-        binding.contactsEmpty.isVisible = empty
-        binding.recyclerView.isVisible = !empty
+        contactsEmpty.isVisible = empty
+        recyclerView.isVisible = !empty
+        if (categoryChanged && animateCategoryChanges) {
+            for (view in listOf(appsHeading, contactsEmpty, recyclerView)) {
+                view.animate().cancel()
+                view.alpha = 1f
+                if (view.isVisible) {
+                    view.alpha = 0.35f
+                    view.animate().alpha(1f).setDuration(160L).start()
+                }
+            }
+        }
     }
 
     override fun onResume() {

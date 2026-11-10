@@ -1,5 +1,6 @@
 package app.olauncher
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.BroadcastReceiver
@@ -8,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ActivityInfo
 import android.content.pm.LauncherApps
+import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
 import android.content.res.Configuration
 import android.os.Build
@@ -15,8 +17,11 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -51,6 +56,10 @@ import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
+    private companion object {
+        const val CONTACTS_PERMISSION_PENDING = "contacts_permission_pending"
+    }
+
     private lateinit var prefs: Prefs
     private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
@@ -60,6 +69,14 @@ class MainActivity : AppCompatActivity() {
     private var profileReceiver: BroadcastReceiver? = null
     private var launcherAppsCallback: LauncherApps.Callback? = null
     private var messageDialog: OlDialog? = null
+    private var startupContactsPermissionPending = false
+    private val requestStartupContactsPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {
+        prefs.contactsStartupPermissionRequested = true
+        startupContactsPermissionPending = false
+        if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) finishFirstOpen()
+    }
 
 //    override fun onBackPressed() {
 //        if (navController.currentDestination?.id != R.id.mainFragment)
@@ -78,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         if (isEinkDisplay()) prefs.appTheme = AppCompatDelegate.MODE_NIGHT_NO
         AppCompatDelegate.setDefaultNightMode(prefs.appTheme)
         super.onCreate(savedInstanceState)
+        startupContactsPermissionPending = savedInstanceState?.getBoolean(CONTACTS_PERMISSION_PENDING) == true
         if (prefs.boldFont) theme.applyStyle(R.style.BoldFontOverlay, true)
         if (isEinkDisplay() || isSystemAnimationsDisabled()) theme.applyStyle(R.style.NoAnimationOverlay, true)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -94,14 +112,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-
-        if (prefs.firstOpen) {
-            viewModel.firstOpen(true)
-            prefs.firstOpen = false
-            prefs.firstOpenTime = System.currentTimeMillis()
-            viewModel.setDefaultClockApp()
-            viewModel.resetLauncherLiveData.call()
-        }
 
         initObservers(viewModel)
         registerAppCallback()
@@ -134,6 +144,33 @@ class MainActivity : AppCompatActivity() {
         isResumed = true
         viewModel.isPrivateSpaceToggling = false
         viewModel.getAppList()
+    }
+
+    override fun onPostResume() {
+        super.onPostResume()
+        if (startupContactsPermissionPending) return
+        if (!prefs.contactsStartupPermissionRequested &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
+        ) {
+            startupContactsPermissionPending = true
+            requestStartupContactsPermission.launch(Manifest.permission.READ_CONTACTS)
+        } else {
+            finishFirstOpen()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(CONTACTS_PERMISSION_PENDING, startupContactsPermissionPending)
+    }
+
+    private fun finishFirstOpen() {
+        if (!prefs.firstOpen) return
+        viewModel.firstOpen(true)
+        prefs.firstOpen = false
+        prefs.firstOpenTime = System.currentTimeMillis()
+        viewModel.setDefaultClockApp()
+        viewModel.resetLauncherLiveData.call()
     }
 
     private fun registerAppCallback() {

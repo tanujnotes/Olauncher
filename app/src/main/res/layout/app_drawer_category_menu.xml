@@ -12,6 +12,7 @@
 
     <FrameLayout
         android:id="@+id/categoryApps"
+        android:background="@drawable/bg_drawer_category_slot"
         android:foreground="?attr/selectableItemBackground"
         style="@style/DrawerCategorySlot">
 
@@ -26,6 +27,7 @@
 
     <FrameLayout
         android:id="@+id/categoryContacts"
+        android:background="@drawable/bg_drawer_category_slot"
         android:foreground="?attr/selectableItemBackground"
         style="@style/DrawerCategorySlot">
 

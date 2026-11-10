@@ -10,6 +10,7 @@ class Prefs(context: Context) {
     private val PREFS_FILENAME = "app.olauncher"
 
     private val FIRST_OPEN = "FIRST_OPEN"
+    private val CONTACTS_STARTUP_PERMISSION_REQUESTED = "CONTACTS_STARTUP_PERMISSION_REQUESTED"
     private val FIRST_OPEN_TIME = "FIRST_OPEN_TIME"
     private val FIRST_SETTINGS_OPEN = "FIRST_SETTINGS_OPEN"
     private val FIRST_HIDE = "FIRST_HIDE"
@@ -121,6 +122,10 @@ class Prefs(context: Context) {
     var firstOpen: Boolean
         get() = prefs.getBoolean(FIRST_OPEN, true)
         set(value) = prefs.edit { putBoolean(FIRST_OPEN, value).apply() }
+
+    var contactsStartupPermissionRequested: Boolean
+        get() = prefs.getBoolean(CONTACTS_STARTUP_PERMISSION_REQUESTED, false)
+        set(value) = prefs.edit { putBoolean(CONTACTS_STARTUP_PERMISSION_REQUESTED, value) }
 
     var firstOpenTime: Long
         get() = prefs.getLong(FIRST_OPEN_TIME, 0L)
