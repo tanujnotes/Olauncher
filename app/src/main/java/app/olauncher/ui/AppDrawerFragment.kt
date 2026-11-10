@@ -1,9 +1,11 @@
 package app.olauncher.ui
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
+import android.view.ContextThemeWrapper
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +16,14 @@ import android.view.inputmethod.BaseInputConnection
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +50,10 @@ class AppDrawerFragment : BaseFragment() {
     private lateinit var prefs: Prefs
     private lateinit var adapter: AppDrawerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
+    private var displayedSearchQuery = ""
     private var cachedIsCjkKeyboard: Boolean? = null
+    private var lightStatusBar = false
+    private var lightNavigationBar = false
 
     private var flag = Constants.FLAG_LAUNCH_APP
     private var canRename = false
@@ -63,17 +71,24 @@ class AppDrawerFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentAppDrawerBinding.inflate(inflater, container, false)
+        arguments?.let {
+            flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
+            canRename = it.getBoolean(Constants.Key.RENAME, false)
+        }
+        val drawerInflater = if (flag == Constants.FLAG_LAUNCH_APP) {
+            inflater.cloneInContext(ContextThemeWrapper(inflater.context, R.style.DrawerDarkOverlay))
+        } else {
+            inflater
+        }
+        _binding = FragmentAppDrawerBinding.inflate(drawerInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
-        arguments?.let {
-            flag = it.getInt(Constants.Key.FLAG, Constants.FLAG_LAUNCH_APP)
-            canRename = it.getBoolean(Constants.Key.RENAME, false)
-        }
+        displayedSearchQuery = ""
+        if (flag == Constants.FLAG_LAUNCH_APP) configureAppSearchUi()
 
         initAdapter()
         initSearch()
@@ -93,6 +108,22 @@ class AppDrawerFragment : BaseFragment() {
             )
             insets
         }
+    }
+
+    private fun configureAppSearchUi() = with(binding) {
+        root.setBackgroundColor(Color.rgb(11, 11, 11))
+        appsHeading.isVisible = true
+        categoryMenu.root.isVisible = true
+        val sideMargin = resources.getDimensionPixelSize(R.dimen.app_drawer_search_margin)
+        recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            marginStart = sideMargin
+            marginEnd = sideMargin
+        }
+        searchBar.setBackgroundResource(R.drawable.bg_drawer_search_white)
+        searchLeadingIcon.isVisible = false
+        searchLegacyRail.isVisible = false
+        searchActionBadge.isVisible = true
+        searchDivider.setBackgroundColor(Color.rgb(16, 16, 16))
     }
 
     private fun initSearch() = with(binding.search) {
@@ -172,6 +203,18 @@ class AppDrawerFragment : BaseFragment() {
         adapter = AppDrawerAdapter(
             flag,
             prefs.appLabelAlignment,
+            viewLifecycleOwner.lifecycleScope,
+            isCurrentSearch = { query ->
+                _binding?.search?.text?.toString() == query &&
+                    findNavController().currentDestination?.id == R.id.appListFragment
+            },
+            onSearchResultsApplied = { query ->
+                if (flag == Constants.FLAG_LAUNCH_APP && query != displayedSearchQuery) {
+                    displayedSearchQuery = query
+                    linearLayoutManager.reverseLayout = query.isNotBlank()
+                    linearLayoutManager.scrollToPositionWithOffset(0, 0)
+                }
+            },
             appClickListener = { appModel ->
                 viewModel.selectedApp(appModel, flag)
                 if (flag == Constants.FLAG_LAUNCH_APP || flag == Constants.FLAG_HIDDEN_APPS)
@@ -266,15 +309,24 @@ class AppDrawerFragment : BaseFragment() {
             ): Int {
                 val scrollRange = super.scrollVerticallyBy(dx, recycler, state)
                 val overScroll = dx - scrollRange
-                if (overScroll < -10 && binding.recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING)
+                if (!reverseLayout && overScroll < -10 &&
+                    binding.recyclerView.scrollState == RecyclerView.SCROLL_STATE_DRAGGING
+                ) {
                     checkMessageAndExit()
+                }
                 return scrollRange
             }
         }
 
         binding.recyclerView.layoutManager = linearLayoutManager
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.addOnScrollListener(getRecyclerViewOnScrollListener())
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    _binding?.search?.hideKeyboard()
+                }
+            }
+        })
         binding.recyclerView.itemAnimator = null
         if (requireContext().isEinkDisplay())
             binding.recyclerView.overScrollMode = View.OVER_SCROLL_NEVER
@@ -352,33 +404,6 @@ class AppDrawerFragment : BaseFragment() {
         }
     }
 
-    private fun getRecyclerViewOnScrollListener(): RecyclerView.OnScrollListener {
-        return object : RecyclerView.OnScrollListener() {
-
-            var onTop = false
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                when (newState) {
-
-                    RecyclerView.SCROLL_STATE_DRAGGING -> {
-                        onTop = !recyclerView.canScrollVertically(-1)
-                        if (onTop)
-                            binding.search.hideKeyboard()
-                    }
-
-                    RecyclerView.SCROLL_STATE_IDLE -> {
-                        if (!recyclerView.canScrollVertically(1))
-                            binding.search.hideKeyboard()
-                        else if (!recyclerView.canScrollVertically(-1))
-                            if (!onTop && !isRemoving && prefs.autoShowKeyboard)
-                                showSearchKeyboard()
-                    }
-                }
-            }
-        }
-    }
-
     private fun checkMessageAndExit() {
         if (!closeDrawer()) return
         if (flag == Constants.FLAG_LAUNCH_APP)
@@ -396,6 +421,13 @@ class AppDrawerFragment : BaseFragment() {
         val window = requireActivity().window
         window.clearFlags(FLAG_LAYOUT_NO_LIMITS)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        if (flag == Constants.FLAG_LAUNCH_APP) {
+            val controller = WindowCompat.getInsetsController(window, binding.root)
+            lightStatusBar = controller.isAppearanceLightStatusBars
+            lightNavigationBar = controller.isAppearanceLightNavigationBars
+            controller.isAppearanceLightStatusBars = false
+            controller.isAppearanceLightNavigationBars = false
+        }
         ViewCompat.requestApplyInsets(binding.root)
         if (prefs.autoShowKeyboard) showSearchKeyboard()
     }
@@ -403,6 +435,11 @@ class AppDrawerFragment : BaseFragment() {
     override fun onStop() {
         binding.search.hideKeyboard()
         val window = requireActivity().window
+        if (flag == Constants.FLAG_LAUNCH_APP) {
+            val controller = WindowCompat.getInsetsController(window, binding.root)
+            controller.isAppearanceLightStatusBars = lightStatusBar
+            controller.isAppearanceLightNavigationBars = lightNavigationBar
+        }
         WindowCompat.setDecorFitsSystemWindows(window, true)
         window.addFlags(FLAG_LAYOUT_NO_LIMITS)
         super.onStop()

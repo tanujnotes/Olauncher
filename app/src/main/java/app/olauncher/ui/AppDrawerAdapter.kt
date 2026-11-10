@@ -2,16 +2,23 @@ package app.olauncher.ui
 
 import android.content.Context
 import android.content.pm.LauncherApps
+import android.graphics.drawable.Drawable
 import android.os.UserHandle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.LruCache
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePaddingRelative
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -24,10 +31,18 @@ import app.olauncher.helper.appLabelMatches
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AppDrawerAdapter(
-    private var flag: Int,
+    private val flag: Int,
     private val appLabelGravity: Int,
+    private val iconScope: CoroutineScope,
+    private val isCurrentSearch: (String) -> Boolean,
+    private val onSearchResultsApplied: (String) -> Unit,
     private val appClickListener: (AppModel) -> Unit,
     private val appInfoListener: (AppModel) -> Unit,
     private val appDeleteListener: (AppModel) -> Unit,
@@ -59,8 +74,7 @@ class AppDrawerAdapter(
         }
     }
 
-    private var autoLaunch = true
-    private var isBangSearch = false
+    private val appIcons = LruCache<AppModel, Drawable.ConstantState>(80)
     private var autoLaunchedQuery: String? = null
     var allowAutoLaunch = true
     private val appFilter = createAppFilter()
@@ -70,7 +84,7 @@ class AppDrawerAdapter(
     var appFilteredList: MutableList<AppModel> = mutableListOf()
 
     override fun getItemViewType(position: Int): Int {
-        return when (appFilteredList.getOrNull(position)) {
+        return when (getItem(position)) {
             is AppModel.PrivateSpaceHeader -> VIEW_TYPE_PRIVATE_HEADER
             else -> VIEW_TYPE_APP
         }
@@ -91,15 +105,20 @@ class AppDrawerAdapter(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                showTiles = flag == Constants.FLAG_LAUNCH_APP,
             )
         }
     }
 
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        if (holder is ViewHolder) holder.cancelIconLoad()
+        super.onViewRecycled(holder)
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         try {
-            if (appFilteredList.isEmpty() || position == RecyclerView.NO_POSITION) return
-            val appModel = appFilteredList[holder.bindingAdapterPosition]
+            val appModel = getItem(position)
             when (holder) {
                 is PrivateSpaceHeaderViewHolder -> {
                     holder.bind(
@@ -109,17 +128,20 @@ class AppDrawerAdapter(
                     )
                 }
 
-                is ViewHolder -> holder.bind(
-                    flag,
-                    appLabelGravity,
-                    myUserHandle,
-                    appModel,
-                    appClickListener,
-                    appDeleteListener,
-                    appInfoListener,
-                    appHideListener,
-                    appRenameListener
-                )
+                is ViewHolder -> {
+                    holder.bind(
+                        flag,
+                        appLabelGravity,
+                        myUserHandle,
+                        appModel,
+                        appClickListener,
+                        appDeleteListener,
+                        appInfoListener,
+                        appHideListener,
+                        appRenameListener,
+                    )
+                    if (flag == Constants.FLAG_LAUNCH_APP) holder.bindIcon(iconScope, appIcons, appModel)
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -131,9 +153,6 @@ class AppDrawerAdapter(
     private fun createAppFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(charSearch: CharSequence?): FilterResults {
-                isBangSearch = charSearch?.startsWith("!") ?: false
-                autoLaunch = allowAutoLaunch && (charSearch?.startsWith(" ")?.not() ?: true)
-
                 val appFilteredList = (if (charSearch.isNullOrBlank()) appsList
                 else appsList.filter { app ->
                     app !is AppModel.PrivateSpaceHeader && appLabelMatches(app.appLabel, charSearch)
@@ -150,47 +169,44 @@ class AppDrawerAdapter(
                     val items = it as MutableList<AppModel>
                     appFilteredList = items
                     submitList(appFilteredList) {
-                        autoLaunch(constraint?.toString())
+                        val query = constraint?.toString().orEmpty()
+                        if (isCurrentSearch(query)) {
+                            onSearchResultsApplied(query)
+                            autoLaunch(query)
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun autoLaunch(query: String?) {
-        // App list refreshes re-run the current query, so launch only once until it changes
+    private fun autoLaunch(query: String) {
         if (query == autoLaunchedQuery) return
         autoLaunchedQuery = null
-        try {
-            if (itemCount == 1
-                && autoLaunch
-                && isBangSearch.not()
-                && flag == Constants.FLAG_LAUNCH_APP
-                && appFilteredList.isNotEmpty()
-                && appFilteredList[0] !is AppModel.PrivateSpaceHeader
-                // Skip the empty bottom-padding item, left alone when the app list is empty
-                && appFilteredList[0].appPackage.isNotEmpty()
-            ) {
-                autoLaunchedQuery = query
-                appClickListener(appFilteredList[0])
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        if (query.isBlank() || !allowAutoLaunch || query.startsWith(" ") || query.startsWith("!") ||
+            flag != Constants.FLAG_LAUNCH_APP
+        ) return
+
+        val app = currentList.singleOrNull() ?: return
+        if (app is AppModel.PrivateSpaceHeader || app.appPackage.isEmpty()) return
+        autoLaunchedQuery = query
+        appClickListener(app)
     }
 
     fun setAppList(appsList: MutableList<AppModel>) {
-        // Add empty app for bottom padding in recyclerview and assign to list
-        appsList.add(
-            AppModel.App(
-                appLabel = "",
-                key = null,
-                appPackage = "",
-                activityClassName = "",
-                isNew = false,
-                user = android.os.Process.myUserHandle()
+        if (flag != Constants.FLAG_LAUNCH_APP) {
+            // The other drawer modes retain the trailing space used by their plain list.
+            appsList.add(
+                AppModel.App(
+                    appLabel = "",
+                    key = null,
+                    appPackage = "",
+                    activityClassName = "",
+                    isNew = false,
+                    user = myUserHandle
+                )
             )
-        )
+        }
         this.appsList = appsList
         this.appFilteredList = appsList
         submitList(appsList)
@@ -217,8 +233,80 @@ class AppDrawerAdapter(
         }
     }
 
-    class ViewHolder(private val binding: AdapterAppDrawerBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        private val binding: AdapterAppDrawerBinding,
+        private val showTiles: Boolean,
+    ) : RecyclerView.ViewHolder(binding.root) {
+        private var iconJob: Job? = null
+
+        init {
+            if (showTiles) with(binding) {
+                root.updateLayoutParams<ViewGroup.MarginLayoutParams> { bottomMargin = dp(4) }
+                appTitle.setBackgroundResource(R.drawable.bg_drawer_app_tile)
+                appTitle.minimumHeight = dp(48)
+                appTitle.updatePaddingRelative(start = dp(18), top = dp(6), end = dp(14), bottom = dp(6))
+                appTitle.compoundDrawablePadding = dp(12)
+                appTitle.textSize = 17f
+                appTitle.ellipsize = TextUtils.TruncateAt.END
+            }
+        }
+
+        private fun dp(value: Int): Int =
+            (value * itemView.resources.displayMetrics.density + 0.5f).toInt()
+
+        fun bindIcon(
+            scope: CoroutineScope,
+            cache: LruCache<AppModel, Drawable.ConstantState>,
+            app: AppModel,
+        ) {
+            cancelIconLoad()
+            val context = itemView.context
+            val cached = cache.get(app)?.newDrawable(context.resources)?.mutate()
+            val chevron = AppCompatResources.getDrawable(context, R.drawable.ic_drawer_chevron)
+            chevron?.setBounds(0, 0, dp(16), dp(16))
+            val iconSize = dp(32)
+            val initialIcon = cached ?: context.packageManager.defaultActivityIcon
+            initialIcon.setBounds(0, 0, iconSize, iconSize)
+            binding.appTitle.setCompoundDrawablesRelative(initialIcon, null, chevron, null)
+            if (cached != null) return
+
+            iconJob = scope.launch {
+                val icon = withContext(Dispatchers.IO) { loadIcon(context, app) } ?: return@launch
+                icon.constantState?.let { cache.put(app, it) }
+                icon.setBounds(0, 0, iconSize, iconSize)
+                binding.appTitle.setCompoundDrawablesRelative(icon, null, chevron, null)
+            }
+        }
+
+        fun cancelIconLoad() {
+            iconJob?.cancel()
+            iconJob = null
+        }
+
+        private fun loadIcon(context: Context, app: AppModel): Drawable? {
+            val launcher = context.getSystemService(LauncherApps::class.java) ?: return null
+            val density = context.resources.displayMetrics.densityDpi
+            if (app is AppModel.PinnedShortcut) {
+                val shortcutIcon = runCatching {
+                    val query = LauncherApps.ShortcutQuery()
+                        .setPackage(app.appPackage)
+                        .setShortcutIds(listOf(app.shortcutId))
+                        .setQueryFlags(LauncherApps.ShortcutQuery.FLAG_MATCH_PINNED)
+                    launcher.getShortcuts(query, app.user)?.firstOrNull()?.let {
+                        launcher.getShortcutBadgedIconDrawable(it, density)
+                    }
+                }.getOrNull()
+                if (shortcutIcon != null) return shortcutIcon
+            }
+            return runCatching {
+                val activities = launcher.getActivityList(app.appPackage, app.user)
+                val activity = if (app is AppModel.App) {
+                    activities.firstOrNull { it.componentName.className == app.activityClassName }
+                } else null
+                (activity ?: activities.firstOrNull())?.getBadgedIcon(density)
+            }.getOrNull()
+        }
+
         fun bind(
             flag: Int,
             appLabelGravity: Int,
@@ -239,7 +327,7 @@ class AppDrawerAdapter(
                 append(appModel.appLabel)
                 if (appModel.isNew) append(" ✦")
             }
-            appTitle.gravity = appLabelGravity
+            appTitle.gravity = if (showTiles) appLabelGravity or Gravity.CENTER_VERTICAL else appLabelGravity
             otherProfileIndicator.isVisible = appModel.user != myUserHandle
 
             appTitle.setOnClickListener { clickListener(appModel) }
