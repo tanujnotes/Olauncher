@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"

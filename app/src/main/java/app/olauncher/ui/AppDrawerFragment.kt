@@ -1,6 +1,8 @@
 package app.olauncher.ui
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -15,6 +17,8 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.BaseInputConnection
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
@@ -36,6 +40,8 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
 import app.olauncher.helper.deletePinnedShortcut
+import app.olauncher.helper.openDrawerContact
+import app.olauncher.helper.readDrawerContacts
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isSystemAnimationsDisabled
@@ -45,6 +51,10 @@ import app.olauncher.helper.openSearch
 import app.olauncher.helper.openUrl
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AppDrawerFragment : BaseFragment() {
 
@@ -52,6 +62,21 @@ class AppDrawerFragment : BaseFragment() {
     private lateinit var adapter: AppDrawerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var displayedSearchQuery = ""
+    private var contactsOnly = false
+    private var contactsLoaded = false
+    private var contactsJob: Job? = null
+    private val requestContactsPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (_binding != null) {
+            if (granted) {
+                browseContacts()
+                refreshContacts()
+            } else {
+                requireContext().showToast(getString(R.string.drawer_contacts_permission))
+            }
+        }
+    }
     private var cachedIsCjkKeyboard: Boolean? = null
     private var lightStatusBar = false
     private var lightNavigationBar = false
@@ -88,6 +113,8 @@ class AppDrawerFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
         displayedSearchQuery = ""
+        contactsOnly = false
+        contactsLoaded = false
         currentAppList = null
         currentPrivateSpaceApps = null
         exitPosted = false
@@ -163,7 +190,7 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun submitSearch(query: String) {
-        if (query.startsWith("!")) {
+        if (!contactsOnly && query.startsWith("!")) {
             adapter.cancelPendingSearchAction()
             requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
             return
@@ -227,13 +254,20 @@ class AppDrawerFragment : BaseFragment() {
                     findNavController().currentDestination?.id == R.id.appListFragment
             },
             onSearchResultsApplied = { query ->
-                if (flag == Constants.FLAG_LAUNCH_APP && query != displayedSearchQuery) {
-                    displayedSearchQuery = query
-                    linearLayoutManager.reverseLayout = query.isNotBlank()
-                    linearLayoutManager.scrollToPositionWithOffset(0, 0)
+                if (flag == Constants.FLAG_LAUNCH_APP) {
+                    binding.appsHeading.isVisible = !contactsOnly && query.isBlank()
+                    updateContactsEmptyState()
+                    if (query != displayedSearchQuery) {
+                        displayedSearchQuery = query
+                        linearLayoutManager.reverseLayout = !contactsOnly && query.isNotBlank()
+                        linearLayoutManager.scrollToPositionWithOffset(0, 0)
+                    }
                 }
             },
             appClickListener = ::selectApp,
+            contactClickListener = { contact, action ->
+                openDrawerContact(requireContext(), contact, action)
+            },
             appInfoListener = {
                 openAppInfo(
                     requireContext(),
@@ -377,6 +411,20 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun initClickListeners() {
+        if (flag == Constants.FLAG_LAUNCH_APP) {
+            binding.categoryMenu.categoryContacts.setOnClickListener {
+                if (hasContactsPermission()) {
+                    browseContacts()
+                    if (!contactsLoaded && contactsJob?.isActive != true) refreshContacts()
+                } else {
+                    requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
+                }
+            }
+            binding.categoryMenu.categoryApps.setOnClickListener {
+                setContactsMode(false)
+                binding.search.text?.clear()
+            }
+        }
         binding.appRename.setOnClickListener {
             val name = binding.search.text.toString().trim()
             if (name.isEmpty()) {
@@ -397,6 +445,56 @@ class AppDrawerFragment : BaseFragment() {
             }
             closeDrawer()
         }
+    }
+
+    private fun hasContactsPermission() = ContextCompat.checkSelfPermission(
+        requireContext(), Manifest.permission.READ_CONTACTS
+    ) == PackageManager.PERMISSION_GRANTED
+
+    private fun browseContacts() {
+        setContactsMode(true)
+        binding.search.text?.clear()
+    }
+
+    private fun setContactsMode(enabled: Boolean) {
+        if (contactsOnly == enabled) return
+        contactsOnly = enabled
+        binding.categoryMenu.categoryContacts.isSelected = enabled
+        binding.categoryMenu.categoryApps.isSelected = !enabled
+        binding.appsHeading.isVisible = !enabled && binding.search.text.isNullOrBlank()
+        linearLayoutManager.reverseLayout = !enabled && !binding.search.text.isNullOrBlank()
+        linearLayoutManager.scrollToPositionWithOffset(0, 0)
+        adapter.setContactsOnly(enabled)
+        updateContactsEmptyState()
+    }
+
+    private fun refreshContacts() {
+        contactsJob?.cancel()
+        if (!hasContactsPermission()) {
+            contactsLoaded = false
+            setContactsMode(false)
+            adapter.setContacts(emptyList())
+            return
+        }
+        val context = requireContext().applicationContext
+        if (!contactsLoaded) adapter.setContacts(null)
+        contactsJob = viewLifecycleOwner.lifecycleScope.launch {
+            val contacts = withContext(Dispatchers.IO) { readDrawerContacts(context) }
+            contactsLoaded = true
+            adapter.setContacts(contacts)
+            updateContactsEmptyState()
+        }
+    }
+
+    private fun updateContactsEmptyState() {
+        val empty = contactsOnly && contactsLoaded && adapter.itemCount == 0
+        binding.contactsEmpty.isVisible = empty
+        binding.recyclerView.isVisible = !empty
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (flag == Constants.FLAG_LAUNCH_APP) refreshContacts()
     }
 
     private fun checkMessageAndExit() {
@@ -441,6 +539,8 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
+        contactsJob?.cancel()
+        contactsJob = null
         binding.recyclerView.adapter = null
         _binding = null
         super.onDestroyView()

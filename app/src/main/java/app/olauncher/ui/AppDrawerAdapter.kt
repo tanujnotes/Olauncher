@@ -22,6 +22,9 @@ import app.olauncher.R
 import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
+import app.olauncher.databinding.AdapterDrawerSectionBinding
+import app.olauncher.helper.DrawerContact
+import app.olauncher.helper.ContactAction
 import app.olauncher.databinding.AdapterPrivateSpaceHeaderBinding
 import app.olauncher.helper.appLabelMatcher
 import app.olauncher.helper.hideKeyboard
@@ -45,16 +48,32 @@ class AppDrawerAdapter(
     private val appDeleteListener: (AppModel) -> Unit,
     private val appHideListener: (AppModel) -> Unit,
     private val appRenameListener: (AppModel, String) -> Unit,
+    private val contactClickListener: (DrawerContact, ContactAction) -> Unit,
     private val privateSpaceToggleListener: () -> Unit = {},
     private val privateSpaceSettingsListener: () -> Unit = {},
-) : ListAdapter<AppModel, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+) : ListAdapter<AppDrawerAdapter.Row, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+
+    sealed interface Row {
+        data class App(val model: AppModel) : Row
+        data class Contact(val model: DrawerContact) : Row
+        enum class Section : Row { APPS, CONTACTS }
+    }
 
     companion object {
         const val VIEW_TYPE_APP = 0
         const val VIEW_TYPE_PRIVATE_HEADER = 1
 
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<AppModel>() {
-            override fun areItemsTheSame(oldItem: AppModel, newItem: AppModel): Boolean = when {
+        private const val VIEW_TYPE_CONTACT = 2
+        private const val VIEW_TYPE_SECTION = 3
+
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Row>() {
+            override fun areItemsTheSame(oldItem: Row, newItem: Row): Boolean = when {
+                oldItem is Row.App && newItem is Row.App -> sameApp(oldItem.model, newItem.model)
+                oldItem is Row.Contact && newItem is Row.Contact -> oldItem.model.id == newItem.model.id
+                else -> oldItem == newItem
+            }
+
+            private fun sameApp(oldItem: AppModel, newItem: AppModel): Boolean = when {
                 oldItem is AppModel.App && newItem is AppModel.App ->
                     oldItem.appPackage == newItem.appPackage && oldItem.user == newItem.user &&
                         oldItem.activityClassName == newItem.activityClassName
@@ -67,7 +86,7 @@ class AppDrawerAdapter(
                 else -> false
             }
 
-            override fun areContentsTheSame(oldItem: AppModel, newItem: AppModel): Boolean =
+            override fun areContentsTheSame(oldItem: Row, newItem: Row): Boolean =
                 oldItem == newItem
         }
     }
@@ -75,6 +94,8 @@ class AppDrawerAdapter(
     private val appIcons = LruCache<AppModel, Drawable.ConstantState>(80)
     private val myUserHandle = android.os.Process.myUserHandle()
     private var apps: List<AppModel>? = null
+    private var contacts: List<DrawerContact>? = emptyList()
+    private var contactsOnly = false
     private var query = ""
     private var pendingAutoLaunch = false
     private var pendingSubmit: ((AppModel?) -> Unit)? = null
@@ -83,14 +104,19 @@ class AppDrawerAdapter(
     private var appliedGeneration = 0
 
     override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
-            is AppModel.PrivateSpaceHeader -> VIEW_TYPE_PRIVATE_HEADER
-            else -> VIEW_TYPE_APP
+        return when (val row = getItem(position)) {
+            is Row.App -> if (row.model is AppModel.PrivateSpaceHeader) VIEW_TYPE_PRIVATE_HEADER else VIEW_TYPE_APP
+            is Row.Contact -> VIEW_TYPE_CONTACT
+            is Row.Section -> VIEW_TYPE_SECTION
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
+            VIEW_TYPE_CONTACT -> ContactViewHolder.create(parent)
+            VIEW_TYPE_SECTION -> SectionViewHolder(
+                AdapterDrawerSectionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
             VIEW_TYPE_PRIVATE_HEADER -> PrivateSpaceHeaderViewHolder(
                 AdapterPrivateSpaceHeaderBinding.inflate(
                     LayoutInflater.from(parent.context),
@@ -117,7 +143,7 @@ class AppDrawerAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         try {
-            val appModel = getItem(position)
+            val row = getItem(position)
             when (holder) {
                 is PrivateSpaceHeaderViewHolder -> {
                     holder.bind(
@@ -127,7 +153,15 @@ class AppDrawerAdapter(
                     )
                 }
 
+                is SectionViewHolder -> holder.bind(row as Row.Section)
+                is ContactViewHolder -> holder.bind((row as Row.Contact).model) { contact, action ->
+                    if (appliedGeneration == filterGeneration && isCurrentSearch(query)) {
+                        contactClickListener(contact, action)
+                    }
+                }
+
                 is ViewHolder -> {
+                    val appModel = (row as Row.App).model
                     holder.bind(
                         flag,
                         appLabelGravity,
@@ -164,6 +198,19 @@ class AppDrawerAdapter(
         filterApps()
     }
 
+    fun setContacts(contacts: List<DrawerContact>?) {
+        if (this.contacts == contacts) return
+        this.contacts = contacts
+        filterApps()
+    }
+
+    fun setContactsOnly(contactsOnly: Boolean) {
+        if (this.contactsOnly == contactsOnly) return
+        this.contactsOnly = contactsOnly
+        cancelPendingSearchAction()
+        filterApps()
+    }
+
     fun cancelPendingSearchAction() {
         pendingAutoLaunch = false
         pendingSubmit = null
@@ -171,19 +218,32 @@ class AppDrawerAdapter(
 
     fun submitSearch(onResult: (AppModel?) -> Unit) {
         pendingAutoLaunch = false
-        if (apps != null && appliedGeneration == filterGeneration) {
-            onResult(currentList.firstOrNull())
+        if ((apps != null || contactsOnly) && contacts != null && appliedGeneration == filterGeneration) {
+            dispatchSearch(currentList, onResult)
         } else {
             pendingSubmit = onResult
         }
     }
 
+    private fun dispatchSearch(rows: List<Row>, onResult: (AppModel?) -> Unit) {
+        val app = rows.filterIsInstance<Row.App>().firstOrNull()?.model
+        val contacts = rows.filterIsInstance<Row.Contact>()
+        val contact = (if (contactsOnly) contacts.firstOrNull() else contacts.lastOrNull())?.model
+        when {
+            app != null -> onResult(app)
+            contact != null -> contactClickListener(contact, ContactAction.OPEN)
+            !contactsOnly -> onResult(null)
+        }
+    }
+
     private fun filterApps() {
-        val source = apps ?: return
+        val source = apps ?: if (contactsOnly) emptyList() else return
         val query = this.query
+        val contactsOnly = this.contactsOnly
+        val contacts = this.contacts.orEmpty()
         val generation = ++filterGeneration
         filterJob?.cancel()
-        if (query.isBlank()) {
+        if (query.isBlank() && !contactsOnly) {
             val items = if (flag == Constants.FLAG_LAUNCH_APP) source else source + AppModel.App(
                 appLabel = "",
                 key = null,
@@ -191,37 +251,70 @@ class AppDrawerAdapter(
                 activityClassName = "",
                 user = myUserHandle,
             )
-            applyResults(query, generation, items)
+            applyResults(query, generation, items.map { Row.App(it) })
             return
         }
         filterJob = iconScope.launch {
             val items = withContext(Dispatchers.Default) {
                 val matches = appLabelMatcher(query)
-                source.filter {
+                val apps = if (contactsOnly) emptyList() else source.filter {
                     ensureActive()
                     it !is AppModel.PrivateSpaceHeader && matches(it.appLabel)
+                }
+                val matchingContacts = contacts.filter {
+                    ensureActive()
+                    query.isBlank() || matches(it.name)
+                }
+                buildList<Row> {
+                    apps.forEach { add(Row.App(it)) }
+                    if (flag == Constants.FLAG_LAUNCH_APP && apps.isNotEmpty()) add(Row.Section.APPS)
+                    if (!contactsOnly && matchingContacts.isNotEmpty()) {
+                        // Search is laid out from the bottom. Reverse contacts to keep A–Z on screen.
+                        matchingContacts.asReversed().forEach { add(Row.Contact(it)) }
+                        add(Row.Section.CONTACTS)
+                    } else if (contactsOnly && matchingContacts.isNotEmpty()) {
+                        add(Row.Section.CONTACTS)
+                        matchingContacts.forEach { add(Row.Contact(it)) }
+                    }
                 }
             }
             applyResults(query, generation, items)
         }
     }
 
-    private fun applyResults(query: String, generation: Int, items: List<AppModel>) {
+    private fun applyResults(query: String, generation: Int, items: List<Row>) {
         submitList(items) {
             if (generation != filterGeneration || !isCurrentSearch(query)) return@submitList
             appliedGeneration = generation
             onSearchResultsApplied(query)
+            if (contacts == null) return@submitList
             pendingSubmit?.let { submit ->
                 pendingSubmit = null
-                submit(items.firstOrNull())
+                dispatchSearch(items, submit)
                 return@submitList
             }
             val launch = pendingAutoLaunch
             pendingAutoLaunch = false
             if (!launch || flag != Constants.FLAG_LAUNCH_APP ||
+                contactsOnly ||
                 query.isBlank() || query.startsWith(" ") || query.startsWith("!")
             ) return@submitList
-            items.singleOrNull()?.let(appClickListener)
+            if (items.none { it is Row.Contact }) {
+                items.filterIsInstance<Row.App>().singleOrNull()?.let { appClickListener(it.model) }
+            }
+        }
+    }
+
+    private class SectionViewHolder(private val binding: AdapterDrawerSectionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(section: Row.Section) {
+            val isApps = section == Row.Section.APPS
+            binding.sectionLabel.setText(if (isApps) R.string.drawer_apps else R.string.drawer_contacts)
+            binding.sectionLabel.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                if (isApps) R.drawable.ic_drawer_apps_badge else R.drawable.ic_drawer_contacts_badge,
+                0, 0, 0,
+            )
         }
     }
 

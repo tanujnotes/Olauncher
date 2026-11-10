@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DrawerContactAction" parent="">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/bg_drawer_contact_action</item>
+        <item name="android:scaleType">center</item>
+    </style>
+
+    <style name="DrawerContactActionDivider" parent="">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_marginHorizontal">1dp</item>
+        <item name="android:background">#8AFAFAFA</item>
+        <item name="android:importantForAccessibility">no</item>
+    </style>
+</resources>
