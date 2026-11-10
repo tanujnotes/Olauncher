@@ -479,7 +479,7 @@ class AppDrawerFragment : BaseFragment() {
         if (categoryChanged || query != displayedSearchQuery) {
             displayedCategory = category
             displayedSearchQuery = query
-            linearLayoutManager.reverseLayout = !contactsOnly && query.isNotBlank()
+            linearLayoutManager.reverseLayout = query.isNotBlank()
             linearLayoutManager.scrollToPositionWithOffset(0, 0)
         }
         appsHeading.isVisible = !contactsOnly && query.isBlank()
