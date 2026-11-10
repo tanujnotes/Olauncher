@@ -106,7 +106,9 @@ fun openDrawerContact(context: Context, contact: DrawerContact, action: ContactA
 
     val numbers = contact.numbers
     when (numbers.size) {
-        0 -> return
+        0 -> if (action == ContactAction.CALL) {
+            launchContactIntent(context, Intent(Intent.ACTION_DIAL))
+        }
         1 -> openNumber(context, numbers.single(), action)
         else -> AlertDialog.Builder(context)
             .setTitle(R.string.drawer_contact_choose_number)

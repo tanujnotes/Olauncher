@@ -72,7 +72,6 @@
     <string name="drawer_contacts_permission">Allow contacts access to search and open your contacts.</string>
     <string name="drawer_contacts_empty">No contacts found</string>
     <string name="drawer_contact_unnamed">Unnamed contact</string>
-    <string name="drawer_contact_call">Call %1$s</string>
     <string name="drawer_contact_text">Text %1$s</string>
     <string name="drawer_contact_whatsapp">WhatsApp %1$s</string>
     <string name="drawer_contact_choose_number">Choose a phone number</string>

@@ -33,9 +33,12 @@ internal class ContactViewHolder(private val binding: AdapterDrawerContactBindin
     ) = with(binding) {
         contactName.text = contact.name
         bindAvatar(contact, scope, photos)
-        contactDetails.setOnClickListener { onClick(contact, ContactAction.OPEN) }
+        contactDetails.setOnClickListener { onClick(contact, ContactAction.CALL) }
+        contactDetails.setOnLongClickListener {
+            onClick(contact, ContactAction.OPEN)
+            true
+        }
 
-        bindAction(contactCall, R.string.drawer_contact_call, contact, ContactAction.CALL, onClick)
         bindAction(contactText, R.string.drawer_contact_text, contact, ContactAction.TEXT, onClick)
         bindAction(contactWhatsApp, R.string.drawer_contact_whatsapp, contact, ContactAction.WHATSAPP, onClick)
     }

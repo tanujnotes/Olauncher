@@ -60,13 +60,6 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/contactCall"
-        style="@style/DrawerContactAction"
-        android:src="@drawable/ic_drawer_contact_call" />
-
-    <View style="@style/DrawerContactActionDivider" />
-
-    <ImageButton
         android:id="@+id/contactText"
         style="@style/DrawerContactAction"
         android:src="@drawable/ic_drawer_contact_text" />
