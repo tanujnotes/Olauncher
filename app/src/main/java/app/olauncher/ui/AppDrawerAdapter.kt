@@ -55,6 +55,8 @@ class AppDrawerAdapter(
     private val privateSpaceSettingsListener: () -> Unit = {},
 ) : ListAdapter<AppDrawerAdapter.Row, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
+    enum class SearchCategory { ALL, APPS, CONTACTS }
+
     sealed interface Row {
         data class App(val model: AppModel) : Row
         data class Contact(val model: DrawerContact) : Row
@@ -98,7 +100,8 @@ class AppDrawerAdapter(
     private val myUserHandle = android.os.Process.myUserHandle()
     private var apps: List<AppModel>? = null
     private var contacts: List<DrawerContact>? = emptyList()
-    private var contactsOnly = false
+    var searchCategory = SearchCategory.ALL
+        private set
     private var query = ""
     private var pendingAutoLaunch = false
     private var pendingSubmit: ((AppModel?) -> Unit)? = null
@@ -208,9 +211,9 @@ class AppDrawerAdapter(
         filterApps()
     }
 
-    fun setContactsOnly(contactsOnly: Boolean) {
-        if (this.contactsOnly == contactsOnly) return
-        this.contactsOnly = contactsOnly
+    fun setSearchCategory(category: SearchCategory) {
+        if (searchCategory == category) return
+        searchCategory = category
         cancelPendingSearchAction()
         filterApps()
     }
@@ -222,14 +225,19 @@ class AppDrawerAdapter(
 
     fun submitSearch(onResult: (AppModel?) -> Unit) {
         pendingAutoLaunch = false
-        if ((apps != null || contactsOnly) && contacts != null && appliedGeneration == filterGeneration) {
+        if (isSearchDataLoaded() && appliedGeneration == filterGeneration) {
             dispatchSearch(currentList, onResult)
         } else {
             pendingSubmit = onResult
         }
     }
 
+    private fun isSearchDataLoaded() =
+        (apps != null || searchCategory == SearchCategory.CONTACTS) &&
+            (contacts != null || searchCategory == SearchCategory.APPS)
+
     private fun dispatchSearch(rows: List<Row>, onResult: (AppModel?) -> Unit) {
+        val contactsOnly = searchCategory == SearchCategory.CONTACTS
         val app = rows.filterIsInstance<Row.App>().firstOrNull()?.model
         val contacts = rows.filterIsInstance<Row.Contact>()
         val contact = (if (contactsOnly) contacts.firstOrNull() else contacts.lastOrNull())?.model
@@ -241,10 +249,11 @@ class AppDrawerAdapter(
     }
 
     private fun filterApps() {
-        val source = apps ?: if (contactsOnly) emptyList() else return
+        val category = searchCategory
+        val contactsOnly = category == SearchCategory.CONTACTS
+        val source = apps ?: if (category == SearchCategory.ALL) return else emptyList()
         val query = this.query
-        val contactsOnly = this.contactsOnly
-        val contacts = this.contacts.orEmpty()
+        val contacts = if (category == SearchCategory.APPS) emptyList() else this.contacts.orEmpty()
         val generation = ++filterGeneration
         filterJob?.cancel()
         if (query.isBlank() && !contactsOnly) {
@@ -291,7 +300,7 @@ class AppDrawerAdapter(
             if (generation != filterGeneration || !isCurrentSearch(query)) return@submitList
             appliedGeneration = generation
             onSearchResultsApplied(query)
-            if (contacts == null) return@submitList
+            if (!isSearchDataLoaded()) return@submitList
             pendingSubmit?.let { submit ->
                 pendingSubmit = null
                 dispatchSearch(items, submit)
@@ -300,7 +309,7 @@ class AppDrawerAdapter(
             val launch = pendingAutoLaunch
             pendingAutoLaunch = false
             if (!launch || flag != Constants.FLAG_LAUNCH_APP ||
-                contactsOnly ||
+                searchCategory == SearchCategory.CONTACTS ||
                 query.isBlank() || query.startsWith(" ") || query.startsWith("!")
             ) return@submitList
             if (items.none { it is Row.Contact }) {

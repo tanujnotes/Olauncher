@@ -51,6 +51,7 @@ import app.olauncher.helper.openSearch
 import app.olauncher.helper.openUrl
 import app.olauncher.helper.showToast
 import app.olauncher.helper.uninstall
+import app.olauncher.ui.AppDrawerAdapter.SearchCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -62,9 +63,8 @@ class AppDrawerFragment : BaseFragment() {
     private lateinit var adapter: AppDrawerAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var displayedSearchQuery = ""
-    private var displayedContactsOnly = false
+    private var displayedCategory = SearchCategory.ALL
     private var animateCategoryChanges = false
-    private var contactsOnly = false
     private var contactsLoaded = false
     private var contactsJob: Job? = null
     private val requestContactsPermission = registerForActivityResult(
@@ -72,7 +72,7 @@ class AppDrawerFragment : BaseFragment() {
     ) { granted ->
         if (_binding != null) {
             if (granted) {
-                browseContacts()
+                selectSearchCategory(SearchCategory.CONTACTS)
                 refreshContacts()
             } else {
                 requireContext().showToast(getString(R.string.drawer_contacts_permission))
@@ -115,8 +115,7 @@ class AppDrawerFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         prefs = Prefs(requireContext())
         displayedSearchQuery = ""
-        displayedContactsOnly = false
-        contactsOnly = false
+        displayedCategory = SearchCategory.ALL
         contactsLoaded = false
         currentAppList = null
         currentPrivateSpaceApps = null
@@ -196,7 +195,7 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun submitSearch(query: String) {
-        if (!contactsOnly && query.startsWith("!")) {
+        if (adapter.searchCategory != SearchCategory.CONTACTS && query.startsWith("!")) {
             adapter.cancelPendingSearchAction()
             requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
             return
@@ -412,15 +411,14 @@ class AppDrawerFragment : BaseFragment() {
         if (flag == Constants.FLAG_LAUNCH_APP) {
             binding.categoryMenu.categoryContacts.setOnClickListener {
                 if (hasContactsPermission()) {
-                    browseContacts()
+                    selectSearchCategory(SearchCategory.CONTACTS)
                     if (!contactsLoaded && contactsJob?.isActive != true) refreshContacts()
                 } else {
                     requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
                 }
             }
             binding.categoryMenu.categoryApps.setOnClickListener {
-                setContactsMode(false)
-                binding.search.text?.clear()
+                selectSearchCategory(SearchCategory.APPS)
             }
         }
         binding.appRename.setOnClickListener {
@@ -449,24 +447,19 @@ class AppDrawerFragment : BaseFragment() {
         requireContext(), Manifest.permission.READ_CONTACTS
     ) == PackageManager.PERMISSION_GRANTED
 
-    private fun browseContacts() {
-        setContactsMode(true)
-        binding.search.text?.clear()
-    }
-
-    private fun setContactsMode(enabled: Boolean) {
-        if (contactsOnly == enabled) return
-        contactsOnly = enabled
-        binding.categoryMenu.categoryContacts.isSelected = enabled
-        binding.categoryMenu.categoryApps.isSelected = !enabled
-        adapter.setContactsOnly(enabled)
+    private fun selectSearchCategory(category: SearchCategory) {
+        binding.categoryMenu.categoryContacts.isSelected = category == SearchCategory.CONTACTS
+        binding.categoryMenu.categoryApps.isSelected = category == SearchCategory.APPS
+        adapter.setSearchCategory(category)
     }
 
     private fun refreshContacts() {
         contactsJob?.cancel()
         if (!hasContactsPermission()) {
             contactsLoaded = false
-            setContactsMode(false)
+            if (adapter.searchCategory == SearchCategory.CONTACTS) {
+                selectSearchCategory(SearchCategory.APPS)
+            }
             adapter.setContacts(emptyList())
             return
         }
@@ -480,9 +473,11 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun showSearchResults(query: String): Unit = with(binding) {
-        val categoryChanged = displayedContactsOnly != contactsOnly
+        val category = adapter.searchCategory
+        val contactsOnly = category == SearchCategory.CONTACTS
+        val categoryChanged = displayedCategory != category
         if (categoryChanged || query != displayedSearchQuery) {
-            displayedContactsOnly = contactsOnly
+            displayedCategory = category
             displayedSearchQuery = query
             linearLayoutManager.reverseLayout = !contactsOnly && query.isNotBlank()
             linearLayoutManager.scrollToPositionWithOffset(0, 0)
