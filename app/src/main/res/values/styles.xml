@@ -63,15 +63,9 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
-    <style name="AppSearchText" parent="Widget.AppCompat.SearchView">
-        <item name="android:maxLength">200</item>
-        <item name="android:textSize">@dimen/text_large</item>
-        <item name="android:textColor">?attr/primaryColor</item>
-        <item name="android:editTextColor">?attr/primaryColor</item>
-        <item name="android:textColorHint">?attr/primaryColor</item>
-        <item name="android:fontFamily">?attr/mainFontFamily</item>
-        <item name="android:inputType">textCapSentences|textNoSuggestions</item>
-        <item name="android:cursorVisible">false</item>
+    <style name="DrawerSearchInput" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">#202020</item>
+        <item name="colorControlActivated">#202020</item>
     </style>
 
     <style name="TextDefault" parent="@android:style/TextAppearance.Large">

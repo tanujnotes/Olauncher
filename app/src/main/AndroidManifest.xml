@@ -37,7 +37,7 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:taskAffinity=""
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
