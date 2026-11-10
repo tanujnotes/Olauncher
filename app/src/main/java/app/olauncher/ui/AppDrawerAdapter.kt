@@ -286,8 +286,9 @@ class AppDrawerAdapter(
                         matchingContacts.asReversed().forEach { add(Row.Contact(it)) }
                         add(Row.Section.CONTACTS)
                     } else if (contactsOnly && matchingContacts.isNotEmpty()) {
-                        add(Row.Section.CONTACTS)
+                        if (query.isBlank()) add(Row.Section.CONTACTS)
                         matchingContacts.forEach { add(Row.Contact(it)) }
+                        if (query.isNotBlank()) add(Row.Section.CONTACTS)
                     }
                 }
             }
