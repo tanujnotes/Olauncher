@@ -251,16 +251,26 @@ class AppDrawerFragment : BaseFragment() {
 
         setOnEditorActionListener { _, actionId, event ->
             val query = text?.toString().orEmpty()
+            val imeSubmit = event == null && actionId in setOf(
+                EditorInfo.IME_ACTION_SEARCH, EditorInfo.IME_ACTION_GO, EditorInfo.IME_ACTION_DONE,
+            )
+            val enterKey = event?.keyCode == KeyEvent.KEYCODE_ENTER
+            val completedPress = imeSubmit ||
+                (enterKey && event?.action == KeyEvent.ACTION_UP && event?.isCanceled == false)
             when {
-                query.isBlank() -> false
-                event == null && actionId in setOf(
-                    EditorInfo.IME_ACTION_SEARCH, EditorInfo.IME_ACTION_GO, EditorInfo.IME_ACTION_DONE,
-                ) -> {
-                    submitSearch(query)
+                query.isEmpty() && flag == Constants.FLAG_LAUNCH_APP && (imeSubmit || enterKey) -> {
+                    if (completedPress) {
+                        if (!commandEntryMode) clearContactCommand()
+                        setCommandEntryMode(!commandEntryMode)
+                        // Consume the action and keep the same focused input connection.
+                        showSearchKeyboard()
+                        post { if (_binding != null) showSearchKeyboard() }
+                    }
                     true
                 }
-                event?.keyCode == KeyEvent.KEYCODE_ENTER -> {
-                    if (event.action == KeyEvent.ACTION_UP && !event.isCanceled) submitSearch(query)
+                query.isBlank() -> false
+                imeSubmit || enterKey -> {
+                    if (completedPress) submitSearch(query)
                     true
                 }
                 else -> false
