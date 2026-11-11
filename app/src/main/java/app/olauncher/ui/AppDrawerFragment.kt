@@ -229,16 +229,18 @@ class AppDrawerFragment : BaseFragment() {
                 val command = ContactSearchCommand.parsePrefix(text, commandEntryMode)
                 if (command != null) {
                     setCommandEntryMode(false)
-                    selectSearchCategory(SearchCategory.CONTACTS)
+                    selectSearchCategory(if (command.action != null) SearchCategory.CONTACTS else SearchCategory.ALL)
                     contactCommand = command
                     updateContactCommandChip()
-                    if (hasContactsPermission()) {
+                    if (command.action == null) {
+                        // External searches do not require contact access.
+                    } else if (hasContactsPermission()) {
                         if (!contactsLoaded && contactsJob?.isActive != true) refreshContacts()
                     } else {
                         requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
                     }
                     // Remove only the prefix; pasted commands can include a contact query.
-                    setText(text.drop(2))
+                    setText(text.substringAfter(' '))
                     setSelection(this.text?.length ?: 0)
                     return@doAfterTextChanged
                 }
@@ -278,6 +280,17 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun submitSearch(query: String) {
+        when (contactCommand) {
+            ContactSearchCommand.WEB -> {
+                requireContext().openUrl("https://www.google.com/search?q=" + android.net.Uri.encode(query.trim()))
+                return
+            }
+            ContactSearchCommand.AI -> {
+                openAiSearch(query.trim())
+                return
+            }
+            else -> Unit
+        }
         if (adapter.searchCategory != SearchCategory.CONTACTS && query.startsWith("!")) {
             adapter.cancelPendingSearchAction()
             requireContext().openUrl(Constants.URL_DUCK_SEARCH + query.replace(" ", "%20"))
@@ -287,6 +300,62 @@ class AppDrawerFragment : BaseFragment() {
             if (app == null) requireContext().openSearch(query.trim())
             else selectApp(app)
         }
+    }
+
+    private fun aiSearchSettings() = requireContext().getSharedPreferences(
+        "external_search", android.content.Context.MODE_PRIVATE
+    )
+
+    private fun selectedAiProvider(): Int {
+        val selected = aiSearchSettings().getInt("ai_provider", 0)
+        if (selected !in 0..1) {
+            aiSearchSettings().edit().putInt("ai_provider", 0).apply()
+            return 0
+        }
+        return selected
+    }
+
+    private fun chooseAiProvider() {
+        val providers = resources.getStringArray(R.array.command_ai_providers)
+        val selected = selectedAiProvider()
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle(R.string.command_choose_ai)
+            .setSingleChoiceItems(providers, selected) { dialog, index ->
+                aiSearchSettings().edit().putInt("ai_provider", index).apply()
+                updateContactCommandChip()
+                dialog.dismiss()
+                showSearchKeyboard()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
+    }
+
+    private fun openAiSearch(query: String) {
+        val encoded = android.net.Uri.encode(query)
+        when (selectedAiProvider()) {
+            1 -> {
+                val intent = android.content.Intent(android.content.Intent.ACTION_SEND)
+                    .setType("text/plain")
+                    .putExtra(android.content.Intent.EXTRA_TEXT, query)
+                    .setPackage("com.google.android.apps.bard")
+                try {
+                    startActivity(intent)
+                } catch (_: android.content.ActivityNotFoundException) {
+                    openGeminiWithCopiedPrompt(query)
+                } catch (_: SecurityException) {
+                    openGeminiWithCopiedPrompt(query)
+                }
+            }
+            else -> requireContext().openUrl("https://www.google.com/search?udm=50&q=" + encoded)
+        }
+    }
+
+    private fun openGeminiWithCopiedPrompt(query: String) {
+        val clipboard = requireContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE)
+            as android.content.ClipboardManager
+        clipboard.setPrimaryClip(android.content.ClipData.newPlainText("AI prompt", query))
+        requireContext().openUrl("https://gemini.google.com/app")
+        requireContext().showToast(getString(R.string.command_gemini_paste))
     }
 
     private fun selectApp(app: AppModel) {
@@ -544,12 +613,23 @@ class AppDrawerFragment : BaseFragment() {
             ContactSearchCommand.PHONE -> R.drawable.ic_drawer_contact_phone
             ContactSearchCommand.MESSAGE -> R.drawable.ic_drawer_contact_text
             ContactSearchCommand.WHATSAPP -> R.drawable.ic_drawer_contact_whatsapp
+            ContactSearchCommand.WEB -> R.drawable.ic_command_web
+            ContactSearchCommand.AI -> if (selectedAiProvider() == 1)
+                R.drawable.ic_command_gemini else R.drawable.ic_command_ai
         })
         contentDescription = getString(when (command) {
             ContactSearchCommand.PHONE -> R.string.contact_command_phone
             ContactSearchCommand.MESSAGE -> R.string.contact_command_message
             ContactSearchCommand.WHATSAPP -> R.string.contact_command_whatsapp
+            ContactSearchCommand.WEB -> R.string.command_web
+            ContactSearchCommand.AI -> R.string.command_ai
         })
+        setOnLongClickListener {
+            if (command == ContactSearchCommand.AI) {
+                chooseAiProvider()
+                true
+            } else false
+        }
         setOnClickListener {
             clearContactCommand()
             showSearchKeyboard()
@@ -564,6 +644,7 @@ class AppDrawerFragment : BaseFragment() {
 
     private fun maybeExecuteContactCommand(query: String) {
         val command = contactCommand ?: return
+        val action = command.action ?: return
         if (commandHandled || query.isBlank() || !contactsLoaded ||
             adapter.searchCategory != SearchCategory.CONTACTS ||
             _binding?.search?.text?.toString() != query ||
@@ -572,7 +653,7 @@ class AppDrawerFragment : BaseFragment() {
         val contact = adapter.currentList.filterIsInstance<AppDrawerAdapter.Row.Contact>()
             .singleOrNull()?.model ?: return
         if (contact.numbers.isEmpty()) return
-        executeContactAction(contact, command.action)
+        executeContactAction(contact, action)
     }
 
     private fun executeContactAction(contact: DrawerContact, action: ContactAction) {

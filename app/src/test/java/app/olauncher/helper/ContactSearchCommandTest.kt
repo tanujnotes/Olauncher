@@ -9,7 +9,9 @@ class ContactSearchCommandTest {
         for ((letter, command) in listOf(
             "p" to ContactSearchCommand.PHONE,
             "m" to ContactSearchCommand.MESSAGE,
-            "w" to ContactSearchCommand.WHATSAPP,
+            "wa" to ContactSearchCommand.WHATSAPP,
+            "w" to ContactSearchCommand.WEB,
+            "ai" to ContactSearchCommand.AI,
         )) {
             assertNull(ContactSearchCommand.parsePrefix(letter, true))
             assertEquals(command, ContactSearchCommand.parsePrefix("$letter ", true))
