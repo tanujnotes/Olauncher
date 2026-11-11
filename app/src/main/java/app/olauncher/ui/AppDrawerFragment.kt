@@ -162,21 +162,6 @@ class AppDrawerFragment : BaseFragment() {
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
             hint = "Please select an app"
 
-        if (flag == Constants.FLAG_LAUNCH_APP) {
-            onEmptyBackspace = {
-                // Only Apps and Contacts are interactive tabs in this menu.
-                val tabs = listOf(SearchCategory.APPS, SearchCategory.CONTACTS)
-                val current = tabs.indexOf(adapter.searchCategory).coerceAtLeast(0)
-                val previous = tabs[(current + tabs.size - 1) % tabs.size]
-                if (previous == SearchCategory.CONTACTS) {
-                    binding.categoryMenu.categoryContacts.performClick()
-                } else {
-                    binding.categoryMenu.categoryApps.performClick()
-                }
-                showSearchKeyboard()
-            }
-        }
-
         doAfterTextChanged { query ->
             adapter.updateSearch(query?.toString().orEmpty())
             binding.appRename.visibility =

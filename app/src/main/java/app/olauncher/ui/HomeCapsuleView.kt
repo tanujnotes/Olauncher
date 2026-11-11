@@ -50,10 +50,11 @@ class HomeCapsuleView @JvmOverloads constructor(
 
     fun cycle() {
         mode = (mode + 1) % 3
-        state.edit().putInt("mode", mode).apply()
         refresh()
+        state.edit().putInt("mode", mode).apply()
     }
 
+    private var cycleTap = false
     private var thunderTouch = false
     private var badgeTouch = false
     private var badgeTap = false
@@ -80,6 +81,7 @@ class HomeCapsuleView @JvmOverloads constructor(
             thunderTouch = dx * dx + dy * dy <= radius * radius
             badgeTouch = insideBadge(event.x, event.y)
             badgeTap = badgeTouch
+            cycleTap = !thunderTouch && !badgeTouch
             downX = event.x
             downY = event.y
         }
@@ -104,7 +106,26 @@ class HomeCapsuleView @JvmOverloads constructor(
             }
             return true
         }
-        return super.onTouchEvent(event)
+        when (event.actionMasked) {
+            MotionEvent.ACTION_MOVE -> {
+                if (kotlin.math.abs(event.x - downX) > touchSlop ||
+                    kotlin.math.abs(event.y - downY) > touchSlop) cycleTap = false
+            }
+            MotionEvent.ACTION_POINTER_DOWN, MotionEvent.ACTION_CANCEL -> cycleTap = false
+            MotionEvent.ACTION_UP -> {
+                val tapped = cycleTap && event.x >= 0 && event.x < width &&
+                    event.y >= 0 && event.y < height
+                cycleTap = false
+                // Dispatch immediately instead of View's posted click runnable.
+                if (tapped) performClick()
+            }
+        }
+        return true
+    }
+
+    override fun performClick(): Boolean {
+        super.performClick()
+        return true
     }
 
     private fun openBadgeDestination() {
