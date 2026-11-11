@@ -516,6 +516,7 @@ class AppDrawerFragment : BaseFragment() {
 
     private fun setCommandEntryMode(enabled: Boolean) = with(binding) {
         commandEntryMode = enabled
+        searchDivider.setBackgroundColor(if (enabled) Color.BLACK else Color.WHITE)
         searchBar.setBackgroundResource(
             if (enabled) R.drawable.bg_drawer_search_command else R.drawable.bg_home_search
         )
