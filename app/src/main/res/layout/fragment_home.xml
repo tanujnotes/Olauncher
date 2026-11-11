@@ -23,12 +23,13 @@
         android:layout_height="1dp"
         android:contentDescription="@string/recents_layout_description" /> -->
 
-    <app.olauncher.ui.HomeCapsuleView
-        android:id="@+id/homeCapsule"
+    <include
+        android:id="@+id/homeSearchBar"
+        layout="@layout/home_search_bar"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginHorizontal="24dp"
+        android:layout_marginHorizontal="@dimen/app_drawer_search_margin"
         android:layout_marginBottom="16dp" />
 
     <!-- Screen time-->

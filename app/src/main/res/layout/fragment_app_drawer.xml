@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/primaryShadeDarkColor"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
     android:paddingTop="24dp">
@@ -27,17 +29,27 @@
         android:visibility="gone"
         app:drawableStartCompat="@drawable/ic_drawer_apps_badge" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <!-- This parent clips the entire scrolling surface, including faded edges
+         and animated rows, while the search bar can move outside its bounds. -->
+    <FrameLayout
+        android:id="@+id/resultsViewport"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/app_drawer_side_inset"
         android:layout_marginEnd="@dimen/app_drawer_side_inset"
         android:layout_weight="1"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:fadingEdgeLength="24dp"
-        android:requiresFadingEdge="vertical" />
+        android:clipChildren="true"
+        android:clipToPadding="true">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:fadingEdgeLength="24dp"
+            android:requiresFadingEdge="vertical" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/contactsEmpty"

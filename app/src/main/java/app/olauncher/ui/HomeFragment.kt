@@ -149,8 +149,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initClickListeners() {
-        binding.homeCapsule.onThunderLongPress = {
-            showAppList(Constants.FLAG_LAUNCH_APP, commandMode = true)
+        binding.homeSearchBar.root.setOnClickListener { openHomeSearch() }
+        binding.homeSearchBar.homeThunder.setOnClickListener { openHomeSearch() }
+        binding.homeSearchBar.homeThunder.setOnLongClickListener {
+            openHomeSearch(commandMode = true)
+            true
         }
         binding.lock.setOnClickListener(this)
         // Home button for recents feature disabled
@@ -277,6 +280,23 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
             isShortcut = prefs.isShortcutSwipeLeft,
             userString = prefs.appUserSwipeLeft,
             fallback = { openCameraApp(requireContext()) }
+        )
+    }
+
+    private fun openHomeSearch(commandMode: Boolean = false) {
+        if (findNavController().currentDestination?.id != R.id.mainFragment) return
+        val location = IntArray(2)
+        binding.homeSearchBar.root.getLocationOnScreen(location)
+        findNavController().navigate(
+            R.id.action_mainFragment_to_appListFragment,
+            bundleOf(
+                Constants.Key.FLAG to Constants.FLAG_LAUNCH_APP,
+                Constants.Key.COMMAND_MODE to commandMode,
+                "homeSearchY" to location[1]
+            ),
+            androidx.navigation.NavOptions.Builder()
+                .setEnterAnim(0).setExitAnim(0)
+                .setPopEnterAnim(0).setPopExitAnim(R.anim.slide_out_bottom).build()
         )
     }
 
@@ -425,7 +445,6 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
             override fun onClick() {
                 super.onClick()
-                binding.homeCapsule.cycle()
                 viewModel.checkForMessages.call()
             }
         }
