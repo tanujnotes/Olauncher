@@ -141,7 +141,7 @@ class AppDrawerFragment : BaseFragment() {
         root.setBackgroundColor(Color.rgb(11, 11, 11))
         appsHeading.isVisible = true
         categoryMenu.root.isVisible = true
-        categoryMenu.categoryApps.isSelected = true
+        categoryMenu.categoryApps.isSelected = false
         animateCategoryChanges = !requireContext().isEinkDisplay() &&
             !requireContext().isSystemAnimationsDisabled()
         val sideMargin = resources.getDimensionPixelSize(R.dimen.app_drawer_search_margin)
@@ -377,7 +377,9 @@ class AppDrawerFragment : BaseFragment() {
     private fun initClickListeners() {
         if (flag == Constants.FLAG_LAUNCH_APP) {
             binding.categoryMenu.categoryContacts.setOnClickListener {
-                if (hasContactsPermission()) {
+                if (adapter.searchCategory == SearchCategory.CONTACTS) {
+                    selectSearchCategory(SearchCategory.ALL)
+                } else if (hasContactsPermission()) {
                     selectSearchCategory(SearchCategory.CONTACTS)
                     if (!contactsLoaded && contactsJob?.isActive != true) refreshContacts()
                 } else {
@@ -385,7 +387,10 @@ class AppDrawerFragment : BaseFragment() {
                 }
             }
             binding.categoryMenu.categoryApps.setOnClickListener {
-                selectSearchCategory(SearchCategory.APPS)
+                selectSearchCategory(
+                    if (adapter.searchCategory == SearchCategory.APPS) SearchCategory.ALL
+                    else SearchCategory.APPS
+                )
             }
         }
         binding.appRename.setOnClickListener {
