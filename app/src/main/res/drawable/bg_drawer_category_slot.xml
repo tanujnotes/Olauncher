@@ -3,7 +3,7 @@
     <item android:state_selected="true">
         <inset android:inset="3dp">
             <shape>
-                <solid android:color="#383838" />
+                <solid android:color="#FFEB3B" />
                 <corners android:radius="20dp" />
             </shape>
         </inset>

@@ -1,7 +1,7 @@
 name: Debug APK
 on:
   push:
-    branches: [highlight-top-result]
+    branches: [highlight-hotkey-yellow-with-black]
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,5 +23,5 @@ jobs:
           GRADLE_OPTS: ''
       - uses: actions/upload-artifact@v4
         with:
-          name: Bolt-Highlight-Top-Result-Debug
+          name: Bolt-Yellow-Hotkeys-Debug
           path: app/build/outputs/apk/debug/*.apk
