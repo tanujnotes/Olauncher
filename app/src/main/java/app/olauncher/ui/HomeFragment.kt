@@ -149,6 +149,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initClickListeners() {
+        binding.homeCapsule.onThunderLongPress = {
+            showAppList(Constants.FLAG_LAUNCH_APP, commandMode = true)
+        }
         binding.lock.setOnClickListener(this)
         // Home button for recents feature disabled
         // binding.recents.setOnClickListener(this)
@@ -277,13 +280,14 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         )
     }
 
-    private fun showAppList(flag: Int, rename: Boolean = false) {
+    private fun showAppList(flag: Int, rename: Boolean = false, commandMode: Boolean = false) {
         try {
             findNavController().navigate(
                 R.id.action_mainFragment_to_appListFragment,
                 bundleOf(
                     Constants.Key.FLAG to flag,
-                    Constants.Key.RENAME to rename
+                    Constants.Key.RENAME to rename,
+                    Constants.Key.COMMAND_MODE to commandMode
                 )
             )
         } catch (e: Exception) {
@@ -291,7 +295,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 R.id.appListFragment,
                 bundleOf(
                     Constants.Key.FLAG to flag,
-                    Constants.Key.RENAME to rename
+                    Constants.Key.RENAME to rename,
+                    Constants.Key.COMMAND_MODE to commandMode
                 )
             )
             e.printStackTrace()
