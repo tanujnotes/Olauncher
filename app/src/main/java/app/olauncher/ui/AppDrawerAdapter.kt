@@ -103,6 +103,7 @@ class AppDrawerAdapter(
     private var contacts: List<DrawerContact>? = emptyList()
     var searchCategory = SearchCategory.ALL
         private set
+    var contactCommand: ContactAction? = null
     private var query = ""
     private var pendingSubmit: ((AppModel?) -> Unit)? = null
     private var filterJob: Job? = null
@@ -163,7 +164,7 @@ class AppDrawerAdapter(
                 is SectionViewHolder -> holder.bind(row as Row.Section)
                 is ContactViewHolder -> holder.bind((row as Row.Contact).model, iconScope, contactPhotos) { contact, action ->
                     if (appliedGeneration == filterGeneration && isCurrentSearch(query)) {
-                        contactClickListener(contact, action)
+                        contactClickListener(contact, if (action == ContactAction.CALL) contactCommand ?: action else action)
                     }
                 }
 
@@ -240,7 +241,7 @@ class AppDrawerAdapter(
         val contact = contacts.firstOrNull()?.model
         when {
             app != null -> onResult(app)
-            contact != null -> contactClickListener(contact, ContactAction.OPEN)
+            contact != null -> contactClickListener(contact, contactCommand ?: ContactAction.OPEN)
             !contactsOnly -> onResult(null)
         }
     }

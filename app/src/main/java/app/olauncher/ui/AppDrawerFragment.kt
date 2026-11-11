@@ -35,6 +35,9 @@ import app.olauncher.data.AppModel
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentAppDrawerBinding
+import app.olauncher.helper.ContactSearchCommand
+import app.olauncher.helper.ContactAction
+import app.olauncher.helper.DrawerContact
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.openDrawerContact
 import app.olauncher.helper.readDrawerContacts
@@ -61,6 +64,8 @@ class AppDrawerFragment : BaseFragment() {
     private var displayedSearchQuery = ""
     private var displayedCategory = SearchCategory.ALL
     private var animateCategoryChanges = false
+    private var contactCommand: ContactSearchCommand? = null
+    private var commandHandled = false
     private var contactsLoaded = false
     private var contactsJob: Job? = null
     private val requestContactsPermission = registerForActivityResult(
@@ -111,6 +116,8 @@ class AppDrawerFragment : BaseFragment() {
         prefs = Prefs(requireContext())
         displayedSearchQuery = ""
         displayedCategory = SearchCategory.ALL
+        contactCommand = null
+        commandHandled = false
         contactsLoaded = false
         currentAppList = null
         currentPrivateSpaceApps = null
@@ -163,7 +170,21 @@ class AppDrawerFragment : BaseFragment() {
             hint = "Please select an app"
 
         doAfterTextChanged { query ->
-            adapter.updateSearch(query?.toString().orEmpty())
+            commandHandled = false
+            val text = query?.toString().orEmpty()
+            if (flag == Constants.FLAG_LAUNCH_APP &&
+                adapter.searchCategory == SearchCategory.CONTACTS && contactCommand == null) {
+                val command = ContactSearchCommand.parsePrefix(text)
+                if (command != null) {
+                    contactCommand = command
+                    updateContactCommandChip()
+                    // Remove only the prefix; pasted commands can include a contact query.
+                    setText(text.drop(2))
+                    setSelection(this.text?.length ?: 0)
+                    return@doAfterTextChanged
+                }
+            }
+            adapter.updateSearch(text)
             binding.appRename.visibility =
                 if (canRename && !query.isNullOrBlank()) View.VISIBLE else View.GONE
         }
@@ -226,11 +247,14 @@ class AppDrawerFragment : BaseFragment() {
                     findNavController().currentDestination?.id == R.id.appListFragment
             },
             onSearchResultsApplied = { query ->
-                if (flag == Constants.FLAG_LAUNCH_APP) showSearchResults(query)
+                if (flag == Constants.FLAG_LAUNCH_APP) {
+                    showSearchResults(query)
+                    maybeExecuteContactCommand(query)
+                }
             },
             appClickListener = ::selectApp,
             contactClickListener = { contact, action ->
-                openDrawerContact(requireContext(), contact, action)
+                executeContactAction(contact, action)
             },
             appInfoListener = {
                 openAppInfo(
@@ -415,11 +439,59 @@ class AppDrawerFragment : BaseFragment() {
         }
     }
 
+    private fun updateContactCommandChip(): Unit = with(binding.contactCommandChip) {
+        val command = contactCommand
+        adapter.contactCommand = command?.action
+        isVisible = command != null
+        if (command == null) return@with
+        setImageResource(when (command) {
+            ContactSearchCommand.PHONE -> R.drawable.ic_drawer_contact_phone
+            ContactSearchCommand.MESSAGE -> R.drawable.ic_drawer_contact_text
+            ContactSearchCommand.WHATSAPP -> R.drawable.ic_drawer_contact_whatsapp
+        })
+        contentDescription = getString(when (command) {
+            ContactSearchCommand.PHONE -> R.string.contact_command_phone
+            ContactSearchCommand.MESSAGE -> R.string.contact_command_message
+            ContactSearchCommand.WHATSAPP -> R.string.contact_command_whatsapp
+        })
+        setOnClickListener {
+            contactCommand = null
+            commandHandled = false
+            updateContactCommandChip()
+            showSearchKeyboard()
+        }
+    }
+
+    private fun maybeExecuteContactCommand(query: String) {
+        val command = contactCommand ?: return
+        if (commandHandled || query.isBlank() || !contactsLoaded ||
+            adapter.searchCategory != SearchCategory.CONTACTS ||
+            _binding?.search?.text?.toString() != query ||
+            !viewLifecycleOwner.lifecycle.currentState.isAtLeast(androidx.lifecycle.Lifecycle.State.RESUMED)
+        ) return
+        val contact = adapter.currentList.filterIsInstance<AppDrawerAdapter.Row.Contact>()
+            .singleOrNull()?.model ?: return
+        if (contact.numbers.isEmpty()) return
+        executeContactAction(contact, command.action)
+    }
+
+    private fun executeContactAction(contact: DrawerContact, action: ContactAction) {
+        // A refresh or return from another app must not repeat the automatic action.
+        commandHandled = true
+        adapter.cancelPendingSearchAction()
+        openDrawerContact(requireContext(), contact, action)
+    }
+
     private fun hasContactsPermission() = ContextCompat.checkSelfPermission(
         requireContext(), Manifest.permission.READ_CONTACTS
     ) == PackageManager.PERMISSION_GRANTED
 
     private fun selectSearchCategory(category: SearchCategory) {
+        if (category != SearchCategory.CONTACTS) {
+            contactCommand = null
+            commandHandled = false
+            updateContactCommandChip()
+        }
         binding.categoryMenu.categoryContacts.isSelected = category == SearchCategory.CONTACTS
         binding.categoryMenu.categoryApps.isSelected = category == SearchCategory.APPS
         adapter.setSearchCategory(category)
