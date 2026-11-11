@@ -172,14 +172,15 @@ class AppDrawerFragment : BaseFragment() {
         doAfterTextChanged { query ->
             commandHandled = false
             val text = query?.toString().orEmpty()
-            if (flag == Constants.FLAG_LAUNCH_APP &&
-                adapter.searchCategory == SearchCategory.CONTACTS && contactCommand == null) {
-                val command = ContactSearchCommand.parsePrefix(text)
+            if (flag == Constants.FLAG_LAUNCH_APP && contactCommand == null) {
+                val contactsOnly = adapter.searchCategory == SearchCategory.CONTACTS
+                val command = ContactSearchCommand.parsePrefix(text, contactsOnly)
                 if (command != null) {
+                    selectSearchCategory(SearchCategory.CONTACTS)
                     contactCommand = command
                     updateContactCommandChip()
                     // Remove only the prefix; pasted commands can include a contact query.
-                    setText(text.drop(2))
+                    setText(text.drop(ContactSearchCommand.prefixLength(text, contactsOnly)))
                     setSelection(this.text?.length ?: 0)
                     return@doAfterTextChanged
                 }
