@@ -65,6 +65,7 @@ class AppDrawerFragment : BaseFragment() {
     private var displayedCategory = SearchCategory.ALL
     private var animateCategoryChanges = false
     private var contactCommand: ContactSearchCommand? = null
+    private var commandEntryMode = false
     private var commandHandled = false
     private var contactsLoaded = false
     private var contactsJob: Job? = null
@@ -117,6 +118,7 @@ class AppDrawerFragment : BaseFragment() {
         displayedSearchQuery = ""
         displayedCategory = SearchCategory.ALL
         contactCommand = null
+        commandEntryMode = false
         commandHandled = false
         contactsLoaded = false
         currentAppList = null
@@ -178,15 +180,20 @@ class AppDrawerFragment : BaseFragment() {
         doAfterTextChanged { query ->
             commandHandled = false
             val text = query?.toString().orEmpty()
-            if (flag == Constants.FLAG_LAUNCH_APP && contactCommand == null) {
-                val contactsOnly = adapter.searchCategory == SearchCategory.CONTACTS
-                val command = ContactSearchCommand.parsePrefix(text, contactsOnly)
+            if (flag == Constants.FLAG_LAUNCH_APP && commandEntryMode) {
+                val command = ContactSearchCommand.parsePrefix(text, commandEntryMode)
                 if (command != null) {
+                    setCommandEntryMode(false)
                     selectSearchCategory(SearchCategory.CONTACTS)
                     contactCommand = command
                     updateContactCommandChip()
+                    if (hasContactsPermission()) {
+                        if (!contactsLoaded && contactsJob?.isActive != true) refreshContacts()
+                    } else {
+                        requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
+                    }
                     // Remove only the prefix; pasted commands can include a contact query.
-                    setText(text.drop(ContactSearchCommand.prefixLength(text, contactsOnly)))
+                    setText(text.drop(2))
                     setSelection(this.text?.length ?: 0)
                     return@doAfterTextChanged
                 }
@@ -407,6 +414,11 @@ class AppDrawerFragment : BaseFragment() {
 
     private fun initClickListeners() {
         if (flag == Constants.FLAG_LAUNCH_APP) {
+            binding.searchActionBadge.setOnClickListener {
+                if (!commandEntryMode) clearContactCommand()
+                setCommandEntryMode(!commandEntryMode)
+                showSearchKeyboard()
+            }
             binding.categoryMenu.categoryContacts.setOnClickListener {
                 if (adapter.searchCategory == SearchCategory.CONTACTS) {
                     selectSearchCategory(SearchCategory.ALL)
@@ -444,6 +456,21 @@ class AppDrawerFragment : BaseFragment() {
             }
             closeDrawer()
         }
+    }
+
+    private fun setCommandEntryMode(enabled: Boolean) = with(binding) {
+        commandEntryMode = enabled
+        searchBar.setBackgroundResource(
+            if (enabled) R.drawable.bg_drawer_search_command else R.drawable.bg_drawer_search_white
+        )
+        searchActionBadge.setImageResource(
+            if (enabled) R.drawable.ic_drawer_action_badge_command else R.drawable.ic_drawer_action_badge
+        )
+        searchActionBadge.isSelected = enabled
+        searchActionBadge.contentDescription = getString(
+            if (enabled) R.string.command_mode_disable else R.string.command_mode_enable
+        )
+        search.setTextColor(if (enabled) Color.BLACK else Color.rgb(32, 32, 32))
     }
 
     private fun updateContactCommandChip(): Unit = with(binding.contactCommandChip) {

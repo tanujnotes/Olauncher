@@ -200,4 +200,6 @@
     <string name="contact_command_phone">Dial contact command. Tap to remove.</string>
     <string name="contact_command_message">Message contact command. Tap to remove.</string>
     <string name="contact_command_whatsapp">WhatsApp contact command. Tap to remove.</string>
+    <string name="command_mode_enable">Enable command mode</string>
+    <string name="command_mode_disable">Disable command mode</string>
 </resources>
