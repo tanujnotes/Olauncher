@@ -88,7 +88,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         populateBoldFont()
         populateAlignment()
         populateStatusBar()
-        populateDateTime()
         populateSwipeApps()
         populateActionHints()
         initClickListeners()
@@ -113,7 +112,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.dailyWallpaper -> toggleDailyWallpaperUpdate()
             R.id.alignment -> showAlignmentMenu(view)
             R.id.statusBar -> toggleStatusBar()
-            R.id.dateTime -> showDateTimeMenu(view)
             R.id.appThemeText -> showAppThemeMenu(view, showSystem = false)
             R.id.textSizeValue -> showTextSizeDialog()
             R.id.boldFont -> toggleBoldFont()
@@ -181,7 +179,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.dailyWallpaper.setOnClickListener(this)
         binding.alignment.setOnClickListener(this)
         binding.statusBar.setOnClickListener(this)
-        binding.dateTime.setOnClickListener(this)
         binding.swipeLeftApp.setOnClickListener(this)
         binding.swipeRightApp.setOnClickListener(this)
         binding.appThemeText.setOnClickListener(this)
@@ -223,16 +220,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     }
 
     // Popup menus
-
-    private fun showDateTimeMenu(anchor: View) {
-        anchor.showPopupMenu(R.menu.date_time) { item ->
-            when (item.itemId) {
-                R.id.dateTimeOn -> toggleDateTime(Constants.DateTime.ON)
-                R.id.dateTimeOff -> toggleDateTime(Constants.DateTime.OFF)
-                R.id.dateOnly -> toggleDateTime(Constants.DateTime.DATE_ONLY)
-            }
-        }
-    }
 
     private fun showAlignmentMenu(anchor: View) {
         anchor.showPopupMenu(R.menu.alignment) { item ->
@@ -333,22 +320,6 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             requireActivity().window.hideStatusBar()
             binding.statusBar.text = getString(R.string.off)
         }
-    }
-
-    private fun toggleDateTime(selected: Int) {
-        prefs.dateTimeVisibility = selected
-        populateDateTime()
-        viewModel.toggleDateTime()
-    }
-
-    private fun populateDateTime() {
-        binding.dateTime.text = getString(
-            when (prefs.dateTimeVisibility) {
-                Constants.DateTime.DATE_ONLY -> R.string.date
-                Constants.DateTime.ON -> R.string.on
-                else -> R.string.off
-            }
-        )
     }
 
     private fun showHiddenApps() {
