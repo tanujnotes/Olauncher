@@ -523,6 +523,9 @@ class AppDrawerFragment : BaseFragment() {
     private fun updateContactCommandChip(): Unit = with(binding.contactCommandChip) {
         val command = contactCommand
         adapter.contactCommand = command?.action
+        if (flag == Constants.FLAG_LAUNCH_APP) {
+            binding.search.setHint(command?.hintRes ?: R.string.search_anything)
+        }
         isVisible = command != null
         if (command == null) return@with
         setImageResource(when (command) {
