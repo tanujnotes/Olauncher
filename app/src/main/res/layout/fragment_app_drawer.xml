@@ -143,10 +143,13 @@
 
         <ImageView
             android:id="@+id/searchActionBadge"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/command_mode_enable"
             android:layout_marginEnd="2dp"
-            android:importantForAccessibility="no"
             android:src="@drawable/ic_drawer_action_badge"
             android:visibility="gone" />
 
