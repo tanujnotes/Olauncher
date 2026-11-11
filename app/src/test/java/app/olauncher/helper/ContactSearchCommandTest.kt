@@ -5,7 +5,7 @@ import org.junit.Assert.assertNull
 import org.junit.Test
 
 class ContactSearchCommandTest {
-    @Test fun commandsRequireSpaceAndIgnoreCase() {
+    @Test fun commandsRequireDoubleSpaceAndIgnoreCase() {
         for ((letter, command) in listOf(
             "p" to ContactSearchCommand.PHONE,
             "m" to ContactSearchCommand.MESSAGE,
@@ -14,23 +14,24 @@ class ContactSearchCommandTest {
             "ai" to ContactSearchCommand.AI,
         )) {
             assertNull(ContactSearchCommand.parsePrefix(letter, true))
-            assertEquals(command, ContactSearchCommand.parsePrefix("$letter ", true))
-            assertEquals(command, ContactSearchCommand.parsePrefix("${letter.uppercase()} ", true))
-            assertEquals(command, ContactSearchCommand.parsePrefix("$letter Jamie", true))
+            assertNull(ContactSearchCommand.parsePrefix("$letter ", true))
+            assertEquals(command, ContactSearchCommand.parsePrefix("$letter  ", true))
+            assertEquals(command, ContactSearchCommand.parsePrefix("${letter.uppercase()}  ", true))
+            assertEquals(command, ContactSearchCommand.parsePrefix("$letter  Jamie", true))
         }
     }
 
     @Test fun regularNamesAndOtherWhitespaceDoNotActivateCommands() {
-        for (text in listOf("", "Paul", "Mary Smith", "Will", " p ", "p\tJamie", "m\nJamie", "x Jamie")) {
+        for (text in listOf("", "Paul", "Mary Smith", "Will", " p ", "p Jamie", "p\tJamie", "m\nJamie", "x Jamie")) {
             assertNull(text, ContactSearchCommand.parsePrefix(text, true))
         }
     }
 
-    @Test fun commandsRequireThunderModeAndRejectOldPeriodSyntax() {
-        for (text in listOf("p ", "M Jamie", "w ")) {
+    @Test fun commandsRejectNonCommandModeAndOldPeriodSyntax() {
+        for (text in listOf("p  ", "M  Jamie", "w  ")) {
             assertNull(ContactSearchCommand.parsePrefix(text, false))
         }
-        for (text in listOf(".p ", ".m Jamie", ".w ", "p. ")) {
+        for (text in listOf(".p  ", ".m  Jamie", ".w  ", "p.  ")) {
             assertNull(ContactSearchCommand.parsePrefix(text, true))
         }
     }
