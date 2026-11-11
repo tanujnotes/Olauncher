@@ -1,0 +1,9 @@
+<resources>
+    <string name="command_web_hint">Search the web…</string>
+    <string name="command_ai_hint">Ask AI…</string>
+    <string name="command_web">Web search</string>
+    <string name="command_ai">AI search</string>
+    <string name="command_choose_ai">Choose your AI app</string>
+    <string name="command_no_ai_app">Install an AI app that accepts shared text first.</string>
+    <string name="command_ai_reset">Choose an AI app again on your next search.</string>
+</resources>

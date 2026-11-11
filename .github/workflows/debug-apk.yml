@@ -1,7 +1,7 @@
 name: Debug APK
 on:
   push:
-    branches: [fix-text-cursor]
+    branches: [commands-for-WEB-and-AI]
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,5 +23,5 @@ jobs:
           GRADLE_OPTS: ''
       - uses: actions/upload-artifact@v4
         with:
-          name: Bolt-Cursor-Fix-Debug
+          name: Bolt-Web-AI-Commands-Debug
           path: app/build/outputs/apk/debug/*.apk
