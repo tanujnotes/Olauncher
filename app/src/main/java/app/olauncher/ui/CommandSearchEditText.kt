@@ -1,5 +1,7 @@
 package app.olauncher.ui
 
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.Rect
 import android.content.Context
 import android.util.AttributeSet
@@ -18,10 +20,39 @@ class CommandSearchEditText @JvmOverloads constructor(
     var onEmptyBackspace: (() -> Boolean)? = null
     private var consumedBackspace = false
 
-    /** Restart the native cursor blink without replacing text, selection, or the IME connection. */
+    private val caretPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    /** Draw our own caret so Android's cached cursor drawable cannot retain the old mode color. */
     fun refreshTypingCursor() {
         isCursorVisible = false
-        isCursorVisible = true
+        invalidate()
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        // Keep native cursor drawing disabled, including after IME selection updates.
+        isCursorVisible = false
+        super.onDraw(canvas)
+        val textLayout = layout ?: return
+        val position = selectionStart
+        if (!isFocused || !isEnabled || position < 0 || position != selectionEnd) return
+        val offset = position.coerceAtMost(text?.length ?: 0)
+        val line = textLayout.getLineForOffset(offset)
+        val width = 2f * resources.displayMetrics.density
+        val left = compoundPaddingLeft + textLayout.getPrimaryHorizontal(offset)
+        val top = totalPaddingTop + textLayout.getLineTop(line).toFloat()
+        val bottom = totalPaddingTop + textLayout.getLineBottom(line).toFloat()
+        caretPaint.color = currentTextColor
+        val save = canvas.save()
+        canvas.clipRect(
+            scrollX + compoundPaddingLeft, scrollY + extendedPaddingTop,
+            scrollX + this.width - compoundPaddingRight, scrollY + height - extendedPaddingBottom,
+        )
+        canvas.drawRect(left, top, left + width, bottom, caretPaint)
+        canvas.restoreToCount(save)
+    }
+
+    override fun onSelectionChanged(selStart: Int, selEnd: Int) {
+        super.onSelectionChanged(selStart, selEnd)
         invalidate()
     }
 
