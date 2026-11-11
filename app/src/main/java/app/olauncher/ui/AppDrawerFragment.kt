@@ -130,6 +130,10 @@ class AppDrawerFragment : BaseFragment() {
         initSearch()
         initObservers()
         initClickListeners()
+        if (flag == Constants.FLAG_LAUNCH_APP &&
+            arguments?.getBoolean(Constants.Key.COMMAND_MODE, false) == true) {
+            setCommandEntryMode(true)
+        }
 
         val topPadding = binding.root.paddingTop
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { drawer, insets ->
@@ -609,7 +613,10 @@ class AppDrawerFragment : BaseFragment() {
             controller.isAppearanceLightNavigationBars = false
         }
         ViewCompat.requestApplyInsets(binding.root)
-        if (prefs.autoShowKeyboard) showSearchKeyboard()
+        if (prefs.autoShowKeyboard || (flag == Constants.FLAG_LAUNCH_APP &&
+            arguments?.getBoolean(Constants.Key.COMMAND_MODE, false) == true)) {
+            showSearchKeyboard()
+        }
     }
 
     override fun onStop() {
