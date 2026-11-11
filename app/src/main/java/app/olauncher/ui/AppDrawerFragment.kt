@@ -240,7 +240,7 @@ class AppDrawerFragment : BaseFragment() {
                         requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
                     }
                     // Remove only the prefix; pasted commands can include a contact query.
-                    setText(text.substringAfter("  "))
+                    setText(ContactSearchCommand.queryAfterPrefix(text))
                     setSelection(this.text?.length ?: 0)
                     return@doAfterTextChanged
                 }
