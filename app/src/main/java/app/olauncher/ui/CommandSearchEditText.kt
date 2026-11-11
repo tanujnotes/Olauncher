@@ -1,5 +1,6 @@
 package app.olauncher.ui
 
+import android.graphics.Rect
 import android.content.Context
 import android.util.AttributeSet
 import android.view.KeyEvent
@@ -16,6 +17,28 @@ class CommandSearchEditText @JvmOverloads constructor(
 ) : AppCompatEditText(context, attrs, defStyleAttr) {
     var onEmptyBackspace: (() -> Boolean)? = null
     private var consumedBackspace = false
+
+    /** Restart the native cursor blink without replacing text, selection, or the IME connection. */
+    fun refreshTypingCursor() {
+        isCursorVisible = false
+        isCursorVisible = true
+        invalidate()
+    }
+
+    override fun onTextChanged(text: CharSequence?, start: Int, lengthBefore: Int, lengthAfter: Int) {
+        super.onTextChanged(text, start, lengthBefore, lengthAfter)
+        if (isFocused) refreshTypingCursor()
+    }
+
+    override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
+        super.onFocusChanged(focused, direction, previouslyFocusedRect)
+        if (focused) refreshTypingCursor()
+    }
+
+    override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
+        super.onWindowFocusChanged(hasWindowFocus)
+        if (hasWindowFocus && isFocused) refreshTypingCursor()
+    }
 
     private fun deleteCommand(): Boolean =
         text.isNullOrEmpty() && onEmptyBackspace?.invoke() == true

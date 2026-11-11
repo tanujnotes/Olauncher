@@ -134,9 +134,8 @@ class AppDrawerFragment : BaseFragment() {
         initSearch()
         initObservers()
         initClickListeners()
-        if (flag == Constants.FLAG_LAUNCH_APP &&
-            arguments?.getBoolean(Constants.Key.COMMAND_MODE, false) == true) {
-            setCommandEntryMode(true)
+        if (flag == Constants.FLAG_LAUNCH_APP) {
+            setCommandEntryMode(arguments?.getBoolean(Constants.Key.COMMAND_MODE, false) == true)
         }
 
         if (savedInstanceState == null) animateHomeSearchEntry()
@@ -302,6 +301,7 @@ class AppDrawerFragment : BaseFragment() {
     private fun showSearchKeyboard() {
         val search = binding.search
         if (search.requestFocus()) {
+            search.refreshTypingCursor()
             WindowCompat.getInsetsController(requireActivity().window, search)
                 .show(WindowInsetsCompat.Type.ime())
         }
@@ -549,7 +549,7 @@ class AppDrawerFragment : BaseFragment() {
                 cursorField.set(editor, arrayOf(cursor, cursor))
             }
         }
-        search.invalidate()
+        search.refreshTypingCursor()
         search.setTextColor(if (enabled) Color.BLACK else Color.WHITE)
         search.setHintTextColor(if (enabled) Color.BLACK else Color.WHITE)
     }
