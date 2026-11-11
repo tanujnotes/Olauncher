@@ -9,6 +9,11 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.os.BatteryManager
+import android.provider.Settings
+import android.view.ViewConfiguration
+import android.view.SoundEffectConstants
+import app.olauncher.helper.openAlarmApp
+import app.olauncher.helper.openCalendar
 import android.text.format.DateFormat
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -50,6 +55,20 @@ class HomeCapsuleView @JvmOverloads constructor(
     }
 
     private var thunderTouch = false
+    private var badgeTouch = false
+    private var badgeTap = false
+    private var downX = 0f
+    private var downY = 0f
+    private val touchSlop = ViewConfiguration.get(context).scaledTouchSlop
+
+    private fun insideBadge(x: Float, y: Float): Boolean {
+        val center = height / 2f
+        val radius = minOf(23f * resources.displayMetrics.density,
+            center - 7f * resources.displayMetrics.density)
+        val dx = x - (width - center)
+        val dy = y - center
+        return dx * dx + dy * dy <= radius * radius
+    }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         if (event.actionMasked == MotionEvent.ACTION_DOWN) {
@@ -59,14 +78,45 @@ class HomeCapsuleView @JvmOverloads constructor(
             val dx = event.x - center
             val dy = event.y - center
             thunderTouch = dx * dx + dy * dy <= radius * radius
+            badgeTouch = insideBadge(event.x, event.y)
+            badgeTap = badgeTouch
+            downX = event.x
+            downY = event.y
         }
-        // Consume the entire thunder gesture so it cannot cycle this view or the home.
-        if (thunderTouch) {
-            if (event.actionMasked == MotionEvent.ACTION_UP || event.actionMasked == MotionEvent.ACTION_CANCEL)
+        // Icon gestures never fall through to the display's tap-to-cycle action.
+        if (thunderTouch || badgeTouch) {
+            if (event.actionMasked == MotionEvent.ACTION_MOVE &&
+                (kotlin.math.abs(event.x - downX) > touchSlop ||
+                 kotlin.math.abs(event.y - downY) > touchSlop)) badgeTap = false
+            if (event.actionMasked == MotionEvent.ACTION_POINTER_DOWN) badgeTap = false
+            if (event.actionMasked == MotionEvent.ACTION_UP) {
+                if (badgeTouch && badgeTap && insideBadge(event.x, event.y)) {
+                    playSoundEffect(SoundEffectConstants.CLICK)
+                    openBadgeDestination()
+                }
                 thunderTouch = false
+                badgeTouch = false
+                badgeTap = false
+            } else if (event.actionMasked == MotionEvent.ACTION_CANCEL) {
+                thunderTouch = false
+                badgeTouch = false
+                badgeTap = false
+            }
             return true
         }
         return super.onTouchEvent(event)
+    }
+
+    private fun openBadgeDestination() {
+        when (mode) {
+            0 -> openAlarmApp(context)
+            1 -> try {
+                context.startActivity(Intent(Intent.ACTION_POWER_USAGE_SUMMARY))
+            } catch (_: android.content.ActivityNotFoundException) {
+                context.startActivity(Intent(Settings.ACTION_SETTINGS))
+            }
+            else -> openCalendar(context)
+        }
     }
 
     override fun onAttachedToWindow() {
