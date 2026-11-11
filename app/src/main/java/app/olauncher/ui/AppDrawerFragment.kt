@@ -164,6 +164,12 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun initSearch() = with(binding.search) {
+        onEmptyBackspace = {
+            if (contactCommand != null) {
+                clearContactCommand()
+                true
+            } else false
+        }
         if (flag == Constants.FLAG_HIDDEN_APPS)
             hint = getString(R.string.hidden_apps)
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
@@ -456,11 +462,15 @@ class AppDrawerFragment : BaseFragment() {
             ContactSearchCommand.WHATSAPP -> R.string.contact_command_whatsapp
         })
         setOnClickListener {
-            contactCommand = null
-            commandHandled = false
-            updateContactCommandChip()
+            clearContactCommand()
             showSearchKeyboard()
         }
+    }
+
+    private fun clearContactCommand() {
+        contactCommand = null
+        commandHandled = false
+        updateContactCommandChip()
     }
 
     private fun maybeExecuteContactCommand(query: String) {

@@ -98,7 +98,7 @@
             android:padding="12dp"
             android:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <app.olauncher.ui.CommandSearchEditText
             android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
