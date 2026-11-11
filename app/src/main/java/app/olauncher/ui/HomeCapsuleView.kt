@@ -75,6 +75,14 @@ class HomeCapsuleView @JvmOverloads constructor(
         invalidate()
     }
 
+    var onThunderLongPress: (() -> Unit)? = null
+    private val thunderLongPress = Runnable {
+        if (thunderTouch) {
+            performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
+            onThunderLongPress?.invoke()
+        }
+    }
+
     private var cycleTap = false
     private var thunderTouch = false
     private var badgeTouch = false
@@ -105,22 +113,31 @@ class HomeCapsuleView @JvmOverloads constructor(
             cycleTap = !thunderTouch && !badgeTouch
             downX = event.x
             downY = event.y
+            if (thunderTouch) postDelayed(thunderLongPress, ViewConfiguration.getLongPressTimeout().toLong())
         }
         // Icon gestures never fall through to the display's tap-to-cycle action.
         if (thunderTouch || badgeTouch) {
             if (event.actionMasked == MotionEvent.ACTION_MOVE &&
                 (kotlin.math.abs(event.x - downX) > touchSlop ||
-                 kotlin.math.abs(event.y - downY) > touchSlop)) badgeTap = false
-            if (event.actionMasked == MotionEvent.ACTION_POINTER_DOWN) badgeTap = false
+                 kotlin.math.abs(event.y - downY) > touchSlop)) {
+                badgeTap = false
+                removeCallbacks(thunderLongPress)
+            }
+            if (event.actionMasked == MotionEvent.ACTION_POINTER_DOWN) {
+                badgeTap = false
+                removeCallbacks(thunderLongPress)
+            }
             if (event.actionMasked == MotionEvent.ACTION_UP) {
                 if (badgeTouch && badgeTap && insideBadge(event.x, event.y)) {
                     playSoundEffect(SoundEffectConstants.CLICK)
                     openBadgeDestination()
                 }
+                removeCallbacks(thunderLongPress)
                 thunderTouch = false
                 badgeTouch = false
                 badgeTap = false
             } else if (event.actionMasked == MotionEvent.ACTION_CANCEL) {
+                removeCallbacks(thunderLongPress)
                 thunderTouch = false
                 badgeTouch = false
                 badgeTap = false
@@ -176,6 +193,7 @@ class HomeCapsuleView @JvmOverloads constructor(
     }
 
     override fun onDetachedFromWindow() {
+        removeCallbacks(thunderLongPress)
         context.unregisterReceiver(receiver)
         removeCallbacks(saveMode)
         saveMode.run()
