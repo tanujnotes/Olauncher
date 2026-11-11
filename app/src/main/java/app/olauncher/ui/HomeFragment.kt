@@ -116,10 +116,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun initObservers() {
-        if (prefs.firstSettingsOpen) {
-            binding.firstRunTips.visibility = View.VISIBLE
-            binding.setDefaultLauncher.visibility = View.GONE
-        } else binding.firstRunTips.visibility = View.GONE
+        binding.firstRunTips.visibility = View.GONE
 
         viewModel.refreshHome.observe(viewLifecycleOwner) {
             populateHomeScreen()
@@ -131,7 +128,6 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                     viewModel.cancelWallpaperWorker()
                 }
             }
-            if (binding.firstRunTips.isVisible) return@Observer
             binding.setDefaultLauncher.isVisible = it.not() && prefs.hideSetDefaultLauncher.not()
         })
         viewModel.screenTimeValue.observe(viewLifecycleOwner) {
@@ -443,10 +439,6 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                     lockPhone()
             }
 
-            override fun onClick() {
-                super.onClick()
-                viewModel.checkForMessages.call()
-            }
         }
     }
 

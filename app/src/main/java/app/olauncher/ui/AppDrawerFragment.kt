@@ -688,9 +688,7 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun checkMessageAndExit() {
-        if (!closeDrawer()) return
-        if (flag == Constants.FLAG_LAUNCH_APP)
-            viewModel.checkForMessages.call()
+        closeDrawer()
     }
 
     // Pops only the drawer. A plain popBackStack() from a late overscroll frame could pop the
