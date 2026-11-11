@@ -609,7 +609,12 @@ class AppDrawerFragment : BaseFragment() {
             linearLayoutManager.reverseLayout = query.isNotBlank()
             linearLayoutManager.scrollToPositionWithOffset(0, 0)
         }
-        appsHeading.isVisible = !contactsOnly && query.isBlank()
+        appsHeading.isVisible = contactsOnly || query.isBlank()
+        appsHeading.setText(if (contactsOnly) R.string.drawer_contacts else R.string.drawer_apps)
+        appsHeading.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            if (contactsOnly) R.drawable.ic_drawer_contacts_badge else R.drawable.ic_drawer_apps_badge,
+            0, 0, 0
+        )
         val empty = contactsOnly && contactsLoaded && adapter.itemCount == 0
         contactsEmpty.isVisible = empty
         resultsViewport.isVisible = !empty
