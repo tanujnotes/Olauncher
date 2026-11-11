@@ -88,7 +88,9 @@
         <item name="android:minHeight">42dp</item>
         <item name="android:paddingHorizontal">2dp</item>
         <item name="android:paddingVertical">6dp</item>
-        <item name="android:textColor">#FAFAFA</item>
+        <item name="android:duplicateParentState">true</item>
+        <item name="android:textColor">@color/drawer_category_content</item>
+        <item name="drawableTint">@color/drawer_category_content</item>
         <item name="android:textSize">12sp</item>
     </style>
 
