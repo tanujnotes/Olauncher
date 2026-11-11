@@ -515,6 +515,7 @@ class AppDrawerFragment : BaseFragment() {
             if (enabled) R.string.command_mode_disable else R.string.command_mode_enable
         )
         search.setTextColor(if (enabled) Color.BLACK else Color.WHITE)
+        search.setHintTextColor(if (enabled) Color.BLACK else Color.WHITE)
     }
 
     private fun updateContactCommandChip(): Unit = with(binding.contactCommandChip) {
