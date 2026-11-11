@@ -29,6 +29,7 @@ import app.olauncher.helper.DrawerContactPhoto
 import app.olauncher.helper.ContactAction
 import app.olauncher.databinding.AdapterPrivateSpaceHeaderBinding
 import app.olauncher.helper.appLabelMatcher
+import app.olauncher.helper.appLabelRanking
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isSystemApp
 import app.olauncher.helper.showKeyboard
@@ -103,7 +104,6 @@ class AppDrawerAdapter(
     var searchCategory = SearchCategory.ALL
         private set
     private var query = ""
-    private var pendingAutoLaunch = false
     private var pendingSubmit: ((AppModel?) -> Unit)? = null
     private var filterJob: Job? = null
     private var filterGeneration = 0
@@ -192,9 +192,8 @@ class AppDrawerAdapter(
         }
     }
 
-    fun updateSearch(query: String, allowAutoLaunch: Boolean) {
+    fun updateSearch(query: String) {
         this.query = query
-        pendingAutoLaunch = allowAutoLaunch
         pendingSubmit = null
         filterApps()
     }
@@ -219,12 +218,10 @@ class AppDrawerAdapter(
     }
 
     fun cancelPendingSearchAction() {
-        pendingAutoLaunch = false
         pendingSubmit = null
     }
 
     fun submitSearch(onResult: (AppModel?) -> Unit) {
-        pendingAutoLaunch = false
         if (isSearchDataLoaded() && appliedGeneration == filterGeneration) {
             dispatchSearch(currentList, onResult)
         } else {
@@ -240,7 +237,7 @@ class AppDrawerAdapter(
         val contactsOnly = searchCategory == SearchCategory.CONTACTS
         val app = rows.filterIsInstance<Row.App>().firstOrNull()?.model
         val contacts = rows.filterIsInstance<Row.Contact>()
-        val contact = (if (contactsOnly) contacts.firstOrNull() else contacts.lastOrNull())?.model
+        val contact = contacts.firstOrNull()?.model
         when {
             app != null -> onResult(app)
             contact != null -> contactClickListener(contact, ContactAction.OPEN)
@@ -270,20 +267,25 @@ class AppDrawerAdapter(
         filterJob = iconScope.launch {
             val items = withContext(Dispatchers.Default) {
                 val matches = appLabelMatcher(query)
+                val ranking = appLabelRanking(query)
                 val apps = if (contactsOnly) emptyList() else source.filter {
                     ensureActive()
                     it !is AppModel.PrivateSpaceHeader && matches(it.appLabel)
-                }
+                }.sortedWith { first, second -> ranking.compare(first.appLabel, second.appLabel) }
                 val matchingContacts = contacts.filter {
                     ensureActive()
                     query.isBlank() || matches(it.name)
+                }.let { matches ->
+                    if (query.isBlank()) matches else matches.sortedWith { first, second ->
+                        ranking.compare(first.name, second.name)
+                    }
                 }
                 buildList<Row> {
                     apps.forEach { add(Row.App(it)) }
                     if (flag == Constants.FLAG_LAUNCH_APP && apps.isNotEmpty()) add(Row.Section.APPS)
                     if (!contactsOnly && matchingContacts.isNotEmpty()) {
-                        // Search is laid out from the bottom. Reverse contacts to keep A–Z on screen.
-                        matchingContacts.asReversed().forEach { add(Row.Contact(it)) }
+                        // Position zero within each section is closest to the bottom.
+                        matchingContacts.forEach { add(Row.Contact(it)) }
                         add(Row.Section.CONTACTS)
                     } else if (contactsOnly && matchingContacts.isNotEmpty()) {
                         if (query.isBlank()) add(Row.Section.CONTACTS)
@@ -306,15 +308,6 @@ class AppDrawerAdapter(
                 pendingSubmit = null
                 dispatchSearch(items, submit)
                 return@submitList
-            }
-            val launch = pendingAutoLaunch
-            pendingAutoLaunch = false
-            if (!launch || flag != Constants.FLAG_LAUNCH_APP ||
-                searchCategory == SearchCategory.CONTACTS ||
-                query.isBlank() || query.startsWith(" ") || query.startsWith("!")
-            ) return@submitList
-            if (items.none { it is Row.Contact }) {
-                items.filterIsInstance<Row.App>().singleOrNull()?.let { appClickListener(it.model) }
             }
         }
     }

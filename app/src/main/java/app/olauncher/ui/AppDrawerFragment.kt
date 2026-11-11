@@ -1,7 +1,6 @@
 package app.olauncher.ui
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
@@ -14,9 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.BaseInputConnection
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -27,7 +24,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -79,7 +75,6 @@ class AppDrawerFragment : BaseFragment() {
             }
         }
     }
-    private var cachedIsCjkKeyboard: Boolean? = null
     private var lightStatusBar = false
     private var lightNavigationBar = false
 
@@ -168,11 +163,7 @@ class AppDrawerFragment : BaseFragment() {
             hint = "Please select an app"
 
         doAfterTextChanged { query ->
-            val userInput = viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
-            adapter.updateSearch(
-                query?.toString().orEmpty(),
-                allowAutoLaunch = userInput && !isSearchComposing(),
-            )
+            adapter.updateSearch(query?.toString().orEmpty())
             binding.appRename.visibility =
                 if (canRename && !query.isNullOrBlank()) View.VISIBLE else View.GONE
         }
@@ -181,7 +172,9 @@ class AppDrawerFragment : BaseFragment() {
             val query = text?.toString().orEmpty()
             when {
                 query.isBlank() -> false
-                event == null && actionId == EditorInfo.IME_ACTION_SEARCH -> {
+                event == null && actionId in setOf(
+                    EditorInfo.IME_ACTION_SEARCH, EditorInfo.IME_ACTION_GO, EditorInfo.IME_ACTION_DONE,
+                ) -> {
                     submitSearch(query)
                     true
                 }
@@ -221,32 +214,6 @@ class AppDrawerFragment : BaseFragment() {
             WindowCompat.getInsetsController(requireActivity().window, search)
                 .show(WindowInsetsCompat.Type.ime())
         }
-    }
-
-    private fun isSearchComposing(): Boolean {
-        val text = binding.search.text ?: return false
-        val start = BaseInputConnection.getComposingSpanStart(text)
-        val end = BaseInputConnection.getComposingSpanEnd(text)
-        if (start !in 0 until end) return false
-        return isCjkKeyboard()
-    }
-
-    private fun isCjkKeyboard(): Boolean {
-        cachedIsCjkKeyboard?.let { return it }
-        val result = try {
-            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            val subtype = imm.currentInputMethodSubtype
-            val language = when {
-                subtype == null -> ""
-                subtype.languageTag.isNotEmpty() -> subtype.languageTag // e.g. "zh-CN", "ja-JP", "en-US"
-                else -> subtype.locale // deprecated fallback, e.g. "zh_CN"
-            }
-            language.startsWith("zh") || language.startsWith("ja") || language.startsWith("ko")
-        } catch (e: Exception) {
-            false
-        }
-        cachedIsCjkKeyboard = result
-        return result
     }
 
     private fun initAdapter() {
@@ -515,7 +482,6 @@ class AppDrawerFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        cachedIsCjkKeyboard = null
         // The wallpaper layout flag prevents the drawer from resizing for the IME.
         val window = requireActivity().window
         window.clearFlags(FLAG_LAYOUT_NO_LIMITS)
