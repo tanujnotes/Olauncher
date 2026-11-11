@@ -31,16 +31,16 @@ class ContactSearchCommandTest {
             "w" to ContactSearchCommand.WHATSAPP,
         )) {
             for (prefix in listOf(letter, letter.uppercase())) {
-                assertEquals(command, ContactSearchCommand.parsePrefix("$prefix. ", false))
-                assertEquals(command, ContactSearchCommand.parsePrefix("$prefix. Jamie", false))
-                assertEquals(3, ContactSearchCommand.prefixLength("$prefix. Jamie", false))
-                assertEquals(command, ContactSearchCommand.parsePrefix("$prefix. ", true))
-                for (text in listOf(prefix, "$prefix ", "$prefix.", "$prefix.Jamie", "$prefix.\tJamie")) {
+                assertEquals(command, ContactSearchCommand.parsePrefix(".$prefix ", false))
+                assertEquals(command, ContactSearchCommand.parsePrefix(".$prefix Jamie", false))
+                assertEquals(3, ContactSearchCommand.prefixLength(".$prefix Jamie", false))
+                assertEquals(command, ContactSearchCommand.parsePrefix(".$prefix ", true))
+                for (text in listOf(prefix, "$prefix ", ".$prefix", ".${prefix}Jamie", ".$prefix\tJamie", "$prefix. ", "$prefix. Jamie", ".$prefix\nJamie")) {
                     assertNull(text, ContactSearchCommand.parsePrefix(text, false))
                 }
             }
         }
-        assertNull(ContactSearchCommand.parsePrefix("x. Jamie", false))
+        assertNull(ContactSearchCommand.parsePrefix(".x Jamie", false))
     }
 
     @Test fun commandsUseTheRequestedContactActions() {
