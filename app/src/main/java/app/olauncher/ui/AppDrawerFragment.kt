@@ -41,7 +41,7 @@ import app.olauncher.helper.ContactAction
 import app.olauncher.helper.DrawerContact
 import app.olauncher.helper.deletePinnedShortcut
 import app.olauncher.helper.openDrawerContact
-import app.olauncher.helper.readDrawerContacts
+import app.olauncher.helper.DrawerContactsCache
 import app.olauncher.helper.hideKeyboard
 import app.olauncher.helper.isEinkDisplay
 import app.olauncher.helper.isSystemAnimationsDisabled
@@ -55,6 +55,8 @@ import app.olauncher.ui.AppDrawerAdapter.SearchCategory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class AppDrawerFragment : BaseFragment() {
@@ -521,6 +523,9 @@ class AppDrawerFragment : BaseFragment() {
     private fun updateContactCommandChip(): Unit = with(binding.contactCommandChip) {
         val command = contactCommand
         adapter.contactCommand = command?.action
+        if (flag == Constants.FLAG_LAUNCH_APP) {
+            binding.search.setHint(command?.hintRes ?: R.string.search_anything)
+        }
         isVisible = command != null
         if (command == null) return@with
         setImageResource(when (command) {
@@ -583,6 +588,7 @@ class AppDrawerFragment : BaseFragment() {
     private fun refreshContacts() {
         contactsJob?.cancel()
         if (!hasContactsPermission()) {
+            DrawerContactsCache.invalidate()
             contactsLoaded = false
             if (adapter.searchCategory == SearchCategory.CONTACTS) {
                 selectSearchCategory(SearchCategory.APPS)
@@ -593,9 +599,20 @@ class AppDrawerFragment : BaseFragment() {
         val context = requireContext().applicationContext
         if (!contactsLoaded) adapter.setContacts(null)
         contactsJob = viewLifecycleOwner.lifecycleScope.launch {
-            val contacts = withContext(Dispatchers.IO) { readDrawerContacts(context) }
-            contactsLoaded = true
-            adapter.setContacts(contacts)
+            var first = true
+            DrawerContactsCache.changes.collectLatest {
+                // Coalesce provider notification bursts; reopening uses the cache immediately.
+                if (!first) delay(150)
+                first = false
+                if (!hasContactsPermission()) {
+                    contactsLoaded = false
+                    adapter.setContacts(emptyList())
+                    return@collectLatest
+                }
+                val contacts = withContext(Dispatchers.IO) { DrawerContactsCache.get(context) }
+                contactsLoaded = true
+                adapter.setContacts(contacts)
+            }
         }
     }
 

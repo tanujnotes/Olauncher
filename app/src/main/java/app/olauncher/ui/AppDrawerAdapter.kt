@@ -25,6 +25,8 @@ import app.olauncher.data.Constants
 import app.olauncher.databinding.AdapterAppDrawerBinding
 import app.olauncher.databinding.AdapterDrawerSectionBinding
 import app.olauncher.helper.DrawerContact
+import app.olauncher.helper.contactPhoneQuery
+import app.olauncher.helper.contactPhoneMatches
 import app.olauncher.helper.DrawerContactPhoto
 import app.olauncher.helper.ContactAction
 import app.olauncher.databinding.AdapterPrivateSpaceHeaderBinding
@@ -273,9 +275,13 @@ class AppDrawerAdapter(
                     ensureActive()
                     it !is AppModel.PrivateSpaceHeader && matches(it.appLabel)
                 }.sortedWith { first, second -> ranking.compare(first.appLabel, second.appLabel) }
+                val phoneQuery = contactPhoneQuery(query)
                 val matchingContacts = contacts.filter {
                     ensureActive()
-                    query.isBlank() || matches(it.name)
+                    query.isBlank() || matches(it.name) ||
+                        (phoneQuery.isNotEmpty() && it.numbers.any { number ->
+                            contactPhoneMatches(phoneQuery, number.display, number.normalized)
+                        })
                 }.let { matches ->
                     if (query.isBlank()) matches else matches.sortedWith { first, second ->
                         ranking.compare(first.name, second.name)
