@@ -17,6 +17,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.WindowCompat
@@ -63,6 +64,7 @@ class AppDrawerFragment : BaseFragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private var displayedSearchQuery = ""
     private var displayedCategory = SearchCategory.ALL
+    private var homeSearchAnimator: android.animation.ValueAnimator? = null
     private var animateCategoryChanges = false
     private var contactCommand: ContactSearchCommand? = null
     private var commandEntryMode = false
@@ -135,6 +137,8 @@ class AppDrawerFragment : BaseFragment() {
             setCommandEntryMode(true)
         }
 
+        if (savedInstanceState == null) animateHomeSearchEntry()
+
         val topPadding = binding.root.paddingTop
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { drawer, insets ->
             val safeArea = insets.getInsets(
@@ -150,6 +154,39 @@ class AppDrawerFragment : BaseFragment() {
         }
     }
 
+    private fun animateHomeSearchEntry() {
+        val sourceY = arguments?.getInt("homeSearchY", -1) ?: -1
+        if (sourceY < 0 || flag != Constants.FLAG_LAUNCH_APP ||
+            requireContext().isEinkDisplay() || requireContext().isSystemAnimationsDisabled()) return
+        val bar = binding.searchBar
+        var progress = 0f
+        val location = IntArray(2)
+        // Recalculate against the laid-out destination on every frame so IME insets
+        // can move the destination without snapping the bar away from its path.
+        val listener = android.view.ViewTreeObserver.OnPreDrawListener {
+            bar.getLocationOnScreen(location)
+            val layoutY = location[1] - bar.translationY
+            bar.translationY = (sourceY - layoutY) * (1f - progress)
+            true
+        }
+        bar.viewTreeObserver.addOnPreDrawListener(listener)
+        homeSearchAnimator = android.animation.ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = 350L
+            interpolator = android.view.animation.DecelerateInterpolator()
+            addUpdateListener {
+                progress = it.animatedValue as Float
+                bar.invalidate()
+            }
+            addListener(object : android.animation.AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    if (bar.viewTreeObserver.isAlive) bar.viewTreeObserver.removeOnPreDrawListener(listener)
+                    bar.translationY = 0f
+                }
+            })
+        }
+        bar.doOnPreDraw { homeSearchAnimator?.start() }
+    }
+
     private fun configureAppSearchUi() = with(binding) {
         root.setBackgroundColor(Color.rgb(11, 11, 11))
         appsHeading.isVisible = true
@@ -162,11 +199,14 @@ class AppDrawerFragment : BaseFragment() {
             marginStart = sideMargin
             marginEnd = sideMargin
         }
-        searchBar.setBackgroundResource(R.drawable.bg_drawer_search_white)
+        searchBar.setBackgroundResource(R.drawable.bg_home_search)
+        search.setTextColor(Color.WHITE)
+        search.setHintTextColor(Color.WHITE)
+        searchActionBadge.setImageResource(R.drawable.ic_home_search_badge)
         searchLeadingIcon.isVisible = false
         searchLegacyRail.isVisible = false
         searchActionBadge.isVisible = true
-        searchDivider.setBackgroundColor(Color.rgb(16, 16, 16))
+        searchDivider.setBackgroundColor(Color.WHITE)
     }
 
     private fun initSearch() = with(binding.search) {
@@ -465,16 +505,16 @@ class AppDrawerFragment : BaseFragment() {
     private fun setCommandEntryMode(enabled: Boolean) = with(binding) {
         commandEntryMode = enabled
         searchBar.setBackgroundResource(
-            if (enabled) R.drawable.bg_drawer_search_command else R.drawable.bg_drawer_search_white
+            if (enabled) R.drawable.bg_drawer_search_command else R.drawable.bg_home_search
         )
         searchActionBadge.setImageResource(
-            if (enabled) R.drawable.ic_drawer_action_badge_command else R.drawable.ic_drawer_action_badge
+            if (enabled) R.drawable.ic_drawer_action_badge_command else R.drawable.ic_home_search_badge
         )
         searchActionBadge.isSelected = enabled
         searchActionBadge.contentDescription = getString(
             if (enabled) R.string.command_mode_disable else R.string.command_mode_enable
         )
-        search.setTextColor(if (enabled) Color.BLACK else Color.rgb(32, 32, 32))
+        search.setTextColor(if (enabled) Color.BLACK else Color.WHITE)
     }
 
     private fun updateContactCommandChip(): Unit = with(binding.contactCommandChip) {
@@ -613,7 +653,7 @@ class AppDrawerFragment : BaseFragment() {
             controller.isAppearanceLightNavigationBars = false
         }
         ViewCompat.requestApplyInsets(binding.root)
-        if (prefs.autoShowKeyboard || (flag == Constants.FLAG_LAUNCH_APP &&
+        if (arguments?.containsKey("homeSearchY") == true || prefs.autoShowKeyboard || (flag == Constants.FLAG_LAUNCH_APP &&
             arguments?.getBoolean(Constants.Key.COMMAND_MODE, false) == true)) {
             showSearchKeyboard()
         }
@@ -633,6 +673,8 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
+        homeSearchAnimator?.cancel()
+        homeSearchAnimator = null
         contactsJob?.cancel()
         contactsJob = null
         binding.recyclerView.adapter = null
