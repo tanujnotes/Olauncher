@@ -1,7 +1,7 @@
 name: Debug APK
 on:
   push:
-    branches: [hold-home-icon-for-command-mode]
+    branches: [search-with-phone-number]
   workflow_dispatch:
 permissions:
   contents: read
@@ -18,10 +18,10 @@ jobs:
         with:
           packages: platform-tools
       - uses: gradle/actions/setup-gradle@v4
-      - run: bash ./gradlew assembleDebug --no-daemon
+      - run: bash ./gradlew testDebugUnitTest assembleDebug --no-daemon
         env:
           GRADLE_OPTS: ''
       - uses: actions/upload-artifact@v4
         with:
-          name: Bolt-Hold-Home-Command-Debug
+          name: Bolt-Phone-Search-Debug
           path: app/build/outputs/apk/debug/*.apk
