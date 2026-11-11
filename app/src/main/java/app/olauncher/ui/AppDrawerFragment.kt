@@ -306,13 +306,23 @@ class AppDrawerFragment : BaseFragment() {
         "external_search", android.content.Context.MODE_PRIVATE
     )
 
+    private fun selectedAiProvider(): Int {
+        val selected = aiSearchSettings().getInt("ai_provider", 0)
+        if (selected !in 0..1) {
+            aiSearchSettings().edit().putInt("ai_provider", 0).apply()
+            return 0
+        }
+        return selected
+    }
+
     private fun chooseAiProvider() {
         val providers = resources.getStringArray(R.array.command_ai_providers)
-        val selected = aiSearchSettings().getInt("ai_provider", 0).coerceIn(providers.indices)
+        val selected = selectedAiProvider()
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
             .setTitle(R.string.command_choose_ai)
             .setSingleChoiceItems(providers, selected) { dialog, index ->
                 aiSearchSettings().edit().putInt("ai_provider", index).apply()
+                updateContactCommandChip()
                 dialog.dismiss()
                 showSearchKeyboard()
             }
@@ -322,7 +332,7 @@ class AppDrawerFragment : BaseFragment() {
 
     private fun openAiSearch(query: String) {
         val encoded = android.net.Uri.encode(query)
-        when (aiSearchSettings().getInt("ai_provider", 0)) {
+        when (selectedAiProvider()) {
             1 -> {
                 val intent = android.content.Intent(android.content.Intent.ACTION_SEND)
                     .setType("text/plain")
@@ -336,7 +346,6 @@ class AppDrawerFragment : BaseFragment() {
                     openGeminiWithCopiedPrompt(query)
                 }
             }
-            2 -> requireContext().openUrl("https://chatgpt.com/?q=" + encoded)
             else -> requireContext().openUrl("https://www.google.com/search?udm=50&q=" + encoded)
         }
     }
@@ -605,7 +614,8 @@ class AppDrawerFragment : BaseFragment() {
             ContactSearchCommand.MESSAGE -> R.drawable.ic_drawer_contact_text
             ContactSearchCommand.WHATSAPP -> R.drawable.ic_drawer_contact_whatsapp
             ContactSearchCommand.WEB -> R.drawable.ic_command_web
-            ContactSearchCommand.AI -> R.drawable.ic_command_ai
+            ContactSearchCommand.AI -> if (selectedAiProvider() == 1)
+                R.drawable.ic_command_gemini else R.drawable.ic_command_ai
         })
         contentDescription = getString(when (command) {
             ContactSearchCommand.PHONE -> R.string.contact_command_phone

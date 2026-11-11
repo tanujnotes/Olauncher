@@ -2,12 +2,11 @@
     <string name="command_web_hint">Search the web…</string>
     <string name="command_ai_hint">Ask AI…</string>
     <string name="command_web">Web search</string>
-    <string name="command_ai">AI search. Tap to remove. Hold to choose Google AI, Gemini, or ChatGPT.</string>
+    <string name="command_ai">AI search. Tap to remove. Hold to choose Google AI or Gemini.</string>
     <string name="command_choose_ai">Choose AI search</string>
     <string name="command_gemini_paste">Prompt copied. Paste it into Gemini.</string>
     <string-array name="command_ai_providers">
         <item>Google AI</item>
         <item>Gemini</item>
-        <item>ChatGPT</item>
     </string-array>
 </resources>
