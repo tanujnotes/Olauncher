@@ -164,6 +164,12 @@ class AppDrawerFragment : BaseFragment() {
     }
 
     private fun initSearch() = with(binding.search) {
+        onEmptyBackspace = {
+            if (contactCommand != null) {
+                clearContactCommand()
+                true
+            } else false
+        }
         if (flag == Constants.FLAG_HIDDEN_APPS)
             hint = getString(R.string.hidden_apps)
         else if (flag in Constants.FLAG_SET_HOME_APP_1..Constants.FLAG_SET_CALENDAR_APP)
@@ -172,14 +178,15 @@ class AppDrawerFragment : BaseFragment() {
         doAfterTextChanged { query ->
             commandHandled = false
             val text = query?.toString().orEmpty()
-            if (flag == Constants.FLAG_LAUNCH_APP &&
-                adapter.searchCategory == SearchCategory.CONTACTS && contactCommand == null) {
-                val command = ContactSearchCommand.parsePrefix(text)
+            if (flag == Constants.FLAG_LAUNCH_APP && contactCommand == null) {
+                val contactsOnly = adapter.searchCategory == SearchCategory.CONTACTS
+                val command = ContactSearchCommand.parsePrefix(text, contactsOnly)
                 if (command != null) {
+                    selectSearchCategory(SearchCategory.CONTACTS)
                     contactCommand = command
                     updateContactCommandChip()
                     // Remove only the prefix; pasted commands can include a contact query.
-                    setText(text.drop(2))
+                    setText(text.drop(ContactSearchCommand.prefixLength(text, contactsOnly)))
                     setSelection(this.text?.length ?: 0)
                     return@doAfterTextChanged
                 }
@@ -455,11 +462,15 @@ class AppDrawerFragment : BaseFragment() {
             ContactSearchCommand.WHATSAPP -> R.string.contact_command_whatsapp
         })
         setOnClickListener {
-            contactCommand = null
-            commandHandled = false
-            updateContactCommandChip()
+            clearContactCommand()
             showSearchKeyboard()
         }
+    }
+
+    private fun clearContactCommand() {
+        contactCommand = null
+        commandHandled = false
+        updateContactCommandChip()
     }
 
     private fun maybeExecuteContactCommand(query: String) {
