@@ -15,9 +15,20 @@ enum class ContactSearchCommand(
     AI(null, R.string.command_ai_hint);
 
     companion object {
+        // Gboard and other IMEs may replace the second space with ". ".
+        // Only normalize it immediately after an exact command alias.
+        private val keyboardPeriod = Regex("^(p|m|wa|w|ai)\\. (?=\\S|$)", RegexOption.IGNORE_CASE)
+
+        fun normalizeDoubleSpace(text: String): String =
+            keyboardPeriod.replace(text) { match -> "${match.groupValues[1]}  " }
+
+        fun queryAfterPrefix(text: String): String =
+            normalizeDoubleSpace(text).substringAfter("  ")
+
         fun parsePrefix(text: String, commandMode: Boolean = false): ContactSearchCommand? {
-            if (!commandMode || !text.contains("  ")) return null
-            return when (text.substringBefore("  ").lowercase(java.util.Locale.ROOT)) {
+            val normalized = normalizeDoubleSpace(text)
+            if (!commandMode || !normalized.contains("  ")) return null
+            return when (normalized.substringBefore("  ").lowercase(java.util.Locale.ROOT)) {
                 "p" -> PHONE
                 "m" -> MESSAGE
                 "wa" -> WHATSAPP
