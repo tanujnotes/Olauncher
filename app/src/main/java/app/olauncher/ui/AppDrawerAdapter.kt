@@ -61,7 +61,7 @@ class AppDrawerAdapter(
     enum class SearchCategory { ALL, APPS, CONTACTS }
 
     sealed interface Row {
-        data class App(val model: AppModel) : Row
+        data class App(val model: AppModel, val isEnterTarget: Boolean = false) : Row
         data class Contact(val model: DrawerContact) : Row
         enum class Section : Row { APPS, CONTACTS }
     }
@@ -187,7 +187,7 @@ class AppDrawerAdapter(
                         appHideListener,
                         appRenameListener,
                     )
-                    if (flag == Constants.FLAG_LAUNCH_APP) holder.bindIcon(iconScope, appIcons, appModel)
+                    if (flag == Constants.FLAG_LAUNCH_APP) holder.bindIcon(iconScope, appIcons, appModel, row.isEnterTarget)
                 }
             }
         } catch (e: Exception) {
@@ -288,7 +288,9 @@ class AppDrawerAdapter(
                     }
                 }
                 buildList<Row> {
-                    apps.forEach { add(Row.App(it)) }
+                    apps.forEachIndexed { index, app ->
+                        add(Row.App(app, isEnterTarget = query.isNotBlank() && index == 0))
+                    }
                     if (flag == Constants.FLAG_LAUNCH_APP && apps.isNotEmpty()) add(Row.Section.APPS)
                     if (!contactsOnly && matchingContacts.isNotEmpty()) {
                         // Position zero within each section is closest to the bottom.
@@ -372,23 +374,27 @@ class AppDrawerAdapter(
             scope: CoroutineScope,
             cache: LruCache<AppModel, Drawable.ConstantState>,
             app: AppModel,
+            isEnterTarget: Boolean,
         ) {
             cancelIconLoad()
             val context = itemView.context
             val cached = cache.get(app)?.newDrawable(context.resources)?.mutate()
-            val chevron = AppCompatResources.getDrawable(context, R.drawable.ic_drawer_chevron)
-            chevron?.setBounds(0, 0, dp(16), dp(16))
+            val indicator = AppCompatResources.getDrawable(context,
+                if (isEnterTarget) R.drawable.ic_drawer_enter_badge else R.drawable.ic_drawer_chevron,
+            )
+            val indicatorSize = dp(if (isEnterTarget) 24 else 16)
+            indicator?.setBounds(0, 0, indicatorSize, indicatorSize)
             val iconSize = dp(32)
             val initialIcon = cached ?: context.packageManager.defaultActivityIcon
             initialIcon.setBounds(0, 0, iconSize, iconSize)
-            binding.appTitle.setCompoundDrawablesRelative(initialIcon, null, chevron, null)
+            binding.appTitle.setCompoundDrawablesRelative(initialIcon, null, indicator, null)
             if (cached != null) return
 
             iconJob = scope.launch {
                 val icon = withContext(Dispatchers.IO) { loadIcon(context, app) } ?: return@launch
                 icon.constantState?.let { cache.put(app, it) }
                 icon.setBounds(0, 0, iconSize, iconSize)
-                binding.appTitle.setCompoundDrawablesRelative(icon, null, chevron, null)
+                binding.appTitle.setCompoundDrawablesRelative(icon, null, indicator, null)
             }
         }
 
