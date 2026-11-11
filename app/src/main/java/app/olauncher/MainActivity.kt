@@ -30,15 +30,10 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
 import app.olauncher.helper.getColorFromAttr
-import app.olauncher.helper.hasBeenDays
-import app.olauncher.helper.hasBeenHours
-import app.olauncher.helper.hasBeenMinutes
 import app.olauncher.helper.isDarkThemeOn
-import app.olauncher.helper.isDaySince
 import app.olauncher.helper.isDefaultLauncher
 import app.olauncher.helper.OlDialog
 import app.olauncher.helper.isEinkDisplay
-import app.olauncher.helper.isOlauncherDefault
 import app.olauncher.helper.isSystemAnimationsDisabled
 import app.olauncher.helper.isTablet
 import app.olauncher.helper.openUrl
@@ -52,7 +47,6 @@ import app.olauncher.helper.showToast
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -242,9 +236,6 @@ class MainActivity : AppCompatActivity() {
             else
                 showLauncherSelector(Constants.REQUEST_CODE_LAUNCHER_SELECTOR)
         }
-        viewModel.checkForMessages.observe(this) {
-            checkForMessages()
-        }
         viewModel.showDialog.observe(this) {
             when (it) {
                 Constants.Dialog.ABOUT -> {
@@ -315,60 +306,6 @@ class MainActivity : AppCompatActivity() {
     private fun showMessage(title: Int, message: Int, action: Int, clickListener: () -> Unit) {
         messageDialog?.dismiss()
         messageDialog = showMessageDialog(title, message, action, clickListener)
-    }
-
-    private fun checkForMessages() {
-        if (prefs.firstOpenTime == 0L)
-            prefs.firstOpenTime = System.currentTimeMillis()
-
-        val calendar = Calendar.getInstance()
-        val dayOfYear = calendar.get(Calendar.DAY_OF_YEAR)
-        if (dayOfYear == 1 && dayOfYear != prefs.shownOnDayOfYear) {
-            prefs.shownOnDayOfYear = dayOfYear
-            showMessage(R.string.hey, R.string.new_year_wish, R.string.cheers) {}
-            return
-        } else if (dayOfYear == 32 && dayOfYear != prefs.shownOnDayOfYear) {
-            prefs.shownOnDayOfYear = dayOfYear
-            showMessage(R.string.hey, R.string.new_year_wish_1, R.string.cheers) {}
-            return
-        }
-
-        when (prefs.userState) {
-            Constants.UserState.START -> {
-                if (prefs.firstOpenTime.hasBeenMinutes(10))
-                    prefs.userState = Constants.UserState.WALLPAPER
-            }
-
-            Constants.UserState.WALLPAPER -> {
-                if (prefs.wallpaperMsgShown || prefs.dailyWallpaper)
-                    prefs.userState = Constants.UserState.REVIEW
-                else if (isOlauncherDefault(this))
-                    viewModel.showDialog.postValue(Constants.Dialog.WALLPAPER)
-            }
-
-            Constants.UserState.REVIEW -> {
-                if (prefs.rateClicked)
-                    prefs.userState = Constants.UserState.SHARE
-                else if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenHours(1))
-                    viewModel.showDialog.postValue(Constants.Dialog.REVIEW)
-            }
-
-            Constants.UserState.RATE -> {
-                if (prefs.rateClicked)
-                    prefs.userState = Constants.UserState.SHARE
-                else if (isOlauncherDefault(this)
-                    && prefs.firstOpenTime.isDaySince() >= 7
-                    && calendar.get(Calendar.HOUR_OF_DAY) >= 16
-                ) viewModel.showDialog.postValue(Constants.Dialog.RATE)
-            }
-
-            Constants.UserState.SHARE -> {
-                if (isOlauncherDefault(this) && prefs.firstOpenTime.hasBeenDays(14)
-                    && prefs.shareShownTime.isDaySince() >= 70
-                    && calendar.get(Calendar.HOUR_OF_DAY) >= 16
-                ) viewModel.showDialog.postValue(Constants.Dialog.SHARE)
-            }
-        }
     }
 
     @SuppressLint("SourceLockedOrientationActivity")

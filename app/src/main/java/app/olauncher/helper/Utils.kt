@@ -90,7 +90,6 @@ suspend fun getAppsList(context: Context, prefs: Prefs): InstalledApps =
             }
             for (app in activityList) {
                 val packageName = app.componentName.packageName
-                if (packageName == BuildConfig.APPLICATION_ID) continue
                 try {
                     val originalLabel = app.label.toString()
                     apps.add(
@@ -225,7 +224,6 @@ fun getPrivateSpaceApps(
         val collator = Collator.getInstance()
 
         for (app in launcherApps.getActivityList(null, privateSpaceHandle)) {
-            if (app.applicationInfo.packageName == BuildConfig.APPLICATION_ID) continue
             val appLabelShown = prefs.getAppRenameLabel(app.applicationInfo.packageName)
                 .ifBlank { app.label.toString() }
             appList.add(
