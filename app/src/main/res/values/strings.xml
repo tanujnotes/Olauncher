@@ -193,4 +193,8 @@
     <string name="shortcut_not_found">Shortcut not found</string>
     <string name="unable_to_open_shortcut">Unable to open shortcut</string>
     <string name="search_anything">Search anything</string>
+    <string name="home_capsule_description">%1$s. Tap to show %2$s.</string>
+    <string name="home_capsule_time">time</string>
+    <string name="home_capsule_battery">battery</string>
+    <string name="home_capsule_date">date</string>
 </resources>
