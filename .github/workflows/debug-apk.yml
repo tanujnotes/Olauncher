@@ -1,7 +1,7 @@
 name: Debug APK
 on:
   push:
-    branches: [bolt-launcher-in-search-results]
+    branches: [fix-text-cursor]
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,5 +23,5 @@ jobs:
           GRADLE_OPTS: ''
       - uses: actions/upload-artifact@v4
         with:
-          name: Bolt-Search-Results-Debug
+          name: Bolt-Cursor-Fix-Debug
           path: app/build/outputs/apk/debug/*.apk
