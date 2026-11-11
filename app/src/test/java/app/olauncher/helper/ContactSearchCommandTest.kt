@@ -21,6 +21,21 @@ class ContactSearchCommandTest {
         }
     }
 
+    @Test fun androidKeyboardAutoPeriodAlsoActivatesCommands() {
+        for ((alias, command) in listOf(
+            "p" to ContactSearchCommand.PHONE,
+            "m" to ContactSearchCommand.MESSAGE,
+            "wa" to ContactSearchCommand.WHATSAPP,
+            "w" to ContactSearchCommand.WEB,
+            "ai" to ContactSearchCommand.AI,
+        )) {
+            assertEquals(command, ContactSearchCommand.parsePrefix("$alias. ", true))
+            assertEquals(command, ContactSearchCommand.parsePrefix("${alias.uppercase()}. Jamie", true))
+            assertEquals("Jamie", ContactSearchCommand.queryAfterPrefix("$alias. Jamie"))
+            assertEquals("", ContactSearchCommand.queryAfterPrefix("$alias. "))
+        }
+    }
+
     @Test fun regularNamesAndOtherWhitespaceDoNotActivateCommands() {
         for (text in listOf("", "Paul", "Mary Smith", "Will", " p ", "p Jamie", "p\tJamie", "m\nJamie", "x Jamie")) {
             assertNull(text, ContactSearchCommand.parsePrefix(text, true))
