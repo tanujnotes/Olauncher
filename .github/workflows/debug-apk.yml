@@ -1,7 +1,7 @@
 name: Debug APK
 on:
   push:
-    branches: [search-with-phone-number]
+    branches: [highlight-top-result]
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,5 +23,5 @@ jobs:
           GRADLE_OPTS: ''
       - uses: actions/upload-artifact@v4
         with:
-          name: Bolt-Phone-Search-Debug
+          name: Bolt-Highlight-Top-Result-Debug
           path: app/build/outputs/apk/debug/*.apk
