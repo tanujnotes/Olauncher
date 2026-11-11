@@ -37,8 +37,20 @@ class HomeCapsuleView @JvmOverloads constructor(
     private var mode = state.getInt("mode", 0).coerceIn(0, 2)
     private var value = ""
     private var badge = ""
+    private val values = Array(3) { "" }
+    private val badges = Array(3) { "" }
+    private val descriptions = Array(3) { "" }
+    private var batteryPercent = -1
+    private val saveMode = Runnable { state.edit().putInt("mode", mode).apply() }
     private val receiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) = refresh()
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == Intent.ACTION_BATTERY_CHANGED) {
+                val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+                val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+                batteryPercent = if (level >= 0 && scale > 0) level * 100 / scale else -1
+            }
+            refresh()
+        }
     }
 
     init {
@@ -50,8 +62,17 @@ class HomeCapsuleView @JvmOverloads constructor(
 
     fun cycle() {
         mode = (mode + 1) % 3
-        refresh()
-        state.edit().putInt("mode", mode).apply()
+        showMode()
+        // Let the new frame draw before persisting; coalesce rapid taps.
+        removeCallbacks(saveMode)
+        postDelayed(saveMode, 250L)
+    }
+
+    private fun showMode() {
+        value = values[mode]
+        badge = badges[mode]
+        contentDescription = descriptions[mode]
+        invalidate()
     }
 
     private var cycleTap = false
@@ -156,6 +177,8 @@ class HomeCapsuleView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         context.unregisterReceiver(receiver)
+        removeCallbacks(saveMode)
+        saveMode.run()
         super.onDetachedFromWindow()
     }
 
@@ -167,26 +190,24 @@ class HomeCapsuleView @JvmOverloads constructor(
     private fun refresh() {
         val now = Date()
         val locale = Locale.getDefault()
-        when (mode) {
-            0 -> {
-                value = SimpleDateFormat(if (DateFormat.is24HourFormat(context)) "HH:mm" else "h:mm", locale).format(now)
-                badge = SimpleDateFormat("a", locale).format(now)
-            }
-            1 -> {
-                val level = (context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager)
-                    .getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-                value = if (level in 0..100) "$level%" else "—%"
-                badge = ""
-            }
-            else -> {
-                value = SimpleDateFormat("EEE, MMM", locale).format(now)
-                badge = SimpleDateFormat("d", locale).format(now)
-            }
+        val is24Hour = DateFormat.is24HourFormat(context)
+        values[0] = SimpleDateFormat(if (is24Hour) "HH:mm" else "h:mm", locale).format(now)
+        badges[0] = SimpleDateFormat("a", locale).format(now)
+        values[1] = if (batteryPercent in 0..100) "$batteryPercent%" else "—%"
+        badges[1] = ""
+        values[2] = SimpleDateFormat("EEE, MMM", locale).format(now)
+        badges[2] = SimpleDateFormat("d", locale).format(now)
+        for (index in 0..2) {
+            val spoken = if (index == 2 || (index == 0 && !is24Hour))
+                "${values[index]} ${badges[index]}" else values[index]
+            descriptions[index] = context.getString(R.string.home_capsule_description, spoken,
+                context.getString(when (index) {
+                    0 -> R.string.home_capsule_battery
+                    1 -> R.string.home_capsule_date
+                    else -> R.string.home_capsule_time
+                }))
         }
-        val spoken = if (mode == 2) "$value $badge" else if (mode == 0 && !DateFormat.is24HourFormat(context)) "$value $badge" else value
-        contentDescription = context.getString(R.string.home_capsule_description, spoken,
-            context.getString(when (mode) { 0 -> R.string.home_capsule_battery; 1 -> R.string.home_capsule_date; else -> R.string.home_capsule_time }))
-        invalidate()
+        showMode()
     }
 
     override fun onDraw(canvas: Canvas) {
