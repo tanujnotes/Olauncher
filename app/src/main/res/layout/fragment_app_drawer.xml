@@ -90,7 +90,7 @@
             android:importantForAccessibility="no"
             android:src="@drawable/ic_drawer_search" />
 
-        <app.olauncher.ui.SearchEditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
