@@ -225,8 +225,8 @@ class AppDrawerFragment : BaseFragment() {
         doAfterTextChanged { query ->
             commandHandled = false
             val text = query?.toString().orEmpty()
-            if (flag == Constants.FLAG_LAUNCH_APP && commandEntryMode) {
-                val command = ContactSearchCommand.parsePrefix(text, commandEntryMode)
+            if (flag == Constants.FLAG_LAUNCH_APP && contactCommand == null) {
+                val command = ContactSearchCommand.parsePrefix(text, true)
                 if (command != null) {
                     setCommandEntryMode(false)
                     selectSearchCategory(if (command.action != null) SearchCategory.CONTACTS else SearchCategory.ALL)
@@ -240,7 +240,7 @@ class AppDrawerFragment : BaseFragment() {
                         requestContactsPermission.launch(Manifest.permission.READ_CONTACTS)
                     }
                     // Remove only the prefix; pasted commands can include a contact query.
-                    setText(text.substringAfter(' '))
+                    setText(text.substringAfter("  "))
                     setSelection(this.text?.length ?: 0)
                     return@doAfterTextChanged
                 }
@@ -259,16 +259,7 @@ class AppDrawerFragment : BaseFragment() {
             val completedPress = imeSubmit ||
                 (enterKey && event?.action == KeyEvent.ACTION_UP && event?.isCanceled == false)
             when {
-                query.isEmpty() && flag == Constants.FLAG_LAUNCH_APP && (imeSubmit || enterKey) -> {
-                    if (completedPress) {
-                        if (!commandEntryMode) clearContactCommand()
-                        setCommandEntryMode(!commandEntryMode)
-                        // Consume the action and keep the same focused input connection.
-                        showSearchKeyboard()
-                        post { if (_binding != null) showSearchKeyboard() }
-                    }
-                    true
-                }
+                query.isEmpty() -> true
                 query.isBlank() -> false
                 imeSubmit || enterKey -> {
                     if (completedPress) submitSearch(query)
@@ -585,20 +576,21 @@ class AppDrawerFragment : BaseFragment() {
 
     private fun setCommandEntryMode(enabled: Boolean) = with(binding) {
         commandEntryMode = enabled
-        searchDivider.setBackgroundColor(if (enabled) Color.BLACK else Color.WHITE)
+        val highlighted = enabled || contactCommand != null
+        searchDivider.setBackgroundColor(if (highlighted) Color.BLACK else Color.WHITE)
         searchBar.setBackgroundResource(
-            if (enabled) R.drawable.bg_drawer_search_command else R.drawable.bg_home_search
+            if (highlighted) R.drawable.bg_drawer_search_command else R.drawable.bg_home_search
         )
         searchActionBadge.setImageResource(
-            if (enabled) R.drawable.ic_drawer_action_badge_command else R.drawable.ic_home_search_badge
+            if (highlighted) R.drawable.ic_drawer_action_badge_command else R.drawable.ic_home_search_badge
         )
-        searchActionBadge.isSelected = enabled
+        searchActionBadge.isSelected = highlighted
         searchActionBadge.contentDescription = getString(
             if (enabled) R.string.command_mode_disable else R.string.command_mode_enable
         )
         search.refreshTypingCursor()
-        search.setTextColor(if (enabled) Color.BLACK else Color.WHITE)
-        search.setHintTextColor(if (enabled) Color.BLACK else Color.WHITE)
+        search.setTextColor(if (highlighted) Color.BLACK else Color.WHITE)
+        search.setHintTextColor(if (highlighted) Color.BLACK else Color.WHITE)
     }
 
     private fun updateContactCommandChip(): Unit = with(binding.contactCommandChip) {
@@ -608,6 +600,7 @@ class AppDrawerFragment : BaseFragment() {
             binding.search.setHint(command?.hintRes ?: R.string.search_anything)
         }
         isVisible = command != null
+        setCommandEntryMode(commandEntryMode)
         if (command == null) return@with
         setImageResource(when (command) {
             ContactSearchCommand.PHONE -> R.drawable.ic_drawer_contact_phone
