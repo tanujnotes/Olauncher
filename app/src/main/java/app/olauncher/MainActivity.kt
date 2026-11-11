@@ -29,6 +29,7 @@ import androidx.navigation.findNavController
 import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.databinding.ActivityMainBinding
+import app.olauncher.helper.hasBeenMinutes
 import app.olauncher.helper.getColorFromAttr
 import app.olauncher.helper.isDarkThemeOn
 import app.olauncher.helper.isDefaultLauncher
