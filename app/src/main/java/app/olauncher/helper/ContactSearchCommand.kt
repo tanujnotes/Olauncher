@@ -3,7 +3,7 @@ package app.olauncher.helper
 import androidx.annotation.StringRes
 import app.olauncher.R
 
-/** Commands activate only after a literal space, never from a name's initial. */
+/** Commands activate only after two consecutive spaces following an exact command alias. */
 enum class ContactSearchCommand(
     val action: ContactAction?,
     @StringRes val hintRes: Int,
@@ -16,8 +16,8 @@ enum class ContactSearchCommand(
 
     companion object {
         fun parsePrefix(text: String, commandMode: Boolean = false): ContactSearchCommand? {
-            if (!commandMode || !text.contains(' ')) return null
-            return when (text.substringBefore(' ').lowercase(java.util.Locale.ROOT)) {
+            if (!commandMode || !text.contains("  ")) return null
+            return when (text.substringBefore("  ").lowercase(java.util.Locale.ROOT)) {
                 "p" -> PHONE
                 "m" -> MESSAGE
                 "wa" -> WHATSAPP
