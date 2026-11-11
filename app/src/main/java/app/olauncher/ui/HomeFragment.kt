@@ -378,7 +378,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     private fun showLongPressToast() = requireContext().showToast(getString(R.string.long_press_to_select_app))
 
     private fun getSwipeGestureListener(context: Context): View.OnTouchListener {
-        return object : OnSwipeTouchListener(context) {
+        return object : OnSwipeTouchListener(context, { prefs.lockModeOn }) {
             override fun onSwipeLeft() {
                 super.onSwipeLeft()
                 openSwipeLeftApp()
