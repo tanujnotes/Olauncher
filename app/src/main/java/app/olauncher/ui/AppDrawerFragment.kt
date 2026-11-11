@@ -302,40 +302,51 @@ class AppDrawerFragment : BaseFragment() {
         }
     }
 
-    private fun openAiSearch(query: String) {
-        val context = requireContext()
-        val settings = context.getSharedPreferences("external_search", android.content.Context.MODE_PRIVATE)
-        val intent = android.content.Intent(android.content.Intent.ACTION_SEND)
-            .setType("text/plain").putExtra(android.content.Intent.EXTRA_TEXT, query)
-        val saved = settings.getString("ai_app", null)
-        if (saved != null) {
-            val component = android.content.ComponentName.unflattenFromString(saved)
-            if (component != null) {
-                try {
-                    startActivity(android.content.Intent(intent).setComponent(component))
-                    return
-                } catch (_: android.content.ActivityNotFoundException) {
-                    settings.edit().remove("ai_app").apply()
-                } catch (_: SecurityException) {
-                    settings.edit().remove("ai_app").apply()
-                }
-            }
-        }
-        val apps = context.packageManager.queryIntentActivities(intent, 0)
-            .sortedBy { it.loadLabel(context.packageManager).toString().lowercase() }
-        if (apps.isEmpty()) {
-            context.showToast(getString(R.string.command_no_ai_app))
-            return
-        }
-        androidx.appcompat.app.AlertDialog.Builder(context)
+    private fun aiSearchSettings() = requireContext().getSharedPreferences(
+        "external_search", android.content.Context.MODE_PRIVATE
+    )
+
+    private fun chooseAiProvider() {
+        val providers = resources.getStringArray(R.array.command_ai_providers)
+        val selected = aiSearchSettings().getInt("ai_provider", 0).coerceIn(providers.indices)
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
             .setTitle(R.string.command_choose_ai)
-            .setItems(apps.map { it.loadLabel(context.packageManager).toString() }.toTypedArray()) { _, index ->
-                val app = apps[index].activityInfo
-                settings.edit().putString("ai_app", android.content.ComponentName(app.packageName, app.name).flattenToString()).apply()
-                openAiSearch(query)
+            .setSingleChoiceItems(providers, selected) { dialog, index ->
+                aiSearchSettings().edit().putInt("ai_provider", index).apply()
+                dialog.dismiss()
+                showSearchKeyboard()
             }
             .setNegativeButton(android.R.string.cancel, null)
             .show()
+    }
+
+    private fun openAiSearch(query: String) {
+        val encoded = android.net.Uri.encode(query)
+        when (aiSearchSettings().getInt("ai_provider", 0)) {
+            1 -> {
+                val intent = android.content.Intent(android.content.Intent.ACTION_SEND)
+                    .setType("text/plain")
+                    .putExtra(android.content.Intent.EXTRA_TEXT, query)
+                    .setPackage("com.google.android.apps.bard")
+                try {
+                    startActivity(intent)
+                } catch (_: android.content.ActivityNotFoundException) {
+                    openGeminiWithCopiedPrompt(query)
+                } catch (_: SecurityException) {
+                    openGeminiWithCopiedPrompt(query)
+                }
+            }
+            2 -> requireContext().openUrl("https://chatgpt.com/?q=" + encoded)
+            else -> requireContext().openUrl("https://www.google.com/search?udm=50&q=" + encoded)
+        }
+    }
+
+    private fun openGeminiWithCopiedPrompt(query: String) {
+        val clipboard = requireContext().getSystemService(android.content.Context.CLIPBOARD_SERVICE)
+            as android.content.ClipboardManager
+        clipboard.setPrimaryClip(android.content.ClipData.newPlainText("AI prompt", query))
+        requireContext().openUrl("https://gemini.google.com/app")
+        requireContext().showToast(getString(R.string.command_gemini_paste))
     }
 
     private fun selectApp(app: AppModel) {
@@ -605,9 +616,7 @@ class AppDrawerFragment : BaseFragment() {
         })
         setOnLongClickListener {
             if (command == ContactSearchCommand.AI) {
-                requireContext().getSharedPreferences("external_search", android.content.Context.MODE_PRIVATE)
-                    .edit().remove("ai_app").apply()
-                requireContext().showToast(getString(R.string.command_ai_reset))
+                chooseAiProvider()
                 true
             } else false
         }
