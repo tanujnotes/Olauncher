@@ -11,6 +11,7 @@ import android.graphics.RectF
 import android.os.BatteryManager
 import android.text.format.DateFormat
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import app.olauncher.R
@@ -38,12 +39,34 @@ class HomeCapsuleView @JvmOverloads constructor(
     init {
         isClickable = true
         isFocusable = true
-        setOnClickListener {
-            mode = (mode + 1) % 3
-            state.edit().putInt("mode", mode).apply()
-            refresh()
-        }
+        setOnClickListener { cycle() }
         refresh()
+    }
+
+    fun cycle() {
+        mode = (mode + 1) % 3
+        state.edit().putInt("mode", mode).apply()
+        refresh()
+    }
+
+    private var thunderTouch = false
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+            val center = height / 2f
+            val radius = minOf(23f * resources.displayMetrics.density,
+                center - 7f * resources.displayMetrics.density)
+            val dx = event.x - center
+            val dy = event.y - center
+            thunderTouch = dx * dx + dy * dy <= radius * radius
+        }
+        // Consume the entire thunder gesture so it cannot cycle this view or the home.
+        if (thunderTouch) {
+            if (event.actionMasked == MotionEvent.ACTION_UP || event.actionMasked == MotionEvent.ACTION_CANCEL)
+                thunderTouch = false
+            return true
+        }
+        return super.onTouchEvent(event)
     }
 
     override fun onAttachedToWindow() {
@@ -119,12 +142,11 @@ class HomeCapsuleView @JvmOverloads constructor(
             (left + boltSize).toInt(), (radius + boltSize).toInt())
         bolt.draw(canvas)
         paint.typeface = android.graphics.Typeface.create("sans-serif-medium", android.graphics.Typeface.NORMAL)
-        paint.textAlign = Paint.Align.LEFT
+        paint.textAlign = Paint.Align.CENTER
         paint.textSize = 26f * resources.displayMetrics.scaledDensity
-        val start = left + circle + 16f * d
-        val available = (right - circle - 12f * d - start).coerceAtLeast(1f)
+        val available = (width - 2f * (left + circle + 12f * d)).coerceAtLeast(1f)
         if (paint.measureText(value) > available) paint.textSize *= available / paint.measureText(value)
-        canvas.drawText(value, start, radius - (paint.ascent() + paint.descent()) / 2, paint)
+        canvas.drawText(value, width / 2f, radius - (paint.ascent() + paint.descent()) / 2, paint)
         paint.color = Color.BLACK
         if (mode == 1) {
             paint.style = Paint.Style.STROKE
@@ -136,6 +158,7 @@ class HomeCapsuleView @JvmOverloads constructor(
             for (i in 0..2) canvas.drawRect(right + (-9 + i*6)*d, radius - 4f*d,
                 right + (-5 + i*6)*d, radius + 4f*d, paint)
         } else {
+            paint.typeface = android.graphics.Typeface.create("sans-serif", android.graphics.Typeface.BOLD)
             paint.textAlign = Paint.Align.CENTER
             paint.textSize = (if (mode == 0) 15f else 23f) * resources.displayMetrics.scaledDensity
             val maxWidth = circle * 1.65f

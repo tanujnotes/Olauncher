@@ -420,6 +420,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
             override fun onClick() {
                 super.onClick()
+                binding.homeCapsule.cycle()
                 viewModel.checkForMessages.call()
             }
         }
