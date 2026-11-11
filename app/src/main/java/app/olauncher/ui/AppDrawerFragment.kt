@@ -516,6 +516,22 @@ class AppDrawerFragment : BaseFragment() {
         searchActionBadge.contentDescription = getString(
             if (enabled) R.string.command_mode_disable else R.string.command_mode_enable
         )
+        val cursor = ContextCompat.getDrawable(requireContext(), R.drawable.cursor_drawer_search)
+            ?.mutate()?.apply { setTint(if (enabled) Color.BLACK else Color.WHITE) }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            search.textCursorDrawable = cursor
+        } else {
+            // Android 7–9 do not expose a public cursor drawable setter.
+            runCatching {
+                val editorField = android.widget.TextView::class.java.getDeclaredField("mEditor")
+                    .apply { isAccessible = true }
+                val editor = editorField.get(search)
+                val cursorField = editor.javaClass.getDeclaredField("mCursorDrawable")
+                    .apply { isAccessible = true }
+                cursorField.set(editor, arrayOf(cursor, cursor))
+            }
+        }
+        search.invalidate()
         search.setTextColor(if (enabled) Color.BLACK else Color.WHITE)
         search.setHintTextColor(if (enabled) Color.BLACK else Color.WHITE)
     }
