@@ -195,7 +195,7 @@ class AppDrawerFragment : BaseFragment() {
         animateCategoryChanges = !requireContext().isEinkDisplay() &&
             !requireContext().isSystemAnimationsDisabled()
         val sideMargin = resources.getDimensionPixelSize(R.dimen.app_drawer_search_margin)
-        recyclerView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        resultsViewport.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             marginStart = sideMargin
             marginEnd = sideMargin
         }
@@ -612,6 +612,7 @@ class AppDrawerFragment : BaseFragment() {
         appsHeading.isVisible = !contactsOnly && query.isBlank()
         val empty = contactsOnly && contactsLoaded && adapter.itemCount == 0
         contactsEmpty.isVisible = empty
+        resultsViewport.isVisible = !empty
         recyclerView.isVisible = !empty
         if (categoryChanged && animateCategoryChanges) {
             for (view in listOf(appsHeading, contactsEmpty, recyclerView)) {
