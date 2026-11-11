@@ -4,6 +4,7 @@ object Constants {
 
     object Key {
         const val FLAG = "flag"
+        const val COMMAND_MODE = "command_mode"
         const val RENAME = "rename"
     }
 
