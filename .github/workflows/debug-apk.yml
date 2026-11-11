@@ -1,7 +1,7 @@
 name: Debug APK
 on:
   push:
-    branches: [commands-for-WEB-and-AI]
+    branches: [commands-for-WEB-and-AI, Change-commands-to-double-space]
   workflow_dispatch:
 permissions:
   contents: read
@@ -23,5 +23,5 @@ jobs:
           GRADLE_OPTS: ''
       - uses: actions/upload-artifact@v4
         with:
-          name: Bolt-Web-AI-Commands-Debug
+          name: Bolt-Double-Space-Commands-Debug
           path: app/build/outputs/apk/debug/*.apk
