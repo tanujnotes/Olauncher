@@ -290,7 +290,10 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     }
 
     private fun populateScreenTime() {
-        if (requireContext().appUsagePermissionGranted().not()) return
+        if (!prefs.showScreenTime || requireContext().appUsagePermissionGranted().not()) {
+            binding.tvScreenTime.visibility = View.GONE
+            return
+        }
 
         viewModel.getTodaysScreenTime()
         binding.tvScreenTime.visibility = View.VISIBLE
@@ -393,7 +396,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         // Get user handle for the app/shortcut
         val userHandle = getUserHandleFromString(requireContext(), userString)
 
-        val textToDisplay = if (requireContext().appUsagePermissionGranted() && appName.isNotEmpty() && packageName.isNotEmpty()) {
+        val textToDisplay = if (prefs.showScreenTime && requireContext().appUsagePermissionGranted() && appName.isNotEmpty() && packageName.isNotEmpty()) {
             val appTimes = viewModel.appScreenTimes.value
             if (appTimes != null) {
                 val timeSpentMillis = appTimes[packageName] ?: 0L

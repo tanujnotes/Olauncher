@@ -104,7 +104,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         when (view.id) {
             R.id.olauncherHiddenApps -> showHiddenApps()
             R.id.moreFeatures -> viewModel.showDialog.postValue(Constants.Dialog.PRO_MESSAGE)
-            R.id.screenTimeOnOff -> viewModel.showDialog.postValue(Constants.Dialog.DIGITAL_WELLBEING)
+            R.id.screenTimeOnOff -> toggleScreenTime()
             R.id.appInfo -> openAppInfo(requireContext(), Process.myUserHandle(), BuildConfig.APPLICATION_ID)
             R.id.setLauncher -> viewModel.resetLauncherLiveData.call()
             R.id.toggleLock -> toggleLockMode()
@@ -158,6 +158,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
             R.id.appThemeText -> showAppThemeMenu(view, showSystem = true)
             R.id.swipeLeftApp -> toggleSwipeLeft()
             R.id.swipeRightApp -> toggleSwipeRight()
+            R.id.screenTimeOnOff -> viewModel.showDialog.postValue(Constants.Dialog.DIGITAL_WELLBEING)
             R.id.toggleLock -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 // Turning the service off needs no disclosure, turning it on does
                 if (isAccessServiceEnabled(requireContext()))
@@ -204,6 +205,7 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
         binding.appThemeText.setOnLongClickListener(this)
         binding.swipeLeftApp.setOnLongClickListener(this)
         binding.swipeRightApp.setOnLongClickListener(this)
+        binding.screenTimeOnOff.setOnLongClickListener(this)
         binding.toggleLock.setOnLongClickListener(this)
     }
 
@@ -592,10 +594,21 @@ class SettingsFragment : BaseFragment(), View.OnClickListener, View.OnLongClickL
     }
 
     private fun populateScreenTimeOnOff() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            if (requireContext().appUsagePermissionGranted()) binding.screenTimeOnOff.text = getString(R.string.on)
-            else binding.screenTimeOnOff.text = getString(R.string.off)
-        } else binding.screenTimeLayout.visibility = View.GONE
+        if (requireContext().appUsagePermissionGranted() && prefs.showScreenTime) {
+            binding.screenTimeOnOff.text = getString(R.string.on)
+        } else {
+            binding.screenTimeOnOff.text = getString(R.string.off)
+        }
+    }
+
+    private fun toggleScreenTime() {
+        if (!requireContext().appUsagePermissionGranted()) {
+            viewModel.showDialog.postValue(Constants.Dialog.DIGITAL_WELLBEING)
+        } else {
+            prefs.showScreenTime = !prefs.showScreenTime
+            populateScreenTimeOnOff()
+            viewModel.refreshHome(false)
+        }
     }
 
     private fun populateKeyboardText() {

@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
         val screenFilter = IntentFilter(Intent.ACTION_SCREEN_ON)
         screenReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                if (intent?.action == Intent.ACTION_SCREEN_ON) {
+                if (intent?.action == Intent.ACTION_SCREEN_ON && prefs.showScreenTime) {
                     viewModel.getTodaysScreenTime(force = true)
                 }
             }
@@ -146,7 +146,9 @@ class MainActivity : AppCompatActivity() {
         isResumed = true
         viewModel.isPrivateSpaceToggling = false
         viewModel.getAppList()
-        viewModel.getTodaysScreenTime(force = true)
+        if (prefs.showScreenTime) {
+            viewModel.getTodaysScreenTime(force = true)
+        }
     }
 
     private fun registerShortcutCallback() {

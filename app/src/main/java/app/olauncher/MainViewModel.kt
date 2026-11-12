@@ -449,7 +449,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun getTodaysScreenTime(force: Boolean = false) {
-        if (appContext.appUsagePermissionGranted().not()) return
+        if (!prefs.showScreenTime || appContext.appUsagePermissionGranted().not()) return
         // Skip the once-a-minute limit when there's nothing to show yet, e.g. after a process restart
         if (!force && screenTimeValue.value != null && prefs.screenTimeLastUpdated.hasBeenMinutes(1).not()) return
         if (screenTimeJob?.isActive == true) return
