@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
     private var timerJob: Job? = null
     private var isResumed = false
     private var profileReceiver: BroadcastReceiver? = null
+    private var screenReceiver: BroadcastReceiver? = null
     private var launcherAppsCallback: LauncherApps.Callback? = null
     private var messageDialog: OlDialog? = null
 
@@ -123,6 +124,16 @@ class MainActivity : AppCompatActivity() {
             }
             registerReceiver(profileReceiver, filter)
         }
+
+        val screenFilter = IntentFilter(Intent.ACTION_SCREEN_ON)
+        screenReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == Intent.ACTION_SCREEN_ON) {
+                    viewModel.getTodaysScreenTime(force = true)
+                }
+            }
+        }
+        registerReceiver(screenReceiver, screenFilter)
     }
 
     override fun onStart() {
@@ -135,6 +146,7 @@ class MainActivity : AppCompatActivity() {
         isResumed = true
         viewModel.isPrivateSpaceToggling = false
         viewModel.getAppList()
+        viewModel.getTodaysScreenTime(force = true)
     }
 
     private fun registerShortcutCallback() {
@@ -392,6 +404,12 @@ class MainActivity : AppCompatActivity() {
             getSystemService(LauncherApps::class.java).unregisterCallback(it)
         }
         profileReceiver?.let {
+            try {
+                unregisterReceiver(it)
+            } catch (_: Exception) {
+            }
+        }
+        screenReceiver?.let {
             try {
                 unregisterReceiver(it)
             } catch (_: Exception) {

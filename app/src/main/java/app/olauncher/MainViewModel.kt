@@ -22,6 +22,7 @@ import app.olauncher.data.Constants
 import app.olauncher.data.Prefs
 import app.olauncher.helper.SingleLiveEvent
 import app.olauncher.helper.WallpaperWorker
+import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.formattedTimeSpent
 import app.olauncher.helper.getAppsList
 import app.olauncher.helper.getPrivateSpaceApps
@@ -54,6 +55,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val launcherResetFailed = MutableLiveData<Boolean>()
     val homeAppAlignment = MutableLiveData<Int>()
     val screenTimeValue = MutableLiveData<String>()
+    val appScreenTimes = MutableLiveData<Map<String, Long>>()
     private var screenTimeJob: Job? = null
 
     val privateSpaceApps = MutableLiveData<List<AppModel>?>()
@@ -106,6 +108,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun launchShortcut(appModel: AppModel.PinnedShortcut) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) return
         val launcher = appContext.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
         val query = LauncherApps.ShortcutQuery().apply {
             setPackage(appModel.appPackage)
@@ -445,9 +448,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         homeAppAlignment.value = prefs.homeAlignment
     }
 
-    fun getTodaysScreenTime() {
+    fun getTodaysScreenTime(force: Boolean = false) {
+        if (appContext.appUsagePermissionGranted().not()) return
         // Skip the once-a-minute limit when there's nothing to show yet, e.g. after a process restart
-        if (screenTimeValue.value != null && prefs.screenTimeLastUpdated.hasBeenMinutes(1).not()) return
+        if (!force && screenTimeValue.value != null && prefs.screenTimeLastUpdated.hasBeenMinutes(1).not()) return
         if (screenTimeJob?.isActive == true) return
 
         screenTimeJob = viewModelScope.launch {
@@ -462,13 +466,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val endTime = System.currentTimeMillis()
 
             // Querying a whole day of usage events is slow, so keep it off the main thread
-            val timeSpent = withContext(Dispatchers.IO) {
+            val (timeSpent, appTimesMap) = withContext(Dispatchers.IO) {
                 val eventLogWrapper = EventLogWrapper(appContext)
-                eventLogWrapper.getTotalForegroundTime(
-                    eventLogWrapper.getForegroundStatsByTimestamps(startTime, endTime)
-                )
+                val foregroundStats = eventLogWrapper.getForegroundStatsByTimestamps(startTime, endTime)
+                val totalForeground = eventLogWrapper.getTotalForegroundTime(foregroundStats)
+                val appStats = eventLogWrapper.aggregateForegroundStats(foregroundStats)
+                val appMap = appStats.associate { it.applicationId to it.timeUsed }
+                Pair(totalForeground, appMap)
             }
             screenTimeValue.value = appContext.formattedTimeSpent(timeSpent)
+            appScreenTimes.value = appTimesMap
             prefs.screenTimeLastUpdated = endTime
         }
     }

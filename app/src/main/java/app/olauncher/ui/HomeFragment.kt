@@ -16,7 +16,6 @@ import android.view.WindowInsets
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -32,6 +31,7 @@ import app.olauncher.data.Prefs
 import app.olauncher.databinding.FragmentHomeBinding
 import app.olauncher.helper.appUsagePermissionGranted
 import app.olauncher.helper.dpToPx
+import app.olauncher.helper.formattedTimeSpent
 import app.olauncher.helper.expandNotificationDrawer
 import app.olauncher.helper.getChangedAppTheme
 import app.olauncher.helper.getUserHandleFromString
@@ -203,6 +203,9 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         viewModel.screenTimeValue.observe(viewLifecycleOwner) {
             it?.let { binding.tvScreenTime.text = it }
         }
+        viewModel.appScreenTimes.observe(viewLifecycleOwner) {
+            updateHomeAppTexts()
+        }
         // Home button for recents feature disabled
         // viewModel.showRecentApps.observe(viewLifecycleOwner) {
         //     binding.recents.performClick()
@@ -286,7 +289,6 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         binding.date.text = dateText.replace(".,", ",")
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     private fun populateScreenTime() {
         if (requireContext().appUsagePermissionGranted().not()) return
 
@@ -316,10 +318,11 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
     private fun populateHomeScreen(appCountUpdated: Boolean) {
         if (appCountUpdated) hideHomeApps()
         populateDateTime()
+        populateScreenTime()
+        updateHomeAppTexts()
+    }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
-            populateScreenTime()
-
+    private fun updateHomeAppTexts() {
         val homeAppsNum = prefs.homeAppsNum
         if (homeAppsNum == 0) return
 
@@ -390,8 +393,21 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
         // Get user handle for the app/shortcut
         val userHandle = getUserHandleFromString(requireContext(), userString)
 
+        val textToDisplay = if (requireContext().appUsagePermissionGranted() && appName.isNotEmpty() && packageName.isNotEmpty()) {
+            val appTimes = viewModel.appScreenTimes.value
+            if (appTimes != null) {
+                val timeSpentMillis = appTimes[packageName] ?: 0L
+                val formattedTime = requireContext().formattedTimeSpent(timeSpentMillis)
+                "$appName $formattedTime"
+            } else {
+                appName
+            }
+        } else {
+            appName
+        }
+
         // If it's a shortcut, verify it still exists
-        if (isShortcut) {
+        if (isShortcut && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             val launcherApps = requireContext().getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
             // Query for the specific shortcut
@@ -404,7 +420,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
                 val shortcuts = launcherApps.getShortcuts(query, userHandle)
                 // Check if our shortcut still exists
                 if (shortcuts?.any { it.id == shortcutId } == true) {
-                    textView.text = appName
+                    textView.text = textToDisplay
                     return true
                 }
                 textView.text = ""
@@ -418,7 +434,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener, View.OnLongClickListe
 
         // Regular app check
         if (isPackageInstalled(requireContext(), packageName, userString)) {
-            textView.text = appName
+            textView.text = textToDisplay
             return true
         }
         textView.text = ""

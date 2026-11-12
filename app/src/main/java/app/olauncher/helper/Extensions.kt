@@ -176,14 +176,23 @@ fun Context.isCountryIn(): Boolean {
     return country.equals("IN", ignoreCase = true)
 }
 
-@RequiresApi(Build.VERSION_CODES.Q)
 fun Context.appUsagePermissionGranted(): Boolean {
     val appOpsManager = getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
-    return appOpsManager.unsafeCheckOpNoThrow(
-        "android:get_usage_stats",
-        android.os.Process.myUid(),
-        packageName
-    ) == AppOpsManager.MODE_ALLOWED
+    val mode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        appOpsManager.unsafeCheckOpNoThrow(
+            AppOpsManager.OPSTR_GET_USAGE_STATS,
+            android.os.Process.myUid(),
+            packageName
+        )
+    } else {
+        @Suppress("DEPRECATION")
+        appOpsManager.checkOpNoThrow(
+            AppOpsManager.OPSTR_GET_USAGE_STATS,
+            android.os.Process.myUid(),
+            packageName
+        )
+    }
+    return mode == AppOpsManager.MODE_ALLOWED
 }
 
 fun Context.formattedTimeSpent(timeSpent: Long): String {
