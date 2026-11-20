@@ -107,7 +107,8 @@ suspend fun getAppsList(
                         // if the current app is not OLauncher
                         if (app.applicationInfo.packageName != BuildConfig.APPLICATION_ID) {
                             // is this a hidden app?
-                            if (hiddenApps.contains(app.applicationInfo.packageName + "|" + profile.toString())) {
+                            val legacyHiddenKey = app.applicationInfo.packageName + "|" + profile.toString()
+                            if (hiddenApps.contains(appModel.hiddenKey) || hiddenApps.contains(legacyHiddenKey)) {
                                 if (includeHiddenApps) {
                                     appList.add(appModel)
                                 }

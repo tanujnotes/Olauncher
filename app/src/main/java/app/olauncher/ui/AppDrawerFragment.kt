@@ -195,16 +195,19 @@ class AppDrawerFragment : BaseFragment() {
                     requireContext().showToast("Hiding pinned shortcuts is not supported")
                     return@AppDrawerAdapter
                 }
+                val app = appModel as? AppModel.App ?: return@AppDrawerAdapter
                 adapter.appFilteredList.removeAt(position)
                 adapter.notifyItemRemoved(position)
                 adapter.appsList.remove(appModel)
 
                 val newSet = mutableSetOf<String>()
                 newSet.addAll(prefs.hiddenApps)
-                if (flag == Constants.FLAG_HIDDEN_APPS)
-                    newSet.remove(appModel.appPackage + "|" + appModel.user.toString())
-                else
-                    newSet.add(appModel.appPackage + "|" + appModel.user.toString())
+                if (flag == Constants.FLAG_HIDDEN_APPS) {
+                    newSet.remove(app.hiddenKey)
+                    newSet.remove(app.appPackage + "|" + app.user.toString())
+                } else {
+                    newSet.add(app.hiddenKey)
+                }
 
                 prefs.hiddenApps = newSet
                 if (newSet.isEmpty())
