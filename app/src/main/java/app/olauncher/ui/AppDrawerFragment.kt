@@ -77,6 +77,10 @@ class AppDrawerFragment : BaseFragment() {
         initAdapter()
         initObservers()
         initClickListeners()
+        arguments?.getString(Constants.Key.QUERY)?.let {
+            arguments?.remove(Constants.Key.QUERY)
+            binding.search.setQuery(it, false)
+        }
     }
 
     private fun initViews() {
@@ -117,6 +121,13 @@ class AppDrawerFragment : BaseFragment() {
                 return false
             }
         })
+    }
+
+    fun appendToSearch(text: String): Boolean {
+        val search = _binding?.search ?: return false
+        search.setQuery(search.query.toString() + text, false)
+        search.requestFocus()
+        return true
     }
 
     private fun isSearchComposing(): Boolean {

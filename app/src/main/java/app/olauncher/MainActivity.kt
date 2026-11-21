@@ -13,10 +13,12 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.view.KeyEvent
 import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -44,6 +46,7 @@ import app.olauncher.helper.shareApp
 import app.olauncher.helper.showLauncherSelector
 import app.olauncher.helper.showMessageDialog
 import app.olauncher.helper.showToast
+import app.olauncher.ui.AppDrawerFragment
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -341,6 +344,41 @@ class MainActivity : AppCompatActivity() {
             return
         // In Android 8.0, windowIsTranslucent cannot be used with screenOrientation=portrait
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    }
+
+    // Hardware keyboard: typing a character on the home screen opens the app drawer search
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        val typed = typedCharacter(event) ?: return super.onKeyDown(keyCode, event)
+        when (navController.currentDestination?.id) {
+            R.id.mainFragment -> {
+                viewModel.getAppList()
+                navController.navigate(
+                    R.id.action_mainFragment_to_appListFragment,
+                    bundleOf(
+                        Constants.Key.FLAG to Constants.FLAG_LAUNCH_APP,
+                        Constants.Key.QUERY to typed
+                    )
+                )
+                return true
+            }
+
+            R.id.appListFragment -> {
+                // Search field is not focused (or the drawer is still opening)
+                val host = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                host?.childFragmentManager?.executePendingTransactions()
+                val drawer = host?.childFragmentManager?.primaryNavigationFragment as? AppDrawerFragment
+                if (drawer?.appendToSearch(typed) == true) return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    private fun typedCharacter(event: KeyEvent): String? {
+        if (event.repeatCount > 0 || event.isCtrlPressed || event.isAltPressed || event.isMetaPressed)
+            return null
+        val char = event.unicodeChar
+        if (char == 0 || Character.isWhitespace(char) || Character.isISOControl(char)) return null
+        return String(Character.toChars(char))
     }
 
     private fun backToHomeScreen() {
